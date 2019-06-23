@@ -1,11 +1,26 @@
 /* Created by handsome qiu */
 requirejs(['common', 'ec'], (sugon, ec) => {
 
+    let searchRuler = {};
+
+    // 初始化标题
+    function initTitle() {
+        sugon.requestJson({
+            type: 'post',
+            url: sugon.interFaces.znbg.ywfxbg.preview.initTitle,
+            data: searchRuler
+        }, result => {
+            result.data.map((val, index) => {
+                $('.pop-container > header > span').eq(index).html(val);
+            });
+        });
+    }
+
     function init1_1() {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init1_1,
-            data: {}
+            data: searchRuler
         }, result => {
             result.data.map((val, index) => {
                 let html;
@@ -25,7 +40,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init1_2,
-            data: {}
+            data: searchRuler
         }, result => {
             let xData = [], yData = [], len = result.data.length;
             result.data.map(val => {
@@ -85,7 +100,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init2_1,
-            data: {}
+            data: searchRuler
         }, result => {
             let $body = $('.tab-container').empty();
             $body.append('<div><div>警情类别</div><div>警情量</div><div>满意度</div><div>同比</div></div>');
@@ -99,7 +114,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init2_2,
-            data: {}
+            data: searchRuler
         }, result => {
             let data1 = [], data2 = [], xData = [];
             result.data1.map(val => {
@@ -183,7 +198,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init3_1,
-            data: {}
+            data: searchRuler
         }, result => {
             $('.fieldset3 footer').html(result.content);
             let chart = ec.init(document.getElementById('chart3'));
@@ -231,7 +246,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init3_2,
-            data: {}
+            data: searchRuler
         }, result => {
             let xData = [], yData = [];
             result.data.map(val => {
@@ -284,7 +299,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init4_1,
-            data: {}
+            data: searchRuler
         }, result => {
             let $body = $('#chart5').empty(), data = result.data;
             var string_ = '';
@@ -303,7 +318,7 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.preview.init4_2,
-            data: {}
+            data: searchRuler
         }, result => {
             $('.zjfx-content').html(result.data);
         });
@@ -311,6 +326,10 @@ requirejs(['common', 'ec'], (sugon, ec) => {
 
     // 初始化页面
     function initPage() {
+        searchRuler.deptId = $('#deptId').val();
+        searchRuler.date1 = $('#date1').val();
+        searchRuler.date2 = $('#date2').val();
+        initTitle();
         init1_1();
         init1_2();
         init2_1();
@@ -319,12 +338,12 @@ requirejs(['common', 'ec'], (sugon, ec) => {
         init3_2();
         init4_1();
         init4_2();
+        $('.pop-mask').show();
     }
 
     // 程序入口
     $(function () {
         initPage();
-        $('.pop-mask').show();
     });
 
     $('.pop-container i').on({
