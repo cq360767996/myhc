@@ -1,0 +1,204 @@
+{
+  "data": [
+    [
+      [
+        {
+          "name": "接处警回访情况分析",
+          "value": "hfkqJcj"
+        }
+      ],
+      [
+        {
+          "name": "窗口服务回访情况分析",
+          "value": "hfkqCk"
+        }
+      ],
+      [
+        {
+          "name": "案件回访情况分析",
+          "value": "hfkqAj"
+        }
+      ],
+      [
+        {
+          "name": "交通事故回访情况分析",
+          "value": "hfkqJtsg"
+        }
+      ],
+      [
+        {
+          "name": "一率两度回访情况分析",
+          "value": "hfkqYlld"
+        }
+      ],
+      [
+        {
+          "name": "12345回访情况分析",
+          "value": "hfkqRx"
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "name": "接处警满意度趋势分析",
+          "value": "zsfxJcjQs"
+        },
+        {
+          "name": "接处警分类满意度分析",
+          "value": "zsfxJcjFl"
+        }
+      ],
+      [
+        {
+          "name": "窗口服务满意度趋势分析",
+          "value": "zsfxCkQs"
+        },
+        {
+          "name": "窗口服务分类满意度分析",
+          "value": "zsfxCkFl"
+        }
+      ],
+      [
+        {
+          "name": "案件综合评价指数趋势分析",
+          "value": "zsfxAjQs"
+        },
+        {
+          "name": "案件综合评价指数分类分析",
+          "value": "zsfxAjFl"
+        }
+      ],
+      [
+        {
+          "name": "事故处理评价指数趋势分析",
+          "value": "zsfxJtsgQs"
+        },
+        {
+          "name": "事故处理评价指数分类分析",
+          "value": "zsfxJtsgFl"
+        }
+      ],
+      [
+        {
+          "name": "一率两度指数趋势分析",
+          "value": "zsfxYlldQs"
+        },
+        {
+          "name": "一率两度指数分类分析",
+          "value": "zsfxYlldFl"
+        }
+      ],
+      [
+        {
+          "name": "12345满意度趋势分析",
+          "value": "zsfxRxQs"
+        },
+        {
+          "name": "12345分类满意度分析",
+          "value": "zsfxRxFl"
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "name": "接处警具体问题分析",
+          "value": "jtwtJcjFx"
+        },
+        {
+          "name": "接处警具体问题单位分析",
+          "value": "jtwtJcjDw"
+        }
+      ],
+      [
+        {
+          "name": "窗口服务问题分析",
+          "value": "jtwtCkFx"
+        },
+        {
+          "name": "窗口服务具体问题单位分析",
+          "value": "jtwtCkDw"
+        }
+      ],
+      [
+        {
+          "name": "案件具体问题分析",
+          "value": "jtwtAjFx"
+        },
+        {
+          "name": "案件具体问题单位分析",
+          "value": "jtwtAjDw"
+        }
+      ],
+      [
+        {
+          "name": "交通事故具体问题分析",
+          "value": "jtwtJtsgFx"
+        },
+        {
+          "name": "交通事故具体问题单位分析",
+          "value": "jtwtJtsgDw"
+        }
+      ],
+      [
+        {
+          "name": "一率两度具体问题分析",
+          "value": "jtwtYlldFx"
+        },
+        {
+          "name": "一率两度具体问题单位分析",
+          "value": "jtwtYlldDw"
+        }
+      ],
+      [
+        {
+          "name": "12345具体问题分析",
+          "value": "jtwtRxFx"
+        },
+        {
+          "name": "12345具体问题单位分析",
+          "value": "jtwtRxDw"
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "name": "接处警回访热词分析",
+          "value": "rcJcj"
+        }
+      ],
+      [
+        {
+          "name": "窗口服务回访热词分析",
+          "value": "rcCk"
+        }
+      ],
+      [
+        {
+          "name": "案件回访热词分析",
+          "value": "rcAj"
+        }
+      ],
+      [
+        {
+          "name": "交通事故回访热词分析",
+          "value": "rcJtsg"
+        }
+      ],
+      [
+        {
+          "name": "一率两度回访热词分析",
+          "value": "rcYlld"
+        }
+      ],
+      [
+        {
+          "name": "12345回访热词分",
+          "value": "rcRx"
+        }
+      ]
+    ]
+  ]
+}

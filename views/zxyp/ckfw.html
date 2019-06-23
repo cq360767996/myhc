@@ -1,0 +1,394 @@
+<link rel="stylesheet" href="../../css/zxyp/ckfw.css"/>
+
+<div class="view-header">
+    <div class="view-header-left">
+        <input type="text" id="place" placeholder="市局/分局" readonly/>
+        <input type="hidden" id="placeCode"/>
+        <input type="hidden" id="tempID"/>
+        <input type="hidden" id="tempTYPE"/>
+        <div id="left-tree"></div>
+        <input id="date-input1" class="date-input" placeholder="时间" type="text" readonly="readonly">
+        <input id="date-input2" class="date-input" placeholder="时间" type="text" readonly="readonly">
+        <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn"/>
+    </div>
+
+    <div class="view-header-right">
+        <img src="../../img/zxyp/aj/download.png"/>
+        <span>分析报告下载</span>
+    </div>
+</div>
+
+<div class="view-body">
+    <div style="width: calc((100% - 20px) * 0.25);">
+        <div class="top_view" id="left_top">
+            <div>
+                <div>
+                    <div class="val b"></div>
+
+                    <div class="txt t"></div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="val b"></div>
+
+                    <div class="txt t"></div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="val b"></div>
+
+                    <div class="txt t"></div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="val g"></div>
+
+                    <div class="txt t"></div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="val r"></div>
+
+                    <div class="txt t"></div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="val r"></div>
+
+                    <div class="txt t"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="down_view">
+            <div class="group">
+                <div class="subTitle2">
+                    <span class="l">窗口服务群众回访热词</span>
+
+                    <span class="y">
+                        <select id="dept">
+                            <option value="0">词云</option>
+
+                            <option value="1">词频</option>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="content">
+                    <div class="world_cloud jqcloud" id="word_cloud"></div>
+
+                    <div class="myys">
+                        <div class="search_title">
+                            <img src="../../img/myhc/cloud_search.png">
+                        </div>
+
+                        <div class="search_bar">
+                            <div class="text">
+                                <img src="../../img/myhc/check.png">
+
+                                <input type="text" id="keywords" placeholder="请输入要搜索内容">
+                            </div>
+
+                            <div class="check">搜 索</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin: 0 10px;width: calc((100% - 20px) * 0.5);">
+        <div class="top_view" id="mid_top">
+            <div>
+                <div class="mid_title"></div>
+
+                <div class="content2">
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度满意率</span><span class="val4 b"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度回访量</span><span class="val5 r"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日办理量</span><span class="val6 g"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日不满意数</span><span class="val7 o"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="mid_title"></div>
+
+                <div class="content2">
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度满意率</span><span class="val4 b"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度回访量</span><span class="val5 r"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日办理量</span><span class="val6 g"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日不满意数</span><span class="val7 o"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="mid_title"></div>
+
+                <div class="content2">
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度满意率</span><span class="val4 b"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度回访量</span><span class="val5 r"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日办理量</span><span class="val6 g"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日不满意数</span><span class="val7 o"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="mid_title"></div>
+
+                <div class="content2">
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度满意率</span><span class="val4 b"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度回访量</span><span class="val5 r"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日办理量</span><span class="val6 g"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日不满意数</span><span class="val7 o"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="mid_title"></div>
+
+                <div class="content2">
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度满意率</span><span class="val4 b"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度回访量</span><span class="val5 r"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日办理量</span><span class="val6 g"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日不满意数</span><span class="val7 o"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="mid_title"></div>
+
+                <div class="content2">
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度满意率</span><span class="val4 b"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">月度回访量</span><span class="val5 r"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日办理量</span><span class="val6 g"></span>
+                    </div>
+
+                    <div>
+                        <span class="dort lh2"></span><span class="lab2 lab">今日不满意数</span><span class="val7 o"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mid_view">
+            <div class="group switch-panel">
+                <div class="myd">
+                    <div class="subTitle2">
+                        <span class="l" style="font-size: 16px;">窗口服务满意度趋势分析</span>
+
+                        <span class="y">
+                            <select id="dept3">
+                                <option value="0">窗口服务</option>
+
+                                <option value="1">户籍业务</option>
+
+                                <option value="2">身份证业务</option>
+
+                                <option value="3">出入境业务</option>
+
+                                <option value="4">车辆业务</option>
+
+                                <option value="5">驾证业务</option>
+
+                                <option value="6">监管业务</option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <div class="content">
+                        <div id="chart3"></div>
+                    </div>
+                </div>
+
+                <div class="dwqk">
+                    <div class="subTitle2">
+                        <span style="font-size: 16px;">窗口服务满意度各单位情况</span>
+                        <span class="switch-two switch-btn"></span>
+                    </div>
+
+                    <div class="content">
+                        <div class="tab2">
+                            <div class="selected">一单元</div>
+
+                            <div>二单元</div>
+
+                            <div>三单元</div>
+
+                            <div style="border-right: 0;">其他</div>
+                        </div>
+
+                        <div id="chart4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mid_view">
+            <div class="group">
+                <div class="group_child">
+                    <div class="subTitle">
+                        <span>窗口服务满意度分析</span>
+                    </div>
+
+                    <div class="content">
+                        <div id="chart2"></div>
+                    </div>
+                </div>
+
+                <div class="group_child">
+                    <div class="subTitle">
+                        <span>具体问题分析</span>
+                    </div>
+
+                    <div class="content">
+                        <div id="chart5"></div>
+                    </div>
+                </div>
+
+                <div class="group_child" style="margin-right: 0px;">
+                    <div class="subTitle">
+                        <span>具体问题单位分析</span>
+                    </div>
+
+                    <div class="content">
+                        <div class="tab3">
+                            <div class="selected">一单元</div>
+
+                            <div>二单元</div>
+
+                            <div>三单元</div>
+
+                            <div style="border-right: 0px;">其他</div>
+                        </div>
+
+                        <div id="chart6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: calc((100% - 20px) * 0.25);">
+        <div class="top_view_2">
+            <div class="subTitle"
+                 style="width: calc(100% - 20px);margin-left: 10px;background: url(../../img/myhc/rdwt/mybd/decorate_bad.png) no-repeat;background-size: 100% 100%;">
+                <span>窗口服务满意度排行榜</span>
+            </div>
+
+            <div class="content">
+                <div class="newMenu">
+                    <select class="first-selector">
+                        <option value="户政业务">户政</option>
+                        <option value="身份证业务">身份证</option>
+                        <option value="出入境业务">出入境</option>
+                        <option value="车管（车辆）业务">车辆</option>
+                        <option value="车管（驾证）业务">驾证</option>
+                        <option value="监管业务">监管</option>
+                    </select>
+                    <select class="second-selector">
+                        <option value="fj">分局</option>
+                        <option value="sd">所队</option>
+                        <option value="ry">人员</option>
+                    </select>
+                </div>
+
+                <div class="rank_list">
+                    <div class="rank-list-header">
+                        <span>分局排行榜</span>
+                        <img src="../../img/zxyp/jcj/stars.png">
+                    </div>
+                    <div class="rank-list-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="down_view_2">
+            <div class="group">
+                <div class="subTitle2">
+                    <span class="l" style="font-size: 16px;">窗口服务问题预测</span>
+
+                    <span class="y wtTab" id="wtyc"><img src="../../img/zxyp/ckfw/blue.png"/>问题预测</span>
+
+                    <span class="y wtTab" id="rdwt"><img src="../../img/zxyp/ckfw/red.png"/>热点问题</span>
+                </div>
+
+                <div class="content">
+                    <div class="wtList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

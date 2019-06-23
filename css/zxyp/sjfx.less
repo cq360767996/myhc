@@ -1,0 +1,395 @@
+@global-font-size: 14px;
+@global-color: #4d4d4d;
+
+.text-ellipse(@line) { // 多行省略
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+  overflow: hidden;
+  text-align: justify;
+}
+
+.scroll-style { // 滚动条样式
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #FFF;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #FFF;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #C1C1C1;
+  }
+}
+
+.sjfx {
+  width: 100%;
+  height: calc(100% - 18px);
+  font-size: @global-font-size;
+  color: @global-color;
+  padding: 10px 20px;
+
+  &-top {
+    height: 62px;
+    line-height: 72px;
+
+    div {
+      float: left;
+      margin-left: 40px;
+      background: url(../../img/zxyp/rx/top-bg.png) no-repeat;
+      background-size: 100% 100%;
+      height: 100%;
+      font-size: 18px;
+
+      span {
+        margin-left: 36px;
+      }
+
+    }
+
+    &-1, &-2 {
+      width: 250px;
+    }
+
+    &-1 {
+      margin-left: 0 !important;
+
+      strong {
+        color: #ec4343;
+      }
+    }
+
+    &-2 {
+      strong {
+        color: #009f3c;
+      }
+    }
+
+    &-3 {
+      width: calc(100% - 580px);
+
+      strong {
+        color: #e1840c;
+      }
+    }
+
+  }
+
+  &-body {
+    width: 100%;
+    height: calc(50% - 31px);
+    padding-top: 10px;
+
+    & > div {
+      float: left;
+      height: calc(100% - 10px);
+    }
+
+    &-left {
+      width: calc((100% - 20px) / 3);
+    }
+
+    &-right {
+      margin-left: 20px;
+      width: calc((100% - 20px) / 3 * 2);
+    }
+
+    &-header {
+      @height: 40px;
+      width: 100%;
+      font-size: 16px;
+      height: @height;
+      line-height: @height;
+
+      img, span {
+        margin-left: 10px;
+      }
+
+      img {
+        margin-top: -3px;
+      }
+
+      div {
+        float: right;
+
+        span {
+          strong {
+            font-size: 18px;
+            color: #ec4343;
+          }
+        }
+
+        select {
+          margin-left: 10px;
+          background-color: #fafafa;
+          border-radius: 3px;
+          border: solid 1px #cccccc;
+          color: #666666;
+        }
+      }
+
+    }
+
+    &-body {
+      width: 100%;
+      height: calc(100% - 40px);
+    }
+
+    .sjfx-mid-right {
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+
+      .time-line {
+        @top: 57%;
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .left-btn, .right-btn {
+          width: 30px;
+          height: 30px;
+          background: url(../../img/zxyp/rx/arrow.png) no-repeat;
+          position: absolute;
+          margin-top: -15px;
+          cursor: pointer;
+        }
+
+        .left-btn {
+          left: 0;
+          top: @top;
+
+          &:hover {
+            background: url(../../img/zxyp/rx/arrow-hover.png) no-repeat;
+          }
+        }
+
+        .right-btn {
+          right: 0;
+          top: @top;
+          transform: rotate(180deg);
+
+          &:hover {
+            background: url(../../img/zxyp/rx/arrow-hover.png) no-repeat;
+            transform: rotate(180deg);
+          }
+        }
+
+        .time-box {
+          width: calc(100% - 60px);
+          height: 100%;
+          margin: 0 auto;
+          overflow: hidden;
+
+          ul {
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+
+            &:after {
+              content: "";
+              background: #d2d2d2;
+              height: 1px;
+              width: 100%;
+              position: absolute;
+              left: 0;
+              top: @top;
+            }
+          }
+
+          li {
+            height: 100%;
+            float: left;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+            margin-left: 20px;
+            background: url(../../img/zxyp/rx/point.png) no-repeat 50% @top;
+            z-index: 1;
+
+            &:hover {
+              background: url(../../img/zxyp/rx/point-hover.png) no-repeat 50% @top;
+            }
+
+            &:nth-child(3n + 1) {
+              margin-left: 0;
+            }
+
+            & > div {
+              @border-color: #d9d9d9;
+              position: relative;
+              width: 100%;
+              border: 1px solid @border-color;
+              border-radius: 5px;
+              font-size: 14px;
+              padding: 5px 3px;
+
+              &:first-child {
+                @first-color: #e8f6ff;
+                top: 0;
+                background-color: @first-color;
+                height: 79px;
+
+                &:before {
+                  content: "";
+                  border-left: 1px solid @border-color;
+                  border-bottom: 1px solid @border-color;
+                  position: absolute;
+                  width: 16px;
+                  height: 16px;
+                  background: @first-color;
+                  bottom: -9px;
+                  transform: rotate(-45deg);
+                  left: 50%;
+                  margin-left: -8px;
+                }
+
+                p {
+                  line-height: 22px;
+                  .text-ellipse(3);
+                }
+              }
+
+              &:nth-child(2) {
+                @second-color: #e0e8ec;
+                top: 40px;
+                background-color: @second-color;
+                height: 55px;
+
+                &:before {
+                  content: "";
+                  border-right: 1px solid @border-color;
+                  border-top: 1px solid @border-color;
+                  position: absolute;
+                  width: 16px;
+                  height: 16px;
+                  background: @second-color;
+                  top: -9px;
+                  transform: rotate(-45deg);
+                  left: 50%;
+                  margin-left: -8px;
+                }
+
+                p {
+                  line-height: 22px;
+                  .text-ellipse(2);
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .sjfx-left-bottom {
+    overflow: auto;
+    .scroll-style();
+
+    & > div {
+      @height: 40px;
+      width: 100%;
+      height: @height;
+      line-height: @height;
+      border-bottom: 1px solid #BCC9D8;
+
+      & > div {
+        height: 100%;
+        width: 25%;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        float: left;
+      }
+    }
+
+  }
+
+  .sjfx-right-bottom {
+
+    overflow: auto;
+    .scroll-style();
+
+    & > div {
+      width: 100%;
+      height: 100px;
+      margin-top: 5px;
+
+      & > div:first-child {
+        @height: 30px;
+        width: 100%;
+        height: @height;
+        line-height: @height;
+        color: #333;
+
+        & > span {
+          float: left;
+          display: inline-block;
+          width: 60%;
+          margin-left: 5px;
+          .text-ellipse(1);
+        }
+
+        div {
+          float: right;
+
+          span {
+            margin-right: 5px;
+          }
+        }
+      }
+
+      & > div:nth-child(2) {
+        width: 100%;
+        height: 65px;
+        margin-top: 5px;
+
+        & > div:nth-child(2) {
+          margin-left: 20px;
+        }
+
+        & > div {
+          width: calc(50% - 10px);
+          height: 100%;
+          float: left;
+
+          & > div {
+            float: left;
+            height: 100%;
+          }
+
+          & > div:first-child {
+            width: 20px;
+            line-height: 16px;
+          }
+
+          & > div:nth-child(2) {
+            width: calc(100% - 20px);
+            background-color: #f7f7f7;
+            border-radius: 2px;
+            border: solid 1px #cccccc;
+            padding: 2px 3px;
+            .text-ellipse(3);
+          }
+
+        }
+      }
+    }
+  }
+}

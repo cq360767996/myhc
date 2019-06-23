@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="../../css/myhc/rdwt_setting.css">
+
+<div class="header-panel">
+    <input type="text" id="place" placeholder="市局/分局" readonly/>
+    <input type="hidden" id="placeCode"/>
+    <input type="hidden" id="tempID"/>
+    <input type="hidden" id="tempTYPE"/>
+    <div id="left-tree"></div>
+
+    <input id="date-input" placeholder="时间" type="text" readonly="readonly">
+    <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn"/>
+</div>
+
+<div class="body-panel">
+    <div class="left-panel">
+        <div class="left-panel-header">
+            <div class="left-panel-header-tab left-panel-header-tab-hover">
+                模型一
+            </div>
+            <div class="left-panel-header-tab">
+                模型二
+            </div>
+            <div class="left-panel-header-tab">
+                模型三
+            </div>
+            <div class="left-panel-header-tab">
+                模型四
+            </div>
+            <div class="left-panel-header-tab">
+                模型五
+            </div>
+        </div>
+        <div class="left-panel-body">
+            <div class="tab-selector">
+                <div>
+                    <span>显示记录数：</span>
+                    <select id="display-num">
+                        <option value="">20</option>
+                        <option value="">50</option>
+                        <option value="">100</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tag-selector">
+            </div>
+            <div class="tag-selector">
+            </div>
+            <div class="tag-selector">
+            </div>
+            <div id="tab-container">
+            </div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-panel-header">
+            <div>
+                <img src="../../img/myhc/rdwt/hottopics.png"/>
+                <span>数据选择列表</span>
+            </div>
+        </div>
+        <div class="right-panel-body">
+        </div>
+    </div>
+</div>
+
+<div class="footer-panel">
+    <div class="footer-panel-btnGroup">
+        <div class="footer-panel-btn" id="preview-btn">预览</div>
+        <div class="footer-panel-btn" id="back-btn">返回</div>
+    </div>
+</div>
+<div class="pop-cover">
+</div>
+<div class="pop-container">
+    <div class="pop-header">
+        <span>热点问题发布</span>
+        <i class="glyphicon glyphicon-remove close-btn"></i>
+    </div>
+    <div class="pop-body">
+    </div>
+    <div class="pop-footer">
+        <div>
+            <div class="pop-footer-btn" id="pop-btn-ok">发布</div>
+            <div class="pop-footer-btn close-btn">返回</div>
+        </div>
+    </div>
+</div>

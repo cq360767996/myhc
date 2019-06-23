@@ -1,0 +1,307 @@
+<link rel="stylesheet" href="../../css/zxyp/aj.css">
+<div class="view-header">
+    <div class="view-header-left">
+        <input type="text" id="place" placeholder="市局/分局" readonly/>
+        <input type="hidden" id="placeCode"/>
+        <input type="hidden" id="tempID"/>
+        <input type="hidden" id="tempTYPE"/>
+        <div id="left-tree"></div>
+        <input id="date-input1" class="date-input" placeholder="时间" type="text" readonly="readonly">
+        <input id="date-input2" class="date-input" placeholder="时间" type="text" readonly="readonly">
+        <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn"/>
+    </div>
+    <div class="view-header-right">
+        <img src="../../img/zxyp/aj/download.png" />
+        <span>分析报告下载</span>
+    </div>
+</div>
+<div class="view-body">
+    <div class="view-col view-left-col">
+        <div class="view-left-col-top border-model">
+            <div>
+                <div class="view-col-header" id="zhpjzs">
+                </div>
+                <div class="view-col-footer">
+                    综合评价指数
+                </div>
+            </div>
+            <div>
+                <div class="view-col-header" id="hfywl">
+                </div>
+                <div class="view-col-footer">
+                    回访业务量
+                </div>
+            </div>
+            <div>
+                <div class="view-col-header" id="fsdxl">
+                </div>
+                <div class="view-col-footer">
+                    发送短信量
+                </div>
+            </div>
+            <div>
+                <div class="view-col-header" id="gfpjs">
+                </div>
+                <div class="view-col-footer">
+                    规范评价数
+                </div>
+            </div>
+            <div>
+                <div class="view-col-header" id="bgfpjs">
+                </div>
+                <div class="view-col-footer">
+                    不规范评价数
+                </div>
+            </div>
+            <div>
+                <div class="view-col-header" id="wzggds">
+                </div>
+                <div class="view-col-footer">
+                    未整改工单数
+                </div>
+            </div>
+        </div>
+        <div class="view-left-col-bottom border-model">
+            <div class="view-left-col-bottom-header">
+                <span>案件群众回访热词</span>
+                <select id="hfrc">
+                    <option value="0">词云</option>
+                    <option value="1">词频</option>
+                </select>
+            </div>
+            <div class="view-left-col-bottom-body" id="label-cloud">
+            </div>
+            <div class="view-left-col-bottom-footer">
+                <img src="../../img/zxyp/aj/cloud_search.png" />
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-info" style="background-color: #4499CF;">搜索</button>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view-col view-mid-col">
+        <div class="view-mid-col-row border-model">
+            <div class="view-mid-three">
+                <div class="view-mid-header">
+                    案件综合评价指数分析
+                </div>
+                <div class="view-mid-body" id="zhpjzsfx"></div>
+            </div>
+            <div class="view-mid-three">
+                <div class="view-mid-header" id="hjwtfx-title">
+                    环节问题分析
+                </div>
+                <div class="view-mid-body" id="hjwtfx"></div>
+            </div>
+            <div class="view-mid-three">
+                <div class="view-mid-header">
+                    案件问题单位分布
+                </div>
+                <div class="view-mid-body">
+                    <div class="view-mid-nav inner-nav">
+                        <div class="nav-selected">一单元</div>
+                        <div>二单元</div>
+                        <div>三单元</div>
+                    </div>
+                    <div id="ajdwfb"></div>
+                </div>
+            </div>
+        </div>
+        <div class="view-mid-col-row border-model" style="margin-top: 10px;">
+            <div class="view-mid-col-row-header">
+                <span style="margin-left: 70px;">案件综合评价指数趋势分析</span>
+                <select id="qsfx-select">
+                    <option value="0">案件</option>
+                    <option value="1">行政案件</option>
+                    <option value="2">刑事案件</option>
+                    <option value="3">经济案件</option>
+                </select>
+            </div>
+            <div class="view-mid-col-row-body" id="zhpjzsfxTrend"></div>
+        </div>
+        <div class="view-mid-col-row border-model" style="margin-top: 10px;">
+            <div class="view-mid-col-row-header">
+                <span>群众热点诉求TOP10</span>
+                <img style="margin-top: -4px;" src="../../img/zxyp/aj/redian.png">
+            </div>
+            <div class="view-mid-col-row-body" id="ajbljtwtfx">
+                <div class="tab-row">
+                    <div class="tab-td" style="width: 60px;">排行</div>
+                    <div class="tab-td" style="width: 120px;">问题标签</div>
+                    <div class="tab-td" style="width: 60px;">数量</div>
+                    <div class="tab-td" style="width: calc(50% - 120px);">问题走势</div>
+                    <div class="tab-td" style="width: calc(50% - 120px);">执行规范</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view-col view-right-col">
+        <div class="view-right-col-top border-model">
+            <div>
+                <div class="view-right-top-header">
+                    伤害类案件专项分析
+                </div>
+                <div class="view-right-top-body">
+                    <div id="air-bubble1">
+                    </div>
+                    <div>
+                        <div>伤害类案件</div>
+                        <div>综合评价指数</div>
+                        <div class="click-div">
+                            <img src="../../img/zxyp/aj/anaysis.png" />
+                            <span>分析</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="view-right-top-header">
+                        侵财类案件专项分析
+                </div>
+                <div class="view-right-top-body">
+                    <div id="air-bubble2">
+                    </div>
+                    <div>
+                        <div>侵财类案件</div>
+                        <div>综合评价指数</div>
+                        <div class="click-div">
+                            <img src="../../img/zxyp/aj/anaysis.png" />
+                            <span>分析</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="view-right-col-bottom border-model">
+            <div class="view-right-bottom-header">
+                案件办理综合评价指数排行榜
+            </div>
+            <div class="view-right-bottom-body">
+                <div>
+                    <div class="view-right-bottom-row-header">
+                        <select>
+                            <option value="xs0">刑事案件</option>
+                            <option value="xs1">&nbsp;&nbsp;故意伤害</option>
+                            <option value="xs2">&nbsp;&nbsp;抢劫</option>
+                            <option value="xs3">&nbsp;&nbsp;抢夺</option>
+                            <option value="xs4">&nbsp;&nbsp;诈骗</option>
+                            <option value="xs5">&nbsp;&nbsp;盗窃</option>
+                        </select>
+                        <img src="../../img/zxyp/aj/star.png" />
+                    </div>
+                </div>
+                <div>
+                    <div class="view-right-bottom-row-header">
+                        <select>
+                            <option value="xz0">行政案件</option>
+                            <option value="xz1">&nbsp;&nbsp;殴打他人</option>
+                            <option value="xz2">&nbsp;&nbsp;故意伤害</option>
+                            <option value="xz3">&nbsp;&nbsp;盗窃</option>
+                            <option value="xz4">&nbsp;&nbsp;诈骗</option>
+                        </select>
+                        <img src="../../img/zxyp/aj/star.png" style="float: right" />
+                    </div>
+                </div>
+                <div>
+                    <div class="view-right-bottom-row-header">
+                        <select>
+                            <option value="jj0">经济案件</option>
+                            <option value="jj1">&nbsp;&nbsp;合同诈骗案</option>
+                            <option value="jj2">&nbsp;&nbsp;职务侵占案</option>
+                            <option value="jj3">&nbsp;&nbsp;挪用资金案</option>
+                            <option value="jj4">&nbsp;&nbsp;挪用诈骗案</option>
+                        </select>
+                        <img src="../../img/zxyp/aj/star.png" style="float: right" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pop-view-mask">
+
+</div>
+<div class="pop-view">
+    <div class="pop-view-header">
+        <span id="pop-header"></span>
+        <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <div class="pop-view-body">
+        <div style="height: calc(30% - 20px);">
+            <div class="pop-view-col pop-view-col1">
+                <div class="pop-view-top">
+                    <div>
+                        <div class="pop-view-top-header">
+                            <img src="../../img/zxyp/aj/class.png" >
+                            <span id="pop-shl-ajzhpjzs-span">伤害类案件综合评价指数</span>
+                        </div>
+                        <div class="pop-view-top-body" id="pop-shl-ajzhpjzs"></div>
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <div  class="pop-view-top-header">
+                            <img src="../../img/zxyp/aj/class.png" >
+                            <span>案件综合评价指数</span>
+                        </div>
+                        <div class="pop-view-top-body" id="pop-ajzhpjzs"></div>
+                    </div>
+                </div>
+                <div class="pop-view-bottom">
+                    伤害类案件评价指数高于案件综合评价指数
+                </div>
+
+            </div>
+            <div class="pop-view-col pop-view-col2" style="margin-left: 10px;">
+                <div>
+                    <img src="../../img/zxyp/aj/class.png" >
+                    <span id="pop-shl-ajzhpjzsfx-span">伤害类案件综合评价指数分析</span>
+                </div>
+                <div id="pop-shl-ajzhpjzsfx"></div>
+            </div>
+        </div>
+        <div style="height: calc(30% - 20px);">
+            <div class="pop-view-col pop-view-col3">
+                <div>
+                    <img src="../../img/zxyp/aj/class.png" >
+                    <span>环节问题分析</span>
+                </div>
+                <div id="pop-hjwtfx"></div>
+            </div>
+            <div class="pop-view-col pop-view-col3" style="margin-left: 10px;">
+                <div>
+                    <img src="../../img/zxyp/aj/class.png" >
+                    <span>案件问题单位分布</span>
+                </div>
+                <div>
+                    <div class="view-mid-nav pop-nav">
+                        <div class="nav-selected">一单元</div>
+                        <div>二单元</div>
+                        <div>三单元</div>
+                    </div>
+                    <div id="pop-ajwtdwfb"></div>
+                </div>
+            </div>
+        </div>
+        <div style="height: calc(40%);">
+            <div class="pop-view-col pop-view-col4" style="margin-bottom: 10px;">
+                <div>
+                    <img src="../../img/zxyp/aj/class.png" >
+                    <span>群众热点诉求TOP5</span>
+                    <img style="margin-top: -4px;" src="../../img/zxyp/aj/redian.png">
+                </div>
+                <div id="pop-ajbljtwtfx"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pop-view2">
+    <div class="pop-view2-header">
+        <span></span>
+        <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <div class="pop-view2-body">
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿{
+  "success": true,
+  "msg": "",
+  "data1": {
+    "name": "张家辉",
+    "jh": "050819",
+    "zw": "出警员"
+  },
+  "data2": {
+    "value1": 91.36,
+    "value2": 0.2,
+    "value3": 95,
+    "value4": 100,
+    "value5": 53,
+    "value6": 3,
+    "value7": "民事纠纷",
+    "value8": 91.02,
+    "value9": "14-17时",
+    "value10": 91.02,
+    "value11": "火警",
+    "value12": 80.85,
+    "value13": "0-4时",
+    "value14": 90.53
+  },
+  "data3": [
+    {"name": "纠纷类", "value": "37次"},
+    {"name": "纠纷类", "value": "37次"},
+    {"name": "纠纷类", "value": "37次"},
+    {"name": "纠纷类", "value": "37次"},
+    {"name": "纠纷类", "value": "37次"},
+    {"name": "纠纷类", "value": "37次"}
+  ]
+}

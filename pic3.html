@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #1e4663;
+        }
+        .father {
+            width: 950px;
+            margin: 30px auto;
+        }
+        .father > div {
+            float: left;
+            margin-left: 10px;
+        }
+        .img-1 {
+            position: relative;
+            width: 350px;
+            height: 1000px;
+            left: 0px;
+            top: 0px;
+            background: url("img/pic3-1.jpg") no-repeat;
+            background-size: 100% 100%;
+        }
+        .img-2 {
+            position: relative;
+            width: 220px;
+            height: 80px;
+            left: 0px;
+            top: 275px;
+            background: url(img/pic3-2.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        .img-3 {
+            position: relative;
+            width: 350px;
+            height: 1000px;
+            left: 0px;
+            top: 0px;
+            background: url("img/pic3-1.jpg") no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="father">
+    <div class="img-1"></div>
+    <div class="img-2"></div>
+    <div class="img-3"></div>
+</div>
+<script src="lib/jquery.min.js"></script>
+<script>
+    $('body').on('keyup', function (e) {
+        if (e.keyCode == 39) {
+            location.href = '/pic4.html';
+        } else if (e.keyCode == 37) {
+            location.href = '/pic2.html';
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #1e4663;
+        }
+        .img-6 {
+            width: 420px;
+            height: 1000px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -210px;
+            margin-top: -500px;
+            background: url("img/pic6.jpg") no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="img-6"></div>
+<script src="lib/jquery.min.js"></script>
+<script>
+    $('body').on('keyup', function (e) {
+        if (e.keyCode == 39) {
+            location.href = '/pic7.html';
+        } else if (e.keyCode == 37) {
+            location.href = '/pic5.html';
+        }
+    });
+</script>
+</body>
+</html>

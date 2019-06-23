@@ -1,0 +1,67 @@
+.simple_close {
+    display: none !important;
+}
+
+.simple_content {
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.simple_showDialog {
+    border-radius: 4px !important;
+}
+
+.pop-header {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    color: #000;
+    line-height: 50px;
+}
+
+.pop-header > span {
+    float: left;
+    margin-left: 15px;;
+}
+
+.pop-header > i {
+    float: right;
+    margin-right: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.pop-body {
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+.pop-body > div {
+    width: 95%;
+    height: 50%;
+    margin: 0 auto;
+}
+
+.chart-header {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #000;
+    font-size: 14px;
+}
+
+.chart-header > span {
+    margin-left: 10px;
+}
+
+.chart-body {
+    width: 100%;
+    height: calc(100% - 30px);
+}
+
+.chart-col {
+    float: left;
+    width: 50%;
+    height: 100%;
+}

@@ -1,0 +1,9 @@
+﻿{
+  "success": true,
+  "msg": "",
+  "data": [
+    {"name": "分局", "value": "fj"},
+    {"name": "所队", "value": "sd"},
+    {"name": "人员", "value": "ry"}
+  ]
+}

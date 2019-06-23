@@ -1,0 +1,143 @@
+<link rel="stylesheet" type="text/css" href="../../css/myhc/sqxz.css">
+
+<div class="leftPannel">
+    <div class="content">
+        <div class="search_pannel">
+            <input type="text" id="place" placeholder="市局/分局" readonly />
+            <input type="hidden" id="placeCode" />
+            <input type="hidden" id="tempID" />
+            <input type="hidden" id="tempTYPE" />
+
+            <input class="form-control" id="date1" placeholder="起始时间" type="text" value="" size="16" readonly />
+
+            <input class="form-control" id="date2" placeholder="结束时间" type="text" value="" size="16" readonly />
+
+            <img id="check" src="../../img/myhc/check.png" />
+        </div>
+
+        <div id="left-tree"></div>
+
+        <div class="list">
+            <div class="group_one">
+                <div class="left_group" id="dyn_group">
+                    <div class="navigor"></div>
+
+                    <div id="topChart"></div>
+
+                    <div id="pie_label"></div>
+                </div>
+
+                <div class="left_group" id="dyn_group2" style="margin-top: 10px;">
+                    <div class="emp" id="pie_3D1"></div>
+
+                    <div class="emp" id="title_1"></div>
+
+                    <div class="emp" id="pie_3D2"></div>
+
+                    <div class="emp" id="title_2"></div>
+
+                    <div class="emp" id="pie_3D3"></div>
+
+                    <div class="emp" id="title_3"></div>
+
+                    <div class="emp" id="pie_3D4"></div>
+
+                    <div class="emp" id="title_4"></div>
+                </div>
+
+                <div id="back">返回</div>
+            </div>
+
+            <div class="group_two">
+                <div>
+                    <div class="title">本期最热标签TOP5</div>
+
+                    <div id="chart1">
+                        <div>
+                            <div class="progress_title">
+                                <span class="lab"></span><span class="b1 val"></span>
+                            </div>
+
+                            <div class="progress_bk">
+                                <div class="progress_val b2"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="progress_title">
+                                <span class="lab"></span><span class="l1 val"></span>
+                            </div>
+
+                            <div class="progress_bk">
+                                <div class="progress_val l2"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="progress_title">
+                                <span class="lab"></span><span class="p1 val"></span>
+                            </div>
+
+                            <div class="progress_bk">
+                                <div class="progress_val p2"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="progress_title">
+                                <span class="lab"></span><span class="d1 val"></span>
+                            </div>
+
+                            <div class="progress_bk">
+                                <div class="progress_val d2"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="progress_title">
+                                <span class="lab"></span><span class="o1 val"></span>
+                            </div>
+
+                            <div class="progress_bk">
+                                <div class="progress_val o2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="title">诉求性质数量分析</div>
+
+                    <div id="chart2"></div>
+                </div>
+
+                <div>
+                    <div class="title">来源渠道分析</div>
+
+                    <div id="chart3"></div>
+                </div>
+
+                <div style="position: relative;">
+                    <div class="title">单位分析</div>
+
+                    <div class="bar_tab"  >
+                        <div>一单元</div>
+
+                        <div>二单元</div>
+
+                        <div>三单元</div>
+
+                        <div style="border-right: 0px;">其他</div>
+                    </div>
+
+                    <div id="chart4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gotoMap">
+</div>
+
+<div class="rightPannel"></div>

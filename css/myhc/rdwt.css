@@ -1,0 +1,292 @@
+.left-panel {
+    float: left;
+    width: 33%;
+    height: 95%;
+}
+
+.right-panel {
+    float: left;
+    width: 65%;
+    height: calc(95% - 20px);
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px #939cab;
+}
+
+.left-panel-header {
+    width: 95%;
+    height: 85px;
+    margin: 10px auto;
+    background-color: #ADC3DB;
+}
+
+.search-btn {
+    cursor: pointer;
+}
+
+.left-panel-header-dept {
+    width : 100%;
+    height: 50%;
+}
+
+#place {
+    width: 90%;
+    height: 70%;
+    margin: 2% 5%;
+    border-radius: 3px;
+    border: 0;
+}
+
+#left-tree {
+    margin-top: -10px;
+    margin-left: 23px;
+    height: 230px;
+    visibility: hidden;
+    overflow: auto;
+    position: absolute;
+    width: 26.75%;
+    z-index: 9999;
+}
+
+.left-panel-header-date {
+    width : 100%;
+    height: 50%;
+}
+
+.left-panel-header-date>img {
+    position: relative;
+    top: -2px;
+    left: -13px;
+}
+
+#date-input {
+    width: 78%;
+    height: 70%;
+    margin: 1% 5%;
+    border-radius: 3px;
+    border: 0px;
+}
+
+.left-panel-body {
+    width: 95%;
+    height: calc(100% - 118px);
+    margin: 13px auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px #939cab;
+}
+
+.left-panel-body-header {
+    width: 95%;
+    height: 65px;
+    margin: 0 auto;
+    border-bottom: 1px solid #bcc9d9;
+}
+
+.left-panel-ul {
+    width: 95%;
+    height: calc(100% - 140px);
+    margin: 0 auto;
+}
+
+.left-panel-body-footer {
+    width: 95%;
+    height: 65px;
+    margin: 0 auto;
+}
+
+.left-panel-body-header-title {
+    float: left;
+    font-size: 18px;
+    color: #74777C;
+    width: 120px;
+    height: 30px;
+    margin-top: 18px;
+    margin-left: 15px;
+}
+
+.left-panel-body-header-setting {
+    float: right;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    margin-right: 0px;
+    margin-top: 20px;
+    color: #74777C;
+    cursor: pointer;
+}
+
+.left-panel-body-header-person {
+    float: right;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    margin-right: 0px;
+    margin-top: 22px;
+    color: #74777C;
+    cursor: pointer;
+}
+
+.left-panel-body-header-setting>span {
+    position: relative;
+    top: 2px;
+}
+
+.left-panel-li {
+    width: 100%;
+    height: 8%;
+    background: url(../../img/myhc/rdwt/list_normal.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 2% auto;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 40px;
+    color: #000;
+}
+
+.left-panel-li-hover {
+    background: url("../../img/myhc/rdwt/list_hover.png") no-repeat !important;
+    background-size: 100% 100% !important;
+}
+
+.left-panel-li>div {
+    float: left;
+}
+
+.left-panel-li-header {
+    text-align: center;
+}
+
+.left-panel-li>span {
+    color: #74777C;
+
+}
+
+.left-panel-li:hover {
+    background: url("../../img/myhc/rdwt/list_hover.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.left-panel-li-header {
+    width: 10%;
+    height: 100%;
+}
+
+.left-panel-li-body {
+    width: 90%;
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.nav-container {
+    float: right;
+    position: relative;
+    top: -15px;
+}
+
+.chart-container {
+    float: left;
+    width: 32%;
+    height: 47%;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.chart-container-header {
+    width: 90%;
+    height: 15%;
+    margin: 0 auto;
+    border-bottom: 1px solid #BCC9D9;
+    text-align: center;
+}
+
+.chart-container-header>span {
+    font-size: 18px;
+    line-height: 46px;
+    color: #74777C;
+}
+
+.chart-container-body {
+    width: 100%;
+    height: 83%;
+    margin-top: 2%;
+}
+
+input {
+    height: 30px;
+    text-indent: 15px;
+}
+
+.download-report {
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.data-row {
+    width: 84%;
+    height: 30px;
+    margin: 30px auto;
+    line-height: 26px;
+}
+
+.data-row-header {
+    float: left;
+    color: #74777C;
+    font-weight: 500;
+}
+
+.data-row-body {
+    float: right;
+    font-size: 20px;
+}
+
+.chart-row {
+    width: 95%;
+    height: 25px;
+    margin: 0 auto;
+    line-height: 25px;
+    border-radius: 2px;
+}
+
+.chart-row-header {
+    float: left;
+    color: #74777C;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.chart-row-body {
+    float: right;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#rcfx-chart {
+    padding: 14px;
+}
+
+.clear-div {
+    clear: both;
+}
+
+#dwfx-hidden {
+    width: 70%;
+    visibility: hidden;
+    position: absolute;
+    left: -500px;
+}
+
+.pop-panel {
+    position: absolute;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    z-index: 1001;
+    background: url("../../img/myhc/rdwt/mybd/bg.png") no-repeat;
+    background-size: 100% 100%;
+    display: none;
+}

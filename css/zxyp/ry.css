@@ -1,0 +1,150 @@
+.dialog {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.dialog>div {
+    float: left;
+    height: 100%;
+}
+.dialog .t {
+    height: calc(100% / 3 * 2) !important;
+}
+.left {
+    width: calc(100% / 3);
+}
+.right {
+    width: calc(100% / 3 * 2);
+}
+.right>div, .left>div {
+    width: 100%;
+    height: calc(100% / 3);
+}
+.dialog .title {
+    width: 100%;
+    height: 35px;
+    color: #000;
+    line-height: 35px;
+}
+.dialog .title>img {
+    position: relative;
+    top: -1px;
+    margin-right: 5px;
+
+}
+.dialog .content {
+    height: calc(100% - 35px);
+}
+.dialog .group_child {
+    width: calc(50% - 5px);
+    margin-right: 10px;
+}
+.dialog .user2 {
+    width: 100%;
+    height: 140px;
+}
+.dialog .user2>div {
+    float: left;
+    width: 50%;
+    height: 140px;
+}
+.dialog .user2 img {
+    width: 110px;
+    height: 130px;
+    margin-left: 25px;
+}
+.dialog .lab {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.dialog .info2 {
+    width: 100%;
+    height: 135px;
+}
+.dialog .info2>div {
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    margin-top: 10px;
+}
+.dialog .info2 img {
+    position: relative;
+    top: -2px;
+    margin-left: 5px;
+}
+.dialog .num {
+    font-size: 14px;
+}
+.dialog .dort1 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 10px;
+    background-color: green;
+}
+.dialog .dort2 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 10px;
+    background-color: red;
+}
+.row_border {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    height: 80px;
+    box-sizing: border-box;
+    border: 1px dashed #afb0b2;
+    background-color: #f3f8fb;
+}
+.row_border>div {
+    float: left;
+    width: calc(50% - 5px);
+    height: 40px;
+    line-height: 40px;
+    margin-left: 5px;
+    font-size: 12px;
+    color: black;
+}
+#tag1, #tag2 {
+    width: 100%;
+    height: 100%;
+}
+#line {
+    width: 100%;
+    height: 50%;
+}
+.second_row {
+    width: 100%;
+    height: 50%;
+}
+#rador1, #rador2 {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+#typeList {
+    overflow: auto;
+}
+#typeList>div {
+    height: 35px;
+    line-height: 35px;
+}
+#typeList::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+#typeList::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+#typeList::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}

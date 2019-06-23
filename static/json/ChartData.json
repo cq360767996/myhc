@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "name": "咨询",
+      "value": 3
+    },
+    {
+      "name": "投诉",
+      "value": 7
+    },
+    {
+      "name": "催办",
+      "value": 1
+    },
+    {
+      "name": "求助",
+      "value": 7
+    },
+    {
+      "name": "举报",
+      "value": 81
+    }
+  ],
+  "timestamp": "Sat Dec 15 2018 17:42:22 GMT+0800 (中国标准时间)"
+}

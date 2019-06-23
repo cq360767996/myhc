@@ -1,0 +1,280 @@
+@font-face {
+    font-family: "Balth";
+    src: url("../../fonts/Balth.ttf");
+}
+
+.pop-container {
+    /*1373px 718px*/
+    width: calc(100% - 42px);
+    height: calc(100% - 48px);
+    margin: 24px;
+    background-color: transparent;
+    /*box-shadow: 0px 0px 48px #939cab;*/
+}
+
+.pop-header {
+    width: 100%;
+    height: 86px;
+    background: url("../../img/myhc/rdwt/mybd/title_bad.png") no-repeat center center;
+}
+
+.pop-header > i {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #000;
+    cursor: pointer;
+}
+
+.pop-banner {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
+.pop-date-group {
+    float: left;
+    width: 500px;
+    height: 60px;
+    margin-left: 15px;
+    color: #000;
+}
+
+.pop-date {
+    width: 190px;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    text-indent: 15px;
+}
+
+.pop-switch {
+    float: right;
+    width: 230px;
+    height: 32px;
+    border: 1px solid #DCDFE6;
+    margin-top: 14px;
+    margin-right: 20px;
+    border-radius: 16px;
+    box-shadow: inset 0px 0px 3px #939cab;
+}
+
+.pop-switch > div {
+    float: left;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    border-radius: 16px;
+    color: #000;
+    line-height: 32px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pop-switch-hover {
+    color: #fff !important;
+}
+
+.pop-switch-first {
+    background-color: #6AA1DA;
+}
+
+.pop-switch-last {
+    background-color: #E79D00;
+}
+
+.pop-body {
+    width: 100%;
+    height: calc(100% - 176px);
+}
+
+.pop-body-col {
+    float: left;
+    width: calc(25% - 25px);
+    height: 100%;
+    margin-left: 20px;
+    background-color: rgba(243, 248, 250, 1);
+}
+
+.pop-body-col-header {
+    width: 100%;
+    height: 23px;
+    background: rgba(243, 248, 250, 1) url("../../img/myhc/rdwt/mybd/decorate_good.png") no-repeat center center;
+    text-align: center;
+    line-height: 23px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.pop-body-col-body {
+    width: 100%;
+    height: calc(100% - 23px);
+    overflow-y: auto;
+}
+
+/*定义宽高以及背景*/
+.pop-body-col-body::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #FFF;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+.pop-body-col-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #FFF;
+}
+
+/*定义滑块 内阴影+圆角*/
+.pop-body-col-body::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #C1C1C1;
+}
+
+.pop-body-col-body > div {
+    width: 95%;
+    height: calc((100% - 24px) / 10);
+    border-bottom: 1px solid #DBE4EB;
+    border-right: 1px solid #DBE4EB;
+    border-radius: 2px;
+    box-shadow: inset -1px -1px 1px #ECF4F7;
+    margin: 3px auto 0;
+    background-color: #fff;
+}
+
+.pop-body-col-body > div > div {
+    float: left;
+}
+
+.row-left {
+    width: 90px;
+    height: 100%;
+}
+
+.row-left > div {
+    float: left;
+    height: 100%;
+}
+
+.row-left > div:first-child {
+    width: 35px;
+    font-family: "Balth";
+    font-size: 20px;
+    text-align: center;
+    color: #000;
+}
+
+.row-left > div:nth-child(2) {
+    width: 55px;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.row-right {
+    width: calc(100% - 90px);
+    height: 100%;
+    color: #000;
+}
+
+.row-right > div {
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.red-strong {
+    color: #008AFF;
+}
+
+.green-strong {
+    color: #FF2325;
+}
+
+.logo1 {
+    background: url("../../img/myhc/rdwt/mybd/gold.png") no-repeat center center;
+    color: #fff !important;
+}
+
+.logo2 {
+    background: url("../../img/myhc/rdwt/mybd/silver.png") no-repeat center center;
+    color: #fff !important;
+}
+
+.logo3 {
+    background: url("../../img/myhc/rdwt/mybd/copper.png") no-repeat center center;
+    color: #fff !important;
+}
+
+.logo4 {
+    background: url("../../img/myhc/rdwt/mybd/worst.png") no-repeat center 60%;
+    color: #fff !important;
+}
+
+.row-col {
+    float: left;
+    height: 100%;
+}
+
+.row-col1 {
+    width: 35px;
+    font-family: "Balth";
+    font-size: 20px;
+    text-align: center;
+    color: #000;
+}
+
+.row-col2 {
+    margin-left: 5px;
+    width: calc(100% - 110px);
+    color: #000;
+}
+
+.row-col3 {
+    width: 70px;
+    color: #000;
+    font-size: 16px;
+}
+
+.row-col2 > div {
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.row-col2 > div:first-child {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.pop-date-group > img {
+    position: relative;
+    top: -2px;
+    left: 22px;
+    cursor: pointer;
+}
+
+.pop-body-col-header > select {
+    border: 0;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0 10px;
+    outline: none;
+    background-color: #F3F8FA;
+}
+
+.pop-body-col-header > select::-ms-expand {
+    display: none
+}

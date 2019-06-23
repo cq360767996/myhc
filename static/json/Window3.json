@@ -1,0 +1,133 @@
+﻿{
+  "success": true,
+  "msg": "",
+  "title": "南京市公安局社会治安满意度分析",
+  "data1": [
+    {"name": "行政案件数量（1）", "value1": "25", "value2": "+0.63", "value3": "-0.63"},
+    {"name": "刑事案件数量（1）", "value1": "77", "value2": "+0.63", "value3": "-0.63"},
+    {"name": "经济案件数量1", "value1": "77", "value2": "+0.63", "value3": "-0.63"},
+    {"name": "行政案件数量（2）", "value1": "25", "value2": "+0.63", "value3": "-0.63"},
+    {"name": "经济案件数量（2）", "value1": "25", "value2": "+0.63", "value3": "-0.63"},
+    {"name": "行政案件数量2", "value1": "25", "value2": "+0.63", "value3": "-0.63"}
+  ],
+  "data2": [
+    [
+      {"name": "2018-01", "value": "78", "red": false},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true},
+      {"name": "2018-01", "value": "78", "red": true},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true}
+    ],
+    [
+      {"name": "2018-01", "value": "78", "red": false},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true},
+      {"name": "2018-01", "value": "78", "red": true},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true}
+    ],
+    [
+      {"name": "2018-01", "value": "78", "red": false},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true},
+      {"name": "2018-01", "value": "78", "red": true},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true}
+    ],
+    [
+      {"name": "2018-01", "value": "78", "red": false},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true},
+      {"name": "2018-01", "value": "78", "red": true},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true}
+    ],
+    [
+      {"name": "2018-01", "value": "78", "red": false},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true},
+      {"name": "2018-01", "value": "78", "red": true},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true}
+    ],
+    [
+      {"name": "2018-01", "value": "78", "red": false},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true},
+      {"name": "2018-01", "value": "78", "red": true},
+      {"name": "2018-02", "value": "66", "red": true},
+      {"name": "2018-03", "value": "75", "red": true},
+      {"name": "2018-04", "value": "79", "red": true},
+      {"name": "2018-05", "value": "65", "red": true},
+      {"name": "2018-06", "value": "83", "red": true}
+    ]
+  ],
+  "data3": [
+    [
+      {"name": "鼓楼分局", "value": "78"},
+      {"name": "鼓楼分局", "value": "66"},
+      {"name": "鼓楼分局", "value": "75"},
+      {"name": "鼓楼分局", "value": "79"},
+      {"name": "鼓楼分局", "value": "65"},
+      {"name": "鼓楼分局", "value": "66"}
+    ],
+    [
+      {"name": "鼓楼分局", "value": "78"},
+      {"name": "鼓楼分局", "value": "66"},
+      {"name": "鼓楼分局", "value": "75"},
+      {"name": "鼓楼分局", "value": "79"},
+      {"name": "鼓楼分局", "value": "65"},
+      {"name": "鼓楼分局", "value": "83"}
+    ],
+    [
+      {"name": "鼓楼分局", "value": "78"},
+      {"name": "鼓楼分局", "value": "66"},
+      {"name": "鼓楼分局", "value": "75"},
+      {"name": "鼓楼分局", "value": "79"},
+      {"name": "鼓楼分局", "value": "65"},
+      {"name": "鼓楼分局", "value": "83"}
+    ],
+    [
+      {"name": "鼓楼分局", "value": "78"},
+      {"name": "鼓楼分局", "value": "66"},
+      {"name": "鼓楼分局", "value": "75"},
+      {"name": "鼓楼分局", "value": "79"},
+      {"name": "鼓楼分局", "value": "65"},
+      {"name": "鼓楼分局", "value": "83"}
+    ]
+  ]
+}

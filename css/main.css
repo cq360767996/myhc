@@ -1,0 +1,355 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    min-width: 1600px;
+    min-height: 900px;
+    font-family: "微软雅黑" !important;
+    color: #89a3c6;
+}
+
+.logo {
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    background-color: #0a3361;
+    overflow: hidden;
+}
+
+#logo img {
+    position: relative;
+    top: 0px;
+    left: 20px;
+}
+
+.logo > div {
+    float: left;
+}
+
+.menu {
+    float: left;
+    width: 100px;
+    height: calc(100% - 70px);
+    background: url("../../img/left_menu_bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.menu > div {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    border-bottom: 2px solid #204059;
+    cursor: pointer;
+    background-size: 80%;
+    background-position-x: 10px;
+    background-position-y: 10px;
+}
+
+#ui-view {
+    float: left;
+    width: calc(100% - 100px);
+    height: calc(100% - 70px);
+    background: url("../../img/myhc/hc_bg.jpg") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.user {
+    float: right !important;
+    width: auto;
+    height: 100%;
+    margin-right: 20px;
+}
+
+.exit {
+    position: relative;
+    margin-left: 5px;
+    top: -1px;
+}
+
+.myzs-menu {
+    background: url("../../img/myhc/menu1.png") no-repeat;
+}
+
+.myjz-menu {
+    background: url("../../img/myhc/menu2.png") no-repeat;
+}
+
+.rdwt-menu {
+    background: url("../../img/myhc/menu3.png") no-repeat;
+}
+
+.dwjx-menu {
+    background: url("../../img/myhc/menu4.png") no-repeat;
+}
+
+.myzd-menu {
+    background: url("../../img/myhc/menu5.png") no-repeat;
+}
+
+.myys-menu {
+    background: url("../../img/myhc/menu6.png") no-repeat;
+}
+
+.myzs-menu-hover {
+    background: url("../../img/myhc/menu1_hover.png") no-repeat;
+}
+
+.myjz-menu-hover {
+    background: url("../../img/myhc/menu2_hover.png") no-repeat;
+}
+
+.rdwt-menu-hover {
+    background: url("../../img/myhc/menu3_hover.png") no-repeat;
+}
+
+.dwjx-menu-hover {
+    background: url("../../img/myhc/menu4_hover.png") no-repeat;
+}
+
+.myzd-menu-hover {
+    background: url("../../img/myhc/menu5_hover.png") no-repeat;
+}
+
+.myys-menu-hover {
+    background: url("../../img/myhc/menu6_hover.png") no-repeat;
+}
+
+.jcj-menu {
+    background: url("../../img/zxyp/menu1_normal.png") no-repeat;
+}
+.ckfw-menu {
+    background: url("../../img/zxyp/menu2_normal.png") no-repeat;
+}
+.jtsg-menu {
+    background: url("../../img/zxyp/menu3_normal.png") no-repeat;
+}
+.aj-menu {
+    background: url("../../img/zxyp/menu4_normal.png") no-repeat;
+}
+.rx-menu {
+    background: url("../../img/zxyp/menu5_normal.png") no-repeat;
+}
+.ylld-menu {
+    background: url("../../img/zxyp/menu6_normal.png") no-repeat;
+}
+.jcj-menu-hover {
+    background: url("../../img/zxyp/menu1_hover.png") no-repeat;
+}
+.ckfw-menu-hover {
+    background: url("../../img/zxyp/menu2_hover.png") no-repeat;
+}
+.jtsg-menu-hover {
+    background: url("../../img/zxyp/menu3_hover.png") no-repeat;
+}
+.aj-menu-hover {
+    background: url("../../img/zxyp/menu4_hover.png") no-repeat;
+}
+.rx-menu-hover {
+    background: url("../../img/zxyp/menu5_hover.png") no-repeat;
+}
+.ylld-menu-hover {
+    background: url("../../img/zxyp/menu6_hover.png") no-repeat;
+}
+
+.ywfxbg-menu {
+    background: url("../../img/znbg/ywfxbg.png") no-repeat;
+}
+.zhfxbg-menu {
+    background: url("../../img/znbg/zhfxbg.png") no-repeat;
+}
+.ywfxbg-menu-hover {
+    background: url("../../img/znbg/ywfxbg_hover.png") no-repeat;
+}
+.zhfxbg-menu-hover {
+    background: url("../../img/znbg/zhfxbg_hover.png") no-repeat;
+}
+
+.tab {
+    width: 480px;
+    height: 100%;
+    margin-left: 12%;
+    color: #bfccdf;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+.tab > div {
+    float: left;
+    height: 100%;
+    width: calc(25%);
+    text-align: center;
+    text-shadow: 1px 3px 6px #000;
+    cursor: pointer;
+    line-height: 50px;
+}
+
+.tab > div > div {
+    width: 95px;
+    height: 50px;
+    margin: 10px auto;
+    border-radius: 3px;
+}
+
+.header-tab-selected > div {
+    background-color: rgba(34, 71, 113, 1);
+    color: #67c3ff;
+}
+
+#gotoMap {
+    cursor: pointer;
+    background: url("../../img/right_pannel_back.png") no-repeat;
+    background-position-y: 62%;
+}
+
+/*
+    弹窗公共样式区域
+*/
+.simple_shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #7f7f7f;
+    opacity: 0.8;
+    z-index: 1000;
+}
+
+.simple_showDialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1001;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #000;
+}
+
+.simple_showDialog_header {
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: #4d4d4d;
+    line-height: 40px;
+}
+
+.simple_close {
+    float: right;
+    margin-right: 10px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.simple_content {
+    width: 100%;
+    height: calc(100% - 30px);
+    position: relative;
+    top: 8px;
+    overflow: auto;
+}
+
+.simple_content::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+
+.simple_content::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.simple_content::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* 提示框组件start */
+.pop-message {
+    min-width: 380px;
+    height: 50px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 50px;
+    z-index: 10000;
+}
+
+.pop-message > i {
+    float: left;
+    color: inherit;
+    margin-left: 18px;
+    margin-top: -4px;
+}
+
+.pop-message > span {
+    float: left;
+    color: inherit;
+    margin-left: 10px;
+}
+
+.pop-message-error {
+    background-color: #fef0f0;
+    border-color: #fde2e2;
+    color: #f56c6c;
+}
+
+.pop-message-warning {
+    background-color: #fdf6ec;
+    border-color: #faecd8;
+    color: #e6a23c;
+}
+
+.pop-message-success {
+    background-color: #f0f9eb;
+    border-color: #e1f3d8;
+    color: #67C23A;
+}
+
+.pop-message-default {
+    background-color: #EDF2FC;
+    border-color: #DCDFE6;
+    color: #999DA3;
+}
+
+/* 提示框组件end */
+
+/* 分页组件start */
+.com-nav > div {
+    float: left;
+    height: 24px;
+    background-color: #fff;
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    margin-left: 3px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0 8px;
+    color: #999;
+    line-height: 24px;
+}
+
+.com-nav > div:hover, .com-nav > div.com-nav-selected {
+    background-color: #3b8cc1;
+    color: #fff;
+}
+
+/* 分页组件end */

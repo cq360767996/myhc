@@ -1,0 +1,465 @@
+.bg {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0 0 8px #939cab;
+}
+.scroll-style::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #FFF;
+}
+.scroll-style::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #FFF;
+}
+.scroll-style::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #C1C1C1;
+}
+.row-width:nth-child(1) {
+  width: 40px;
+}
+.row-width:nth-child(2) {
+  width: calc(100% - 280px);
+}
+.row-width:nth-child(2) * {
+  float: left;
+}
+.row-width:nth-child(2) img {
+  margin-top: 8px;
+}
+.row-width:nth-child(2) span {
+  text-align: left;
+  display: inline-block;
+  width: calc(100% - 28px);
+  height: 100%;
+  margin-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.row-width:nth-child(3) {
+  width: 100px;
+}
+.row-width:nth-child(4) {
+  width: 140px;
+}
+.row-width:nth-child(4) img {
+  margin-left: 8px;
+  cursor: pointer;
+}
+.row-width:nth-child(4) img:first-child {
+  margin-left: 0;
+}
+.left-section {
+  float: left;
+  width: 60%;
+  padding: 20px 0 20px 20px;
+  height: 100%;
+}
+.left-section > header {
+  width: 100%;
+  height: 50px;
+  background-color: #ADC3DB;
+  padding: 10px;
+}
+.left-section > header input {
+  width: calc((100% - 40px) / 3);
+  height: 30px;
+  background-color: #fff;
+  margin-left: 10px;
+  border-radius: 3px;
+  color: #808080;
+  text-indent: 15px;
+  line-height: 30px;
+}
+.left-section > header input:first-child {
+  margin-left: 0;
+}
+.left-section section {
+  width: 100%;
+  height: calc(100% - 60px);
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0 0 8px #939cab;
+}
+.left-section section fieldset {
+  width: 100%;
+  height: calc(20% - 10px);
+  padding: 0 10px;
+}
+.left-section section fieldset > header {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+.left-section section fieldset > header * {
+  margin-left: 10px;
+}
+.left-section section fieldset > header span {
+  background: url("../../img/znbg/checkbox.png") no-repeat;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+.left-section section fieldset article {
+  width: calc(100% - 50px);
+  height: calc(100% - 40px - 10px);
+  border: 1px dashed #bcc9d8;
+  margin: 0 auto;
+  padding: 5px;
+  color: #999;
+  background-color: #F6FAFF;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.left-section section fieldset article::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #FFF;
+}
+.left-section section fieldset article::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #FFF;
+}
+.left-section section fieldset article::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #C1C1C1;
+}
+.left-section section fieldset article > div {
+  width: 100%;
+  border-bottom: 1px dashed #bcc9d8;
+  line-height: 30px;
+}
+.left-section section fieldset article > div > span {
+  cursor: pointer;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+.left-section section fieldset article > div > span > span {
+  margin-left: 3px;
+}
+.left-section section fieldset article:nth-child(5) {
+  overflow: hidden;
+}
+.left-section section fieldset article textarea {
+  width: 100%;
+  height: calc(100% - 5px);
+  resize: none;
+  background-color: #F6FAFF;
+  border: 0;
+  outline: none;
+}
+.left-section section fieldset article textarea::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #FFF;
+}
+.left-section section fieldset article textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #FFF;
+}
+.left-section section fieldset article textarea::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #C1C1C1;
+}
+.left-section section fieldset > footer {
+  width: 100%;
+  height: 1px;
+  background-color: #bcc9d8;
+  margin-top: 9px;
+}
+.left-section section > footer {
+  width: 100%;
+  height: 50px;
+}
+.left-section section > footer div {
+  width: 200px;
+  height: 30px;
+  margin: 10px auto;
+}
+.left-section section > footer div button {
+  float: left;
+  display: block;
+  width: 90px;
+  height: 30px;
+  background-color: #ffffff;
+  border: solid 1px #409cf1;
+  color: #027ecb;
+}
+.left-section section > footer div button:nth-child(2) {
+  margin-left: 20px;
+}
+.right-section {
+  float: left;
+  width: calc(40% - 40px);
+  height: calc(100% - 40px);
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0 0 8px #939cab;
+}
+.right-section header {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #000;
+}
+.right-section header span,
+.right-section header img {
+  margin-left: 10px;
+}
+.right-section section {
+  width: 100%;
+  height: calc(100% - 40px);
+  padding: 10px 20px;
+}
+.right-section section > div {
+  width: 100%;
+  line-height: 35px;
+  color: #000;
+  text-align: center;
+}
+.right-section section > div.tab-header {
+  height: 35px;
+  background-color: #f6faff;
+}
+.right-section section > div.tab-header div {
+  float: left;
+  height: 100%;
+}
+.right-section section > div.tab-header div:nth-child(1) {
+  width: 40px;
+}
+.right-section section > div.tab-header div:nth-child(2) {
+  width: calc(100% - 280px);
+}
+.right-section section > div.tab-header div:nth-child(2) * {
+  float: left;
+}
+.right-section section > div.tab-header div:nth-child(2) img {
+  margin-top: 8px;
+}
+.right-section section > div.tab-header div:nth-child(2) span {
+  text-align: left;
+  display: inline-block;
+  width: calc(100% - 28px);
+  height: 100%;
+  margin-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.right-section section > div.tab-header div:nth-child(3) {
+  width: 100px;
+}
+.right-section section > div.tab-header div:nth-child(4) {
+  width: 140px;
+}
+.right-section section > div.tab-header div:nth-child(4) img {
+  margin-left: 8px;
+  cursor: pointer;
+}
+.right-section section > div.tab-header div:nth-child(4) img:first-child {
+  margin-left: 0;
+}
+.right-section section > div.tab-body {
+  height: calc(100% - 35px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.right-section section > div.tab-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #FFF;
+}
+.right-section section > div.tab-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #FFF;
+}
+.right-section section > div.tab-body::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #C1C1C1;
+}
+.right-section section > div.tab-body > div {
+  width: 100%;
+  height: 35px;
+}
+.right-section section > div.tab-body > div:hover,
+.right-section section > div.tab-body > div.row-selected {
+  background-color: #EDF6FF;
+}
+.right-section section > div.tab-body > div > div {
+  float: left;
+  height: 35px;
+}
+.right-section section > div.tab-body > div > div:nth-child(1) {
+  width: 40px;
+}
+.right-section section > div.tab-body > div > div:nth-child(2) {
+  width: calc(100% - 280px);
+}
+.right-section section > div.tab-body > div > div:nth-child(2) * {
+  float: left;
+}
+.right-section section > div.tab-body > div > div:nth-child(2) img {
+  margin-top: 8px;
+}
+.right-section section > div.tab-body > div > div:nth-child(2) span {
+  text-align: left;
+  display: inline-block;
+  width: calc(100% - 28px);
+  height: 100%;
+  margin-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.right-section section > div.tab-body > div > div:nth-child(3) {
+  width: 100px;
+}
+.right-section section > div.tab-body > div > div:nth-child(4) {
+  width: 140px;
+}
+.right-section section > div.tab-body > div > div:nth-child(4) img {
+  margin-left: 8px;
+  cursor: pointer;
+}
+.right-section section > div.tab-body > div > div:nth-child(4) img:first-child {
+  margin-left: 0;
+}
+.pop-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #7f7f7f;
+  opacity: 0.8;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.setting-aside {
+  position: absolute;
+  width: 260px;
+  height: 100%;
+  z-index: 3;
+  display: none;
+}
+.setting-aside > div {
+  float: left;
+  width: 220px;
+  height: 100%;
+  background-color: #fff;
+  padding: 30px 10px;
+  color: #333;
+}
+.setting-aside > div header {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.setting-aside > div section {
+  width: 100%;
+  height: calc(100% - 2 * 50px);
+  padding: 30px 20px;
+  color: #4d4d4d;
+}
+.setting-aside > div section ul,
+.setting-aside > div section li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: block;
+}
+.setting-aside > div section ul {
+  width: 100%;
+  height: 100%;
+}
+.setting-aside > div section li {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+}
+.setting-aside > div section li span {
+  float: left;
+}
+.setting-aside > div section li div {
+  float: right;
+  display: inline-block;
+  width: 28px;
+  height: 16px;
+  margin-top: 22px;
+  cursor: pointer;
+}
+.setting-aside > div section li div.switch-on {
+  background: url("../../img/znbg/switch_on.png") no-repeat;
+}
+.setting-aside > div section li div.switch-off {
+  background: url("../../img/znbg/switch_off.png") no-repeat;
+}
+.setting-aside > div footer {
+  width: 100%;
+  height: 50px;
+}
+.setting-aside > div footer button {
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  background-color: #5483d5;
+  color: #fff;
+  border: 0;
+  outline: none;
+  margin-top: 10px;
+  margin-left: 25px;
+}
+.setting-aside > div footer button:nth-child(2) {
+  background-color: #ffffff;
+  border: solid 1px #d9d9d9;
+  color: #666666;
+}
+.setting-aside > button {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: url("../../img/znbg/close.png") no-repeat;
+  border: 0;
+  outline: none;
+  position: relative;
+  top: 50%;
+  margin-top: -20px;
+}
+.setting-btn {
+  position: absolute;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  outline: none;
+  display: block;
+  top: 50%;
+  margin-top: -20px;
+  background: url("../../img/znbg/setting.png") no-repeat;
+}
+.left-tree {
+  height: 230px;
+  visibility: hidden;
+  overflow: auto;
+  position: absolute;
+  z-index: 2;
+}
+/*# sourceMappingURL=ywfxbg.css.map */

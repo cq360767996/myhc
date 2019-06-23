@@ -1,0 +1,10 @@
+{
+  "name": "myhc",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "run-sequence": "2.2.1"
+  }
+}
