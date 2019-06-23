@@ -330,6 +330,10 @@ define([], function () {
                     remoteUrl: base.server + "znbg/ywfxbg/getFileList"
                 },
                 preview: {
+                    initTitle: {
+                        localUrl: './static/json/ywfxbg/preview/title.json',
+                        remoteUrl: base.server + 'znbg/ywfxbg/preview/initTitle'
+                    },
                     init1_1: {
                         localUrl: './static/json/ywfxbg/preview/1_1.json',
                         remoteUrl: base.server + 'znbg/ywfxbg/preview/init1_1'
