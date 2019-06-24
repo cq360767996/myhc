@@ -1,5 +1,5 @@
 /* Created by handsome qiu */
-requirejs(['common'], function (sugon) {
+requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
     // 全局查询尺度
     let searchRuler = {};
@@ -100,6 +100,210 @@ requirejs(['common'], function (sugon) {
                     '<img src="../../img/znbg/delete.png"></div></div>');
             });
         });
+    }
+
+    // 初始化隐藏的图表
+    function initHiddenCharts(result) {
+        let imgBase64 = '';
+        let dom = 'hidden-chart';
+        if (result.type != 5) {
+            let chart = ec.init(document.getElementById(dom));
+            let xData = [], yData = [], len = result.data.length;
+            result.data.map(val => {
+                xData.push(val.name);
+                yData.push(val.value);
+            });
+            result.data.sort((v1, v2) => {
+                return Number(v1.value) - Number(v2.value);
+            });
+            let min = len > 0 && result.data[0].value, max = len > 0 && result.data[len - 1].value;
+            let diff = (max - min) / 2;
+            min = min - diff;
+            max = Number(max) + Number(diff);
+            min = Number(min).toFixed(2);
+            max = max > 100 ? 100 : Number(max).toFixed(2);
+            let option = [
+                {
+                    grid: {
+                        top: 15,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            show: false
+                        },
+                        data: xData
+                    },
+                    yAxis: {
+                        type: 'value',
+                        min: min,
+                        max: max,
+                        splitLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            show: true,
+                            formatter: '{value}%'
+                        }
+                    },
+                    series: [{
+                        data: yData,
+                        type: 'line',
+                        color: '#2887a7',
+                        smooth: true
+                    }]
+                },
+                {
+                    tooltip: {
+                        show: true
+                    },
+                    series: [{
+                        color: ['#A770B3', '#AF8744', '#ED7D31', '#3A9BBE', '#1D84C6', '#6463AF'],
+                        name: '',
+                        type: 'pie',
+                        clockWise: false,
+                        center: ['50%', '50%'],
+                        radius: ['40%', '56%'],
+                        hoverAnimation: false,
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    position: 'outside',
+                                    rich: {
+                                        white: {
+                                            color: '#ddd',
+                                            align: 'center'
+                                        }
+                                    },
+                                    formatter: '{b}：{c}'
+                                },
+                                labelLine: {
+                                    show: true,
+                                    length: 8,
+                                    length2: 5
+                                }
+                            }
+                        },
+                        data: result.data
+                    }]
+                },
+                {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: 0,
+                        top: 15,
+                        right: 0,
+                        bottom: 0,
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {show: false},
+                            splitArea: {show: false},
+                            data: xData,
+                            axisLabel: {
+                                color: '#000'
+                            },
+                            axisLine: {
+                                color: '#000'
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            show: true,
+                            splitLine: {
+                                show: false
+                            },
+                            axisTick: {show: false},
+                            axisLabel: {
+                                formatter: '{value}'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            type: 'bar',
+                            barWidth: 15,
+                            color: '#3A9BBE',
+                            data: yData
+                        }
+                    ]
+                },
+                {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    color: ["#2C8FCE"],
+                    grid: {
+                        left: 0,
+                        right: 15,
+                        bottom: 0,
+                        top: 0,
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        axisTick: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false
+                        },
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisLine: {
+                            show: true
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        data: yData
+                    },
+                    series: [{
+                        type: 'bar',
+                        barWidth: 10,
+                        data: xData
+                    }]
+                }
+            ];
+            chart.setOption(option[result.type - 1]);
+            imgBase64 = chart.getDataURL();
+        } else {
+            let $body = $('#'+ dom).empty(), data = result.data;
+            let string_ = '';
+            for (let i = 0; i < data.length; i++) {
+                let string_f = data[i].name;
+                let string_n = data[i].value;
+                string_ += "{text: '" + string_f + "', weight: '" + string_n + "',html: {'class': 'span_list'}},";
+            }
+            let string_list = string_;
+            let word_list = eval("[" + string_list + "]");
+            $body.jQCloud(word_list);
+            domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
+                imgBase64 = dataUrl;
+            });
+        }
+        return imgBase64;
     }
 
     // 程序入口
@@ -221,6 +425,17 @@ requirejs(['common'], function (sugon) {
             url: sugon.interFaces.znbg.ywfxbg.generateReport,
             data: searchRuler
         }, result => {
+            result.data.map(val => {
+                let param = {personId: 'personId', id: val.id, img: initHiddenCharts(val)};
+                sugon.requestJson({
+                    type: 'post',
+                    url: sugon.interFaces.znbg.ywfxbg.uploadImg,
+                    data: param
+                }, result => {});
+            });
+            requirejs(['text!../../views/znbg/preview.html'], ele => {
+                $("#ui-view").append(ele);
+            });
             initRightPanel();
         });
     });
@@ -234,14 +449,6 @@ requirejs(['common'], function (sugon) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    });
-
-    // 报告预览按钮事件
-    $('.report-preview').click(() => {
-        requirejs(['text!../../views/znbg/preview.html'], ele => {
-            $("#ui-view").append(ele);
-        });
-
     });
 
 });

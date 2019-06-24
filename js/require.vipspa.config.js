@@ -2,30 +2,55 @@ requirejs.config({
     baseUrl: 'js',
     urlArgs: '1.0.0',
     paths: {
-        ec: 'echarts.min',
-        ecPlugin: 'echarts-liquidfill.min',
-        text: 'text',
-        highcharts: 'highcharts',
-        high3D: 'highcharts-3d',
-        _: '../lib/lodash.min'
+        ec: '../lib/echarts.min',
+        ecPlugin: '../lib/echarts-liquidfill.min',
+        text: '../lib/text',
+        highcharts: '../lib/highcharts',
+        high3D: '../lib/highcharts-3d',
+        _: '../lib/lodash.min',
+        L: '../lib/leaflet/leaflet',
+        iclient: '../lib/leaflet/iclient9-leaflet-es6.min',
+        heat: '../lib/leaflet/leaflet-heat',
+        markerCluster: '../lib/leaflet/leaflet.markercluster',
+        plot: '../lib/leaflet/iclient9-plot-leaflet-es6.min',
+        pulse: '../lib/leaflet/L.Icon.Pulse',
+        domtoimage: '../lib/dom-to-image.min'
     },
     shim: {
         high3D: {
             deps: ['highcharts']
         },
         ecPlugin: {
-            deps: ['ec']
+            deps: ['L']
+        },
+        iclient: {
+            deps: ['L']
+        },
+        heat: {
+            deps: ['L']
+        },
+        markerCluster: {
+            deps: ['L']
+        },
+        plot: {
+            deps: ['L', 'iclient']
+        },
+        pulse: {
+            deps: ['L']
+        },
+        domtoimage: {
+            exports: 'domtoimage'
         }
     }
 });
 
-requirejs(["common"], function (sugon) {
+requirejs([], function () {
 
     let router = {
         'myzs': {
             parent: 'myhc',
             templateUrl: 'views/myhc/myzs.html',
-            controller: ''
+            controller: 'js/myhc/myzs.js'
         },
         'myjz': {
             parent: 'myhc',
@@ -193,5 +218,4 @@ requirejs(["common"], function (sugon) {
         sessionStorage.removeItem("myKeywords");
         location.hash = vipspa.stringify("myys/ysxq", {txt: tempTxt});
     }
-})
-;
+});

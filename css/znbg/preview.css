@@ -21,26 +21,22 @@
 .banner2 span {
   margin-left: 20px;
 }
-.pop-container {
+#pop-container {
   position: absolute;
   width: 1280px;
   height: 690px;
-  top: 50%;
-  left: 50%;
-  margin-left: -640px;
-  margin-top: -345px;
+  top: 0;
+  left: 0;
   z-index: 2;
   background-color: #ffffff;
-  border-radius: 3px;
-  box-shadow: 0 0 5px #000;
   color: #485053;
 }
-.pop-container > header {
+#pop-container > header {
   width: 100%;
   height: 65px;
   background: url("../../img/znbg/preview/header.png") no-repeat;
 }
-.pop-container > header span:first-child {
+#pop-container > header span:first-child {
   line-height: 58px;
   font-size: 48px;
   letter-spacing: 5px;
@@ -48,7 +44,7 @@
   font-family: CenturyGothic-Bold;
   color: #a9aac2;
 }
-.pop-container > header span:nth-child(2) {
+#pop-container > header span:nth-child(2) {
   color: #ebecfa;
   margin-left: -2px;
   font-size: 24px;
@@ -56,7 +52,7 @@
   position: relative;
   top: -18px;
 }
-.pop-container > header i {
+#pop-container > header i {
   float: right;
   margin-top: 10px;
   margin-right: 10px;
@@ -64,97 +60,97 @@
   font-size: 18px;
   color: #fff;
 }
-.pop-container > section {
+#pop-container > section {
   width: 100%;
   height: calc(100% - 65px);
 }
-.pop-container > section fieldset {
+#pop-container > section fieldset {
   float: left;
   width: 25%;
   height: 100%;
   border-right: 1px solid #dbdbdb;
 }
-.pop-container > section fieldset > section {
+#pop-container > section fieldset > section {
   width: 100%;
   height: 50%;
   padding: 10px;
 }
-.pop-container > section fieldset > section header {
+#pop-container > section fieldset > section header {
   width: 180px;
   height: 30px;
   line-height: 24px;
   font-size: 16px;
   background: url("../../img/znbg/preview/title.png") no-repeat;
 }
-.pop-container > section fieldset > section header span {
+#pop-container > section fieldset > section header span {
   margin-left: 15px;
   color: #ebecfa;
 }
-.pop-container > section fieldset:nth-child(4) {
+#pop-container > section fieldset:nth-child(4) {
   border-right: 0;
 }
-.pop-container > section .fieldset1 > section > section {
+#pop-container > section .fieldset1 > section > section {
   width: 100%;
   height: calc(100% - 30px);
 }
-.pop-container > section .fieldset1 > section > section > div {
+#pop-container > section .fieldset1 > section > section > div {
   width: 100%;
-  height: 35px;
-  line-height: 35px;
+  height: 43px;
+  line-height: 43px;
   padding: 0 5px;
 }
-.pop-container > section .fieldset1 > section > section > div > * {
+#pop-container > section .fieldset1 > section > section > div > * {
   float: left;
 }
-.pop-container > section .fieldset1 > section > section > div > div:nth-child(2) {
+#pop-container > section .fieldset1 > section > section > div > div:nth-child(2) {
   width: calc(100% - 46px);
   height: 100%;
   margin-left: 10px;
 }
-.pop-container > section .fieldset1 > section > section > div > div:first-child {
+#pop-container > section .fieldset1 > section > section > div > div:first-child {
   width: 36px;
   height: 35px;
 }
-.pop-container > section .fieldset1 > section > section > div > div > div {
+#pop-container > section .fieldset1 > section > section > div > div > div {
   width: 100%;
-  height: 35px;
+  height: 43px;
 }
-.pop-container > section .fieldset1 > section > section > div > div span {
+#pop-container > section .fieldset1 > section > section > div > div span {
   float: left;
   color: #485053;
 }
-.pop-container > section .fieldset1 > section > section > div > div strong {
+#pop-container > section .fieldset1 > section > section > div > div strong {
   float: right;
   color: #ff6000;
   font-size: 20px;
 }
-.pop-container > section .fieldset1 > section > section > div:nth-child(2) {
-  height: calc(100% - 35px * 3);
+#pop-container > section .fieldset1 > section > section > div:nth-child(2) {
+  height: calc(100% - 43px * 3);
   padding: 0;
 }
-.pop-container > section .fieldset1 > section > section > div:nth-child(2) > div:nth-child(2) {
+#pop-container > section .fieldset1 > section > section > div:nth-child(2) > div:nth-child(2) {
   border: dashed 1px #bec5d4;
 }
-.pop-container > section .fieldset1 > section > section > div:nth-child(2) > div > div {
-  margin-top: 20px;
+#pop-container > section .fieldset1 > section > section > div:nth-child(2) > div > div {
   padding: 0 5px;
 }
-.pop-container > section .fieldset1 > section > section > div:nth-child(2) > div > div:first-child {
+#pop-container > section .fieldset1 > section > section > div:nth-child(2) > div > div:first-child {
   margin-top: 0;
   background-color: #f4f6fc;
   border-bottom: 1px solid #dbdbdb;
 }
-.pop-container > section .fieldset1 > section:first-child {
+#pop-container > section .fieldset1 > section:first-child {
   border-bottom: 1px solid #dbdbdb;
 }
-.pop-container > section .fieldset1 #chart1 {
+#pop-container > section .fieldset1 #chart1 {
   width: 100%;
-  height: calc(100% - 130px);
+  height: calc(100% - 135px);
 }
-.pop-container > section .fieldset1 footer {
+#pop-container > section .fieldset1 footer {
   width: 100%;
   height: 60px;
   line-height: 20px;
+  margin-top: 5px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -162,19 +158,19 @@
   overflow: hidden;
   text-align: justify;
 }
-.pop-container > section .fieldset2 > section .tab-container {
+#pop-container > section .fieldset2 > section .tab-container {
   width: calc(100% - 20px);
-  height: calc(100% - 40px - 10px);
+  height: calc(100% - 40px - 70px);
   margin: 0 10px 10px 10px;
   border: 1px solid #dbdbdb;
 }
-.pop-container > section .fieldset2 > section .tab-container > div {
+#pop-container > section .fieldset2 > section .tab-container > div {
   width: 100%;
   height: 30px;
   line-height: 30px;
   border-top: 1px solid #dbdbdb;
 }
-.pop-container > section .fieldset2 > section .tab-container > div > div {
+#pop-container > section .fieldset2 > section .tab-container > div > div {
   text-align: center;
   float: left;
   width: 60px;
@@ -184,50 +180,19 @@
   overflow: hidden;
   white-space: nowrap;
 }
-.pop-container > section .fieldset2 > section .tab-container > div > div:nth-child(4n + 1) {
+#pop-container > section .fieldset2 > section .tab-container > div > div:nth-child(4n + 1) {
   width: calc(100% - 180px);
   border-left: 0;
 }
-.pop-container > section .fieldset2 > section .tab-container > div:first-child {
+#pop-container > section .fieldset2 > section .tab-container > div:first-child {
   border-top: 0;
   background-color: #F0F3FA;
 }
-.pop-container > section .fieldset2 > section #chart2 {
+#pop-container > section .fieldset2 > section #chart2 {
   width: 100%;
-  height: calc(100% - 145px);
+  height: calc(100% - 135px);
 }
-.pop-container > section .fieldset2 > section footer {
-  width: 100%;
-  height: 120px;
-}
-.pop-container > section .fieldset2 > section footer > div {
-  width: 100%;
-  height: 24px;
-  line-height: 24px;
-}
-.pop-container > section .fieldset2 > section footer > div > div {
-  float: left;
-  width: 50px;
-  height: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-align: center;
-}
-.pop-container > section .fieldset2 > section footer > div > div:first-child {
-  width: calc(100% - 110px);
-}
-.pop-container > section .fieldset2 > section footer > div > div:nth-child(3) {
-  width: 60px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.pop-container > section .fieldset3 #chart3 {
-  width: 100%;
-  height: calc(100% - 130px);
-}
-.pop-container > section .fieldset3 footer {
+#pop-container > section .fieldset2 > section .footer1 {
   width: 100%;
   height: 60px;
   line-height: 20px;
@@ -238,18 +203,67 @@
   overflow: hidden;
   text-align: justify;
 }
-.pop-container > section .fieldset3 #chart4 {
+#pop-container > section .fieldset2 > section .footer2 {
+  width: 100%;
+  height: 60px;
+  margin-top: 5px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container > section .fieldset3 #chart3 {
+  width: 100%;
+  height: calc(100% - 65px);
+}
+#pop-container > section .fieldset3 footer {
+  width: 100%;
+  height: 60px;
+  margin-top: 5px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container > section .fieldset3 footer > div {
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+}
+#pop-container > section .fieldset3 footer > div > div {
+  float: left;
+  width: 50px;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+#pop-container > section .fieldset3 footer > div > div:first-child {
+  width: calc(100% - 110px);
+}
+#pop-container > section .fieldset3 footer > div > div:nth-child(3) {
+  width: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#pop-container > section .fieldset3 #chart4 {
   width: 100%;
   height: calc(100% - 40px);
 }
-.pop-container > section .fieldset4 > section:first-child {
+#pop-container > section .fieldset4 > section:first-child {
   border-bottom: 1px solid #dbdbdb;
 }
-.pop-container > section .fieldset4 #chart5 {
+#pop-container > section .fieldset4 #chart5 {
   width: 100%;
   height: calc(100% - 30px);
 }
-.pop-container > section .fieldset4 .zjfx-content {
+#pop-container > section .fieldset4 .zjfx-content {
   width: 100%;
   height: calc(100% - 30px);
   line-height: 30px;

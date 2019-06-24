@@ -189,24 +189,14 @@
       width: 100%;
       height: 50px;
 
-      div {
-        width: 200px;
-        height: 30px;
-        margin: 10px auto;
-
         button {
-          float: left;
           display: block;
           width: 90px;
           height: 30px;
           background-color: #ffffff;
           border: solid 1px #409cf1;
           color: #027ecb;
-
-          &:nth-child(2) {
-            margin-left: 20px;
-          }
-        }
+          margin: 10px auto;
       }
 
     }
@@ -421,4 +411,112 @@
   overflow: auto;
   position: absolute;
   z-index: 2;
+}
+
+.hidden-chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background: #0F7CBD;
+  display: none;
+
+  div {
+    width: 200px;
+    height: 150px;
+    float: left;
+    margin-left: 20px;
+  }
+}
+
+/*词云*/
+div.jqcloud {
+  font-family: "微软雅黑", "宋体", sans-serif;
+  font-size: 10px;
+  line-height: normal;
+}
+
+div.jqcloud a {
+  font-size: inherit;
+  text-decoration: none;
+}
+
+div.jqcloud span.w10 {
+  font-size: 200%;
+  color: #7a833c;
+}
+
+div.jqcloud span.w9 {
+  font-size: 190%;
+  color: #53609b;
+}
+
+div.jqcloud span.w8 {
+  font-size: 180%;
+  color: #bc78de;
+}
+
+div.jqcloud span.w7 {
+  font-size: 170%;
+  color: #cf3876;
+}
+
+div.jqcloud span.w6 {
+  font-size: 160%;
+  color: #1d84c6;
+}
+
+div.jqcloud span.w5 {
+  font-size: 150%;
+  color: #7a833c;
+}
+
+div.jqcloud span.w4 {
+  font-size: 140%;
+  color: #1d84c6;
+}
+
+div.jqcloud span.w3 {
+  font-size: 130%;
+  color: #e8a31c;
+}
+
+div.jqcloud span.w2 {
+  font-size: 120%;
+  color: #bc78de;
+}
+
+div.jqcloud span.w1 {
+  font-size: 110%;
+  color: #ed8166;
+}
+
+/* colors */
+
+div.jqcloud {
+  color: #09f;
+}
+
+div.jqcloud a {
+  color: inherit;
+}
+
+div.jqcloud span {
+  cursor: pointer;
+}
+
+div.jqcloud span:hover {
+  color: #1a86d1;
+  font-weight: bold;
+}
+
+div.jqcloud {
+  overflow: hidden;
+  position: relative;
+}
+
+div.jqcloud span {
+  padding: 0;
 }

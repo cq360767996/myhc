@@ -23,12 +23,12 @@ requirejs(["common", "ec"], function (sugon, ec) {
     var initSearchBar = function () {
         var lastMonth = getDate(-1);
         searchRuler.deptId = '2014110416460086100000002942';
-        searchRuler.date1 = getDate(-9);
-        searchRuler.date2 = getDate(-3);
+        searchRuler.date1 = getDate(-10);
+        searchRuler.date2 = getDate(-4);
         searchRuler.deptName = '南京市公安局';
         search.deptId = '2014110416460086100000002942';
-        search.date1 = getDate(-9);
-        search.date2 = getDate(-3);
+        search.date1 = getDate(-10);
+        search.date2 = getDate(-4);
         search.deptName = '南京市公安局';
 
         $('#place').val('南京市公安局');

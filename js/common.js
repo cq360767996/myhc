@@ -6,7 +6,95 @@ define([], function () {
     base.server = "../";
 
     base.interFaces = {
-        "myjz": {
+        myzs: {
+            //下拉树
+            Tree: {localUrl: "../../static/json/Tree.json", remoteUrl: base.server + "/myzs/getDwTree"},
+            // 根据单位code获取单位id
+            DeptId: {remoteUrl: base.server + "/myzs/getDeptId"},
+            // 加载左侧数据
+            getLeftData: {remoteUrl: base.server + '/myzs/getLeftData'},
+            // 加载右侧中间部分数据
+            getRightMidData: {remoteUrl: base.server + '/myzs/getRightMidData'},
+            // 加载右侧数据
+            getRightData: {remoteUrl: base.server + '/myrd/getRdwtList'},
+            // 获取指标组成
+            getZbzc: {localUrl: '../../static/json/myzs/pop-zbzs.json', remoteUrl: base.server + '/myzs/getZbzc'},
+            // 指标展示悬停弹框
+            getZbzcDetail: {
+                localUrl: '../../static/json/myzs/pop-zbzs-detail.json',
+                remoteUrl: base.server + '/myzs/getZbzcDetail'
+            },
+            // 执法公信力走势分析
+            getZfgxl: {remoteUrl: base.server + '/myzs/getZfgxl'},
+            // 单位情况
+            getDwqk: {remoteUrl: base.server + '/myzs/getDwqk'},
+            // 根据单位id获取单位层级
+            getDwLevel: {remoteUrl: base.server + '/myzs/getDwLevel'},
+            // 社会治安满意度调查情况
+            getMyd: {localUrl: '../../static/json/myd.json', remoteUrl: base.server + 'myzs/getMyd'},
+            // 获取数据录入初始化数据
+            getSjlr: {localUrl: '../../static/json/myzs/pop1.json', remoteUrl: base.server + 'myzs/getSjlr'},
+            // 提交数据录入
+            submitSjlr: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitSjlr'},
+            // 获取系数配置初始化数据
+            getXspz: {localUrl: '../../static/json/myzs/pop2.json', remoteUrl: base.server + 'myzs/getXspz'},
+            // 重置系数配置
+            resetXspz: {localUrl: '../../static/json/myzs/pop2.json', remoteUrl: base.server + 'myzs/resetXspz'},
+            // 提交系数配置
+            submitXspz: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitXspz'},
+            // 获取展示配置初始化数据
+            getZspz: {localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/getZspz'},
+            // 重置展示配置
+            resetZspz: {localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/resetZspz'},
+            // 计算展示配置数据
+            calcZspz: {localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/calcZspz'},
+            // 提交展示配置
+            submitZspz: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitZspz'},
+            getPoint: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getTestJwd'},
+            getMapData: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getMapData'},
+            getPcsZb: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getPcsZb'},
+            getDetailMapData: {
+                localUrl: '../../static/json/myzs/success.json',
+                remoteUrl: base.server + 'myzs/getDetailMapData'
+            },
+            getMapCount: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getMapCount'},
+            getMapDataByBounds: {
+                localUrl: '../../static/json/myzs/success.json',
+                remoteUrl: base.server + 'myzs/getMapDataByBounds'
+            },
+            getCkfw: {
+                localUrl: '../../static/json/myzs/success.json',
+                remoteUrl: base.server + 'myzs/getCkfw'
+            },
+            getCkMapData: {
+                localUrl: '../../static/json/myzs/success.json',
+                remoteUrl: base.server + 'myzs/getCkMapData'
+            },
+            getCkfwq: {
+                remoteUrl: base.server + 'myzs/getCkfwq'
+            },
+            getCkDetail: {
+                remoteUrl: base.server + 'myzs/getCkDetail'
+            },
+            getPointByCode: {
+                remoteUrl: base.server + 'myzs/getPointByCode'
+            },
+            getCkRdwtDetail: {
+                remoteUrl: base.server + 'myzs/getCkRdwtDetail'
+            },
+            getCkfwqDetail: {
+                remoteUrl: base.server + 'myzs/getCkfwqDetail'
+            },
+            getCkfwqZb: {
+                localUrl: "../../static/json/Date.json",
+                remoteUrl: base.server + 'myzs/getCkfwqZb'
+            },
+            getCkfwqRank: {
+                localUrl: "../../static/json/Date.json",
+                remoteUrl: base.server + 'myzs/getCkfwqRank'
+            }
+        },
+        myjz: {
             //下拉树
             "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "/myjz/getDwTree"},
             //民意矩阵中间数据
@@ -22,7 +110,7 @@ define([], function () {
             //部门列表
             "bmList": {localUrl: "./static/json/bmList.json", remoteUrl: base.server + "/myjz/getMyjz"}
         },
-        "dwjx": {
+        dwjx: {
             //初始化标签
             "Tab": {localUrl: "./static/json/Tab.json", remoteUrl: base.server + "/dwjx/getNavigor"},
             //初始化标签
@@ -38,11 +126,7 @@ define([], function () {
             //其他图标数据
             "OtherCharts": {localUrl: "./static/json/OtherCharts.json", remoteUrl: base.server + "/dwjx/getChartData"}
         },
-        "myzs": {
-            //下拉树
-            "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "/myzs/getDwTree"}
-        },
-        "myys": {
+        myys: {
             //民意热词
             "HotWords": {localUrl: "./static/json/HotWords.json", remoteUrl: base.server + "/myys/getReSouList"},
             //热搜-换一换
@@ -64,7 +148,7 @@ define([], function () {
             //详情表格
             "saveKeyWord": {localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/saveKeyWord"}
         },
-        "rdwt": {
+        rdwt: {
             "Tree": {remoteUrl: base.server + "/myrd/getDwTree"}, // 加载树
             "RdList": {localUrl: "./static/json/rdwt.json", remoteUrl: base.server + "myrd/getRdwtList"}, // 获取左侧数据
             "Rdwt": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getWtTrend"}, // 加载热点问题
@@ -88,7 +172,7 @@ define([], function () {
             "getMjsxl": {localUrl: './static/json/rdwt/sxl.json', remoteUrl: base.server + "myrd/ranking"} // 获取社区民警熟悉率数据
 
         },
-        "zxyp": {
+        zxyp: {
             "aj": {
                 "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/aj/getDwTree"}, // 加载树
                 "getZbzs": {localUrl: "./static/json/aj/zbzs.json", remoteUrl: base.server + "zxyp/aj/zbzs"}, // 加载指标展示
@@ -319,53 +403,25 @@ define([], function () {
                     localUrl: "./static/json/ywfxbg/submitSetting.json",
                     remoteUrl: base.server + "znbg/ywfxbg/submitSetting"
                 },
-
                 generateReport: { // 生成报告
                     localUrl: "./static/json/ywfxbg/generateReport.json",
                     remoteUrl: base.server + "znbg/ywfxbg/generateReport"
                 },
-
                 getFileList: { // 获取文件列表
                     localUrl: "./static/json/ywfxbg/getFileList.json",
                     remoteUrl: base.server + "znbg/ywfxbg/getFileList"
                 },
-                preview: {
-                    initTitle: {
-                        localUrl: './static/json/ywfxbg/preview/title.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/initTitle'
-                    },
-                    init1_1: {
-                        localUrl: './static/json/ywfxbg/preview/1_1.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init1_1'
-                    },
-                    init1_2: {
-                        localUrl: './static/json/ywfxbg/preview/1_2.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init1_2'
-                    },
-                    init2_1: {
-                        localUrl: './static/json/ywfxbg/preview/2_1.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init2_1'
-                    },
-                    init2_2: {
-                        localUrl: './static/json/ywfxbg/preview/2_2.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init2_2'
-                    },
-                    init3_1: {
-                        localUrl: './static/json/ywfxbg/preview/3_1.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init3_1'
-                    },
-                    init3_2: {
-                        localUrl: './static/json/ywfxbg/preview/3_2.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init3_2'
-                    },
-                    init4_1: {
-                        localUrl: './static/json/ywfxbg/preview/4_1.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init4_1'
-                    },
-                    init4_2: {
-                        localUrl: './static/json/ywfxbg/preview/4_2.json',
-                        remoteUrl: base.server + 'znbg/ywfxbg/preview/init4_2'
-                    },
+                postImg: {
+                    localUrl: "./static/json/ywfxbg/postImg.json",
+                    remoteUrl: base.server + "znbg/ywfxbg/postImg"
+                },
+                getJcjPreview: {
+                    localUrl: "./static/json/ywfxbg/preview.json",
+                    remoteUrl: base.server + "znbg/ywfxbg/getJcjPreview"
+                },
+                uploadImg: {
+                    localUrl: "./static/json/ywfxbg/preview.json",
+                    remoteUrl: base.server + "znbg/ywfxbg/uploadImg"
                 }
             }
         }
