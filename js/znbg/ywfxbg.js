@@ -104,10 +104,18 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         });
     }
 
+    // 上传图片
+    function uploadImg(result, imgUrl, uuid) {
+        sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
+            uuid: uuid,
+            id: result.id,
+            img: imgUrl
+        });
+    }
 
     // 初始化隐藏的图表
     function initHiddenCharts(result, uuid) {
-        let dom = 'hidden-chart', promise;
+        let dom = 'hidden-chart', imgBase64;
         if (result.type != 5) {
             let chart = ec.init(document.getElementById(dom));
             let xData = [], yData = [], len = result.data.length;
@@ -289,11 +297,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                 }
             ];
             chart.setOption(option[result.type - 1]);
-            promise = sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
-                uuid: uuid,
-                id: result.id,
-                img: chart.getDataURL()
-            });
+            setTimeout(uploadImg, 2000, result, chart.getDataURL(), uuid);
         } else {
             let $body = $('#' + dom).empty(), data = result.data;
             let string_ = '';
@@ -305,18 +309,10 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             let string_list = string_;
             let word_list = eval("[" + string_list + "]");
             $body.jQCloud(word_list);
-            promise = domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
-                let img = new Image();
-                img.src = dataUrl;
-                document.body.appendChild(img);
-                return sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
-                    uuid: uuid,
-                    id: result.id,
-                    img: dataUrl
-                });
+            domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
+                setTimeout(uploadImg, 2000, result, dataUrl, uuid);
             });
         }
-        return promise;
     }
 
     // 生成报告
@@ -334,10 +330,15 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                 initHiddenCharts(val, uuid);
             });
             requirejs(['text!../../views/znbg/preview.html'], ele => {
-                window.dialogParams = {uuid: uuid};
+                window.dialogParams = {
+                    uuid: uuid,
+                    initRightPanel: initRightPanel,
+                    deptId: searchRuler.deptId,
+                    date1: searchRuler.date1,
+                    date2: searchRuler.date2
+                };
                 $("#ui-view").append(ele);
             });
-            initRightPanel();
         });
     }
 
@@ -468,16 +469,16 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             imgUrl = $target.attr('imgUrl'), pdfUrl = $target.attr('pdfUrl');
         if (containImg === "1") {
             $('#ui-view').append('<div class="pop-menu" style="top: ' + (offset.top - 38) + 'px;left: ' + (offset.left - 128) +
-                'px;"><a href="' + imgUrl + '" download>简报预览</a><a href="' + pdfUrl + '" download>报告预览</a></div>');
+                'px;"><a href="' + imgUrl + '" target="_blank">简报预览</a><a href="' + pdfUrl + '" target="_blank">报告预览</a></div>');
             // 绑定点击事件
             $('.pop-menu > a').unbind().bind('click', e => {
                 $('.pop-menu').remove();
             });
         } else {
             let link = document.createElement('a');
-            link.download = '';
             link.style.display = 'none';
             link.href = pdfUrl;
+            link.target = '_blank';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

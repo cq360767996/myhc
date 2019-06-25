@@ -290,9 +290,9 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
     // 初始化页面
     function initPage() {
-        searchRuler.deptId = $('#deptId').val();
-        searchRuler.date1 = $('#date1').val();
-        searchRuler.date2 = $('#date2').val();
+        searchRuler.deptId = window.dialogParams.deptId;
+        searchRuler.date1 = window.dialogParams.date1;
+        searchRuler.date2 = window.dialogParams.date2;
         searchRuler.uuid = window.dialogParams.uuid;
         sugon.request(sugon.interFaces.znbg.ywfxbg.getJcjPreview, searchRuler).then(result => {
             initTitle(result.title);
@@ -304,7 +304,8 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             init3_2(result.data6);
             init4_1(result.data7);
             init4_2();
-            postImg();
+            setTimeout(postImg, 2000);
+            window.dialogParams.initRightPanel();
         });
     }
 
