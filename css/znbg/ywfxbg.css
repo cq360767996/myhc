@@ -540,8 +540,27 @@ div.jqcloud span {
   z-index: 4;
   border-radius: 1px;
 }
-.pop-menu > div {
+.pop-menu::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  bottom: -9px;
+  transform: rotate(-45deg);
+  left: 50%;
+  margin-left: -8px;
+  top: -8px;
+}
+.pop-menu > a {
+  display: block;
   padding: 3px 10px;
   line-height: 24px;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.pop-menu > a:hover {
+  color: #2E91FE;
 }
 /*# sourceMappingURL=ywfxbg.css.map */

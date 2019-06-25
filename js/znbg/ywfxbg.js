@@ -96,8 +96,9 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             result.data.map(val => {
                 $tabBody.append('<div url="' + val.url + '"><div><img src="../../img/znbg/checkbox.png"></div>' +
                     '<div><img src="../../img/znbg/word.png"><span>' + val.name + '</span></div><div>' + val.date +
-                    '</div><div><img class="preview-report" containImg="' + val.containImg + '' +
-                    '" src="../../img/znbg/preview.png"><img class="download-img" src="../../img/znbg/download.png">' +
+                    '</div><div><img class="preview-report" imgUrl="' + val.imgUrl + '" pdfUrl="' + val.pdfUrl +
+                    '" containImg="' + val.containImg + '' + '" src="../../img/znbg/preview.png">' +
+                    '<img class="download-img" src="../../img/znbg/download.png">' +
                     '<img src="../../img/znbg/delete.png"></div></div>');
             });
         });
@@ -305,6 +306,9 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             let word_list = eval("[" + string_list + "]");
             $body.jQCloud(word_list);
             promise = domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
+                let img = new Image();
+                img.src = dataUrl;
+                document.body.appendChild(img);
                 return sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
                     uuid: uuid,
                     id: result.id,
@@ -460,10 +464,23 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
     // 预览按钮事件
     $('.tab-body').on('click', '.preview-report', e => {
-        let $target = $(e.target), offset = $target.offset(), containImg = $target.attr('containImg');
+        let $target = $(e.target), offset = $target.offset(), containImg = $target.attr('containImg'),
+            imgUrl = $target.attr('imgUrl'), pdfUrl = $target.attr('pdfUrl');
         if (containImg === "1") {
-            $('#ui-view').append('<div class="pop-menu" style="top: ' + (offset.top - 40) + 'px;left: ' + (offset.left - 123) +
-                'px;"><div>简报预览</div><div>报告预览</div></div>');
+            $('#ui-view').append('<div class="pop-menu" style="top: ' + (offset.top - 38) + 'px;left: ' + (offset.left - 128) +
+                'px;"><a href="' + imgUrl + '" download>简报预览</a><a href="' + pdfUrl + '" download>报告预览</a></div>');
+            // 绑定点击事件
+            $('.pop-menu > a').unbind().bind('click', e => {
+                $('.pop-menu').remove();
+            });
+        } else {
+            let link = document.createElement('a');
+            link.download = '';
+            link.style.display = 'none';
+            link.href = pdfUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     });
 

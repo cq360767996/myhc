@@ -293,6 +293,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         searchRuler.deptId = $('#deptId').val();
         searchRuler.date1 = $('#date1').val();
         searchRuler.date2 = $('#date2').val();
+        searchRuler.uuid = window.dialogParams.uuid;
         sugon.request(sugon.interFaces.znbg.ywfxbg.getJcjPreview, searchRuler).then(result => {
             initTitle(result.title);
             init1_1(result.data1);
