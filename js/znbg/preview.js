@@ -285,6 +285,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         }).then(result => {
             $('#pop-container').remove();
             sugon.removeLoading();
+            window.dialogParams.initRightPanel();
         });
     }
 
@@ -305,7 +306,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             init4_1(result.data7);
             init4_2();
             setTimeout(postImg, 2000);
-            window.dialogParams.initRightPanel();
+
         });
     }
 

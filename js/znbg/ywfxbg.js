@@ -85,6 +85,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
     // 初始化右侧文件列表
     function initRightPanel() {
+        debugger
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.getFileList,
@@ -115,7 +116,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
     // 初始化隐藏的图表
     function initHiddenCharts(result, uuid) {
-        let dom = 'hidden-chart', imgBase64;
+        let dom = 'hidden-chart';
         if (result.type != 5) {
             let chart = ec.init(document.getElementById(dom));
             let xData = [], yData = [], len = result.data.length;
