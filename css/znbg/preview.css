@@ -27,7 +27,7 @@
   height: 690px;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: -2;
   background-color: #ffffff;
   color: #485053;
 }
@@ -46,11 +46,20 @@
 }
 #pop-container > header span:nth-child(2) {
   color: #ebecfa;
-  margin-left: -2px;
+  margin-left: 2px;
   font-size: 24px;
   font-family: ZHSCNMT--GBK1-0;
   position: relative;
   top: -18px;
+}
+#pop-container > header span:nth-child(3) {
+  float: right;
+  color: #ebecfa;
+  right: 18px;
+  font-size: 18px;
+  font-family: ZHSCNMT--GBK1-0;
+  position: relative;
+  top: 35px;
 }
 #pop-container > header i {
   float: right;
@@ -151,6 +160,7 @@
   height: 60px;
   line-height: 20px;
   margin-top: 5px;
+  text-indent: 28px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -196,6 +206,7 @@
   width: 100%;
   height: 60px;
   line-height: 20px;
+  text-indent: 28px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -207,6 +218,7 @@
   width: 100%;
   height: 60px;
   margin-top: 5px;
+  text-indent: 28px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -216,12 +228,13 @@
 }
 #pop-container > section .fieldset3 #chart3 {
   width: 100%;
-  height: calc(100% - 65px);
+  height: calc(100% - 35px);
 }
 #pop-container > section .fieldset3 footer {
   width: 100%;
   height: 60px;
   margin-top: 5px;
+  text-indent: 28px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -259,9 +272,21 @@
 #pop-container > section .fieldset4 > section:first-child {
   border-bottom: 1px solid #dbdbdb;
 }
+#pop-container > section .fieldset4 footer {
+  width: 100%;
+  height: 60px;
+  margin-top: 5px;
+  text-indent: 28px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
+}
 #pop-container > section .fieldset4 #chart5 {
   width: 100%;
-  height: calc(100% - 30px);
+  height: calc(100% - 90px);
 }
 #pop-container > section .fieldset4 .zjfx-content {
   width: 100%;

@@ -102,10 +102,10 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         });
     }
 
+
     // 初始化隐藏的图表
     function initHiddenCharts(result) {
-        let imgBase64 = '';
-        let dom = 'hidden-chart';
+        let dom = 'hidden-chart', promise;
         if (result.type != 5) {
             let chart = ec.init(document.getElementById(dom));
             let xData = [], yData = [], len = result.data.length;
@@ -287,9 +287,13 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                 }
             ];
             chart.setOption(option[result.type - 1]);
-            imgBase64 = chart.getDataURL();
+            promise = sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
+                uuid: sugon.uuid(),
+                id: result.id,
+                img: chart.getDataURL()
+            });
         } else {
-            let $body = $('#'+ dom).empty(), data = result.data;
+            let $body = $('#' + dom).empty(), data = result.data;
             let string_ = '';
             for (let i = 0; i < data.length; i++) {
                 let string_f = data[i].name;
@@ -299,11 +303,36 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             let string_list = string_;
             let word_list = eval("[" + string_list + "]");
             $body.jQCloud(word_list);
-            domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
-                imgBase64 = dataUrl;
+            promise = domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
+                return sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
+                    uuid: sugon.uuid(),
+                    id: result.id,
+                    img: dataUrl
+                });
             });
         }
-        return imgBase64;
+        return promise;
+    }
+
+    // 生成报告
+    function generateReport() {
+        let $span = $('.span-div'), codeArr = [];
+        $span.each((index, ele) => {
+            let $ele = $(ele);
+            $ele.find('img').attr('src').indexOf('hover') > -1 && codeArr.push($ele.attr('code'));
+        });
+        searchRuler.code = codeArr.join(',');
+        searchRuler.content = $('.textarea-div').val();
+        searchRuler.uuid = sugon.uuid();
+        sugon.request(sugon.interFaces.znbg.ywfxbg.generateReport, searchRuler).then(result => {
+            result.data.map(val => {
+                initHiddenCharts(val);
+            });
+            requirejs(['text!../../views/znbg/preview.html'], ele => {
+                $("#ui-view").append(ele);
+            });
+            initRightPanel();
+        });
     }
 
     // 程序入口
@@ -364,6 +393,11 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
                 });
                 $checkbox.attr('src', '../../img/znbg/checkbox_hover.png');
+                // 报告生成事件
+                $('.report-generator').on('click', () => {
+                    sugon.renderLoading();
+                    generateReport();
+                });
             }
             $('.setting-aside').hide();
             $('.pop-mask').hide();
@@ -409,35 +443,6 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         let $target = $(e.target), text = $target.val(), reg = /\S/, checkboxOn = '../../img/znbg/checkbox_hover.png',
             checkboxOff = '../../img/znbg/checkbox.png';
         $target.parent().prev().find('img').eq(0).attr('src', reg.test(text) ? checkboxOn : checkboxOff);
-    });
-
-    // 报告生成事件
-    $('.report-generator').on('click', () => {
-        let $span = $('.span-div'), codeArr = [];
-        $span.each((index, ele) => {
-            let $ele = $(ele);
-            $ele.find('img').attr('src').indexOf('hover') > -1 && codeArr.push($ele.attr('code'));
-        });
-        searchRuler.code = codeArr.join(',');
-        searchRuler.content = $('.textarea-div').val();
-        sugon.requestJson({
-            type: 'post',
-            url: sugon.interFaces.znbg.ywfxbg.generateReport,
-            data: searchRuler
-        }, result => {
-            result.data.map(val => {
-                let param = {personId: 'personId', id: val.id, img: initHiddenCharts(val)};
-                sugon.requestJson({
-                    type: 'post',
-                    url: sugon.interFaces.znbg.ywfxbg.uploadImg,
-                    data: param
-                }, result => {});
-            });
-            requirejs(['text!../../views/znbg/preview.html'], ele => {
-                $("#ui-view").append(ele);
-            });
-            initRightPanel();
-        });
     });
 
     // 下载按钮事件

@@ -93,6 +93,10 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
     function init2_2(result) {
         $('.footer2').html(result.content);
         let chart = ec.init(document.getElementById('chart2'));
+        let total = 0;
+        result.data.map(val => {
+            total += Number(val.value);
+        });
         let option = {
             tooltip: {
                 show: true
@@ -116,7 +120,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                                     align: 'center'
                                 }
                             },
-                            formatter: '{b}：{c}'
+                            formatter: '{b}：\n{c}%'
                         },
                         labelLine: {
                             show: true,
@@ -146,7 +150,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             },
             grid: {
                 left: 0,
-                top: 15,
+                top: 20,
                 right: 0,
                 bottom: 0,
                 containLabel: true
@@ -158,7 +162,8 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                     splitArea: {show: false},
                     data: xData,
                     axisLabel: {
-                        color: '#000'
+                        color: '#000',
+                        interval: 0
                     },
                     axisLine: {
                         color: '#000'
@@ -183,6 +188,11 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                     type: 'bar',
                     barWidth: 15,
                     color: '#3A9BBE',
+                    label: {
+                        show: true,
+                        position: 'top',
+                        color: '#000'
+                    },
                     data: yData
                 }
             ]
@@ -209,7 +219,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             color: ["#2C8FCE"],
             grid: {
                 left: 0,
-                right: 15,
+                right: 30,
                 bottom: 0,
                 top: 0,
                 containLabel: true
@@ -221,7 +231,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                 },
                 splitLine: {
                     show: false
-                },
+                }
             },
             yAxis: {
                 type: 'category',
@@ -231,11 +241,19 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                 axisTick: {
                     show: false
                 },
+                axisLabel: {
+                    interval: 0
+                },
                 data: yData
             },
             series: [{
                 type: 'bar',
                 barWidth: 10,
+                label: {
+                    show: true,
+                    position: 'right',
+                    color: '#000'
+                },
                 data: xData
             }]
         };
@@ -243,6 +261,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
     }
 
     function init4_1(result) {
+        $('.fieldset4 footer').html(result.content);
         let $body = $('#chart5').empty(), data = result.data;
         var string_ = '';
         for (var i = 0; i < data.length; i++) {
@@ -262,12 +281,10 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
     // 把img生成的img图片传给后台
     function postImg() {
         domtoimage.toJpeg(document.getElementById('pop-container')).then(dataUrl => {
-            sugon.requestJson({
-                type: 'post',
-                url: sugon.interFaces.znbg.ywfxbg.postImg,
-                data: {url: dataUrl}
-            }, result => {
-            });
+            return sugon.request(sugon.interFaces.znbg.ywfxbg.postImg, {uuid: sugon.uuid(), url: dataUrl});
+        }).then(result => {
+            $('#pop-container').remove();
+            sugon.removeLoading();
         });
     }
 
@@ -276,11 +293,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         searchRuler.deptId = $('#deptId').val();
         searchRuler.date1 = $('#date1').val();
         searchRuler.date2 = $('#date2').val();
-        sugon.requestJson({
-            type: 'post',
-            url: sugon.interFaces.znbg.ywfxbg.getJcjPreview,
-            data: searchRuler
-        }, result => {
+        sugon.request(sugon.interFaces.znbg.ywfxbg.getJcjPreview, searchRuler).then(result => {
             initTitle(result.title);
             init1_1(result.data1);
             init1_2(result.data2);
@@ -290,8 +303,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
             init3_2(result.data6);
             init4_1(result.data7);
             init4_2();
-            setTimeout(postImg, 2000);
-            $('.pop-mask').show();
+            postImg();
         });
     }
 
