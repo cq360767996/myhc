@@ -22,7 +22,7 @@
   width: 40px;
 }
 .row-width:nth-child(2) {
-  width: calc(100% - 280px);
+  width: calc(100% - 320px);
 }
 .row-width:nth-child(2) * {
   float: left;
@@ -41,7 +41,7 @@
   white-space: nowrap;
 }
 .row-width:nth-child(3) {
-  width: 100px;
+  width: 140px;
 }
 .row-width:nth-child(4) {
   width: 140px;
@@ -234,7 +234,7 @@
   width: 40px;
 }
 .right-section section > div.tab-header div:nth-child(2) {
-  width: calc(100% - 280px);
+  width: calc(100% - 320px);
 }
 .right-section section > div.tab-header div:nth-child(2) * {
   float: left;
@@ -253,7 +253,7 @@
   white-space: nowrap;
 }
 .right-section section > div.tab-header div:nth-child(3) {
-  width: 100px;
+  width: 140px;
 }
 .right-section section > div.tab-header div:nth-child(4) {
   width: 140px;
@@ -301,7 +301,7 @@
   width: 40px;
 }
 .right-section section > div.tab-body > div > div:nth-child(2) {
-  width: calc(100% - 280px);
+  width: calc(100% - 320px);
 }
 .right-section section > div.tab-body > div > div:nth-child(2) * {
   float: left;
@@ -320,7 +320,7 @@
   white-space: nowrap;
 }
 .right-section section > div.tab-body > div > div:nth-child(3) {
-  width: 100px;
+  width: 140px;
 }
 .right-section section > div.tab-body > div > div:nth-child(4) {
   width: 140px;
@@ -533,5 +533,15 @@ div.jqcloud {
 }
 div.jqcloud span {
   padding: 0;
+}
+.pop-menu {
+  background-color: #fff;
+  position: absolute;
+  z-index: 4;
+  border-radius: 1px;
+}
+.pop-menu > div {
+  padding: 3px 10px;
+  line-height: 24px;
 }
 /*# sourceMappingURL=ywfxbg.css.map */

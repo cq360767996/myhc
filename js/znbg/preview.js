@@ -1,7 +1,7 @@
 /* Created by handsome qiu */
 requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
-    let searchRuler = {};
+    let searchRuler = {}, uuid = window.dialogParams.uuid;
 
     // 初始化标题
     function initTitle(result) {
@@ -281,7 +281,7 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
     // 把img生成的img图片传给后台
     function postImg() {
         domtoimage.toJpeg(document.getElementById('pop-container')).then(dataUrl => {
-            return sugon.request(sugon.interFaces.znbg.ywfxbg.postImg, {uuid: sugon.uuid(), url: dataUrl});
+            return sugon.request(sugon.interFaces.znbg.ywfxbg.postImg, {uuid: uuid, url: dataUrl});
         }).then(result => {
             $('#pop-container').remove();
             sugon.removeLoading();

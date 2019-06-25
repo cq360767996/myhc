@@ -36,7 +36,7 @@
   }
 
   &:nth-child(2) {
-    width: calc(100% - 280px);
+    width: calc(100% - 320px);
 
     * {
       float: left;
@@ -57,7 +57,7 @@
   }
 
   &:nth-child(3) {
-    width: 100px;
+    width: 140px;
   }
 
   &:nth-child(4) {
@@ -511,4 +511,16 @@ div.jqcloud {
 
 div.jqcloud span {
   padding: 0;
+}
+
+.pop-menu {
+  background-color: #fff;
+  position: absolute;
+  z-index: 4;
+  border-radius: 1px;
+
+  & > div {
+    padding: 3px 10px;
+    line-height: 24px;
+  }
 }
