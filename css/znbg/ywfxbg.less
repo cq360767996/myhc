@@ -565,6 +565,7 @@ div.jqcloud span {
   height: @banner-height;
   line-height: @banner-height;
   color: #485053;
+  font-weight: 600;
 }
 
 .banner2 {
@@ -601,34 +602,32 @@ div.jqcloud span {
       margin-right: 10px;
     }
 
-    span {
-      &:first-child {
-        line-height: 58px;
-        font-size: 48px;
-        letter-spacing: 5px;
-        margin-left: 331px;
-        font-family: CenturyGothic-Bold;
-        color: #a9aac2;
-      }
+    .first-span {
+      line-height: 58px;
+      font-size: 48px;
+      letter-spacing: 5px;
+      margin-left: 331px;
+      font-family: CenturyGothic-Bold;
+      color: #a9aac2;
+    }
 
-      &:nth-child(2) {
-        color: #ebecfa;
-        margin-left: 2px;
-        font-size: 24px;
-        font-family: ZHSCNMT--GBK1-0;
-        position: relative;
-        top: -18px;
-      }
+    .second-span {
+      color: #ebecfa;
+      margin-left: 2px;
+      font-size: 24px;
+      font-family: ZHSCNMT--GBK1-0;
+      position: relative;
+      top: -18px;
+    }
 
-      &:nth-child(3) {
-        float: right;
-        color: #ebecfa;
-        right: 18px;
-        font-size: 18px;
-        font-family: ZHSCNMT--GBK1-0;
-        position: relative;
-        top: 35px;
-      }
+    .third-span {
+      float: right;
+      color: #ebecfa;
+      right: 18px;
+      font-size: 18px;
+      font-family: ZHSCNMT--GBK1-0;
+      position: relative;
+      top: 35px;
     }
 
     i {

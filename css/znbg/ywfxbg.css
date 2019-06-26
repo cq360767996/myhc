@@ -567,6 +567,7 @@ div.jqcloud span {
   height: 40px;
   line-height: 40px;
   color: #485053;
+  font-weight: 600;
 }
 .banner2 {
   height: 25px;
@@ -597,7 +598,7 @@ div.jqcloud span {
   margin-top: 10px;
   margin-right: 10px;
 }
-#pop-container > header span:first-child {
+#pop-container > header .first-span {
   line-height: 58px;
   font-size: 48px;
   letter-spacing: 5px;
@@ -605,7 +606,7 @@ div.jqcloud span {
   font-family: CenturyGothic-Bold;
   color: #a9aac2;
 }
-#pop-container > header span:nth-child(2) {
+#pop-container > header .second-span {
   color: #ebecfa;
   margin-left: 2px;
   font-size: 24px;
@@ -613,7 +614,7 @@ div.jqcloud span {
   position: relative;
   top: -18px;
 }
-#pop-container > header span:nth-child(3) {
+#pop-container > header .third-span {
   float: right;
   color: #ebecfa;
   right: 18px;
