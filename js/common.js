@@ -422,6 +422,10 @@ define([], function () {
                 uploadImg: {
                     localUrl: "./static/json/ywfxbg/uploadImg.json",
                     remoteUrl: base.server + "znbg/ywfxbg/uploadImg"
+                },
+                deleteReport: { // 删除报告
+                    localUrl: "./static/json/ywfxbg/deleteReport.json",
+                    remoteUrl: base.server + "znbg/ywfxbg/deleteReport"
                 }
             }
         }

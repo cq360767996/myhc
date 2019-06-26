@@ -73,7 +73,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     data: yData,
                     type: 'line',
                     color: '#2887a7',
-                    label:{
+                    label: {
                         show: true,
                         position: 'top',
                         formatter: '{c}%'
@@ -158,7 +158,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     left: 0,
                     top: 20,
                     right: 0,
-                    bottom: 0,
+                    bottom: 30,
                     containLabel: true
                 },
                 xAxis: [
@@ -169,12 +169,26 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                         data: xData,
                         axisLabel: {
                             color: '#000',
-                            interval: 0
+                            interval: 0,
+                            formatter: param => {
+                                let tempStr = "";
+                                if (param.length > 4) {
+                                    for (var i = 0; i < param.length; i++) {
+                                        if (i % 4 == 3) {
+                                            tempStr += param[i] + "\n";
+                                        } else {
+                                            tempStr += param[i];
+                                        }
+                                    }
+                                } else {
+                                    tempStr = param;
+                                }
+                                return tempStr;
+                            }
                         },
                         axisLine: {
                             color: '#000'
-                        },
-                        interval: 0
+                        }
                     }
                 ],
                 yAxis: [
@@ -293,7 +307,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                         let a = document.createElement('a');
                         a.href = dataUrl;
                         a.style.display = 'none';
-                        a.download = '';
+                        a.download = 'xx.jpg';
                         document.body.appendChild(a);
                         a.click();
                         document.body.removeChild(a);
@@ -301,10 +315,8 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     });
                 }
             }).then(result => {
-                $('#pop-container').remove();
                 sugon.removeLoading();
                 sugon.showMessage('报告已生成！', 'success');
-                initRightPanel();
             });
         },
         initPopPage(condition) { // 初始化页面
@@ -483,7 +495,6 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 }
             });
             setTimeout(drawImage, 2000, result, uuid);
-
         });
     }
 
@@ -510,6 +521,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     break;
             }
         });
+        initRightPanel();
     }
 
     // 程序入口
@@ -622,27 +634,23 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
         $target.parent().prev().find('img').eq(0).attr('src', reg.test(text) ? checkboxOn : checkboxOff);
     });
 
-    // 下载/预览/删除按钮事件
-    $('.tab-body').on('click', 'img', e => {
+    // 预览事件
+    $('.tab-body').on('click', '.report-preview', e => {
         let $target = $(e.target), offset = $target.offset(), containImg = $target.parent().parent().attr('containImg'),
-            url = $target.parent().parent().attr('url'), download = 'download', preview = 'preview', del = 'delete',
-            className = $target.attr('class'), classDemo = 'report-', selectedRow;
-        for (let i = 0, len = rightPanelData.length; i < len; i++) {
-            if (rightPanelData[i].url === url) {
-                selectedRow = rightPanelData[i];
-                break;
+            url = $target.parent().parent().attr('url'), selectedRow, $preview = $('.pop-menu-preview');
+        if ($preview.length === 0) {
+            for (let i = 0, len = rightPanelData.length; i < len; i++) {
+                if (rightPanelData[i].url === url) {
+                    selectedRow = rightPanelData[i];
+                    break;
+                }
             }
-        }
-        rightPanelData.map(val => {
-
-        });
-        if (className === classDemo + preview) {
             if (containImg === "1") {
-                $('#ui-view').append('<div class="pop-menu pop-menu-' + preview + '" style="top: ' + (offset.top - 38) + 'px;left: ' + (offset.left - 128) +
+                $('#ui-view').append('<div class="pop-menu pop-menu-preview" style="top: ' + (offset.top - 38) + 'px;left: ' + (offset.left - 128) +
                     'px;"><a class="simple-pre">简报预览</a><a href="' + selectedRow.pdfUrl + '" target="_blank">报告预览</a></div>');
                 // 绑定点击事件
-                $('.pop-menu-' + preview + ' > a').unbind().bind('click', e => {
-                    $('.pop-menu-' + preview).remove();
+                $('.pop-menu-preview > a').unbind().bind('click', e => {
+                    $('.pop-menu-preview').remove();
                     if ($(e.target).hasClass('simple-pre')) {
                         popFunc.initPopPage({deptId, date1, date2} = selectedRow);
                     }
@@ -656,16 +664,30 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 link.click();
                 document.body.removeChild(link);
             }
+        } else {
+            $preview.remove();
         }
-        else if (className === classDemo + download) {
+    });
+
+    // 下载事件
+    $('.tab-body').on('click', '.report-download', e => {
+        let $target = $(e.target), offset = $target.offset(), containImg = $target.parent().parent().attr('containImg'),
+            url = $target.parent().parent().attr('url'), selectedRow, $download = $('.pop-menu-download');
+        if ($download.length === 0) {
+            for (let i = 0, len = rightPanelData.length; i < len; i++) {
+                if (rightPanelData[i].url === url) {
+                    selectedRow = rightPanelData[i];
+                    break;
+                }
+            }
             if (containImg === "1") {
-                $('#ui-view').append('<div class="pop-menu pop-menu-' + download + '" style="top: ' + (offset.top - 38) +
+                $('#ui-view').append('<div class="pop-menu pop-menu-download" style="top: ' + (offset.top - 38) +
                     'px;left: ' + (offset.left - 128) + 'px;"><a href="' + selectedRow.imgUrl +
                     '" download="' + selectedRow.fileName2 + '">简报下载</a><a href="' +
                     selectedRow.url + '" download="' + selectedRow.fileName1 + '">报告下载</a></div>');
                 // 绑定点击事件
-                $('.pop-menu-' + download + ' > a').unbind().bind('click', e => {
-                    $('.pop-menu-' + download).remove();
+                $('.pop-menu-download > a').unbind().bind('click', e => {
+                    $('.pop-menu-download').remove();
                 });
             } else {
                 let link = document.createElement('a');
@@ -676,6 +698,25 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 link.click();
                 document.body.removeChild(link);
             }
+        } else {
+            $download.remove();
         }
+    });
+
+    // 删除事件
+    $('.tab-body').on('click', '.report-delete', e => {
+        let $target = $(e.target), id = $target.parent().parent().attr('url'), selectedRow;
+        for (let i = 0, len = rightPanelData.length; i < len; i++) {
+            if (rightPanelData[i].url === id) {
+                selectedRow = rightPanelData[i];
+                break;
+            }
+        }
+        let {url, imgUrl, pdfUrl} = selectedRow;
+        sugon.request(sugon.interFaces.znbg.ywfxbg.deleteReport, {url, imgUrl, pdfUrl}).then(result => {
+            initRightPanel();
+            result.code ? sugon.showMessage('删除成功！', 'success') :
+                sugon.showMessage('删除失败！', 'error');
+        });
     });
 });
