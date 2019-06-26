@@ -1,8 +1,311 @@
 /* Created by handsome qiu */
-requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
+requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => {
 
+    let charts = [], rightPanelData;
     // 全局查询尺度
     let searchRuler = {};
+    let popFunc = {
+        initTitle(result) {
+            result.data.map((val, index) => {
+                $('#pop-container > header > span').eq(index).html(val);
+            });
+        },
+        init1_1(result) {
+            result.data.map((val, index) => {
+                let html;
+                if (index < 4) {
+                    html = val + '&nbsp;&nbsp;条';
+                } else if (index == 4) {
+                    html = val + '&nbsp;&nbsp;件';
+                } else {
+                    html = val + '%';
+                }
+                $('.value1-1').eq(index).html(html);
+            });
+        },
+        init1_2(result) {
+            let xData = [], yData = [], len = result.data.length;
+            result.data.map(val => {
+                xData.push(val.name);
+                yData.push(val.value);
+            });
+            result.data.sort((v1, v2) => {
+                return Number(v1.value) - Number(v2.value);
+            });
+            let min = len > 0 && result.data[0].value, max = len > 0 && result.data[len - 1].value;
+            let diff = (max - min) / 2;
+            min = min - diff;
+            max = Number(max) + Number(diff);
+            min = Number(min).toFixed(2);
+            max = max > 100 ? 100 : Number(max).toFixed(2);
+            let option = {
+                grid: {
+                    top: 15,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        show: false
+                    },
+                    data: xData
+                },
+                yAxis: {
+                    type: 'value',
+                    min: min,
+                    max: max,
+                    splitLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: true,
+                        formatter: '{value}%'
+                    }
+                },
+                series: [{
+                    data: yData,
+                    type: 'line',
+                    color: '#2887a7',
+                    smooth: true
+                }]
+            };
+            charts[0] = ec.init(document.getElementById('chart1'));
+            charts[0].setOption(option);
+            $('.fieldset1 footer').html(result.content);
+        },
+        init2_1(result) {
+            let $body = $('.tab-container').empty();
+            $body.append('<div><div>警情类别</div><div>警情量</div><div>满意度</div><div>同比</div></div>');
+            result.data.map(val => {
+                $body.append('<div><div>' + val.name + '</div><div>' + val.value1 + '</div><div>' + val.value2 + '</div><div>' + val.value3 + '</div></div>');
+            });
+            $('.footer1').html(result.content);
+        },
+        init2_2(result) {
+            $('.footer2').html(result.content);
+            charts[1] = ec.init(document.getElementById('chart2'));
+            let total = 0;
+            result.data.map(val => {
+                total += Number(val.value);
+            });
+            let option = {
+                tooltip: {
+                    show: true
+                },
+                series: [{
+                    color: ['#A770B3', '#AF8744', '#ED7D31', '#3A9BBE', '#1D84C6', '#6463AF'],
+                    name: '',
+                    type: 'pie',
+                    clockWise: false,
+                    center: ['50%', '50%'],
+                    radius: ['40%', '56%'],
+                    hoverAnimation: false,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'outside',
+                                rich: {
+                                    white: {
+                                        color: '#ddd',
+                                        align: 'center'
+                                    }
+                                },
+                                formatter: '{b}：\n{c}%'
+                            },
+                            labelLine: {
+                                show: true,
+                                length: 8,
+                                length2: 5
+                            }
+                        }
+                    },
+                    data: result.data
+                }]
+            };
+            charts[1].setOption(option);
+        },
+        init3_1(result) {
+            let xData = [], yData = [];
+            result.data.map(val => {
+                xData.push(val.name);
+                yData.push(val.value);
+            });
+            let option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: 0,
+                    top: 20,
+                    right: 0,
+                    bottom: 0,
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        axisTick: {show: false},
+                        splitArea: {show: false},
+                        data: xData,
+                        axisLabel: {
+                            color: '#000',
+                            interval: 0
+                        },
+                        axisLine: {
+                            color: '#000'
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        show: true,
+                        splitLine: {
+                            show: false
+                        },
+                        axisTick: {show: false},
+                        axisLabel: {
+                            formatter: '{value}'
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        type: 'bar',
+                        barWidth: 15,
+                        color: '#3A9BBE',
+                        label: {
+                            show: true,
+                            position: 'top',
+                            color: '#000'
+                        },
+                        data: yData
+                    }
+                ]
+            };
+            charts[2] = ec.init(document.getElementById('chart3'));
+            charts[2].setOption(option);
+            $('.fieldset3 footer').html(result.content);
+        },
+        init3_2(result) {
+            let xData = [], yData = [];
+            result.data.map(val => {
+                xData.push(val.value);
+                yData.push(val.name);
+            });
+            charts[3] = ec.init(document.getElementById('chart4'));
+            let option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                color: ["#2C8FCE"],
+                grid: {
+                    left: 0,
+                    right: 30,
+                    bottom: 0,
+                    top: 0,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: {
+                        show: true
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        interval: 0
+                    },
+                    data: yData
+                },
+                series: [{
+                    type: 'bar',
+                    barWidth: 10,
+                    label: {
+                        show: true,
+                        position: 'right',
+                        color: '#000'
+                    },
+                    data: xData
+                }]
+            };
+            charts[3].setOption(option);
+        },
+        init4_1(result) {
+            $('.fieldset4 footer').html(result.content);
+            let $body = $('#chart5').empty(), data = result.data;
+            var string_ = '';
+            for (var i = 0; i < data.length; i++) {
+                var string_f = data[i].name;
+                var string_n = data[i].value;
+                string_ += "{text: '" + string_f + "', weight: '" + string_n + "',html: {'class': 'span_list'}},";
+            }
+            var string_list = string_;
+            var word_list = eval("[" + string_list + "]");
+            $body.jQCloud(word_list);
+        },
+        init4_2() {
+            $('.zjfx-content').html($('.textarea-div').val());
+        },
+        postImg() { // 把img生成的img图片传给后台
+            domtoimage.toJpeg(document.getElementById('pop-container')).then(dataUrl => {
+                return sugon.request(sugon.interFaces.znbg.ywfxbg.postImg, {uuid: searchRuler.uuid, url: dataUrl});
+            }).then(result => {
+                $('#pop-container').remove();
+                sugon.removeLoading();
+                initRightPanel();
+            });
+        },
+        initPopPage(condition) { // 初始化页面
+            sugon.request(sugon.interFaces.znbg.ywfxbg.getJcjPreview, condition).then(result => {
+                this.initTitle(result.title);
+                this.init1_1(result.data1);
+                this.init1_2(result.data2);
+                this.init2_1(result.data3);
+                this.init2_2(result.data4);
+                this.init3_1(result.data5);
+                this.init3_2(result.data6);
+                this.init4_1(result.data7);
+                this.init4_2();
+                if (condition.uuid) {
+                    setTimeout(this.postImg, 2000);
+                } else {
+                    let $body = $('#pop-container').css('top', '50%').css('left', '50%').css('margin-top', '-345px')
+                        .css('margin-left', '-640px').css('z-index', 3);
+                    let $i = $('#pop-container > header > i').show(), $mask = $('.pop-mask').show();
+                    $i.unbind().bind('click', e => { // 绑定关闭按钮
+                        $i.hide();
+                        $mask.hide();
+                        $body.css('top', 0).css('left', 0).css('margin-top', 0)
+                            .css('margin-left', 0).css('z-index', -2);
+                    });
+                }
+            });
+        }
+    };
 
     // 获取当前时间并加减固定月份
     function getDate(difference) {
@@ -85,7 +388,6 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
 
     // 初始化右侧文件列表
     function initRightPanel() {
-        debugger
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.znbg.ywfxbg.getFileList,
@@ -93,227 +395,25 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
                 deptId: searchRuler.deptId
             }
         }, result => {
+            rightPanelData = result.data;
             let $tabBody = $('.tab-body').empty();
             result.data.map(val => {
-                $tabBody.append('<div url="' + val.url + '"><div><img src="../../img/znbg/checkbox.png"></div>' +
-                    '<div><img src="../../img/znbg/word.png"><span>' + val.name + '</span></div><div>' + val.date +
-                    '</div><div><img class="preview-report" imgUrl="' + val.imgUrl + '" pdfUrl="' + val.pdfUrl +
-                    '" containImg="' + val.containImg + '' + '" src="../../img/znbg/preview.png">' +
-                    '<img class="download-img" src="../../img/znbg/download.png">' +
-                    '<img src="../../img/znbg/delete.png"></div></div>');
+                $tabBody.append('<div url="' + val.url + '" containImg="' + val.containImg + '' + '">' +
+                    '<div><img src="../../img/znbg/checkbox.png"></div><div><img src="../../img/znbg/word.png"><span>' +
+                    val.name + '</span></div><div>' + val.date + '</div><div><img class="report-preview" src="../../img/znbg/preview.png">' +
+                    '<img class="report-download" src="../../img/znbg/download.png">' +
+                    '<img class="report-delete" src="../../img/znbg/delete.png"></div></div>');
             });
         });
     }
 
     // 上传图片
-    function uploadImg(result, imgUrl, uuid) {
+    function uploadImg(id, imgUrl, uuid) {
         sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
             uuid: uuid,
-            id: result.id,
+            id: id,
             img: imgUrl
         });
-    }
-
-    // 初始化隐藏的图表
-    function initHiddenCharts(result, uuid) {
-        let dom = 'hidden-chart';
-        if (result.type != 5) {
-            let chart = ec.init(document.getElementById(dom));
-            let xData = [], yData = [], len = result.data.length;
-            result.data.map(val => {
-                xData.push(val.name);
-                yData.push(val.value);
-            });
-            result.data.sort((v1, v2) => {
-                return Number(v1.value) - Number(v2.value);
-            });
-            let min = len > 0 && result.data[0].value, max = len > 0 && result.data[len - 1].value;
-            let diff = (max - min) / 2;
-            min = min - diff;
-            max = Number(max) + Number(diff);
-            min = Number(min).toFixed(2);
-            max = max > 100 ? 100 : Number(max).toFixed(2);
-            let option = [
-                {
-                    grid: {
-                        top: 15,
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        containLabel: true
-                    },
-                    xAxis: {
-                        type: 'category',
-                        axisTick: {
-                            show: false
-                        },
-                        data: xData
-                    },
-                    yAxis: {
-                        type: 'value',
-                        min: min,
-                        max: max,
-                        splitLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            show: true,
-                            formatter: '{value}%'
-                        }
-                    },
-                    series: [{
-                        data: yData,
-                        type: 'line',
-                        color: '#2887a7',
-                        smooth: true
-                    }]
-                },
-                {
-                    tooltip: {
-                        show: true
-                    },
-                    series: [{
-                        color: ['#A770B3', '#AF8744', '#ED7D31', '#3A9BBE', '#1D84C6', '#6463AF'],
-                        name: '',
-                        type: 'pie',
-                        clockWise: false,
-                        center: ['50%', '50%'],
-                        radius: ['40%', '56%'],
-                        hoverAnimation: false,
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    position: 'outside',
-                                    rich: {
-                                        white: {
-                                            color: '#ddd',
-                                            align: 'center'
-                                        }
-                                    },
-                                    formatter: '{b}：{c}'
-                                },
-                                labelLine: {
-                                    show: true,
-                                    length: 8,
-                                    length2: 5
-                                }
-                            }
-                        },
-                        data: result.data
-                    }]
-                },
-                {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow'
-                        }
-                    },
-                    grid: {
-                        left: 0,
-                        top: 15,
-                        right: 0,
-                        bottom: 0,
-                        containLabel: true
-                    },
-                    xAxis: [
-                        {
-                            type: 'category',
-                            axisTick: {show: false},
-                            splitArea: {show: false},
-                            data: xData,
-                            axisLabel: {
-                                color: '#000'
-                            },
-                            axisLine: {
-                                color: '#000'
-                            }
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'value',
-                            show: true,
-                            splitLine: {
-                                show: false
-                            },
-                            axisTick: {show: false},
-                            axisLabel: {
-                                formatter: '{value}'
-                            }
-                        }
-                    ],
-                    series: [
-                        {
-                            type: 'bar',
-                            barWidth: 15,
-                            color: '#3A9BBE',
-                            data: yData
-                        }
-                    ]
-                },
-                {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow'
-                        }
-                    },
-                    color: ["#2C8FCE"],
-                    grid: {
-                        left: 0,
-                        right: 15,
-                        bottom: 0,
-                        top: 0,
-                        containLabel: true
-                    },
-                    xAxis: {
-                        type: 'value',
-                        axisTick: {
-                            show: false
-                        },
-                        splitLine: {
-                            show: false
-                        },
-                    },
-                    yAxis: {
-                        type: 'category',
-                        axisLine: {
-                            show: true
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        data: yData
-                    },
-                    series: [{
-                        type: 'bar',
-                        barWidth: 10,
-                        data: xData
-                    }]
-                }
-            ];
-            chart.setOption(option[result.type - 1]);
-            setTimeout(uploadImg, 2000, result, chart.getDataURL(), uuid);
-        } else {
-            let $body = $('#' + dom).empty(), data = result.data;
-            let string_ = '';
-            for (let i = 0; i < data.length; i++) {
-                let string_f = data[i].name;
-                let string_n = data[i].value;
-                string_ += "{text: '" + string_f + "', weight: '" + string_n + "',html: {'class': 'span_list'}},";
-            }
-            let string_list = string_;
-            let word_list = eval("[" + string_list + "]");
-            $body.jQCloud(word_list);
-            domtoimage.toJpeg(document.getElementById(dom)).then(dataUrl => {
-                setTimeout(uploadImg, 2000, result, dataUrl, uuid);
-            });
-        }
     }
 
     // 生成报告
@@ -328,18 +428,32 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         searchRuler.uuid = uuid;
         sugon.request(sugon.interFaces.znbg.ywfxbg.generateReport, searchRuler).then(result => {
             result.data.map(val => {
-                initHiddenCharts(val, uuid);
+                switch (val.type) {
+                    case "1":
+                        popFunc.init1_2(val);
+                        uploadImg(val.id, charts[0].getDataURL(), uuid);
+                        break;
+                    case "2":
+                        popFunc.init2_2(val);
+                        uploadImg(val.id, charts[1].getDataURL(), uuid);
+                        break;
+                    case "3":
+                        popFunc.init3_1(val);
+                        uploadImg(val.id, charts[2].getDataURL(), uuid);
+                        break;
+                    case "4":
+                        popFunc.init3_2(val);
+                        uploadImg(val.id, charts[3].getDataURL(), uuid);
+                        break;
+                    case "5":
+                        popFunc.init4_1(val);
+                        domtoimage.toJpeg(document.getElementById('chart5')).then(dataUrl => {
+                            uploadImg(val.id, dataUrl, uuid);
+                        });
+                        break;
+                }
             });
-            requirejs(['text!../../views/znbg/preview.html'], ele => {
-                window.dialogParams = {
-                    uuid: uuid,
-                    initRightPanel: initRightPanel,
-                    deptId: searchRuler.deptId,
-                    date1: searchRuler.date1,
-                    date2: searchRuler.date2
-                };
-                $("#ui-view").append(ele);
-            });
+            popFunc.initPopPage(searchRuler);
         });
     }
 
@@ -453,37 +567,60 @@ requirejs(['common', 'ec', 'domtoimage'], (sugon, ec, domtoimage) => {
         $target.parent().prev().find('img').eq(0).attr('src', reg.test(text) ? checkboxOn : checkboxOff);
     });
 
-    // 下载按钮事件
-    $('.tab-body').on('click', '.download-img', e => {
-        let link = document.createElement('a'), $target = $(e.target);
-        link.download = '';
-        link.style.display = 'none';
-        link.href = $target.parent().parent().attr('url');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
+    // 下载/预览/删除按钮事件
+    $('.tab-body').on('click', 'img', e => {
+        let $target = $(e.target), offset = $target.offset(), containImg = $target.parent().parent().attr('containImg'),
+            url = $target.parent().parent().attr('url'), download = 'download', preview = 'preview', del = 'delete',
+            className = $target.attr('class'), classDemo = 'report-', selectedRow;
+        for (let i = 0, len = rightPanelData.length; i < len; i++) {
+            if (rightPanelData[i].url === url) {
+                selectedRow = rightPanelData[i];
+                break;
+            }
+        }
+        rightPanelData.map(val => {
 
-    // 预览按钮事件
-    $('.tab-body').on('click', '.preview-report', e => {
-        let $target = $(e.target), offset = $target.offset(), containImg = $target.attr('containImg'),
-            imgUrl = $target.attr('imgUrl'), pdfUrl = $target.attr('pdfUrl');
-        if (containImg === "1") {
-            $('#ui-view').append('<div class="pop-menu" style="top: ' + (offset.top - 38) + 'px;left: ' + (offset.left - 128) +
-                'px;"><a href="' + imgUrl + '" target="_blank">简报预览</a><a href="' + pdfUrl + '" target="_blank">报告预览</a></div>');
-            // 绑定点击事件
-            $('.pop-menu > a').unbind().bind('click', e => {
-                $('.pop-menu').remove();
-            });
-        } else {
-            let link = document.createElement('a');
-            link.style.display = 'none';
-            link.href = pdfUrl;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        });
+        if (className === classDemo + preview) {
+            if (containImg === "1") {
+                $('#ui-view').append('<div class="pop-menu pop-menu-' + preview + '" style="top: ' + (offset.top - 38) + 'px;left: ' + (offset.left - 128) +
+                    'px;"><a class="simple-pre">简报预览</a><a href="' + selectedRow.pdfUrl + '" target="_blank">报告预览</a></div>');
+                // 绑定点击事件
+                $('.pop-menu-' + preview + ' > a').unbind().bind('click', e => {
+                    $('.pop-menu-' + preview).remove();
+                    if ($(e.target).hasClass('simple-pre')) {
+                        popFunc.initPopPage({deptId, date1, date2} = selectedRow);
+                    }
+                });
+            } else {
+                let link = document.createElement('a');
+                link.style.display = 'none';
+                link.href = selectedRow.pdfUrl;
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+        else if (className === classDemo + download) {
+            if (containImg === "1") {
+                $('#ui-view').append('<div class="pop-menu pop-menu-' + download + '" style="top: ' + (offset.top - 38) +
+                    'px;left: ' + (offset.left - 128) + 'px;"><a href="' + selectedRow.imgUrl +
+                    '" download="' + selectedRow.fileName2 + '">简报下载</a><a href="' +
+                    selectedRow.url + '" download="' + selectedRow.fileName1 + '">报告下载</a></div>');
+                // 绑定点击事件
+                $('.pop-menu-' + download + ' > a').unbind().bind('click', e => {
+                    $('.pop-menu-' + download).remove();
+                });
+            } else {
+                let link = document.createElement('a');
+                link.style.display = 'none';
+                link.href = selectedRow.url;
+                link.download = selectedRow.fileName1;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         }
     });
-
 });

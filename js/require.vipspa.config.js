@@ -14,7 +14,9 @@ requirejs.config({
         markerCluster: '../lib/leaflet/leaflet.markercluster',
         plot: '../lib/leaflet/iclient9-plot-leaflet-es6.min',
         pulse: '../lib/leaflet/L.Icon.Pulse',
-        domtoimage: '../lib/dom-to-image.min'
+        domtoimage: '../lib/dom-to-image.min',
+        jqcloud: '../lib/jqcloud',
+        vipspa: '../lib/vipspa.min'
     },
     shim: {
         high3D: {
@@ -40,11 +42,14 @@ requirejs.config({
         },
         domtoimage: {
             exports: 'domtoimage'
+        },
+        vipspa: {
+            exports: 'vipspa'
         }
     }
 });
 
-requirejs([], function () {
+requirejs(['vipspa'], function (vipspa) {
 
     let router = {
         'myzs': {
@@ -162,6 +167,8 @@ requirejs([], function () {
         router: router
     });
 
+    loadMenu(location.hash);
+
     // 菜单点击事件
     $(".menu").on("click", 'div', function () {
         let $this = $(this), type = $this.attr('type');
@@ -180,8 +187,6 @@ requirejs([], function () {
         location.hash = vipspa.stringify(type);
         loadMenu(type);
     });
-
-    loadMenu(location.hash);
 
     // 加载菜单
     function loadMenu(type) {

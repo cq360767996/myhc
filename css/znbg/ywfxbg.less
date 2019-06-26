@@ -1,13 +1,33 @@
+@font-face {
+  font-family: "ZHSCNMT--GBK1-0";
+  src: url("../../fonts/zhscnm.ttf");
+}
+
+@font-face {
+  font-family: "CenturyGothic-Bold";
+  src: url("../../fonts/GOTHICB.TTF");
+}
+
 .bg { // 背景色
   background-color: rgba(255, 255, 255, .7);
   border-radius: 5px;
   box-shadow: 0 0 8px #939cab;
 }
 
-.text-ellipse() { // 单行省略
+
+.single-text-ellipse() { // 单行省略
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.text-ellipse(@line) { // 多行省略
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+  overflow: hidden;
+  text-align: justify;
 }
 
 .scroll-style { // 滚动条样式
@@ -52,7 +72,7 @@
       width: calc(100% - 28px);
       height: 100%;
       margin-left: 8px;
-      .text-ellipse();
+      .single-text-ellipse();
     }
   }
 
@@ -413,16 +433,6 @@
   z-index: 2;
 }
 
-#hidden-chart {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -2;
-  width: 200px;
-  height: 150px;
-  background-color: #fff;
-}
-
 /*词云*/
 div.jqcloud {
   font-family: "微软雅黑", "宋体", sans-serif;
@@ -530,18 +540,367 @@ div.jqcloud span {
     left: 50%;
     margin-left: -8px;
     top: -8px;
+  }
+
+  & > a {
+    display: block;
+    padding: 3px 10px;
+    line-height: 24px;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: #2E91FE;
+    }
+  }
 }
 
-& > a {
-display: block;
-padding: 3px 10px;
-line-height: 24px;
-color: #000;
-text-decoration: none;
-cursor: pointer;
+@banner-height: 40px;
+@header-height: 65px;
+@text-indent: 32px;
 
-&:hover {
-  color: #2E91FE;
+.banner {
+  width: 100%;
+  height: @banner-height;
+  line-height: @banner-height;
+  color: #485053;
 }
+
+.banner2 {
+  height: 25px;
+  line-height: 25px;
+  background: url(../../img/znbg/preview/title2.png) no-repeat 5%;
+  color: #fff;
+
+  span {
+    margin-left: 20px;
+  }
 }
+
+#pop-container {
+
+  position: absolute;
+  width: 1280px;
+  height: 690px;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  background-color: #ffffff;
+  color: #485053;
+
+
+  & > header {
+    width: 100%;
+    height: @header-height;
+    background: url("../../img/znbg/preview/header.png") no-repeat;
+
+    i {
+      float: right;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    span {
+      &:first-child {
+        line-height: 58px;
+        font-size: 48px;
+        letter-spacing: 5px;
+        margin-left: 331px;
+        font-family: CenturyGothic-Bold;
+        color: #a9aac2;
+      }
+
+      &:nth-child(2) {
+        color: #ebecfa;
+        margin-left: 2px;
+        font-size: 24px;
+        font-family: ZHSCNMT--GBK1-0;
+        position: relative;
+        top: -18px;
+      }
+
+      &:nth-child(3) {
+        float: right;
+        color: #ebecfa;
+        right: 18px;
+        font-size: 18px;
+        font-family: ZHSCNMT--GBK1-0;
+        position: relative;
+        top: 35px;
+      }
+    }
+
+    i {
+      float: right;
+      margin-top: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #fff;
+    }
+  }
+
+  & > section {
+    @border: 1px solid #dbdbdb;
+    width: 100%;
+    height: calc(100% - @header-height);
+
+    fieldset {
+      float: left;
+      width: 25%;
+      height: 100%;
+      border-right: @border;
+
+      & > section {
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+
+        header {
+          width: 180px;
+          height: 30px;
+          line-height: 24px;
+          font-size: 16px;
+          background: url("../../img/znbg/preview/title.png") no-repeat;
+
+          span {
+            margin-left: 15px;
+            color: #ebecfa;
+          }
+        }
+      }
+
+      &:nth-child(4) {
+        border-right: 0;
+      }
+    }
+
+    .fieldset1 {
+
+      & > section {
+        @header-height: 30px;
+
+        & > section {
+          @line-height: 43px;
+          width: 100%;
+          height: calc(100% - @header-height);
+
+          & > div {
+            width: 100%;
+            height: @line-height;
+            line-height: @line-height;
+            padding: 0 5px;
+
+            & > * {
+              float: left;
+            }
+
+            & > div {
+              &:nth-child(2) {
+                width: calc(100% - 46px);
+                height: 100%;
+                margin-left: 10px;
+              }
+
+              &:first-child {
+                width: 36px;
+                height: 35px;
+              }
+
+              & > div {
+                width: 100%;
+                height: @line-height;
+              }
+
+              span {
+                float: left;
+                color: #485053;
+              }
+
+              strong {
+                float: right;
+                color: #ff6000;
+                font-size: 20px;
+              }
+            }
+
+            &:nth-child(2) {
+              height: calc(100% - @line-height * 3);
+              padding: 0;
+
+              & > div {
+
+                &:nth-child(2) {
+                  @border: dashed 1px #bec5d4;
+                  border: @border;
+                }
+
+                & > div {
+                  padding: 0 5px;
+
+                  &:first-child {
+                    margin-top: 0;
+                    background-color: #f4f6fc;
+                    border-bottom: @border;
+                  }
+
+                }
+              }
+            }
+          }
+        }
+
+        &:first-child {
+          border-bottom: @border;
+        }
+      }
+
+      #chart1 {
+        width: 100%;
+        height: calc(100% - 135px);
+      }
+
+      footer {
+        width: 100%;
+        height: 60px;
+        line-height: 20px;
+        margin-top: 5px;
+        text-indent: @text-indent;
+        .text-ellipse(3);
+      }
+    }
+
+    .fieldset2 {
+      & > section {
+
+        .tab-container {
+          width: calc(100% - 20px);
+          height: calc(100% - @banner-height - 70px);
+          margin: 0 10px 10px 10px;
+          border: @border;
+
+          & > div {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            border-top: @border;
+
+            & > div {
+              text-align: center;
+              float: left;
+              width: 60px;
+              height: 100%;
+              border-left: @border;
+              .single-text-ellipse();
+
+              &:nth-child(4n + 1) {
+                width: calc(100% - 180px);
+                border-left: 0;
+              }
+            }
+
+            &:first-child {
+              border-top: 0;
+              background-color: #F0F3FA;
+            }
+          }
+        }
+
+        #chart2 {
+          width: 100%;
+          height: calc(100% - 135px);
+        }
+
+        .footer1 {
+          width: 100%;
+          height: 60px;
+          line-height: 20px;
+          text-indent: @text-indent;
+          .text-ellipse(3);
+        }
+
+        .footer2 {
+          width: 100%;
+          height: 60px;
+          margin-top: 5px;
+          text-indent: @text-indent;
+          .text-ellipse(3);
+        }
+      }
+    }
+
+    .fieldset3 {
+      #chart3 {
+        width: 100%;
+        height: calc(100% - 35px);
+      }
+
+      footer {
+        width: 100%;
+        height: 60px;
+        margin-top: 5px;
+        text-indent: @text-indent;
+        .text-ellipse(3);
+
+        & > div {
+          width: 100%;
+          height: 24px;
+          line-height: 24px;
+
+          & > div {
+            float: left;
+            width: 50px;
+            height: 100%;
+            .single-text-ellipse();
+            text-align: center;
+
+            &:first-child {
+              width: calc(100% - 110px);
+
+            }
+
+            &:nth-child(3) {
+              width: 60px;
+              .single-text-ellipse();
+            }
+          }
+        }
+      }
+
+      #chart4 {
+        width: 100%;
+        height: calc(100% - @banner-height);
+      }
+    }
+
+    .fieldset4 {
+      & > section {
+
+        &:first-child {
+          border-bottom: @border;
+        }
+      }
+
+      footer {
+        width: 100%;
+        height: 60px;
+        margin-top: 5px;
+        text-indent: @text-indent;
+        .text-ellipse(3);
+      }
+
+      #chart5 {
+        width: 100%;
+        height: calc(100% - 90px);
+      }
+
+      .zjfx-content {
+        width: 100%;
+        height: calc(100% - 30px);
+        line-height: 30px;
+        .text-ellipse(9);
+      }
+    }
+  }
 }

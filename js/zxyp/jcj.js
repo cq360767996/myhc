@@ -1,4 +1,4 @@
-requirejs(["common", "ec"], function (sugon, ec) {
+requirejs(["common", "ec", 'jqcloud'], function (sugon, ec) {
     // 全局查询尺度
     var searchRuler = {}, search = {}, gddwfbData = [];
     var param1, param2;

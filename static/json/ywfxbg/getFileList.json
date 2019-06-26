@@ -3,26 +3,41 @@
     {
       "containImg": "1",
       "date": "2019-06-21 10:10",
-      "name": "南京市公安局1561109672761.docx",
+      "name": "南京市公安局15109672761.docx",
       "url": "../../WordTemplet/Znbg.docx",
       "imgUrl": "../../img/zxyp/jcj/1.png",
-      "pdfUrl": "../../WordTemplet/Znbg.docx"
+      "pdfUrl": "../../WordTemplet/Znbg.docx",
+      "deptId": "111",
+      "date1": "222",
+      "date2": "333",
+      "fileName1": "12121.png",
+      "fileName2": "dsadadas.docx"
     },
     {
       "containImg": "0",
       "date": "2019-06-21 10:10",
-      "name": "南京市公安局1561109767866.docx",
+      "name": "南京市公安局156110976.docx",
       "url": "../../WordTemplet/Znbg.docx",
       "imgUrl": "../../WordTemplet/Znbg.docx",
-      "pdfUrl": "../../WordTemplet/Znbg.docx"
+      "pdfUrl": "../../WordTemplet/Znbg.docx",
+      "deptId": "111",
+      "date1": "222",
+      "date2": "333",
+      "fileName1": "12121.png",
+      "fileName2": "dsadadas.docx"
     },
     {
       "containImg": "0",
       "date": "2019-06-21 10:10",
-      "name": "南京市公安局1561109769839.docx",
+      "name": "南京市公安局15611839.docx",
       "url": "../../WordTemplet/Znbg.docx",
       "imgUrl": "../../WordTemplet/Znbg.docx",
-      "pdfUrl": "../../WordTemplet/Znbg.docx"
+      "pdfUrl": "../../WordTemplet/Znbg.docx",
+      "deptId": "111",
+      "date1": "222",
+      "date2": "333",
+      "fileName1": "12121.png",
+      "fileName2": "dsadadas.docx"
     }
   ]
 }

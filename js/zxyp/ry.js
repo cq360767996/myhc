@@ -1,5 +1,5 @@
 /* Created by handsome qiu */
-requirejs(["common", "ec"], function (sugon, ec) {
+requirejs(["common", "ec", 'jqcloud'], function (sugon, ec) {
     //获取参数
     var params = window.dialogParams.split("_");
     var index = Number(params[0]), id = params[1], searchRuler = params[2];
