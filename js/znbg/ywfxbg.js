@@ -23,7 +23,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 $('.value1-1').eq(index).html(html);
             });
         },
-        init1_2(result) {
+        init1_2(result, isHidden) {
             let xData = [], yData = [], len = result.data.length;
             result.data.map(val => {
                 xData.push(val.name);
@@ -39,6 +39,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             min = Number(min).toFixed(2);
             max = max > 100 ? 100 : Number(max).toFixed(2);
             let option = {
+                animation: false,
                 grid: {
                     top: 15,
                     bottom: 0,
@@ -72,29 +73,37 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     data: yData,
                     type: 'line',
                     color: '#2887a7',
+                    label:{
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}%'
+                    },
                     smooth: true
                 }]
             };
-            charts[0] = ec.init(document.getElementById('chart1'));
-            charts[0].setOption(option);
+            let dom = document.getElementById(isHidden ? 'hidden-chart1' : 'chart1');
+            charts[0] = ec.init(dom);
+            charts[0].setOption(option, true);
             $('.fieldset1 footer').html(result.content);
         },
         init2_1(result) {
             let $body = $('.tab-container').empty();
-            $body.append('<div><div>警情类别</div><div>警情量</div><div>满意度</div><div>同比</div></div>');
+            $body.append('<div><div>警情类别</div><div>满意度</div><div>同比</div><div>环比</div></div>');
             result.data.map(val => {
                 $body.append('<div><div>' + val.name + '</div><div>' + val.value1 + '</div><div>' + val.value2 + '</div><div>' + val.value3 + '</div></div>');
             });
             $('.footer1').html(result.content);
         },
-        init2_2(result) {
+        init2_2(result, isHidden) {
             $('.footer2').html(result.content);
-            charts[1] = ec.init(document.getElementById('chart2'));
+            let dom = document.getElementById(isHidden ? 'hidden-chart2' : 'chart2');
+            charts[1] = ec.init(dom);
             let total = 0;
             result.data.map(val => {
                 total += Number(val.value);
             });
             let option = {
+                animation: false,
                 tooltip: {
                     show: true
                 },
@@ -129,15 +138,16 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     data: result.data
                 }]
             };
-            charts[1].setOption(option);
+            charts[1].setOption(option, true);
         },
-        init3_1(result) {
+        init3_1(result, isHidden) {
             let xData = [], yData = [];
             result.data.map(val => {
                 xData.push(val.name);
                 yData.push(val.value);
             });
             let option = {
+                animation: false,
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -163,7 +173,8 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                         },
                         axisLine: {
                             color: '#000'
-                        }
+                        },
+                        interval: 0
                     }
                 ],
                 yAxis: [
@@ -193,18 +204,21 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     }
                 ]
             };
-            charts[2] = ec.init(document.getElementById('chart3'));
-            charts[2].setOption(option);
+            let dom = document.getElementById(isHidden ? 'hidden-chart3' : 'chart3');
+            charts[2] = ec.init(dom);
+            charts[2].setOption(option, true);
             $('.fieldset3 footer').html(result.content);
         },
-        init3_2(result) {
+        init3_2(result, isHidden) {
             let xData = [], yData = [];
             result.data.map(val => {
                 xData.push(val.value);
                 yData.push(val.name);
             });
-            charts[3] = ec.init(document.getElementById('chart4'));
+            let dom = document.getElementById(isHidden ? 'hidden-chart4' : 'chart4');
+            charts[3] = ec.init(dom);
             let option = {
+                animation: false,
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -252,11 +266,11 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     data: xData
                 }]
             };
-            charts[3].setOption(option);
+            charts[3].setOption(option, true);
         },
-        init4_1(result) {
+        init4_1(result, isHidden) {
             $('.fieldset4 footer').html(result.content);
-            let $body = $('#chart5').empty(), data = result.data;
+            let $body = $((isHidden ? '#hidden-chart5' : '#chart5')).empty(), data = result.data;
             var string_ = '';
             for (var i = 0; i < data.length; i++) {
                 var string_f = data[i].name;
@@ -272,10 +286,24 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
         },
         postImg() { // 把img生成的img图片传给后台
             domtoimage.toJpeg(document.getElementById('pop-container')).then(dataUrl => {
-                return sugon.request(sugon.interFaces.znbg.ywfxbg.postImg, {uuid: searchRuler.uuid, url: dataUrl});
+                if (sugon.isPublished) {
+                    return sugon.request(sugon.interFaces.znbg.ywfxbg.postImg, {uuid: searchRuler.uuid, url: dataUrl});
+                } else {
+                    return new Promise((resolve, reject) => {
+                        let a = document.createElement('a');
+                        a.href = dataUrl;
+                        a.style.display = 'none';
+                        a.download = '';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        resolve();
+                    });
+                }
             }).then(result => {
                 $('#pop-container').remove();
                 sugon.removeLoading();
+                sugon.showMessage('报告已生成！', 'success');
                 initRightPanel();
             });
         },
@@ -291,7 +319,8 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 this.init4_1(result.data7);
                 this.init4_2();
                 if (condition.uuid) {
-                    setTimeout(this.postImg, 2000);
+                    this.postImg();
+                    // setTimeout(this.postImg, 2000);
                 } else {
                     let $body = $('#pop-container').css('top', '50%').css('left', '50%').css('margin-top', '-345px')
                         .css('margin-left', '-640px').css('z-index', 3);
@@ -409,15 +438,22 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
 
     // 上传图片
     function uploadImg(id, imgUrl, uuid) {
-        sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
-            uuid: uuid,
-            id: id,
-            img: imgUrl
-        });
+        if (sugon.isPublished) {
+            sugon.request(sugon.interFaces.znbg.ywfxbg.uploadImg, {
+                uuid: uuid,
+                id: id,
+                img: imgUrl
+            });
+        } else {
+            let img = new Image();
+            img.src = imgUrl;
+            document.body.appendChild(img);
+        }
     }
 
     // 生成报告
     function generateReport(uuid) {
+        popFunc.initPopPage(searchRuler);
         let $span = $('.span-div'), codeArr = [];
         $span.each((index, ele) => {
             let $ele = $(ele);
@@ -430,30 +466,49 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             result.data.map(val => {
                 switch (val.type) {
                     case "1":
-                        popFunc.init1_2(val);
-                        uploadImg(val.id, charts[0].getDataURL(), uuid);
+                        popFunc.init1_2(val, true);
                         break;
                     case "2":
-                        popFunc.init2_2(val);
-                        uploadImg(val.id, charts[1].getDataURL(), uuid);
+                        popFunc.init2_2(val, true);
                         break;
                     case "3":
-                        popFunc.init3_1(val);
-                        uploadImg(val.id, charts[2].getDataURL(), uuid);
+                        popFunc.init3_1(val, true);
                         break;
                     case "4":
-                        popFunc.init3_2(val);
-                        uploadImg(val.id, charts[3].getDataURL(), uuid);
+                        popFunc.init3_2(val, true);
                         break;
                     case "5":
-                        popFunc.init4_1(val);
-                        domtoimage.toJpeg(document.getElementById('chart5')).then(dataUrl => {
-                            uploadImg(val.id, dataUrl, uuid);
-                        });
+                        popFunc.init4_1(val, true);
                         break;
                 }
             });
-            popFunc.initPopPage(searchRuler);
+            setTimeout(drawImage, 2000, result, uuid);
+
+        });
+    }
+
+    // 遍历图片
+    function drawImage(result, uuid) {
+        result.data.map(val => {
+            switch (val.type) {
+                case "1":
+                    uploadImg(val.id, charts[0].getDataURL(), uuid);
+                    break;
+                case "2":
+                    uploadImg(val.id, charts[1].getDataURL(), uuid);
+                    break;
+                case "3":
+                    uploadImg(val.id, charts[2].getDataURL(), uuid);
+                    break;
+                case "4":
+                    uploadImg(val.id, charts[3].getDataURL(), uuid);
+                    break;
+                case "5":
+                    domtoimage.toPng(document.getElementById('hidden-chart5')).then(dataUrl => {
+                        uploadImg(val.id, dataUrl, uuid);
+                    });
+                    break;
+            }
         });
     }
 
