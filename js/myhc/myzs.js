@@ -3752,6 +3752,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             options = '<option value="0">业务量</option><option value="1">满意度</option><option value="2">工单量</option>';
         }
         $type3.empty().append(options);
+        $('.right-bottom').off('click', '.right-bottom-row');
         initRightBottom();
     });
 
@@ -3762,7 +3763,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
 
 // type3改变事件
     $('.right-mid').on('change', '#type3', function () {
-        if ($(this).val() == '2') {
+        if ($(this).find("option:selected").text() == '工单量') {
             $('.right-bottom').on('click', '.right-bottom-row', function () {
                 let $this = $(this);
                 if (!$this.hasClass('right-divider')) {
