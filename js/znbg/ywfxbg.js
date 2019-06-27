@@ -315,6 +315,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     });
                 }
             }).then(result => {
+                initRightPanel();
                 sugon.removeLoading();
                 sugon.showMessage('报告已生成！', 'success');
             });
@@ -396,7 +397,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             endDate: lastMonth,
             language: 'zh-CN'
         }).change(() => {
-            searchRuler.date1 = $('.date1').val();
+            searchRuler.date1 = $('#date1').val();
         });
         $date2.datetimepicker({
             format: 'yyyy-mm',
@@ -408,7 +409,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             endDate: lastMonth,
             language: 'zh-CN'
         }).change(() => {
-            searchRuler.date2 = $('.date2').val();
+            searchRuler.date2 = $('#date2').val();
         });
         let offset = $deptName.offset();
         // 设置下拉框宽度
@@ -455,6 +456,10 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 uuid: uuid,
                 id: id,
                 img: imgUrl
+            }).then((result) => {
+                if (result.code) {
+                    initRightPanel();
+                }
             });
         } else {
             let img = new Image();
@@ -520,8 +525,9 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     });
                     break;
             }
+
         });
-        initRightPanel();
+
     }
 
     // 程序入口
