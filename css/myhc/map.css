@@ -150,7 +150,7 @@ input {
     border-radius: 3px;
     padding: 0 10px 10px;
     display: none;
-    z-index: 10000;
+    z-index: 999;
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.26);
 }
 
@@ -1564,7 +1564,7 @@ input {
 
 .hidden-icon {
     display: none !important;
-    background: url("../../views/dist/images/marker-icon.png") no-repeat;
+    background: url("../../img/marker-icon.png") no-repeat;
     width: 25px !important;
     height: 41px !important;
 }
@@ -1834,6 +1834,14 @@ input {
 
 .pop-col5 {
     width: 150px;
+}
+
+.pop-col6 {
+    width: 100px;
+}
+
+.pop-col7 {
+    width: 240px;
 }
 
 .simple_showDialog_header {

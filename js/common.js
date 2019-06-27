@@ -90,8 +90,12 @@ define([], function () {
                 remoteUrl: base.server + 'myzs/getCkfwqZb'
             },
             getCkfwqRank: {
-                localUrl: "../../static/json/Date.json",
+                localUrl: "../../static/json/myzs/getCkfwqRank.json",
                 remoteUrl: base.server + 'myzs/getCkfwqRank'
+            },
+            getCkfwqRankPopup: {
+                localUrl: "../../static/json/myzs/getCkfwqRankPopup.json",
+                remoteUrl: base.server + 'myzs/getCkfwqRankPopup'
             }
         },
         myjz: {

@@ -3452,7 +3452,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
                     $body.append('<div class="right-divider"></div>');
                 }
                 var background = img ? 'background: url(../../img/myhc/rdwt/mybd/' + img + '.png) no-repeat 50% 50%;' : '';
-                $body.append($('<div/>').append('<div style="' + background + titleColor + '">' + val.index + '</div><span title="' + val.name + '">' + val.name + '</span><strong style="color: ' + color + ';">' + val.value + '</strong></div>'));
+                $body.append($('<div/>').addClass('right-bottom-row').append('<div style="' + background + titleColor + '">' + val.index + '</div><span title="' + val.name + '">' + val.name + '</span><strong style="color: ' + color + ';">' + val.value + '</strong></div>'));
             });
         });
     }
@@ -3762,6 +3762,38 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
 
 // type3改变事件
     $('.right-mid').on('change', '#type3', function () {
+        if ($(this).val() == '2') {
+            $('.right-bottom').on('click', '.right-bottom-row', function () {
+                let $this = $(this);
+                if (!$this.hasClass('right-divider')) {
+                    let condition = {
+                        type1: $('#type1').val(),
+                        type2: $('#type2').val(),
+                        name: $this.find('span').html(),
+                        date1: $('#date1').val(),
+                        date2: $('#date2').val()
+                    };
+                    sugon.request(sugon.interFaces.myzs.getCkfwqRankPopup, condition).then(result => {
+                        var str = '', data = result.data;
+                        str += '<div class="map-mark-right-pop-header"><div class="pop-col1">工单编号</div><div class="pop-col2">姓名</div><div class="pop-col6">电话</div><div class="pop-col7">回访内容</div></div>';
+                        data.map(function (value) {
+                            str += '<div><div class="pop-col1">' + value.gdbh + '</div><div class="pop-col2">' +
+                                value.xm + '</div><div class="pop-col6">' + value.dh +
+                                '</div><div title="' + value.hfnr + '" class="pop-col7">' + value.hfnr + '</div></div>';
+                        });
+                        var ele = '<div class="map-mark-right-pop">' + str + '</div>';
+                        sugon.renderDialog({
+                            width: 560,
+                            height: 300,
+                            ele: ele,
+                            title: '工单详情'
+                        });
+                    });
+                }
+            });
+        } else {
+            $('.right-bottom').off('click', '.right-bottom-row');
+        }
         initRightBottom();
     });
 
@@ -3814,7 +3846,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
                     value.gdlb + '</div><div title="' + value.hfnr + '" class="pop-col5">' + value.hfnr + '</div></div>';
             });
             var ele = '<div class="map-mark-right-pop">' + str + '</div>';
-            sugon.showDialog({
+            sugon.renderDialog({
                 width: 560,
                 height: 300,
                 ele: ele,
