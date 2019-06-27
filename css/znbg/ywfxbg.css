@@ -734,7 +734,7 @@ div.jqcloud span {
   width: calc(100% - 20px);
   height: calc(100% - 40px - 70px);
   margin: 0 10px 10px 10px;
-  border: 1px solid #dbdbdb;
+  border: 2px solid #dbdbdb;
 }
 #pop-container > section .fieldset2 > section .tab-container > div {
   width: 100%;
