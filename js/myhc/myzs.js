@@ -2799,8 +2799,15 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
                 }
             });
             diff = (max - min) / 2;
-            min = min - diff;
-            max = max + diff;
+            min = Number(min - diff).toFixed(2);
+            max = Number(max + diff).toFixed(2);
+
+            if (min < 0) {
+                min = 0;
+            }
+            if (max > 100) {
+                max = 100;
+            }
 
             data2.map(function (value, index) {
                 rightData += '<div><div title="' + value.content + '">' + (index + 1) + '、' + value.content +
@@ -2979,6 +2986,9 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             max = Number(max + diff).toFixed(2);
             if (max > 100) {
                 max = 100
+            }
+            if (min < 0) {
+                min = 0;
             }
             var random = parseInt(Math.random() * 10000);
             var html = '<div class="pop-map-mark-header">满意度分析</div>' +

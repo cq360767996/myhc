@@ -330,12 +330,12 @@ input {
     margin-left: 57%;
 }
 
-.pop-nav>div {
+.pop-nav > div {
     background-color: #259BE5 !important;
     color: #fff !important;
 }
 
-.pop-nav>div.nav-selected {
+.pop-nav > div.nav-selected {
     background-color: #C8EFD4 !important;
     color: #000 !important;
 }
@@ -345,22 +345,28 @@ input {
 }
 
 .view-mid-nav {
-    margin-top: 2px;
-    width: 200px;
+    position: relative;
+    width: 150px;
     height: 20px;
-    background-color: transparent;
+    line-height: 20px;
+    right: -33px;
+    top: 5px;
+    overflow: hidden;
+    border-radius: 3px;
+    z-index: 99;
+    margin-bottom: 9px;
 }
 
-.view-mid-nav>div {
+.view-mid-nav > div {
     float: left;
-    width: calc(25% - 1px);
-    background-color: #fff;
-    margin-left: 1px;
-    border-radius: 4px;
-    color: #000;
-    cursor: pointer;
-    padding: 0 2px;
+    width: calc(100% / 3);
+    height: 100%;
+    box-sizing: border-box;
     text-align: center;
+    cursor: pointer;
+    background-color: #fcfdff;
+    color: #a3a3a3;
+    border-right: 1px solid #eff0f2;
 }
 
 .nav-selected {
@@ -370,7 +376,7 @@ input {
 
 #ajdwfb {
     width: 100%;
-    height: calc(100% - 24px);
+    height: calc(100% - 30px);
 }
 
 /*定义宽高以及背景*/
@@ -701,13 +707,13 @@ div.jqcloud span {
     padding: 0;
 }
 
-#zhpjzs, #hfywl, #fsdxl{
+#zhpjzs, #hfywl, #fsdxl {
     color: #1D84C6;
 }
 
 #gfpjs {
     color: #01B261;
- }
+}
 
 #bgfpjs, #wzggds {
     color: #EA4C33;
