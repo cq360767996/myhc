@@ -140,7 +140,9 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             };
             charts[1].setOption(option, true);
         },
-        init3_1(result, isHidden) {
+        init3_1(result, isHidden, domName) {
+            domName = domName || 'chart3';
+
             let xData = [], yData = [];
             result.data.map(val => {
                 xData.push(val.name);
@@ -218,9 +220,15 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     }
                 ]
             };
-            let dom = document.getElementById(isHidden ? 'hidden-chart3' : 'chart3');
-            charts[2] = ec.init(dom);
-            charts[2].setOption(option, true);
+            let dom = document.getElementById(domName);
+            if (domName === 'hidden-chart3' || domName === 'chart3') {
+                charts[2] = ec.init(dom);
+                charts[2].setOption(option, true);
+            } else {
+                charts[4] = ec.init(dom);
+                charts[4].setOption(option, true);
+            }
+
             $('.fieldset3 footer').html(result.content);
         },
         init3_2(result, isHidden) {
@@ -295,8 +303,8 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             var word_list = eval("[" + string_list + "]");
             $body.jQCloud(word_list);
         },
-        init4_2() {
-            $('.zjfx-content').html($('.textarea-div').val());
+        init4_2(result) {
+            $('.zjfx-content').html(result);
         },
         postImg() { // 把img生成的img图片传给后台
             domtoimage.toJpeg(document.getElementById('pop-container')).then(dataUrl => {
@@ -330,11 +338,8 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 this.init3_1(result.data5);
                 this.init3_2(result.data6);
                 this.init4_1(result.data7);
-                this.init4_2();
-                if (condition.uuid) {
-                    this.postImg();
-                    // setTimeout(this.postImg, 2000);
-                } else {
+                this.init4_2(result.data8);
+                if (condition.content === undefined) {
                     let $body = $('#pop-container').css('top', '50%').css('left', '50%').css('margin-top', '-345px')
                         .css('margin-left', '-640px').css('z-index', 3);
                     let $i = $('#pop-container > header > i').show(), $mask = $('.pop-mask').show();
@@ -344,6 +349,10 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                         $body.css('top', 0).css('left', 0).css('margin-top', 0)
                             .css('margin-left', 0).css('z-index', -2);
                     });
+                    sugon.removeLoading();
+                } else {
+                    this.postImg();
+                    // setTimeout(this.postImg, 2000);
                 }
             });
         }
@@ -469,16 +478,11 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
     }
 
     // 生成报告
-    function generateReport(uuid) {
-        popFunc.initPopPage(searchRuler);
-        let $span = $('.span-div'), codeArr = [];
-        $span.each((index, ele) => {
-            let $ele = $(ele);
-            $ele.find('img').attr('src').indexOf('hover') > -1 && codeArr.push($ele.attr('code'));
-        });
+    function generateReport(uuid, codeArr) {
         searchRuler.code = codeArr.join(',');
         searchRuler.content = $('.textarea-div').val();
         searchRuler.uuid = uuid;
+        popFunc.initPopPage(searchRuler);
         sugon.request(sugon.interFaces.znbg.ywfxbg.generateReport, searchRuler).then(result => {
             result.data.map(val => {
                 switch (val.type) {
@@ -489,13 +493,13 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                         popFunc.init2_2(val, true);
                         break;
                     case "3":
-                        popFunc.init3_1(val, true);
+                        popFunc.init3_1(val, true, 'hidden-chart3');
                         break;
                     case "4":
                         popFunc.init3_2(val, true);
                         break;
                     case "5":
-                        popFunc.init4_1(val, true);
+                        popFunc.init3_1(val, true, 'hidden-chart5');
                         break;
                 }
             });
@@ -520,9 +524,10 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                     uploadImg(val.id, charts[3].getDataURL(), uuid);
                     break;
                 case "5":
-                    domtoimage.toPng(document.getElementById('hidden-chart5')).then(dataUrl => {
-                        uploadImg(val.id, dataUrl, uuid);
-                    });
+                    uploadImg(val.id, charts[4].getDataURL(), uuid);
+                    // domtoimage.toPng(document.getElementById('hidden-chart5')).then(dataUrl => {
+                    //     uploadImg(val.id, dataUrl, uuid);
+                    // });
                     break;
             }
 
@@ -590,8 +595,15 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 $checkbox.attr('src', '../../img/znbg/checkbox_hover.png');
                 // 报告生成事件
                 $('.report-generator').on('click', () => {
-                    sugon.renderLoading();
-                    generateReport(sugon.uuid());
+                    let $span = $('.span-div'), codeArr = [];
+                    $span.each((index, ele) => {
+                        let $ele = $(ele);
+                        $ele.find('img').attr('src').indexOf('hover') > -1 && codeArr.push($ele.attr('code'));
+                    });
+                    if (codeArr.length !== 0) {
+                        sugon.renderLoading();
+                        generateReport(sugon.uuid(), codeArr);
+                    }
                 });
             }
             $('.setting-aside').hide();
@@ -658,7 +670,9 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 $('.pop-menu-preview > a').unbind().bind('click', e => {
                     $('.pop-menu-preview').remove();
                     if ($(e.target).hasClass('simple-pre')) {
-                        popFunc.initPopPage({deptId, date1, date2} = selectedRow);
+                        let {deptId, date1, date2, uuid} = selectedRow;
+                        sugon.renderLoading();
+                        popFunc.initPopPage({deptId, date1, date2, uuid});
                     }
                 });
             } else {
@@ -718,8 +732,8 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 break;
             }
         }
-        let {url, imgUrl, pdfUrl} = selectedRow;
-        sugon.request(sugon.interFaces.znbg.ywfxbg.deleteReport, {url, imgUrl, pdfUrl}).then(result => {
+        let {url, imgUrl, pdfUrl, uuid} = selectedRow;
+        sugon.request(sugon.interFaces.znbg.ywfxbg.deleteReport, {url, imgUrl, pdfUrl, uuid}).then(result => {
             initRightPanel();
             result.code ? sugon.showMessage('删除成功！', 'success') :
                 sugon.showMessage('删除失败！', 'error');

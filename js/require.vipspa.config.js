@@ -13,7 +13,6 @@ requirejs.config({
         heat: '../lib/leaflet/leaflet-heat',
         markerCluster: '../lib/leaflet/leaflet.markercluster',
         plot: '../lib/leaflet/iclient9-plot-leaflet-es6.min',
-        pulse: '../lib/leaflet/L.Icon.Pulse',
         domtoimage: '../lib/dom-to-image.min',
         jqcloud: '../lib/jqcloud',
         vipspa: '../lib/vipspa.min'
@@ -36,9 +35,6 @@ requirejs.config({
         },
         plot: {
             deps: ['L', 'iclient']
-        },
-        pulse: {
-            deps: ['L']
         },
         domtoimage: {
             exports: 'domtoimage'

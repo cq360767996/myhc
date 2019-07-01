@@ -1,10 +1,10 @@
-requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pulse'], (sugon, L, echarts) => {
+requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (sugon, L, echarts) => {
     // 全局查询尺度
     var searchRuler = {};
-// 单位情况数据缓存
+    // 单位情况数据缓存
     var dwqkData = [], tData = [], sqfxData = []; // 诉求分析数据;
 
-// 获取当前时间并加减固定月份
+    // 获取当前时间并加减固定月份
     var getDate = function (difference) {
         var now = new Date();
         var year = now.getFullYear();
@@ -19,12 +19,6 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             return resultYear + '-' + resultMonth;
         }
     };
-
-// $("#left-tree").css("width", $("#place").css("width"));
-//
-// $("#place").bind("click", function () {
-//     $('#left-tree').css("visibility", "visible");
-// });
 
     var initList = function () {
         var date = '';
@@ -54,7 +48,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         $("#date2").val(getDate(-2));
     }
 
-//获取树数据
+    //获取树数据
     function getTree(param, isAsync) {
         var treeData = [];
         sugon.requestJson({
@@ -69,7 +63,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         return treeData;
     }
 
-//日期时间控件
+    //日期时间控件
     $('#date1').datetimepicker({
         format: 'yyyy-mm',
         autoclose: true,
@@ -96,7 +90,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initLevelLayer();
     });
 
-// 获取左侧上部数据
+    // 获取左侧上部数据
     var getRightUpData = function () {
         var condition = {
             dept: $('#placeCode').val(),
@@ -117,7 +111,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 获取左侧中间数据
+    // 获取左侧中间数据
     var getRightMidData = function () {
         var condition = {
             deptId: $('#placeCode').val(),
@@ -191,7 +185,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 获取右侧下部数据
+    // 获取右侧下部数据
     var getRightDownData = function () {
         var condition = {
             deptId: $('#placeCode').val(),
@@ -216,7 +210,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 初始化两侧数据
+    // 初始化两侧数据
     var initSideData = function () {
         // 加载右上侧数据
         getRightUpData();
@@ -226,7 +220,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         getRightDownData();
     };
 
-// 指标组成接口调用
+    // 指标组成接口调用
     var getZbzc = function () {
         var condition = {
             deptId: $('#placeCode').val(),
@@ -260,7 +254,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 执法公信力走势分析接口调用
+    // 执法公信力走势分析接口调用
     var getZfgxl = function () {
         var condition = {
             deptId: $('#placeCode').val(),
@@ -278,7 +272,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 渲染执法公信力走势分析echarts图
+    // 渲染执法公信力走势分析echarts图
     var renderZfgxl = function (data) {
         var xData = [], yData = [], min = 0, max = 0;
         if (data && data.length > 0) {
@@ -386,7 +380,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         chart.setOption(option);
     };
 
-// 单位情况接口调用
+    // 单位情况接口调用
     var getDwqk = function () {
         var condition = {
             deptId: $('#placeCode').val(),
@@ -405,7 +399,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 渲染执法公信力走势分析echarts图
+    // 渲染执法公信力走势分析echarts图
     var renderDwqk = function (data) {
         var xData = [], yData = [], min = 0, max = 0,
             markData = [], startValue = 0, endValue = 100, isShow = false;
@@ -688,14 +682,14 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 初始化弹出框
+    // 初始化弹出框
     var initPopPage = function () {
         getZbzc();
         getZfgxl();
         getDwqk();
     };
 
-// 初始化第二弹出页
+    // 初始化第二弹出页
     var initPopPage2 = function () {
         sugon.requestJson({
             type: 'post',
@@ -718,7 +712,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 执法公信力指数录入时间选择器
+    // 执法公信力指数录入时间选择器
     $('#pop-date1').datetimepicker({
         format: 'yyyy-mm',
         autoclose: true,
@@ -731,7 +725,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initPopSetting1();
     });
 
-// 执法公信力系统配置时间选择器
+    // 执法公信力系统配置时间选择器
     $('#pop-date2').datetimepicker({
         format: 'yyyy',
         autoclose: true,
@@ -744,7 +738,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initPopSetting2();
     });
 
-// 执法公信力展示配置时间选择器1
+    // 执法公信力展示配置时间选择器1
     $('#pop-date3').datetimepicker({
         format: 'yyyy-mm',
         autoclose: true,
@@ -757,7 +751,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initPopSetting3();
     });
 
-// 执法公信力展示配置时间选择器
+    // 执法公信力展示配置时间选择器
     $('#pop-date4').datetimepicker({
         format: 'yyyy-mm',
         autoclose: true,
@@ -770,7 +764,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initPopSetting3();
     });
 
-// 初始化执法公信力指数录入数据
+    // 初始化执法公信力指数录入数据
     var initPopSetting1 = function () {
         sugon.requestJson({
             type: 'post',
@@ -827,7 +821,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 提交执法公信力指数录入数据
+    // 提交执法公信力指数录入数据
     var submitPopSetting1 = function () {
         var arr = [];
         // 写入数据
@@ -860,7 +854,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 提交系数配置
+    // 提交系数配置
     var submitPopSetting2 = function () {
         var arr = [];
         // 写入数据
@@ -887,7 +881,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// 提交展示配置
+    // 提交展示配置
     var submitPopSetting3 = function () {
         var data = [];
         var condition = {
@@ -916,7 +910,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     };
 
-// input失去焦点的时候计算新的指标
+    // input失去焦点的时候计算新的指标
     $('.right-tab2 > div > input').blur(function () {
         var condition = {};
         var data = [];
@@ -940,14 +934,14 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     });
 
-// 返回按钮
+    // 返回按钮
     $('.return-img').click(function () {
         searchRuler.id = '';
         $('.return-img').hide();
         initPopPage2();
     });
 
-// 左侧容器点击事件
+    // 左侧容器点击事件
     $('.right-panel-up-1-up > div').click(function () {
         var index = $(this).index();
         $('.pop-mask').show();
@@ -963,19 +957,19 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 关闭按钮事件
+    // 关闭按钮事件
     $('.pop-panel > div > i').click(function () {
         $('.pop-mask').hide();
         $('.pop-panel').hide();
     });
 
-// 关闭按钮事件
+    // 关闭按钮事件
     $('.pop-panel2-header').on('click', $('.pop-panel2-header > i'), function () {
         $('.pop-mask').hide();
         $('.pop-panel2').hide();
     });
 
-// 导航切换事件
+    // 导航切换事件
     $('.pop-nav > div').click(function () {
         var $this = $(this);
         var index = $this.index();
@@ -986,7 +980,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 云搜查询事件监听
+    // 云搜查询事件监听
     $('.input-group-btn').click(function () {
         var value = $(".search-box").val();
         if (value) {
@@ -994,7 +988,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 折叠按钮点击事件
+    // 折叠按钮点击事件
     $('.fold-btn').click(function () {
         var rightPanel = $('.right-panel');
         var foldBtn = $('.fold-img');
@@ -1008,7 +1002,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 设置按钮点击事件
+    // 设置按钮点击事件
     $('.setting-btn').click(function () {
         var $selectTab = $('.select-tab');
         var $this = $(this);
@@ -1023,7 +1017,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 下拉框选择事件
+    // 下拉框选择事件
     $('.select-option').click(function () {
         var index = $(this).index();
         $('.pop-mask').show();
@@ -1049,25 +1043,25 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
 
     });
 
-// 第一个弹出框关闭事件
+    // 第一个弹出框关闭事件
     $('.setting1-back').click(function () {
         $('.pop-mask').hide();
         $('.pop-setting1').hide();
     });
 
-// 第二个弹出框关闭事件
+    // 第二个弹出框关闭事件
     $('.setting2-back').click(function () {
         $('.pop-mask').hide();
         $('.pop-setting2').hide();
     });
 
-// 第三个弹出框关闭事件
+    // 第三个弹出框关闭事件
     $('.setting3-back').click(function () {
         $('.pop-mask').hide();
         $('.pop-setting3').hide();
     });
 
-// 第二个弹出框重置事件
+    // 第二个弹出框重置事件
     $('.reset-btn2').click(function () {
         initPopSetting2(true);
     });
@@ -1077,22 +1071,22 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initPopSetting3(true);
     });
 
-// 第一个弹出框提交按钮事件
+    // 第一个弹出框提交按钮事件
     $('.submit-btn1').click(function () {
         submitPopSetting1();
     });
 
-// 第二个弹出框提交按钮事件
+    // 第二个弹出框提交按钮事件
     $('.submit-btn2').click(function () {
         submitPopSetting2();
     });
 
-// 第三个弹出框提交按钮事件
+    // 第三个弹出框提交按钮事件
     $('.submit-btn3').click(function () {
         submitPopSetting3();
     });
 
-// 弹出框单位选择事件
+    // 弹出框单位选择事件
     $('#pop-dept-name').click(function () {
         var position = $(this).offset();
         var $tree = $('#left-tree');
@@ -1100,7 +1094,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             .css('top', position.top + 25 + 'px').width('200px');
     });
 
-// 鼠标经过显示
+    // 鼠标经过显示
     $('.body-row-body').mouseover(function (e) {
         var $this = $(this);
         var index = $this.index('.body-row-body');
@@ -1119,12 +1113,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     });
 
-// 鼠标移出事件
+    // 鼠标移出事件
     $('.body-row-body').mouseout(function () {
         $('.inner-pop-panel').css('display', 'none');
     });
 
-// 鼠标移动移动弹框位置
+    // 鼠标移动移动弹框位置
     $('.body-row-body').mousemove(function (e) {
         $('.inner-pop-panel').css('left', e.clientX - 100 - 100);
         $('.inner-pop-panel').css('top', e.clientY + 20 - 70);
@@ -1133,7 +1127,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
     /******************************************************************/
 
     var map;
-// 分别记录分局、派出所、责任区的zoom、上级code、center
+    // 分别记录分局、派出所、责任区的zoom、上级code、center
     var zoomArr = [{zoom: 11, upDeptCode: '', center: [32.03613281, 118.78211975]}], mapLayer = [];
     var allFjLayerGroup = L.layerGroup(), allFjMarkerGroup = L.layerGroup(); // 所有分局layer相关数据
     var pcsLayerGroup = L.layerGroup(), pcsMarkerGroup = L.layerGroup(); // 派出所layer相关数据
@@ -1148,15 +1142,15 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
     }), queryGroup = L.layerGroup(), mapMarkData = [];
     var searchInput, ckGroup = L.layerGroup(); // 1、输入框文本；2、窗口图层group
 
-// 圈选相关变量
-    var serverUrl, plottingLayer, queryPlottingLayer, drawControl, plotting;
+    // 圈选相关变量
+    var serverUrl, queryPlottingLayer, drawControl, plotting;
     var bounds, queryResult = [], selectedData = [], isQuery; // 圈选的数据
-    var ckMarkerGroup = L.layerGroup(), ckPulseMarker = L.layerGroup(); // 窗口marker
-    var randomTimer, popMarkerGroup = L.layerGroup(), circleGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
+    var ckMarkerGroup = L.layerGroup(); // 窗口marker
+    var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
     var ckBorderGroup = L.layerGroup(), isLoadBounds = true, syncPulse = false; // 窗口的边界图层，窗口页面是否加载边界
     var isRenderSearchChart = false; // 是否渲染查询的echarts图
 
-// 创建地图
+    // 创建地图
     function createMapL() {
         // 创建地图
         map = L.map('mainMap', {
@@ -1184,7 +1178,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         getAllFjData();
     }
 
-//初始化地图数据 绘制出所有的分局
+    //初始化地图数据 绘制出所有的分局
     function getAllFjData() {
         currentLevel = 0;
         var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
@@ -1336,7 +1330,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         map.addLayer(allFjMarkerGroup);
     }
 
-// 鼠标经过边框加粗事件
+    // 鼠标经过边框加粗事件
     function mouseoverEvent(e) {
         $('.bubblefj').css('color', 'white');
         map.eachLayer(function (layer) {
@@ -1360,7 +1354,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 鼠标出去移除加粗效果事件
+    // 鼠标出去移除加粗效果事件
     function mouseoutEvent() {
         $('.bubblefj').css('color', 'white');
         map.eachLayer(function (layer) {
@@ -1374,7 +1368,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 单位层级由0 ==》 1
+    // 单位层级由0 ==》 1
     function level021(deptCode, upDeptCode, center) {
         var zoomArrObj = {};
         zoomArrObj.zoom = 12;
@@ -1404,7 +1398,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initSideData();
     }
 
-// 单位层级由1 ==》 2
+    // 单位层级由1 ==》 2
     function level122(deptCode, upDeptCode, center) {
         // 隐藏热力图层
         map.removeLayer(heatLayerGroup);
@@ -1463,7 +1457,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         getZrqDataByPcsCode(deptCode);
     }
 
-// 单位层级由2 ==》 3
+    // 单位层级由2 ==》 3
     function level223(deptCode) {
         // 隐藏左右两侧页面
         $('.right-panel-up').hide();
@@ -1489,7 +1483,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         getDataByZrqCode(deptCode);
     }
 
-//处理geometry数据数组中经纬度 与 leaflet.js API中构建polygon(纬，经)矛盾
+    //处理geometry数据数组中经纬度 与 leaflet.js API中构建polygon(纬，经)矛盾
     function changeLonAndLat(arr) {
         var result = [];
         for (var k = 0; k < arr.length; k++) {
@@ -1514,7 +1508,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         return result;
     }
 
-//获取分局下所有派出所数据
+    //获取分局下所有派出所数据
     function getPcsDataByFjCode(fjCode) {
         if (isRenderSearchChart) {
             renderSearchChart();
@@ -1610,7 +1604,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-//传入派出所编码 绘制责任区数据
+    //传入派出所编码 绘制责任区数据
     function getZrqDataByPcsCode(pcsCode) {
         if (isRenderSearchChart) {
             renderSearchChart();
@@ -1720,7 +1714,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 根据责任区id获取责任区边界
+    // 根据责任区id获取责任区边界
     function getDataByZrqCode(zrqCode) {
         if (searchInput) {
             isRenderSearchChart = false;
@@ -1814,14 +1808,14 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 初始化数据面板
+    // 初始化数据面板
     function initDataPanel(type) {
         $('.data-panel').show();
         initSearch(type);
         initTab(type);
     }
 
-// 初始化查询面板
+    // 初始化查询面板
     function initSearch(type) {
         var $search = $('.data-panel-search');
         $search.empty();
@@ -1836,7 +1830,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 获取查询栏的数据
+    // 获取查询栏的数据
     function getSearchData(type) {
         var data = [], countData = [0, 0, 0, 0, 0];
         if (isQuery) {
@@ -1892,7 +1886,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         return data;
     }
 
-// 获取表单数据
+    // 获取表单数据
     function getTabData(type, pageNum) {
         type = type || 0;
         pageNum = pageNum || 1;
@@ -1938,7 +1932,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         return data;
     }
 
-// 初始化tab面板
+    // 初始化tab面板
     function initTab(type, pageNum, searchType) {
         searchType = searchType || 0;
         var $tab = $('.data-panel-tab');
@@ -2065,7 +2059,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 处理颜色和icon
+    // 处理颜色和icon
     function handleColorAndIcon(data) {
         data = Number(data);
         var result = {
@@ -2085,7 +2079,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         return result;
     }
 
-// 初始化窗口mark
+    // 初始化窗口mark
     function initCkMark(deptCode, isNotZoomIn) {
         map.removeLayer(allFjLayerGroup);
         var className = !isNotZoomIn ? 'pop-ck-down-true' : '';
@@ -2214,7 +2208,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 初始化窗口右侧面板
+    // 初始化窗口右侧面板
     function initCkRight(deptCode, isPcs) {
         deptCode = deptCode || '';
         sugon.requestJson({
@@ -2258,10 +2252,10 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
                             case '出入境业务':
                                 img = 'crj';
                                 break;
-                            case '车管驾证业务':
+                            case '驾证业务':
                                 img = 'cgjz';
                                 break;
-                            case '车管车辆业务':
+                            case '车辆业务':
                                 img = 'cgcl';
                                 break;
                             case '监管业务':
@@ -2288,109 +2282,6 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
 
                         if (!isPcs) {
                             $('#' + img + '-chart').html('<strong style="color: #3286ff;">' + value[1] + '%</strong>');
-                            // var chart = echarts.init(document.getElementById(img + '-chart'));
-                            // var maxData = 100;
-                            // var option = {
-                            //     xAxis: {
-                            //         max: maxData,
-                            //         splitLine: {
-                            //             show: false
-                            //         },
-                            //         offset: 10,
-                            //         axisTick: {
-                            //             show: false
-                            //         },
-                            //         axisLine: {
-                            //             show: false
-                            //         },
-                            //         axisLabel: {
-                            //             show: false
-                            //         }
-                            //     },
-                            //     yAxis: {
-                            //         data: ['系统名称1'],
-                            //         inverse: true,
-                            //         axisTick: {
-                            //             show: false
-                            //         },
-                            //         axisLine: {
-                            //             show: false
-                            //         },
-                            //         axisLabel: {
-                            //             show: false,
-                            //             margin: 10,
-                            //             textStyle: {
-                            //                 fontSize: 16
-                            //             }
-                            //         }
-                            //     },
-                            //     grid: {
-                            //         top: 'center',
-                            //         height: 0,
-                            //         left: 0,
-                            //         right: 75
-                            //     },
-                            //     series: [
-                            //         {
-                            //             type: 'pictorialBar',
-                            //             symbol: 'rect',
-                            //             itemStyle: {
-                            //                 normal: {
-                            //                     barBorderRadius: 5,
-                            //                     color: '#ED7D31'
-                            //                 }
-                            //             },
-                            //             symbolRepeat: 'fixed',
-                            //             symbolMargin: '70%',
-                            //             symbolClip: true,
-                            //             symbolSize: [4, 20],
-                            //             symbolBoundingData: maxData,
-                            //             data: [891],
-                            //             z: 9999,
-                            //             animationEasing: 'elasticOut',
-                            //             animationDelay: function (dataIndex, params) {
-                            //                 return params.index * 30;
-                            //             }
-                            //         }, {
-                            //             type: 'pictorialBar',
-                            //             itemStyle: {
-                            //                 normal: {
-                            //                     color: 'rgba(179, 188, 208, 0.3)'
-                            //                 }
-                            //             },
-                            //             label: {
-                            //                 normal: {
-                            //                     show: true,
-                            //                     formatter: function (params) {
-                            //                         return params.value + '%';
-                            //                     },
-                            //                     position: 'right',
-                            //                     offset: [5, 0],
-                            //                     textStyle: {
-                            //                         color: '#1d84c6',
-                            //                         fontSize: 18
-                            //                     }
-                            //                 }
-                            //             },
-                            //             animationDuration: 0,
-                            //             symbolRepeat: 'fixed',
-                            //             symbolMargin: '70%',
-                            //             symbol: 'rect',
-                            //             symbolSize: [4, 20],
-                            //             symbolBoundingData: maxData,
-                            //             data: [891],
-                            //             z: 99999,
-                            //             animationEasing: 'elasticOut',
-                            //             animationDelay: function (dataIndex, params) {
-                            //                 return params.index * 30;
-                            //             }
-                            //         }
-                            //     ]
-                            // };
-                            // option.series.map(function (val) {
-                            //     val.data = [value[1]];
-                            // });
-                            // chart.setOption(option);
                         }
                     }
                 });
@@ -2398,7 +2289,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 初始化窗口面板
+    // 初始化窗口面板
     function initCk() {
         $('.right-panel-up').css('height', '60%');
         $('.right-panel-down').css('height', '40%');
@@ -2416,7 +2307,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initCkRight();
     }
 
-// 初始化窗口边界
+    // 初始化窗口边界
     function initCkBounds(index) {
         if (isLoadBounds) {
             map.removeLayer(allFjLayerGroup);
@@ -2458,7 +2349,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     }
 
-// 根据图层等级刷新对于的layer
+    // 根据图层等级刷新对于的layer
     function initLevelLayer() {
         switch (currentLevel) {
             case 0:
@@ -2480,7 +2371,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     }
 
-// 移除所有图层
+    // 移除所有图层
     function removeAllLayers() {
         map.eachLayer(function (layer) {
             if (layer._leaflet_id != mapLayer._leaflet_id) {
@@ -2489,14 +2380,14 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 初始化查询面板
+    // 初始化查询面板
     function initSearchPanel() {
         currentLevel = 4;
         removeAllLayers();
         initDataPanel($('.search-yw').val());
     }
 
-// 加载热力图
+    // 加载热力图
     function loadHeatMap() {
         if (!heatLayerGroup || heatLayerGroup.length != 0) {
             map.removeLayer(heatLayerGroup);
@@ -2535,7 +2426,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 加载聚合图
+    // 加载聚合图
     function loadMarkerCluster() {
         map.removeLayer(markerClusterGroup);
         markerClusterGroup = L.markerClusterGroup({
@@ -2563,7 +2454,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         markerClusterGroup.addTo(map);
     }
 
-// 加载工具
+    // 加载工具
     function loadGj(index) {
         var defaultStyle = plotting.getDefaultStyle();
         defaultStyle.defaultFlag = true;
@@ -2586,7 +2477,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         drawControl.handler.enable();
     }
 
-// 加载查询的echarts图
+    // 加载查询的echarts图
     function renderSearchChart() {
         var $panel = $('.search-pop-panel');
         if (isRenderSearchChart) {
@@ -2614,7 +2505,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 重新渲染echarts图
+    // 重新渲染echarts图
     function reRenderChart(index) {
         index = index || 1;
         var data = [];
@@ -2735,7 +2626,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         chart.setOption(option);
     }
 
-// 复位页面
+    // 复位页面
     function resetPage(type, isSearch) {
         var searchYw = $('.search-yw');
         var searchGj = $('.search-gj');
@@ -2756,12 +2647,6 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         $('.toolbar-panel2-pop').hide();
         searchGj.val(0);
         $('.toolbar-panel2 > div').removeClass('toolbar-panel2-hover');
-        if (randomTimer) {
-            clearInterval(randomTimer);
-            randomTimer = '';
-            map.removeLayer(ckPulseMarker);
-            ckPulseMarker = L.layerGroup();
-        }
         onLoad("");
         removeAllLayers();
         bounds = '';
@@ -2781,7 +2666,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         getAllFjData();
     }
 
-// 清除圈选页面
+    // 清除圈选页面
     function clearPage() {
         if (currentLevel == 3) {
             if (drawControl) {
@@ -2798,19 +2683,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             $('.right-panel-up-4').hide();
             $('.toolbar-panel2 > div').removeClass('toolbar-panel2-hover');
             $('.toolbar-panel2-pop').hide();
-            if (randomTimer) {
-                clearInterval(randomTimer);
-                randomTimer = '';
-                map.removeLayer(ckPulseMarker);
-                ckPulseMarker = L.layerGroup();
-            }
             map.removeLayer(popMarkerGroup);
-            map.removeLayer(circleGroup);
             initCk();
         }
     }
 
-// 加载plot图
+    // 加载plot图
     function loadPlot() {
         serverUrl = 'http://10.33.66.183:2334/iserver/services/plot-jingyong/rest/plot/';
         queryPlottingLayer = L.supermap.plotting.plottingLayer("plot", serverUrl);
@@ -2892,26 +2770,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             }, null);
     }
 
-// 随机点跳动
-    function randomPulse(data) {
-        map.removeLayer(ckPulseMarker);
-        ckPulseMarker = L.layerGroup();
-        // var color = index > 0 && index < 3 ? '#A15BEF' : '#3165FB';
-        var len = data.length;
-        for (var i = 0; i < 12; i++) {
-            var randomIndex = parseInt(Math.random() * len);
-            randomIndex = randomIndex >= len ? (len - 1) : randomIndex;
-            var marker = L.marker.pulse([data[randomIndex].lat, data[randomIndex].lng], {
-                heartbeat: 0.5,
-                iconSize: [10, 10],
-                color: '#3165FB'
-            });
-            ckPulseMarker.addLayer(marker);
-        }
-        ckPulseMarker.addTo(map);
-    }
-
-// 打开窗口弹出框
+    // 打开窗口弹出框
     function openCkPopup(code, layer, type) {
         sugon.requestJson({
             type: 'post',
@@ -3078,7 +2937,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 打开窗口闪烁图的弹出框
+    // 打开窗口闪烁图的弹出框
     function openCkPulsePopup(code, layer) {
         var type = $('.toolbar-panel2-hover').index('.toolbar-panel2 > div');
         sugon.requestJson({
@@ -3106,12 +2965,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
                 data2.push(value.bdw);
                 var colorIcon1 = handleColorAndIcon(value.tb), colorIcon2 = handleColorAndIcon(value.hb);
                 rightData += '<div class="map-mark-right-body-row"><div class="mark-header">' + value.name +
-                    '</div><div class="mark-body"><div><span style="float: left;">全局排名：' +
+                    '</div><div class="mark-body"><div><span style="float: left;">全局排名:' +
                     '<span style="color: #008AE2;">' + value.qjpm + '</span></span>' +
-                    '<span style="float: right;">办理量：<span style="color: #008AE2;">' + value.bll +
-                    '</span></span></div><div><span style="float: left;">同比：<span class="' +
+                    '<span style="float: right;">办理量:<span style="color: #008AE2;">' + value.bll +
+                    '</span></span></div><div><span style="float: left;">同比:<span class="' +
                     colorIcon1.color + '"><i class="glyphicon ' + colorIcon1.icon + '"></i> ' +
-                    Math.abs(value.tb) + '%</span></span><span style="float: right;">环比：' +
+                    Math.abs(value.tb) + '%</span></span><span style="float: right;">环比:' +
                     '<span class="' + colorIcon2.color + '"><i class="glyphicon ' + colorIcon2.icon +
                     '"></i> ' + Math.abs(value.hb) + '%</span></span></div></div></div>';
             });
@@ -3181,7 +3040,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 加载闪烁图
+    // 加载闪烁图
     function initPulse(index) {
         sugon.requestJson({
             type: 'post',
@@ -3244,91 +3103,11 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
                 });
                 ckMarkerGroup.addLayer(marker);
             });
-            randomPulse(data);
-            randomTimer = setInterval(randomPulse, 1000, data);
             ckMarkerGroup.addTo(map);
         });
-        // 绑定弹出层点击事件
-        $('.toolbar-panel2-pop > img').unbind().bind('click', function () {
-            var $this = $(this);
-            var imgClass = $this.attr('class');
-            var index = $this.parent().attr('type');
-            loadServiceCircle(index, imgClass);
-            isLoadBounds = true;
-            syncPulse = true;
-        });
     }
 
-// 加载服务圈
-    function loadServiceCircle(index, imgClass) {
-        sugon.requestJson({
-            type: 'post',
-            url: sugon.interFaces.myzs.getCkfwq,
-            data: {type: index},
-            async: true
-        }, function (result) {
-            if (randomTimer) {
-                clearInterval(randomTimer);
-                randomTimer = '';
-            }
-            map.removeLayer(circleGroup);
-            circleGroup = L.layerGroup();
-            map.removeLayer(ckPulseMarker);
-            map.removeLayer(ckMarkerGroup);
-            map.removeLayer(popMarkerGroup);
-            map.removeLayer(allFjLayerGroup);
-            var radius;
-            switch (index) {
-                case '0':
-                    radius = 1.5;
-                    break;
-                case '2':
-                    radius = 9;
-                    break;
-                default:
-                    radius = 6;
-                    break;
-            }
-            var color = '';
-            if (imgClass != 'second-img') {
-                color = '#386AFB';
-            }
-            result.data.map(function (val) {
-                switch (imgClass) {
-                    case 'first-img':
-                        if (val.red == '0') {
-                            circleGroup.addLayer(L.circle([val.lat, val.lng], {
-                                color: color,
-                                fillOpacity: 0.15,
-                                radius: radius * 1000,
-                                weight: 0.5
-                            }));
-                        }
-                        break;
-                    case 'second-img':
-                        color = val.red == '0' ? '#386AFB' : '#F3686D';
-                        circleGroup.addLayer(L.circle([val.lat, val.lng], {
-                            color: color,
-                            fillOpacity: 0.15,
-                            radius: radius * 1000,
-                            weight: 0.5
-                        }));
-                        break;
-                    case 'third-img':
-                        circleGroup.addLayer(L.circle([val.lat, val.lng], {
-                            color: color,
-                            fillOpacity: 0.15,
-                            radius: radius * 1000,
-                            weight: 0.5
-                        }));
-                        break;
-                }
-            });
-            circleGroup.addTo(map);
-        });
-    }
-
-// 查询功能
+    // 查询功能
     function searchFunc() {
         var inputVal = $('.search-input').val();
         var reg = /\S/;
@@ -3366,7 +3145,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     }
 
-// 窗口右侧面板刷新
+    // 窗口右侧面板刷新
     function initCkRightMid(index) {
         sugon.requestJson({
             type: 'post',
@@ -3420,7 +3199,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
 
     }
 
-// 初始化窗口右下页面
+    // 初始化窗口右下页面
     function initRightBottom() {
         var option = {
             date1: $('#date1').val(),
@@ -3457,7 +3236,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     }
 
-// 渲染下拉框
+    // 渲染下拉框
     function renderSelector(index) {
         var secondSelect = '';
         switch (index) {
@@ -3479,7 +3258,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             secondSelect + '<select id="type3"><option value="0">业务量</option><option value="1">满意度</option><option value="2">工单量</option></select>');
     }
 
-// 页面入口
+    // 页面入口
     $(function () {
         // 加载数据接口
         onLoad('');
@@ -3492,12 +3271,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 禁用全局右击事件
+    // 禁用全局右击事件
     $('#mainMap').bind('contextmenu', function () {
         return false;
     });
 
-// pop-ck-down-true点击事件
+    // pop-ck-down-true点击事件
     document.addEventListener('click', function (e) {
         var $target = $(e.target);
         if ($target.hasClass('pop-mid')) {
@@ -3567,7 +3346,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     }, true);
 
-// 业务下拉框改变事件
+    // 业务下拉框改变事件
     $('.search-yw').change(function () {
         var index = $(this).val();
         if (currentLevel == 5) {
@@ -3584,7 +3363,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 左下查询条件改变事件
+    // 左下查询条件改变事件
     $('.data-panel-search').on('click', 'div', function (e) {
         var $div = $('.data-panel-search > div');
         var index = $div.index(e.target);
@@ -3595,12 +3374,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 数据panel关闭事件
+    // 数据panel关闭事件
     $('.data-panel-header > i').click(function () {
         $('.data-panel').hide();
     });
 
-// 工具切换时
+    // 工具切换时
     $('.search-gj').on('change', function () {
         $('.analysis-btn').show();
         $('.data-panel').hide();
@@ -3629,29 +3408,29 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         loadGj(index);
     });
 
-// 清除按钮事件
+    // 清除按钮事件
     $('.search-clear').click(function () {
         clearPage();
     });
 
-// 复位按钮事件
+    // 复位按钮事件
     $('.search-reset').click(function () {
         resetPage();
     });
 
-// 查询按钮事件
+    // 查询按钮事件
     $('.search-btn').click(function () {
         searchFunc();
     });
 
-// 回车查询事件
+    // 回车查询事件
     $('.search-input').on('keyup', function (e) {
         if (e.keyCode == 13) {
             searchFunc();
         }
     });
 
-// 左下tab点击事件
+    // 左下tab点击事件
     $('.data-panel-tab').on('click', '.data-panel-tab-row', function (e) {
         var $target = $(e.target);
         $target = $target.hasClass('data-panel-tab-row') ? $target : $target.parent();
@@ -3663,7 +3442,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         }
     });
 
-// 分析按钮点击事件
+    // 分析按钮点击事件
     $('.analysis-btn').click(function () {
         var keywordArr = [], timesArr = [], idArr = {}, result = [];
         selectedData.map(function (value) {
@@ -3705,37 +3484,16 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         $body.appendTo($container);
     });
 
-// 窗口toolbar点击事件
+    // 窗口toolbar点击事件
     $('.toolbar-panel2 > div').on('click', function () {
         var $this = $(this), index = $this.index('.toolbar-panel2 > div');
-        var $second = $('.second-img'), $third = $('.third-img'), left, width;
-        if (randomTimer) {
-            clearInterval(randomTimer);
-            randomTimer = '';
-            map.removeLayer(ckPulseMarker);
-            ckPulseMarker = L.layerGroup();
-        }
         map.removeLayer(ckGroup);
         map.removeLayer(popMarkerGroup);
-        map.removeLayer(circleGroup);
         map.removeLayer(ckBorderGroup);
         map.closePopup();
         popMarkerGroup = L.layerGroup();
         $('.toolbar-panel2 > div').removeClass('toolbar-panel2-hover');
         $this.addClass('toolbar-panel2-hover');
-        var offset = $this.offset();
-        if (index == 0) {
-            $second.show();
-            $third.show();
-            left = offset.left - 2 - 100;
-            width = 95;
-        } else {
-            $second.hide();
-            $third.hide();
-            left = offset.left + 22 - 100;
-            width = 42;
-        }
-        $('.toolbar-panel2-pop').attr('type', index).show().css('width', width).css('left', left).css('top', offset.top + 47 - 70);
         initCkBounds(index);
         if (!syncPulse) {
             initPulse(index);
@@ -3743,7 +3501,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initCkRightMid(index);
     });
 
-// type1改变事件
+    // type1改变事件
     $('.right-mid').on('change', '#type1', function () {
         var $this = $(this), $type3 = $('#type3'), options;
         if ($this.val() == '1') {
@@ -3756,12 +3514,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initRightBottom();
     });
 
-// type2改变事件
+    // type2改变事件
     $('.right-mid').on('change', '#type2', function () {
         initRightBottom();
     });
 
-// type3改变事件
+    // type3改变事件
     $('.right-mid').on('change', '#type3', function () {
         if ($(this).find("option:selected").text() == '工单量') {
             $('.right-bottom').on('click', '.right-bottom-row', function () {
@@ -3798,12 +3556,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         initRightBottom();
     });
 
-// 热点问题分析弹出页关闭事件
+    // 热点问题分析弹出页关闭事件
     $('.pop-rdwtfx').on('click', '.pop-map-mark-header > i', function () {
         $('.pop-rdwtfx').hide();
     });
 
-// 分析弹出页点击事件
+    // 分析弹出页点击事件
     $('.pop-rdwtfx').on('click', '.pop-map-mark-body > p', function () {
         var $this = $(this);
         var idArr = $this.attr('ywid').split(',');
@@ -3824,7 +3582,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     });
 
-// 弹出页的点击事件
+    // 弹出页的点击事件
     $('#mainMap').on('click', '.map-mark-right-body > div > span', function () {
         var deptCode = $('.map-mark-right-title').attr('deptCode');
         var code = $(this).attr('code');
@@ -3856,7 +3614,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
         });
     });
 
-// 切换事件
+    // 切换事件
     $('.search-pop-nav > div').on('click', function () {
         var className = 'search-nav-selected', $this = $(this);
         if (!$this.hasClass(className)) {

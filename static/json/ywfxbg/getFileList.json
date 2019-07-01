@@ -11,7 +11,8 @@
       "date1": "222",
       "date2": "333",
       "fileName1": "12121.png",
-      "fileName2": "dsadadas.docx"
+      "fileName2": "dsadadas.docx",
+      "uuid": "112"
     },
     {
       "containImg": "0",
@@ -24,7 +25,8 @@
       "date1": "222",
       "date2": "333",
       "fileName1": "12121.png",
-      "fileName2": "dsadadas.docx"
+      "fileName2": "dsadadas.docx",
+      "uuid": "112"
     },
     {
       "containImg": "0",
@@ -37,7 +39,8 @@
       "date1": "222",
       "date2": "333",
       "fileName1": "12121.png",
-      "fileName2": "dsadadas.docx"
+      "fileName2": "dsadadas.docx",
+      "uuid": "112"
     }
   ]
 }
