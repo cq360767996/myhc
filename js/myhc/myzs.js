@@ -2435,7 +2435,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot', 'pul
             L.supermap.featureService(url).getFeaturesBySQL(sqlParam, function (serviceResult) {
                 var resultData = serviceResult.result.features.features;
                 map.setView(zoomArr[0].center, zoomArr[0].zoom);
-                var colorArr = ['#0fedd4', '#eb5c64', '#66dc2b', '#f560c4', '#ffa78f', '#7FB5CD',
+                var colorArr = ['#66edda', '#eb5c64', '#66dc2b', '#ffb372', '#ffa78f', '#7FB5CD',
                     '#F78EF7', '#005ec5', '#5bc5f0', '#61eddd', '#ffb553', '#5bc5f0', '#e37e6d'];
                 allFjLayerGroup = L.layerGroup();
                 // 在添加之前置空
