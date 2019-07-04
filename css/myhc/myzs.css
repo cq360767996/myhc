@@ -3,6 +3,100 @@
     src: url("../../fonts/Balth.ttf");
 }
 
+tab, row, cell {
+    display: block;
+}
+
+/*!
+ *     Copyright 2012 David Leaver
+ *     Leaflet.markercluster.(https://github.com/Leaflet/Leaflet.markercluster/)
+ *     license: MIT
+ *     version: v1.3.0
+ */
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+    -webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+    -moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+    -o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+    /* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+    -webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+    -moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+    -o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+    transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+
+.marker-cluster-small {
+    background-color: rgba(181, 226, 140, 0.6);
+}
+
+.marker-cluster-small div {
+    background-color: rgba(110, 204, 57, 0.6);
+}
+
+.marker-cluster-medium {
+    background-color: rgba(241, 211, 87, 0.6);
+}
+
+.marker-cluster-medium div {
+    background-color: rgba(240, 194, 12, 0.6);
+}
+
+.marker-cluster-large {
+    background-color: rgba(253, 156, 115, 0.6);
+}
+
+.marker-cluster-large div {
+    background-color: rgba(241, 128, 23, 0.6);
+}
+
+/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+    background-color: rgb(181, 226, 140);
+}
+
+.leaflet-oldie .marker-cluster-small div {
+    background-color: rgb(110, 204, 57);
+}
+
+.leaflet-oldie .marker-cluster-medium {
+    background-color: rgb(241, 211, 87);
+}
+
+.leaflet-oldie .marker-cluster-medium div {
+    background-color: rgb(240, 194, 12);
+}
+
+.leaflet-oldie .marker-cluster-large {
+    background-color: rgb(253, 156, 115);
+}
+
+.leaflet-oldie .marker-cluster-large div {
+    background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+}
+
+.marker-cluster div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+
+    text-align: center;
+    border-radius: 15px;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.marker-cluster span {
+    line-height: 30px;
+}
+
 .map-container {
     width: 100%;
     height: 100%;
@@ -518,13 +612,13 @@ input {
     display: none;
 }
 
-.right-panel-up-3, .right-panel-up-4 {
+.right-panel-up-3 {
     width: 100%;
     height: 100%;
     display: none;
 }
 
-.right-up-title, .right-up-title2 {
+.right-up-title {
     width: calc(100% - 20px);
     height: 40px;
     margin: 0 auto;
@@ -535,7 +629,7 @@ input {
     background: url("../../img/myhc/myzs/line.png") 50% no-repeat;
 }
 
-.right-up-banner, .right-up-banner2 {
+.right-up-banner {
     width: 100%;
     height: 100px;
     padding: 5px 20px;
@@ -592,7 +686,7 @@ input {
     float: right;
 }
 
-.right-up-body, .right-up-body2 {
+.right-up-body {
     width: 100%;
     height: calc(100% - 140px);
     margin: 0 auto;
@@ -1924,54 +2018,6 @@ input {
     line-height: 90px;
 }
 
-.right-up-body2-header {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-}
-
-.right-up-body2-header > span {
-    margin-left: 10px;
-}
-
-.right-up-body2-body {
-    width: 100%;
-    height: calc(100% - 40px);
-}
-
-/*定义宽高以及背景*/
-.right-up-body2-body::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #FFF;
-}
-
-/*定义滚动条轨道 内阴影+圆角*/
-.right-up-body2-body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    background-color: #FFF;
-}
-
-/*定义滑块 内阴影+圆角*/
-.right-up-body2-body::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #C1C1C1;
-}
-
-.right-mid {
-    width: 100%;
-    height: 20px;
-}
-
-.right-mid > select {
-    width: 90px;
-    display: inline-block;
-    margin-left: 10px;
-}
-
 .switch-panel2 > div {
     float: left;
     margin-left: 5px;
@@ -1986,48 +2032,9 @@ input {
     cursor: pointer;
 }
 
-.right-bottom {
-    width: 100%;
-    height: calc(100% - 20px);
-}
-
-.right-bottom > div {
-    width: calc(100% - 25px);
-    height: 38px;
-    margin: 5px auto 0;
-    background-color: #F1F6FC;
-    line-height: 38px;
-}
-
-.right-bottom > div > span {
-    float: left;
-    margin-left: 10px;
-    display: inline-block;
-    width: calc(70% - 38px);
-    height: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.right-bottom > div > strong {
-    float: right;
-    margin-right: 10px;
-}
-
 .switch-selected {
     background-color: #50a1ea !important;
     color: #ffffff !important;
-}
-
-.right-bottom > div > div {
-    width: 38px;
-    height: 100%;
-    float: left;
-    text-align: center;
-    font-family: "Balth";
-    font-size: 20px;
-    color: #000;
 }
 
 .right-divider {
@@ -2035,84 +2042,216 @@ input {
     border-top: 1px dashed #4d4d4d;
 }
 
-/*!
- *     Copyright 2012 David Leaver
- *     Leaflet.markercluster.(https://github.com/Leaflet/Leaflet.markercluster/)
- *     license: MIT
- *     version: v1.3.0
- */
-.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
-    -webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
-    -moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
-    -o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+.right-panel-ck {
+    width: 100%;
+    height: calc(100% - 15px);
+    color: #4d4d4d;
+    margin-top: 15px;
 }
 
-.leaflet-cluster-spider-leg {
-    /* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
-    -webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
-    -moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
-    -o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
-    transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+.right-panel-ck > header {
+    width: 100%;
+    height: 123px;
+    background: url("../../img/myhc/myzs/up_bg.png") no-repeat 50% -82%;
 }
 
-.marker-cluster-small {
-    background-color: rgba(181, 226, 140, 0.6);
-}
-.marker-cluster-small div {
-    background-color: rgba(110, 204, 57, 0.6);
-}
-
-.marker-cluster-medium {
-    background-color: rgba(241, 211, 87, 0.6);
-}
-.marker-cluster-medium div {
-    background-color: rgba(240, 194, 12, 0.6);
-}
-
-.marker-cluster-large {
-    background-color: rgba(253, 156, 115, 0.6);
-}
-.marker-cluster-large div {
-    background-color: rgba(241, 128, 23, 0.6);
-}
-
-/* IE 6-8 fallback colors */
-.leaflet-oldie .marker-cluster-small {
-    background-color: rgb(181, 226, 140);
-}
-.leaflet-oldie .marker-cluster-small div {
-    background-color: rgb(110, 204, 57);
-}
-
-.leaflet-oldie .marker-cluster-medium {
-    background-color: rgb(241, 211, 87);
-}
-.leaflet-oldie .marker-cluster-medium div {
-    background-color: rgb(240, 194, 12);
-}
-
-.leaflet-oldie .marker-cluster-large {
-    background-color: rgb(253, 156, 115);
-}
-.leaflet-oldie .marker-cluster-large div {
-    background-color: rgb(241, 128, 23);
-}
-
-.marker-cluster {
-    background-clip: padding-box;
-    border-radius: 20px;
-}
-.marker-cluster div {
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-    margin-top: 5px;
-
+.right-panel-ck > header > header {
+    width: 100%;
+    height: 18px;
+    line-height: 18px;
+    font-size: 16px;
     text-align: center;
-    border-radius: 15px;
-    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
-.marker-cluster span {
+
+.right-panel-ck > header > article {
+    width: 282px;
+    height: 90px;
+    margin: 15px auto 0;
+    padding: 15px;
+}
+
+.right-panel-ck > header > article > div {
+    text-align: center;
+    line-height: 20px;
+}
+
+.right-panel-ck > header > article > div > * {
     line-height: 30px;
+}
+
+.right-panel-ck > header > article > div > strong {
+    font-family: "Times New Roman";
+    font-size: 24px;
+    color: #007eff;
+}
+
+.right-panel-ck > banner {
+    display: block;
+    width: 300px;
+    height: 110px;
+    background-color: #fafafa;
+    box-shadow: inset 0px 3px 8px 0px rgba(132, 132, 132, 0.17);
+    border: solid 1px #cccccc;
+    margin: 10px auto 0;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.right-panel-ck > banner > div {
+    float: left;
+    font-size: 14px;
+    width: 50%;
+    height: 30px;
+}
+
+.right-panel-ck > banner > div > strong {
+    color: #1d84c6;
+}
+
+.right-panel-ck > section {
+    margin-top: 7px;
+    width: 100%;
+    height: calc(100% - 250px);
+    background: url(../../img/myhc/myzs/down_bg.png) no-repeat;
+    padding: 20px;
+    background-size: 100% 100%;
+}
+
+.right-panel-ck > section > header {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.right-panel-ck > section > header > span {
+    font-size: 16px;
+}
+
+.right-panel-ck > section > section {
+    width: 100%;
+    height: calc(50% - 20px);
+}
+
+.right-panel-ck > section > header > div {
+    float: right;
+
+}
+
+.right-panel-ck > section > header > div > select {
+    width: 66px;
+    height: 25px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: solid 1px #cccccc;
+}
+
+.right-panel-ck > section > section > header {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: #fff9d4;
+    padding: 0 5px;
+}
+
+.right-panel-ck > section > section > tab {
+    width: 100%;
+    height: calc(100% - 30px);
+    overflow: auto;
+}
+
+.right-panel-ck > section > section > tab {
+
+}
+
+/*定义宽高以及背景*/
+.tab1::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #FFF;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+.tab1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #FFF;
+}
+
+/*定义滑块 内阴影+圆角*/
+.tab1::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #C1C1C1;
+}
+
+/*定义宽高以及背景*/
+.tab2::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #FFF;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+.tab2::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #FFF;
+}
+
+/*定义滑块 内阴影+圆角*/
+.tab2::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #C1C1C1;
+}
+
+.right-panel-ck > section > section > header > select {
+    float: right;
+    width: 66px;
+    height: 25px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: solid 1px #cccccc;
+    margin-top: 2px;
+}
+
+.right-panel-ck > section > section > tab > row {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: #bcc9d8 1px solid;
+    padding: 0 5px;
+}
+
+.right-panel-ck > section > section > tab > row > cell {
+    float: left;
+    height: 100%;
+}
+
+.right-panel-ck > section > section > tab > row > cell:nth-child(1) {
+    width: 30px;
+}
+
+.right-panel-ck > section > section > tab > row > cell:nth-child(2) {
+    width: calc(100% - 80px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.right-panel-ck > section > section > tab > row > cell:nth-child(3) {
+    width: 50px;
+}
+
+.right-panel-ck > section > section > tab > row:nth-child(1) > cell:nth-child(1) {
+    background: url("../../img/myhc/myzs/no1.png") no-repeat 50% 50%;
+}
+
+.right-panel-ck > section > section > tab > row:nth-child(2) > cell:nth-child(1) {
+    background: url("../../img/myhc/myzs/no2.png") no-repeat 50% 50%;
+}
+
+.right-panel-ck > section > section > tab > row:nth-child(3) > cell:nth-child(1) {
+    background: url("../../img/myhc/myzs/no3.png") no-repeat 50% 50%;
 }

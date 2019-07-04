@@ -1080,6 +1080,16 @@ requirejs(["common", "ec", 'jqcloud'], function (sugon, ec) {
         renderYxal(type);
     });
 
+    // 设置按钮点击事件
+    $('.subTitle > img').click(e => {
+        requirejs(['text!../views/zxyp/rx_setting.html'], ele => {
+            requirejs(['css!../../css/zxyp/rx_setting.css']);
+            let option = {title: '热点事件配置页面', width: 1010, height: 600, ele: ele, params: {}};
+            sugon.renderDialog(option);
+        });
+
+    });
+
     // 上页下页功能
     function preNextEvent(e) {
         var $doc = $('#yxal');

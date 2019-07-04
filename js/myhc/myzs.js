@@ -1145,7 +1145,8 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
     // 圈选相关变量
     var serverUrl, queryPlottingLayer, drawControl, plotting;
     var bounds, queryResult = [], selectedData = [], isQuery; // 圈选的数据
-    var ckMarkerGroup = L.layerGroup(); // 窗口marker
+    // var ckMarkerGroup = L.layerGroup(); // 窗口marker
+    var ckMarkerGroups = [];
     var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
     var ckBorderGroup = L.layerGroup(), isLoadBounds = true, syncPulse = false; // 窗口的边界图层，窗口页面是否加载边界
     var isRenderSearchChart = false; // 是否渲染查询的echarts图
@@ -2291,11 +2292,12 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
 
     // 初始化窗口面板
     function initCk() {
-        $('.right-panel-up').css('height', '60%');
-        $('.right-panel-down').css('height', '40%');
+        $('.right-panel-up').show().css('height', '60%');
+        $('.right-panel-down').show().css('height', '40%');
         $('.right-panel-up-1').hide();
         $('.right-panel-up-2').hide();
         $('.right-panel-up-3').show();
+        $('.right-panel-ck').hide();
         onLoad();
         map.off('mouseup');
         removeAllLayers();
@@ -2332,10 +2334,10 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
                 // 在添加之前置空
                 resultData.map(function (val, index) {
                     var resultLayer = L.polygon(changeLonAndLat(val.geometry.coordinates), {
-                        color: '#386AFB',
+                        color: '#fff',
                         fillOpacity: 0.45,
                         fillColor: colorArr[index],
-                        weight: 0
+                        weight: 3
                     });
                     allFjLayerGroup.addLayer(resultLayer);
                 });
@@ -2637,6 +2639,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             $('.search-input').val('');
             searchYw.removeAttr('disabled');
             searchGj.removeAttr('disabled');
+            onLoad("");
         }
         type = type || 0;
         searchYw.val(type);
@@ -2647,7 +2650,6 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
         $('.toolbar-panel2-pop').hide();
         searchGj.val(0);
         $('.toolbar-panel2 > div').removeClass('toolbar-panel2-hover');
-        onLoad("");
         removeAllLayers();
         bounds = '';
         map.off('moveend');
@@ -2656,7 +2658,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
         }
         $('.right-panel-up-2').hide();
         $('.right-panel-up-3').hide();
-        $('.right-panel-up-4').hide();
+        $('.right-panel-ck').hide();
         $('.right-panel-up-1').show();
         $('.right-panel-up').show().css('height', '70%');
         $('.right-panel-down').css('height', '30%');
@@ -2680,7 +2682,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             $('.pop-rdwtfx').hide();
         }
         if (currentLevel == 5) {
-            $('.right-panel-up-4').hide();
+            $('.right-panel-ck').hide();
             $('.toolbar-panel2 > div').removeClass('toolbar-panel2-hover');
             $('.toolbar-panel2-pop').hide();
             map.removeLayer(popMarkerGroup);
@@ -2826,7 +2828,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             }
             layer.bindPopup(html, popupOption).openPopup().unbindPopup();
 
-            var text = !titleData || '{d|' + titleData.name + '}' + '{a|满意度为}' +
+            var text = !titleData || '{d|' + titleData.name + '}{a|满意度为}' +
                 '{c|' + titleData.value + '%} {a|全市排名}{b|' + titleData.rank + '}';
             var option = {
                 title: {
@@ -3061,8 +3063,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             async: true
         }, function (result) {
             var data = result.data;
-            map.removeLayer(ckMarkerGroup);
-            ckMarkerGroup = L.layerGroup();
+            ckMarkerGroups[index] = L.layerGroup();
             var iconUrl = '../../img/myhc/myzs/';
             switch (index) {
                 case 0:
@@ -3111,9 +3112,9 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
                         popMarkerGroup = L.layerGroup();
                     }
                 });
-                ckMarkerGroup.addLayer(marker);
+                ckMarkerGroups[index].addLayer(marker);
             });
-            ckMarkerGroup.addTo(map);
+            ckMarkerGroups[index].addTo(map);
         });
     }
 
@@ -3157,115 +3158,85 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
 
     // 窗口右侧面板刷新
     function initCkRightMid(index) {
-        sugon.requestJson({
-            type: 'post',
-            url: sugon.interFaces.myzs.getCkfwqZb,
-            data: {
-                type: index
-            },
-            async: true
-        }, function (result) {
-            var data = result.data;
-            $('.right-panel-down').css('height', '21%');
-            $('.right-panel-up').css('height', '79%');
-            var $panel = $('.right-panel-up-4'), $title = $('.right-up-title2'),
-                $banner = $('.right-up-banner2');
-            $('.right-panel-up-3').hide();
-            $panel.show();
-            var title, bannerTitle, bannerHtml;
-            switch (index) {
-                case 1:
-                    title = '出入境便民服务圈';
-                    bannerTitle = '全市出入境服务：';
-                    break;
-                case 2:
-                    title = '车驾管便民服务圈';
-                    bannerTitle = '全市车驾管服务：';
-                    break;
-                case 3:
-                    title = '全科窗口服务圈';
-                    bannerTitle = '全市全科窗口服务：';
-                    break;
-                default:
-                    title = '户政便民服务圈';
-                    bannerTitle = '全市户政服务：';
+        let arr = [];
+        $('.toolbar-panel2 > div').each((index, dom) => {
+            if ($(dom).hasClass('toolbar-panel2-hover')) {
+                arr.push(index);
             }
-            $title.html(title);
-            if (index == 0) {
-                bannerHtml = '<div class="banner-up"><span>' + bannerTitle +
-                    '</span><strong style="color:#007eff;">' + data[0] +
-                    '</strong><span>家</span></div><div class="banner-down">' +
-                    '<span>户籍服务：</span><strong style="color:#007eff;">' + data[1] +
-                    '</strong><span>身份证服务：</span><strong style="color:#007eff;">'
-                    + data[2] + '</strong></div>';
-            } else {
-                bannerHtml = '<div class="banner-mid"><span style="margin-left: 25px;">' + bannerTitle +
-                    '</span><strong style="color:#007eff;">' + data[0] + '</strong><span>家</span></div>';
-            }
-            $banner.empty().append(bannerHtml);
         });
-        renderSelector(index);
-        initRightBottom();
-
+        sugon.request(sugon.interFaces.myzs.getCkfwqZb, {type: arr.join(',')}).then(result => {
+            $('.right-panel-down').hide();
+            $('.right-panel-up').hide();
+            $('.right-panel-ck').show();
+            $('.ck-header-name').html(result.data1.name);
+            $('.ck-header-value').html(result.data1.value);
+            let $body = $('.ck-banner').empty();
+            result.data2.map(val => {
+                let imgName;
+                switch (val.type) {
+                    case '1':
+                        imgName = 'hz';
+                        break;
+                    case '2':
+                        imgName = 'sfz';
+                        break;
+                    case '3':
+                        imgName = 'crj';
+                        break;
+                    case '4':
+                        imgName = 'cgcl';
+                        break;
+                    case '5':
+                        imgName = 'cgjz';
+                        break;
+                }
+                $body.append('<div><img src="../../img/myhc/myzs/' + imgName + '.png"><span>' + val.name +
+                    '：</span><strong>' + val.value + '</strong></div>');
+            });
+            initCkRightBottom();
+        });
     }
 
-    // 初始化窗口右下页面
-    function initRightBottom() {
-        var option = {
-            date1: $('#date1').val(),
-            date2: $('#date2').val(),
+    // 初始化右下窗口
+    function initCkRightBottom() {
+        initCkfwqRybd();
+        initCkfwqDwbd();
+    }
+
+    // 窗口服务圈人员榜单
+    function initCkfwqRybd() {
+        let condition = {
             type1: $('#type1').val(),
             type2: $('#type2').val(),
-            type3: $('#type3').val()
+            type3: $('#type4').val(),
+            date1: $('#date1').val(),
+            date2: $('#date2').val()
         };
-        sugon.requestJson({
-            type: 'post',
-            url: sugon.interFaces.myzs.getCkfwqRank,
-            data: option,
-            async: true
-        }, function (result) {
-            var $body = $('.right-bottom').empty();
-            var data = result.data;
-            data.map(function (val, index) {
-                var color, titleColor = '', img;
-                if (index < 3) {
-                    color = '#18a80d';
-                    titleColor = 'color: #fff;';
-                    img = 'gold';
-                } else if (index < 5) {
-                    color = '#18a80d';
-                } else {
-                    color = '#00aab5';
-                }
-                if (index == 5) {
-                    $body.append('<div class="right-divider"></div>');
-                }
-                var background = img ? 'background: url(../../img/myhc/rdwt/mybd/' + img + '.png) no-repeat 50% 50%;' : '';
-                $body.append($('<div/>').addClass('right-bottom-row').append('<div style="' + background + titleColor + '">' + val.index + '</div><span title="' + val.name + '">' + val.name + '</span><strong style="color: ' + color + ';">' + val.value + '</strong></div>'));
+        sugon.request(sugon.interFaces.myzs.getCkfwqRybd, condition).then(result => {
+            let $body = $('.tab2').empty();
+            result.data.map((val, index) => {
+                $body.append('<row><cell></cell><cell class="dept-name">' + (index + 1) + '、' + val.name +
+                    '</cell><cell>' + val.value + '</cell></row>');
             });
         });
     }
 
-    // 渲染下拉框
-    function renderSelector(index) {
-        var secondSelect = '';
-        switch (index) {
-            case 1:
-                secondSelect = '<select id="type2"><option value="crj">出入境</option></select>';
-                break;
-            case 2:
-                secondSelect = '<select id="type2"><option value="cl">车辆</option><option value="jz">驾证</option></select>';
-                break;
-            case 3:
-                secondSelect = '<select id="type2"><option value="hj">户籍</option><option value="sfz">身份证</option>' +
-                    '<option value="crj">出入境</option><option value="cl">车辆</option><option value="jz">驾证</option>' +
-                    '<option value="jg">监管</option></select>';
-                break;
-            default:
-                secondSelect = '<select id="type2"><option value="hj">户籍</option><option value="sfz">身份证</option></select>';
-        }
-        $('.right-mid').empty().append('<select id="type1"><option value="0">单位</option><option value="1">人员</option></select>' +
-            secondSelect + '<select id="type3"><option value="0">业务量</option><option value="1">满意度</option><option value="2">工单量</option></select>');
+    // 窗口服务圈单位榜单
+    function initCkfwqDwbd() {
+        let condition = {
+            type1: $('#type1').val(),
+            type2: $('#type2').val(),
+            type3: $('#type3').val(),
+            date1: $('#date1').val(),
+            date2: $('#date2').val()
+        };
+        sugon.request(sugon.interFaces.myzs.getCkfwqDwbd, condition).then(result => {
+            let $body = $('.tab1').empty();
+            result.data.map((val, index) => {
+                $body.append('<row><cell></cell><cell class="dept-name">' + (index + 1) + '、' + val.name +
+                    '</cell><cell>' + val.value + '</cell></row>');
+            });
+        });
     }
 
     // 页面入口
@@ -3496,74 +3467,140 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
 
     // 窗口toolbar点击事件
     $('.toolbar-panel2 > div').on('click', function () {
-        var $this = $(this), index = $this.index('.toolbar-panel2 > div');
+        var $this = $(this), index = $this.index('.toolbar-panel2 > div'), className = 'toolbar-panel2-hover',
+            $panel = $('.toolbar-panel2 > div');
         map.removeLayer(ckGroup);
         map.removeLayer(popMarkerGroup);
         map.removeLayer(ckBorderGroup);
         map.closePopup();
         popMarkerGroup = L.layerGroup();
-        $('.toolbar-panel2 > div').removeClass('toolbar-panel2-hover');
-        $this.addClass('toolbar-panel2-hover');
-        initCkBounds(index);
-        if (!syncPulse) {
-            initPulse(index);
+        if (index === 3) {
+            $panel.removeClass(className);
+            $this.addClass(className);
+            ckMarkerGroups.map(val => {
+                map.removeLayer(val);
+            });
+            let $select = $('#type1').empty();
+            $select.append('<option value="hj">户籍</option>')
+                .append('<option value="sfz">身份证</option>')
+                .append('<option value="cl">车辆</option>')
+                .append('<option value="jz">驾证</option>')
+                .append('<option value="crj">出入境</option>');
+            initCkBounds(index);
+            if (!syncPulse) {
+                initPulse(index);
+            }
+            initCkRightMid();
+        } else {
+            let $select = $('#type1').empty();
+            $panel.eq(3).removeClass(className);
+            if (ckMarkerGroups[3]) {
+                map.removeLayer(ckMarkerGroups[3]);
+            }
+            if ($this.hasClass(className)) {
+                $this.removeClass(className);
+                map.removeLayer(ckMarkerGroups[index]);
+                let hasClass = false;
+                $panel.each((index, dom) => {
+                    if ($(dom).hasClass(className)) {
+                        hasClass = true;
+                    }
+                });
+                hasClass ? initCkRightMid() : initCk();
+            } else {
+                $this.addClass(className);
+                initCkBounds(index);
+                if (!syncPulse) {
+                    initPulse(index);
+                }
+                initCkRightMid();
+            }
+            $panel.each((index, dom) => {
+                if ($(dom).hasClass(className)) {
+                    switch (index) {
+                        case 0:
+                            $select.append('<option value="hj">户籍</option>')
+                                .append('<option value="sfz">身份证</option>');
+                            break;
+                        case 1:
+                            $select.append('<option value="crj">出入境</option>');
+                            break;
+                        case 2:
+                            $select.append('<option value="cl">车辆</option>')
+                                .append('<option value="jz">驾证</option>');
+                            break;
+                    }
+                }
+            });
         }
-        initCkRightMid(index);
     });
 
     // type1改变事件
-    $('.right-mid').on('change', '#type1', function () {
-        var $this = $(this), $type3 = $('#type3'), options;
-        if ($this.val() == '1') {
-            options = '<option value="0">业务量</option><option value="1">工单量</option>';
-        } else {
-            options = '<option value="0">业务量</option><option value="1">满意度</option><option value="2">工单量</option>';
-        }
-        $type3.empty().append(options);
-        $('.right-bottom').off('click', '.right-bottom-row');
-        initRightBottom();
+    $('#type1').on('change', function () {
+        initCkRightBottom();
     });
 
     // type2改变事件
-    $('.right-mid').on('change', '#type2', function () {
-        initRightBottom();
+    $('#type2').on('change', function (e) {
+        let value = $(e.target).val(), $type3 = $('#type3').empty(),
+            $type4 = $('#type4').empty(), dom;
+        if (value == '1') {
+            dom = '<option value="0">满意度</option><option value="1">工单量</option>';
+        } else {
+            dom = '<option value="0">满意度</option><option value="1">业务量</option>';
+        }
+        $type3.append(dom);
+        $type4.append(dom);
+        initCkRightBottom();
     });
 
-    // type3改变事件
-    $('.right-mid').on('change', '#type3', function () {
-        if ($(this).find("option:selected").text() == '工单量') {
-            $('.right-bottom').on('click', '.right-bottom-row', function () {
+    function openCkfwqRankPopup(isDept, e) {
+        let value = $(e.target).find("option:selected").text(), className;
+        className = isDept ? 'tab1' : 'tab2';
+        if (value == '工单量') {
+            $('.' + className).on('click', 'row', function () {
                 let $this = $(this);
-                if (!$this.hasClass('right-divider')) {
-                    let condition = {
-                        type1: $('#type1').val(),
-                        type2: $('#type2').val(),
-                        name: $this.find('span').html(),
-                        date1: $('#date1').val(),
-                        date2: $('#date2').val()
-                    };
-                    sugon.request(sugon.interFaces.myzs.getCkfwqRankPopup, condition).then(result => {
-                        var str = '', data = result.data;
-                        str += '<div class="map-mark-right-pop-header"><div class="pop-col1">工单编号</div><div class="pop-col2">姓名</div><div class="pop-col6">电话</div><div class="pop-col7">回访内容</div></div>';
-                        data.map(function (value) {
-                            str += '<div><div class="pop-col1">' + value.gdbh + '</div><div class="pop-col2">' +
-                                value.xm + '</div><div class="pop-col6">' + value.dh +
-                                '</div><div title="' + value.hfnr + '" class="pop-col7">' + value.hfnr + '</div></div>';
-                        });
-                        var ele = '<div class="map-mark-right-pop">' + str + '</div>';
-                        sugon.renderDialog({
-                            width: 560,
-                            height: 300,
-                            ele: ele,
-                            title: '工单详情'
-                        });
+                let condition = {
+                    type1: $('#type1').val(),
+                    type2: Number(!isDept),
+                    name: $this.find('.dept-name').html(),
+                    date1: $('#date1').val(),
+                    date2: $('#date2').val()
+                };
+                sugon.request(sugon.interFaces.myzs.getCkfwqRankPopup, condition).then(result => {
+                    let str = '', data = result.data;
+                    str += '<div class="map-mark-right-pop-header"><div class="pop-col1">工单编号</div>' +
+                        '<div class="pop-col2">姓名</div><div class="pop-col6">电话</div>' +
+                        '<div class="pop-col7">回访内容</div></div>';
+                    data.map(function (value) {
+                        str += '<div><div class="pop-col1">' + value.gdbh + '</div><div class="pop-col2">' +
+                            value.xm + '</div><div class="pop-col6">' + value.dh +
+                            '</div><div title="' + value.hfnr + '" class="pop-col7">' + value.hfnr + '</div></div>';
                     });
-                }
+                    let ele = '<div class="map-mark-right-pop">' + str + '</div>';
+                    sugon.renderDialog({
+                        width: 560,
+                        height: 300,
+                        ele: ele,
+                        title: '工单详情'
+                    });
+                });
             });
         } else {
-            $('.right-bottom').off('click', '.right-bottom-row');
+            $('.tab1').off('click');
         }
-        initRightBottom();
+    }
+
+    // type3改变事件
+    $('#type3').on('change', function (e) {
+        initCkfwqDwbd();
+        openCkfwqRankPopup(true, e);
+    });
+
+    // type4改变事件
+    $('#type4').on('change', function (e) {
+        initCkfwqRybd();
+        openCkfwqRankPopup(false, e);
     });
 
     // 热点问题分析弹出页关闭事件

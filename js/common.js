@@ -86,12 +86,16 @@ define([], function () {
                 remoteUrl: base.server + 'myzs/getCkfwqDetail'
             },
             getCkfwqZb: {
-                localUrl: "../../static/json/Date.json",
+                localUrl: "../../static/json/myzs/getCkfwqZb.json",
                 remoteUrl: base.server + 'myzs/getCkfwqZb'
             },
-            getCkfwqRank: {
+            getCkfwqRybd: {
                 localUrl: "../../static/json/myzs/getCkfwqRank.json",
-                remoteUrl: base.server + 'myzs/getCkfwqRank'
+                remoteUrl: base.server + 'myzs/getCkfwqRybd'
+            },
+            getCkfwqDwbd: {
+                localUrl: "../../static/json/myzs/getCkfwqRank.json",
+                remoteUrl: base.server + 'myzs/getCkfwqDwbd'
             },
             getCkfwqRankPopup: {
                 localUrl: "../../static/json/myzs/getCkfwqRankPopup.json",
@@ -361,6 +365,24 @@ define([], function () {
                     getBottomRight: {
                         localUrl: "./static/json/rx/bottomRight.json",
                         remoteUrl: base.server + "zxyp/rx/popup/getBottomRight"
+                    },
+                },
+                setting: {
+                    left1: {
+                        localUrl: "./static/json/rx/setting/left1.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/left1"
+                    },
+                    left2: {
+                        localUrl: "./static/json/rx/setting/left2.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/left2"
+                    },
+                    right1: {
+                        localUrl: "./static/json/rx/setting/right1.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/right1"
+                    },
+                    right2: {
+                        localUrl: "./static/json/rx/setting/right2.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/right2"
                     },
                 }
             },
@@ -651,7 +673,7 @@ define([], function () {
         }
 
         // 绑定点击事件
-        $('.com-nav > div').unbind().bind('click', function (e) {
+        $div.find('div').unbind().bind('click', function (e) {
             var key = e.target.innerHTML, toPage;
             switch (key) {
                 case '&lt;':

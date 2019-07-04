@@ -1,0 +1,281 @@
+search, search-list, tab, row, cell, column {
+  display: block;
+}
+
+.single-text-ellipse() { // 单行省略
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.simple_content {
+  height: calc(100% - 40px) !important;
+  top: 0 !important;
+  padding: 5px;
+  color: #333333;
+
+  & > aside {
+    float: left;
+    width: calc(50% - 8px);
+    height: 100%;
+  }
+
+  .rx-left-panel {
+    & > section {
+      width: 100%;
+      @first-height: 120px;
+
+      &:first-child {
+        height: @first-height;
+
+        & > header {
+          @header-height: 40px;
+          height: @header-height;
+          line-height: @header-height;
+          text-align: center;
+          font-size: 16px;
+        }
+
+        & > search {
+          @search-height: 54px;
+          width: 100%;
+          height: @search-height;
+          margin: 3px 0;
+          padding: 10px 15px;
+
+          input {
+            background: url("../../img/zxyp/aj/search_gray.png") no-repeat 1% 50%;
+          }
+        }
+
+        & > search-list {
+          @search-height: 20px;
+          width: 100%;
+          height: @search-height;
+          line-height: @search-height;
+          padding: 0 15px;
+
+          span {
+            font-size: 13px;
+            color: #333333;
+          }
+
+          & > a {
+            margin-left: 5px;
+            font-size: 13px;
+            color: #3b84de;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:nth-child(2) {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        height: calc(100% - @first-height);
+        padding: 0 15px;
+        @height: 38px;
+
+        & > header {
+          height: @height;
+          line-height: @height;
+          font-size: 16px;
+
+          & > span {
+            margin-left: 7px;
+          }
+        }
+
+        & > tab {
+          width: 100%;
+          height: calc(100% - @height * 2);
+
+          row {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            border-bottom: 1px #bcc9d8 dashed;
+
+            & > cell {
+              float: left;
+              .single-text-ellipse();
+              text-align: center;
+
+              &:nth-child(1) {
+                width: 80px;
+              }
+
+              &:nth-child(2) {
+                width: 55px;
+              }
+
+              &:nth-child(3) {
+                width: 95px;
+              }
+
+              &:nth-child(4) {
+                width: 60px;
+              }
+
+              &:nth-child(5) {
+                width: calc(100% - 290px);
+              }
+            }
+          }
+        }
+
+        & > nav {
+          @nav-height: 40px;
+          width: 100%;
+          height: @height;
+          line-height: @height;
+
+          & > div {
+            height: 24px;
+            float: right;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .rx-right-panel {
+    margin-left: 16px;
+
+    & > section {
+      width: 100%;
+
+      & > header {
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+
+        & > img {
+          position: relative;
+          top: -2px;
+        }
+
+        & > span {
+          margin-left: 7px;
+          font-size: 16px;
+        }
+      }
+
+      & > tab {
+        width: 100%;
+        height: calc(100% - 65px);
+
+        & > row {
+          @row-height: 44px;
+          width: 100%;
+          height: @row-height;
+          line-height: @row-height;
+          border-bottom: #bcc9d8 1px dashed;
+          padding: 5px;
+
+          & > cell {
+            float: left;
+            height: 100%;
+            .single-text-ellipse();
+
+            & > img {
+              margin-left: 6px;
+              cursor: pointer;
+            }
+
+            &:nth-child(1) {
+              width: 100px;
+            }
+
+            &:nth-child(2) {
+              width: 80px;
+            }
+
+            &:nth-child(3) {
+              width: calc(100% - 250px);
+            }
+
+            &:nth-child(4) {
+              width: 60px;
+            }
+          }
+        }
+
+        & > column {
+          float: left;
+          width: calc(50% - 10px);
+          height: 100%;
+
+          row {
+            @row-height: 31px;
+            width: 100%;
+            height: @row-height;
+            line-height: @row-height;
+            border-bottom: 1px solid #bcc9d8;
+            padding: 0 5px;
+
+            img {
+              float: right;
+              margin-top: 7px;
+              cursor: pointer;
+            }
+          }
+
+          &:nth-child(2) {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      & > nav {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+
+        & > div {
+          height: 24px;
+          float: right;
+          margin-top: 10px;
+        }
+      }
+
+      &:first-child {
+        height: 40%;
+
+        & > header > div {
+          float: right;
+
+          input {
+            width: 160px;
+            height: 25px;
+            background-color: #ffffff;
+            box-shadow: inset 0px 1px 6px 0px rgba(0, 0, 0, 0.19);
+            border-radius: 3px;
+            border: solid 1px #cccccc;
+          }
+
+          button {
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+            background-color: #3b8cc1;
+            border-radius: 2px;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border: 0;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        height: 60%;
+      }
+    }
+  }
+}

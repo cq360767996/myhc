@@ -594,7 +594,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 });
                 $checkbox.attr('src', '../../img/znbg/checkbox_hover.png');
                 // 报告生成事件
-                $('.report-generator').on('click', () => {
+                $('.report-generator').off().on('click', () => {
                     let $span = $('.span-div'), codeArr = [];
                     $span.each((index, ele) => {
                         let $ele = $(ele);

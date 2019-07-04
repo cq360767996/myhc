@@ -172,6 +172,13 @@ input {
     font-size: 16px;
 }
 
+.subTitle > img {
+    float: right;
+    margin-right: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .group {
     width: calc(100% - 20px);
     margin-left: 10px;

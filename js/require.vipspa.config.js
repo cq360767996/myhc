@@ -5,6 +5,7 @@ requirejs.config({
         ec: '../lib/echarts.min',
         ecPlugin: '../lib/echarts-liquidfill.min',
         text: '../lib/text',
+        css: '../lib/require.css.min',
         highcharts: '../lib/highcharts',
         high3D: '../lib/highcharts-3d',
         _: '../lib/lodash.min',
@@ -15,7 +16,8 @@ requirejs.config({
         plot: '../lib/leaflet/iclient9-plot-leaflet-es6.min',
         domtoimage: '../lib/dom-to-image.min',
         jqcloud: '../lib/jqcloud',
-        vipspa: '../lib/vipspa.min'
+        vipspa: '../lib/vipspa.min',
+        rx_setting: 'zxyp/rx_setting'
     },
     shim: {
         high3D: {
