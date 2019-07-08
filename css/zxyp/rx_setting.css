@@ -150,20 +150,19 @@ column {
   white-space: nowrap;
 }
 .simple_content .rx-right-panel > section > tab > row > cell > img {
-  margin-left: 6px;
   cursor: pointer;
 }
 .simple_content .rx-right-panel > section > tab > row > cell:nth-child(1) {
-  width: 100px;
+  width: 110px;
 }
 .simple_content .rx-right-panel > section > tab > row > cell:nth-child(2) {
-  width: 80px;
+  width: 90px;
 }
 .simple_content .rx-right-panel > section > tab > row > cell:nth-child(3) {
-  width: calc(100% - 250px);
+  width: calc(100% - 230px);
 }
 .simple_content .rx-right-panel > section > tab > row > cell:nth-child(4) {
-  width: 60px;
+  width: 20px;
 }
 .simple_content .rx-right-panel > section > tab > column {
   float: left;
