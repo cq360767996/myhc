@@ -1084,7 +1084,7 @@ requirejs(["common", "ec", 'jqcloud'], function (sugon, ec) {
     $('.subTitle > img').click(e => {
         requirejs(['text!../views/zxyp/rx_setting.html'], ele => {
             requirejs(['css!../../css/zxyp/rx_setting.css']);
-            let option = {title: '热点事件配置页面', width: 1010, height: 600, ele: ele, params: {}};
+            let option = {title: '热点事件配置页面', width: 1010, height: 600, ele: ele, params: searchRuler};
             sugon.renderDialog(option);
         });
 

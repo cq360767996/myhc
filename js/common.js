@@ -384,6 +384,18 @@ define([], function () {
                         localUrl: "./static/json/rx/setting/right2.json",
                         remoteUrl: base.server + "zxyp/rx/setting/right2"
                     },
+                    addRight1: {
+                        localUrl: "./static/json/myzs/success.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/addRight1"
+                    },
+                    deleteRight1: {
+                        localUrl: "./static/json/myzs/success.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/deleteRight1"
+                    },
+                    addRight2: {
+                        localUrl: "./static/json/myzs/success.json",
+                        remoteUrl: base.server + "zxyp/rx/setting/addRight2"
+                    }
                 }
             },
             "jtsg": {
