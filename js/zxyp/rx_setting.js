@@ -76,6 +76,20 @@ requirejs(['common'], sugon => {
         initPage();
     });
 
+    // 查询按钮事件
+    $('.pop-search').click(e => {
+        let input = $('.search-input').val(), reg = /\S/;
+        if (reg.test(input)) {
+            initLeft2();
+        }
+    });
+
+    // 热搜点击查询事件
+    $('.left1').on('click', 'a', e => {
+        $('.search-input').val(e.target.innerHTML);
+        $('.pop-search').click();
+    });
+
     // 添加按钮事件
     $('.add-btn').click(e => {
         let input = $('.add-event-input').val(), reg = /\S/;

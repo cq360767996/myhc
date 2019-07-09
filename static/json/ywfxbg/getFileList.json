@@ -12,13 +12,14 @@
       "date2": "333",
       "fileName1": "12121.png",
       "fileName2": "dsadadas.docx",
-      "uuid": "112"
+      "uuid": "112",
+      "type": "jcj"
     },
     {
-      "containImg": "0",
+      "containImg": "1",
       "date": "2019-06-21 10:10",
       "name": "南京市公安局156110976.docx",
-      "url": "../../WordTemplet/Znbg.docx",
+      "url": "../../WordTemplet/Znbg1.docx",
       "imgUrl": "../../WordTemplet/Znbg.docx",
       "pdfUrl": "../../WordTemplet/Znbg.docx",
       "deptId": "111",
@@ -26,7 +27,8 @@
       "date2": "333",
       "fileName1": "12121.png",
       "fileName2": "dsadadas.docx",
-      "uuid": "112"
+      "uuid": "112",
+      "type": "aj"
     },
     {
       "containImg": "0",
@@ -40,7 +42,8 @@
       "date2": "333",
       "fileName1": "12121.png",
       "fileName2": "dsadadas.docx",
-      "uuid": "112"
+      "uuid": "112",
+      "type": "jcj"
     }
   ]
 }
