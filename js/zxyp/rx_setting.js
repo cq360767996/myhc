@@ -93,8 +93,9 @@ requirejs(['common'], sugon => {
     // 添加按钮事件
     $('.add-btn').click(e => {
         let input = $('.add-event-input').val(), reg = /\S/;
+        let {deptId, date1, date2} = window.dialogParams;
         if (reg.test(input)) {
-            sugon.request(sugon.interFaces.zxyp.rx.setting.addRight1, {name: input})
+            sugon.request(sugon.interFaces.zxyp.rx.setting.addRight1, {name: input, deptId, date1, date2})
                 .then(result => {
                     initRight1();
                     result.code == '200' && sugon.showMessage(result.msg, 'success');
@@ -106,7 +107,8 @@ requirejs(['common'], sugon => {
 
     // 删除按钮事件
     $('.right-up').on('click', 'img', e => {
-        sugon.request(sugon.interFaces.zxyp.rx.setting.deleteRight1, {name: $(e.target).prev().html()})
+        let {deptId, date1, date2} = window.dialogParams;
+        sugon.request(sugon.interFaces.zxyp.rx.setting.deleteRight1, {name: $(e.target).prev().html(), deptId, date1, date2})
             .then(result => {
                 initRight1();
                 result.code == '200' && sugon.showMessage(result.msg, 'success');
