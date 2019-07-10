@@ -26,8 +26,9 @@ requirejs(['common'], sugon => {
             let $body = $('.left2').empty().append('<row><cell>诉求时间</cell><cell>诉求人</cell><cell>诉求电话</cell>' +
                 '<cell>诉求类型</cell><cell>诉求内容</cell></row>');
             data.data.map(val => {
+                let sqnr = val.sqnr.replace(/<.*>/, '');
                 $body.append('<row><cell>' + val.sqsj + '</cell><cell>' + val.sqr + '</cell><cell>' + val.sqdh +
-                    '</cell><cell>' + val.sqlx + '</cell><cell>' + val.sqnr + '</cell></row>');
+                    '</cell><cell>' + val.sqlx + '</cell><cell>' + sqnr + '</cell></row>');
             });
             sugon.renderNav($('.nav1 > div'), pageNum, data.totalPage, initLeft2);
         });
@@ -108,7 +109,8 @@ requirejs(['common'], sugon => {
     // 删除按钮事件
     $('.right-up').on('click', 'img', e => {
         let {deptId, date1, date2} = window.dialogParams;
-        sugon.request(sugon.interFaces.zxyp.rx.setting.deleteRight1, {name: $(e.target).prev().html(), deptId, date1, date2})
+        let name = $(e.target).prev().html().replace(/\d、/, '');
+        sugon.request(sugon.interFaces.zxyp.rx.setting.deleteRight1, {name, deptId, date1, date2})
             .then(result => {
                 initRight1();
                 result.code == '200' && sugon.showMessage(result.msg, 'success');
@@ -119,9 +121,9 @@ requirejs(['common'], sugon => {
     $('.right-down').on('click', 'img', e => {
         let $target = $(e.target), src = $target.attr('src');
         if (src.indexOf('dislike') > -1) {
-            let name = $target.parent().prev().prev().prev().html();
-            name = name.replace(/\d、/, '');
-            sugon.request(sugon.interFaces.zxyp.rx.setting.addRight2, {name}).then(result => {
+            let {deptId, date1, date2} = window.dialogParams;
+            let name = $target.parent().prev().prev().prev().html().replace(/\d、/, '');
+            sugon.request(sugon.interFaces.zxyp.rx.setting.addRight1, {name, deptId, date1, date2}).then(result => {
                 if (result.code == '200') {
                     initRight1();
                     $target.attr('src', '../../img/zxyp/rx/like.png');
