@@ -8,56 +8,56 @@ define([], function () {
     base.interFaces = {
         myzs: {
             //下拉树
-            Tree: {localUrl: "../../static/json/Tree.json", remoteUrl: base.server + "/myzs/getDwTree"},
+            Tree: { localUrl: "../../static/json/Tree.json", remoteUrl: base.server + "/myzs/getDwTree" },
             // 根据单位code获取单位id
-            DeptId: {remoteUrl: base.server + "/myzs/getDeptId"},
+            DeptId: { remoteUrl: base.server + "/myzs/getDeptId" },
             // 加载左侧数据
-            getLeftData: {remoteUrl: base.server + '/myzs/getLeftData'},
+            getLeftData: { remoteUrl: base.server + '/myzs/getLeftData' },
             // 加载右侧中间部分数据
-            getRightMidData: {remoteUrl: base.server + '/myzs/getRightMidData'},
+            getRightMidData: { remoteUrl: base.server + '/myzs/getRightMidData' },
             // 加载右侧数据
-            getRightData: {remoteUrl: base.server + '/myrd/getRdwtList'},
+            getRightData: { remoteUrl: base.server + '/myrd/getRdwtList' },
             // 获取指标组成
-            getZbzc: {localUrl: '../../static/json/myzs/pop-zbzs.json', remoteUrl: base.server + '/myzs/getZbzc'},
+            getZbzc: { localUrl: '../../static/json/myzs/pop-zbzs.json', remoteUrl: base.server + '/myzs/getZbzc' },
             // 指标展示悬停弹框
             getZbzcDetail: {
                 localUrl: '../../static/json/myzs/pop-zbzs-detail.json',
                 remoteUrl: base.server + '/myzs/getZbzcDetail'
             },
             // 执法公信力走势分析
-            getZfgxl: {remoteUrl: base.server + '/myzs/getZfgxl'},
+            getZfgxl: { remoteUrl: base.server + '/myzs/getZfgxl' },
             // 单位情况
-            getDwqk: {remoteUrl: base.server + '/myzs/getDwqk'},
+            getDwqk: { remoteUrl: base.server + '/myzs/getDwqk' },
             // 根据单位id获取单位层级
-            getDwLevel: {remoteUrl: base.server + '/myzs/getDwLevel'},
+            getDwLevel: { remoteUrl: base.server + '/myzs/getDwLevel' },
             // 社会治安满意度调查情况
-            getMyd: {localUrl: '../../static/json/myd.json', remoteUrl: base.server + 'myzs/getMyd'},
+            getMyd: { localUrl: '../../static/json/myd.json', remoteUrl: base.server + 'myzs/getMyd' },
             // 获取数据录入初始化数据
-            getSjlr: {localUrl: '../../static/json/myzs/pop1.json', remoteUrl: base.server + 'myzs/getSjlr'},
+            getSjlr: { localUrl: '../../static/json/myzs/pop1.json', remoteUrl: base.server + 'myzs/getSjlr' },
             // 提交数据录入
-            submitSjlr: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitSjlr'},
+            submitSjlr: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitSjlr' },
             // 获取系数配置初始化数据
-            getXspz: {localUrl: '../../static/json/myzs/pop2.json', remoteUrl: base.server + 'myzs/getXspz'},
+            getXspz: { localUrl: '../../static/json/myzs/pop2.json', remoteUrl: base.server + 'myzs/getXspz' },
             // 重置系数配置
-            resetXspz: {localUrl: '../../static/json/myzs/pop2.json', remoteUrl: base.server + 'myzs/resetXspz'},
+            resetXspz: { localUrl: '../../static/json/myzs/pop2.json', remoteUrl: base.server + 'myzs/resetXspz' },
             // 提交系数配置
-            submitXspz: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitXspz'},
+            submitXspz: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitXspz' },
             // 获取展示配置初始化数据
-            getZspz: {localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/getZspz'},
+            getZspz: { localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/getZspz' },
             // 重置展示配置
-            resetZspz: {localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/resetZspz'},
+            resetZspz: { localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/resetZspz' },
             // 计算展示配置数据
-            calcZspz: {localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/calcZspz'},
+            calcZspz: { localUrl: '../../static/json/myzs/pop3.json', remoteUrl: base.server + 'myzs/calcZspz' },
             // 提交展示配置
-            submitZspz: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitZspz'},
-            getPoint: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getTestJwd'},
-            getMapData: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getMapData'},
-            getPcsZb: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getPcsZb'},
+            submitZspz: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/submitZspz' },
+            getPoint: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getTestJwd' },
+            getMapData: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getMapData' },
+            getPcsZb: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getPcsZb' },
             getDetailMapData: {
                 localUrl: '../../static/json/myzs/success.json',
                 remoteUrl: base.server + 'myzs/getDetailMapData'
             },
-            getMapCount: {localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getMapCount'},
+            getMapCount: { localUrl: '../../static/json/myzs/success.json', remoteUrl: base.server + 'myzs/getMapCount' },
             getMapDataByBounds: {
                 localUrl: '../../static/json/myzs/success.json',
                 remoteUrl: base.server + 'myzs/getMapDataByBounds'
@@ -100,91 +100,95 @@ define([], function () {
             getCkfwqRankPopup: {
                 localUrl: "../../static/json/myzs/getCkfwqRankPopup.json",
                 remoteUrl: base.server + 'myzs/getCkfwqRankPopup'
+            },
+            getBmfwq: {
+                localUrl: "../../static/json/myzs/getBmfwq.json",
+                remoteUrl: base.server + 'myzs/getBmfwq'
             }
         },
         myjz: {
             //下拉树
-            "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "/myjz/getDwTree"},
+            "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "/myjz/getDwTree" },
             //民意矩阵中间数据
-            "List": {localUrl: "./static/json/List.json", remoteUrl: base.server + "/myjz/getMyjz"},
+            "List": { localUrl: "./static/json/List.json", remoteUrl: base.server + "/myjz/getMyjz" },
             //查询栏日期默认值
-            "Date": {localUrl: "./static/json/Date.json", remoteUrl: base.server + "/myjz/getRecentDate"},
+            "Date": { localUrl: "./static/json/Date.json", remoteUrl: base.server + "/myjz/getRecentDate" },
             //极坐标弹窗接口
-            "Window1": {localUrl: "./static/json/Window1.json", remoteUrl: base.server + "/myjz/getMyjzDialogData"},
+            "Window1": { localUrl: "./static/json/Window1.json", remoteUrl: base.server + "/myjz/getMyjzDialogData" },
             //环形图弹窗接口
-            "Window2": {localUrl: "./static/json/Window2.json", remoteUrl: base.server + "/myjz/getMyjzDialogData"},
+            "Window2": { localUrl: "./static/json/Window2.json", remoteUrl: base.server + "/myjz/getMyjzDialogData" },
             //雷达图弹窗接口
-            "Window3": {localUrl: "./static/json/Window3.json", remoteUrl: base.server + "/myjz/getMyjzDialogData"},
+            "Window3": { localUrl: "./static/json/Window3.json", remoteUrl: base.server + "/myjz/getMyjzDialogData" },
             //部门列表
-            "bmList": {localUrl: "./static/json/bmList.json", remoteUrl: base.server + "/myjz/getMyjz"}
+            "bmList": { localUrl: "./static/json/bmList.json", remoteUrl: base.server + "/myjz/getMyjz" }
         },
         dwjx: {
             //初始化标签
-            "Tab": {localUrl: "./static/json/Tab.json", remoteUrl: base.server + "/dwjx/getNavigor"},
+            "Tab": { localUrl: "./static/json/Tab.json", remoteUrl: base.server + "/dwjx/getNavigor" },
             //初始化标签
-            "Chart": {localUrl: "./static/json/Chart.json", remoteUrl: base.server + "/dwjx/getChartData"},
+            "Chart": { localUrl: "./static/json/Chart.json", remoteUrl: base.server + "/dwjx/getChartData" },
             //下拉树
-            "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "/dwjx/getDwTree"},
+            "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "/dwjx/getDwTree" },
             //二级标签
-            "Tab2": {localUrl: "./static/json/Tab2.json", remoteUrl: base.server + "/dwjx/getNavigor"},
+            "Tab2": { localUrl: "./static/json/Tab2.json", remoteUrl: base.server + "/dwjx/getNavigor" },
             //标红功能
-            "Keywords": {localUrl: "./static/json/Keywords.json", remoteUrl: base.server + "/dwjx/search"},
+            "Keywords": { localUrl: "./static/json/Keywords.json", remoteUrl: base.server + "/dwjx/search" },
             //可操作图表
-            "TopChart": {localUrl: "./static/json/TopChart.json", remoteUrl: base.server + "/dwjx/getNavigor"},
+            "TopChart": { localUrl: "./static/json/TopChart.json", remoteUrl: base.server + "/dwjx/getNavigor" },
             //其他图标数据
-            "OtherCharts": {localUrl: "./static/json/OtherCharts.json", remoteUrl: base.server + "/dwjx/getChartData"}
+            "OtherCharts": { localUrl: "./static/json/OtherCharts.json", remoteUrl: base.server + "/dwjx/getChartData" }
         },
         myys: {
             //民意热词
-            "HotWords": {localUrl: "./static/json/HotWords.json", remoteUrl: base.server + "/myys/getReSouList"},
+            "HotWords": { localUrl: "./static/json/HotWords.json", remoteUrl: base.server + "/myys/getReSouList" },
             //热搜-换一换
-            "SearchList": {localUrl: "./static/json/SearchList.json", remoteUrl: base.server + "/myys/getReSouList"},
+            "SearchList": { localUrl: "./static/json/SearchList.json", remoteUrl: base.server + "/myys/getReSouList" },
             //查询列表
-            "DataList": {localUrl: "./static/json/DataList.json", remoteUrl: base.server + "/myys/search"},
+            "DataList": { localUrl: "./static/json/DataList.json", remoteUrl: base.server + "/myys/search" },
             // 更新查询列表缓存
-            "cacheDataList": {localUrl: "./static/json/DataList.json", remoteUrl: base.server + "/myys/cacheSearch"},
+            "cacheDataList": { localUrl: "./static/json/DataList.json", remoteUrl: base.server + "/myys/cacheSearch" },
             //详情
-            "Detail": {localUrl: "./static/json/Detail.json", remoteUrl: base.server + "/myys/getDetail"},
+            "Detail": { localUrl: "./static/json/Detail.json", remoteUrl: base.server + "/myys/getDetail" },
             // 缓存详情页
-            "cacheDetail": {localUrl: "./static/json/Detail.json", remoteUrl: base.server + "/myys/cacheDetail"},
+            "cacheDetail": { localUrl: "./static/json/Detail.json", remoteUrl: base.server + "/myys/cacheDetail" },
             // 弹出详细信息
-            "PopDetail": {localUrl: "./static/json/Detail.json", remoteUrl: base.server + "myys/getPopDetail"},
+            "PopDetail": { localUrl: "./static/json/Detail.json", remoteUrl: base.server + "myys/getPopDetail" },
             //详情表格
-            "Grid": {localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/getGrid"},
+            "Grid": { localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/getGrid" },
             // 更新详情表格
-            "cacheGrid": {localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/cacheGrid"},
+            "cacheGrid": { localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/cacheGrid" },
             //详情表格
-            "saveKeyWord": {localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/saveKeyWord"}
+            "saveKeyWord": { localUrl: "./static/json/Grid.json", remoteUrl: base.server + "/myys/saveKeyWord" }
         },
         rdwt: {
-            "Tree": {remoteUrl: base.server + "/myrd/getDwTree"}, // 加载树
-            "RdList": {localUrl: "./static/json/rdwt.json", remoteUrl: base.server + "myrd/getRdwtList"}, // 获取左侧数据
-            "Rdwt": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getWtTrend"}, // 加载热点问题
-            "Sqxz": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getSqxzFx"}, // 加载诉求性质
-            "Sjly": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getSjlyFx"}, // 加载数据来源
-            "Jtwt": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getTagAnalysis"}, // 加载具体问题
-            "Dwfx": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getTagAnalysisByDw"}, // 加载单位分析
-            "Rcfx": {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getFkrcFx"}, // 加载热词分析
+            "Tree": { remoteUrl: base.server + "/myrd/getDwTree" }, // 加载树
+            "RdList": { localUrl: "./static/json/rdwt.json", remoteUrl: base.server + "myrd/getRdwtList" }, // 获取左侧数据
+            "Rdwt": { localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getWtTrend" }, // 加载热点问题
+            "Sqxz": { localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getSqxzFx" }, // 加载诉求性质
+            "Sjly": { localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getSjlyFx" }, // 加载数据来源
+            "Jtwt": { localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getTagAnalysis" }, // 加载具体问题
+            "Dwfx": { localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getTagAnalysisByDw" }, // 加载单位分析
+            "Rcfx": { localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/getFkrcFx" }, // 加载热词分析
             // "exportReport" : {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/exportReport"}, // 导出报告
-            "getTags": {localUrl: "./static/json/getTags.json", remoteUrl: base.server + "myrd/getTags"}, // 获取初始化查询条件
-            "getTab": {localUrl: "./static/json/TabData.json", remoteUrl: base.server + "myrd/getTableData"}, // 加载表单数据,
+            "getTags": { localUrl: "./static/json/getTags.json", remoteUrl: base.server + "myrd/getTags" }, // 获取初始化查询条件
+            "getTab": { localUrl: "./static/json/TabData.json", remoteUrl: base.server + "myrd/getTableData" }, // 加载表单数据,
             "getRightList": {
                 localUrl: "./static/json/rightData.json",
                 remoteUrl: base.server + "myrd/getSelectedTableData"
             }, // 获取右侧list
-            "getDetail": {localUrl: "./static/json/getDetail.json", remoteUrl: base.server + "myrd/preview"}, // 加载详细信息
-            "publish": {localUrl: "./static/json/getDetail.json", remoteUrl: base.server + "myrd/publish"}, // 发布数据,
-            "getJcj": {localUrl: './static/json/rdwt/jcj.json', remoteUrl: base.server + "myrd/ranking"}, // 获取接处警数据
-            "getCkfw": {localUrl: './static/json/rdwt/jcj.json', remoteUrl: base.server + "myrd/ranking"}, // 获取窗口服务数据
-            "getAj": {localUrl: './static/json/rdwt/jcj.json', remoteUrl: base.server + "myrd/ranking"}, // 获取案件数据
-            "getMjsxl": {localUrl: './static/json/rdwt/sxl.json', remoteUrl: base.server + "myrd/ranking"} // 获取社区民警熟悉率数据
+            "getDetail": { localUrl: "./static/json/getDetail.json", remoteUrl: base.server + "myrd/preview" }, // 加载详细信息
+            "publish": { localUrl: "./static/json/getDetail.json", remoteUrl: base.server + "myrd/publish" }, // 发布数据,
+            "getJcj": { localUrl: './static/json/rdwt/jcj.json', remoteUrl: base.server + "myrd/ranking" }, // 获取接处警数据
+            "getCkfw": { localUrl: './static/json/rdwt/jcj.json', remoteUrl: base.server + "myrd/ranking" }, // 获取窗口服务数据
+            "getAj": { localUrl: './static/json/rdwt/jcj.json', remoteUrl: base.server + "myrd/ranking" }, // 获取案件数据
+            "getMjsxl": { localUrl: './static/json/rdwt/sxl.json', remoteUrl: base.server + "myrd/ranking" } // 获取社区民警熟悉率数据
 
         },
         zxyp: {
             "aj": {
-                "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/aj/getDwTree"}, // 加载树
-                "getZbzs": {localUrl: "./static/json/aj/zbzs.json", remoteUrl: base.server + "zxyp/aj/zbzs"}, // 加载指标展示
-                "getHfrc": {localUrl: "./static/json/aj/hfrc.json", remoteUrl: base.server + "zxyp/aj/hfrc"}, // 加载热词
+                "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/aj/getDwTree" }, // 加载树
+                "getZbzs": { localUrl: "./static/json/aj/zbzs.json", remoteUrl: base.server + "zxyp/aj/zbzs" }, // 加载指标展示
+                "getHfrc": { localUrl: "./static/json/aj/hfrc.json", remoteUrl: base.server + "zxyp/aj/hfrc" }, // 加载热词
                 "getZhpjzsfxTrend": {
                     localUrl: "./static/json/aj/zhpjzsfxTrend.json",
                     remoteUrl: base.server + 'zxyp/aj/zhpjzsfxTrend'
@@ -193,8 +197,8 @@ define([], function () {
                     localUrl: "./static/json/aj/zhpjzsfx.json",
                     remoteUrl: base.server + 'zxyp/aj/zhpjzsfx'
                 }, // 加载案件综合评价指数分析
-                "getHjwtfx": {localUrl: "./static/json/aj/hjwtfx.json", remoteUrl: base.server + 'zxyp/aj/hjwtfx'}, // 加载环节问题分析
-                "getAjdwfb": {localUrl: "./static/json/aj/ajdwfb.json", remoteUrl: base.server + 'zxyp/aj/ajdwfb'}, // 加载案件问题单位分布
+                "getHjwtfx": { localUrl: "./static/json/aj/hjwtfx.json", remoteUrl: base.server + 'zxyp/aj/hjwtfx' }, // 加载环节问题分析
+                "getAjdwfb": { localUrl: "./static/json/aj/ajdwfb.json", remoteUrl: base.server + 'zxyp/aj/ajdwfb' }, // 加载案件问题单位分布
                 "getAjbljtwtfx": {
                     localUrl: "./static/json/aj/ajbljtwtfx.json",
                     remoteUrl: base.server + 'zxyp/aj/ajbljtwtfx'
@@ -203,147 +207,147 @@ define([], function () {
                     localUrl: "./static/json/aj/zxfxpjzs.json",
                     remoteUrl: base.server + 'zxyp/aj/zxfxpjzs'
                 }, // 加载专项分析评价指数
-                "getZsmyb": {localUrl: "./static/json/aj/zsmyb.json", remoteUrl: base.server + 'zxyp/aj/zsmyb'}, // 加载案件办理综合评价指数满意榜
+                "getZsmyb": { localUrl: "./static/json/aj/zsmyb.json", remoteUrl: base.server + 'zxyp/aj/zsmyb' }, // 加载案件办理综合评价指数满意榜
                 "getZxfxzhpjzs": {
                     localUrl: "./static/json/aj/zxfxzhpjzs.json",
                     remoteUrl: base.server + 'zxyp/aj/zxfxzhpjzs'
                 }, // 加载弹出框案件综合评价指数分析分析
-                "getZxgf": {localUrl: "./static/json/aj/zxgf.json", remoteUrl: base.server + 'zxyp/aj/zxgf'} // 加载执行规范
+                "getZxgf": { localUrl: "./static/json/aj/zxgf.json", remoteUrl: base.server + 'zxyp/aj/zxgf' } // 加载执行规范
             },
             "jcj": {
                 // 加载树
-                "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/jcj/getDwTree"},
+                "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/jcj/getDwTree" },
                 //左上文本
-                "Txt": {localUrl: "./static/json/jcj/Txt.json", remoteUrl: base.server + "zxyp/jcj/zbzs"},
+                "Txt": { localUrl: "./static/json/jcj/Txt.json", remoteUrl: base.server + "zxyp/jcj/zbzs" },
                 //知识库
-                "Zsk": {localUrl: "./static/json/jcj/Zsk.json", remoteUrl: base.server + "zxyp/jcj/zsk"},
+                "Zsk": { localUrl: "./static/json/jcj/Zsk.json", remoteUrl: base.server + "zxyp/jcj/zsk" },
                 //下滑预警
-                "Xhyj": {localUrl: "./static/json/jcj/Xhyj.json", remoteUrl: base.server + "zxyp/jcj/xhyjfx"},
+                "Xhyj": { localUrl: "./static/json/jcj/Xhyj.json", remoteUrl: base.server + "zxyp/jcj/xhyjfx" },
                 //排行榜
-                "Rank": {localUrl: "./static/json/jcj/Rank.json", remoteUrl: base.server + "zxyp/jcj/jcjmydrank"},
+                "Rank": { localUrl: "./static/json/jcj/Rank.json", remoteUrl: base.server + "zxyp/jcj/jcjmydrank" },
                 //标签云
-                "Tag": {localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/jcj/rcfx"},
+                "Tag": { localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/jcj/rcfx" },
                 //满意度
-                "Myd": {localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/jcj/jcjmydfxTrend"},
+                "Myd": { localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/jcj/jcjmydfxTrend" },
                 //单位情况
-                "Dwqk": {localUrl: "./static/json/jcj/Dwqk.json", remoteUrl: base.server + "zxyp/jcj/jcjdwqk"},
+                "Dwqk": { localUrl: "./static/json/jcj/Dwqk.json", remoteUrl: base.server + "zxyp/jcj/jcjdwqk" },
                 //雷达图1
-                "Rador1": {localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydfx"},
+                "Rador1": { localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydfx" },
                 //雷达图2
-                "Rador2": {localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydsdfx"},
+                "Rador2": { localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydsdfx" },
                 //警情分析
-                "Jqfx": {localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/jcj/jqfx"},
+                "Jqfx": { localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/jcj/jqfx" },
                 //环节问题
-                "Hjwt": {localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/jcj/jqjtwtfx"},
+                "Hjwt": { localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/jcj/jqjtwtfx" },
                 //问题单位
-                "Wtdw": {localUrl: "./static/json/jcj/Wtdw.json", remoteUrl: base.server + "zxyp/jcj/jqjtwtdwfx"},
+                "Wtdw": { localUrl: "./static/json/jcj/Wtdw.json", remoteUrl: base.server + "zxyp/jcj/jqjtwtdwfx" },
                 //警情类型
-                "Jqlx": {localUrl: "./static/json/jcj/Jqlx.json", remoteUrl: base.server + "zxyp/jcj/jcjjqlxsd"},
+                "Jqlx": { localUrl: "./static/json/jcj/Jqlx.json", remoteUrl: base.server + "zxyp/jcj/jcjjqlxsd" },
                 //视频
-                "Video": {localUrl: "./static/json/jcj/Video.json", remoteUrl: base.server + "zxyp/jcj/videoList"},
+                "Video": { localUrl: "./static/json/jcj/Video.json", remoteUrl: base.server + "zxyp/jcj/videoList" },
                 //弹窗民警信息
-                "User": {localUrl: "./static/json/jcj/User.json", remoteUrl: base.server + "zxyp/jcj/mjxx"},
+                "User": { localUrl: "./static/json/jcj/User.json", remoteUrl: base.server + "zxyp/jcj/mjxx" },
                 //弹窗标签云
-                "Tag2": {localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/jcj/mjcy"},
+                "Tag2": { localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/jcj/mjcy" },
                 //弹窗折线图
-                "Line": {localUrl: "./static/json/ylld/Ylld.json", remoteUrl: base.server + "zxyp/jcj/cjtsfx"},
+                "Line": { localUrl: "./static/json/ylld/Ylld.json", remoteUrl: base.server + "zxyp/jcj/cjtsfx" },
                 //弹窗雷达-左
-                "Rador3": {localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydfx"},
+                "Rador3": { localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydfx" },
                 //弹窗雷达-右
-                "Rador4": {localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydsdfx"},
+                "Rador4": { localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/jcj/jcjmydsdfx" },
                 // 一般工单量走势分析
-                "getGdzsgx": {localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/jcj/getGdzsgx"},
+                "getGdzsgx": { localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/jcj/getGdzsgx" },
                 // 一般工单业务分析
-                "getGdywfx": {localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/jcj/getGdywfx"},
+                "getGdywfx": { localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/jcj/getGdywfx" },
                 // 一般工单各单位情况
-                "getGddwfb": {localUrl: "./static/json/rx/Sqdwfb.json", remoteUrl: base.server + "zxyp/jcj/getGddwfb"},
+                "getGddwfb": { localUrl: "./static/json/rx/Sqdwfb.json", remoteUrl: base.server + "zxyp/jcj/getGddwfb" },
             },
             "ckfw": {
                 //左上文本
-                "Txt": {localUrl: "./static/json/jcj/Txt.json", remoteUrl: base.server + "zxyp/ckfw/zbzs"},
+                "Txt": { localUrl: "./static/json/jcj/Txt.json", remoteUrl: base.server + "zxyp/ckfw/zbzs" },
                 //满意度走势
-                "Myd": {localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/ckfw/ckfwmydtrend"},
+                "Myd": { localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/ckfw/ckfwmydtrend" },
                 //单位情况
-                "Dwqk": {localUrl: "./static/json/jcj/Dwqk.json", remoteUrl: base.server + "zxyp/ckfw/ckfwmyddwqk"},
+                "Dwqk": { localUrl: "./static/json/jcj/Dwqk.json", remoteUrl: base.server + "zxyp/ckfw/ckfwmyddwqk" },
                 //雷达图
-                "Rador": {localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/ckfw/ckfwmydfx"},
+                "Rador": { localUrl: "./static/json/jcj/Rador.json", remoteUrl: base.server + "zxyp/ckfw/ckfwmydfx" },
                 //具体问题
-                "Jtwt": {localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/ckfw/ckfwjtwtfx"},
+                "Jtwt": { localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/ckfw/ckfwjtwtfx" },
                 //案件问题
-                "Ajwt": {localUrl: "./static/json/ckfw/Ajwt.json", remoteUrl: base.server + "zxyp/ckfw/ajwtdwfx"},
+                "Ajwt": { localUrl: "./static/json/ckfw/Ajwt.json", remoteUrl: base.server + "zxyp/ckfw/ajwtdwfx" },
                 //排行榜按钮
-                "Menu": {localUrl: "./static/json/ckfw/Menu.json", remoteUrl: base.server + "zxyp/ckfw/mydrankbutton"},
+                "Menu": { localUrl: "./static/json/ckfw/Menu.json", remoteUrl: base.server + "zxyp/ckfw/mydrankbutton" },
                 //排行榜
-                "Rank": {localUrl: "./static/json/ckfw/Rank.json", remoteUrl: base.server + "zxyp/ckfw/mydrankmenu"},
+                "Rank": { localUrl: "./static/json/ckfw/Rank.json", remoteUrl: base.server + "zxyp/ckfw/mydrankmenu" },
                 //中上文本
-                "Yw": {localUrl: "./static/json/ckfw/Yw.json", remoteUrl: base.server + "zxyp/ckfw/flzbzs"},
+                "Yw": { localUrl: "./static/json/ckfw/Yw.json", remoteUrl: base.server + "zxyp/ckfw/flzbzs" },
                 //词云
-                "Tag": {localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/ckfw/rcfx"},
+                "Tag": { localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/ckfw/rcfx" },
                 //问题预测
-                "Ckfw": {localUrl: "./static/json/ckfw/Ckfw.json", remoteUrl: base.server + "zxyp/ckfw/ckfwwtyc"},
+                "Ckfw": { localUrl: "./static/json/ckfw/Ckfw.json", remoteUrl: base.server + "zxyp/ckfw/ckfwwtyc" },
                 // 一般工单量走势分析
-                "getGdzsgx": {localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/ckfw/getGdzsgx"},
+                "getGdzsgx": { localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/ckfw/getGdzsgx" },
                 // 一般工单业务分析
-                "getGdywfx": {localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/ckfw/getGdywfx"},
+                "getGdywfx": { localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/ckfw/getGdywfx" },
                 // 一般工单各单位情况
-                "getGddwfb": {localUrl: "./static/json/rx/Sqdwfb.json", remoteUrl: base.server + "zxyp/ckfw/getGddwfb"}
+                "getGddwfb": { localUrl: "./static/json/rx/Sqdwfb.json", remoteUrl: base.server + "zxyp/ckfw/getGddwfb" }
             },
             "ylld": {
                 // 加载树
-                "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/ylld/getDwTree"},
+                "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/ylld/getDwTree" },
                 //左上文本
-                "Txt": {localUrl: "./static/json/ylld/Txt.json", remoteUrl: base.server + "zxyp/ylld/zbzs"},
+                "Txt": { localUrl: "./static/json/ylld/Txt.json", remoteUrl: base.server + "zxyp/ylld/zbzs" },
                 //排行榜
-                "Rank": {localUrl: "./static/json/ylld/Rank.json", remoteUrl: base.server + "zxyp/ylld/zjjml"},
+                "Rank": { localUrl: "./static/json/ylld/Rank.json", remoteUrl: base.server + "zxyp/ylld/zjjml" },
                 //社会治安满意度
-                "Shza": {localUrl: "./static/json/ckfw/Ckfw.json", remoteUrl: base.server + "zxyp/ylld/jtwt"},
+                "Shza": { localUrl: "./static/json/ckfw/Ckfw.json", remoteUrl: base.server + "zxyp/ylld/jtwt" },
                 //单位情况分析
-                "Rdfx": {localUrl: "./static/json/ylld/Rdfx.json", remoteUrl: base.server + "zxyp/ylld/dwqkfx"},
+                "Rdfx": { localUrl: "./static/json/ylld/Rdfx.json", remoteUrl: base.server + "zxyp/ylld/dwqkfx" },
                 //一率两度走势
-                "Ylld": {localUrl: "./static/json/ylld/Ylld.json", remoteUrl: base.server + "zxyp/ylld/ylldTrend"},
+                "Ylld": { localUrl: "./static/json/ylld/Ylld.json", remoteUrl: base.server + "zxyp/ylld/ylldTrend" },
                 //多维解析-左
-                "Dwjxz": {localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/ylld/getDwjs"},
+                "Dwjxz": { localUrl: "./static/json/jcj/Jqfx.json", remoteUrl: base.server + "zxyp/ylld/getDwjs" },
                 //多维解析-右
-                "Info": {localUrl: "./static/json/ylld/Info.json", remoteUrl: base.server + "zxyp/ylld/getDwjsInfo"},
+                "Info": { localUrl: "./static/json/ylld/Info.json", remoteUrl: base.server + "zxyp/ylld/getDwjsInfo" },
                 //走访助手
-                "Zfzs": {localUrl: "./static/json/ylld/Zfzs.json", remoteUrl: base.server + "zxyp/ylld/zfzs"},
+                "Zfzs": { localUrl: "./static/json/ylld/Zfzs.json", remoteUrl: base.server + "zxyp/ylld/zfzs" },
                 //推送
-                "Ts": {localUrl: "./static/json/ylld/Ts.json", remoteUrl: base.server + "zxyp/ylld/kchts"},
-                "Zsfx": {localUrl: "./static/json/ylld/Zsfx.json", remoteUrl: base.server + "zxyp/ylld/getZsfx"},
-                "Dyqkfx": {localUrl: "./static/json/ylld/Dyqkfx.json", remoteUrl: base.server + "zxyp/ylld/getDyqkfx"},
-                "Dyzj": {localUrl: "./static/json/ylld/Dyzj.json", remoteUrl: base.server + "zxyp/ylld/getDyzj"}
+                "Ts": { localUrl: "./static/json/ylld/Ts.json", remoteUrl: base.server + "zxyp/ylld/kchts" },
+                "Zsfx": { localUrl: "./static/json/ylld/Zsfx.json", remoteUrl: base.server + "zxyp/ylld/getZsfx" },
+                "Dyqkfx": { localUrl: "./static/json/ylld/Dyqkfx.json", remoteUrl: base.server + "zxyp/ylld/getDyqkfx" },
+                "Dyzj": { localUrl: "./static/json/ylld/Dyzj.json", remoteUrl: base.server + "zxyp/ylld/getDyzj" }
             },
             "rx": {
                 // 加载树
-                "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/rx/getDwTree"},
+                "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/rx/getDwTree" },
                 //左上文本
-                "Txt": {localUrl: "./static/json/jcj/Txt.json", remoteUrl: base.server + "zxyp/rx/zbzs"},
+                "Txt": { localUrl: "./static/json/jcj/Txt.json", remoteUrl: base.server + "zxyp/rx/zbzs" },
                 //热词
-                "Tag": {localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/rx/rc"},
+                "Tag": { localUrl: "./static/json/jcj/Tag.json", remoteUrl: base.server + "zxyp/rx/rc" },
                 //热线分析
-                "Rxfx": {localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/rx/mydAndBdFx"},
+                "Rxfx": { localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/rx/mydAndBdFx" },
                 //热点事件排行榜
-                "Rank": {localUrl: "./static/json/rx/Rank.json", remoteUrl: base.server + "zxyp/rx/rdsjRank"},
+                "Rank": { localUrl: "./static/json/rx/Rank.json", remoteUrl: base.server + "zxyp/rx/rdsjRank" },
                 // 群众诉求量
-                "Qzsql": {localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/rx/sqlTrend"},
+                "Qzsql": { localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/rx/sqlTrend" },
                 // 诉求性质分析
-                "Sqxz": {localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/rx/sqxzfx"},
+                "Sqxz": { localUrl: "./static/json/rx/Chart.json", remoteUrl: base.server + "zxyp/rx/sqxzfx" },
                 // 诉求单位分布
-                "Sqdwfb": {localUrl: "./static/json/rx/Sqdwfb.json", remoteUrl: base.server + "zxyp/rx/sqdwfb"},
+                "Sqdwfb": { localUrl: "./static/json/rx/Sqdwfb.json", remoteUrl: base.server + "zxyp/rx/sqdwfb" },
                 // 办事效能分析
-                "Bsxn": {localUrl: "./static/json/rx/Point.json", remoteUrl: base.server + "zxyp/rx/xnfx"},
+                "Bsxn": { localUrl: "./static/json/rx/Point.json", remoteUrl: base.server + "zxyp/rx/xnfx" },
                 // 12345工单办理优秀案例
-                "getYxal": {localUrl: "./static/json/rx/yxal.json", remoteUrl: "zxyp/rx/getYxal"},
+                "getYxal": { localUrl: "./static/json/rx/yxal.json", remoteUrl: "zxyp/rx/getYxal" },
                 // 12345工单办理优秀案例弹出页
-                "getPopupYxal": {localUrl: "./static/json/rx/popupYxal.json", remoteUrl: "zxyp/rx/getPopupYxal"},
+                "getPopupYxal": { localUrl: "./static/json/rx/popupYxal.json", remoteUrl: "zxyp/rx/getPopupYxal" },
                 // 热点专题
-                "Rdzt": {localUrl: "./static/json/rx/Rdzt.json", remoteUrl: base.server + "zxyp/rx/rdzt"},
+                "Rdzt": { localUrl: "./static/json/rx/Rdzt.json", remoteUrl: base.server + "zxyp/rx/rdzt" },
                 // 诉求性质分析
-                "Zhpjzs": {localUrl: "./static/json/aj/hjwtfx.json", remoteUrl: base.server + "zxyp/rx/popsqxz"},
+                "Zhpjzs": { localUrl: "./static/json/aj/hjwtfx.json", remoteUrl: base.server + "zxyp/rx/popsqxz" },
                 // 各单位诉求量及满意度分析
-                "Myd": {localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/rx/popdwfx"},
+                "Myd": { localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/rx/popdwfx" },
                 // 群众诉求走势分析
-                "Qzsqzsgx": {localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/rx/poptrend"},
+                "Qzsqzsgx": { localUrl: "./static/json/jcj/Myd.json", remoteUrl: base.server + "zxyp/rx/poptrend" },
                 popup: {
                     getTop: {
                         localUrl: "./static/json/rx/top.json", remoteUrl: base.server + "zxyp/rx/popup/getTop"
@@ -400,15 +404,15 @@ define([], function () {
             },
             "jtsg": {
                 // 树结构
-                "Tree": {localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/jcj/getDwTree"},
+                "Tree": { localUrl: "./static/json/Tree.json", remoteUrl: base.server + "zxyp/jcj/getDwTree" },
                 // 左上指标
-                "left1": {localUrl: "./static/json/jtsg/left1.json", remoteUrl: base.server + "zxyp/jtsg/getJqAndJtsg"},
+                "left1": { localUrl: "./static/json/jtsg/left1.json", remoteUrl: base.server + "zxyp/jtsg/getJqAndJtsg" },
                 // 左下满意度走势分析
-                "left2": {localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getMydzsfx"},
+                "left2": { localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getMydzsfx" },
                 // 中1-1交通警情分析
-                "mid1_1": {localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getJtjqfx"},
+                "mid1_1": { localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getJtjqfx" },
                 // 中1-2具体问题分析
-                "mid1_2": {localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getJtwtfx"},
+                "mid1_2": { localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getJtwtfx" },
                 // 中1-3具体问题单位分布
                 "mid1_3": {
                     localUrl: "./static/json/jtsg/mid1-3.json",
@@ -420,7 +424,7 @@ define([], function () {
                     remoteUrl: base.server + "zxyp/jtsg/getJtsgclzhpj"
                 },
                 // 中2-2环节问题分析
-                "mid2_2": {localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getHjwtfx"},
+                "mid2_2": { localUrl: "./static/json/jtsg/left2.json", remoteUrl: base.server + "zxyp/jtsg/getHjwtfx" },
                 // 中2-3环节问题单位分布
                 "mid2_3": {
                     localUrl: "./static/json/jtsg/mid1-3.json",
@@ -432,7 +436,7 @@ define([], function () {
                     remoteUrl: base.server + "zxyp/jtsg//getMydxhyj"
                 },
                 // 右1综合评价排行榜
-                "right2": {localUrl: "./static/json/jtsg/right2.json", remoteUrl: base.server + "zxyp/jtsg/getZhpjphb"},
+                "right2": { localUrl: "./static/json/jtsg/right2.json", remoteUrl: base.server + "zxyp/jtsg/getZhpjphb" },
             }
         },
         znbg: {
@@ -560,9 +564,9 @@ define([], function () {
 
     base.opacityAnimate = function (ele, text, speed, time) {
         window.setInterval(function () {
-            $("#" + ele).animate({opacity: 0}, speed * 1000, function () {
+            $("#" + ele).animate({ opacity: 0 }, speed * 1000, function () {
                 $("#" + ele).html(text);
-                $("#" + ele).animate({opacity: 1}, speed * 1000);
+                $("#" + ele).animate({ opacity: 1 }, speed * 1000);
             });
         }, time * 1000);
     };
@@ -654,21 +658,21 @@ define([], function () {
         pageNum = pageNum > totalPage ? totalPage : pageNum;
         var arr = [];
         if (totalPage == 1 || totalPage == 0) {
-            arr = [{value: 1, selected: true}];
+            arr = [{ value: 1, selected: true }];
         } else if (totalPage == 2) {
             if (pageNum == 1) {
-                arr = [{value: 1, selected: true}, {value: 2, selected: false}];
+                arr = [{ value: 1, selected: true }, { value: 2, selected: false }];
             } else {
-                arr = [{value: 1, selected: false}, {value: 2, selected: true}];
+                arr = [{ value: 1, selected: false }, { value: 2, selected: true }];
             }
         } else {
             if (pageNum == 1) {
-                arr = [{value: 1, selected: true}, {value: 2, selected: false}];
+                arr = [{ value: 1, selected: true }, { value: 2, selected: false }];
             } else if (pageNum == totalPage) {
-                arr = [{value: pageNum - 1, selected: false}, {value: pageNum, selected: true}];
+                arr = [{ value: pageNum - 1, selected: false }, { value: pageNum, selected: true }];
             } else {
                 for (var i = 0; i < 3; i++) {
-                    arr.push({value: pageNum - 1 + i, selected: i == 1});
+                    arr.push({ value: pageNum - 1 + i, selected: i == 1 });
                 }
             }
         }

@@ -188,7 +188,7 @@ input {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.toolbar-panel2 {
+.toolbar-panel2, .toolbar-panel3{
     width: 345px;
     height: 40px;
     position: absolute;
@@ -203,6 +203,15 @@ input {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+.toolbar-panel3 > div {
+    float: left;
+    width: calc(100% / 3);
+    height: 100%;
+    border-right: 1px solid #e6e6e6;
+    line-height: 30px;
+    cursor: pointer;
+}
+
 .toolbar-panel2 > div {
     float: left;
     width: 25%;
@@ -212,7 +221,7 @@ input {
     cursor: pointer;
 }
 
-.toolbar-panel2-hover, .toolbar-panel2 > div:hover {
+.toolbar-panel2-hover, .toolbar-panel2 > div:hover, .toolbar-panel3-hover, .toolbar-panel3 > div:hover {
     color: #0384d8;
 }
 

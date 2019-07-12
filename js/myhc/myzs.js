@@ -990,6 +990,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
 
     // 折叠按钮点击事件
     $('.fold-btn').click(function () {
+        $('.select-tab').hide();
         var rightPanel = $('.right-panel');
         var foldBtn = $('.fold-img');
         if (parseInt(rightPanel.css('right')) < 0) {
@@ -1145,8 +1146,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
     // 圈选相关变量
     var serverUrl, queryPlottingLayer, drawControl, plotting;
     var bounds, queryResult = [], selectedData = [], isQuery; // 圈选的数据
-    // var ckMarkerGroup = L.layerGroup(); // 窗口marker
-    var ckMarkerGroups = [];
+    var ckMarkerGroups = [], ckCircleGroups = [], latLng = {}; // 窗口mark，窗口圆，圆心经纬度
     var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
     var ckBorderGroup = L.layerGroup(), isLoadBounds = true, syncPulse = false; // 窗口的边界图层，窗口页面是否加载边界
     var isRenderSearchChart = false; // 是否渲染查询的echarts图
@@ -2292,6 +2292,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
 
     // 初始化窗口面板
     function initCk() {
+        $('.toolbar-panel3').hide();
         $('.right-panel-up').show().css('height', '60%');
         $('.right-panel-down').show().css('height', '40%');
         $('.right-panel-up-1').hide();
@@ -2307,6 +2308,36 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
         initCkMark();
         // 初始化右侧面板
         initCkRight();
+    }
+
+    // 窗口图层鼠标悬停事件
+    function ckMouseoverEvent(e) {
+        map.eachLayer(function (layer) {
+            if (layer.options.fillOpacity == '0.55') {
+                layer.setStyle({
+                    color: '#fff',
+                    fillOpacity: 0.45
+                });
+            }
+            if (layer._leaflet_id == e.target._leaflet_id) {
+                layer.setStyle({
+                    color: '#386AFB',
+                    fillOpacity: 0.55
+                });
+            }
+        });
+    }
+
+    // 窗口图层鼠标移出事件
+    function ckMouseoutEvent(e) {
+        map.eachLayer(function (layer) {
+            if (layer.options.fillOpacity == '0.55') {
+                layer.setStyle({
+                    color: '#fff',
+                    fillOpacity: 0.45
+                });
+            }
+        });
     }
 
     // 初始化窗口边界
@@ -2338,6 +2369,11 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
                         fillOpacity: 0.45,
                         fillColor: colorArr[index],
                         weight: 3
+                    });
+                    resultLayer.on({
+                        mouseover: ckMouseoverEvent,
+                        mouseout: ckMouseoutEvent
+
                     });
                     allFjLayerGroup.addLayer(resultLayer);
                 });
@@ -2632,6 +2668,10 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
     function resetPage(type, isSearch) {
         var searchYw = $('.search-yw');
         var searchGj = $('.search-gj');
+        latLng = {};
+        $('.toolbar-panel3').hide();
+        map.off('click');
+        $('.toolbar-panel3 > div').removeClass('toolbar-panel3-hover');
         if (!isSearch) {
             isRenderSearchChart = false;
             $('.search-pop-panel').hide();
@@ -2687,6 +2727,16 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             $('.toolbar-panel2-pop').hide();
             map.removeLayer(popMarkerGroup);
             initCk();
+        }
+        if ($('.toolbar-panel3').css('display') === 'block') {
+            $('.toolbar-panel3 > div').removeClass('toolbar-panel3-hover');
+            latLng = {};
+            ckMarkerGroups.map(val => {
+                val && map.removeLayer(val);
+            });
+            ckCircleGroups.map(val => {
+                val && map.removeLayer(val);
+            });
         }
     }
 
@@ -2947,8 +2997,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
     }
 
     // 打开窗口闪烁图的弹出框
-    function openCkPulsePopup(code, layer) {
-        var type = $('.toolbar-panel2-hover').index('.toolbar-panel2 > div');
+    function openCkPulsePopup(code, layer, type) {
         sugon.requestJson({
             type: 'post',
             url: sugon.interFaces.myzs.getCkfwqDetail,
@@ -3052,6 +3101,62 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
         });
     }
 
+    // 渲染标记点(便民服务圈和服务点)
+    function renderMarks(data, index) {
+        ckMarkerGroups[index] = L.layerGroup();
+        var iconUrl = '../../img/myhc/myzs/';
+        switch (index) {
+            case 0:
+                iconUrl += 'hz_icon.png';
+                break;
+            case 1:
+                iconUrl += 'crj_icon.png';
+                break;
+            case 2:
+                iconUrl += 'cjg_icon.png';
+                break;
+        }
+        var divIcon = L.icon({
+            iconUrl: iconUrl,
+            iconAnchor: [12, 10]
+        });
+        data.map(function (value) {
+            if (index == 3) {
+                iconUrl = '../../img/myhc/myzs/fwd_icon' + value.value + '.png';
+                var mult = value.value < 3 ? 2 : 3;
+                divIcon = L.icon({
+                    iconUrl: iconUrl,
+                    iconAnchor: [12 * mult, 10]
+                });
+            }
+            var marker = L.marker([value.lat, value.lng], {icon: divIcon});
+            marker.on({
+                click: function () {
+                    openCkPulsePopup(value.code, marker, value.type);
+                },
+                mouseover: function () {
+                    map.removeLayer(popMarkerGroup);
+                    popMarkerGroup = L.layerGroup();
+                    var width = value.name.length * 16 + 30;
+                    var html = '<div class="pop-marker-bg" style="width: ' + width + 'px;">' + value.name + '</div>';
+                    var popIcon = L.divIcon({
+                        html: html,
+                        iconAnchor: [width / 2, 60]
+                    });
+                    var popMarker = L.marker([value.lat, value.lng], {icon: popIcon});
+                    popMarkerGroup.addLayer(popMarker);
+                    popMarkerGroup.addTo(map);
+                },
+                mouseout: function () {
+                    map.removeLayer(popMarkerGroup);
+                    popMarkerGroup = L.layerGroup();
+                }
+            });
+            ckMarkerGroups[index].addLayer(marker);
+        });
+        ckMarkerGroups[index].addTo(map);
+    }
+
     // 加载闪烁图
     function initPulse(index) {
         sugon.requestJson({
@@ -3062,59 +3167,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             },
             async: true
         }, function (result) {
-            var data = result.data;
-            ckMarkerGroups[index] = L.layerGroup();
-            var iconUrl = '../../img/myhc/myzs/';
-            switch (index) {
-                case 0:
-                    iconUrl += 'hz_icon.png';
-                    break;
-                case 1:
-                    iconUrl += 'crj_icon.png';
-                    break;
-                case 2:
-                    iconUrl += 'cjg_icon.png';
-                    break;
-            }
-            var divIcon = L.icon({
-                iconUrl: iconUrl,
-                iconAnchor: [12, 10]
-            });
-            data.map(function (value) {
-                if (index == 3) {
-                    iconUrl = '../../img/myhc/myzs/fwd_icon' + value.value + '.png';
-                    var mult = value.value < 3 ? 2 : 3;
-                    divIcon = L.icon({
-                        iconUrl: iconUrl,
-                        iconAnchor: [12 * mult, 10]
-                    });
-                }
-                var marker = L.marker([value.lat, value.lng], {icon: divIcon});
-                marker.on({
-                    click: function () {
-                        openCkPulsePopup(value.code, marker);
-                    },
-                    mouseover: function () {
-                        map.removeLayer(popMarkerGroup);
-                        popMarkerGroup = L.layerGroup();
-                        var width = value.name.length * 16 + 30;
-                        var html = '<div class="pop-marker-bg" style="width: ' + width + 'px;">' + value.name + '</div>';
-                        var popIcon = L.divIcon({
-                            html: html,
-                            iconAnchor: [width / 2, 60]
-                        });
-                        var popMarker = L.marker([value.lat, value.lng], {icon: popIcon});
-                        popMarkerGroup.addLayer(popMarker);
-                        popMarkerGroup.addTo(map);
-                    },
-                    mouseout: function () {
-                        map.removeLayer(popMarkerGroup);
-                        popMarkerGroup = L.layerGroup();
-                    }
-                });
-                ckMarkerGroups[index].addLayer(marker);
-            });
-            ckMarkerGroups[index].addTo(map);
+            renderMarks(result.data, index);
         });
     }
 
@@ -3285,6 +3338,7 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
             var code = $target.parent().attr('code');
             var subCode = code.substring(0, 6);
             map.removeLayer(ckGroup);
+            map.closePopup();
             isLoadBounds = true;
             var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
                 queryParameter: {
@@ -3360,33 +3414,107 @@ requirejs(['common', 'L', 'ec', 'iclient', 'heat', 'markerCluster', 'plot'], (su
         $('.data-panel').hide();
     });
 
+    // 画便民服务圈
+    function drawCircle(index, lat, lng) {
+        let radius;
+        switch (index) {
+            case 0:
+                radius = 3000;
+                break;
+            case 1:
+                radius = 6000;
+                break;
+            case 2:
+                radius = 9000;
+                break;
+        }
+        if (lat && lng) {
+            ckCircleGroups[index] = L.circle([lat, lng], {radius});
+            map.addLayer(ckCircleGroups[index]);
+        }
+    }
+
+    // 获取便民服务圈
+    function getBmfwq(typeArr) {
+        let {lat, lng} = latLng;
+        sugon.request(sugon.interFaces.myzs.getBmfwq, {lat, lng, type: typeArr.join(',')}).then(result => {
+            typeArr.map(val => {
+                val = val && Number(val);
+                renderMarks(result.data[val], val);
+                drawCircle(val, lat, lng);
+            });
+        });
+    }
+
     // 工具切换时
     $('.search-gj').on('change', function () {
-        $('.analysis-btn').show();
-        $('.data-panel').hide();
-        var index = $(this).val();
-        isLoadBounds = true;
-        removeAllLayers();
-        map.setZoom(16, {animate: false});
-        var $searchYw = $('.search-yw');
-        if ($searchYw.val() == 4) {
-            $searchYw.val(0);
-            $('.toolbar-panel2').hide();
-            $('.toolbar-panel2-pop').hide();
-        }
-
-        // 绑定移动事件
-        map.on('moveend', function () {
-            if (currentLevel == 3) {
-                if (drawControl) {
-                    drawControl.handler.disable();
+        var index = $(this).val(), $panel3 = $('.toolbar-panel3');
+        if (index == 4) {
+            removeAllLayers();
+            $panel3.show().off().on('click', 'div', function (e) {
+                let $target = $(e.target), className = 'toolbar-panel3-hover',
+                    targetIndex = $target.index('.toolbar-panel3 > div');
+                if ($target.hasClass(className)) {
+                    $target.removeClass(className);
+                    ckMarkerGroups[targetIndex] && map.removeLayer(ckMarkerGroups[targetIndex]);
+                    ckCircleGroups[targetIndex] && map.removeLayer(ckCircleGroups[targetIndex]);
+                } else {
+                    $target.addClass(className);
+                    if (ckCircleGroups.length > 0 && ckCircleGroups.length > 0) {
+                        getBmfwq([targetIndex]);
+                    }
                 }
-                $('.search-gj').val(0);
+                let $hover = $('.toolbar-panel3-hover');
+                if ($hover.length > 0) {
+                    map.off('click').on('click', function (e) {
+                        map.closePopup();
+                        ckMarkerGroups.map(val => {
+                            val && map.removeLayer(val);
+                            ``
+                        });
+                        ckCircleGroups.map(val => {
+                            val && map.removeLayer(val);
+                        });
+                        latLng = e.latlng;
+                        let typeArr = [];
+                        $hover.each((index, dom) => {
+                            let indexOfDiv = $(dom).index('.toolbar-panel3 > div');
+                            typeArr.push(indexOfDiv);
+                        });
+                        getBmfwq(typeArr);
+                    });
+                } else {
+                    map.off('click');
+                }
+            });
+        } else {
+            $panel3.hide();
+            map.off('click');
+            $('.analysis-btn').show();
+            $('.data-panel').hide();
+            isLoadBounds = true;
+            removeAllLayers();
+            map.setZoom(16, {animate: false});
+            var $searchYw = $('.search-yw');
+            if ($searchYw.val() == 4) {
+                $searchYw.val(0);
+                $('.toolbar-panel2').hide();
+                $('.toolbar-panel2-pop').hide();
             }
-        });
-        currentLevel = 3;
-        loadPlot();
-        loadGj(index);
+
+            // 绑定移动事件
+            map.on('moveend', function () {
+                if (currentLevel == 3) {
+                    if (drawControl) {
+                        drawControl.handler.disable();
+                    }
+                    $('.search-gj').val(0);
+                }
+            });
+            currentLevel = 3;
+            loadPlot();
+            loadGj(index);
+        }
     });
 
     // 清除按钮事件
