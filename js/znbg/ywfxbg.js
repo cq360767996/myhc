@@ -66,7 +66,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             let chart = ec.init(document.getElementById(id));
             chart.setOption(option, true);
         },
-        initAnnual(data, id) {
+        initAnnual(data, id, withPercent) {
             let dom = document.getElementById(id);
             let chart = ec.init(dom);
             let total = 0;
@@ -97,7 +97,7 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                                         align: 'center'
                                     }
                                 },
-                                formatter: '{b}：\n{c}%'
+                                formatter: '{b}：\n{c}' + (withPercent ? '%' : '')
                             },
                             labelLine: {
                                 show: true,
@@ -262,6 +262,20 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             var word_list = eval("[" + string_list + "]");
             $body.jQCloud(word_list);
         },
+        initJcjTab(data, id) {
+            let $body = $('#' + id).empty();
+            $body.append('<div><div>警情类别</div><div>满意度</div><div>同比</div><div>环比</div></div>');
+            data.map(val => {
+                $body.append('<div><div>' + val.name + '</div><div>' + val.value1 + '</div><div>' + val.value2 + '</div><div>' + val.value3 + '</div></div>');
+            });
+        },
+        initAjTab(data, id) {
+            let $body = $('#' + id).empty();
+            data.map(val => {
+                $body.append('<row><cell>' + val.name + '</cell><cell>' + val.value1 + '</cell><cell>' +
+                    val.value2 + '</cell><cell>' + val.value3 + '</cell></row>');
+            });
+        },
         initTitle(result, id) {
             result.data.map((val, index) => {
                 $('#' + id + ' > header > span').eq(index).html(val);
@@ -285,16 +299,12 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             $('#pop-container1 .fieldset1 footer').html(result.content);
         },
         init1_2_1(result) {
-            let $body = $('.tab-container').empty();
-            $body.append('<div><div>警情类别</div><div>满意度</div><div>同比</div><div>环比</div></div>');
-            result.data.map(val => {
-                $body.append('<div><div>' + val.name + '</div><div>' + val.value1 + '</div><div>' + val.value2 + '</div><div>' + val.value3 + '</div></div>');
-            });
+            this.initJcjTab(result.data, 'tab1');
             $('#pop-container1 .footer1').html(result.content);
         },
         init1_2_2(result) {
             $('#pop-container1 .footer2').html(result.content);
-            this.initAnnual(result.data, 'chart1-2');
+            this.initAnnual(result.data, 'chart1-2', true);
         },
         init1_3_1(result) {
             this.initBarX(result.data, 'chart1-3');
@@ -326,16 +336,12 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
             this.initLine(result.data2, 'chart2-1');
         },
         init2_2(result) {
-            let $body = $('#chart2-2').empty();
-            result.data.map(val => {
-                $body.append('<row><cell>' + val.col1 + '</cell><cell>' + val.col2 + '</cell><cell>' +
-                    val.col3 + '</cell><cell>' + val.col4 + '</cell></row>');
-            });
+            this.initAjTab(result.data, 'chart2-2');
             $('#pop-container3 .fieldset2 .footer1').html(result.content1);
             $('#pop-container3 .fieldset2 .footer2').html(result.content2);
         },
         init2_3(result) {
-            this.initAnnual(result.data1, 'chart2-3');
+            this.initAnnual(result.data1, 'chart2-3', false);
             this.initBarX(result.data2, 'chart2-4');
             $('#pop-container3 .fieldset3 .article1').html(result.content1);
             $('#pop-container3 .fieldset3 .article2').html(result.content2);
@@ -571,12 +577,24 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
                 result.data.map(val => {
                     let id = sugon.uuid();
                     $body.append($('<div/>').attr('id', id));
+                    let $id = $('#' + id);
                     switch (val.type) {
+                        case "0.1":
+                            $id.addClass('tab-container1');
+                            popFunc.initJcjTab(val.data, id);
+                            break;
+                        case "0.3":
+                            $id.addClass('tab-container3');
+                            popFunc.initAjTab(val.data, id);
+                            break;
                         case "1":
                             popFunc.initLine(val.data, id);
                             break;
-                        case "2":
-                            popFunc.initAnnual(val.data, id);
+                        case "2.1":
+                            popFunc.initAnnual(val.data, id, true);
+                            break;
+                        case "2.2":
+                            popFunc.initAnnual(val.data, id, false);
                             break;
                         case "3":
                             popFunc.initBarX(val.data, id);
@@ -597,12 +615,12 @@ requirejs(['common', 'ec', 'domtoimage', 'jqcloud'], (sugon, ec, domtoimage) => 
     // 遍历图片
     function drawImage(result, uuid) {
         $('.hidden-chart > div').each((index, dom) => {
-            if ($(dom).find('span').length > 0) {
+            if ($(dom).attr('_echarts_instance_')) {
+                uploadImg(result.data[index].id, ec.getInstanceByDom(dom).getDataURL(), uuid);
+            } else {
                 domtoimage.toPng(dom).then(imgUrl => {
                     uploadImg(result.data[index].id, imgUrl, uuid);
                 });
-            } else {
-                uploadImg(result.data[index].id, ec.getInstanceByDom(dom).getDataURL(), uuid);
             }
         });
         if (idArr.length !== 1) {

@@ -458,7 +458,7 @@ define([], function () {
                     remoteUrl: base.server + "znbg/ywfxbg/postImg"
                 },
                 getJcjPreview: {
-                    localUrl: "./static/json/ywfxbg/preview.json",
+                    localUrl: "./static/json/ywfxbg/jcjPreview.json",
                     remoteUrl: base.server + "znbg/ywfxbg/getJcjPreview"
                 },
                 getAjPreview: {

@@ -825,36 +825,6 @@
   overflow: hidden;
   text-align: justify;
 }
-#pop-container1 .fieldset2 > section .tab-container {
-  width: calc(100% - 20px);
-  height: calc(100% - 40px - 88px);
-  margin: 0 10px 2px 10px;
-  border: 2px solid #757b7b;
-}
-#pop-container1 .fieldset2 > section .tab-container > div {
-  width: 100%;
-  height: 27px;
-  line-height: 27px;
-  border-top: 1px solid #485053;
-}
-#pop-container1 .fieldset2 > section .tab-container > div > div {
-  text-align: center;
-  float: left;
-  width: 60px;
-  height: 100%;
-  border-left: 1px solid #485053;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-#pop-container1 .fieldset2 > section .tab-container > div > div:nth-child(4n + 1) {
-  width: calc(100% - 180px);
-  border-left: 0;
-}
-#pop-container1 .fieldset2 > section .tab-container > div:first-child {
-  border-top: 0;
-  background-color: #F0F3FA;
-}
 #pop-container1 .fieldset2 > section #chart1-2 {
   width: 100%;
   height: calc(100% - 135px);
@@ -1112,42 +1082,6 @@
 #pop-container3 .fieldset2 {
   padding: 0 10px;
 }
-#pop-container3 .fieldset2 #chart2-2 {
-  width: 100%;
-  height: 344px;
-  border: #8a8a8a 2px solid;
-  display: block;
-}
-#pop-container3 .fieldset2 #chart2-2 > row {
-  display: block;
-  width: 100%;
-  height: 22px;
-  line-height: 22px;
-  border-top: 1px solid #dbdbdb;
-}
-#pop-container3 .fieldset2 #chart2-2 > row:first-child {
-  height: 31px;
-  line-height: 31px;
-  background-color: #F0F3FA;
-  border-top: 0;
-}
-#pop-container3 .fieldset2 #chart2-2 > row:nth-child(2),
-#pop-container3 .fieldset2 #chart2-2 > row:nth-child(7),
-#pop-container3 .fieldset2 #chart2-2 > row:nth-child(12) {
-  background-color: #CCEAFF;
-}
-#pop-container3 .fieldset2 #chart2-2 > row > cell {
-  display: block;
-  height: 100%;
-  width: 65px;
-  float: left;
-  text-align: center;
-  border-left: 1px solid #dbdbdb;
-}
-#pop-container3 .fieldset2 #chart2-2 > row > cell:first-child {
-  width: calc(100% - 65px * 3);
-  border-left: 0;
-}
 #pop-container3 .fieldset2 footer {
   width: 100%;
   height: 88px;
@@ -1264,4 +1198,72 @@
   float: left;
   width: 400px;
   height: 300px;
+}
+.tab-container1 {
+  color: #000;
+  width: 299px !important;
+  height: 164px !important;
+  margin-bottom: 2px;
+  border: 2px solid #757b7b;
+}
+.tab-container1 > div {
+  width: 100%;
+  height: 27px;
+  line-height: 27px;
+  border-top: 1px solid #485053;
+}
+.tab-container1 > div > div {
+  text-align: center;
+  float: left;
+  width: 60px;
+  height: 100%;
+  border-left: 1px solid #485053;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.tab-container1 > div > div:nth-child(4n + 1) {
+  width: calc(100% - 180px);
+  border-left: 0;
+}
+.tab-container1 > div:first-child {
+  border-top: 0;
+  background-color: #F0F3FA;
+}
+.tab-container3 {
+  color: #000;
+  width: 299px !important;
+  height: 344px !important;
+  border: #8a8a8a 2px solid;
+  display: block;
+}
+.tab-container3 > row {
+  display: block;
+  width: 100%;
+  height: 22px;
+  line-height: 22px;
+  border-top: 1px solid #dbdbdb;
+}
+.tab-container3 > row:first-child {
+  height: 31px;
+  line-height: 31px;
+  background-color: #F0F3FA;
+  border-top: 0;
+}
+.tab-container3 > row:nth-child(2),
+.tab-container3 > row:nth-child(7),
+.tab-container3 > row:nth-child(12) {
+  background-color: #CCEAFF;
+}
+.tab-container3 > row > cell {
+  display: block;
+  height: 100%;
+  width: 65px;
+  float: left;
+  text-align: center;
+  border-left: 1px solid #dbdbdb;
+}
+.tab-container3 > row > cell:first-child {
+  width: calc(100% - 65px * 3);
+  border-left: 0;
 }
