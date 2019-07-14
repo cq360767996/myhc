@@ -71,7 +71,7 @@
   }
 
   &:nth-child(2) {
-    width: calc(100% - 320px);
+    width: calc(~"100% - 320px");
 
     * {
       float: left;
@@ -84,7 +84,7 @@
     span {
       text-align: left;
       display: inline-block;
-      width: calc(100% - 28px);
+      width: calc(~"100% - 28px");
       height: 100%;
       margin-left: 8px;
       .single-text-ellipse();
@@ -173,7 +173,7 @@
   & > section {
     @border: 1px solid #dbdbdb;
     width: 100%;
-    height: calc(100% - @header-height);
+    height: calc(~"100% - @{header-height}");
 
     fieldset {
       float: left;
@@ -210,7 +210,7 @@
 
     input {
       @height: 30px;
-      width: calc((100% - 40px) / 3);
+      width: calc(~"(100% - 40px) / 3");
       height: @height;
       background-color: #fff;
       margin-left: 10px;
@@ -227,14 +227,14 @@
 
   section {
     width: 100%;
-    height: calc(100% - 60px);
+    height: calc(~"100% - 60px");
     margin-top: 10px;
     .bg();
 
     fieldset {
       @header-height: 40px;
       width: 100%;
-      height: calc(20% - 10px);
+      height: calc(~"20% - 10px");
       padding: 0 10px;
 
       & > header {
@@ -257,8 +257,8 @@
       }
 
       article {
-        width: calc(100% - 50px);
-        height: calc(100% - @header-height - 10px);
+        width: calc(~"100% - 50px");
+        height: calc(~"100% - @{header-height} - 10px");
         border: 1px dashed #bcc9d8;
         margin: 0 auto;
         padding: 5px;
@@ -290,7 +290,7 @@
 
         textarea {
           width: 100%;
-          height: calc(100% - 5px);
+          height: calc(~"100% - 5px");
           resize: none;
           background-color: #F6FAFF;
           border: 0;
@@ -328,8 +328,8 @@
 .right-section {
   @header-height: 40px;
   float: left;
-  width: calc(40% - 40px);
-  height: calc(100% - 40px);
+  width: calc(~"40% - 40px");
+  height: calc(~"100% - 40px");
   margin: 20px;
   .bg();
 
@@ -347,7 +347,7 @@
 
   section {
     width: 100%;
-    height: calc(100% - @header-height);
+    height: calc(~"100% - @{header-height}");
     padding: 10px 20px;
 
     & > div {
@@ -369,7 +369,7 @@
       }
 
       &.tab-body {
-        height: calc(100% - @tab-height);
+        height: calc(~"100% - @{tab-height}");
         overflow-y: auto;
         overflow-x: hidden;
         .scroll-style();
@@ -431,7 +431,7 @@
 
     section {
       width: 100%;
-      height: calc(100% - 2 * @header-height);
+      height: calc(~"100% - 2 * @{header-height}");
       padding: 30px 20px;
       color: #4d4d4d;
 
@@ -693,7 +693,7 @@
       & > section {
         @line-height: 43px;
         width: 100%;
-        height: calc(100% - @header-height);
+        height: calc(~"100% - @{header-height}");
 
         & > div {
           width: 100%;
@@ -707,7 +707,7 @@
 
           & > div {
             &:nth-child(2) {
-              width: calc(100% - 46px);
+              width: calc(~"100% - 46px");
               height: 100%;
               margin-left: 10px;
             }
@@ -735,7 +735,7 @@
           }
 
           &:nth-child(2) {
-            height: calc(100% - @line-height * 3);
+            height: calc(~"100% - @{line-height} * 3");
             padding: 0;
 
             & > div {
@@ -767,7 +767,7 @@
 
     #chart1-1 {
       width: 100%;
-      height: calc(100% - 135px);
+      height: calc(~"100% - 135px");
     }
 
     footer {
@@ -785,7 +785,7 @@
 
       #chart1-2 {
         width: 100%;
-        height: calc(100% - 135px);
+        height: calc(~"100% - 135px");
       }
 
       .footer1 {
@@ -809,7 +809,7 @@
   .fieldset3 {
     #chart1-3 {
       width: 100%;
-      height: calc(100% - 35px);
+      height: calc(~"100% - 35px");
     }
 
     footer {
@@ -832,7 +832,7 @@
           text-align: center;
 
           &:first-child {
-            width: calc(100% - 110px);
+            width: calc(~"100% - 110px");
 
           }
 
@@ -846,7 +846,7 @@
 
     #chart1-4 {
       width: 100%;
-      height: calc(100% - @banner-height);
+      height: calc(~"100% - @{banner-height}");
     }
   }
 
@@ -868,12 +868,12 @@
 
     #chart1-5 {
       width: 100%;
-      height: calc(100% - 130px);
+      height: calc(~"100% - 130px");
     }
 
     .zjfx-content {
       width: 100%;
-      height: calc(100% - 30px);
+      height: calc(~"100% - 30px");
       line-height: 30px;
       .text-ellipse(9);
     }
@@ -891,7 +891,7 @@
       & > section {
         @line-height: 32px;
         width: 100%;
-        height: calc(100% - @header-height);
+        height: calc(~"100% - @{header-height}");
 
         & > div {
           width: 100%;
@@ -905,7 +905,7 @@
 
           & > div {
             &:nth-child(2) {
-              width: calc(100% - 46px);
+              width: calc(~"100% - 46px");
               height: 100%;
               margin-left: 10px;
             }
@@ -933,7 +933,7 @@
           }
 
           &:nth-child(3) {
-            height: calc(100% - @line-height * 4);
+            height: calc(~"100% - @{line-height} * 4");
             padding: 0;
 
             & > div {
@@ -965,7 +965,7 @@
 
     #chart2-1 {
       width: 100%;
-      height: calc(100% - 135px);
+      height: calc(~"100% - 135px");
     }
 
     footer {
@@ -1096,7 +1096,7 @@
       .single-text-ellipse();
 
       &:nth-child(4n + 1) {
-        width: calc(100% - 180px);
+        width: calc(~"100% - 180px");
         border-left: 0;
       }
     }
@@ -1145,7 +1145,7 @@
       border-left: @border;
 
       &:first-child {
-        width: calc(100% - @cell-height * 3);
+        width: calc(~"100% - @{cell-height} * 3");
         border-left: 0;
       }
     }

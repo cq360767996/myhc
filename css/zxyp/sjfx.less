@@ -32,7 +32,7 @@
 
 .sjfx {
   width: 100%;
-  height: calc(100% - 18px);
+  height: calc(~"100% - 18px");
   font-size: @global-font-size;
   color: @global-color;
   padding: 10px 20px;
@@ -74,7 +74,7 @@
     }
 
     &-3 {
-      width: calc(100% - 580px);
+      width: calc(~"100% - 580px");
 
       strong {
         color: #e1840c;
@@ -85,21 +85,21 @@
 
   &-body {
     width: 100%;
-    height: calc(50% - 31px);
+    height: calc(~"50% - 31px");
     padding-top: 10px;
 
     & > div {
       float: left;
-      height: calc(100% - 10px);
+      height: calc(~"100% - 10px");
     }
 
     &-left {
-      width: calc((100% - 20px) / 3);
+      width: calc(~"(100% - 20px) / 3");
     }
 
     &-right {
       margin-left: 20px;
-      width: calc((100% - 20px) / 3 * 2);
+      width: calc(~"(100% - 20px) / 3 * 2");
     }
 
     &-header {
@@ -140,7 +140,7 @@
 
     &-body {
       width: 100%;
-      height: calc(100% - 40px);
+      height: calc(~"100% - 40px");
     }
 
     .sjfx-mid-right {
@@ -190,7 +190,7 @@
         }
 
         .time-box {
-          width: calc(100% - 60px);
+          width: calc(~"100% - 60px");
           height: 100%;
           margin: 0 auto;
           overflow: hidden;
@@ -365,7 +365,7 @@
         }
 
         & > div {
-          width: calc(50% - 10px);
+          width: calc(~"50% - 10px");
           height: 100%;
           float: left;
 
@@ -380,7 +380,7 @@
           }
 
           & > div:nth-child(2) {
-            width: calc(100% - 20px);
+            width: calc(~"100% - 20px");
             background-color: #f7f7f7;
             border-radius: 2px;
             border: solid 1px #cccccc;
