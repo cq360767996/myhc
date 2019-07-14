@@ -1,5 +1,4 @@
 /* Created by handsome qiu */
-/* Created by handsome qiu */
 const gulp = require('gulp');
 const livereload = require('gulp-livereload');
 const sequence = require('run-sequence');
