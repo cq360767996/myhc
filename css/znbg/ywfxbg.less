@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "ZHSCNMT--GBK1-0";
-  src: url("../../fonts/zhscnm.ttf");
+  font-family: 'ZHSCNMT--GBK1-0';
+  src: url('../../fonts/zhscnm.ttf');
 }
 
 @font-face {
-  font-family: "CenturyGothic-Bold";
-  src: url("../../fonts/GOTHICB.TTF");
+  font-family: 'CenturyGothic-Bold';
+  src: url('../../fonts/GOTHICB.TTF');
 }
 
 .header {
@@ -14,7 +14,7 @@
     height: 30px;
     line-height: 24px;
     font-size: 16px;
-    background: url("../../img/znbg/preview/title.png") no-repeat;
+    background: url('../../img/znbg/preview/title.png') no-repeat;
 
     & > span {
       margin-left: 15px;
@@ -23,20 +23,22 @@
   }
 }
 
-.bg { // 背景色
-  background-color: rgba(255, 255, 255, .7);
+.bg {
+  // 背景色
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
   box-shadow: 0 0 8px #939cab;
 }
 
-
-.single-text-ellipse() { // 单行省略
+.single-text-ellipse() {
+  // 单行省略
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.text-ellipse(@line) { // 多行省略
+.text-ellipse(@line) {
+  // 多行省略
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -45,33 +47,35 @@
   text-align: justify;
 }
 
-.scroll-style { // 滚动条样式
+.scroll-style {
+  // 滚动条样式
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-    background-color: #FFF;
+    background-color: #fff;
   }
 
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
-    background-color: #FFF;
+    background-color: #fff;
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 2px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #C1C1C1;
+    background-color: #c1c1c1;
   }
 }
 
-.row-width { // 表格宽度设置
+.row-width {
+  // 表格宽度设置
   &:nth-child(1) {
     width: 40px;
   }
 
   &:nth-child(2) {
-    width: calc(~"100% - 320px");
+    width: calc(~'100% - 320px');
 
     * {
       float: left;
@@ -84,7 +88,7 @@
     span {
       text-align: left;
       display: inline-block;
-      width: calc(~"100% - 28px");
+      width: calc(~'100% - 28px');
       height: 100%;
       margin-left: 8px;
       .single-text-ellipse();
@@ -124,7 +128,7 @@
   & > header {
     width: 100%;
     height: @header-height;
-    background: url("../../img/znbg/preview/header.png") no-repeat;
+    background: url('../../img/znbg/preview/header.png') no-repeat;
 
     i {
       float: right;
@@ -173,7 +177,7 @@
   & > section {
     @border: 1px solid #dbdbdb;
     width: 100%;
-    height: calc(~"100% - @{header-height}");
+    height: calc(~'100% - @{header-height}');
 
     fieldset {
       float: left;
@@ -205,12 +209,12 @@
   & > header {
     width: 100%;
     height: 50px;
-    background-color: #ADC3DB;
+    background-color: #adc3db;
     padding: 10px;
 
     input {
       @height: 30px;
-      width: calc(~"(100% - 40px) / 3");
+      width: calc(~'(100% - 40px) / 3');
       height: @height;
       background-color: #fff;
       margin-left: 10px;
@@ -227,14 +231,14 @@
 
   section {
     width: 100%;
-    height: calc(~"100% - 60px");
+    height: calc(~'100% - 60px');
     margin-top: 10px;
     .bg();
 
     fieldset {
       @header-height: 40px;
       width: 100%;
-      height: calc(~"20% - 10px");
+      height: calc(~'20% - 10px');
       padding: 0 10px;
 
       & > header {
@@ -249,7 +253,7 @@
         }
 
         span {
-          background: url("../../img/znbg/checkbox.png") no-repeat;
+          background: url('../../img/znbg/checkbox.png') no-repeat;
           display: inline-block;
           width: 18px;
           height: 18px;
@@ -257,13 +261,13 @@
       }
 
       article {
-        width: calc(~"100% - 50px");
-        height: calc(~"100% - @{header-height} - 10px");
+        width: calc(~'100% - 50px');
+        height: calc(~'100% - @{header-height} - 10px');
         border: 1px dashed #bcc9d8;
         margin: 0 auto;
         padding: 5px;
         color: #999;
-        background-color: #F6FAFF;
+        background-color: #f6faff;
         overflow-y: auto;
         overflow-x: hidden;
         .scroll-style();
@@ -290,9 +294,9 @@
 
         textarea {
           width: 100%;
-          height: calc(~"100% - 5px");
+          height: calc(~'100% - 5px');
           resize: none;
-          background-color: #F6FAFF;
+          background-color: #f6faff;
           border: 0;
           outline: none;
           .scroll-style();
@@ -320,7 +324,6 @@
         color: #027ecb;
         margin: 10px auto;
       }
-
     }
   }
 }
@@ -328,8 +331,8 @@
 .right-section {
   @header-height: 40px;
   float: left;
-  width: calc(~"40% - 40px");
-  height: calc(~"100% - 40px");
+  width: calc(~'40% - 40px');
+  height: calc(~'100% - 40px');
   margin: 20px;
   .bg();
 
@@ -340,14 +343,15 @@
     font-size: 18px;
     color: #000;
 
-    span, img {
+    span,
+    img {
       margin-left: 10px;
     }
   }
 
   section {
     width: 100%;
-    height: calc(~"100% - @{header-height}");
+    height: calc(~'100% - @{header-height}');
     padding: 10px 20px;
 
     & > div {
@@ -369,7 +373,7 @@
       }
 
       &.tab-body {
-        height: calc(~"100% - @{tab-height}");
+        height: calc(~'100% - @{tab-height}');
         overflow-y: auto;
         overflow-x: hidden;
         .scroll-style();
@@ -378,8 +382,9 @@
           width: 100%;
           height: @tab-height;
 
-          &:hover, &.row-selected {
-            background-color: #EDF6FF;
+          &:hover,
+          &.row-selected {
+            background-color: #edf6ff;
           }
 
           & > div {
@@ -431,11 +436,12 @@
 
     section {
       width: 100%;
-      height: calc(~"100% - 2 * @{header-height}");
+      height: calc(~'100% - 2 * @{header-height}');
       padding: 30px 20px;
       color: #4d4d4d;
 
-      ul, li {
+      ul,
+      li {
         margin: 0;
         padding: 0;
         list-style: none;
@@ -466,11 +472,11 @@
           cursor: pointer;
 
           &.switch-on {
-            background: url("../../img/znbg/switch_on.png") no-repeat;
+            background: url('../../img/znbg/switch_on.png') no-repeat;
           }
 
           &.switch-off {
-            background: url("../../img/znbg/switch_off.png") no-repeat;
+            background: url('../../img/znbg/switch_off.png') no-repeat;
           }
         }
       }
@@ -498,14 +504,13 @@
         }
       }
     }
-
   }
 
   & > button {
     display: block;
     width: 40px;
     height: 40px;
-    background: url("../../img/znbg/close.png") no-repeat;
+    background: url('../../img/znbg/close.png') no-repeat;
     border: 0;
     outline: none;
     position: relative;
@@ -524,7 +529,7 @@
   display: block;
   top: 50%;
   margin-top: -20px;
-  background: url("../../img/znbg/setting.png") no-repeat;
+  background: url('../../img/znbg/setting.png') no-repeat;
 }
 
 .left-tree {
@@ -537,7 +542,7 @@
 
 /*词云*/
 .jqcloud {
-  font-family: "微软雅黑", "宋体", sans-serif;
+  font-family: '微软雅黑', '宋体', sans-serif;
   font-size: 10px;
   line-height: normal;
 }
@@ -632,7 +637,7 @@
   border-radius: 1px;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 16px;
     height: 16px;
@@ -653,7 +658,7 @@
     cursor: pointer;
 
     &:hover {
-      color: #2E91FE;
+      color: #2e91fe;
     }
   }
 }
@@ -686,14 +691,13 @@
   .pop-container();
 
   .fieldset1 {
-
     & > section {
       @header-height: 30px;
 
       & > section {
         @line-height: 43px;
         width: 100%;
-        height: calc(~"100% - @{header-height}");
+        height: calc(~'100% - @{header-height}');
 
         & > div {
           width: 100%;
@@ -707,7 +711,7 @@
 
           & > div {
             &:nth-child(2) {
-              width: calc(~"100% - 46px");
+              width: calc(~'100% - 46px');
               height: 100%;
               margin-left: 10px;
             }
@@ -735,11 +739,10 @@
           }
 
           &:nth-child(2) {
-            height: calc(~"100% - @{line-height} * 3");
+            height: calc(~'100% - @{line-height} * 3');
             padding: 0;
 
             & > div {
-
               &:nth-child(2) {
                 @border: dashed 1px #bec5d4;
                 border: @border;
@@ -753,7 +756,6 @@
                   background-color: #f4f6fc;
                   border-bottom: @border;
                 }
-
               }
             }
           }
@@ -767,7 +769,7 @@
 
     #chart1-1 {
       width: 100%;
-      height: calc(~"100% - 135px");
+      height: calc(~'100% - 135px');
     }
 
     footer {
@@ -782,10 +784,9 @@
 
   .fieldset2 {
     & > section {
-
       #chart1-2 {
         width: 100%;
-        height: calc(~"100% - 135px");
+        height: calc(~'100% - 135px');
       }
 
       .footer1 {
@@ -809,7 +810,7 @@
   .fieldset3 {
     #chart1-3 {
       width: 100%;
-      height: calc(~"100% - 35px");
+      height: calc(~'100% - 35px');
     }
 
     footer {
@@ -832,8 +833,7 @@
           text-align: center;
 
           &:first-child {
-            width: calc(~"100% - 110px");
-
+            width: calc(~'100% - 110px');
           }
 
           &:nth-child(3) {
@@ -846,13 +846,12 @@
 
     #chart1-4 {
       width: 100%;
-      height: calc(~"100% - @{banner-height}");
+      height: calc(~'100% - @{banner-height}');
     }
   }
 
   .fieldset4 {
     & > section {
-
       &:first-child {
         border-bottom: @border;
       }
@@ -868,12 +867,12 @@
 
     #chart1-5 {
       width: 100%;
-      height: calc(~"100% - 130px");
+      height: calc(~'100% - 130px');
     }
 
     .zjfx-content {
       width: 100%;
-      height: calc(~"100% - 30px");
+      height: calc(~'100% - 30px');
       line-height: 30px;
       .text-ellipse(9);
     }
@@ -891,7 +890,7 @@
       & > section {
         @line-height: 32px;
         width: 100%;
-        height: calc(~"100% - @{header-height}");
+        height: calc(~'100% - @{header-height}');
 
         & > div {
           width: 100%;
@@ -905,7 +904,7 @@
 
           & > div {
             &:nth-child(2) {
-              width: calc(~"100% - 46px");
+              width: calc(~'100% - 46px');
               height: 100%;
               margin-left: 10px;
             }
@@ -933,11 +932,10 @@
           }
 
           &:nth-child(3) {
-            height: calc(~"100% - @{line-height} * 4");
+            height: calc(~'100% - @{line-height} * 4');
             padding: 0;
 
             & > div {
-
               &:nth-child(2) {
                 @border: dashed 1px #bec5d4;
                 border: @border;
@@ -951,7 +949,6 @@
                   background-color: #f4f6fc;
                   border-bottom: @border;
                 }
-
               }
             }
           }
@@ -965,7 +962,7 @@
 
     #chart2-1 {
       width: 100%;
-      height: calc(~"100% - 135px");
+      height: calc(~'100% - 135px');
     }
 
     footer {
@@ -1021,7 +1018,6 @@
       height: 66px;
       .text-ellipse(3);
     }
-
   }
 
   .fieldset4 {
@@ -1055,7 +1051,6 @@
       .text-ellipse(3);
       text-indent: 30px;
     }
-
   }
 }
 
@@ -1096,14 +1091,14 @@
       .single-text-ellipse();
 
       &:nth-child(4n + 1) {
-        width: calc(~"100% - 180px");
+        width: calc(~'100% - 180px');
         border-left: 0;
       }
     }
 
     &:first-child {
       border-top: 0;
-      background-color: #F0F3FA;
+      background-color: #f0f3fa;
     }
   }
 }
@@ -1127,12 +1122,14 @@
     &:first-child {
       height: 31px;
       line-height: 31px;
-      background-color: #F0F3FA;
+      background-color: #f0f3fa;
       border-top: 0;
     }
 
-    &:nth-child(2), &:nth-child(7), &:nth-child(12) {
-      background-color: #CCEAFF;
+    &:nth-child(2),
+    &:nth-child(7),
+    &:nth-child(12) {
+      background-color: #cceaff;
     }
 
     & > cell {
@@ -1145,10 +1142,9 @@
       border-left: @border;
 
       &:first-child {
-        width: calc(~"100% - @{cell-height} * 3");
+        width: calc(~'100% - @{cell-height} * 3');
         border-left: 0;
       }
     }
-
   }
 }

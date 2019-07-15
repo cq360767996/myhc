@@ -1,102 +1,96 @@
-<link rel="stylesheet" type="text/css" href="../../css/myhc/rdwt.css">
+<link rel="stylesheet" type="text/css" href="../../css/myhc/rdwt.css" />
 <div class="left-panel">
-    <div class="left-panel-header">
-        <div class="left-panel-header-dept">
-            <input type="text" id="place" placeholder="市局/分局" readonly/>
-            <input type="hidden" id="placeCode"/>
-            <input type="hidden" id="tempID"/>
-            <input type="hidden" id="tempTYPE"/>
-            <div id="left-tree"></div>
-        </div>
-        <div class="left-panel-header-date">
-            <input id="date-input" placeholder="时间" type="text" readonly="readonly">
-            <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn"/>
-        </div>
+  <div class="left-panel-header">
+    <div class="left-panel-header-dept">
+      <input type="text" id="place" placeholder="市局/分局" readonly />
+      <input type="hidden" id="placeCode" />
+      <input type="hidden" id="tempID" />
+      <input type="hidden" id="tempTYPE" />
+      <div id="left-tree"></div>
     </div>
-    <div class="left-panel-body">
-        <div class="left-panel-body-header">
-            <div class="left-panel-body-header-title">
-                <img src="../../img/myhc/rdwt/hottopics.png"/>
-                <span>热点问题</span>
-            </div>
-            <div class="left-panel-body-header-setting">
-                <img src="../../img/myhc/rdwt/set.png"/>
-            </div>
-            <div class="left-panel-body-header-person">
-                <img src="../../img/myhc/rdwt/paixingbang.png"/>
-                <span>民意榜单</span>
-            </div>
-        </div>
-        <div class="left-panel-ul">
-
-        </div>
-        <div class="left-panel-body-footer">
-            <div class="nav-container">
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li class="active"><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="left-panel-header-date">
+      <input
+        id="date-input"
+        placeholder="时间"
+        type="text"
+        readonly="readonly"
+      />
+      <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
     </div>
+  </div>
+  <div class="left-panel-body">
+    <div class="left-panel-body-header">
+      <div class="left-panel-body-header-title">
+        <img src="../../img/myhc/rdwt/hottopics.png" />
+        <span>热点问题</span>
+      </div>
+      <div class="left-panel-body-header-setting">
+        <img src="../../img/myhc/rdwt/set.png" />
+      </div>
+      <div class="left-panel-body-header-person">
+        <img src="../../img/myhc/rdwt/paixingbang.png" />
+        <span>民意榜单</span>
+      </div>
+    </div>
+    <div class="left-panel-ul"></div>
+    <div class="left-panel-body-footer">
+      <div class="nav-container">
+        <ul class="pagination">
+          <li><a href="#">&laquo;</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li class="active"><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="right-panel">
-    <div class="chart-container" id="rdwt-container">
-        <div class="chart-container-header">
-            <span>热点问题走势分析</span>
-        </div>
-        <div class="chart-container-body" id="rdwt-chart">
-        </div>
+  <div class="chart-container" id="rdwt-container">
+    <div class="chart-container-header">
+      <span>热点问题走势分析</span>
     </div>
-    <div class="chart-container" id="sqxz">
-        <div class="chart-container-header">
-            <span>群众反馈诉求性质分析</span>
-        </div>
-        <div class="chart-container-body"  id="sqxz-chart">
-        </div>
+    <div class="chart-container-body" id="rdwt-chart"></div>
+  </div>
+  <div class="chart-container" id="sqxz">
+    <div class="chart-container-header">
+      <span>群众反馈诉求性质分析</span>
     </div>
-    <div class="chart-container">
-        <div class="chart-container-header">
-            <span>数据来源分析</span>
-        </div>
-        <div class="chart-container-body" id="sjly-chart">
-        </div>
+    <div class="chart-container-body" id="sqxz-chart"></div>
+  </div>
+  <div class="chart-container">
+    <div class="chart-container-header">
+      <span>数据来源分析</span>
     </div>
-    <div class="chart-container"  id="jtwt">
-        <div class="chart-container-header">
-            <span>具体问题分析</span>
-        </div>
-        <div class="chart-container-body" id="jtwt-chart">
-        </div>
+    <div class="chart-container-body" id="sjly-chart"></div>
+  </div>
+  <div class="chart-container" id="jtwt">
+    <div class="chart-container-header">
+      <span>具体问题分析</span>
     </div>
-    <div class="chart-container" id="dwfx">
-        <div class="chart-container-header">
-            <span>具体问题单位分析</span>
-        </div>
-        <div class="chart-container-body" id="dwfx-chart">
-        </div>
+    <div class="chart-container-body" id="jtwt-chart"></div>
+  </div>
+  <div class="chart-container" id="dwfx">
+    <div class="chart-container-header">
+      <span>具体问题单位分析</span>
     </div>
-    <div class="chart-container">
-        <div class="chart-container-header">
-            <span>群众反馈热词分析</span>
-        </div>
-        <div class="chart-container-body" id="rcfx-chart">
-        </div>
+    <div class="chart-container-body" id="dwfx-chart"></div>
+  </div>
+  <div class="chart-container">
+    <div class="chart-container-header">
+      <span>群众反馈热词分析</span>
     </div>
-    <div class="chart-container"  id="dwfx-hidden">
-        <div class="chart-container-body" id="dwfx-chart-hidden">
-        </div>
-    </div>
-    <div class="download-report">
-        <img src="../../img/myhc/rdwt/download.png" >
-        <span>报告下载</span>
-    </div>
+    <div class="chart-container-body" id="rcfx-chart"></div>
+  </div>
+  <div class="chart-container" id="dwfx-hidden">
+    <div class="chart-container-body" id="dwfx-chart-hidden"></div>
+  </div>
+  <div class="download-report">
+    <img src="../../img/myhc/rdwt/download.png" />
+    <span>报告下载</span>
+  </div>
 </div>
-<div class="pop-panel">
-
-</div>
+<div class="pop-panel"></div>

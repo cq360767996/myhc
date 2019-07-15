@@ -1,496 +1,495 @@
 .header-panel {
-    width: 95%;
-    height: 50px;
-    background-color: #ADC3DB;
-    padding: 10px 20px;
-    margin: 20px auto;
+  width: 95%;
+  height: 50px;
+  background-color: #adc3db;
+  padding: 10px 20px;
+  margin: 20px auto;
 }
 
 .body-panel {
-    width: 95%;
-    height: calc(100% - 180px);
-    margin: 20px auto;
+  width: 95%;
+  height: calc(100% - 180px);
+  margin: 20px auto;
 }
 
 .footer-panel {
-    width: 95%;
-    height: 50px;
-    margin: 20px auto;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #939cab;
+  width: 95%;
+  height: 50px;
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #939cab;
 }
 
 #place {
-    width: 46%;
-    border-radius: 3px;
-    border: 0;
+  width: 46%;
+  border-radius: 3px;
+  border: 0;
 }
 
 #left-tree {
-    height: 230px;
-    visibility: hidden;
-    overflow: auto;
-    position: absolute;
-    z-index: 999;
+  height: 230px;
+  visibility: hidden;
+  overflow: auto;
+  position: absolute;
+  z-index: 999;
 }
 
 #date-input {
-    width: 46%;
-    border-radius: 3px;
-    border: 0;
-    margin-left: 20px;
+  width: 46%;
+  border-radius: 3px;
+  border: 0;
+  margin-left: 20px;
 }
 
 .search-btn {
-    margin-left: 15px;
-    position: relative;
-    top: -3px;
-    left: 13px;
-    cursor: pointer;
+  margin-left: 15px;
+  position: relative;
+  top: -3px;
+  left: 13px;
+  cursor: pointer;
 }
 
 input {
-    height: 30px;
-    text-indent: 15px;
+  height: 30px;
+  text-indent: 15px;
 }
 
 .left-panel {
-    width: 75%;
-    height: 100%;
-    float: left;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #939cab;
+  width: 75%;
+  height: 100%;
+  float: left;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #939cab;
 }
 
 .right-panel {
-    width: 24%;
-    height: 100%;
-    float: right;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #939cab;
+  width: 24%;
+  height: 100%;
+  float: right;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #939cab;
 }
 
 .left-panel-header {
-    width: 95%;
-    height: 50px;
-    border-bottom: #BDC9D9 1px solid;
-    margin: 0 auto;
+  width: 95%;
+  height: 50px;
+  border-bottom: #bdc9d9 1px solid;
+  margin: 0 auto;
 }
 
 .left-panel-header-tab {
-    width: 90px;
-    height: 50px;
-    float: left;
-    line-height: 50px;
-    font-size: 18px;
-    color: #75797C;
-    text-align: center;
-    cursor: pointer;
+  width: 90px;
+  height: 50px;
+  float: left;
+  line-height: 50px;
+  font-size: 18px;
+  color: #75797c;
+  text-align: center;
+  cursor: pointer;
 }
 
 .left-panel-header-tab:hover {
-    border-bottom: #1C83C6 2px solid;
+  border-bottom: #1c83c6 2px solid;
 }
 
 .left-panel-header-tab-hover {
-    border-bottom: #1C83C6 2px solid;
+  border-bottom: #1c83c6 2px solid;
 }
 
 .footer-panel-btnGroup {
-    width: 200px;
-    height: 50px;
-    margin: auto;
+  width: 200px;
+  height: 50px;
+  margin: auto;
 }
 
 .footer-panel-btn {
-    float: left;
-    width: 60px;
-    height: 30px;
-    margin: 10px 15px;
-    cursor: pointer;
-    border: #3B8CC1 1px solid;
-    text-align: center;
-    line-height: 30px;
-    color: #75797C;
-    border-radius: 2px;
+  float: left;
+  width: 60px;
+  height: 30px;
+  margin: 10px 15px;
+  cursor: pointer;
+  border: #3b8cc1 1px solid;
+  text-align: center;
+  line-height: 30px;
+  color: #75797c;
+  border-radius: 2px;
 }
 
 #preview-btn {
-    background-color: #3B8CC1;
-    color: white;
+  background-color: #3b8cc1;
+  color: white;
 }
 
 .left-panel-body {
-    width: 100%;
-    height: calc(100% - 50px);
+  width: 100%;
+  height: calc(100% - 50px);
 }
 
 .tab-selector {
-    width: 100%;
-    height: 5%;
+  width: 100%;
+  height: 5%;
 }
 
-.tab-selector>div {
-    float: right;
-    width: 20%;
-    margin-top: 14px;
+.tab-selector > div {
+  float: right;
+  width: 20%;
+  margin-top: 14px;
 }
 
 #tab-container {
-    width: 90%;
-    height: calc(95% - 30px);
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    border-collapse: collapse;
-    overflow-y: auto;
-
+  width: 90%;
+  height: calc(95% - 30px);
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  border-collapse: collapse;
+  overflow-y: auto;
 }
 
 .tab-td-first {
-    float: left;
-    width: 40px;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
+  float: left;
+  width: 40px;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .tab-tr-head {
-    width: 100%;
-    height: 30px;
-    line-height: 35px;
-    border-bottom: 1px solid #ccc;
-    color: #4b4c4e;
+  width: 100%;
+  height: 30px;
+  line-height: 35px;
+  border-bottom: 1px solid #ccc;
+  color: #4b4c4e;
 }
 
-.tab-tr-head>div.tab-td{
-    font-weight: bold;
+.tab-tr-head > div.tab-td {
+  font-weight: bold;
 }
 
 .tab-tr {
-    width: 100%;
-    height: 30px;
-    line-height: 35px;
-    border-bottom: 1px solid #ccc;
-    color: #4b4c4e;
+  width: 100%;
+  height: 30px;
+  line-height: 35px;
+  border-bottom: 1px solid #ccc;
+  color: #4b4c4e;
 }
 
 .tab-tr-hover {
-    background-color: #f2dede;
+  background-color: #f2dede;
 }
 
 .tab-tr:hover {
-    background-color: #f2dede;
+  background-color: #f2dede;
 }
 
 .tab-td {
-    float: left;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-left: 1px solid #ccc;
+  float: left;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: 1px solid #ccc;
 }
 
-.tab-td>i {
-    cursor: pointer;
+.tab-td > i {
+  cursor: pointer;
 }
 
 /*定义宽高以及背景*/
 #tab-container::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #FFF;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 #tab-container::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 2px;
-    background-color: #FFF;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
 }
 
 /*定义滑块 内阴影+圆角*/
 #tab-container::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #C1C1C1;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
 }
 
 /*定义宽高以及背景*/
 .tag-selector::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #FFF;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 .tag-selector::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 2px;
-    background-color: #FFF;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
 }
 
 /*定义滑块 内阴影+圆角*/
 .tag-selector::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #C1C1C1;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
 }
 
 .tag-selector {
-    height: 200px;
-    overflow: auto;
-    position: absolute;
-    background-color: #ccc;
-    display: none;
-    z-index: 999;
-    border-radius: 3px;
+  height: 200px;
+  overflow: auto;
+  position: absolute;
+  background-color: #ccc;
+  display: none;
+  z-index: 999;
+  border-radius: 3px;
 }
 
 .tag-col {
-    width: 100%;
-    height: 24px;
-    text-align: left;
-    line-height: 24px;
-    color : #000;
-    border-bottom: 1px solid #0a2d57;
+  width: 100%;
+  height: 24px;
+  text-align: left;
+  line-height: 24px;
+  color: #000;
+  border-bottom: 1px solid #0a2d57;
 }
 
-.tag-col:hover{
-    background-color: #f2dede;
+.tag-col:hover {
+  background-color: #f2dede;
 }
 
-.tag-col>i {
-    float: right;
-    margin-right: 9px;
-    margin-top: 3px;
+.tag-col > i {
+  float: right;
+  margin-right: 9px;
+  margin-top: 3px;
 }
 
-.tag-col>span {
-    float: left;
-    margin-left: 3px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 80%;
+.tag-col > span {
+  float: left;
+  margin-left: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 80%;
 }
 
 .right-panel-header {
-    width: 90%;
-    height: 50px;
-    margin: 0 auto;
-    border-bottom: 1px solid #ccc;
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc;
 }
 
-.right-panel-header>div {
-    float: left;
-    margin-left: 5px;
-    font-size: 18px;
-    line-height: 50px;
+.right-panel-header > div {
+  float: left;
+  margin-left: 5px;
+  font-size: 18px;
+  line-height: 50px;
 }
 
 .right-panel-body {
-    overflow-y: auto;
-    width: 90%;
-    height: calc(100% - 70px);
-    margin: 10px auto;
+  overflow-y: auto;
+  width: 90%;
+  height: calc(100% - 70px);
+  margin: 10px auto;
 }
 
 /*定义宽高以及背景*/
 .right-panel-body::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #FFF;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 .right-panel-body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 2px;
-    background-color: #FFF;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
 }
 
 /*定义滑块 内阴影+圆角*/
 .right-panel-body::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #C1C1C1;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
 }
 
 .right-panel-li {
-    width: 100%;
-    height: 40px;
-    text-align: left;
-    line-height: 40px;
-    margin: 2px auto;
-    font-size: 14px;
-    color : #000;
-    background: url("../../img/myhc/rdwt/list_normal.png") no-repeat;
-    background-size: 100% 100%;
+  width: 100%;
+  height: 40px;
+  text-align: left;
+  line-height: 40px;
+  margin: 2px auto;
+  font-size: 14px;
+  color: #000;
+  background: url('../../img/myhc/rdwt/list_normal.png') no-repeat;
+  background-size: 100% 100%;
 }
 
 .right-panel-li:hover {
-    background: url("../../img/myhc/rdwt/list_hover.png") no-repeat;
-    background-size: 100% 100%;
+  background: url('../../img/myhc/rdwt/list_hover.png') no-repeat;
+  background-size: 100% 100%;
 }
 
-.right-panel-li>span {
-    margin-left: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    float: left;
+.right-panel-li > span {
+  margin-left: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  float: left;
 }
 
-.right-panel-li>img {
-    float: right;
-    margin-right: 15px;
-    margin-top: 10px;
-    cursor: pointer;
+.right-panel-li > img {
+  float: right;
+  margin-right: 15px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 .pop-cover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #7f7f7f;
-    opacity: 0.8;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #7f7f7f;
+  opacity: 0.8;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: none;
 }
 
 .pop-container {
-    width: 685px;
-    height: 500px;
-    position: absolute;
-    top: 220px;
-    left: 500px;
-    background-color: #ffffff;
-    z-index: 9999;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #000;
-    display: none;
+  width: 685px;
+  height: 500px;
+  position: absolute;
+  top: 220px;
+  left: 500px;
+  background-color: #ffffff;
+  z-index: 9999;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  display: none;
 }
 
 .pop-header {
-    width: 90%;
-    height: 50px;
-    border-bottom: 1px solid #BCC9D9;
-    margin: 0 auto;
+  width: 90%;
+  height: 50px;
+  border-bottom: 1px solid #bcc9d9;
+  margin: 0 auto;
 }
 
-.pop-header>span {
-    font-size: 16px;
-    line-height: 50px;
-    float: left;
-    color: #000;
+.pop-header > span {
+  font-size: 16px;
+  line-height: 50px;
+  float: left;
+  color: #000;
 }
 
-.pop-header>i {
-    float: right;
-    line-height: 50px;
+.pop-header > i {
+  float: right;
+  line-height: 50px;
 }
 
 .pop-body {
-    width: 90%;
-    height: calc(100% - 100px);
-    margin: 0 auto;
-    overflow-y: auto;
+  width: 90%;
+  height: calc(100% - 100px);
+  margin: 0 auto;
+  overflow-y: auto;
 }
 
 /*定义宽高以及背景*/
 .pop-body::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #FFF;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 .pop-body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 2px;
-    background-color: #FFF;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
 }
 
 /*定义滑块 内阴影+圆角*/
 .pop-body::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #C1C1C1;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
 }
 
 .pop-footer {
-    width: 90%;
-    height: 50px;
-    margin: 0 auto;
-    border-top: 1px solid #BCC9D9;
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
+  border-top: 1px solid #bcc9d9;
 }
 
-.pop-footer>div {
-    width: 200px;
-    height: 50px;
-    margin: 0 auto;
+.pop-footer > div {
+  width: 200px;
+  height: 50px;
+  margin: 0 auto;
 }
 
 .pop-footer-btn {
-    float: left;
-    width: 60px;
-    height: 30px;
-    margin: 10px 15px;
-    cursor: pointer;
-    border: #3B8CC1 1px solid;
-    text-align: center;
-    line-height: 30px;
-    color: #75797C;
-    border-radius: 2px;
+  float: left;
+  width: 60px;
+  height: 30px;
+  margin: 10px 15px;
+  cursor: pointer;
+  border: #3b8cc1 1px solid;
+  text-align: center;
+  line-height: 30px;
+  color: #75797c;
+  border-radius: 2px;
 }
 
 #pop-btn-ok {
-    background-color: #3B8CC1;
-    color: #fff;
+  background-color: #3b8cc1;
+  color: #fff;
 }
 
 .close-btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .pop-body-li {
-    width: 100%;
-    height: 30px;
-    margin-top: 5px;
-    background: url("../../img/myhc/rdwt/list_normal.png");
-    background-size: 100%;
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  background: url('../../img/myhc/rdwt/list_normal.png');
+  background-size: 100%;
 }
 
 .pop-body-li:hover {
-    background: url("../../img/myhc/rdwt/list_hover.png");
-    background-size: 100%;
+  background: url('../../img/myhc/rdwt/list_hover.png');
+  background-size: 100%;
 }
 
-.pop-body-li>span {
-    float: left;
-    line-height: 30px;
-    color: #000;
-    margin-left: 5px;
+.pop-body-li > span {
+  float: left;
+  line-height: 30px;
+  color: #000;
+  margin-left: 5px;
 }
 
-.pop-body-li>img {
-    float: right;
-    margin-right: 10px;
-    margin-top: 5px;
-    cursor: pointer;
+.pop-body-li > img {
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+  cursor: pointer;
 }
 
-.pop-body-li>input {
-    width: 70%;
-    height: 20px;
-    margin-top: 5px;
+.pop-body-li > input {
+  width: 70%;
+  height: 20px;
+  margin-top: 5px;
 }

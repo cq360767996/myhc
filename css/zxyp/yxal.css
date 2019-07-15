@@ -1,161 +1,170 @@
 /* Created by handsome qiu */
 .yxal-pop {
-    padding: 10px 5px;
-    width: calc(100% - 10px);
-    height: calc(100% - 20px);
+  padding: 10px 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 20px);
 }
 
 .yxal-pop > div {
-    line-height: 30px;
-    width: 100%;
-    margin-top: 5px;
+  line-height: 30px;
+  width: 100%;
+  margin-top: 5px;
 }
 
 .yxal-row1 {
-    height: 30px;
-    margin-top: 0;
+  height: 30px;
+  margin-top: 0;
 }
 
 .yxal-row2 {
-    height: 60px;
+  height: 60px;
 }
 
 .yxal-row3 {
-    height: 60px;
+  height: 60px;
 }
 
 .yxal-row4 {
-    height: 30px;
+  height: 30px;
 }
 
 .yxal-row5 {
-    height: 90px;
+  height: 90px;
 }
 
 .yxal-row6 {
-    height: calc(100% - 295px);
+  height: calc(100% - 295px);
 }
 
 .yxal-row1 > div {
-    height: 100%;
-    float: left;
+  height: 100%;
+  float: left;
 }
 
 .yxal-row1 > div:nth-child(2n) {
-    background-color: #f7f7f7;
-    border-radius: 3px;
-    border: solid 1px #cccccc;
-    padding: 0 3px;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  border: solid 1px #cccccc;
+  padding: 0 3px;
 }
 
 .yxal-pop > div > div:nth-child(2n) {
-    color: #4d4d4d;
+  color: #4d4d4d;
 }
 
-#sbdw, #gdbh, #sqlx, #lxdh, #flsy, #bjqk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+#sbdw,
+#gdbh,
+#sqlx,
+#lxdh,
+#flsy,
+#bjqk {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #sbdw {
-    width: 130px;
+  width: 130px;
 }
 
 #gdbh {
-    width: 100px;
+  width: 100px;
 }
 
 #sqlx {
-    width: 104px;
+  width: 104px;
 }
 
 #lxdh {
-    width: 140px;
+  width: 140px;
 }
 
 .yxal-pop > div > div {
-    float: left;
+  float: left;
 }
 
 .yxal-pop > div > div:nth-child(2n + 1) {
-    color: #333333;
-    font-size: 14px;
-    margin-left: 6px;
-    font-weight: 600;
-    height: 100%;
-    width: 70px;
+  color: #333333;
+  font-size: 14px;
+  margin-left: 6px;
+  font-weight: 600;
+  height: 100%;
+  width: 70px;
 }
 
-#sqnr, #blgc, #jyzjhjy {
-    width: calc(100% - 78px);
-    height: 100%;
-    background-color: #f7f7f7;
-    border-radius: 3px;
-    border: solid 1px #cccccc;
-    padding: 0 3px;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+#sqnr,
+#blgc,
+#jyzjhjy {
+  width: calc(100% - 78px);
+  height: 100%;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  border: solid 1px #cccccc;
+  padding: 0 3px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-#sqnr, #blgc {
-    -webkit-line-clamp: 2;
+#sqnr,
+#blgc {
+  -webkit-line-clamp: 2;
 }
 
 #jyzjhjy {
-    -webkit-line-clamp: 3;
+  -webkit-line-clamp: 3;
 }
 
-#flsy, #bjqk {
-    width: calc(50% - 77px);
-    height: 100%;
-    background-color: #f7f7f7;
-    border-radius: 3px;
-    border: solid 1px #cccccc;
-    padding: 0 3px;
+#flsy,
+#bjqk {
+  width: calc(50% - 77px);
+  height: 100%;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  border: solid 1px #cccccc;
+  padding: 0 3px;
 }
 
 #alzp {
-    width: calc(100% - 78px);
-    height: 100%;
+  width: calc(100% - 78px);
+  height: 100%;
 }
 
 #alzp > div {
-    float: left;
+  float: left;
 }
 
 .yxal-head-icon {
-    width: 20px;
-    height: 100%;
+  width: 20px;
+  height: 100%;
 }
 
 .yxal-head-icon > i {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    top: 50%;
-    margin-top: -10px;
-    cursor: pointer;
-    font-size: 20px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 50%;
+  margin-top: -10px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .yxal-img-container {
-    width: calc(100% - 40px);
-    height: 100%;
-    overflow: hidden;
+  width: calc(100% - 40px);
+  height: 100%;
+  overflow: hidden;
 }
 
 .yxal-img-container > div {
-    height: 100%;
-    overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 
 .yxal-img-container > div > div {
-    float: left;
-    height: 100%;
-    margin-left: 10px;
-    background-size: 100% 100%;
+  float: left;
+  height: 100%;
+  margin-left: 10px;
+  background-size: 100% 100%;
 }

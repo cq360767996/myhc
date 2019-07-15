@@ -1,230 +1,252 @@
 .bmList {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-.bmList::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 4px;
+.bmList::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
 }
-.bmList::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: rgba(114, 144, 180, 0.5);
+.bmList::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(114, 144, 180, 0.5);
 }
-.bmList::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    border-radius: 0;
-    background: rgba(0,0,0,0.1);
+.bmList::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
-.bmList>div {
-    width: 100%;
-    height: calc(50% - 20px);
-    background-color: rgba(196, 217, 238, 0.6);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 20px;
+.bmList > div {
+  width: 100%;
+  height: calc(50% - 20px);
+  background-color: rgba(196, 217, 238, 0.6);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 .bmTitle {
-    width: 100%;
-    height: 45px;
-    line-height: 45px;
-    color: #4d4d4b;
-    font-size: 18px;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  color: #4d4d4b;
+  font-size: 18px;
 }
 .bmTitle span {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 .bt {
-    float: left;
-    margin-left: 30px;
-    font-weight: bold;
+  float: left;
+  margin-left: 30px;
+  font-weight: bold;
 }
 .bmInfo {
-    float: right;
-    margin-right: 12px;
+  float: right;
+  margin-right: 12px;
 }
 .chartPannel2 {
-    width: 100%;
-    height: calc(100% - 45px);
-    background-color: white;
+  width: 100%;
+  height: calc(100% - 45px);
+  background-color: white;
 }
-.chartPannel2>div {
-    float: left;
-    width: calc(35% - 2px);
-    height: 100%;
-    position: relative;
-    background-color: rgba(232, 237, 241, 0.6);
+.chartPannel2 > div {
+  float: left;
+  width: calc(35% - 2px);
+  height: 100%;
+  position: relative;
+  background-color: rgba(232, 237, 241, 0.6);
 }
 .chartTitle {
-    width: 90%;
-    margin-left: 5%;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    color: #78797d;
-    font-weight: bold;
-    box-sizing: border-box;
-    border-bottom: 1px solid #bcc8d8;
+  width: 90%;
+  margin-left: 5%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #78797d;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-bottom: 1px solid #bcc8d8;
 }
-#pie11, #pie22, #pie33, #line11, #line22, #line33, #line44, #bar11, #bar22, #bar33 {
-    width: 100%;
-    height: calc(100% - 60px);
-    margin-top: 10px;
+#pie11,
+#pie22,
+#pie33,
+#line11,
+#line22,
+#line33,
+#line44,
+#bar11,
+#bar22,
+#bar33 {
+  width: 100%;
+  height: calc(100% - 60px);
+  margin-top: 10px;
 }
-#pie44, #pie55 {
-    float: left;
-    width: 50%;
-    height: calc(100% - 90px);
+#pie44,
+#pie55 {
+  float: left;
+  width: 50%;
+  height: calc(100% - 90px);
 }
 .tool_tip2 {
-    position: absolute;
-    left: 62%;
-    top: 55px;
-    font-size: 14px;
-    font-family: "微软雅黑", "宋体", sans-serif;
-    font-weight: 600;
+  position: absolute;
+  left: 62%;
+  top: 55px;
+  font-size: 14px;
+  font-family: '微软雅黑', '宋体', sans-serif;
+  font-weight: 600;
 }
 .b2 {
-    color: #2ba5e8;
+  color: #2ba5e8;
 }
 
 .g2 {
-    color: #40bcbc;
+  color: #40bcbc;
 }
 
 .p2 {
-    color: #8c6ccd;
+  color: #8c6ccd;
 }
-#pie44, #pie55 {
-    float: left;
-    width: 50%;
-    height: calc(100% - 90px);
+#pie44,
+#pie55 {
+  float: left;
+  width: 50%;
+  height: calc(100% - 90px);
 }
-.info11, .info22 {
-    float: left;
-    width: 50%;
-    height: 60px;
-    text-align: center;
-    font-weight: bold;
-    color: #56ace7;
+.info11,
+.info22 {
+  float: left;
+  width: 50%;
+  height: 60px;
+  text-align: center;
+  font-weight: bold;
+  color: #56ace7;
 }
 .newTab1 {
-    position: absolute;
-    width: 150px;
-    left: 16px;
-    top: 50px;
-    height: 26px;
-    line-height: 26px;
-    overflow: hidden;
-    border-radius: 5px;
-    z-index: 999;
+  position: absolute;
+  width: 150px;
+  left: 16px;
+  top: 50px;
+  height: 26px;
+  line-height: 26px;
+  overflow: hidden;
+  border-radius: 5px;
+  z-index: 999;
 }
-.newTab1>div {
-    float: left;
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    color: #81888e;
-    background-color: white;
-    box-sizing: border-box;
-    border-right: 1px solid white;
-    cursor: pointer;
+.newTab1 > div {
+  float: left;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  color: #81888e;
+  background-color: white;
+  box-sizing: border-box;
+  border-right: 1px solid white;
+  cursor: pointer;
 }
 .newTab2 {
-    position: absolute;
-    width: 175px;
-    height: 26px;
-    line-height: 26px;
-    right: 16px;
-    top: 50px;
-    overflow: hidden;
-    border-radius: 5px;
-    z-index: 999;
+  position: absolute;
+  width: 175px;
+  height: 26px;
+  line-height: 26px;
+  right: 16px;
+  top: 50px;
+  overflow: hidden;
+  border-radius: 5px;
+  z-index: 999;
 }
-.newTab2>div {
-    float: left;
-    width: 25%;
-    height: 100%;
-    text-align: center;
-    color: #81888e;
-    background-color: white;
-    box-sizing: border-box;
-    border-right: 1px solid white;
-    cursor: pointer;
+.newTab2 > div {
+  float: left;
+  width: 25%;
+  height: 100%;
+  text-align: center;
+  color: #81888e;
+  background-color: white;
+  box-sizing: border-box;
+  border-right: 1px solid white;
+  cursor: pointer;
 }
-.newtab.selected, .newtab2.selected, .newtab3.selected, .newtabC.selected {
-    color: white;
-    background-color: #3b8cc1;
+.newtab.selected,
+.newtab2.selected,
+.newtab3.selected,
+.newtabC.selected {
+  color: white;
+  background-color: #3b8cc1;
 }
 .year_month {
-    position: absolute;
-    width: 140px;
-    right: 20px;
-    top: 49px;
-    border-radius: 3px;
-    overflow: hidden;
-    height: 26px;
-    z-index: 999;
-    line-height: 26px;
+  position: absolute;
+  width: 140px;
+  right: 20px;
+  top: 49px;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 26px;
+  z-index: 999;
+  line-height: 26px;
 }
 .year_month2 {
-    position: absolute;
-    width: 140px;
-    right: 205px;
-    top: 50px;
-    border-radius: 3px;
-    overflow: hidden;
-    height: 26px;
-    z-index: 999;
-    line-height: 26px;
+  position: absolute;
+  width: 140px;
+  right: 205px;
+  top: 50px;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 26px;
+  z-index: 999;
+  line-height: 26px;
 }
 .year_month3 {
-    position: absolute;
-    width: 140px;
-    right: 205px;
-    top: 50px;
-    border-radius: 3px;
-    overflow: hidden;
-    height: 26px;
-    z-index: 999;
-    line-height: 26px;
+  position: absolute;
+  width: 140px;
+  right: 205px;
+  top: 50px;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 26px;
+  z-index: 999;
+  line-height: 26px;
 }
-.year_month .selected, .year_month2 .selected , .year_month3 .selected {
-    color: white;
-    background-color: #3b8cc1;
+.year_month .selected,
+.year_month2 .selected,
+.year_month3 .selected {
+  color: white;
+  background-color: #3b8cc1;
 }
-.year_month>div, .year_month2>div, .year_month3>div {
-    float: left;
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    color: #81888e;
-    background-color: white;
-    box-sizing: border-box;
-    border-right: 1px solid white;
-    cursor: pointer;
+.year_month > div,
+.year_month2 > div,
+.year_month3 > div {
+  float: left;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  color: #81888e;
+  background-color: white;
+  box-sizing: border-box;
+  border-right: 1px solid white;
+  cursor: pointer;
 }
 .select_pannel3 {
-    background-color: white;
-    color: #81888e;
-    width: 180px;
-    height: 26px;
-    line-height: 26px;
-    position: absolute;
-    z-index: 999;
-    top: 50px;
-    right: 20px;
+  background-color: white;
+  color: #81888e;
+  width: 180px;
+  height: 26px;
+  line-height: 26px;
+  position: absolute;
+  z-index: 999;
+  top: 50px;
+  right: 20px;
 }
 .select_pannel4 {
-    background-color: white;
-    color: #81888e;
-    width: 180px;
-    height: 26px;
-    line-height: 26px;
-    position: absolute;
-    z-index: 999;
-    top: 50px;
-    right: 20px;
+  background-color: white;
+  color: #81888e;
+  width: 180px;
+  height: 26px;
+  line-height: 26px;
+  position: absolute;
+  z-index: 999;
+  top: 50px;
+  right: 20px;
 }

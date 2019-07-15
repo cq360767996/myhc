@@ -1,378 +1,400 @@
 .view {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .title {
-    width: calc(100% - 100px);
-    margin-left: 50px;
-    height: 70px;
-    line-height: 70px;
-    text-align: center;
-    color: #165581;
-    font-size: 20px;
-    border-bottom: 2px solid #aabfd2;
-    position: relative;
-    top: 15%;
+  width: calc(100% - 100px);
+  margin-left: 50px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  color: #165581;
+  font-size: 20px;
+  border-bottom: 2px solid #aabfd2;
+  position: relative;
+  top: 15%;
 }
 .img {
-    width: calc(100% - 100px);
-    margin-left: 50px;
-    position: relative;
-    top: 22%;
+  width: calc(100% - 100px);
+  margin-left: 50px;
+  position: relative;
+  top: 22%;
 }
-.img>div {
-    width: 1396px;
-    margin: 0 auto;
+.img > div {
+  width: 1396px;
+  margin: 0 auto;
 }
 .img img {
-    margin-left: 20px;
-    cursor: pointer;
+  margin-left: 20px;
+  cursor: pointer;
 }
 .dort {
-    width: 12px;
-    height: 12px;
-    background-color: #3175a4;
-    border-radius: 60px;
-    position: relative;
-    left: 50%;
-    margin-left: -6px;
-    top: 15%;
-    margin-top: -6px;
+  width: 12px;
+  height: 12px;
+  background-color: #3175a4;
+  border-radius: 60px;
+  position: relative;
+  left: 50%;
+  margin-left: -6px;
+  top: 15%;
+  margin-top: -6px;
 }
 /*
     内部页面
 */
 .content {
-    width: calc(100% - 70px);
-    margin-left: 35px;
-    height: 100%;
+  width: calc(100% - 70px);
+  margin-left: 35px;
+  height: 100%;
 }
 .search_pannel {
-     width: 100%;
-     height: 50px;
-     line-height: 50px;
-     background-color: rgba(153, 170, 188, 0.6);
-     position: relative;
-     top: 15px;
- }
-#place {
-    width: calc(50% - 50px);
-    margin-left: 20px;
-    float: left;
-    margin-top: 10px;
-    border-radius: 3px;
-    border: 0px;
-    height: 30px;
-    line-height: 30px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgba(153, 170, 188, 0.6);
+  position: relative;
+  top: 15px;
 }
-#date1, #date2 {
-    width: calc(25% - 15px);
-    margin-left: 20px;
-    float: left;
-    margin-top: 10px;
-    height: 30px;
-    line-height: 30px !important;
-    background-color: white;
-    border: 0px;
+#place {
+  width: calc(50% - 50px);
+  margin-left: 20px;
+  float: left;
+  margin-top: 10px;
+  border-radius: 3px;
+  border: 0px;
+  height: 30px;
+  line-height: 30px;
+}
+#date1,
+#date2 {
+  width: calc(25% - 15px);
+  margin-left: 20px;
+  float: left;
+  margin-top: 10px;
+  height: 30px;
+  line-height: 30px !important;
+  background-color: white;
+  border: 0px;
 }
 input {
-    height: 30px;
-    text-indent: 15px;
+  height: 30px;
+  text-indent: 15px;
 }
 .search {
-    margin-left: 10px;
-    cursor: pointer;
+  margin-left: 10px;
+  cursor: pointer;
 }
 .list-group {
-    margin-bottom: 0px !important;
+  margin-bottom: 0px !important;
 }
 #left-tree {
-    margin-top: 5px;
-    /*width: calc(50% - 50px);*/
-    margin-left: 20px;
-    height: 230px;
-    visibility: hidden;
-    overflow: auto;
-    position: absolute;
-    z-index: 999;
+  margin-top: 5px;
+  /*width: calc(50% - 50px);*/
+  margin-left: 20px;
+  height: 230px;
+  visibility: hidden;
+  overflow: auto;
+  position: absolute;
+  z-index: 999;
 }
 .list {
-    width: 100%;
-    height: calc(100% - 115px);
-    margin-top: 40px;
-    background-color: rgba(226, 234, 244, 0.6);
+  width: 100%;
+  height: calc(100% - 115px);
+  margin-top: 40px;
+  background-color: rgba(226, 234, 244, 0.6);
 }
-.list>div {
-    float: left;
-    height: 100%;
+.list > div {
+  float: left;
+  height: 100%;
 }
 .tab_pannel {
-    width: calc(100% - 550px);
-    box-sizing: border-box;
+  width: calc(100% - 550px);
+  box-sizing: border-box;
 }
-.tab_pannel>div {
-    float: left;
+.tab_pannel > div {
+  float: left;
 }
 .left_pannel {
-    width: calc(100% - 52px);
-    height: 100%;
-    margin-left: 25px;
-    margin-right: 25px;
+  width: calc(100% - 52px);
+  height: 100%;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 .splitLine {
-    height: 100%;
-    width: 2px;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0), #b9c7d6 ,rgba(255,255,255,0));
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    #b9c7d6,
+    rgba(255, 255, 255, 0)
+  );
 }
 .splitLine2 {
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), #b9c7d6 ,rgba(255,255,255,0));
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #b9c7d6,
+    rgba(255, 255, 255, 0)
+  );
 }
 .chartPannel {
-    width: 550px;
+  width: 550px;
 }
 .top {
-    overflow: hidden;
+  overflow: hidden;
 }
-.top>div {
-    float: left;
-    height: 70px;
-    /*line-height: 70px;*/
+.top > div {
+  float: left;
+  height: 70px;
+  /*line-height: 70px;*/
 }
 .search_bar {
-    width: calc(100% - 150px);
-    color: #2771a5;
-    font-size: 16px;
+  width: calc(100% - 150px);
+  color: #2771a5;
+  font-size: 16px;
 }
 .navigor {
-    width: calc(100% - 150px);
-    color: #2771a5;
-    font-size: 16px;
-    height: 70px;
+  width: calc(100% - 150px);
+  color: #2771a5;
+  font-size: 16px;
+  height: 70px;
 }
 .navigor span {
-    position: relative;
-    top: 10px;
-    margin-top: 10px;
-    line-height: 28px;
+  position: relative;
+  top: 10px;
+  margin-top: 10px;
+  line-height: 28px;
 }
 .history {
-    text-align: center;
-    width: 150px;
-    height: 40px !important;
-    line-height: 40px !important;
-    margin-top: 15px;
-    box-sizing: border-box;
-    border-left: 2px solid #aec3da;
+  text-align: center;
+  width: 150px;
+  height: 40px !important;
+  line-height: 40px !important;
+  margin-top: 15px;
+  box-sizing: border-box;
+  border-left: 2px solid #aec3da;
 }
 .navi {
-    cursor: pointer;
+  cursor: pointer;
 }
 .bt {
-    width: 500px;
-    height: 35px;
-    margin: 25px auto;
+  width: 500px;
+  height: 35px;
+  margin: 25px auto;
 }
-.bt>div {
-    float: left;
-    text-align: center;
-    width: 100px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #939cab;
-    cursor: pointer;
+.bt > div {
+  float: left;
+  text-align: center;
+  width: 100px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #939cab;
+  cursor: pointer;
 }
 #check {
-    background-color: #4890c3;
-    color: white;
+  background-color: #4890c3;
+  color: white;
 }
-#reset, #back {
-    margin-left: 100px;
-    background-color: #ccd9e8;
-    color: #7e8f9d;
+#reset,
+#back {
+  margin-left: 100px;
+  background-color: #ccd9e8;
+  color: #7e8f9d;
 }
 .ywgk_jtwt {
-    width: 100%;
-    height: calc(100% - 329px);
+  width: 100%;
+  height: calc(100% - 329px);
 }
-.ywgk_jtwt>div {
-    width: 100%;
-    height: 50%;
+.ywgk_jtwt > div {
+  width: 100%;
+  height: 50%;
 }
-.ywgk>div, .jtwt>div {
-    float: left;
+.ywgk > div,
+.jtwt > div {
+  float: left;
 }
 .lab {
-    margin-top: 25px;
-    font-size: 18px;
-    font-weight: bold;
-    width: 100px;
-    height: 35px;
-    line-height: 35px;
-    color: #5d707e;
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100px;
+  height: 35px;
+  line-height: 35px;
+  color: #5d707e;
 }
 .tab2 {
-    height: 100%;
-    width: calc(100% - 100px);
+  height: 100%;
+  width: calc(100% - 100px);
 }
-.secondTab, .thirdTab, .firstTab {
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-    height: 24px;
-    line-height: 24px;
+.secondTab,
+.thirdTab,
+.firstTab {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
 }
-.secondTab>div, .thirdTab>div, .firstTab>div {
-    float: left;
-    width: auto;
-    font-size: 14px;
-    text-align: center;
-    height: 24px;
-    line-height: 24px;
-    border-left: 1px solid #5d707e;
-    cursor: pointer;
+.secondTab > div,
+.thirdTab > div,
+.firstTab > div {
+  float: left;
+  width: auto;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  border-left: 1px solid #5d707e;
+  cursor: pointer;
 }
-.secondTab .selected, .thirdTab .selected, li.selected, .last .selected, .firstTab .selected {
-    color: #4c84b0 !important;
+.secondTab .selected,
+.thirdTab .selected,
+li.selected,
+.last .selected,
+.firstTab .selected {
+  color: #4c84b0 !important;
 }
 .ywgk_jtwt ul {
-    color: #5d707e;
-    line-height: 26px;
-    width: auto;
-    margin-left: -26px;
-    float: left;
+  color: #5d707e;
+  line-height: 26px;
+  width: auto;
+  margin-left: -26px;
+  float: left;
 }
 .ywgk_jtwt ul li {
-    cursor: pointer;
+  cursor: pointer;
 }
 .line {
-    width: 124px;
-    height: 1px;
-    background-color: #939aa1;
-    margin-top: 5px;
+  width: 124px;
+  height: 1px;
+  background-color: #939aa1;
+  margin-top: 5px;
 }
 .last {
-    color: #78868f;
-    line-height: 24px;
-    float: left;
-    background-color: #ecf7fd;
-    margin-top: 10px;
-    border-radius: 4px;
+  color: #78868f;
+  line-height: 24px;
+  float: left;
+  background-color: #ecf7fd;
+  margin-top: 10px;
+  border-radius: 4px;
 }
-.last>div {
-    height: 26px;
-    line-height: 26px;
-    cursor: pointer;
+.last > div {
+  height: 26px;
+  line-height: 26px;
+  cursor: pointer;
 }
-.triangle_left{
-    width: 0;
-    height: 0;
-    border-width: 6px 6px 6px 0;
-    border-style: solid;
-    border-color: transparent #ecf7fd transparent transparent;
-    margin-left: 10px;
-    position: relative;
-    float: left;
-    top: 25px;
-    display: none;
+.triangle_left {
+  width: 0;
+  height: 0;
+  border-width: 6px 6px 6px 0;
+  border-style: solid;
+  border-color: transparent #ecf7fd transparent transparent;
+  margin-left: 10px;
+  position: relative;
+  float: left;
+  top: 25px;
+  display: none;
 }
-.chartPannel>div {
-    width: 100%;
-    height: calc(50% - 35px);
+.chartPannel > div {
+  width: 100%;
+  height: calc(50% - 35px);
 }
-#pie, #line {
-    width: 100%;
-    height: 100%;
+#pie,
+#line {
+  width: 100%;
+  height: 100%;
 }
 .collect {
-    height: 70px !important;
-    width: 100%;
+  height: 70px !important;
+  width: 100%;
 }
 .collect img {
-    position: relative;
-    left: calc(100% - 100px);
-    margin-top: 20px;
+  position: relative;
+  left: calc(100% - 100px);
+  margin-top: 20px;
 }
 .tab_pannel2 {
-    position: absolute;
-    width: 240px;
-    height: 26px;
-    line-height: 26px;
-    overflow: hidden;
-    border-radius: 5px;
-    z-index: 999;
-    right: 79px;
+  position: absolute;
+  width: 240px;
+  height: 26px;
+  line-height: 26px;
+  overflow: hidden;
+  border-radius: 5px;
+  z-index: 999;
+  right: 79px;
 }
-.tab_pannel2>div {
-    float:left;
-    width: 25%;
-    height: 100%;
-    text-align: center;
-    color: #81888e;
-    background-color: #b0becb;
-    box-sizing: border-box;
-    border-right: 1px solid white;
-    cursor: pointer;
+.tab_pannel2 > div {
+  float: left;
+  width: 25%;
+  height: 100%;
+  text-align: center;
+  color: #81888e;
+  background-color: #b0becb;
+  box-sizing: border-box;
+  border-right: 1px solid white;
+  cursor: pointer;
 }
 .tab_pannel2 .selected {
-    color: white;
-    background-color: #3b8cc1;
+  color: white;
+  background-color: #3b8cc1;
 }
 .lab {
-    cursor: pointer;
+  cursor: pointer;
 }
 .firstTab {
-    height: 100%;
-    width: calc(100% - 100px);
-    float: left;
-    margin-top: 25px;
+  height: 100%;
+  width: calc(100% - 100px);
+  float: left;
+  margin-top: 25px;
 }
-.firstTab>div {
-    margin-top: 5px;
+.firstTab > div {
+  margin-top: 5px;
 }
 .sqfx {
-    width: 100%;
-    height: 60px;
-    overflow: hidden;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
 }
-.sqfx>div {
-    float: left;
+.sqfx > div {
+  float: left;
 }
 .search_bar {
-    height: 55px !important;
-    line-height: 55px !important;
+  height: 55px !important;
+  line-height: 55px !important;
 }
 .check {
-    text-align: center;
-    width: 150px;
-    height: 30px !important;
-    line-height: 30px !important;
-    margin-top: 14px;
-    box-sizing: border-box;
-    border-left: 2px solid #aec3da;
-    background-color: white;
-    color: #bfbfbf;
-    cursor: pointer;
+  text-align: center;
+  width: 150px;
+  height: 30px !important;
+  line-height: 30px !important;
+  margin-top: 14px;
+  box-sizing: border-box;
+  border-left: 2px solid #aec3da;
+  background-color: white;
+  color: #bfbfbf;
+  cursor: pointer;
 }
 .check img {
-    width: 16px;
-    height: 16px;
-    position: relative;
-    right: 8px;
-    top: -1px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  right: 8px;
+  top: -1px;
 }
 #keywords {
-    height: 30px;
-    text-indent: 15px;
-    width: 100%;
-    border: 0px;
-    position: relative;
-    color: #bfbfbf;
-    font-size: 14px;
+  height: 30px;
+  text-indent: 15px;
+  width: 100%;
+  border: 0px;
+  position: relative;
+  color: #bfbfbf;
+  font-size: 14px;
 }
 .keyword {
-    color: red;
+  color: red;
 }

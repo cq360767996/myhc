@@ -1,207 +1,221 @@
 <link rel="stylesheet" href="../../css/zxyp/ylld.css" />
 
 <div class="view-header">
-    <div class="view-header-left">
-        <input type="text" id="place" placeholder="市局/分局" readonly/>
-        <input type="hidden" id="placeCode"/>
-        <input type="hidden" id="tempID"/>
-        <input type="hidden" id="tempTYPE"/>
-        <div id="left-tree"></div>
-        <input id="date-input1" class="date-input" placeholder="时间" type="text" readonly="readonly">
-        <input id="date-input2" class="date-input" placeholder="时间" type="text" readonly="readonly">
-        <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn"/>
-    </div>
+  <div class="view-header-left">
+    <input type="text" id="place" placeholder="市局/分局" readonly />
+    <input type="hidden" id="placeCode" />
+    <input type="hidden" id="tempID" />
+    <input type="hidden" id="tempTYPE" />
+    <div id="left-tree"></div>
+    <input
+      id="date-input1"
+      class="date-input"
+      placeholder="时间"
+      type="text"
+      readonly="readonly"
+    />
+    <input
+      id="date-input2"
+      class="date-input"
+      placeholder="时间"
+      type="text"
+      readonly="readonly"
+    />
+    <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
+  </div>
 
-    <div class="view-header-right">
-        <img src="../../img/zxyp/aj/download.png" />
-        <span>分析报告下载</span>
-    </div>
+  <div class="view-header-right">
+    <img src="../../img/zxyp/aj/download.png" />
+    <span>分析报告下载</span>
+  </div>
 </div>
 
 <div class="view-body">
-    <div>
-        <div class="left_view" id="left_top" style="width: 30%;">
-            <div>
-                <div>
-                    <div class="val"><span class="b"></span><span class="i"></span></div>
+  <div>
+    <div class="left_view" id="left_top" style="width: 30%;">
+      <div>
+        <div>
+          <div class="val"><span class="b"></span><span class="i"></span></div>
 
-                    <div class="txt t"></div>
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <div class="val r"></div>
-
-                    <div class="txt t"></div>
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <div class="val"><span class="b"></span><span class="i"></span></div>
-
-                    <div class="txt t"></div>
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <div class="val g"></div>
-
-                    <div class="txt"></div>
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <div class="val"><span class="b"></span><span class="i"></span></div>
-
-                    <div class="txt t"></div>
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <div class="val q"></div>
-
-                    <div class="txt t"></div>
-                </div>
-            </div>
+          <div class="txt t"></div>
         </div>
+      </div>
 
-        <div class="mid_view"  style="width: calc(40% - 20px);">
-            <div class="group">
-                <div class="subTitle">
-                    <span>一率两度走势分析</span>
-                </div>
+      <div>
+        <div>
+          <div class="val r"></div>
 
-                <div class="content">
-                    <div id="chart3"></div>
-                </div>
-            </div>
+          <div class="txt t"></div>
         </div>
+      </div>
 
-        <div class="right_view"  style="width: 30%;">
-            <div class="group">
-                <div class="subTitle2">
-                    <span class="l">一率两度单位情况</span>
+      <div>
+        <div>
+          <div class="val"><span class="b"></span><span class="i"></span></div>
 
-                    <span class="y">
-                        <select id="dept2">
-                            <option value="0">社会治安满意度</option>
-
-                            <option value="1">公安队伍满意度</option>
-
-                            <option value="2">社区民警熟悉率</option>
-                        </select>
-                    </span>
-                </div>
-
-                <div class="content">
-                    <div class="tab2">
-                        <div class="selected" id="1">一单元</div>
-
-                        <div id="2">二单元</div>
-
-                        <div id="3" style="border-right: 0px;">三单元</div>
-                    </div>
-
-                    <div id="chart6"></div>
-                </div>
-            </div>
+          <div class="txt t"></div>
         </div>
+      </div>
+
+      <div>
+        <div>
+          <div class="val g"></div>
+
+          <div class="txt"></div>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <div class="val"><span class="b"></span><span class="i"></span></div>
+
+          <div class="txt t"></div>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <div class="val q"></div>
+
+          <div class="txt t"></div>
+        </div>
+      </div>
     </div>
 
-    <div>
-        <div class="left_view"  style="width: 30%;">
-            <div class="group">
-                <div class="subTitle">
-                    <span>治安晴雨表</span>
-                </div>
-
-                <div class="content">
-                    <div class="wtList"></div>
-                </div>
-            </div>
+    <div class="mid_view" style="width: calc(40% - 20px);">
+      <div class="group">
+        <div class="subTitle">
+          <span>一率两度走势分析</span>
         </div>
 
-        <div class="mid_view"  style="width: calc(40% - 20px);">
-            <div class="group">
-                <div class="subTitle">
-                    <span>队伍门诊室</span>
-                </div>
-
-                <div class="content">
-                    <div id="chart_title"></div>
-
-                    <div id="chart0"></div>
-
-                    <div class="infoT"></div>
-                </div>
-            </div>
+        <div class="content">
+          <div id="chart3"></div>
         </div>
-
-        <div class="right_view"  style="width: 30%;">
-            <div class="group">
-                <div class="subTitle2">
-                    <span class="l">百姓贴心人</span>
-
-                    <span class="y">
-                        <select id="dept">
-                            <option value="0">本期最高</option>
-
-                            <option value="1">增速最快</option>
-                        </select>
-                    </span>
-                </div>
-
-                <div class="content">
-                    <div class="rankList"></div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <div>
-        <div class="left_view_2">
-            <div class="group">
-                <div class="subTitle2">
-                    <span class="l">走访助手</span>
+    <div class="right_view" style="width: 30%;">
+      <div class="group">
+        <div class="subTitle2">
+          <span class="l">一率两度单位情况</span>
 
-                    <span class="y">
-                        <span id="export2"><img src="../../img/download.png" /></span>
+          <span class="y">
+            <select id="dept2">
+              <option value="0">社会治安满意度</option>
 
-                        <input id="zfzs" type="text" /><span id="check2"><img src="../../img/myhc/rdwt/btn_search.png" /></span>
-                    </span>
-                </div>
+              <option value="1">公安队伍满意度</option>
 
-                <div class="content">
-                    <div class="zfList"></div>
-                </div>
-            </div>
+              <option value="2">社区民警熟悉率</option>
+            </select>
+          </span>
         </div>
 
-        <div class="right_view_2">
-            <div class="group">
-                <div class="subTitle2">
-                    <span class="l">号码诊断</span>
+        <div class="content">
+          <div class="tab2">
+            <div class="selected" id="1">一单元</div>
 
-                    <span class="y">
-                        <span id="export"><img src="../../img/download.png" /></span>
+            <div id="2">二单元</div>
 
-                        <select id="dept3">
-                            <option value="0">空错号</option>
+            <div id="3" style="border-right: 0px;">三单元</div>
+          </div>
 
-                            <option value="1">人号不一</option>
-                        </select>
-                    </span>
-                </div>
-
-                <div class="content">
-                    <div class="tsList"></div>
-                </div>
-            </div>
+          <div id="chart6"></div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div>
+    <div class="left_view" style="width: 30%;">
+      <div class="group">
+        <div class="subTitle">
+          <span>治安晴雨表</span>
+        </div>
+
+        <div class="content">
+          <div class="wtList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mid_view" style="width: calc(40% - 20px);">
+      <div class="group">
+        <div class="subTitle">
+          <span>队伍门诊室</span>
+        </div>
+
+        <div class="content">
+          <div id="chart_title"></div>
+
+          <div id="chart0"></div>
+
+          <div class="infoT"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right_view" style="width: 30%;">
+      <div class="group">
+        <div class="subTitle2">
+          <span class="l">百姓贴心人</span>
+
+          <span class="y">
+            <select id="dept">
+              <option value="0">本期最高</option>
+
+              <option value="1">增速最快</option>
+            </select>
+          </span>
+        </div>
+
+        <div class="content">
+          <div class="rankList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="left_view_2">
+      <div class="group">
+        <div class="subTitle2">
+          <span class="l">走访助手</span>
+
+          <span class="y">
+            <span id="export2"><img src="../../img/download.png"/></span>
+
+            <input id="zfzs" type="text" /><span id="check2"
+              ><img src="../../img/myhc/rdwt/btn_search.png"
+            /></span>
+          </span>
+        </div>
+
+        <div class="content">
+          <div class="zfList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right_view_2">
+      <div class="group">
+        <div class="subTitle2">
+          <span class="l">号码诊断</span>
+
+          <span class="y">
+            <span id="export"><img src="../../img/download.png"/></span>
+
+            <select id="dept3">
+              <option value="0">空错号</option>
+
+              <option value="1">人号不一</option>
+            </select>
+          </span>
+        </div>
+
+        <div class="content">
+          <div class="tsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,17 +1,17 @@
 @font-face {
-  font-family: "ZHSCNMT--GBK1-0";
-  src: url("../../fonts/zhscnm.ttf");
+  font-family: 'ZHSCNMT--GBK1-0';
+  src: url('../../fonts/zhscnm.ttf');
 }
 @font-face {
-  font-family: "CenturyGothic-Bold";
-  src: url("../../fonts/GOTHICB.TTF");
+  font-family: 'CenturyGothic-Bold';
+  src: url('../../fonts/GOTHICB.TTF');
 }
 .header > header {
   width: 180px;
   height: 30px;
   line-height: 24px;
   font-size: 16px;
-  background: url("../../img/znbg/preview/title.png") no-repeat;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
 }
 .header > header > span {
   margin-left: 15px;
@@ -25,17 +25,17 @@
 .scroll-style::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .scroll-style::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .scroll-style::-webkit-scrollbar-thumb {
   border-radius: 2px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #C1C1C1;
+  background-color: #c1c1c1;
 }
 .row-width:nth-child(1) {
   width: 40px;
@@ -86,7 +86,7 @@
 .pop-container > header {
   width: 100%;
   height: 65px;
-  background: url("../../img/znbg/preview/header.png") no-repeat;
+  background: url('../../img/znbg/preview/header.png') no-repeat;
 }
 .pop-container > header i {
   float: right;
@@ -146,7 +146,7 @@
   height: 30px;
   line-height: 24px;
   font-size: 16px;
-  background: url("../../img/znbg/preview/title.png") no-repeat;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
 }
 .pop-container > section fieldset > section > header > span {
   margin-left: 15px;
@@ -164,7 +164,7 @@
 .left-section > header {
   width: 100%;
   height: 50px;
-  background-color: #ADC3DB;
+  background-color: #adc3db;
   padding: 10px;
 }
 .left-section > header input {
@@ -204,7 +204,7 @@
   margin-left: 10px;
 }
 .left-section section fieldset > header span {
-  background: url("../../img/znbg/checkbox.png") no-repeat;
+  background: url('../../img/znbg/checkbox.png') no-repeat;
   display: inline-block;
   width: 18px;
   height: 18px;
@@ -216,24 +216,24 @@
   margin: 0 auto;
   padding: 5px;
   color: #999;
-  background-color: #F6FAFF;
+  background-color: #f6faff;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .left-section section fieldset article::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .left-section section fieldset article::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .left-section section fieldset article::-webkit-scrollbar-thumb {
   border-radius: 2px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #C1C1C1;
+  background-color: #c1c1c1;
 }
 .left-section section fieldset article > div {
   width: 100%;
@@ -255,24 +255,24 @@
   width: 100%;
   height: calc(100% - 5px);
   resize: none;
-  background-color: #F6FAFF;
+  background-color: #f6faff;
   border: 0;
   outline: none;
 }
 .left-section section fieldset article textarea::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .left-section section fieldset article textarea::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .left-section section fieldset article textarea::-webkit-scrollbar-thumb {
   border-radius: 2px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #C1C1C1;
+  background-color: #c1c1c1;
 }
 .left-section section fieldset > footer {
   width: 100%;
@@ -375,17 +375,17 @@
 .right-section section > div.tab-body::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .right-section section > div.tab-body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .right-section section > div.tab-body::-webkit-scrollbar-thumb {
   border-radius: 2px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #C1C1C1;
+  background-color: #c1c1c1;
 }
 .right-section section > div.tab-body > div {
   width: 100%;
@@ -393,7 +393,7 @@
 }
 .right-section section > div.tab-body > div:hover,
 .right-section section > div.tab-body > div.row-selected {
-  background-color: #EDF6FF;
+  background-color: #edf6ff;
 }
 .right-section section > div.tab-body > div > div {
   float: left;
@@ -501,10 +501,10 @@
   cursor: pointer;
 }
 .setting-aside > div section li div.switch-on {
-  background: url("../../img/znbg/switch_on.png") no-repeat;
+  background: url('../../img/znbg/switch_on.png') no-repeat;
 }
 .setting-aside > div section li div.switch-off {
-  background: url("../../img/znbg/switch_off.png") no-repeat;
+  background: url('../../img/znbg/switch_off.png') no-repeat;
 }
 .setting-aside > div footer {
   width: 100%;
@@ -530,7 +530,7 @@
   display: block;
   width: 40px;
   height: 40px;
-  background: url("../../img/znbg/close.png") no-repeat;
+  background: url('../../img/znbg/close.png') no-repeat;
   border: 0;
   outline: none;
   position: relative;
@@ -547,7 +547,7 @@
   display: block;
   top: 50%;
   margin-top: -20px;
-  background: url("../../img/znbg/setting.png") no-repeat;
+  background: url('../../img/znbg/setting.png') no-repeat;
 }
 .left-tree {
   height: 230px;
@@ -558,7 +558,7 @@
 }
 /*词云*/
 .jqcloud {
-  font-family: "微软雅黑", "宋体", sans-serif;
+  font-family: '微软雅黑', '宋体', sans-serif;
   font-size: 10px;
   line-height: normal;
 }
@@ -634,7 +634,7 @@
   border-radius: 1px;
 }
 .pop-menu::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 16px;
   height: 16px;
@@ -654,7 +654,7 @@
   cursor: pointer;
 }
 .pop-menu > a:hover {
-  color: #2E91FE;
+  color: #2e91fe;
 }
 .banner {
   width: 100%;
@@ -686,7 +686,7 @@
 #pop-container1 > header {
   width: 100%;
   height: 65px;
-  background: url("../../img/znbg/preview/header.png") no-repeat;
+  background: url('../../img/znbg/preview/header.png') no-repeat;
 }
 #pop-container1 > header i {
   float: right;
@@ -746,7 +746,7 @@
   height: 30px;
   line-height: 24px;
   font-size: 16px;
-  background: url("../../img/znbg/preview/title.png") no-repeat;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
 }
 #pop-container1 > section fieldset > section > header > span {
   margin-left: 15px;
@@ -940,7 +940,7 @@
 #pop-container3 > header {
   width: 100%;
   height: 65px;
-  background: url("../../img/znbg/preview/header.png") no-repeat;
+  background: url('../../img/znbg/preview/header.png') no-repeat;
 }
 #pop-container3 > header i {
   float: right;
@@ -1000,7 +1000,7 @@
   height: 30px;
   line-height: 24px;
   font-size: 16px;
-  background: url("../../img/znbg/preview/title.png") no-repeat;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
 }
 #pop-container3 > section fieldset > section > header > span {
   margin-left: 15px;
@@ -1100,7 +1100,7 @@
   height: 30px;
   line-height: 24px;
   font-size: 16px;
-  background: url("../../img/znbg/preview/title.png") no-repeat;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
 }
 #pop-container3 .fieldset2 > header > span {
   margin-left: 15px;
@@ -1148,7 +1148,7 @@
   height: 30px;
   line-height: 24px;
   font-size: 16px;
-  background: url("../../img/znbg/preview/title.png") no-repeat;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
 }
 #pop-container3 .fieldset4 > header > span {
   margin-left: 15px;
@@ -1228,7 +1228,7 @@
 }
 .tab-container1 > div:first-child {
   border-top: 0;
-  background-color: #F0F3FA;
+  background-color: #f0f3fa;
 }
 .tab-container3 {
   color: #000;
@@ -1247,13 +1247,13 @@
 .tab-container3 > row:first-child {
   height: 31px;
   line-height: 31px;
-  background-color: #F0F3FA;
+  background-color: #f0f3fa;
   border-top: 0;
 }
 .tab-container3 > row:nth-child(2),
 .tab-container3 > row:nth-child(7),
 .tab-container3 > row:nth-child(12) {
-  background-color: #CCEAFF;
+  background-color: #cceaff;
 }
 .tab-container3 > row > cell {
   display: block;

@@ -1,332 +1,325 @@
-<link rel="stylesheet" href="../../css/zxyp/jtsg.css">
+<link rel="stylesheet" href="../../css/zxyp/jtsg.css" />
 <div class="view-header">
-    <div class="view-header-left">
-        <input type="text" id="place" placeholder="市局/分局" readonly/>
-        <input type="hidden" id="placeCode"/>
-        <input type="hidden" id="tempID"/>
-        <input type="hidden" id="tempTYPE"/>
-        <div id="left-tree"></div>
-        <input id="date-input1" class="date-input" placeholder="时间" type="text" readonly="readonly">
-        <input id="date-input2" class="date-input" placeholder="时间" type="text" readonly="readonly">
-        <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn"/>
-    </div>
-    <div class="view-header-right">
-        <img src="../../img/zxyp/aj/download.png"/>
-        <span>分析报告下载</span>
-    </div>
+  <div class="view-header-left">
+    <input type="text" id="place" placeholder="市局/分局" readonly />
+    <input type="hidden" id="placeCode" />
+    <input type="hidden" id="tempID" />
+    <input type="hidden" id="tempTYPE" />
+    <div id="left-tree"></div>
+    <input
+      id="date-input1"
+      class="date-input"
+      placeholder="时间"
+      type="text"
+      readonly="readonly"
+    />
+    <input
+      id="date-input2"
+      class="date-input"
+      placeholder="时间"
+      type="text"
+      readonly="readonly"
+    />
+    <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
+  </div>
+  <div class="view-header-right">
+    <img src="../../img/zxyp/aj/download.png" />
+    <span>分析报告下载</span>
+  </div>
 </div>
 <div class="view-body">
-    <div class="view-col view-left-col">
-        <div class="view-left-col-top border-model">
-            <div>
-                <div class="view-col-header color4" id="jtjqmyd">
-                </div>
-                <div class="view-col-footer">
-                    交通警情满意度
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color4" id="jtjql">
-                </div>
-                <div class="view-col-footer">
-                    交通事故综合评价
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color5" id="jtsgmyd">
-                </div>
-                <div class="view-col-footer">
-                    交通警情量
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color5" id="jtsgl">
-                </div>
-                <div class="view-col-footer">
-                    交通事故量
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color6" id="cgmyd-jz">
-                </div>
-                <div class="view-col-footer">
-                    满意回复量
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color6" id="cgywl-jz">
-                </div>
-                <div class="view-col-footer">
-                    规范业务量
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color7" id="cgmyd-cl">
-                </div>
-                <div class="view-col-footer">
-                    不满意回复量
-                </div>
-            </div>
-            <div>
-                <div class="view-col-header color7" id="cgywl-cl">
-                </div>
-                <div class="view-col-footer">
-                    不规范业务量
-                </div>
-            </div>
+  <div class="view-col view-left-col">
+    <div class="view-left-col-top border-model">
+      <div>
+        <div class="view-col-header color4" id="jtjqmyd"></div>
+        <div class="view-col-footer">
+          交通警情满意度
         </div>
-        <div class="view-left-col-bottom border-model">
-            <div class="view-left-col-bottom-header">
-                <span>满意度走势分析</span>
-                <select id="left2-1">
-                    <option value="0">交通警情</option>
-                    <option value="1">交通事故</option>
-                </select>
-            </div>
-            <div class="view-left-col-bottom-body" id="left2">
-            </div>
+      </div>
+      <div>
+        <div class="view-col-header color4" id="jtjql"></div>
+        <div class="view-col-footer">
+          交通事故综合评价
         </div>
+      </div>
+      <div>
+        <div class="view-col-header color5" id="jtsgmyd"></div>
+        <div class="view-col-footer">
+          交通警情量
+        </div>
+      </div>
+      <div>
+        <div class="view-col-header color5" id="jtsgl"></div>
+        <div class="view-col-footer">
+          交通事故量
+        </div>
+      </div>
+      <div>
+        <div class="view-col-header color6" id="cgmyd-jz"></div>
+        <div class="view-col-footer">
+          满意回复量
+        </div>
+      </div>
+      <div>
+        <div class="view-col-header color6" id="cgywl-jz"></div>
+        <div class="view-col-footer">
+          规范业务量
+        </div>
+      </div>
+      <div>
+        <div class="view-col-header color7" id="cgmyd-cl"></div>
+        <div class="view-col-footer">
+          不满意回复量
+        </div>
+      </div>
+      <div>
+        <div class="view-col-header color7" id="cgywl-cl"></div>
+        <div class="view-col-footer">
+          不规范业务量
+        </div>
+      </div>
     </div>
-    <div class="view-col view-mid-col">
-        <div class="view-mid-col-row border-model">
-            <div class="view-mid-three">
-                <div class="view-mid-header">
-                    交通警情分析
-                </div>
-                <div class="view-mid-body" id="mid1-1"></div>
-            </div>
-            <div class="view-mid-three">
-                <div class="view-mid-header">
-                    具体问题分析
-                </div>
-                <div class="view-mid-body">
-                    <div class="return-img">
-                        <img src="../../img/myhc/myzs/return-btn.png" class="mid1-2-img">
-                    </div>
-                    <div id="mid1-2">
-
-                    </div>
-                </div>
-            </div>
-            <div class="view-mid-three">
-                <div class="view-mid-header">
-                    具体问题单位分布
-                </div>
-                <div class="view-mid-body">
-                    <div class="switch-panel switch1-3">
-                        <div class="switch-selected">
-                            城区大队
-                        </div>
-                        <div>
-                            高速大队
-                        </div>
-                    </div>
-                    <div id="mid1-3"></div>
-                </div>
-            </div>
-        </div>
-        <div class="view-mid-col-row border-model" style="margin-top: 10px;">
-            <div class="view-mid-three">
-                <div class="view-mid-header">
-                    交通事故处理综合评价
-                </div>
-                <div class="view-mid-body mid2-1" style="height: calc(100% - 60px);">
-                    <div class="mid2-1-top">
-                        <div>
-                            综合评价
-                            <strong class="color1">
-                            </strong>
-                        </div>
-                        <div>
-                            <div>
-                                <span>同比</span>
-                                <img src="../../img/zxyp/jtsg/arrow_red.png">
-                                <strong class="color2"></strong>
-                            </div>
-                            <div>
-                                <span>环比</span>
-                                <img src="../../img/zxyp/jtsg/arrow_green.png">
-                                <strong class="color3"></strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mid2-1-bottom">
-                        <div>
-                            <img src="../../img/zxyp/jtsg/card.png">
-                            简易事故评价
-                        </div>
-                        <div id="mid2-1-1"></div>
-                        <div class="mid2-1-bottom-bottom">
-                            <span>同比</span>
-                            <img src="../../img/zxyp/jtsg/arrow_red.png">
-                            <strong class="color2"></strong>
-
-                            <span style="margin-left: 10px;">环比</span>
-                            <img src="../../img/zxyp/jtsg/arrow_green.png">
-                            <strong class="color3"></strong>
-                        </div>
-                    </div>
-                    <div class="mid2-1-bottom">
-                        <div>
-                            <img src="../../img/zxyp/jtsg/car.png">
-                            一般事故评价
-                        </div>
-                        <div id="mid2-1-2"></div>
-                        <div class="mid2-1-bottom-bottom">
-                            <span>同比</span>
-                            <img src="../../img/zxyp/jtsg/arrow_red.png">
-                            <strong class="color2"></strong>
-
-                            <span style="margin-left: 10px;">环比</span>
-                            <img src="../../img/zxyp/jtsg/arrow_green.png">
-                            <strong class="color3"></strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="view-mid-three">
-                <div class="view-mid-header" id="hjwtfx-title">
-                    环节问题分析
-                </div>
-                <div class="view-mid-body">
-                    <div class="return-img">
-                        <img src="../../img/myhc/myzs/return-btn.png" class="mid2-2-img">
-                    </div>
-                    <div id="mid2-2">
-
-                    </div>
-                </div>
-            </div>
-            <div class="view-mid-three">
-                <div class="view-mid-header">
-                    环节问题单位分布
-                </div>
-                <div class="view-mid-body" style="height: calc(100% - 54px);">
-                    <div class="switch-panel switch2-3">
-                        <div class="switch-selected">
-                            城区大队
-                        </div>
-                        <div>
-                            高速大队
-                        </div>
-                    </div>
-                    <div id="mid2-3"></div>
-                </div>
-            </div>
-        </div>
+    <div class="view-left-col-bottom border-model">
+      <div class="view-left-col-bottom-header">
+        <span>满意度走势分析</span>
+        <select id="left2-1">
+          <option value="0">交通警情</option>
+          <option value="1">交通事故</option>
+        </select>
+      </div>
+      <div class="view-left-col-bottom-body" id="left2"></div>
     </div>
-    <div class="view-col view-right-col">
-        <div class="view-right-col-top border-model">
-            <div class="view-mid-header">
-                满意度预警分析
-            </div>
-            <div class="view-mid-body right1">
-                <div>
-                    <span></span>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-
-                </div>
-                <div>
-                    <span></span>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-
-                </div>
-                <div>
-                    <span></span>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-
-                </div>
-                <div>
-                    <span></span>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-
-                </div>
-                <div>
-                    <span></span>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-
-                </div>
-            </div>
+  </div>
+  <div class="view-col view-mid-col">
+    <div class="view-mid-col-row border-model">
+      <div class="view-mid-three">
+        <div class="view-mid-header">
+          交通警情分析
         </div>
-        <div class="view-right-col-bottom border-model">
-            <div class="view-mid-header">
-                综合评价排行榜
-            </div>
-            <div class="view-mid-body" style="height: calc(100% - 50px);">
-                <div class="right-mid">
-                    <div class="switch-panel2">
-                        <div class="switch-selected">
-                            单位
-                        </div>
-                        <div>
-                            人员
-                        </div>
-                    </div>
-                    <div>
-                        <select id="right2-2">
-                            <option value="0">交通警情</option>
-                            <option value="1">交通事故</option>
-                        </select>
-                        <select id="right2-3">
-                            <option value="0">好评榜</option>
-                            <option value="1">曝光台</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="right-bottom">
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                    <div>
-                        <span></span>
-                        <strong></strong>
-                    </div>
-                </div>
-            </div>
+        <div class="view-mid-body" id="mid1-1"></div>
+      </div>
+      <div class="view-mid-three">
+        <div class="view-mid-header">
+          具体问题分析
         </div>
+        <div class="view-mid-body">
+          <div class="return-img">
+            <img src="../../img/myhc/myzs/return-btn.png" class="mid1-2-img" />
+          </div>
+          <div id="mid1-2"></div>
+        </div>
+      </div>
+      <div class="view-mid-three">
+        <div class="view-mid-header">
+          具体问题单位分布
+        </div>
+        <div class="view-mid-body">
+          <div class="switch-panel switch1-3">
+            <div class="switch-selected">
+              城区大队
+            </div>
+            <div>
+              高速大队
+            </div>
+          </div>
+          <div id="mid1-3"></div>
+        </div>
+      </div>
     </div>
+    <div class="view-mid-col-row border-model" style="margin-top: 10px;">
+      <div class="view-mid-three">
+        <div class="view-mid-header">
+          交通事故处理综合评价
+        </div>
+        <div class="view-mid-body mid2-1" style="height: calc(100% - 60px);">
+          <div class="mid2-1-top">
+            <div>
+              综合评价
+              <strong class="color1"> </strong>
+            </div>
+            <div>
+              <div>
+                <span>同比</span>
+                <img src="../../img/zxyp/jtsg/arrow_red.png" />
+                <strong class="color2"></strong>
+              </div>
+              <div>
+                <span>环比</span>
+                <img src="../../img/zxyp/jtsg/arrow_green.png" />
+                <strong class="color3"></strong>
+              </div>
+            </div>
+          </div>
+          <div class="mid2-1-bottom">
+            <div>
+              <img src="../../img/zxyp/jtsg/card.png" />
+              简易事故评价
+            </div>
+            <div id="mid2-1-1"></div>
+            <div class="mid2-1-bottom-bottom">
+              <span>同比</span>
+              <img src="../../img/zxyp/jtsg/arrow_red.png" />
+              <strong class="color2"></strong>
+
+              <span style="margin-left: 10px;">环比</span>
+              <img src="../../img/zxyp/jtsg/arrow_green.png" />
+              <strong class="color3"></strong>
+            </div>
+          </div>
+          <div class="mid2-1-bottom">
+            <div>
+              <img src="../../img/zxyp/jtsg/car.png" />
+              一般事故评价
+            </div>
+            <div id="mid2-1-2"></div>
+            <div class="mid2-1-bottom-bottom">
+              <span>同比</span>
+              <img src="../../img/zxyp/jtsg/arrow_red.png" />
+              <strong class="color2"></strong>
+
+              <span style="margin-left: 10px;">环比</span>
+              <img src="../../img/zxyp/jtsg/arrow_green.png" />
+              <strong class="color3"></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="view-mid-three">
+        <div class="view-mid-header" id="hjwtfx-title">
+          环节问题分析
+        </div>
+        <div class="view-mid-body">
+          <div class="return-img">
+            <img src="../../img/myhc/myzs/return-btn.png" class="mid2-2-img" />
+          </div>
+          <div id="mid2-2"></div>
+        </div>
+      </div>
+      <div class="view-mid-three">
+        <div class="view-mid-header">
+          环节问题单位分布
+        </div>
+        <div class="view-mid-body" style="height: calc(100% - 54px);">
+          <div class="switch-panel switch2-3">
+            <div class="switch-selected">
+              城区大队
+            </div>
+            <div>
+              高速大队
+            </div>
+          </div>
+          <div id="mid2-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view-col view-right-col">
+    <div class="view-right-col-top border-model">
+      <div class="view-mid-header">
+        满意度预警分析
+      </div>
+      <div class="view-mid-body right1">
+        <div>
+          <span></span>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+        </div>
+        <div>
+          <span></span>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+        </div>
+        <div>
+          <span></span>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+        </div>
+        <div>
+          <span></span>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+        </div>
+        <div>
+          <span></span>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view-right-col-bottom border-model">
+      <div class="view-mid-header">
+        综合评价排行榜
+      </div>
+      <div class="view-mid-body" style="height: calc(100% - 50px);">
+        <div class="right-mid">
+          <div class="switch-panel2">
+            <div class="switch-selected">
+              单位
+            </div>
+            <div>
+              人员
+            </div>
+          </div>
+          <div>
+            <select id="right2-2">
+              <option value="0">交通警情</option>
+              <option value="1">交通事故</option>
+            </select>
+            <select id="right2-3">
+              <option value="0">好评榜</option>
+              <option value="1">曝光台</option>
+            </select>
+          </div>
+        </div>
+        <div class="right-bottom">
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+          <div>
+            <span></span>
+            <strong></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

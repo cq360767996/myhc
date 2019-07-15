@@ -1,847 +1,885 @@
 .view-header {
-    width: 95%;
-    height: 50px;
-    margin: 10px auto;
+  width: 95%;
+  height: 50px;
+  margin: 10px auto;
 }
 .view-body {
-    width: 95%;
-    height: calc(100% - 85px);
-    margin: 10px auto;
+  width: 95%;
+  height: calc(100% - 85px);
+  margin: 10px auto;
 }
 .view-header-left {
-    float: left;
-    width: calc(100% - 160px);
-    height: 50px;
-    background: #ADC3DB;
+  float: left;
+  width: calc(100% - 160px);
+  height: 50px;
+  background: #adc3db;
 }
 .view-header-right {
-    float: right;
-    width: 150px;
-    height: 50px;
-    margin-left: 10px;
-    line-height: 42px;
-    font-size: 16px;
-    color: #000;
-    cursor: pointer;
+  float: right;
+  width: 150px;
+  height: 50px;
+  margin-left: 10px;
+  line-height: 42px;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
 }
-.view-header-right>span {
-    margin-left: 10px;
+.view-header-right > span {
+  margin-left: 10px;
 }
 input {
-    height: 30px;
-    text-indent: 15px;
+  height: 30px;
+  text-indent: 15px;
 }
 #place {
-    width: 50%;
-    border-radius: 3px;
-    margin: 10px 10px;
-    border: 0;
+  width: 50%;
+  border-radius: 3px;
+  margin: 10px 10px;
+  border: 0;
 }
 #left-tree {
-    margin-top: -10px;
-    margin-left: 10px;
-    height: 230px;
-    visibility: hidden;
-    overflow: auto;
-    position: absolute;
-    width: 26.75%;
-    z-index: 9999;
+  margin-top: -10px;
+  margin-left: 10px;
+  height: 230px;
+  visibility: hidden;
+  overflow: auto;
+  position: absolute;
+  width: 26.75%;
+  z-index: 9999;
 }
 .date-input {
-    width: 20%;
-    border-radius: 3px;
-    margin: 10px 10px;
-    border: 0;
+  width: 20%;
+  border-radius: 3px;
+  margin: 10px 10px;
+  border: 0;
 }
 .search-btn {
-    cursor: pointer;
-    margin-top: -5px;
+  cursor: pointer;
+  margin-top: -5px;
 }
-.view-body>div {
-    width: 100%;
-    height: calc(100% / 3 - 10px);
-    margin-top: 10px;
+.view-body > div {
+  width: 100%;
+  height: calc(100% / 3 - 10px);
+  margin-top: 10px;
 }
-.view-body>div>div {
-    float: left;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #939cab;
-    overflow: hidden;
+.view-body > div > div {
+  float: left;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #939cab;
+  overflow: hidden;
 }
-.left_view, .right_view {
-    width: calc(100% / 4);
+.left_view,
+.right_view {
+  width: calc(100% / 4);
 }
 .mid_view {
-    width: calc(100% / 2 - 20px);
-    margin-left: 10px;
-    margin-right: 10px;
+  width: calc(100% / 2 - 20px);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .left_view_2 {
-    width: calc(50% - 5px);
-    margin-right: 10px;
+  width: calc(50% - 5px);
+  margin-right: 10px;
 }
 .right_view_2 {
-    width: calc(50% - 5px);
+  width: calc(50% - 5px);
 }
 #video {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    object-fit: fill;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  object-fit: fill;
 }
-#left_top>div {
-    float: left;
-    width: 50%;
-    height: calc(100% / 3);
+#left_top > div {
+  float: left;
+  width: 50%;
+  height: calc(100% / 3);
 }
-#left_top>div>div {
-    height: 70%;
-    width: 90%;
-    border: 1px solid #dadfe3;
-    border-radius: 50px;
-    margin: 0 auto;
-    margin-top: 7%;
-    background-color: #f7f8fc;
+#left_top > div > div {
+  height: 70%;
+  width: 90%;
+  border: 1px solid #dadfe3;
+  border-radius: 50px;
+  margin: 0 auto;
+  margin-top: 7%;
+  background-color: #f7f8fc;
 }
 #left_top span {
-    margin-right: 5px;
+  margin-right: 5px;
 }
-.val, .txt {
-    text-align: center;
-    line-height: 25px;
+.val,
+.txt {
+  text-align: center;
+  line-height: 25px;
 }
 
 .val {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .h {
-    height: 20px;
-    line-height: 22px;
-    float: left;
+  height: 20px;
+  line-height: 22px;
+  float: left;
 }
-.txt, .h {
-    color: #646569;
+.txt,
+.h {
+  color: #646569;
 }
 .b {
-    color: #3788b3 !important;
+  color: #3788b3 !important;
 }
 .g {
-    color: #4ac396 !important;
+  color: #4ac396 !important;
 }
 .r {
-    color: #d24e4a !important;
+  color: #d24e4a !important;
 }
 .p {
-    color: #a470b2 !important;
+  color: #a470b2 !important;
 }
 .o {
-    color: #ed7d33 !important;
+  color: #ed7d33 !important;
 }
 .q {
-    color: #009eb1 !important;
+  color: #009eb1 !important;
 }
 .hh {
-    color: #646569 !important;
+  color: #646569 !important;
 }
 .subTitle {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 18px;
-    color: #888f95;
-    border-bottom: 2px solid #ced7e0;
-    /*font-weight: bold;*/
-    color: #000;
-    font-size: 16px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: #888f95;
+  border-bottom: 2px solid #ced7e0;
+  /*font-weight: bold;*/
+  color: #000;
+  font-size: 16px;
 }
 .group {
-    width: calc(100% - 20px);
-    margin-left: 10px;
-    height: 100%;
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  height: 100%;
 }
 .content {
-    width: 100%;
-    height: calc(100% - 42px);
-    position: relative;
+  width: 100%;
+  height: calc(100% - 42px);
+  position: relative;
 }
-#jcjzsk .content>div, #xhyj .content>div {
-    width: 100%;
-    height: calc(100% / 6);
-    line-height: 32px;
-    color: #75797c;
-    box-sizing: border-box;
-    border-bottom: 1px solid #ced7e0;
+#jcjzsk .content > div,
+#xhyj .content > div {
+  width: 100%;
+  height: calc(100% / 6);
+  line-height: 32px;
+  color: #75797c;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ced7e0;
 }
-.pic, .name {
-    float: left;
-    margin-left: 10px;
+.pic,
+.name {
+  float: left;
+  margin-left: 10px;
 }
-.pic2, .name2, .val2 {
-    float: right;
-    margin-right: 10px;
+.pic2,
+.name2,
+.val2 {
+  float: right;
+  margin-right: 10px;
 }
 .val2 {
-    color: #e45581;
+  color: #e45581;
 }
 .pic2 img {
-    width: 16px;
-    height: 16px;
+  width: 16px;
+  height: 16px;
 }
 .subTitle2 {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    color: #888f95;
-    border-bottom: 2px solid #ced7e0;
-    /*font-weight: bold;*/
-    color: #000;
-    font-size: 16px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #888f95;
+  border-bottom: 2px solid #ced7e0;
+  /*font-weight: bold;*/
+  color: #000;
+  font-size: 16px;
 }
 .l {
-    float: left;
+  float: left;
 }
 .y {
-    float: right;
+  float: right;
 }
-#dept, #dept2, #dept3, #dept4 {
-    width: 100px;
-    background-color: #ccd8e6;
-    border: 0px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 200;
+#dept,
+#dept2,
+#dept3,
+#dept4 {
+  width: 100px;
+  background-color: #ccd8e6;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 200;
 }
 #dept2 {
-    width: 145px;
+  width: 145px;
 }
-#dept3, #dept4 {
-    width: 120px;
+#dept3,
+#dept4 {
+  width: 120px;
 }
 .rank {
-    height: 35px;
-    line-height: 35px;
+  height: 35px;
+  line-height: 35px;
 }
 .rankTitle {
-    margin-left: 10px;
-    color: #878e94;
-    font-size: 16px;
-    float: left;
+  margin-left: 10px;
+  color: #878e94;
+  font-size: 16px;
+  float: left;
 }
 .star {
-    margin-right: 10px;
-    float: right;
+  margin-right: 10px;
+  float: right;
 }
 .rankList {
-    width: 100%;
-    height: calc(100%);
+  width: 100%;
+  height: calc(100%);
 }
-.rankList>div {
-    width: 100%;
-    height: 20%;
-    line-height: 38px;
+.rankList > div {
+  width: 100%;
+  height: 20%;
+  line-height: 38px;
 }
 .rankPic {
-    float: left;
-    width: 24px;
-    height: 24px;
+  float: left;
+  width: 24px;
+  height: 24px;
 }
 .rankPic img {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    top: -2px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: -2px;
 }
 .rankName {
-    float: left;
-    margin-left: 8px;
-    color: #878e94;
-    width: 100px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  float: left;
+  margin-left: 8px;
+  color: #878e94;
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .rankVal {
-    float: right;
-    margin-right: 10px;
-    width: 70px;
-    text-align: right;
-    color: #ae7aab;
+  float: right;
+  margin-right: 10px;
+  width: 70px;
+  text-align: right;
+  color: #ae7aab;
 }
-#tagscloud{
-    width:100%;height:100%;position:relative;font-size:14px;color:#333;text-align:center;overflow: hidden;
+#tagscloud {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  overflow: hidden;
 }
-.myd, .dwqk {
-    width: calc(50% - 5px);
-    height: 100%;
-    float: left;
+.myd,
+.dwqk {
+  width: calc(50% - 5px);
+  height: 100%;
+  float: left;
 }
 .dwqk {
-    margin-left: 10px;
+  margin-left: 10px;
 }
-#chart0, #chart1, #chart2, #chart3, #chart4, #chart5, #chart6 {
-    width: 100%;
-    height: 100%;
+#chart0,
+#chart1,
+#chart2,
+#chart3,
+#chart4,
+#chart5,
+#chart6 {
+  width: 100%;
+  height: 100%;
 }
 #chart0 {
-    height: 100%;
-    width: 50%;
-    float: left;
+  height: 100%;
+  width: 50%;
+  float: left;
 }
-.tab2, .tab3 {
-    position: absolute;
-    width: 200px;
-    height: 26px;
-    line-height: 26px;
-    right: 0px;
-    top: 7px;
-    overflow: hidden;
-    border-radius: 5px;
-    z-index: 99;
+.tab2,
+.tab3 {
+  position: absolute;
+  width: 200px;
+  height: 26px;
+  line-height: 26px;
+  right: 0px;
+  top: 7px;
+  overflow: hidden;
+  border-radius: 5px;
+  z-index: 99;
 }
-.tab2>div, .tab3>div {
-    float: left;
-    width: 25%;
-    height: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    background-color: #fcfdff;
-    color: #a3a3a3;
-    border-right: 1px solid #eff0f2;
+.tab2 > div,
+.tab3 > div {
+  float: left;
+  width: 25%;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fcfdff;
+  color: #a3a3a3;
+  border-right: 1px solid #eff0f2;
 }
-.tab2>div {
-    width: calc(100% / 3);
+.tab2 > div {
+  width: calc(100% / 3);
 }
-.tab2 .selected, .tab3 .selected {
-    color: white;
-    background-color: #2390d3;
+.tab2 .selected,
+.tab3 .selected {
+  color: white;
+  background-color: #2390d3;
 }
 .group_child {
-    float: left;
-    width: calc(100% / 3 - 7px);
-    margin-right: 10px;
-    height: 100%;
+  float: left;
+  width: calc(100% / 3 - 7px);
+  margin-right: 10px;
+  height: 100%;
 }
 .rect {
-    width: calc(100% - 20px);
-    margin-left: 10px;
-    height: calc(50% - 15px);
-    margin-top: 10px;
-    box-sizing: border-box;
-    border: 1px solid #bec7d0;
-    border-radius: 5px;
-    background-color: #f7f8fc;
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  height: calc(50% - 15px);
+  margin-top: 10px;
+  box-sizing: border-box;
+  border: 1px solid #bec7d0;
+  border-radius: 5px;
+  background-color: #f7f8fc;
 }
-.rect>div {
-    width: 100%;
-    height: 50%;
-    line-height: 40px;
+.rect > div {
+  width: 100%;
+  height: 50%;
+  line-height: 40px;
 }
 .dort {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-left: 10px;
-    border-radius: 10px;
-    background-color: #1a86d1;
-    float: left;
-    top: 23px;
-    position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: #1a86d1;
+  float: left;
+  top: 23px;
+  position: relative;
 }
 .lab {
-    color: #5f646a;
+  color: #5f646a;
 }
 .val3 {
-    color: #1a86d1;
-    float: right;
-    margin-right: 5px;
+  color: #1a86d1;
+  float: right;
+  margin-right: 5px;
 }
 
 /*词云*/
 div.jqcloud {
-    font-family: "微软雅黑", "宋体", sans-serif;
-    font-size: 10px;
-    line-height: normal;
+  font-family: '微软雅黑', '宋体', sans-serif;
+  font-size: 10px;
+  line-height: normal;
 }
 
 div.jqcloud a {
-    font-size: inherit;
-    text-decoration: none;
+  font-size: inherit;
+  text-decoration: none;
 }
 
 div.jqcloud span.w10 {
-    font-size: 250%;
-    color: #7a833c;
+  font-size: 250%;
+  color: #7a833c;
 }
 
 div.jqcloud span.w9 {
-    font-size: 240%;
-    color: #53609b;
+  font-size: 240%;
+  color: #53609b;
 }
 
 div.jqcloud span.w8 {
-    font-size: 230%;
-    color: #bc78de;
+  font-size: 230%;
+  color: #bc78de;
 }
 
 div.jqcloud span.w7 {
-    font-size: 220%;
-    color: #cf3876;
+  font-size: 220%;
+  color: #cf3876;
 }
 
 div.jqcloud span.w6 {
-    font-size: 210%;
-    color: #1d84c6;
+  font-size: 210%;
+  color: #1d84c6;
 }
 
 div.jqcloud span.w5 {
-    font-size: 200%;
-    color: #7a833c;
+  font-size: 200%;
+  color: #7a833c;
 }
 
 div.jqcloud span.w4 {
-    font-size: 190%;
-    color: #1d84c6;
+  font-size: 190%;
+  color: #1d84c6;
 }
 
 div.jqcloud span.w3 {
-    font-size: 180%;
-    color: #e8a31c;
+  font-size: 180%;
+  color: #e8a31c;
 }
 
 div.jqcloud span.w2 {
-    font-size: 170%;
-    color: #bc78de;
+  font-size: 170%;
+  color: #bc78de;
 }
 
 div.jqcloud span.w1 {
-    font-size: 160%;
-    color: #ed8166;
+  font-size: 160%;
+  color: #ed8166;
 }
 
 /* colors */
 
 div.jqcloud {
-    color: #09f;
+  color: #09f;
 }
 
 div.jqcloud a {
-    color: inherit;
+  color: inherit;
 }
 
 div.jqcloud span {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 div.jqcloud span:hover {
-    color: #1a86d1;
-    font-weight: bold;
+  color: #1a86d1;
+  font-weight: bold;
 }
 
 div.jqcloud {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
 }
 
 div.jqcloud span {
-    padding: 0;
+  padding: 0;
 }
 #chart6 {
-    height: calc(100% - 35px);
+  height: calc(100% - 35px);
 }
 .progressBar {
-    background-color: #b8c9d9;
-    border-radius: 10px;
-    width: calc(100% - 115px);
-    height: 14px;
-    float: left;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 4px;
+  background-color: #b8c9d9;
+  border-radius: 10px;
+  width: calc(100% - 115px);
+  height: 14px;
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 4px;
 }
 .percent {
-    height: 100%;
-    border-radius: 10px;
+  height: 100%;
+  border-radius: 10px;
 }
 .color1 {
-    background-color: #1e8fdb;
+  background-color: #1e8fdb;
 }
 .color2 {
-    background-color: #399bbe;
+  background-color: #399bbe;
 }
 .color3 {
-    background-color: #a770b3;
+  background-color: #a770b3;
 }
 .color4 {
-    background-color: #6463af;
+  background-color: #6463af;
 }
 .color5 {
-    background-color: #ed7d31;
+  background-color: #ed7d31;
 }
 .newMenu {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
 }
-.newMenu>div {
-    float: left;
-    width: 70px;
-    margin-left: 10px;
-    text-align: center;
-    border-radius: 10px;
-    background-color: #f9fafc;
-    color: #6e6f71;
-    height: 24px;
-    line-height: 24px;
-    margin-top: 8px;
-    cursor: pointer;
+.newMenu > div {
+  float: left;
+  width: 70px;
+  margin-left: 10px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f9fafc;
+  color: #6e6f71;
+  height: 24px;
+  line-height: 24px;
+  margin-top: 8px;
+  cursor: pointer;
 }
 .newMenu .selected {
-    background-color: #51a1ea;
-    color: white;
+  background-color: #51a1ea;
+  color: white;
 }
 .rank_list {
-    width: 100%;
-    height: calc(100% - 40px);
+  width: 100%;
+  height: calc(100% - 40px);
 }
-.rank_list>div {
-    width: 100%;
-    height: calc(100% / 9 - 4px);
-    margin-bottom: 4px;
+.rank_list > div {
+  width: 100%;
+  height: calc(100% / 9 - 4px);
+  margin-bottom: 4px;
 }
 .list-view {
-    background-color: #f7f8fc;
-    box-shadow: 0px 0px 3px #939cab;
-    cursor: pointer;
+  background-color: #f7f8fc;
+  box-shadow: 0px 0px 3px #939cab;
+  cursor: pointer;
 }
 .rank_list .choose {
-    display: block;
+  display: block;
 }
 .ph {
-    height: calc(100% / 9 * 3 - 2px) !important;
-    display: none;
+  height: calc(100% / 9 * 3 - 2px) !important;
+  display: none;
 }
-.ph>div {
-    width: 100%;
-    height: calc(100% / 3);
+.ph > div {
+  width: 100%;
+  height: calc(100% / 3);
 }
 .rankLab {
-    float: left;
-    color: #6e6f71;
-    line-height: 28px;
-    margin-left: 10px;
+  float: left;
+  color: #6e6f71;
+  line-height: 28px;
+  margin-left: 10px;
 }
 .rankLab img {
-    margin-right: 10px;
-    position: relative;
-    top: -2px;
+  margin-right: 10px;
+  position: relative;
+  top: -2px;
 }
 .rankImg {
-    float: right;
-    line-height: 24px;
-    margin-right: 10px;
+  float: right;
+  line-height: 24px;
+  margin-right: 10px;
 }
 .lh {
-    line-height: 32px;
+  line-height: 32px;
 }
-#mid_top>div {
-    float: left;
-    height: calc(50% - 8px);
-    margin-top: 5px;
-    width: calc(100% / 3 - 14px);
-    margin-left: 10px;
-    background: url("../../img/zxyp/ckfw/bg.png") no-repeat;
-    background-size: 100% 100%;
+#mid_top > div {
+  float: left;
+  height: calc(50% - 8px);
+  margin-top: 5px;
+  width: calc(100% / 3 - 14px);
+  margin-left: 10px;
+  background: url('../../img/zxyp/ckfw/bg.png') no-repeat;
+  background-size: 100% 100%;
 }
 .mid_title {
-    text-align: center;
-    color: #1c85c9;
-    font-size: 16px;
-    height: 20px;
-    line-height: 20px;
+  text-align: center;
+  color: #1c85c9;
+  font-size: 16px;
+  height: 20px;
+  line-height: 20px;
 }
 .content2 {
-    width: 100%;
-    height: calc(100% - 23px);
-    line-height: 22px;
+  width: 100%;
+  height: calc(100% - 23px);
+  line-height: 22px;
 }
-.content2>div {
-    width: 100%;
-    height: 25%;
+.content2 > div {
+  width: 100%;
+  height: 25%;
 }
 .lh2 {
-    float: left;
-    margin-top: 6px;
-    margin-left: 10px;
+  float: left;
+  margin-top: 6px;
+  margin-left: 10px;
 }
 .lab2 {
-    margin-left: 6px;
+  margin-left: 6px;
 }
-.val4, .val5 , .val6 , .val7 {
-    float: right;
-    margin-right: 10px;
+.val4,
+.val5,
+.val6,
+.val7 {
+  float: right;
+  margin-right: 10px;
 }
 .world_cloud {
-    width: 100%;
-    height: calc(100% - 140px);
+  width: 100%;
+  height: calc(100% - 140px);
 }
 .myys {
-    width: 100%;
-    height: 110px;
-    border-top: 1px solid #d8e2ec;
-    box-sizing: border-box;
+  width: 100%;
+  height: 110px;
+  border-top: 1px solid #d8e2ec;
+  box-sizing: border-box;
 }
 .search_title {
-    text-align: center;
-    margin-top: 15px;
+  text-align: center;
+  margin-top: 15px;
 }
 .search_bar {
-    width: 100%;
-    height: 37px;
-    line-height: 37px;
-    margin-top: 15px;
+  width: 100%;
+  height: 37px;
+  line-height: 37px;
+  margin-top: 15px;
 }
-.search_bar>div {
-    float: left;
+.search_bar > div {
+  float: left;
 }
 .text {
-    width: calc(100% - 65px);
-    height: 100%;
-    position: relative;
+  width: calc(100% - 65px);
+  height: 100%;
+  position: relative;
 }
 .text img {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 #keywords {
-    width: 100%;
-    height: 36px;
-    border: 0px;
-    text-indent: 36px;
-    color: #4c4c4c;
+  width: 100%;
+  height: 36px;
+  border: 0px;
+  text-indent: 36px;
+  color: #4c4c4c;
 }
 .check {
-    width: 65px;
-    height: 100%;
-    color: #b5e9ff;
-    background-color: #1887cf;
-    border-radius: 0px 4px 4px 0px;
-    text-align: center;
-    cursor: pointer;
+  width: 65px;
+  height: 100%;
+  color: #b5e9ff;
+  background-color: #1887cf;
+  border-radius: 0px 4px 4px 0px;
+  text-align: center;
+  cursor: pointer;
 }
 .wtTab {
-    margin-right: 10px;
-    font-size: 14px;
-    cursor: pointer;
+  margin-right: 10px;
+  font-size: 14px;
+  cursor: pointer;
 }
 .wtTab img {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 .wtList {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
-.wtList>div {
-    width: 100%;
-    height: calc(100% / 6);
-    box-sizing: border-box;
-    border-bottom: 1px solid #ced7e0;
+.wtList > div {
+  width: 100%;
+  height: calc(100% / 6);
+  box-sizing: border-box;
+  border-bottom: 1px solid #ced7e0;
 }
 .tt {
-    color: #646569;
-    margin-left: 10px;
+  color: #646569;
+  margin-left: 10px;
 }
 .advise {
-    color: #378bcb;
-    cursor: pointer;
-    margin-right: 10px;
+  color: #378bcb;
+  cursor: pointer;
+  margin-right: 10px;
 }
 .img {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 .val9 {
-    font-size: 20px;
+  font-size: 20px;
 }
 #chart6 {
-    overflow: hidden;
+  overflow: hidden;
 }
-.wtList::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 4px;
+.wtList::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
 }
-.wtList::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: rgba(0,0,0,0.2);
+.wtList::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
-.wtList::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    border-radius: 0;
-    background: rgba(0,0,0,0.1);
+.wtList::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
 .t {
-    color: #000;
+  color: #000;
 }
 #left_top {
-    font-size: 16px;
+  font-size: 16px;
 }
 select {
-    color: #89a3c6;
-    background-color: white !important;
-    border: 1px solid rgb(169, 169, 169) !important;
+  color: #89a3c6;
+  background-color: white !important;
+  border: 1px solid rgb(169, 169, 169) !important;
 }
 .world_cloud > div {
-    width: 95%;
-    height: 30px;
-    line-height: 30px;
-    font-size: 16px;
-    color: #000;
-    margin: 0 auto;
+  width: 95%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #000;
+  margin: 0 auto;
 }
 .world_cloud > div > span:first-child {
-    float: left;
+  float: left;
 }
 .world_cloud > div > span:nth-child(2) {
-    color: #2A9BD5;
-    float: right;
-    font-size: 18px;
-    font-weight: 500;
+  color: #2a9bd5;
+  float: right;
+  font-size: 18px;
+  font-weight: 500;
 }
 .mm {
-    margin-left: 25px;
+  margin-left: 25px;
 }
 #chart6 {
-    position: relative;
-    top: 35px;
+  position: relative;
+  top: 35px;
 }
 .infoT {
-    float: left;
-    width: 50%;
-    height: 100%;
-    overflow: auto;
+  float: left;
+  width: 50%;
+  height: 100%;
+  overflow: auto;
 }
-.infoT::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 4px;
+.infoT::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
 }
-.infoT::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: rgba(0,0,0,0.2);
+.infoT::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
-.infoT::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    border-radius: 0;
-    background: rgba(0,0,0,0.1);
+.infoT::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
-.infoT>div {
-    width: calc(100% - 20px);
-    margin-left: 10px;
-    height: calc(100% / 3 - 10px);
-    margin-top: 8px;
-    background: url("../../img/zxyp/ylld/bg.png") no-repeat;
-    background-size: 100% 100%;
-    line-height: 55px;
+.infoT > div {
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  height: calc(100% / 3 - 10px);
+  margin-top: 8px;
+  background: url('../../img/zxyp/ylld/bg.png') no-repeat;
+  background-size: 100% 100%;
+  line-height: 55px;
 }
 #zfzs {
-    height: 26px;
-    position: relative;
-    top: 1px;
-    margin-right: 3px;
-    border: 1px solid #cecfd3;
-    border-radius: 4px;
-    text-indent: 5px !important;
+  height: 26px;
+  position: relative;
+  top: 1px;
+  margin-right: 3px;
+  border: 1px solid #cecfd3;
+  border-radius: 4px;
+  text-indent: 5px !important;
 }
 #check2 {
-    cursor: pointer;
+  cursor: pointer;
 }
-.zfList, .tsList {
-    width: 100%;
-    height: 100%;
+.zfList,
+.tsList {
+  width: 100%;
+  height: 100%;
 }
-.zfList>div {
-    width: 100%;
-    height: calc(100% / 6);
-    line-height: 30px;
-    color: #494c51;
-    box-sizing: border-box;
-    border-bottom: 1px solid #c9d5e1;
+.zfList > div {
+  width: 100%;
+  height: calc(100% / 6);
+  line-height: 30px;
+  color: #494c51;
+  box-sizing: border-box;
+  border-bottom: 1px solid #c9d5e1;
 }
-.zfList>div div {
-    float: left;
-    width: calc(100% / 5 - 10px);
-    text-align: center;
+.zfList > div div {
+  float: left;
+  width: calc(100% / 5 - 10px);
+  text-align: center;
 }
-.tsList>div {
-    width: 100%;
-    height: calc(100% / 6);
-    line-height: 30px;
-    color: #494c51;
-    box-sizing: border-box;
-    border-bottom: 1px solid #c9d5e1;
+.tsList > div {
+  width: 100%;
+  height: calc(100% / 6);
+  line-height: 30px;
+  color: #494c51;
+  box-sizing: border-box;
+  border-bottom: 1px solid #c9d5e1;
 }
-.tsList>div div {
-    float: left;
-    width: calc(100% / 4 - 12px);
-    text-align: center;
+.tsList > div div {
+  float: left;
+  width: calc(100% / 4 - 12px);
+  text-align: center;
 }
 .num {
-    width: 50px !important;
+  width: 50px !important;
 }
 .num2 {
-    width: 48px !important;
+  width: 48px !important;
 }
 .det {
-    cursor: pointer;
-    color: #1c85c7;
+  cursor: pointer;
+  color: #1c85c7;
 }
-#export, #export2 {
-    color: white;
-    border-radius: 5px;
-    width: 30px;
-    position: relative;
-    top: -1px;
-    display: inline-block;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    cursor: pointer;
+#export,
+#export2 {
+  color: white;
+  border-radius: 5px;
+  width: 30px;
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
 }
 #chart_title {
-    position: absolute;
-    width: 82px;
-    text-align: center;
-    left: 25%;
-    margin-left: -41px;
-    top: 50%;
-    margin-top: -15px;
-    height: auto;
-    cursor: pointer;
-    z-index: 99;
+  position: absolute;
+  width: 82px;
+  text-align: center;
+  left: 25%;
+  margin-left: -41px;
+  top: 50%;
+  margin-top: -15px;
+  height: auto;
+  cursor: pointer;
+  z-index: 99;
 }
 .tw {
-    display: inline-block;
-    width: 55px;
-    text-align: right;
+  display: inline-block;
+  width: 55px;
+  text-align: right;
 }
 .type3 span {
-    color: red;
+  color: red;
 }
 .type2 {
-    /*background-color: #ADC3DB;*/
+  /*background-color: #ADC3DB;*/
 }
 .type4 {
-    background-color: #ADC3DB;
+  background-color: #adc3db;
 }
 .type4 span {
-    color: red;
+  color: red;
 }

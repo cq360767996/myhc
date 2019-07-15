@@ -2,10 +2,10 @@
   "success": true,
   "msg": "",
   "data": [
-    {"name": "社区1", "name2": "秦淮分局",  "value": "99.2%", "value2": "5"},
-    {"name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "15"},
-    {"name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "100"},
-    {"name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "9"},
-    {"name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "66"}
+    { "name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "5" },
+    { "name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "15" },
+    { "name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "100" },
+    { "name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "9" },
+    { "name": "社区1", "name2": "秦淮分局", "value": "99.2%", "value2": "66" }
   ]
 }

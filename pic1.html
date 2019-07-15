@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>1</title>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            background-color: #1e4663;
-        }
-        .img-1 {
-            position: absolute;
-            width: 980px;
-            height: 1000px;
-            left: 50%;
-            top: 50%;
-            margin-left: -490px;
-            margin-top: -500px;
-            background: url("img/pic1.jpg") no-repeat;
-            background-size: 100% 100%;
-        }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #1e4663;
+      }
+      .img-1 {
+        position: absolute;
+        width: 980px;
+        height: 1000px;
+        left: 50%;
+        top: 50%;
+        margin-left: -490px;
+        margin-top: -500px;
+        background: url('img/pic1.jpg') no-repeat;
+        background-size: 100% 100%;
+      }
     </style>
-</head>
-<body>
-<div class="img-1">
-
-</div>
-<script src="lib/jquery.min.js"></script>
-<script>
-    $('body').on('keyup', function (e) {
+  </head>
+  <body>
+    <div class="img-1"></div>
+    <script src="lib/jquery.min.js"></script>
+    <script>
+      $('body').on('keyup', function(e) {
         if (e.keyCode == 39) {
-            location.href = '/pic2.html';
+          location.href = '/pic2.html'
         } else if (e.keyCode == 37) {
-            location.href = '/pic7.html';
+          location.href = '/pic7.html'
         }
-    });
-</script>
-</body>
+      })
+    </script>
+  </body>
 </html>

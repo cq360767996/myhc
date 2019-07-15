@@ -2,43 +2,41 @@
   "success": true,
   "msg": "",
   "data1": [
-    {"name": "违法犯罪类1", "value": 30},
-    {"name": "违法犯罪类2", "value": 30},
-    {"name": "违法犯罪类3", "value": 30},
-    {"name": "违法犯罪类4", "value": 30},
-    {"name": "违法犯罪类5", "value": 30}
+    { "name": "违法犯罪类1", "value": 30 },
+    { "name": "违法犯罪类2", "value": 30 },
+    { "name": "违法犯罪类3", "value": 30 },
+    { "name": "违法犯罪类4", "value": 30 },
+    { "name": "违法犯罪类5", "value": 30 }
   ],
   "data2": [
     [
-      {"name": "玄武分局1", "idvalue": 90},
-      {"name": "玄武分局2", "value": 90},
-      {"name": "玄武分局3", "value": 90},
-      {"name": "玄武分局4", "value": 90},
-      {"name": "玄武分局5", "value": 90},
-      {"name": "玄武分局6", "value": 90},
-      {"name": "玄武分局7", "value": 90},
-      {"name": "玄武分局8", "value": 90},
-      {"name": "玄武分局9", "value": 90}
+      { "name": "玄武分局1", "idvalue": 90 },
+      { "name": "玄武分局2", "value": 90 },
+      { "name": "玄武分局3", "value": 90 },
+      { "name": "玄武分局4", "value": 90 },
+      { "name": "玄武分局5", "value": 90 },
+      { "name": "玄武分局6", "value": 90 },
+      { "name": "玄武分局7", "value": 90 },
+      { "name": "玄武分局8", "value": 90 },
+      { "name": "玄武分局9", "value": 90 }
     ],
     [
-      {"name": "鼓楼分局1", "value": 100},
-      {"name": "鼓楼分局2", "value": 100},
-      {"name": "鼓楼分局3", "value": 10},
-      {"name": "鼓楼分局4", "value": 100},
-      {"name": "鼓楼分局5", "value": 10},
-      {"name": "鼓楼分局6", "value": 10}
+      { "name": "鼓楼分局1", "value": 100 },
+      { "name": "鼓楼分局2", "value": 100 },
+      { "name": "鼓楼分局3", "value": 10 },
+      { "name": "鼓楼分局4", "value": 100 },
+      { "name": "鼓楼分局5", "value": 10 },
+      { "name": "鼓楼分局6", "value": 10 }
     ],
+    [{ "name": "建邺分局1", "value": 90 }],
     [
-      {"name": "建邺分局1", "value": 90}
-    ],
-    [
-      {"name": "秦淮分局1", "value": 90},
-      {"name": "秦淮分局2", "value": 90},
-      {"name": "秦淮分局3", "value": 90},
-      {"name": "秦淮分局4", "value": 90},
-      {"name": "秦淮分局5", "value": 90},
-      {"name": "秦淮分局6", "value": 90},
-      {"name": "秦淮分局7", "value": 90}
+      { "name": "秦淮分局1", "value": 90 },
+      { "name": "秦淮分局2", "value": 90 },
+      { "name": "秦淮分局3", "value": 90 },
+      { "name": "秦淮分局4", "value": 90 },
+      { "name": "秦淮分局5", "value": 90 },
+      { "name": "秦淮分局6", "value": 90 },
+      { "name": "秦淮分局7", "value": 90 }
     ]
   ]
 }

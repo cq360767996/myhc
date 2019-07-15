@@ -1,155 +1,157 @@
 .view {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-.view>div {
-    width: 1200px;
-    height: 100%;
-    margin: 0 auto;
+.view > div {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
 }
 .back {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    cursor: pointer;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
 }
 #back {
-    float: right;
-    margin-right: 10px;
+  float: right;
+  margin-right: 10px;
 }
 #back img {
-    position: relative;
-    top: -2px;
+  position: relative;
+  top: -2px;
 }
 #back span {
-    margin-left: 6px;
+  margin-left: 6px;
 }
 .list {
-    width: 100%;
-    height: calc(100% - 60px);
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 5px;
-    color: #4c4c4c
+  width: 100%;
+  height: calc(100% - 60px);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  color: #4c4c4c;
 }
-.list>div {
-    height: 100%;
-    width: calc(100% - 70px);
-    margin-left: 35px;
+.list > div {
+  height: 100%;
+  width: calc(100% - 70px);
+  margin-left: 35px;
 }
 .line {
-    width: 100%;
-    height: 10px;
+  width: 100%;
+  height: 10px;
 }
 .search_bar {
-    width: 100%;
-    height: 50px;
-    line-height: 32px;
+  width: 100%;
+  height: 50px;
+  line-height: 32px;
 }
-.search_bar>div {
-    float: left;
+.search_bar > div {
+  float: left;
 }
 .check {
-    width: 65px;
-    height: 100%;
-    color: #b5e9ff;
-    background-color: #1887cf;
-    border-radius: 0px 4px 4px 0px;
-    text-align: center;
-    cursor: pointer;
-    margin-top: 11px;
-    height: 37px;
-    line-height: 37px;
+  width: 65px;
+  height: 100%;
+  color: #b5e9ff;
+  background-color: #1887cf;
+  border-radius: 0px 4px 4px 0px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 11px;
+  height: 37px;
+  line-height: 37px;
 }
 .text {
-    width: calc(100% - 215px);
-    height: 100%;
-    position: relative;
-    margin-top: 11px;
-    height: 37px;
+  width: calc(100% - 215px);
+  height: 100%;
+  position: relative;
+  margin-top: 11px;
+  height: 37px;
 }
 #keywords {
-    width: 100%;
-    height: 37px;
-    border: 0px;
-    text-indent: 20px;
-    color: #4c4c4c;
+  width: 100%;
+  height: 37px;
+  border: 0px;
+  text-indent: 20px;
+  color: #4c4c4c;
 }
 .title {
-    width: 150px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    color: #55b2de;
-    text-shadow: 1px 3px 6px #000;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: #55b2de;
+  text-shadow: 1px 3px 6px #000;
 }
 .grid {
-    width: 100%;
-    height: calc(100% - 145px);
-    margin-top: 10px;
-    box-sizing: border-box;
-    border-top: 1px dashed #cbcbcb;
+  width: 100%;
+  height: calc(100% - 145px);
+  margin-top: 10px;
+  box-sizing: border-box;
+  border-top: 1px dashed #cbcbcb;
 }
-.grid>div {
-    width: 100%;
-    height: calc(100% / 6);
-    box-sizing: border-box;
-    border-bottom: 1px dashed #cbcbcb;
-    cursor: pointer;
+.grid > div {
+  width: 100%;
+  height: calc(100% / 6);
+  box-sizing: border-box;
+  border-bottom: 1px dashed #cbcbcb;
+  cursor: pointer;
 }
 .pagination {
-    position: relative;
-    left: 50%;
-    margin-left: -141px;
+  position: relative;
+  left: 50%;
+  margin-left: -141px;
 }
 .row {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
-.row>div {
-    width: 100%;
-    height: 50%;
+.row > div {
+  width: 100%;
+  height: 50%;
 }
-.firstRow, .secondRow {
-    overflow: hidden;
+.firstRow,
+.secondRow {
+  overflow: hidden;
 }
-.firstRow>div {
-    float: left;
-    width: calc(100% / 3 * 2);
+.firstRow > div {
+  float: left;
+  width: calc(100% / 3 * 2);
 }
-.secondRow>div {
-    float: left;
-    width: calc(100% / 3);
+.secondRow > div {
+  float: left;
+  width: calc(100% / 3);
 }
-.lab, .val {
-    margin-top: 2%;
-    display: inline-block;
-    color: #666666;
+.lab,
+.val {
+  margin-top: 2%;
+  display: inline-block;
+  color: #666666;
 }
 ::-webkit-input-placeholder {
-    color: #b7bcbf;
+  color: #b7bcbf;
 }
 .myThumbnail {
-    width: calc(100% / 3) !important;
-    text-align: center;
+  width: calc(100% / 3) !important;
+  text-align: center;
 }
 .myThumbnail img {
-    width: 100px;
-    height: 70px;
-    margin-top: 15px;
-    position: absolute;
+  width: 100px;
+  height: 70px;
+  margin-top: 15px;
+  position: absolute;
 }
 .hid {
-    display: none;
+  display: none;
 }
 .sow {
-    width: 100% !important;
-    margin-top: -1%;
+  width: 100% !important;
+  margin-top: -1%;
 }
 .low {
-    width: 22% !important;
+  width: 22% !important;
 }
 .low .val {
-    color: #337ab7;
+  color: #337ab7;
 }

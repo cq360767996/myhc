@@ -1,431 +1,438 @@
 .view {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .leftPannel {
-    float: left;
-    width: calc(100% - 390px);
-    height: 100%;
+  float: left;
+  width: calc(100% - 390px);
+  height: 100%;
 }
 .rightPannel {
-    float: left;
-    width: 390px;
-    height: calc(100% - 75px);
-    overflow: hidden;
+  float: left;
+  width: 390px;
+  height: calc(100% - 75px);
+  overflow: hidden;
 }
 .content {
-    width: calc(100% - 70px);
-    margin-left: 35px;
-    height: 100%;
+  width: calc(100% - 70px);
+  margin-left: 35px;
+  height: 100%;
 }
 .search_pannel {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    background-color: rgba(153, 170, 188, 0.6);
-    position: relative;
-    top: 15px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgba(153, 170, 188, 0.6);
+  position: relative;
+  top: 15px;
 }
 #place {
-    width: calc(35% - 30px);
-    margin-left: 15px;
-    float: left;
-    margin-top: 10px;
-    border-radius: 3px;
-    border: 0px;
-    height: 30px;
-    line-height: 30px;
+  width: calc(35% - 30px);
+  margin-left: 15px;
+  float: left;
+  margin-top: 10px;
+  border-radius: 3px;
+  border: 0px;
+  height: 30px;
+  line-height: 30px;
 }
 
-#date1, #date2 {
-    width: calc(32% - 30px);
-    margin-left: 15px;
-    float: left;
-    margin-top: 10px;
-    height: 30px;
-    line-height: 30px !important;
-    background-color: white;
-    border: 0px;
+#date1,
+#date2 {
+  width: calc(32% - 30px);
+  margin-left: 15px;
+  float: left;
+  margin-top: 10px;
+  height: 30px;
+  line-height: 30px !important;
+  background-color: white;
+  border: 0px;
 }
 
 input {
-    height: 30px;
-    text-indent: 15px;
+  height: 30px;
+  text-indent: 15px;
 }
 
 #check {
-    margin-left: 10px;
-    cursor: pointer;
+  margin-left: 10px;
+  cursor: pointer;
 }
 #left-tree {
-    margin-top: 5px;
-    margin-left: 15px;
-    height: 230px;
-    visibility: hidden;
-    overflow: auto;
-    position: absolute;
-    z-index: 9999;
+  margin-top: 5px;
+  margin-left: 15px;
+  height: 230px;
+  visibility: hidden;
+  overflow: auto;
+  position: absolute;
+  z-index: 9999;
 }
 .list {
-    width: 100%;
-    height: calc(100% - 95px);
-    margin-top: 30px;
+  width: 100%;
+  height: calc(100% - 95px);
+  margin-top: 30px;
 }
-.list>div {
-    float: left;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #939cab;
+.list > div {
+  float: left;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #939cab;
 }
 .group_one {
-    position: relative;
-    width: 330px;
-    height: 100%;
+  position: relative;
+  width: 330px;
+  height: 100%;
 }
 .left_group {
-    width: 100%;
-    height: calc(50% - 50px);
-    position: relative;
+  width: 100%;
+  height: calc(50% - 50px);
+  position: relative;
 }
 .navigor {
-    width: calc(100% - 30px);
-    margin-left: 15px;
-    color: #2771a5;
-    font-size: 16px;
-    height: 70px;
+  width: calc(100% - 30px);
+  margin-left: 15px;
+  color: #2771a5;
+  font-size: 16px;
+  height: 70px;
 }
 .navigor span {
-    position: relative;
-    top: 8px;
-    line-height: 28px;
-    display: inline-block;
+  position: relative;
+  top: 8px;
+  line-height: 28px;
+  display: inline-block;
 }
 .nav {
-    cursor: pointer;
+  cursor: pointer;
 }
 #topChart {
-    width: 100%;
-    height: calc(100% - 70px);
-    position: relative;
-    z-index: 999;
+  width: 100%;
+  height: calc(100% - 70px);
+  position: relative;
+  z-index: 999;
 }
 #back {
-    width: 90px;
-    height: 40px;
-    line-height: 40px;
-    color: white;
-    background-color: #488fc3;
-    border-radius: 4px;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    margin-left: -45px;
-    cursor: pointer;
-    text-align: center;
-    box-shadow: 0px 0px 8px #939cab;
+  width: 90px;
+  height: 40px;
+  line-height: 40px;
+  color: white;
+  background-color: #488fc3;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -45px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0px 0px 8px #939cab;
 }
 .group_two {
-    position: relative;
-    width: calc(100% - 345px);
-    height: 100%;
-    margin-left: 15px;
+  position: relative;
+  width: calc(100% - 345px);
+  height: 100%;
+  margin-left: 15px;
 }
 #pie_3D1 {
-    float: left;
-    width: 70%;
-    height: 80%;
-    margin: 0 auto;
-    position: absolute;
-    top: 45%;
-    margin-left: 0px;
+  float: left;
+  width: 70%;
+  height: 80%;
+  margin: 0 auto;
+  position: absolute;
+  top: 45%;
+  margin-left: 0px;
 }
 #pie_3D2 {
-    float: left;
-    width: 70%;
-    height: 80%;
-    margin: 0 auto;
-    position: absolute;
-    top: 25%;
-    margin-left: 0px;
+  float: left;
+  width: 70%;
+  height: 80%;
+  margin: 0 auto;
+  position: absolute;
+  top: 25%;
+  margin-left: 0px;
 }
 #pie_3D3 {
-    float: left;
-    width: 70%;
-    height: 80%;
-    margin: 0 auto;
-    position: absolute;
-    top: 5%;
-    margin-left: 0px;
+  float: left;
+  width: 70%;
+  height: 80%;
+  margin: 0 auto;
+  position: absolute;
+  top: 5%;
+  margin-left: 0px;
 }
 #pie_3D4 {
-    float: left;
-    width: 70%;
-    height: 80%;
-    margin: 0 auto;
-    position: absolute;
-    top: -15%;
-    margin-left: 0px;
+  float: left;
+  width: 70%;
+  height: 80%;
+  margin: 0 auto;
+  position: absolute;
+  top: -15%;
+  margin-left: 0px;
 }
 #title_1 {
-    text-align: left;
-    float: left;
-    width: 25%;
-    height: auto;
-    margin: 0 auto;
-    position: absolute;
-    top: 80%;
-    left: 72%;
-    margin-left: 0px;
+  text-align: left;
+  float: left;
+  width: 25%;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 80%;
+  left: 72%;
+  margin-left: 0px;
 }
 #title_2 {
-    text-align: left;
-    float: left;
-    width: 25%;
-    height: auto;
-    margin: 0 auto;
-    position: absolute;
-    top: 60%;
-    left: 72%;
-    margin-left: 0px;
+  text-align: left;
+  float: left;
+  width: 25%;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 60%;
+  left: 72%;
+  margin-left: 0px;
 }
 #title_3 {
-    text-align: left;
-    float: left;
-    width: 25%;
-    height: auto;
-    margin: 0 auto;
-    position: absolute;
-    top: 40%;
-    left: 72%;
-    margin-left: 0px;
+  text-align: left;
+  float: left;
+  width: 25%;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 40%;
+  left: 72%;
+  margin-left: 0px;
 }
 #title_4 {
-    text-align: left;
-    float: left;
-    width: 25%;
-    height: auto;
-    margin: 0 auto;
-    position: absolute;
-    top: 20%;
-    left: 72%;
-    margin-left: 0px;
+  text-align: left;
+  float: left;
+  width: 25%;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 20%;
+  left: 72%;
+  margin-left: 0px;
 }
-.group_two>div {
-    float: left;
-    width: calc(50% - 30px);
-    height: calc(50% - 30px);
-    margin: 0 auto;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.group_two > div {
+  float: left;
+  width: calc(50% - 30px);
+  height: calc(50% - 30px);
+  margin: 0 auto;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .title {
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-    text-align: center;
-    color: #6e7776;
-    font-size: 18px;
-    border-bottom: 1px solid #bdc9d7;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  color: #6e7776;
+  font-size: 18px;
+  border-bottom: 1px solid #bdc9d7;
 }
-#chart1, #chart2, #chart3, #chart4 {
-    width: 100%;
-    height: calc(100% - 35px);
+#chart1,
+#chart2,
+#chart3,
+#chart4 {
+  width: 100%;
+  height: calc(100% - 35px);
 }
 #chart1 {
-    overflow-x: hidden;
-    overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-#chart1>div {
-    width: 100%;
-    height: 18%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+#chart1 > div {
+  width: 100%;
+  height: 18%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 #chart2_2 {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 #chart3 {
-    overflow: auto;
+  overflow: auto;
 }
-#chart3>div {
-    width: 100%;
-    height: 21%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    overflow: hidden;
-    line-height: 62px;
+#chart3 > div {
+  width: 100%;
+  height: 21%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  overflow: hidden;
+  line-height: 62px;
 }
 .progress_title {
-    color: #757c82;
-    font-weight: bold;
+  color: #757c82;
+  font-weight: bold;
 }
-.progress_title>span {
-    margin-right: 15px;
+.progress_title > span {
+  margin-right: 15px;
 }
 .progress_bk {
-    width: 100%;
-    height: 20px;
-    background-color: #b9cada;
-    border-radius: 10px;
-    margin-top: 1%;
-    overflow: hidden;
+  width: 100%;
+  height: 20px;
+  background-color: #b9cada;
+  border-radius: 10px;
+  margin-top: 1%;
+  overflow: hidden;
 }
 .progress_val {
-    height: 100%;
-    width: 0%;
-    border-radius: 10px;
+  height: 100%;
+  width: 0%;
+  border-radius: 10px;
 }
 .b1 {
-    color: #1c90db;
+  color: #1c90db;
 }
 .b2 {
-    background-color: #1c90db;
+  background-color: #1c90db;
 }
 .l1 {
-    color: #3a9bbe;
+  color: #3a9bbe;
 }
 .l2 {
-    background-color: #3a9bbe;
+  background-color: #3a9bbe;
 }
 .p1 {
-    color: #a770b3;
+  color: #a770b3;
 }
 .p2 {
-    background-color: #a770b3;
+  background-color: #a770b3;
 }
 .d1 {
-    color: #6463af;
+  color: #6463af;
 }
 .d2 {
-    background-color: #6463af;
+  background-color: #6463af;
 }
 .o1 {
-    color: #ed7d31;
+  color: #ed7d31;
 }
 .o2 {
-    background-color: #ed7d31;
+  background-color: #ed7d31;
 }
 .pic {
-    float: left;
+  float: left;
 }
 .name {
-    float: left;
-    margin-top: 2px;
-    margin-left: 15px;
-    color: #63686c;
+  float: left;
+  margin-top: 2px;
+  margin-left: 15px;
+  color: #63686c;
 }
 .value {
-    float: right;
-    margin-top: 2px;
-    color: #0075bb;
+  float: right;
+  margin-top: 2px;
+  color: #0075bb;
 }
 .bar_tab {
-    position: absolute;
-    right: 0px;
-    top: 45px;
-    width: 240px;
-    height: 30px;
-    line-height: 30;
-    background-color: #faf9ff;
-    box-sizing: border-box;
-    border-radius: 5px;
-    overflow: hidden;
-    z-index: 999;
+  position: absolute;
+  right: 0px;
+  top: 45px;
+  width: 240px;
+  height: 30px;
+  line-height: 30;
+  background-color: #faf9ff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 999;
 }
-.bar_tab>div {
-    float: left;
-    width: 25%;
-    height: 100%;
-    color: #999a9c;
-    border-right: 1px solid #d3dbf0;
-    cursor: pointer;
-    text-align: center;
-    line-height: 30px;
+.bar_tab > div {
+  float: left;
+  width: 25%;
+  height: 100%;
+  color: #999a9c;
+  border-right: 1px solid #d3dbf0;
+  cursor: pointer;
+  text-align: center;
+  line-height: 30px;
 }
 .bar_tab .selected {
-    color: #f4fffb;
-    background-color: #1299d9;
+  color: #f4fffb;
+  background-color: #1299d9;
 }
 .emp {
-    color: #2284c1;
+  color: #2284c1;
 }
 #pie_label {
-    position: absolute;
-    top: 50%;
-    margin-top: 20px;
-    left: 50%;
-    width: 100px;
-    text-align: center;
-    margin-left: -50px;
-    font-size: 18px;
-    height: auto;
+  position: absolute;
+  top: 50%;
+  margin-top: 20px;
+  left: 50%;
+  width: 100px;
+  text-align: center;
+  margin-left: -50px;
+  font-size: 18px;
+  height: auto;
 }
-#chart1::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 4px;
+#chart1::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
 }
-#chart1::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: rgba(0,0,0,0.2);
+#chart1::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
-#chart1::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    border-radius: 0;
-    background: rgba(0,0,0,0.1);
+#chart1::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
 .newName {
-    width: calc(100% - 5px);
-    height: 50%;
-    color: #0075bb;
-    font-size: 16px;
-    margin-left: 10px;
+  width: calc(100% - 5px);
+  height: 50%;
+  color: #0075bb;
+  font-size: 16px;
+  margin-left: 10px;
 }
 .newValue {
-    width: calc(100% - 5px);
-    height: 50%;
-    background-color: #b9cada;
-    border-radius: 4px;
+  width: calc(100% - 5px);
+  height: 50%;
+  background-color: #b9cada;
+  border-radius: 4px;
 }
 .newName span {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 .newName img {
-    height: 20px;
-    position: relative;
-    top: -2px;
+  height: 20px;
+  position: relative;
+  top: -2px;
 }
 .newLabel {
-    float: left;
-    color: #63686c;
-    line-height: 26px;
-    margin-left: 10px;
+  float: left;
+  color: #63686c;
+  line-height: 26px;
+  margin-left: 10px;
 }
 .newValue2 {
-    float: right;
-    color: #0075bb;
-    line-height: 26px;
-    margin-right: 10px;
+  float: right;
+  color: #0075bb;
+  line-height: 26px;
+  margin-right: 10px;
 }
 #gotoMap {
-    width: 390px;
-    height: 75px;
-    line-height: 75px;
-    float: right;
+  width: 390px;
+  height: 75px;
+  line-height: 75px;
+  float: right;
 }
 #gotoMap span {
-    float: right;
-    margin-right: 35px;
-    color: red;
-    font-size: 20px;
-    cursor: pointer;
+  float: right;
+  margin-right: 35px;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
 }
 .group_one {
-    width: 480px;
+  width: 480px;
 }
 .group_two {
-    width: calc(100% - 495px);
+  width: calc(100% - 495px);
 }
