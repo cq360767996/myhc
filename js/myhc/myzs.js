@@ -1247,7 +1247,12 @@ requirejs(
         {
           type: "post",
           url: sugon.interFaces.myzs.getZbzcDetail,
-          data: { type: index },
+          data: {
+            type: index,
+            deptId: $("#placeCode").val(),
+            date1: $("#date1").val(),
+            date2: $("#date2").val()
+          },
           async: true
         },
         function(result) {
