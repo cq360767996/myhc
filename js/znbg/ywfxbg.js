@@ -339,7 +339,7 @@ requirejs(
           } else {
             html = val + "%";
           }
-          $(".value1-1-1")
+          $("#pop-container1 .value1-1-1")
             .eq(index)
             .html(html);
         });
@@ -405,6 +405,37 @@ requirejs(
         $("#pop-container3 .fieldset4 .article1").html(result.content1);
         $("#pop-container3 .fieldset4 .article2").html(result.content2);
       },
+      init6_1(result) {
+        result.data1.map((val, index) => {
+          let html;
+          if (index < 8) {
+            html = val + "&nbsp;&nbsp;件";
+          } else {
+            html = val + "%";
+          }
+          $("#pop-container6 .value1-1-1")
+            .eq(index)
+            .html(html);
+        });
+        this.initLine(result.data2, "chart6-1");
+        $("#pop-container6 .fieldset1 footer").html(result.content);
+      },
+      init6_2(result) {
+        this.initJcjTab(result.data1, "tab6");
+        $("#pop-container6 .footer1").html(result.content1);
+        $("#pop-container6 .footer2").html(result.content2);
+        this.initAnnual(result.data2, "chart6-2", true);
+      },
+      init6_3(result) {
+        this.initBarX(result.data1, "chart6-3");
+        $("#pop-container6 .fieldset3 footer").html(result.content);
+        this.initBarY(result.data2, "chart6-4");
+      },
+      init6_4(result) {
+        $("#pop-container6 .fieldset4 footer").html(result.content1);
+        this.initCloud(result.data, "chart6-5");
+        $("#pop-container6 .zjfx-content").html(result.content2);
+      },
       postImg(id) {
         // 把img生成的img图片传给后台
         domtoimage
@@ -464,6 +495,19 @@ requirejs(
             this.init2_4(result.data4);
           });
       },
+      initRxPreview(codition) {
+        return sugon
+          .request(sugon.interFaces.znbg.ywfxbg.getRxPreview, codition)
+          .then(result => {
+            let id = "pop-container6";
+            $("#" + id).show();
+            this.initTitle(result.title, id);
+            this.init6_1(result.data1);
+            this.init6_2(result.data2);
+            this.init6_3(result.data3);
+            this.init6_4(result.data4);
+          });
+      },
       initPopPage(condition, type) {
         // 初始化页面
         let promise, id;
@@ -489,6 +533,8 @@ requirejs(
             break;
           case 5:
           case "rx":
+            id = "pop-container6";
+            promise = this.initRxPreview(condition);
             break;
         }
         promise.then(result => {

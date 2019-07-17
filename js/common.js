@@ -872,6 +872,10 @@ define([], function() {
           localUrl: "./static/json/ywfxbg/ajPreview.json",
           remoteUrl: base.server + "znbg/ywfxbg/getAjPreview"
         },
+        getRxPreview: {
+          localUrl: "./static/json/ywfxbg/rxPreview.json",
+          remoteUrl: base.server + "znbg/ywfxbg/getRxPreview"
+        },
         uploadImg: {
           localUrl: "./static/json/ywfxbg/uploadImg.json",
           remoteUrl: base.server + "znbg/ywfxbg/uploadImg"

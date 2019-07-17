@@ -1186,6 +1186,245 @@
   text-align: justify;
   text-indent: 30px;
 }
+#pop-container6 {
+  position: absolute;
+  width: 1280px;
+  height: 690px;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  background-color: #ffffff;
+  color: #485053;
+  display: none;
+}
+#pop-container6 > header {
+  width: 100%;
+  height: 65px;
+  background: url('../../img/znbg/preview/header.png') no-repeat;
+}
+#pop-container6 > header i {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+#pop-container6 > header .first-span {
+  line-height: 58px;
+  font-size: 48px;
+  letter-spacing: 5px;
+  margin-left: 331px;
+  font-family: CenturyGothic-Bold;
+  color: #a9aac2;
+}
+#pop-container6 > header .second-span {
+  color: #ebecfa;
+  margin-left: 2px;
+  font-size: 24px;
+  font-family: ZHSCNMT--GBK1-0;
+  position: relative;
+  top: -18px;
+}
+#pop-container6 > header .third-span {
+  float: right;
+  color: #ebecfa;
+  right: 18px;
+  font-size: 18px;
+  font-family: ZHSCNMT--GBK1-0;
+  position: relative;
+  top: 35px;
+}
+#pop-container6 > header i {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+}
+#pop-container6 > section {
+  width: 100%;
+  height: calc(100% - 65px);
+}
+#pop-container6 > section fieldset {
+  float: left;
+  width: 25%;
+  height: 100%;
+  border-right: 1px solid #dbdbdb;
+}
+#pop-container6 > section fieldset > section {
+  width: 100%;
+  height: 50%;
+  padding: 10px;
+}
+#pop-container6 > section fieldset > section > header {
+  width: 180px;
+  height: 30px;
+  line-height: 24px;
+  font-size: 16px;
+  background: url('../../img/znbg/preview/title.png') no-repeat;
+}
+#pop-container6 > section fieldset > section > header > span {
+  margin-left: 15px;
+  color: #ebecfa;
+}
+#pop-container6 > section fieldset:nth-child(4) {
+  border-right: 0;
+}
+#pop-container6 .fieldset1 > section > section {
+  width: 100%;
+  height: calc(100% - 30px);
+}
+#pop-container6 .fieldset1 > section > section > div {
+  width: 100%;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 5px;
+}
+#pop-container6 .fieldset1 > section > section > div > * {
+  float: left;
+}
+#pop-container6 .fieldset1 > section > section > div > div:nth-child(2) {
+  width: calc(100% - 43px);
+  height: 100%;
+  margin-left: 10px;
+}
+#pop-container6 .fieldset1 > section > section > div > div:first-child {
+  width: 33px;
+  height: 33px;
+}
+#pop-container6 .fieldset1 > section > section > div > div > div {
+  width: 100%;
+  height: 33px;
+}
+#pop-container6 .fieldset1 > section > section > div > div span {
+  float: left;
+  color: #485053;
+}
+#pop-container6 .fieldset1 > section > section > div > div strong {
+  float: right;
+  color: #ff6000;
+  font-size: 20px;
+}
+#pop-container6 .fieldset1 > section:first-child {
+  border-bottom: 1px solid #dbdbdb;
+}
+#pop-container6 .fieldset1 #chart6-1 {
+  width: 100%;
+  height: calc(100% - 135px);
+}
+#pop-container6 .fieldset1 footer {
+  width: 100%;
+  height: 60px;
+  line-height: 20px;
+  margin-top: 5px;
+  text-indent: 32px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container6 .fieldset2 > section #chart6-2 {
+  width: 100%;
+  height: calc(100% - 135px);
+}
+#pop-container6 .fieldset2 > section .footer1 {
+  width: 100%;
+  height: 80px;
+  line-height: 20px;
+  text-indent: 32px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container6 .fieldset2 > section .footer2 {
+  width: 100%;
+  height: 60px;
+  margin-top: 5px;
+  text-indent: 32px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container6 .fieldset3 #chart6-3 {
+  width: 100%;
+  height: calc(100% - 35px);
+}
+#pop-container6 .fieldset3 footer {
+  width: 100%;
+  height: 60px;
+  margin-top: 5px;
+  text-indent: 32px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container6 .fieldset3 footer > div {
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+}
+#pop-container6 .fieldset3 footer > div > div {
+  float: left;
+  width: 50px;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+#pop-container6 .fieldset3 footer > div > div:first-child {
+  width: calc(100% - 110px);
+}
+#pop-container6 .fieldset3 footer > div > div:nth-child(3) {
+  width: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#pop-container6 .fieldset3 #chart6-4 {
+  width: 100%;
+  height: calc(100% - 40px);
+}
+#pop-container6 .fieldset4 > section:first-child {
+  border-bottom: 1px solid #dbdbdb;
+}
+#pop-container6 .fieldset4 footer {
+  width: 100%;
+  height: 100px;
+  margin-top: 5px;
+  text-indent: 32px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-align: justify;
+}
+#pop-container6 .fieldset4 #chart6-5 {
+  width: 100%;
+  height: calc(100% - 130px);
+}
+#pop-container6 .fieldset4 .zjfx-content {
+  width: 100%;
+  height: calc(100% - 30px);
+  line-height: 30px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+  overflow: hidden;
+  text-align: justify;
+}
 .hidden-chart {
   position: absolute;
   z-index: -3;
