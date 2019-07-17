@@ -1313,8 +1313,8 @@ requirejs(
       queryResult = [],
       selectedData = [],
       isQuery; // 圈选的数据
-    var ckMarkerGroups = [],
-      ckCircleGroups = [],
+    var ckMarkerGroups = L.layerGroup(),
+      ckCircleGroups = L.layerGroup(),
       latLng = {}; // 窗口mark，窗口圆，圆心经纬度
     var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
     var ckBorderGroup = L.layerGroup(),
@@ -2261,7 +2261,7 @@ requirejs(
     // 初始化tab面板
     function initTab(type, pageNum, searchType) {
       searchType = searchType || 0;
-      var $tab = $(".data-panel-tab");
+      var $tab = $(".data-panel .data-panel-tab");
       var header1 = "",
         header2 = "";
       var realType = type == 0 ? searchType : Number(type);
@@ -2732,6 +2732,7 @@ requirejs(
 
     // 初始化窗口面板
     function initCk() {
+      $(".data-panel2").hide();
       $(".toolbar-panel3").hide();
       $(".right-panel-up")
         .show()
@@ -3153,6 +3154,7 @@ requirejs(
       var searchYw = $(".search-yw");
       var searchGj = $(".search-gj");
       latLng = {};
+      $(".data-panel2").hide();
       $(".toolbar-panel3").hide();
       map.off("click");
       $(".toolbar-panel3 > div").removeClass("toolbar-panel3-hover");
@@ -3196,6 +3198,7 @@ requirejs(
 
     // 清除圈选页面
     function clearPage() {
+      $(".data-panel2").hide();
       if (currentLevel == 3) {
         if (drawControl) {
           drawControl.handler.disable();
@@ -3217,12 +3220,8 @@ requirejs(
       if ($(".toolbar-panel3").css("display") === "block") {
         $(".toolbar-panel3 > div").removeClass("toolbar-panel3-hover");
         latLng = {};
-        ckMarkerGroups.map(val => {
-          val && map.removeLayer(val);
-        });
-        ckCircleGroups.map(val => {
-          val && map.removeLayer(val);
-        });
+        map.removeLayer(ckMarkerGroups);
+        map.removeLayer(ckCircleGroups);
       }
     }
 
@@ -3696,7 +3695,6 @@ requirejs(
 
     // 渲染标记点(便民服务圈和服务点)
     function renderMarks(data, index) {
-      ckMarkerGroups[index] = L.layerGroup();
       var iconUrl = "../../img/myhc/myzs/";
       switch (index) {
         case 0:
@@ -3722,7 +3720,7 @@ requirejs(
             iconAnchor: [12 * mult, 10]
           });
         }
-        var marker = L.marker([value.lat, value.lng], { icon: divIcon });
+        var marker = L.marker([value.lat, value.lng], { icon: divIcon, ywid: value.code, type:value.type });
         marker.on({
           click: function() {
             openCkPulsePopup(value.code, marker, value.type);
@@ -3748,11 +3746,23 @@ requirejs(
           mouseout: function() {
             map.removeLayer(popMarkerGroup);
             popMarkerGroup = L.layerGroup();
+          },
+          popupopen: function (e) {
+              let ywid = e.target.options.ywid;
+              $(".data-panel2 .data-panel-tab-row").each(function (index, dom) {
+                let $dom = $(dom);
+                  if ($dom.attr("ywid") == ywid) {
+                      $dom.addClass("data-panel-tab-row-hover");
+                  }
+              });
+          },
+          popupclose: function () {
+              $(".data-panel2 .data-panel-tab-row").removeClass("data-panel-tab-row-hover");
           }
         });
-        ckMarkerGroups[index].addLayer(marker);
+        ckMarkerGroups.addLayer(marker);
       });
-      ckMarkerGroups[index].addTo(map);
+      ckMarkerGroups.addTo(map);
     }
 
     // 加载闪烁图
@@ -4062,27 +4072,35 @@ requirejs(
     });
 
     // 数据panel关闭事件
-    $(".data-panel-header > i").click(function() {
+    $(".data-panel .data-panel-header > i").click(function() {
       $(".data-panel").hide();
+    });
+
+    // 数据panel2关闭事件
+    $(".data-panel2 .data-panel-header > i").click(function () {
+        $(".data-panel2").hide();
     });
 
     // 画便民服务圈
     function drawCircle(index, lat, lng) {
-      let radius;
+      let radius, color;
       switch (index) {
         case 0:
-          radius = 3000;
+          radius = 1500;
+          color = "#14AEE0";
           break;
         case 1:
-          radius = 6000;
+          radius = 3000;
+          color = "#E06B14";
           break;
         case 2:
-          radius = 9000;
+          radius = 4500;
+          color = "#44E014";
           break;
       }
       if (lat && lng) {
-        ckCircleGroups[index] = L.circle([lat, lng], { radius });
-        map.addLayer(ckCircleGroups[index]);
+        ckCircleGroups.addLayer(L.circle([lat, lng], { radius, color }));
+        map.addLayer(ckCircleGroups);
       }
     }
 
@@ -4093,6 +4111,8 @@ requirejs(
         .request(sugon.interFaces.myzs.getBmfwq, {
           lat,
           lng,
+          date1: $("#date1").val(),
+          date2: $("#date2").val(),
           type: typeArr.join(",")
         })
         .then(result => {
@@ -4101,7 +4121,31 @@ requirejs(
             renderMarks(result.data[val], val);
             drawCircle(val, lat, lng);
           });
+            renderCircleList(result.data);
         });
+    }
+
+    // 渲染圆圈列表
+    function renderCircleList(data) {
+      $(".data-panel2").show();
+      let $body = $(".data-panel2 .data-panel-tab").empty(), index = 0;
+        $body.append(`<div class="data-tab-header">
+                <div class="col9">序号</div>
+                <div class="col6">单位</div>
+                <div class="col7">业务类型</div>
+                <div class="col8">满意度</div>
+            </div>`);
+        data.map(val1 => {
+        val1.map(val2 => {
+            index ++;
+            $body.append(`<div class="data-panel-tab-row" ywid="${ val2.code }">
+                <div class="col9">${ index }</div>
+                <div class="col6">${ val2.name }</div>
+                <div class="col7">${ val2.ywlx }</div>
+                <div class="col8">${ val2.myd }</div>
+            </div>`);
+        });
+      });
     }
 
     // 工具切换时
@@ -4115,40 +4159,32 @@ requirejs(
           .off()
           .on("click", "div", function(e) {
             let $target = $(e.target),
-              className = "toolbar-panel3-hover",
-              targetIndex = $target.index(".toolbar-panel3 > div");
-            if ($target.hasClass(className)) {
-              $target.removeClass(className);
-              ckMarkerGroups[targetIndex] &&
-                map.removeLayer(ckMarkerGroups[targetIndex]);
-              ckCircleGroups[targetIndex] &&
-                map.removeLayer(ckCircleGroups[targetIndex]);
-            } else {
-              $target.addClass(className);
-              if (ckCircleGroups.length > 0 && ckCircleGroups.length > 0) {
-                getBmfwq([targetIndex]);
-              }
-            }
-            let $hover = $(".toolbar-panel3-hover");
-            if ($hover.length > 0) {
+              className = "toolbar-panel3-hover";
+            $target.hasClass(className) ? $target.removeClass(className) : $target.addClass(className);
+            let $hover = $(".toolbar-panel3-hover"), typeArr = [], $panel2 = $(".data-panel2");
+            $hover.each((index, dom) => {
+                let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
+                typeArr.push(indexOfDiv);
+            });
+            map.removeLayer(ckMarkerGroups);
+            map.removeLayer(ckCircleGroups);
+            ckMarkerGroups = L.layerGroup();
+            ckCircleGroups = L.layerGroup();
+
+            if (typeArr.length > 0 && latLng) {
+              getBmfwq(typeArr);
               map.off("click").on("click", function(e) {
+                $panel2.show();
                 map.closePopup();
-                ckMarkerGroups.map(val => {
-                  val && map.removeLayer(val);
-                  ``;
-                });
-                ckCircleGroups.map(val => {
-                  val && map.removeLayer(val);
-                });
+                map.removeLayer(ckMarkerGroups);
+                map.removeLayer(ckCircleGroups);
+                ckMarkerGroups = L.layerGroup();
+                ckCircleGroups = L.layerGroup();
                 latLng = e.latlng;
-                let typeArr = [];
-                $hover.each((index, dom) => {
-                  let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
-                  typeArr.push(indexOfDiv);
-                });
                 getBmfwq(typeArr);
               });
             } else {
+              $panel2.hide();
               map.off("click");
             }
           });
@@ -4205,7 +4241,7 @@ requirejs(
     });
 
     // 左下tab点击事件
-    $(".data-panel-tab").on("click", ".data-panel-tab-row", function(e) {
+    $(".data-panel .data-panel-tab").on("click", ".data-panel-tab-row", function(e) {
       var $target = $(e.target);
       $target = $target.hasClass("data-panel-tab-row")
         ? $target
@@ -4217,6 +4253,22 @@ requirejs(
         }
       }
     });
+
+      // 左下tab点击事件
+      $(".data-panel2 .data-panel-tab").on("click", ".data-panel-tab-row", function(e) {
+          var $target = $(e.target);
+          $target = $target.hasClass("data-panel-tab-row")
+              ? $target
+              : $target.parent();
+          var ywid = $target.attr("ywid");
+          for (let key in ckMarkerGroups._layers) {
+              let layer = ckMarkerGroups._layers[key];
+              if (layer.options.ywid == ywid) {
+                  openCkPulsePopup(layer.options.ywid, layer, layer.options.type);
+                  break;
+              }
+          }
+      });
 
     // 分析按钮点击事件
     $(".analysis-btn").click(function() {
