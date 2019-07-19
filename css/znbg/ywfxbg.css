@@ -88,9 +88,6 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-.pop-container > header > * {
-  float: left;
-}
 .pop-container > header i {
   float: right;
   margin-top: 10px;
@@ -106,10 +103,11 @@
 }
 .pop-container > header .second-span {
   color: #ebecfa;
-  margin-left: 7px;
+  margin-left: 2px;
   font-size: 24px;
   font-family: ZHSCNMT--GBK1-0;
   position: relative;
+  top: -20px;
 }
 .pop-container > header .third-span {
   float: right;
@@ -690,9 +688,6 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-#pop-container1 > header > * {
-  float: left;
-}
 #pop-container1 > header i {
   float: right;
   margin-top: 10px;
@@ -708,10 +703,11 @@
 }
 #pop-container1 > header .second-span {
   color: #ebecfa;
-  margin-left: 7px;
+  margin-left: 2px;
   font-size: 24px;
   font-family: ZHSCNMT--GBK1-0;
   position: relative;
+  top: -20px;
 }
 #pop-container1 > header .third-span {
   float: right;
@@ -946,9 +942,6 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-#pop-container3 > header > * {
-  float: left;
-}
 #pop-container3 > header i {
   float: right;
   margin-top: 10px;
@@ -964,10 +957,11 @@
 }
 #pop-container3 > header .second-span {
   color: #ebecfa;
-  margin-left: 7px;
+  margin-left: 2px;
   font-size: 24px;
   font-family: ZHSCNMT--GBK1-0;
   position: relative;
+  top: -20px;
 }
 #pop-container3 > header .third-span {
   float: right;
@@ -1208,9 +1202,6 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-#pop-container6 > header > * {
-  float: left;
-}
 #pop-container6 > header i {
   float: right;
   margin-top: 10px;
@@ -1226,10 +1217,11 @@
 }
 #pop-container6 > header .second-span {
   color: #ebecfa;
-  margin-left: 7px;
+  margin-left: 2px;
   font-size: 24px;
   font-family: ZHSCNMT--GBK1-0;
   position: relative;
+  top: -20px;
 }
 #pop-container6 > header .third-span {
   float: right;
@@ -1276,6 +1268,9 @@
 }
 #pop-container6 > section fieldset:nth-child(4) {
   border-right: 0;
+}
+#pop-container6 .third-span {
+  top: -24px !important;
 }
 #pop-container6 .fieldset1 > section > section {
   width: 100%;

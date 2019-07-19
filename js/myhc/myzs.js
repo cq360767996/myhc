@@ -4196,7 +4196,8 @@ requirejs(
                 ckCircleGroups = L.layerGroup();
                 latLng = e.latlng;
                 var icon = L.icon({
-                  iconUrl: "../../img/myhc/myzs/center_point.png"
+                  iconUrl: "../../img/myhc/myzs/center_point.png",
+                  iconAnchor: [17, 37]
                 });
                 centerMarker = L.marker([latLng.lat, latLng.lng], { icon });
                 map.addLayer(centerMarker);
