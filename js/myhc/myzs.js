@@ -3224,6 +3224,9 @@ requirejs(
         latLng = {};
         map.removeLayer(ckMarkerGroups1);
         map.removeLayer(ckCircleGroups);
+        ckMarkerGroups2.map(val => {
+          val && map.removeLayer(val);
+        });
         centerMarker && map.removeLayer(centerMarker);
       }
     }
@@ -4185,6 +4188,9 @@ requirejs(
             map.removeLayer(ckCircleGroups);
             ckMarkerGroups1 = L.layerGroup();
             ckCircleGroups = L.layerGroup();
+            ckMarkerGroups2.map(val => {
+              val && map.removeLayer(val);
+            });
 
             if (typeArr.length > 0 && latLng) {
               getBmfwq(typeArr);
@@ -4196,6 +4202,9 @@ requirejs(
                 map.removeLayer(ckCircleGroups);
                 ckMarkerGroups1 = L.layerGroup();
                 ckCircleGroups = L.layerGroup();
+                ckMarkerGroups2.map(val => {
+                  val && map.removeLayer(val);
+                });
                 latLng = e.latlng;
                 var icon = L.icon({
                   iconUrl: "../../img/myhc/myzs/center_point.png",
