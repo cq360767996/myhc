@@ -324,7 +324,7 @@ requirejs(
       },
       initTitle(result, id) {
         result.data.map((val, index) => {
-          $("#" + id + " > header > span")
+          $("#" + id + " .header-val")
             .eq(index)
             .html(val);
         });
@@ -408,7 +408,7 @@ requirejs(
       init6_1(result) {
         result.data1.map((val, index) => {
           let html;
-          if (index < 8) {
+          if (index < 7) {
             html = val + "&nbsp;&nbsp;件";
           } else {
             html = val + "%";
@@ -546,7 +546,7 @@ requirejs(
               .css("margin-left", "-640px")
               .css("z-index", 3)
               .show();
-            let $i = $("#" + id + " > header > i").show(),
+            let $i = $("#" + id + " > header > div > i").show(),
               $mask = $(".pop-mask").show();
             $i.unbind().bind("click", e => {
               // 绑定关闭按钮

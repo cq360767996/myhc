@@ -1313,7 +1313,8 @@ requirejs(
       queryResult = [],
       selectedData = [],
       isQuery; // 圈选的数据
-    var ckMarkerGroups = L.layerGroup(),
+    var ckMarkerGroups1 = L.layerGroup(),
+      ckMarkerGroups2 = [],
       ckCircleGroups = L.layerGroup(),
       centerMarker,
       latLng = {}; // 窗口mark，窗口圆，圆心点mark，圆心经纬度
@@ -3221,7 +3222,7 @@ requirejs(
       if ($(".toolbar-panel3").css("display") === "block") {
         $(".toolbar-panel3 > div").removeClass("toolbar-panel3-hover");
         latLng = {};
-        map.removeLayer(ckMarkerGroups);
+        map.removeLayer(ckMarkerGroups1);
         map.removeLayer(ckCircleGroups);
         centerMarker && map.removeLayer(centerMarker);
       }
@@ -3697,6 +3698,7 @@ requirejs(
 
     // 渲染标记点(便民服务圈和服务点)
     function renderMarks(data, index) {
+      ckMarkerGroups2[index] = L.layerGroup();
       var iconUrl = "../../img/myhc/myzs/";
       switch (index) {
         case 0:
@@ -3768,9 +3770,9 @@ requirejs(
             );
           }
         });
-        ckMarkerGroups.addLayer(marker);
+        ckMarkerGroups2[index].addLayer(marker);
       });
-      ckMarkerGroups.addTo(map);
+      ckMarkerGroups2[index].addTo(map);
     }
 
     // 加载闪烁图
@@ -4179,9 +4181,9 @@ requirejs(
               let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
               typeArr.push(indexOfDiv);
             });
-            map.removeLayer(ckMarkerGroups);
+            map.removeLayer(ckMarkerGroups1);
             map.removeLayer(ckCircleGroups);
-            ckMarkerGroups = L.layerGroup();
+            ckMarkerGroups1 = L.layerGroup();
             ckCircleGroups = L.layerGroup();
 
             if (typeArr.length > 0 && latLng) {
@@ -4190,9 +4192,9 @@ requirejs(
                 centerMarker && map.removeLayer(centerMarker);
                 $panel2.show();
                 map.closePopup();
-                map.removeLayer(ckMarkerGroups);
+                map.removeLayer(ckMarkerGroups1);
                 map.removeLayer(ckCircleGroups);
-                ckMarkerGroups = L.layerGroup();
+                ckMarkerGroups1 = L.layerGroup();
                 ckCircleGroups = L.layerGroup();
                 latLng = e.latlng;
                 var icon = L.icon({
@@ -4288,8 +4290,8 @@ requirejs(
           ? $target
           : $target.parent();
         var ywid = $target.attr("ywid");
-        for (let key in ckMarkerGroups._layers) {
-          let layer = ckMarkerGroups._layers[key];
+        for (let key in ckMarkerGroups1._layers) {
+          let layer = ckMarkerGroups1._layers[key];
           if (layer.options.ywid == ywid) {
             openCkPulsePopup(layer.options.ywid, layer, layer.options.type);
             break;
@@ -4374,7 +4376,9 @@ requirejs(
       if (index === 3) {
         $panel.removeClass(className);
         $this.addClass(className);
-        map.removeLayer(ckMarkerGroups);
+        ckMarkerGroups2.map(val => {
+          map.removeLayer(val);
+        });
         let $select = $("#type1").empty();
         $select
           .append('<option value="hj">户籍</option>')
@@ -4390,10 +4394,12 @@ requirejs(
       } else {
         let $select = $("#type1").empty();
         $panel.eq(3).removeClass(className);
-        map.removeLayer(ckMarkerGroups);
+        if (ckMarkerGroups2[3]) {
+          map.removeLayer(ckMarkerGroups2[3]);
+        }
         if ($this.hasClass(className)) {
           $this.removeClass(className);
-          map.removeLayer(ckMarkerGroups);
+          map.removeLayer(ckMarkerGroups2[index]);
           let hasClass = false;
           $panel.each((index, dom) => {
             if ($(dom).hasClass(className)) {

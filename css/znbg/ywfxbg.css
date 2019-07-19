@@ -88,43 +88,50 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-.pop-container > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+.pop-container > header > div {
+  float: left;
+  height: 100%;
 }
-.pop-container > header .first-span {
+.pop-container > header > div:first-child {
+  width: 129px;
   line-height: 58px;
   font-size: 48px;
   letter-spacing: 5px;
   margin-left: 331px;
   font-family: CenturyGothic-Bold;
   color: #a9aac2;
+  text-align: center;
 }
-.pop-container > header .second-span {
+.pop-container > header > div:nth-child(2) {
+  width: calc(100% - 475px);
+  margin-left: 5px;
+}
+.pop-container > header > div:nth-child(2) > div {
+  width: 100%;
   color: #ebecfa;
-  margin-left: 2px;
+  font-family: ZHSCNMT--GBK1-0;
+}
+.pop-container > header > div:nth-child(2) > div:first-child {
+  height: 33px;
+  line-height: 33px;
   font-size: 24px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: -20px;
 }
-.pop-container > header .third-span {
-  float: right;
+.pop-container > header > div:nth-child(2) > div:nth-child(2) {
+  height: 32px;
+  line-height: 32px;
+  font-size: 18px;
+  text-align: right;
+}
+.pop-container > header > div:nth-child(3) {
+  width: 10px;
+  height: 100%;
   color: #ebecfa;
-  right: 18px;
-  font-size: 18px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: 35px;
 }
-.pop-container > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+.pop-container > header > div:nth-child(3) i {
+  position: relative;
+  top: 8px;
+  right: 13px;
   cursor: pointer;
-  font-size: 18px;
-  color: #fff;
 }
 .pop-container > section {
   width: 100%;
@@ -688,43 +695,50 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-#pop-container1 > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+#pop-container1 > header > div {
+  float: left;
+  height: 100%;
 }
-#pop-container1 > header .first-span {
+#pop-container1 > header > div:first-child {
+  width: 129px;
   line-height: 58px;
   font-size: 48px;
   letter-spacing: 5px;
   margin-left: 331px;
   font-family: CenturyGothic-Bold;
   color: #a9aac2;
+  text-align: center;
 }
-#pop-container1 > header .second-span {
+#pop-container1 > header > div:nth-child(2) {
+  width: calc(100% - 475px);
+  margin-left: 5px;
+}
+#pop-container1 > header > div:nth-child(2) > div {
+  width: 100%;
   color: #ebecfa;
-  margin-left: 2px;
+  font-family: ZHSCNMT--GBK1-0;
+}
+#pop-container1 > header > div:nth-child(2) > div:first-child {
+  height: 33px;
+  line-height: 33px;
   font-size: 24px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: -20px;
 }
-#pop-container1 > header .third-span {
-  float: right;
+#pop-container1 > header > div:nth-child(2) > div:nth-child(2) {
+  height: 32px;
+  line-height: 32px;
+  font-size: 18px;
+  text-align: right;
+}
+#pop-container1 > header > div:nth-child(3) {
+  width: 10px;
+  height: 100%;
   color: #ebecfa;
-  right: 18px;
-  font-size: 18px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: 35px;
 }
-#pop-container1 > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+#pop-container1 > header > div:nth-child(3) i {
+  position: relative;
+  top: 8px;
+  right: 13px;
   cursor: pointer;
-  font-size: 18px;
-  color: #fff;
 }
 #pop-container1 > section {
   width: 100%;
@@ -942,43 +956,50 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-#pop-container3 > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+#pop-container3 > header > div {
+  float: left;
+  height: 100%;
 }
-#pop-container3 > header .first-span {
+#pop-container3 > header > div:first-child {
+  width: 129px;
   line-height: 58px;
   font-size: 48px;
   letter-spacing: 5px;
   margin-left: 331px;
   font-family: CenturyGothic-Bold;
   color: #a9aac2;
+  text-align: center;
 }
-#pop-container3 > header .second-span {
+#pop-container3 > header > div:nth-child(2) {
+  width: calc(100% - 475px);
+  margin-left: 5px;
+}
+#pop-container3 > header > div:nth-child(2) > div {
+  width: 100%;
   color: #ebecfa;
-  margin-left: 2px;
+  font-family: ZHSCNMT--GBK1-0;
+}
+#pop-container3 > header > div:nth-child(2) > div:first-child {
+  height: 33px;
+  line-height: 33px;
   font-size: 24px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: -20px;
 }
-#pop-container3 > header .third-span {
-  float: right;
+#pop-container3 > header > div:nth-child(2) > div:nth-child(2) {
+  height: 32px;
+  line-height: 32px;
+  font-size: 18px;
+  text-align: right;
+}
+#pop-container3 > header > div:nth-child(3) {
+  width: 10px;
+  height: 100%;
   color: #ebecfa;
-  right: 18px;
-  font-size: 18px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: 35px;
 }
-#pop-container3 > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+#pop-container3 > header > div:nth-child(3) i {
+  position: relative;
+  top: 8px;
+  right: 13px;
   cursor: pointer;
-  font-size: 18px;
-  color: #fff;
 }
 #pop-container3 > section {
   width: 100%;
@@ -1202,43 +1223,50 @@
   height: 65px;
   background: url('../../img/znbg/preview/header.png') no-repeat;
 }
-#pop-container6 > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+#pop-container6 > header > div {
+  float: left;
+  height: 100%;
 }
-#pop-container6 > header .first-span {
+#pop-container6 > header > div:first-child {
+  width: 129px;
   line-height: 58px;
   font-size: 48px;
   letter-spacing: 5px;
   margin-left: 331px;
   font-family: CenturyGothic-Bold;
   color: #a9aac2;
+  text-align: center;
 }
-#pop-container6 > header .second-span {
+#pop-container6 > header > div:nth-child(2) {
+  width: calc(100% - 475px);
+  margin-left: 5px;
+}
+#pop-container6 > header > div:nth-child(2) > div {
+  width: 100%;
   color: #ebecfa;
-  margin-left: 2px;
+  font-family: ZHSCNMT--GBK1-0;
+}
+#pop-container6 > header > div:nth-child(2) > div:first-child {
+  height: 33px;
+  line-height: 33px;
   font-size: 24px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: -20px;
 }
-#pop-container6 > header .third-span {
-  float: right;
+#pop-container6 > header > div:nth-child(2) > div:nth-child(2) {
+  height: 32px;
+  line-height: 32px;
+  font-size: 18px;
+  text-align: right;
+}
+#pop-container6 > header > div:nth-child(3) {
+  width: 10px;
+  height: 100%;
   color: #ebecfa;
-  right: 18px;
-  font-size: 18px;
-  font-family: ZHSCNMT--GBK1-0;
-  position: relative;
-  top: 35px;
 }
-#pop-container6 > header i {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
+#pop-container6 > header > div:nth-child(3) i {
+  position: relative;
+  top: 8px;
+  right: 13px;
   cursor: pointer;
-  font-size: 18px;
-  color: #fff;
 }
 #pop-container6 > section {
   width: 100%;
@@ -1268,9 +1296,6 @@
 }
 #pop-container6 > section fieldset:nth-child(4) {
   border-right: 0;
-}
-#pop-container6 .third-span {
-  top: -24px !important;
 }
 #pop-container6 .fieldset1 > section > section {
   width: 100%;
