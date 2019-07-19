@@ -1315,7 +1315,8 @@ requirejs(
       isQuery; // 圈选的数据
     var ckMarkerGroups = L.layerGroup(),
       ckCircleGroups = L.layerGroup(),
-      latLng = {}; // 窗口mark，窗口圆，圆心经纬度
+      centerMarker,
+      latLng = {}; // 窗口mark，窗口圆，圆心点mark，圆心经纬度
     var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
     var ckBorderGroup = L.layerGroup(),
       isLoadBounds = true,
@@ -3222,6 +3223,7 @@ requirejs(
         latLng = {};
         map.removeLayer(ckMarkerGroups);
         map.removeLayer(ckCircleGroups);
+        centerMarker && map.removeLayer(centerMarker);
       }
     }
 
@@ -3720,7 +3722,11 @@ requirejs(
             iconAnchor: [12 * mult, 10]
           });
         }
-        var marker = L.marker([value.lat, value.lng], { icon: divIcon, ywid: value.code, type:value.type });
+        var marker = L.marker([value.lat, value.lng], {
+          icon: divIcon,
+          ywid: value.code,
+          type: value.type
+        });
         marker.on({
           click: function() {
             openCkPulsePopup(value.code, marker, value.type);
@@ -3747,17 +3753,19 @@ requirejs(
             map.removeLayer(popMarkerGroup);
             popMarkerGroup = L.layerGroup();
           },
-          popupopen: function (e) {
-              let ywid = e.target.options.ywid;
-              $(".data-panel2 .data-panel-tab-row").each(function (index, dom) {
-                let $dom = $(dom);
-                  if ($dom.attr("ywid") == ywid) {
-                      $dom.addClass("data-panel-tab-row-hover");
-                  }
-              });
+          popupopen: function(e) {
+            let ywid = e.target.options.ywid;
+            $(".data-panel2 .data-panel-tab-row").each(function(index, dom) {
+              let $dom = $(dom);
+              if ($dom.attr("ywid") == ywid) {
+                $dom.addClass("data-panel-tab-row-hover");
+              }
+            });
           },
-          popupclose: function () {
-              $(".data-panel2 .data-panel-tab-row").removeClass("data-panel-tab-row-hover");
+          popupclose: function() {
+            $(".data-panel2 .data-panel-tab-row").removeClass(
+              "data-panel-tab-row-hover"
+            );
           }
         });
         ckMarkerGroups.addLayer(marker);
@@ -4077,8 +4085,8 @@ requirejs(
     });
 
     // 数据panel2关闭事件
-    $(".data-panel2 .data-panel-header > i").click(function () {
-        $(".data-panel2").hide();
+    $(".data-panel2 .data-panel-header > i").click(function() {
+      $(".data-panel2").hide();
     });
 
     // 画便民服务圈
@@ -4121,28 +4129,29 @@ requirejs(
             renderMarks(result.data[val], val);
             drawCircle(val, lat, lng);
           });
-            renderCircleList(result.data);
+          renderCircleList(result.data);
         });
     }
 
     // 渲染圆圈列表
     function renderCircleList(data) {
       $(".data-panel2").show();
-      let $body = $(".data-panel2 .data-panel-tab").empty(), index = 0;
-        $body.append(`<div class="data-tab-header">
+      let $body = $(".data-panel2 .data-panel-tab").empty(),
+        index = 0;
+      $body.append(`<div class="data-tab-header">
                 <div class="col9">序号</div>
                 <div class="col6">单位</div>
                 <div class="col7">业务类型</div>
                 <div class="col8">满意度</div>
             </div>`);
-        data.map(val1 => {
+      data.map(val1 => {
         val1.map(val2 => {
-            index ++;
-            $body.append(`<div class="data-panel-tab-row" ywid="${ val2.code }">
-                <div class="col9">${ index }</div>
-                <div class="col6">${ val2.name }</div>
-                <div class="col7">${ val2.ywlx }</div>
-                <div class="col8">${ val2.myd }</div>
+          index++;
+          $body.append(`<div class="data-panel-tab-row" ywid="${val2.code}">
+                <div class="col9">${index}</div>
+                <div class="col6">${val2.name}</div>
+                <div class="col7">${val2.ywlx}</div>
+                <div class="col8">${val2.myd}</div>
             </div>`);
         });
       });
@@ -4160,11 +4169,15 @@ requirejs(
           .on("click", "div", function(e) {
             let $target = $(e.target),
               className = "toolbar-panel3-hover";
-            $target.hasClass(className) ? $target.removeClass(className) : $target.addClass(className);
-            let $hover = $(".toolbar-panel3-hover"), typeArr = [], $panel2 = $(".data-panel2");
+            $target.hasClass(className)
+              ? $target.removeClass(className)
+              : $target.addClass(className);
+            let $hover = $(".toolbar-panel3-hover"),
+              typeArr = [],
+              $panel2 = $(".data-panel2");
             $hover.each((index, dom) => {
-                let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
-                typeArr.push(indexOfDiv);
+              let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
+              typeArr.push(indexOfDiv);
             });
             map.removeLayer(ckMarkerGroups);
             map.removeLayer(ckCircleGroups);
@@ -4174,6 +4187,7 @@ requirejs(
             if (typeArr.length > 0 && latLng) {
               getBmfwq(typeArr);
               map.off("click").on("click", function(e) {
+                centerMarker && map.removeLayer(centerMarker);
                 $panel2.show();
                 map.closePopup();
                 map.removeLayer(ckMarkerGroups);
@@ -4181,6 +4195,11 @@ requirejs(
                 ckMarkerGroups = L.layerGroup();
                 ckCircleGroups = L.layerGroup();
                 latLng = e.latlng;
+                var icon = L.icon({
+                  iconUrl: "../../img/myhc/myzs/center_point.png"
+                });
+                centerMarker = L.marker([latLng.lat, latLng.lng], { icon });
+                map.addLayer(centerMarker);
                 getBmfwq(typeArr);
               });
             } else {
@@ -4241,34 +4260,42 @@ requirejs(
     });
 
     // 左下tab点击事件
-    $(".data-panel .data-panel-tab").on("click", ".data-panel-tab-row", function(e) {
-      var $target = $(e.target);
-      $target = $target.hasClass("data-panel-tab-row")
-        ? $target
-        : $target.parent();
-      var ywid = $target.attr("ywid");
-      for (var key in queryGroup._layers) {
-        if (queryGroup._layers[key]._popup._content.indexOf(ywid) > 0) {
-          queryGroup._layers[key].openPopup();
+    $(".data-panel .data-panel-tab").on(
+      "click",
+      ".data-panel-tab-row",
+      function(e) {
+        var $target = $(e.target);
+        $target = $target.hasClass("data-panel-tab-row")
+          ? $target
+          : $target.parent();
+        var ywid = $target.attr("ywid");
+        for (var key in queryGroup._layers) {
+          if (queryGroup._layers[key]._popup._content.indexOf(ywid) > 0) {
+            queryGroup._layers[key].openPopup();
+          }
         }
       }
-    });
+    );
 
-      // 左下tab点击事件
-      $(".data-panel2 .data-panel-tab").on("click", ".data-panel-tab-row", function(e) {
-          var $target = $(e.target);
-          $target = $target.hasClass("data-panel-tab-row")
-              ? $target
-              : $target.parent();
-          var ywid = $target.attr("ywid");
-          for (let key in ckMarkerGroups._layers) {
-              let layer = ckMarkerGroups._layers[key];
-              if (layer.options.ywid == ywid) {
-                  openCkPulsePopup(layer.options.ywid, layer, layer.options.type);
-                  break;
-              }
+    // 左下tab点击事件
+    $(".data-panel2 .data-panel-tab").on(
+      "click",
+      ".data-panel-tab-row",
+      function(e) {
+        var $target = $(e.target);
+        $target = $target.hasClass("data-panel-tab-row")
+          ? $target
+          : $target.parent();
+        var ywid = $target.attr("ywid");
+        for (let key in ckMarkerGroups._layers) {
+          let layer = ckMarkerGroups._layers[key];
+          if (layer.options.ywid == ywid) {
+            openCkPulsePopup(layer.options.ywid, layer, layer.options.type);
+            break;
           }
-      });
+        }
+      }
+    );
 
     // 分析按钮点击事件
     $(".analysis-btn").click(function() {
@@ -4346,9 +4373,7 @@ requirejs(
       if (index === 3) {
         $panel.removeClass(className);
         $this.addClass(className);
-        ckMarkerGroups.map(val => {
-          map.removeLayer(val);
-        });
+        map.removeLayer(ckMarkerGroups);
         let $select = $("#type1").empty();
         $select
           .append('<option value="hj">户籍</option>')
@@ -4364,12 +4389,10 @@ requirejs(
       } else {
         let $select = $("#type1").empty();
         $panel.eq(3).removeClass(className);
-        if (ckMarkerGroups[3]) {
-          map.removeLayer(ckMarkerGroups[3]);
-        }
+        map.removeLayer(ckMarkerGroups);
         if ($this.hasClass(className)) {
           $this.removeClass(className);
-          map.removeLayer(ckMarkerGroups[index]);
+          map.removeLayer(ckMarkerGroups);
           let hasClass = false;
           $panel.each((index, dom) => {
             if ($(dom).hasClass(className)) {

@@ -31,10 +31,10 @@
       "type": "aj"
     },
     {
-      "containImg": "0",
+      "containImg": "1",
       "date": "2019-06-21 10:10",
       "name": "南京市公安局15611839.docx",
-      "url": "../../WordTemplet/Znbg.docx",
+      "url": "../../WordTemplet/Znbg2.docx",
       "imgUrl": "../../WordTemplet/Znbg.docx",
       "pdfUrl": "../../WordTemplet/Znbg.docx",
       "deptId": "111",
@@ -43,7 +43,7 @@
       "fileName1": "12121.png",
       "fileName2": "dsadadas.docx",
       "uuid": "112",
-      "type": "jcj"
+      "type": "rx"
     }
   ]
 }

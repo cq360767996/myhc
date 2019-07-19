@@ -130,6 +130,10 @@
     height: @header-height;
     background: url('../../img/znbg/preview/header.png') no-repeat;
 
+    & > * {
+      float: left;
+    }
+
     i {
       float: right;
       margin-top: 10px;
@@ -147,11 +151,10 @@
 
     .second-span {
       color: #ebecfa;
-      margin-left: 2px;
+      margin-left: 7px;
       font-size: 24px;
       font-family: ZHSCNMT--GBK1-0;
       position: relative;
-      top: -18px;
     }
 
     .third-span {
@@ -1031,11 +1034,11 @@
     }
 
     #chart2-5 {
-      height: 270px;
+      height: calc(~'100% - 360px');
     }
 
     #chart2-6 {
-      height: 110px;
+      height: 120px;
     }
 
     .article1 {
@@ -1132,7 +1135,7 @@
     & > section {
       #chart6-2 {
         width: 100%;
-        height: calc(~'100% - 135px');
+        height: calc(~'100% - 115px');
       }
 
       .footer1 {

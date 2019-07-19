@@ -424,7 +424,7 @@ requirejs(
         this.initJcjTab(result.data1, "tab6");
         $("#pop-container6 .footer1").html(result.content1);
         $("#pop-container6 .footer2").html(result.content2);
-        this.initAnnual(result.data2, "chart6-2", true);
+        this.initAnnual(result.data2, "chart6-2", false);
       },
       init6_3(result) {
         this.initBarX(result.data1, "chart6-3");
@@ -738,6 +738,10 @@ requirejs(
                 case "0.3":
                   $id.addClass("tab-container3");
                   popFunc.initAjTab(val.data, id);
+                  break;
+                case "0.6":
+                  $id.addClass("tab-container1");
+                  popFunc.initJcjTab(val.data, id);
                   break;
                 case "1":
                   popFunc.initLine(val.data, id);
