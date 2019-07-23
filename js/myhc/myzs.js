@@ -4239,7 +4239,7 @@ requirejs(
           $(".toolbar-panel2-pop").hide();
         }
 
-        // 绑��移动事件
+        // 绑定移动事件
         map.on("moveend", function () {
           if (currentLevel == 3) {
             if (drawControl) {
@@ -4307,7 +4307,15 @@ requirejs(
         for (let key in ckMarkerGroups1._layers) {
           let layer = ckMarkerGroups1._layers[key];
           if (layer.options.ywid == ywid) {
-            openCkPulsePopup(layer.options.ywid, layer, layer.options.type);
+            let type;
+            if (layer.options.type == "1") {
+              type = "2";
+            } else if (layer.options.type == "2") {
+              type = "1";
+            } else {
+              type = layer.options.type;
+            }
+            openCkPulsePopup(layer.options.ywid, layer, type);
             break;
           }
         }

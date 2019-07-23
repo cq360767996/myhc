@@ -1105,13 +1105,13 @@
 }
 #pop-container3 .fieldset2 footer {
   width: 100%;
-  height: 88px;
+  height: 66px;
   line-height: 22px;
   text-indent: 30px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   overflow: hidden;
   text-align: justify;
   margin-top: 5px;
@@ -1500,7 +1500,7 @@
 .tab-container3 {
   color: #000;
   width: 299px !important;
-  height: 344px !important;
+  height: 388px !important;
   border: #8a8a8a 2px solid;
   display: block;
 }
@@ -1519,7 +1519,7 @@
 }
 .tab-container3 > row:nth-child(2),
 .tab-container3 > row:nth-child(7),
-.tab-container3 > row:nth-child(12) {
+.tab-container3 > row:nth-child(13) {
   background-color: #cceaff;
 }
 .tab-container3 > row > cell {

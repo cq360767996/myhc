@@ -183,6 +183,7 @@ requirejs(
             {
               type: "value",
               show: true,
+              splitNumber: 3,
               splitLine: {
                 show: false
               },
