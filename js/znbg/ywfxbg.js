@@ -73,7 +73,7 @@ requirejs(
         let chart = ec.init(document.getElementById(id));
         chart.setOption(option, true);
       },
-      initAnnual(data, id, withPercent) {
+      initAnnual(data, id, withPercent, withPosition) {
         let dom = document.getElementById(id);
         let chart = ec.init(dom);
         let total = 0;
@@ -98,7 +98,7 @@ requirejs(
               name: "",
               type: "pie",
               clockWise: false,
-              center: ["50%", "50%"],
+              center: ["50%", withPosition ? "60%" : "50%"],
               radius: ["40%", "56%"],
               hoverAnimation: false,
               itemStyle: {
@@ -393,7 +393,7 @@ requirejs(
         $("#pop-container3 .fieldset2 .footer2").html(result.content2);
       },
       init2_3(result) {
-        this.initAnnual(result.data1, "chart2-3", false);
+        this.initAnnual(result.data1, "chart2-3", false, true);
         this.initBarX(result.data2, "chart2-4");
         $("#pop-container3 .fieldset3 .article1").html(result.content1);
         $("#pop-container3 .fieldset3 .article2").html(result.content2);
