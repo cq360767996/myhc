@@ -2762,14 +2762,12 @@ requirejs(
       map.eachLayer(function(layer) {
         if (layer.options.fillOpacity == "0.55") {
           layer.setStyle({
-            color: "#fff",
             fillOpacity: 0.45
           });
         }
         if (layer._leaflet_id == e.target._leaflet_id) {
           layer.setStyle({
-            color: "#386AFB",
-            fillOpacity: 0.55
+            fillOpacity: 0.65
           });
         }
       });
@@ -2778,7 +2776,7 @@ requirejs(
     // 窗口图层鼠标移出事件
     function ckMouseoutEvent(e) {
       map.eachLayer(function(layer) {
-        if (layer.options.fillOpacity == "0.55") {
+        if (layer.options.fillOpacity == "0.65") {
           layer.setStyle({
             color: "#fff",
             fillOpacity: 0.45
