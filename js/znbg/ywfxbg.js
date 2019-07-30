@@ -288,6 +288,67 @@ requirejs(
         var word_list = eval("[" + string_list + "]");
         $body.jQCloud(word_list);
       },
+      initDoubleBar(data, id) {
+        let xData = [],
+          data1 = [],
+          data2 = [];
+        let chart = ec.init(document.getElementById(id));
+        data.map(val => {
+          xData.push(val.name);
+          data1.push(val.value1);
+          data2.push(val.value2);
+        });
+        let option = {
+          tooltip: {
+            show: true
+          },
+          legend: {
+            data: ["上期", "本期"],
+            show: true
+          },
+          grid: {
+            top: 60,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            containLabel: true
+          },
+          xAxis: {
+            type: "category",
+            data: xData
+          },
+          yAxis: {
+            type: "value"
+            // min: min,
+            // max: max
+          },
+          series: [
+            {
+              name: "上期",
+              type: "bar",
+              color: "#008fef",
+              barGap: "5%",
+              barWidth: 20,
+              itemStyle: {
+                barBorderRadius: 2
+              },
+              data: data1
+            },
+            {
+              name: "本期",
+              type: "bar",
+              color: "#4cb676",
+              barWidth: 20,
+              itemStyle: {
+                barBorderRadius: 2
+              },
+              barGap: "5%",
+              data: data2
+            }
+          ]
+        };
+        chart.setOption(option);
+      },
       initJcjTab(data, id) {
         let $body = $("#" + id).empty();
         $body.append(
@@ -406,6 +467,39 @@ requirejs(
         $("#pop-container3 .fieldset4 .article1").html(result.content1);
         $("#pop-container3 .fieldset4 .article2").html(result.content2);
       },
+      init4_1(result) {
+        result.data1.map((val, index) => {
+          let html;
+          if (index === 0 || index === 5) {
+            html = val + "&nbsp;&nbsp;件";
+          } else if (index === 6) {
+            html = val + "%";
+          } else {
+            html = val + "&nbsp;&nbsp;条";
+          }
+          $("#pop-container4 .value4-1")
+            .eq(index)
+            .html(html);
+        });
+        this.initLine(result.data2, "chart4-1");
+        $("#pop-container4 .fieldset1 footer").html(result.content);
+      },
+      init4_2(result) {
+        this.initDoubleBar(result.data1, "chart4-2");
+        $("#pop-container4 .footer1").html(result.content1);
+        $("#pop-container4 .footer2").html(result.content2);
+        this.initAnnual(result.data2, "chart4-3", true);
+      },
+      init4_3(result) {
+        this.initBarX(result.data1, "chart4-4");
+        $("#pop-container4 .fieldset3 footer").html(result.content);
+        this.initBarY(result.data2, "chart4-5");
+      },
+      init4_4(result) {
+        $("#pop-container4 .fieldset4 footer").html(result.content1);
+        this.initCloud(result.data, "chart4-6");
+        $("#pop-container4 .zjfx-content").html(result.content2);
+      },
       init6_1(result) {
         result.data1.map((val, index) => {
           let html;
@@ -509,6 +603,19 @@ requirejs(
             this.init6_4(result.data4);
           });
       },
+      initJtsgPreview(condition) {
+        return sugon
+          .request(sugon.interFaces.znbg.ywfxbg.getJtsgPreview, condition)
+          .then(result => {
+            let id = "pop-container4";
+            $("#" + id).show();
+            this.initTitle(result.title, id);
+            this.init4_1(result.data1);
+            this.init4_2(result.data2);
+            this.init4_3(result.data3);
+            this.init4_4(result.data4);
+          });
+      },
       initPopPage(condition, type) {
         // 初始化页面
         let promise, id;
@@ -528,6 +635,8 @@ requirejs(
             break;
           case 3:
           case "jtsg":
+            id = "pop-container4";
+            promise = this.initJtsgPreview(condition);
             break;
           case 4:
           case "ylld":
@@ -653,6 +762,7 @@ requirejs(
           onNodeSelected: function(event, node) {
             $deptName.val((searchRuler.deptName = node.text));
             $deptId.val((searchRuler.deptId = node.id));
+            initLeft();
             $leftTree.css("visibility", "hidden");
           },
           showCheckbox: false //是否显示多选
@@ -762,6 +872,8 @@ requirejs(
                 case "5":
                   popFunc.initCloud(val.data, id);
                   break;
+                case "6":
+                  popFunc.initDoubleBar(val.data, id);
               }
             });
           }
@@ -790,29 +902,11 @@ requirejs(
       }
     }
 
-    // 程序入口
-    $(function() {
-      initSearchBar();
-      initRightPanel();
-    });
-
-    // 设置按钮点击事件
-    $(".setting-btn").click(() => {
-      $(".pop-mask").show();
-      $(".setting-aside").show();
-    });
-
-    // 关闭按钮点击事件
-    $(".setting-cancel").click(() => {
-      $(".pop-mask").hide();
-      $(".setting-aside").hide();
-    });
-
-    // 确定按钮事件
-    $(".setting-confirm").click(() => {
+    // 刷新左侧面板
+    function initLeft() {
       let $div = $(".setting-ul > li > div"),
         typeArr = [];
-      idArr = [];
+      idArr = [], { deptId } = searchRuler;
       for (let i = 0, len = $div.length; i < len; i++) {
         let $dom = $div.eq(i);
         if ($dom.attr("class") == "switch-on") {
@@ -825,7 +919,8 @@ requirejs(
           type: "post",
           url: sugon.interFaces.znbg.ywfxbg.submitSetting,
           data: {
-            typeArr: typeArr.join(",")
+            typeArr: typeArr.join(","),
+            deptId
           }
         },
         result => {
@@ -896,6 +991,29 @@ requirejs(
           $(".pop-mask").hide();
         }
       );
+    }
+
+    // 程序入口
+    $(function() {
+      initSearchBar();
+      initRightPanel();
+    });
+
+    // 设置按钮点击事件
+    $(".setting-btn").click(() => {
+      $(".pop-mask").show();
+      $(".setting-aside").show();
+    });
+
+    // 关闭按钮点击事件
+    $(".setting-cancel").click(() => {
+      $(".pop-mask").hide();
+      $(".setting-aside").hide();
+    });
+
+    // 确定按钮事件
+    $(".setting-confirm").click(() => {
+      initLeft();
     });
 
     // 全选按钮事件
