@@ -914,7 +914,6 @@ requirejs(
               let id = sugon.uuid();
               $body.append($("<div/>").attr("id", id));
               let $id = $("#" + id);
-              debugger;
               switch (val.type) {
                 case "0.1":
                   $id
@@ -992,8 +991,8 @@ requirejs(
     function initLeft() {
       let $div = $(".setting-ul > li > div"),
         typeArr = [],
-        idArr = [],
         { deptId, date1, date2 } = searchRuler;
+      idArr = [];
       for (let i = 0, len = $div.length; i < len; i++) {
         let $dom = $div.eq(i);
         if ($dom.attr("class") == "switch-on") {
