@@ -806,6 +806,7 @@ requirejs(
         })
         .change(() => {
           searchRuler.date1 = $("#date1").val();
+          initLeft();
         });
       $date2
         .datetimepicker({
@@ -820,6 +821,7 @@ requirejs(
         })
         .change(() => {
           searchRuler.date2 = $("#date2").val();
+          initLeft();
         });
       let offset = $deptName.offset();
       // 设置下拉框宽度
@@ -989,8 +991,9 @@ requirejs(
     // 刷新左侧面板
     function initLeft() {
       let $div = $(".setting-ul > li > div"),
-        typeArr = [];
-      (idArr = []), ({ deptId } = searchRuler);
+        typeArr = [],
+        idArr = [],
+        { deptId, date1, date2 } = searchRuler;
       for (let i = 0, len = $div.length; i < len; i++) {
         let $dom = $div.eq(i);
         if ($dom.attr("class") == "switch-on") {
@@ -1004,7 +1007,9 @@ requirejs(
           url: sugon.interFaces.znbg.ywfxbg.submitSetting,
           data: {
             typeArr: typeArr.join(","),
-            deptId
+            deptId,
+            date1,
+            date2
           }
         },
         result => {
