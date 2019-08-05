@@ -923,8 +923,9 @@ requirejs(
                   popFunc.initJcjTab(val.data, id);
                   break;
                 case "0.2":
-                  $id.addClass("tab-container1").css("height", "152px");
-                  popFunc.initJcjTab(val.data, id);
+                  $id.addClass("tab-container1").css("height", "193px");
+                  popFunc.initCkTab(val.data, id);
+                  break;
                 case "0.3":
                   $id
                     .addClass("tab-container3")
