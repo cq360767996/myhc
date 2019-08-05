@@ -868,6 +868,10 @@ define([], function() {
           localUrl: "./static/json/ywfxbg/jcjPreview.json",
           remoteUrl: base.server + "znbg/ywfxbg/getJcjPreview"
         },
+        getCkPreview: {
+          localUrl: "./static/json/ywfxbg/ckPreview.json",
+          remoteUrl: base.server + "znbg/ywfxbg/getCkPreview"
+        },
         getAjPreview: {
           localUrl: "./static/json/ywfxbg/ajPreview.json",
           remoteUrl: base.server + "znbg/ywfxbg/getAjPreview"

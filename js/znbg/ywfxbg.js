@@ -368,6 +368,25 @@ requirejs(
           );
         });
       },
+      initCkTab(data, id) {
+        let $body = $("#" + id).empty();
+        $body.append(
+          "<div><div>业务类别</div><div>满意度</div><div>同比</div><div>环比</div></div>"
+        );
+        data.map(val => {
+          $body.append(
+            "<div><div>" +
+              val.name +
+              "</div><div>" +
+              val.value1 +
+              "</div><div>" +
+              val.value2 +
+              "</div><div>" +
+              val.value3 +
+              "</div></div>"
+          );
+        });
+      },
       initAjTab(data, id) {
         let $body = $("#" + id).empty();
         data.map(val => {
@@ -435,6 +454,43 @@ requirejs(
       init2_1(result) {
         result.data1.map((val, index) => {
           let html;
+          if (index < 4) {
+            html = val + "&nbsp;&nbsp;条";
+          } else if (index == 4) {
+            html = val + "&nbsp;&nbsp;件";
+          } else {
+            html = val + "%";
+          }
+          $("#pop-container2 .value2-1")
+            .eq(index)
+            .html(html);
+        });
+        this.initLine(result.data2, "chart2-1");
+        $("#pop-container2 .fieldset1 footer").html(result.content);
+      },
+      init2_2(result) {
+        this.initCkTab(result.data1, "tab2");
+        $("#pop-container2 .fieldset2 .article1").html(result.content1);
+        this.initAnnual(result.data2, "chart2-2");
+        $("#pop-container2 .fieldset2 .article2").html(result.content2);
+        this.initBarX(result.data3, "chart2-3");
+      },
+      init2_3(result) {
+        this.initBarY(result.data1, "chart2-4");
+        result.data2.map((val, index) => {
+          $("#pop-container2 .article")
+            .eq(index)
+            .html(val);
+        });
+      },
+      init2_4(result) {
+        $("#pop-container2 .fieldset4 .article1").html(result.content1);
+        $("#pop-container2 .fieldset4 .article2").html(result.content2);
+        this.initCloud(result.data, "chart2-5");
+      },
+      init3_1(result) {
+        result.data1.map((val, index) => {
+          let html;
           if (index < 5 && index > 0) {
             html = val + "&nbsp;&nbsp;条";
           } else if (index == 6) {
@@ -442,28 +498,28 @@ requirejs(
           } else {
             html = val + "&nbsp;&nbsp;件";
           }
-          $(".value2-1-1")
+          $(".value3-1")
             .eq(index)
             .html(html);
         });
         $("#pop-container3 .fieldset1 .footer1").html(result.content);
-        this.initLine(result.data2, "chart2-1");
+        this.initLine(result.data2, "chart3-1");
       },
-      init2_2(result) {
-        this.initAjTab(result.data, "chart2-2");
+      init3_2(result) {
+        this.initAjTab(result.data, "chart3-2");
         $("#pop-container3 .fieldset2 .footer1").html(result.content1);
         $("#pop-container3 .fieldset2 .footer2").html(result.content2);
       },
-      init2_3(result) {
-        this.initAnnual(result.data1, "chart2-3", false, true);
-        this.initBarX(result.data2, "chart2-4");
+      init3_3(result) {
+        this.initAnnual(result.data1, "chart3-3", false, true);
+        this.initBarX(result.data2, "chart3-4");
         $("#pop-container3 .fieldset3 .article1").html(result.content1);
         $("#pop-container3 .fieldset3 .article2").html(result.content2);
         $("#pop-container3 .fieldset3 .article3").html(result.content3);
       },
-      init2_4(result) {
-        this.initBarY(result.data1, "chart2-5");
-        this.initCloud(result.data2, "chart2-6");
+      init3_4(result) {
+        this.initBarY(result.data1, "chart3-5");
+        this.initCloud(result.data2, "chart3-6");
         $("#pop-container3 .fieldset4 .article1").html(result.content1);
         $("#pop-container3 .fieldset4 .article2").html(result.content2);
       },
@@ -577,6 +633,19 @@ requirejs(
             this.init1_4_2(result.data8);
           });
       },
+      initCkPreview(condition) {
+        return sugon
+          .request(sugon.interFaces.znbg.ywfxbg.getCkPreview, condition)
+          .then(result => {
+            let id = "pop-container2";
+            $("#" + id).show();
+            this.initTitle(result.title, id);
+            this.init2_1(result.data1);
+            this.init2_2(result.data2);
+            this.init2_3(result.data3);
+            this.init2_4(result.data4);
+          });
+      },
       initAjPreview(condition) {
         return sugon
           .request(sugon.interFaces.znbg.ywfxbg.getAjPreview, condition)
@@ -584,10 +653,10 @@ requirejs(
             let id = "pop-container3";
             $("#" + id).show();
             this.initTitle(result.title, id);
-            this.init2_1(result.data1);
-            this.init2_2(result.data2);
-            this.init2_3(result.data3);
-            this.init2_4(result.data4);
+            this.init3_1(result.data1);
+            this.init3_2(result.data2);
+            this.init3_3(result.data3);
+            this.init3_4(result.data4);
           });
       },
       initRxPreview(codition) {
@@ -627,6 +696,8 @@ requirejs(
             break;
           case 1:
           case "ck":
+            id = "pop-container2";
+            promise = this.initCkPreview(condition);
             break;
           case 2:
           case "aj":
@@ -841,18 +912,31 @@ requirejs(
               let id = sugon.uuid();
               $body.append($("<div/>").attr("id", id));
               let $id = $("#" + id);
+              debugger;
               switch (val.type) {
                 case "0.1":
-                  $id.addClass("tab-container1");
+                  $id
+                    .addClass("tab-container1")
+                    .css("width", "299px")
+                    .css("height", "164px");
                   popFunc.initJcjTab(val.data, id);
                   break;
+                case "0.2":
+                  $id.addClass("tab-container1").css("height", "152px");
+                  popFunc.initJcjTab(val.data, id);
                 case "0.3":
-                  $id.addClass("tab-container3");
+                  $id
+                    .addClass("tab-container3")
+                    .css("width", "299px")
+                    .css("height", "388px");
                   popFunc.initAjTab(val.data, id);
                   break;
                 case "0.6":
                   $id.addClass("tab-container1");
-                  popFunc.initJcjTab(val.data, id);
+                  popFunc
+                    .initJcjTab(val.data, id)
+                    .css("width", "299px")
+                    .css("height", "164px");
                   break;
                 case "1":
                   popFunc.initLine(val.data, id);
@@ -906,7 +990,7 @@ requirejs(
     function initLeft() {
       let $div = $(".setting-ul > li > div"),
         typeArr = [];
-      idArr = [], { deptId } = searchRuler;
+      (idArr = []), ({ deptId } = searchRuler);
       for (let i = 0, len = $div.length; i < len; i++) {
         let $dom = $div.eq(i);
         if ($dom.attr("class") == "switch-on") {
