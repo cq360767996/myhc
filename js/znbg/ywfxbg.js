@@ -934,11 +934,11 @@ requirejs(
                   popFunc.initAjTab(val.data, id);
                   break;
                 case "0.6":
-                  $id.addClass("tab-container1");
-                  popFunc
-                    .initJcjTab(val.data, id)
+                  $id
+                    .addClass("tab-container1")
                     .css("width", "299px")
                     .css("height", "164px");
+                  popFunc.initJcjTab(val.data, id);
                   break;
                 case "1":
                   popFunc.initLine(val.data, id);
