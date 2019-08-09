@@ -1104,14 +1104,14 @@ requirejs(
                   $id
                     .addClass("tab-container52")
                     .css("width", "284px")
-                    .css("height", "120px");
+                    .css("height", "212px");
                   popFunc.initYlldTab2(val.data, id);
                   break;
                 case "0.53":
                   $id
                     .addClass("tab-container53")
                     .css("width", "284px")
-                    .css("height", "120px");
+                    .css("height", "212px");
                   popFunc.initYlldTab3(val.data, id);
                   break;
                 case "0.6":

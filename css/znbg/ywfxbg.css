@@ -2138,6 +2138,12 @@
   width: 100%;
   height: 100%;
 }
+.hidden-chart chart,
+.hidden-chart tab,
+.hidden-chart row,
+.hidden-chart cell {
+  display: block;
+}
 .hidden-chart > div {
   float: left;
   width: 400px;
