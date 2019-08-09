@@ -884,6 +884,10 @@ define([], function() {
           localUrl: "./static/json/ywfxbg/jtsgPreview.json",
           remoteUrl: base.server + "znbg/ywfxbg/getJtsgPreview"
         },
+        getYlldPreview: {
+          localUrl: "./static/json/ywfxbg/ylldPreview.json",
+          remoteUrl: base.server + "znbg/ywfxbg/getYlldPreview"
+        },
         uploadImg: {
           localUrl: "./static/json/ywfxbg/uploadImg.json",
           remoteUrl: base.server + "znbg/ywfxbg/uploadImg"
@@ -1201,6 +1205,26 @@ define([], function() {
 
     var uuid = s.join("");
     return uuid;
+  };
+
+  // 处理最大值和最小值
+  base.handleMinAndMax = function(arr) {
+    let result = { min: null, max: null },
+      diff;
+    if (arr.length > 0) {
+      result.min = Number(arr[0]);
+      result.max = Number(arr[0]);
+      arr.map(val => {
+        result.min = Math.min(result.min, Number(val));
+        result.max = Math.max(result.max, Number(val));
+      });
+      diff = (result.max - result.min) / 2;
+      result.min =
+        result.min - diff < 0 ? 0 : Number(result.min - diff).toFixed(2);
+      result.max =
+        result.max + diff > 100 ? 100 : Number(result.max + diff).toFixed(2);
+    }
+    return result;
   };
 
   base.initRightMenu = function() {

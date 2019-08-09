@@ -10,6 +10,7 @@
 
 .header {
   & > header {
+    clear: both;
     width: 180px;
     height: 30px;
     line-height: 24px;
@@ -56,14 +57,14 @@
   }
 
   &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
     background-color: #fff;
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #c1c1c1;
   }
 }
@@ -114,10 +115,10 @@
 }
 
 // 弹出页统一样式
-.pop-container {
+.pop-container(@width, @height, @fieldWidth) {
   position: absolute;
-  width: 1280px;
-  height: 690px;
+  width: @width;
+  height: @height;
   top: 0;
   left: 0;
   z-index: -2;
@@ -129,6 +130,7 @@
     width: 100%;
     height: @header-height;
     background: url("../../img/znbg/preview/header.png") no-repeat;
+    background-size: 100% 100%;
 
     & > div {
       float: left;
@@ -191,7 +193,7 @@
 
     fieldset {
       float: left;
-      width: 25%;
+      width: @fieldWidth;
       height: 100%;
       border-right: @border;
 
@@ -203,7 +205,7 @@
         .header();
       }
 
-      &:nth-child(4) {
+      &:last-child {
         border-right: 0;
       }
     }
@@ -475,7 +477,6 @@
 
         div {
           float: right;
-          display: inline-block;
           width: 28px;
           height: 16px;
           margin-top: 22px;
@@ -694,14 +695,26 @@
   @height: 22px;
   height: @height;
   line-height: @height;
-  
+
   span {
     margin-left: 5px;
   }
 }
 
-#pop-container1,
-#pop-container2 {
+.banner3 {
+  line-height: 22px;
+  height: 22px;
+}
+
+.banner4 {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  background: url(../../img/znbg/preview/header_bg.png) no-repeat 50% 50%;
+  text-align: center;
+}
+
+#pop-container1 {
   @border: 1px solid #dbdbdb;
   .fieldset1 {
     & > section {
@@ -780,7 +793,8 @@
       }
     }
 
-    #chart1-1, #chart2-1 {
+    #chart1-1,
+    #chart2-1 {
       width: 100%;
       height: calc(~"100% - 135px");
     }
@@ -799,7 +813,10 @@
 #pop-container1,
 #pop-container4 {
   @border: 1px solid #dbdbdb;
-  .pop-container();
+  @width: 1280px;
+  @height: 690px;
+  @fieldWidth: 25%;
+  .pop-container(@width, @height, @fieldWidth);
 
   .fieldset2 {
     & > section {
@@ -913,10 +930,106 @@
 
 #pop-container2 {
   @border: 1px solid #dbdbdb;
-  .pop-container();
+  @width: 1280px;
+  @height: 690px;
+  @fieldWidth: 25%;
+  .pop-container(@width, @height, @fieldWidth);
 
   article {
-     text-indent: 30px; 
+    text-indent: 30px;
+  }
+
+  .fieldset1 {
+    & > section {
+      @header-height: 30px;
+
+      & > section {
+        @line-height: 50px;
+        width: 100%;
+        height: calc(~"100% - @{header-height}");
+
+        & > div {
+          width: 100%;
+          height: @line-height;
+          line-height: @line-height;
+          padding: 0 5px;
+
+          & > * {
+            float: left;
+          }
+
+          & > div {
+            &:nth-child(2) {
+              width: calc(~"100% - 46px");
+              height: 100%;
+              margin-left: 10px;
+            }
+
+            &:first-child {
+              width: 36px;
+              height: 50px;
+            }
+
+            & > div {
+              width: 100%;
+              height: @line-height;
+            }
+
+            span {
+              float: left;
+              color: #485053;
+            }
+
+            strong {
+              float: right;
+              color: #ff6000;
+              font-size: 20px;
+            }
+          }
+
+          &:nth-child(2) {
+            height: calc(~"100% - @{line-height} * 3");
+            padding: 0;
+
+            & > div {
+              &:nth-child(2) {
+                @border: dashed 1px #bec5d4;
+                border: @border;
+              }
+
+              & > div {
+                padding: 0 5px;
+
+                &:first-child {
+                  margin-top: 0;
+                  background-color: #f4f6fc;
+                  border-bottom: @border;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &:first-child {
+        border-bottom: @border;
+      }
+    }
+
+    #chart1-1,
+    #chart2-1 {
+      width: 100%;
+      height: calc(~"100% - 135px");
+    }
+
+    footer {
+      width: 100%;
+      height: 60px;
+      line-height: 20px;
+      margin-top: 5px;
+      text-indent: @text-indent;
+      .text-ellipse(3);
+    }
   }
 
   .fieldset2 {
@@ -1006,7 +1119,10 @@
 
 #pop-container3 {
   @border: 1px solid #dbdbdb;
-  .pop-container();
+  @width: 1280px;
+  @height: 690px;
+  @fieldWidth: 25%;
+  .pop-container(@width, @height, @fieldWidth);
 
   .fieldset1 {
     & > section {
@@ -1283,9 +1399,278 @@
   }
 }
 
+#pop-container5 {
+  @border: 1px solid #dbdbdb;
+  @width: 1520px;
+  @height: 760px;
+  @fieldWidth: 20%;
+  .pop-container(@width, @height, @fieldWidth);
+
+  chart,
+  tab,
+  row,
+  cell {
+    display: block;
+  }
+
+  fieldset {
+    padding: 10px;
+    .header();
+  }
+
+  .fieldset1 {
+    .row1 {
+      width: 100%;
+      height: 34px;
+      line-height: 34px;
+
+      & > div {
+        float: left;
+        height: 100%;
+        &:first-child {
+          width: 34px;
+        }
+        &:nth-child(2) {
+          width: calc(~"100% - 134px");
+          padding-left: 5px;
+        }
+        &:nth-child(3) {
+          width: 100px;
+          color: #ff6000;
+          font-size: 22px;
+        }
+      }
+    }
+
+    .row-left {
+      float: left;
+      width: 34px;
+      height: 108px;
+      margin-bottom: 10px;
+    }
+
+    .row-right {
+      margin-bottom: 10px;
+      @border: solid 1px #bec5d4;
+      float: left;
+      width: calc(~"100% - 34px");
+      height: 108px;
+      border-radius: 0px 0px 4px 4px;
+      border: @border;
+
+      & > div {
+        &:first-child {
+          height: 34px;
+          line-height: 34px;
+          background-color: #f4f6fc;
+          border-bottom: @border;
+
+          & > div:nth-child(2) {
+            font-size: 22px;
+            color: #399554;
+          }
+        }
+        &:nth-child(2) {
+          height: 74px;
+
+          & > div {
+            float: left;
+            height: 100%;
+            line-height: 24px;
+
+            &:first-child {
+              width: calc(~"100% - 100px");
+            }
+            &:nth-child(2) {
+              width: 100px;
+              font-size: 18px;
+              color: #ffa200;
+            }
+
+            & > div {
+              width: 100%;
+              height: 24px;
+            }
+          }
+        }
+
+        & > div {
+          height: 100%;
+          float: left;
+          &:first-child {
+            width: calc(~"100% - 100px");
+            padding-left: 5px;
+          }
+          &:nth-child(2) {
+            width: 100px;
+          }
+        }
+      }
+    }
+
+    #chart5-1 {
+      width: 100%;
+      height: 110px;
+    }
+
+    article {
+      height: 60px;
+      line-height: 20px;
+      .text-ellipse(3);
+      text-indent: 30px;
+    }
+  }
+  .fieldset2 {
+    #chart5-2 {
+      height: 120px;
+    }
+
+    #chart5-3 {
+      height: 120px;
+    }
+
+    #tab5-1 {
+      @border: solid 1px #dcdcdc;
+      width: 100%;
+      height: 128px;
+      border: @border;
+
+      & > row {
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        border-top: @border;
+
+        &:first-child {
+          border-top: 0;
+          background-color: #f0f3fa;
+        }
+
+        & > cell {
+          border-left: @border;
+          width: 55px;
+          height: 100%;
+          text-align: center;
+          float: left;
+
+          &:first-child {
+            border-left: 0;
+            width: calc(~"100% - 165px");
+          }
+        }
+      }
+    }
+
+    article {
+      width: 100%;
+      height: 60px;
+      line-height: 20px;
+      .text-ellipse(3);
+      text-indent: 30px;
+      margin-top: 4px;
+    }
+  }
+  .fieldset3 {
+    #chart5-4 {
+      height: 220px;
+    }
+
+    #chart5-5,
+    #chart5-6 {
+      height: 138px;
+    }
+  }
+  .fieldset4 {
+    #chart5-7 {
+      height: 250px;
+    }
+    #chart5-8,
+    #chart5-9 {
+      height: 145px;
+    }
+  }
+  .fieldset5 {
+    article {
+      height: 60px;
+      line-height: 20px;
+      .text-ellipse(3);
+      text-indent: 30px;
+    }
+
+    #tab5-2 {
+      @border: solid 1px #dcdcdc;
+      width: 100%;
+      height: 210px;
+      border: @border;
+      font-size: 12px;
+
+      & > row {
+        width: 100%;
+        height: 15px;
+        line-height: 15px;
+        border-top: @border;
+
+        &:first-child {
+          border-top: 0;
+          background-color: #f0f3fa;
+        }
+
+        & > cell {
+          border-left: @border;
+          width: 60px;
+          height: 100%;
+          text-align: center;
+          float: left;
+
+          &:first-child {
+            border-left: 0;
+            width: calc(~"100% - 180px");
+          }
+        }
+      }
+    }
+
+    #tab5-3 {
+      @border: solid 1px #dcdcdc;
+      width: 100%;
+      height: 212px;
+      border: @border;
+      font-size: 12px;
+
+      & > row {
+        width: 100%;
+        height: 15px;
+        line-height: 15px;
+        border-top: @border;
+
+        &:first-child {
+          border-top: 0;
+          background-color: #f0f3fa;
+        }
+
+        & > cell {
+          border-left: @border;
+          width: 70px;
+          height: 100%;
+          text-align: center;
+          float: left;
+
+          &:first-child {
+            border-left: 0;
+            width: calc(~"100% - 140px");
+          }
+        }
+      }
+    }
+  }
+}
+
 #pop-container6 {
   @border: 1px solid #dbdbdb;
-  .pop-container();
+  @width: 1280px;
+  @height: 690px;
+  @fieldWidth: 25%;
+  .pop-container(@width, @height, @fieldWidth);
 
   .fieldset1 {
     & > section {
@@ -1547,6 +1932,104 @@
       &:first-child {
         width: calc(~"100% - @{cell-height} * 3");
         border-left: 0;
+      }
+    }
+  }
+}
+
+.tab-container51 {
+  @border: solid 1px #dcdcdc;
+  width: 100%;
+  height: 128px;
+  border: @border;
+
+  & > row {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    border-top: @border;
+
+    &:first-child {
+      border-top: 0;
+      background-color: #f0f3fa;
+    }
+
+    & > cell {
+      border-left: @border;
+      width: 55px;
+      height: 100%;
+      text-align: center;
+      float: left;
+
+      &:first-child {
+        border-left: 0;
+        width: calc(~"100% - 165px");
+      }
+    }
+  }
+}
+
+.tab-container52 {
+  @border: solid 1px #dcdcdc;
+  width: 100%;
+  height: 210px;
+  border: @border;
+  font-size: 12px;
+
+  & > row {
+    width: 100%;
+    height: 15px;
+    line-height: 15px;
+    border-top: @border;
+
+    &:first-child {
+      border-top: 0;
+      background-color: #f0f3fa;
+    }
+
+    & > cell {
+      border-left: @border;
+      width: 60px;
+      height: 100%;
+      text-align: center;
+      float: left;
+
+      &:first-child {
+        border-left: 0;
+        width: calc(~"100% - 180px");
+      }
+    }
+  }
+}
+
+.tab-container53 {
+  @border: solid 1px #dcdcdc;
+  width: 100%;
+  height: 212px;
+  border: @border;
+  font-size: 12px;
+
+  & > row {
+    width: 100%;
+    height: 15px;
+    line-height: 15px;
+    border-top: @border;
+
+    &:first-child {
+      border-top: 0;
+      background-color: #f0f3fa;
+    }
+
+    & > cell {
+      border-left: @border;
+      width: 70px;
+      height: 100%;
+      text-align: center;
+      float: left;
+
+      &:first-child {
+        border-left: 0;
+        width: calc(~"100% - 140px");
       }
     }
   }

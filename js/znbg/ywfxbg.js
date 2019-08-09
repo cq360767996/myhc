@@ -7,7 +7,7 @@ requirejs(
     // 全局查询尺度
     let searchRuler = {};
     let popFunc = {
-      initLine(data, id) {
+      initLine(data, id, lineData) {
         let xData = [],
           yData = [],
           len = data.length;
@@ -70,10 +70,32 @@ requirejs(
             }
           ]
         };
+        if (lineData) {
+          option.series[0].markLine = {
+            label: {
+              show: false
+            },
+            lineStyle: {
+              color: "#ff0000",
+              width: "1",
+              type: "dashed"
+            },
+            data: [
+              {
+                xAxis: -1,
+                yAxis: lineData
+              },
+              {
+                xAxis: data.length,
+                yAxis: lineData
+              }
+            ]
+          };
+        }
         let chart = ec.init(document.getElementById(id));
         chart.setOption(option, true);
       },
-      initAnnual(data, id, withPercent, withPosition) {
+      initAnnual(data, id, withPercent, withPosition, withCenter) {
         let dom = document.getElementById(id);
         let chart = ec.init(dom);
         let total = 0;
@@ -125,6 +147,23 @@ requirejs(
             }
           ]
         };
+        if (withCenter) {
+          option.title = {
+            text: total,
+            subtext: "诉求总量",
+            left: "center",
+            top: "35%",
+            padding: [0, 0],
+            subtextStyle: {
+              color: "#000",
+              fontSize: 12
+            },
+            textStyle: {
+              color: "#1D84C6",
+              fontSize: 14
+            }
+          };
+        }
         chart.setOption(option, true);
       },
       initBarX(data, id) {
@@ -291,12 +330,15 @@ requirejs(
       initDoubleBar(data, id) {
         let xData = [],
           data1 = [],
-          data2 = [];
+          data2 = [],
+          minMaxArr = [];
         let chart = ec.init(document.getElementById(id));
         data.map(val => {
           xData.push(val.name);
           data1.push(val.value1);
           data2.push(val.value2);
+          minMaxArr.push(val.value1);
+          minMaxArr.push(val.value2);
         });
         let option = {
           tooltip: {
@@ -318,9 +360,9 @@ requirejs(
             data: xData
           },
           yAxis: {
-            type: "value"
-            // min: min,
-            // max: max
+            type: "value",
+            min: sugon.handleMinAndMax(minMaxArr).min,
+            max: sugon.handleMinAndMax(minMaxArr).max
           },
           series: [
             {
@@ -403,6 +445,55 @@ requirejs(
           );
         });
       },
+      initYlldTab1(data, id) {
+        let $body = $("#" + id).empty();
+        $body.append(
+          "<row><cell>警情类别</cell><cell>满意度</cell><cell>同比</cell><cell>环比</cell></row>"
+        );
+        data.map(val => {
+          $body.append(
+            "<row><cell>" +
+              val.name +
+              "</cell><cell>" +
+              val.value1 +
+              "</cell><cell>" +
+              val.value2 +
+              "</cell><cell>" +
+              val.value3 +
+              "</cell></row>"
+          );
+        });
+      },
+      initYlldTab2(data, id) {
+        let $body = $("#" + id).empty();
+        data.map(val => {
+          $body.append(
+            "<row><cell>" +
+              val.name +
+              "</cell><cell>" +
+              val.value1 +
+              "</cell><cell>" +
+              val.value2 +
+              "</cell><cell>" +
+              val.value3 +
+              "</cell></row>"
+          );
+        });
+      },
+      initYlldTab3(data, id) {
+        let $body = $("#" + id).empty();
+        data.map(val => {
+          $body.append(
+            "<row><cell>" +
+              val.name +
+              "</cell><cell>" +
+              val.value1 +
+              "</cell><cell>" +
+              val.value2 +
+              "</cell></row>"
+          );
+        });
+      },
       initTitle(result, id) {
         result.data.map((val, index) => {
           $("#" + id + " .header-val")
@@ -454,9 +545,9 @@ requirejs(
       init2_1(result) {
         result.data1.map((val, index) => {
           let html;
-          if (index < 4) {
+          if (index < 3) {
             html = val + "&nbsp;&nbsp;条";
-          } else if (index == 4) {
+          } else if (index == 3) {
             html = val + "&nbsp;&nbsp;件";
           } else {
             html = val + "%";
@@ -471,7 +562,7 @@ requirejs(
       init2_2(result) {
         this.initCkTab(result.data1, "tab2");
         $("#pop-container2 .fieldset2 .article1").html(result.content1);
-        this.initAnnual(result.data2, "chart2-2");
+        this.initAnnual(result.data2, "chart2-2", false, false, true);
         $("#pop-container2 .fieldset2 .article2").html(result.content2);
         this.initBarX(result.data3, "chart2-3");
       },
@@ -555,6 +646,47 @@ requirejs(
         $("#pop-container4 .fieldset4 footer").html(result.content1);
         this.initCloud(result.data, "chart4-6");
         $("#pop-container4 .zjfx-content").html(result.content2);
+      },
+      init5_1(result) {
+        let $dom = $("#pop-container5 .value5-1");
+        result.map((val, index) => {
+          let html;
+          if (index == 1 || index == 5 || index == 9) {
+            html = val + "%";
+          } else if (index == 0) {
+            html = val;
+          } else {
+            html = val + "人";
+          }
+          $dom.eq(index).html(html);
+        });
+      },
+      init5_2(result) {
+        this.initLine(result.data1.data1, "chart5-1", result.data1.data2);
+        $("#pop-container5 .fieldset1 article").html(result.content1);
+        this.initLine(result.data2.data1, "chart5-2", result.data2.data2);
+        $("#pop-container5 .fieldset2 .article1").html(result.content2);
+        this.initLine(result.data3.data1, "chart5-3", result.data3.data2);
+        $("#pop-container5 .fieldset2 .article2").html(result.content3);
+        this.initYlldTab1(result.data4, "tab5-1");
+        $("#pop-container5 .fieldset2 .article3").html(result.content4);
+      },
+      init5_3(result) {
+        this.initBarY(result.data1, "chart5-4");
+        this.initAnnual(result.data2, "chart5-5");
+        this.initBarX(result.data3, "chart5-6");
+      },
+      init5_4(result) {
+        this.initBarY(result.data1, "chart5-7");
+        this.initAnnual(result.data2, "chart5-8");
+        this.initBarX(result.data3, "chart5-9");
+      },
+      init5_5(result) {
+        $("#pop-container5 .fieldset5 .article1").html(result.content1);
+        $("#pop-container5 .fieldset5 .article2").html(result.content2);
+        $("#pop-container5 .fieldset5 .article3").html(result.content3);
+        this.initYlldTab2(result.data1, "tab5-2");
+        this.initYlldTab3(result.data2, "tab5-3");
       },
       init6_1(result) {
         result.data1.map((val, index) => {
@@ -659,9 +791,9 @@ requirejs(
             this.init3_4(result.data4);
           });
       },
-      initRxPreview(codition) {
+      initRxPreview(condition) {
         return sugon
-          .request(sugon.interFaces.znbg.ywfxbg.getRxPreview, codition)
+          .request(sugon.interFaces.znbg.ywfxbg.getRxPreview, condition)
           .then(result => {
             let id = "pop-container6";
             $("#" + id).show();
@@ -670,6 +802,20 @@ requirejs(
             this.init6_2(result.data2);
             this.init6_3(result.data3);
             this.init6_4(result.data4);
+          });
+      },
+      initYlldPreview(condition) {
+        return sugon
+          .request(sugon.interFaces.znbg.ywfxbg.getYlldPreview, condition)
+          .then(result => {
+            let id = "pop-container5";
+            $("#" + id).show();
+            this.initTitle(result.title, id);
+            this.init5_1(result.data1);
+            this.init5_2(result.data2);
+            this.init5_3(result.data3);
+            this.init5_4(result.data4);
+            this.init5_5(result.data5);
           });
       },
       initJtsgPreview(condition) {
@@ -711,6 +857,8 @@ requirejs(
             break;
           case 4:
           case "ylld":
+            id = "pop-container5";
+            promise = this.initYlldPreview(condition);
             break;
           case 5:
           case "rx":
@@ -720,11 +868,19 @@ requirejs(
         }
         promise.then(result => {
           if (condition.content === undefined) {
+            let top, left;
+            if (id === "pop-container5") {
+              top = "-380px";
+              left = "-760px";
+            } else {
+              top = "-345px";
+              left = "-640px";
+            }
             let $body = $("#" + id)
               .css("top", "50%")
               .css("left", "50%")
-              .css("margin-top", "-345px")
-              .css("margin-left", "-640px")
+              .css("margin-top", top)
+              .css("margin-left", left)
               .css("z-index", 3)
               .show();
             let $i = $("#" + id + " > header > div > i").show(),
@@ -933,6 +1089,27 @@ requirejs(
                     .css("height", "388px");
                   popFunc.initAjTab(val.data, id);
                   break;
+                case "0.51":
+                  $id
+                    .addClass("tab-container51")
+                    .css("width", "283px")
+                    .css("height", "128px");
+                  popFunc.initYlldTab1(val.data, id);
+                  break;
+                case "0.52":
+                  $id
+                    .addClass("tab-container52")
+                    .css("width", "284px")
+                    .css("height", "120px");
+                  popFunc.initYlldTab2(val.data, id);
+                  break;
+                case "0.53":
+                  $id
+                    .addClass("tab-container53")
+                    .css("width", "284px")
+                    .css("height", "120px");
+                  popFunc.initYlldTab3(val.data, id);
+                  break;
                 case "0.6":
                   $id
                     .addClass("tab-container1")
@@ -942,6 +1119,9 @@ requirejs(
                   break;
                 case "1":
                   popFunc.initLine(val.data, id);
+                  break;
+                case "1.1":
+                  popFunc.initLine(val.data1, id, val.data2);
                   break;
                 case "2.1":
                   popFunc.initAnnual(val.data, id, true);
