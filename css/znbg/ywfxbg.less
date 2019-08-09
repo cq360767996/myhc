@@ -115,7 +115,7 @@
 }
 
 // 弹出页统一样式
-.pop-container(@width, @height, @fieldWidth) {
+.pop-container(@width, @height, @fieldWidth, @bg) {
   position: absolute;
   width: @width;
   height: @height;
@@ -129,7 +129,7 @@
   & > header {
     width: 100%;
     height: @header-height;
-    background: url("../../img/znbg/preview/header.png") no-repeat;
+    background: @bg;
     background-size: 100% 100%;
 
     & > div {
@@ -816,7 +816,8 @@
   @width: 1280px;
   @height: 690px;
   @fieldWidth: 25%;
-  .pop-container(@width, @height, @fieldWidth);
+  @bg: url("../../img/znbg/preview/header.png") no-repeat;
+  .pop-container(@width, @height, @fieldWidth, @bg);
 
   .fieldset2 {
     & > section {
@@ -933,7 +934,8 @@
   @width: 1280px;
   @height: 690px;
   @fieldWidth: 25%;
-  .pop-container(@width, @height, @fieldWidth);
+  @bg: url("../../img/znbg/preview/header.png") no-repeat;
+  .pop-container(@width, @height, @fieldWidth, @bg);
 
   article {
     text-indent: 30px;
@@ -1122,7 +1124,8 @@
   @width: 1280px;
   @height: 690px;
   @fieldWidth: 25%;
-  .pop-container(@width, @height, @fieldWidth);
+  @bg: url("../../img/znbg/preview/header.png") no-repeat;
+  .pop-container(@width, @height, @fieldWidth, @bg);
 
   .fieldset1 {
     & > section {
@@ -1404,7 +1407,8 @@
   @width: 1520px;
   @height: 760px;
   @fieldWidth: 20%;
-  .pop-container(@width, @height, @fieldWidth);
+  @bg: url("../../img/znbg/preview/header2.png") no-repeat;
+  .pop-container(@width, @height, @fieldWidth, @bg);
 
   chart,
   tab,
@@ -1414,7 +1418,7 @@
   }
 
   fieldset {
-    padding: 10px;
+    padding: 10px 5px;
     .header();
   }
 
@@ -1670,7 +1674,8 @@
   @width: 1280px;
   @height: 690px;
   @fieldWidth: 25%;
-  .pop-container(@width, @height, @fieldWidth);
+  @bg: url("../../img/znbg/preview/header.png") no-repeat;
+  .pop-container(@width, @height, @fieldWidth, @bg);
 
   .fieldset1 {
     & > section {

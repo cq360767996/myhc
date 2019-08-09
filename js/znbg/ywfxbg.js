@@ -10,21 +10,18 @@ requirejs(
       initLine(data, id, lineData) {
         let xData = [],
           yData = [],
+          minMaxData = [],
           len = data.length;
         data.map(val => {
           xData.push(val.name);
           yData.push(val.value);
         });
+        minMaxData = yData.slice(0);
+        lineData && minMaxData.push(lineData);
         data.sort((v1, v2) => {
           return Number(v1.value) - Number(v2.value);
         });
-        let min = len > 0 && data[0].value,
-          max = len > 0 && data[len - 1].value;
-        let diff = (max - min) / 2;
-        min = min - diff;
-        max = Number(max) + Number(diff);
-        min = Number(min).toFixed(2);
-        max = max > 100 ? 100 : Number(max).toFixed(2);
+        let minMax = sugon.handleMinAndMax(minMaxData);
         let option = {
           animation: false,
           grid: {
@@ -43,8 +40,8 @@ requirejs(
           },
           yAxis: {
             type: "value",
-            min: min,
-            max: max,
+            min: minMax.min,
+            max: minMax.max,
             splitLine: {
               show: false
             },
@@ -166,7 +163,7 @@ requirejs(
         }
         chart.setOption(option, true);
       },
-      initBarX(data, id) {
+      initBarX(data, id, render3Words) {
         let xData = [],
           yData = [];
         data.map(val => {
@@ -198,10 +195,11 @@ requirejs(
                 color: "#000",
                 interval: 0,
                 formatter: param => {
+                  let prefix = render3Words ? 3 : 4;
                   let tempStr = "";
-                  if (param.length > 4) {
+                  if (param.length > prefix) {
                     for (var i = 0; i < param.length; i++) {
-                      if (i % 4 == 3) {
+                      if (i % prefix == prefix - 1) {
                         tempStr += param[i] + "\n";
                       } else {
                         tempStr += param[i];
@@ -249,7 +247,7 @@ requirejs(
         let chart = ec.init(document.getElementById(id));
         chart.setOption(option, true);
       },
-      initBarY(data, id) {
+      initBarY(data, id, splitMinMax) {
         let xData = [],
           yData = [];
         data.map(val => {
@@ -308,6 +306,11 @@ requirejs(
             }
           ]
         };
+        if (splitMinMax) {
+          let minMax = sugon.handleMinAndMax(xData);
+          option.xAxis.min = minMax.min;
+          option.xAxis.max = minMax.max;
+        }
         chart.setOption(option, true);
       },
       initCloud(data, id) {
@@ -340,6 +343,7 @@ requirejs(
           minMaxArr.push(val.value1);
           minMaxArr.push(val.value2);
         });
+        let minMax = sugon.handleMinAndMax(minMaxArr);
         let option = {
           tooltip: {
             show: true
@@ -361,8 +365,8 @@ requirejs(
           },
           yAxis: {
             type: "value",
-            min: sugon.handleMinAndMax(minMaxArr).min,
-            max: sugon.handleMinAndMax(minMaxArr).max
+            min: minMax.min,
+            max: minMax.max
           },
           series: [
             {
@@ -672,14 +676,14 @@ requirejs(
         $("#pop-container5 .fieldset2 .article3").html(result.content4);
       },
       init5_3(result) {
-        this.initBarY(result.data1, "chart5-4");
+        this.initBarY(result.data1, "chart5-4", true);
         this.initAnnual(result.data2, "chart5-5");
-        this.initBarX(result.data3, "chart5-6");
+        this.initBarX(result.data3, "chart5-6", true);
       },
       init5_4(result) {
-        this.initBarY(result.data1, "chart5-7");
+        this.initBarY(result.data1, "chart5-7", true);
         this.initAnnual(result.data2, "chart5-8");
-        this.initBarX(result.data3, "chart5-9");
+        this.initBarX(result.data3, "chart5-9", true);
       },
       init5_5(result) {
         $("#pop-container5 .fieldset5 .article1").html(result.content1);
@@ -1121,7 +1125,7 @@ requirejs(
                   popFunc.initLine(val.data, id);
                   break;
                 case "1.1":
-                  popFunc.initLine(val.data1, id, val.data2);
+                  popFunc.initLine(val.data.data1, id, val.data.data2);
                   break;
                 case "2.1":
                   popFunc.initAnnual(val.data, id, true);
