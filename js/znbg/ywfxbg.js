@@ -452,7 +452,7 @@ requirejs(
       initYlldTab1(data, id) {
         let $body = $("#" + id).empty();
         $body.append(
-          "<row><cell>警情类别</cell><cell>满意度</cell><cell>同比</cell><cell>环比</cell></row>"
+          "<row><cell>类别</cell><cell>指数</cell><cell>同比</cell><cell>环比</cell></row>"
         );
         data.map(val => {
           $body.append(
