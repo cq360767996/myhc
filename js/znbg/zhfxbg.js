@@ -507,22 +507,25 @@ requirejs(
 
     // 刷新左侧面板
     function initLeft() {
-      sugon.request(sugon.interFaces.znbg.zhfxbg.getLeft).then(result => {
-        let $article = $(".article-div").empty(),
-          $checkbox = $(".checkbox-div");
-        result.data.map((val1, index) => {
-          let $div = $("<div/>"),
-            $span = "";
-          val1.map(val2 => {
-            $span += `<span class="span-div" code="${val2.value}">
+      let { deptId, date1, date2 } = searchRuler;
+      sugon
+        .request(sugon.interFaces.znbg.zhfxbg.getLeft, { deptId, date1, date2 })
+        .then(result => {
+          let $article = $(".article-div").empty(),
+            $checkbox = $(".checkbox-div");
+          result.data.map((val1, index) => {
+            let $div = $("<div/>"),
+              $span = "";
+            val1.map(val2 => {
+              $span += `<span class="span-div" code="${val2.value}">
               <img src="../../img/znbg/checkbox_hover.png">
               <span>${val2.name}</span>
             </span>`;
+            });
+            $div.append($span).appendTo($article.eq(index));
           });
-          $div.append($span).appendTo($article.eq(index));
+          $checkbox.attr("src", "../../img/znbg/checkbox_hover.png");
         });
-        $checkbox.attr("src", "../../img/znbg/checkbox_hover.png");
-      });
     }
 
     // 程序入口
