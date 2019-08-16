@@ -155,6 +155,11 @@ requirejs(["vipspa"], function(vipspa) {
       templateUrl: "views/znbg/ywfxbg.html",
       controller: "js/znbg/ywfxbg.js"
     },
+    zhfxbg: {
+      parent: "znbg",
+      templateUrl: "views/znbg/zhfxbg.html",
+      controller: "js/znbg/zhfxbg.js"
+    },
     defaults: "myzs"
   };
 

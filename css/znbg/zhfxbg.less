@@ -1,0 +1,373 @@
+.header {
+  & > header {
+    clear: both;
+    width: 180px;
+    height: 30px;
+    line-height: 24px;
+    font-size: 16px;
+    background: url("../../img/znbg/preview/title.png") no-repeat;
+
+    & > span {
+      margin-left: 15px;
+      color: #ebecfa;
+    }
+  }
+}
+
+.bg {
+  // 背景色
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 0 0 8px #939cab;
+}
+
+.single-text-ellipse() {
+  // 单行省略
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.text-ellipse(@line) {
+  // 多行省略
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+  overflow: hidden;
+  text-align: justify;
+}
+
+.scroll-style {
+  // 滚动条样式
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #c1c1c1;
+  }
+}
+
+.row-width {
+  // 表格宽度设置
+  &:nth-child(1) {
+    width: 40px;
+  }
+
+  &:nth-child(2) {
+    width: calc(~"100% - 320px");
+
+    * {
+      float: left;
+    }
+
+    img {
+      margin-top: 8px;
+    }
+
+    span {
+      text-align: left;
+      display: inline-block;
+      width: calc(~"100% - 28px");
+      height: 100%;
+      margin-left: 8px;
+      .single-text-ellipse();
+    }
+  }
+
+  &:nth-child(3) {
+    width: 140px;
+  }
+
+  &:nth-child(4) {
+    width: 140px;
+
+    img {
+      margin-left: 8px;
+      cursor: pointer;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.left-section {
+  float: left;
+  width: 60%;
+  padding: 20px 0 20px 20px;
+  height: 100%;
+
+  & > header {
+    width: 100%;
+    height: 50px;
+    background-color: #adc3db;
+    padding: 10px;
+
+    input {
+      @height: 30px;
+      width: calc(~"(100% - 40px) / 3");
+      height: @height;
+      background-color: #fff;
+      margin-left: 10px;
+      border-radius: 3px;
+      color: #808080;
+      text-indent: 15px;
+      line-height: @height;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  section {
+    width: 100%;
+    height: calc(~"100% - 60px");
+    margin-top: 10px;
+    .bg();
+
+    fieldset {
+      @header-height: 40px;
+      width: 100%;
+      height: calc(~"20% - 10px");
+      padding: 0 10px;
+
+      & > header {
+        width: 100%;
+        height: @header-height;
+        line-height: @header-height;
+        font-size: 16px;
+        color: #1a1a1a;
+
+        * {
+          margin-left: 10px;
+        }
+
+        span {
+          background: url("../../img/znbg/checkbox.png") no-repeat;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      article {
+        width: calc(~"100% - 50px");
+        height: calc(~"100% - @{header-height} - 10px");
+        border: 1px dashed #bcc9d8;
+        margin: 0 auto;
+        padding: 5px;
+        color: #999;
+        background-color: #f6faff;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .scroll-style();
+
+        & > div {
+          width: 100%;
+          line-height: 30px;
+
+          & > span {
+            cursor: pointer;
+            margin-left: 10px;
+            white-space: nowrap;
+
+            & > span {
+              margin-left: 3px;
+            }
+          }
+        }
+
+        &:nth-child(5) {
+          overflow: hidden;
+        }
+
+        textarea {
+          width: 100%;
+          height: calc(~"100% - 5px");
+          resize: none;
+          background-color: #f6faff;
+          border: 0;
+          outline: none;
+          .scroll-style();
+        }
+      }
+
+      & > footer {
+        width: 100%;
+        height: 1px;
+        background-color: #bcc9d8;
+        margin-top: 9px;
+      }
+    }
+
+    & > footer {
+      width: 100%;
+      height: 50px;
+
+      button {
+        display: block;
+        width: 90px;
+        height: 30px;
+        background-color: #ffffff;
+        border: solid 1px #409cf1;
+        color: #027ecb;
+        margin: 10px auto;
+      }
+    }
+  }
+}
+
+.right-section {
+  @header-height: 40px;
+  float: left;
+  width: calc(~"40% - 40px");
+  height: calc(~"100% - 40px");
+  margin: 20px;
+  .bg();
+
+  header {
+    width: 100%;
+    height: @header-height;
+    line-height: @header-height;
+    font-size: 18px;
+    color: #000;
+
+    span,
+    img {
+      margin-left: 10px;
+    }
+  }
+
+  section {
+    width: 100%;
+    height: calc(~"100% - @{header-height}");
+    padding: 10px 20px;
+
+    & > div {
+      @tab-height: 35px;
+      width: 100%;
+      line-height: @tab-height;
+      color: #000;
+      text-align: center;
+
+      &.tab-header {
+        height: @tab-height;
+        background-color: #f6faff;
+
+        div {
+          float: left;
+          height: 100%;
+          .row-width();
+        }
+      }
+
+      &.tab-body {
+        height: calc(~"100% - @{tab-height}");
+        overflow-y: auto;
+        overflow-x: hidden;
+        .scroll-style();
+
+        & > div {
+          width: 100%;
+          height: @tab-height;
+
+          &:hover,
+          &.row-selected {
+            background-color: #edf6ff;
+          }
+
+          & > div {
+            float: left;
+            height: @tab-height;
+            .row-width();
+          }
+        }
+      }
+    }
+  }
+}
+
+.pop-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #7f7f7f;
+  opacity: 0.8;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.left-tree {
+  height: 230px;
+  visibility: hidden;
+  overflow: auto;
+  position: absolute;
+  z-index: 2;
+}
+
+.hidden-chart {
+  position: absolute;
+  z-index: -3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  chart,
+  tab,
+  row,
+  cell {
+    display: block;
+  }
+
+  & > div {
+    float: left;
+    width: 400px;
+    height: 300px;
+  }
+}
+
+.tab-container {
+  @border: solid 1px #dcdcdc;
+  border: @border;
+
+  & > row {
+    height: 32px;
+    line-height: 32px;
+    border-top: @border;
+
+    &:first-child {
+      border-top: 0;
+      background-color: #f0f3fa;
+    }
+
+    & > cell {
+      border-left: @border;
+      width: 55px;
+      height: 32px;
+      text-align: center;
+      float: left;
+
+      &:first-child {
+        border-left: 0;
+        width: 120px;
+      }
+    }
+  }
+}

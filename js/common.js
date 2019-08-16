@@ -897,6 +897,31 @@ define([], function() {
           localUrl: "./static/json/ywfxbg/deleteReport.json",
           remoteUrl: base.server + "znbg/ywfxbg/deleteReport"
         }
+      },
+      zhfxbg: {
+        getLeft: {
+          localUrl: "./static/json/zhfxbg/getLeft.json",
+          remoteUrl: base.server + "znbg/zhfxbg/getLeft"
+        },
+        generateReport: {
+          // 生成报告
+          localUrl: "./static/json/zhfxbg/generateReport.json",
+          remoteUrl: base.server + "znbg/zhfxbg/generateReport"
+        },
+        getFileList: {
+          // 获取文件列表
+          localUrl: "./static/json/ywfxbg/getFileList.json",
+          remoteUrl: base.server + "znbg/zhfxbg/getFileList"
+        },
+        uploadImg: {
+          localUrl: "./static/json/ywfxbg/uploadImg.json",
+          remoteUrl: base.server + "znbg/zhfxbg/uploadImg"
+        },
+        deleteReport: {
+          // 删除报告
+          localUrl: "./static/json/ywfxbg/deleteReport.json",
+          remoteUrl: base.server + "znbg/zhfxbg/deleteReport"
+        }
       }
     }
   };
