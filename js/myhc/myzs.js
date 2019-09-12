@@ -1317,7 +1317,7 @@ requirejs(
       ckMarkerGroups2 = [],
       ckCircleGroups = L.layerGroup(),
       centerMarker,
-        latLng; // 窗口mark，窗口圆，圆心点mark，圆心经纬度
+      latLng; // 窗口mark，窗口圆，圆心点mark，圆心经纬度
     var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
     var ckBorderGroup = L.layerGroup(),
       isLoadBounds = true,
@@ -2822,7 +2822,7 @@ requirejs(
               "#5bc5f0",
               "#e37e6d"
             ];
-              map.removeLayer(allFjLayerGroup);
+            map.removeLayer(allFjLayerGroup);
             allFjLayerGroup = L.layerGroup();
             // 在添加之前置空
             resultData.map(function(val, index) {
@@ -3154,7 +3154,7 @@ requirejs(
     function resetPage(type, isSearch) {
       var searchYw = $(".search-yw");
       var searchGj = $(".search-gj");
-        latLng = "";
+      latLng = "";
       $(".data-panel2").hide();
       $(".toolbar-panel3").hide();
       map.off("click");
@@ -3220,7 +3220,7 @@ requirejs(
       }
       if ($(".toolbar-panel3").css("display") === "block") {
         $(".toolbar-panel3 > div").removeClass("toolbar-panel3-hover");
-          latLng = "";
+        latLng = "";
         map.removeLayer(ckMarkerGroups1);
         map.removeLayer(ckCircleGroups);
         ckMarkerGroups2.map(val => {
@@ -3699,7 +3699,7 @@ requirejs(
     }
 
     // 渲染标记点(便民服务圈和服务点)
-      function renderMarks(data, index, isTimeChange) {
+    function renderMarks(data, index, isTimeChange) {
       ckMarkerGroups2[index] = L.layerGroup();
       var iconUrl = "../../img/myhc/myzs/";
       switch (index) {
@@ -3707,16 +3707,16 @@ requirejs(
           iconUrl += "hz_icon.png";
           break;
         case 1:
-            iconUrl += isTimeChange ? "cjg_icon.png" : "crj_icon.png";
+          iconUrl += isTimeChange ? "cjg_icon.png" : "crj_icon.png";
           break;
         case 2:
-            iconUrl += isTimeChange ? "crj_icon.png" : "cjg_icon.png";
+          iconUrl += isTimeChange ? "crj_icon.png" : "cjg_icon.png";
           break;
       }
       var divIcon = L.icon({
         iconUrl: iconUrl,
-          iconAnchor: [13, 43],
-          popupAnchor: [2, -35]
+        iconAnchor: [13, 43],
+        popupAnchor: [2, -35]
       });
       data.map(function(value) {
         if (index == 3) {
@@ -3734,7 +3734,12 @@ requirejs(
         });
         marker.on({
           click: function() {
-            let type = !isTimeChange || value.type == 0 ? value.type : (value.type == 1 ? 2 : 1);
+            let type =
+              !isTimeChange || value.type == 0
+                ? value.type
+                : value.type == 1
+                ? 2
+                : 1;
             openCkPulsePopup(value.code, marker, type);
           },
           mouseover: function() {
@@ -3749,7 +3754,7 @@ requirejs(
               "</div>";
             var popIcon = L.divIcon({
               html: html,
-                iconAnchor: [width / 2, 90]
+              iconAnchor: [width / 2, 90]
             });
             var popMarker = L.marker([value.lat, value.lng], { icon: popIcon });
             popMarkerGroup.addLayer(popMarker);
@@ -4105,11 +4110,11 @@ requirejs(
           break;
         case 1:
           radius = 3000;
-            color = "#44E014";
+          color = "#44E014";
           break;
         case 2:
           radius = 4500;
-            color = "#E06B14";
+          color = "#E06B14";
           break;
       }
       if (lat && lng) {
@@ -4132,7 +4137,7 @@ requirejs(
         .then(result => {
           typeArr.map(val => {
             val = val && Number(val);
-              renderMarks(result.data[val], val, true);
+            renderMarks(result.data[val], val, true);
             drawCircle(val, lat, lng);
           });
           renderCircleList(result.data);
@@ -4193,8 +4198,8 @@ requirejs(
               val && map.removeLayer(val);
             });
 
-              if (typeArr.length > 0) {
-                  latLng && getBmfwq(typeArr);
+            if (typeArr.length > 0) {
+              latLng && getBmfwq(typeArr);
               map.off("click").on("click", function(e) {
                 centerMarker && map.removeLayer(centerMarker);
                 $panel2.show();
@@ -4301,23 +4306,23 @@ requirejs(
           : $target.parent();
         var ywid = $target.attr("ywid");
 
-          ckMarkerGroups2.map(val => {
-              for (let key in val._layers) {
-                  let layer = val._layers[key];
-                  if (layer.options.ywid == ywid) {
-                      let type;
-                      if (layer.options.type == "1") {
-                          type = "2";
-                      } else if (layer.options.type == "2") {
-                          type = "1";
-                      } else {
-                          type = layer.options.type;
-                      }
-                      openCkPulsePopup(layer.options.ywid, layer, type);
-                      break;
-                  }
+        ckMarkerGroups2.map(val => {
+          for (let key in val._layers) {
+            let layer = val._layers[key];
+            if (layer.options.ywid == ywid) {
+              let type;
+              if (layer.options.type == "1") {
+                type = "2";
+              } else if (layer.options.type == "2") {
+                type = "1";
+              } else {
+                type = layer.options.type;
               }
-          });
+              openCkPulsePopup(layer.options.ywid, layer, type);
+              break;
+            }
+          }
+        });
       }
     );
 
