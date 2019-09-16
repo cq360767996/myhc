@@ -904,6 +904,10 @@ select {
   height: calc(100% - 25px);
 }
 
+.mid3 {
+  overflow: auto;
+}
+
 .mid3::-webkit-scrollbar {
   /*滚动条整体样式*/
   width: 4px; /*高宽分别对应横竖滚动条的尺寸*/

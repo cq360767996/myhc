@@ -26,6 +26,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
     searchRuler.date1 = getDate(-7);
     searchRuler.date2 = getDate(-2);
     searchRuler.deptName = "南京市公安局";
+    searchRuler.type1 = "0";
+    searchRuler.type2 = "0";
 
     $("#place").val("南京市公安局");
     $("#placeCode").val("2014110416460086100000002942");
@@ -967,16 +969,23 @@ requirejs(["common", "ec"], function(sugon, ec) {
 
   // 初始化下拉框
   function initSelector() {
-    sugon.request(sugon.interFaces.zxyp.ylld.initSelector, {}).then(result => {
-      let dom = "";
-      result.data.map(val => {
-        dom += `<option value="${val.id}">${val.name}</option>`;
+    let deptId = searchRuler.deptId;
+    sugon
+      .request(
+        sugon.interFaces.zxyp.ylld.initSelector,
+        { deptId },
+        { async: false }
+      )
+      .then(result => {
+        let dom = "";
+        result.data.map(val => {
+          dom += `<option value="${val.id}">${val.name}</option>`;
+        });
+        $("#type2")
+          .empty()
+          .append(dom);
+        searchRuler.type2 = "0";
       });
-      $("#type2")
-        .empty()
-        .append(dom);
-      searchRuler.type2 = "0";
-    });
   }
 
   var initView = function() {

@@ -1028,7 +1028,7 @@ define([], function() {
   };
 
   // 利用promise请求
-  base.request = function(url, data) {
+  base.request = function(url, data, config) {
     return new Promise((resolve, reject) => {
       let option = {
         url,
@@ -1039,9 +1039,11 @@ define([], function() {
         dataType: "json",
         traditional: true
       };
-      option.url = base.isPublished ? url.remoteUrl : url.localUrl;
-      option.type = base.isPublished ? "post" : "get";
-      $.ajax(option);
+      let finalOpt = {};
+      Object.assign(finalOpt, option, config);
+      finalOpt.url = base.isPublished ? url.remoteUrl : url.localUrl;
+      finalOpt.type = base.isPublished ? "post" : "get";
+      $.ajax(finalOpt);
     });
   };
 
