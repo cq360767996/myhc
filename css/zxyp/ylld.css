@@ -7,6 +7,7 @@
   width: 95%;
   height: calc(100% - 85px);
   margin: 10px auto;
+  color: #4d4d4d;
 }
 .view-header-left {
   float: left;
@@ -153,7 +154,6 @@ input {
   width: 100%;
   height: 40px;
   line-height: 40px;
-  text-align: center;
   font-size: 18px;
   color: #888f95;
   border-bottom: 2px solid #ced7e0;
@@ -391,7 +391,7 @@ input {
 
 /*词云*/
 div.jqcloud {
-  font-family: '微软雅黑', '宋体', sans-serif;
+  font-family: "微软雅黑", "宋体", sans-serif;
   font-size: 10px;
   line-height: normal;
 }
@@ -582,7 +582,7 @@ div.jqcloud span {
   margin-top: 5px;
   width: calc(100% / 3 - 14px);
   margin-left: 10px;
-  background: url('../../img/zxyp/ckfw/bg.png') no-repeat;
+  background: url("../../img/zxyp/ckfw/bg.png") no-repeat;
   background-size: 100% 100%;
 }
 .mid_title {
@@ -784,7 +784,7 @@ select {
   margin-left: 10px;
   height: calc(100% / 3 - 10px);
   margin-top: 8px;
-  background: url('../../img/zxyp/ylld/bg.png') no-repeat;
+  background: url("../../img/zxyp/ylld/bg.png") no-repeat;
   background-size: 100% 100%;
   line-height: 55px;
 }
@@ -882,4 +882,198 @@ select {
 }
 .type4 span {
   color: red;
+}
+
+.mid1 > div,
+.mid2 > div {
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+
+.chart-title {
+  margin-top: 5px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: #75787a;
+  font-size: 16px;
+}
+
+.chart-body {
+  height: calc(100% - 25px);
+}
+
+.mid3::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
+}
+.mid3::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+}
+.mid3::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mid3 > div {
+  height: 35px;
+  line-height: 35px;
+  border-bottom: #bcc9d8 1px solid;
+  color: #75787a;
+}
+
+.mid3 > div > div {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+
+.right1 > div:first-child {
+  height: 25px;
+  line-height: 25px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#right1-chart {
+  height: calc(100% - 25px);
+}
+
+#right1-strong {
+  margin-left: 5px;
+  color: #1d84c6;
+  font-size: 18px;
+}
+
+#right2-strong {
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  height: 40px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#right2-chart {
+  height: calc(100% - 50px);
+}
+
+#right2-strong > strong {
+  color: #1d84c6;
+  font-size: 18px;
+}
+
+.subTitle > div {
+  float: right;
+  margin-right: 5px;
+}
+
+#type2 {
+  margin-left: 5px;
+}
+
+.right3 > div {
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.right3 > div > div {
+  float: left;
+  height: 100%;
+}
+
+.right3 > div > div:first-child {
+  width: 30px;
+}
+
+.right3 > div > div:nth-child(2) {
+  width: calc(100% - 110px);
+}
+
+.right3 > div > div:nth-child(3) {
+  width: 80px;
+  color: #4a7fb2;
+}
+
+.right3 {
+  padding: 10px;
+}
+
+.chart-pop {
+  position: absolute;
+  top: 76px;
+  left: 98px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+}
+
+.chart-pop > div {
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: #1d84c6;
+}
+
+.chart-pop > div:first-child {
+  height: 30px;
+}
+
+.chart-pop > div:first-child > img {
+  margin: 0 auto;
+}
+
+.pop-container {
+  width: 120px;
+  height: 60px;
+  line-height: 20px;
+  position: absolute;
+  top: 83px;
+  left: 210px;
+  background: rgb(207, 233, 249);
+  border-radius: 3px;
+  box-shadow: 0px 0px 8px #939cab;
+  display: none;
+}
+
+.pop-container::before {
+  content: "";
+  border-left: 1px solid rgb(207, 233, 249);
+  border-bottom: 1px solid rgb(207, 233, 249);
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: rgb(207, 233, 249);
+  bottom: -9px;
+  transform: rotate(-45deg);
+  left: -8px;
+  top: 50%;
+  margin-top: -8px;
+}
+
+.pop-container > div {
+  width: calc(100% - 30px);
+  height: 20px;
+  margin: 0 auto;
+  color: #4d4d4d;
+}
+
+.pop-container > div:first-child > strong {
+  color: rgb(71, 140, 201);
+}
+
+.pop-container > div:nth-child(2) > strong {
+  color: rgb(225, 145, 101);
+}
+
+.pop-container > div:nth-child(3) > strong {
+  color: rgb(230, 65, 73);
 }

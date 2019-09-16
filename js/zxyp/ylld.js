@@ -2,8 +2,7 @@ var zsfxChart;
 requirejs(["common", "ec"], function(sugon, ec) {
   // 全局查询尺度
   var searchRuler = {};
-  var param1, param2, param3;
-  var hfrcData = [];
+  var popData = []; // 弹出页数据
   // 获取当前时间并加减固定月份
   var getDate = function(difference) {
     var now = new Date();
@@ -87,7 +86,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
     $("#left-tree").css("visibility", "visible");
   });
 
-  var initTxt = function() {
+  // 初始化左1面板
+  var initLeft1 = function() {
     sugon.requestJson(
       {
         type: "POST",
@@ -102,6 +102,10 @@ requirejs(["common", "ec"], function(sugon, ec) {
               .eq(i)
               .html(result.data[i].value);
           } else {
+            let { name1, name2, name3, value1, value2, value3 } = result.data[
+              i
+            ];
+            popData.push({ name1, name2, name3, value1, value2, value3 });
             $("#left_top .val")
               .eq(i)
               .find(".b")
@@ -125,99 +129,200 @@ requirejs(["common", "ec"], function(sugon, ec) {
     );
   };
 
-  var initWtyc = function() {
+  // 初始化左2面板
+  var initLeft2 = function() {
     sugon.requestJson(
       {
         type: "POST",
         async: true,
-        url: sugon.interFaces.zxyp.ylld.Shza,
+        url: sugon.interFaces.zxyp.ylld.Ylld,
         data: { search: JSON.stringify(searchRuler) }
       },
       function(result) {
-        $(".wtList").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          var str =
-            result.data[i].name.length > 19
-              ? result.data[i].name.substr(0, 19) + "..."
-              : result.data[i].name;
-          var tempStr = i + 1 + ". " + str;
-          var tempClass = "type" + result.data[i].type;
-          $(".wtList").append(
-            "<div id=" +
-              result.data[i].id +
-              " class=" +
-              tempClass +
-              ">" +
-              "<span class='lh l tt'>" +
-              tempStr +
-              "</span>" +
-              "</div>"
-          );
+        var xData = [],
+          yData1 = [],
+          yData2 = [],
+          yData3 = [],
+          iData = [],
+          min = 0,
+          max = 0; /*, min2 = 0, max2 = 0*/
+        if (result.data.length == 0) {
+          xData.push("暂无数据");
+          yData1.push(0);
+          yData2.push(0);
+          yData3.push(0);
+        } else {
+          (min = result.data[0].value1),
+            (max =
+              result.data[0]
+                .value1) /*, min2 = result.data[0].value3, max2 = result.data[0].value3*/;
+          for (var i = 0; i < result.data.length; i++) {
+            xData.push(result.data[i].name);
+            yData1.push(result.data[i].value1);
+            yData2.push(result.data[i].value2);
+            yData3.push(result.data[i].value3);
+            iData.push(result.data[i].id);
+            min = Math.min(
+              result.data[i].value1,
+              result.data[i].value2,
+              result.data[i].value3,
+              min
+            );
+            max = Math.max(
+              result.data[i].value1,
+              result.data[i].value2,
+              result.data[i].value3,
+              max
+            );
+            /*min2 = Math.min(result.data[i].value3, min2);
+                    max2 = Math.max(result.data[i].value3, max2);*/
+          }
+          min = min - 5;
         }
+        var Chart3 = ec.init(document.getElementById("chart3"));
+        Chart3.off();
+        Chart3.on("click", function(params) {
+          if (params.data == 0) {
+            return;
+          }
+          var seriesName = params.seriesName;
+          var name = params.name;
+          requirejs(["text!../views/zxyp/myd.html"], function(ele) {
+            sugon.showDialog({
+              width: 760,
+              height: 410,
+              ele: ele,
+              params:
+                seriesName + "_" + name + "_" + JSON.stringify(searchRuler)
+            });
+          });
+        });
+
+        var option = {
+          color: [
+            "rgb(21, 175, 137)",
+            "rgb(42, 155, 213)",
+            "rgb(167, 112, 179)"
+          ],
+          tooltip: {
+            trigger: "axis"
+            // formatter: function(params) {
+            //   var tempStr =
+            //     params[0].name +
+            //     "<br />" +
+            //     params[0].seriesName +
+            //     "：" +
+            //     params[0].value +
+            //     "%<br />" +
+            //     params[1].seriesName +
+            //     "：" +
+            //     params[1].value +
+            //     "%<br />" +
+            //     params[2].seriesName +
+            //     "：" +
+            //     params[2].value +
+            //     "%";
+            //   return tempStr;
+            // }
+          },
+          legend: {
+            show: true
+          },
+          grid: {
+            top: 25,
+            bottom: 25,
+            left: 45,
+            right: 15
+          },
+          xAxis: [
+            {
+              type: "category",
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                onZero: false,
+                lineStyle: {
+                  color: "#426791"
+                }
+              },
+              axisLabel: {
+                interval: 0,
+                textStyle: {
+                  color: "#b3cce2"
+                }
+              },
+              splitLine: {
+                show: false,
+                lineStyle: {
+                  color: "#c9d3df"
+                }
+              },
+              data: xData
+            }
+          ],
+          yAxis: [
+            {
+              type: "value",
+              splitNumber: 5,
+              min: min,
+              max: max,
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                onZero: false,
+                lineStyle: {
+                  color: "#426791"
+                }
+              },
+              axisLabel: {
+                formatter: "{value}%",
+                textStyle: {
+                  color: "#b3cce2"
+                }
+              },
+              splitLine: {
+                show: false,
+                lineStyle: {
+                  color: "#c9d3df"
+                }
+              }
+            }
+          ],
+          series: [
+            {
+              name: "社会治安满意度",
+              showSymbol: true,
+              symbolSize: 8,
+              type: "line",
+              data: yData1
+            },
+            {
+              name: "公安队伍满意度",
+              showSymbol: true,
+              symbolSize: 8,
+              type: "line",
+              data: yData2
+            },
+            {
+              name: "社区民警熟悉率",
+              showSymbol: true,
+              symbolSize: 8,
+              type: "line",
+              //yAxisIndex: 1,
+              data: yData3
+            }
+          ]
+        };
+
+        Chart3.setOption(option);
       }
     );
   };
 
-  var initRank = function() {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
-        url: sugon.interFaces.zxyp.ylld.Rank,
-        data: { dept: $("#dept").val(), search: JSON.stringify(searchRuler) }
-      },
-      function(result) {
-        $(".rankList").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          var tempImg = "",
-            tempClass = "rankVal";
-          if (i == 0) {
-            tempImg = "<img src='../img/zxyp/jcj/one.png' />";
-            tempClass += " g";
-          } else if (i == 1) {
-            tempImg = "<img src='../img/zxyp/jcj/two.png' />";
-            tempClass += " b";
-          } else if (i == 2) {
-            tempImg = "<img src='../img/zxyp/jcj/three.png' />";
-          }
-          var tempEle =
-            "<div>" +
-            "<div class='rankPic'>" +
-            tempImg +
-            "</div>" +
-            "<div class='rankName' title='" +
-            result.data[i].name +
-            "'>" +
-            result.data[i].name +
-            "</div>" +
-            "<div class='rankName' title='" +
-            result.data[i].name2 +
-            "'>" +
-            result.data[i].name2 +
-            "</div>";
-          if (result.data[i].value2) {
-            tempEle +=
-              "<div class='rankVal hh'>全市" +
-              result.data[i].value2 +
-              "名</div>";
-          }
-          tempEle +=
-            "<div class='" +
-            tempClass +
-            "'>" +
-            result.data[i].value +
-            "</div></div>";
-          $(".rankList").append(tempEle);
-        }
-      }
-    );
-  };
-
-  $("#dept").change(function() {
-    initRank();
-  });
-
-  var initRdfx = function(index) {
+  // 初始化左3面板
+  var initLeft3 = function(index) {
     sugon.requestJson(
       {
         type: "POST",
@@ -431,293 +536,39 @@ requirejs(["common", "ec"], function(sugon, ec) {
     );
   };
 
-  $("#dept2").change(function() {
-    initRdfx(0);
-  });
-
-  $(".tab2>div")
-    .unbind()
-    .bind("click", function() {
-      $(".tab2 .selected").removeClass("selected");
-      $(this).attr("class", "selected");
-      var index = $(".tab2>div").index(this);
-      initRdfx(index);
-    });
-
-  var initYlld = function() {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
-        url: sugon.interFaces.zxyp.ylld.Ylld,
-        data: { search: JSON.stringify(searchRuler) }
-      },
-      function(result) {
-        var xData = [],
-          yData1 = [],
-          yData2 = [],
-          yData3 = [],
-          iData = [],
-          min = 0,
-          max = 0; /*, min2 = 0, max2 = 0*/
-        if (result.data.length == 0) {
-          xData.push("暂无数据");
-          yData1.push(0);
-          yData2.push(0);
-          yData3.push(0);
-        } else {
-          (min = result.data[0].value1),
-            (max =
-              result.data[0]
-                .value1) /*, min2 = result.data[0].value3, max2 = result.data[0].value3*/;
-          for (var i = 0; i < result.data.length; i++) {
-            xData.push(result.data[i].name);
-            yData1.push(result.data[i].value1);
-            yData2.push(result.data[i].value2);
-            yData3.push(result.data[i].value3);
-            iData.push(result.data[i].id);
-            min = Math.min(
-              result.data[i].value1,
-              result.data[i].value2,
-              result.data[i].value3,
-              min
-            );
-            max = Math.max(
-              result.data[i].value1,
-              result.data[i].value2,
-              result.data[i].value3,
-              max
-            );
-            /*min2 = Math.min(result.data[i].value3, min2);
-                    max2 = Math.max(result.data[i].value3, max2);*/
-          }
-          min = min - 5;
-        }
-        var Chart3 = ec.init(document.getElementById("chart3"));
-        Chart3.off();
-        Chart3.on("click", function(params) {
-          if (params.data == 0) {
-            return;
-          }
-          var seriesName = params.seriesName;
-          var name = params.name;
-          requirejs(["text!../views/zxyp/myd.html"], function(ele) {
-            sugon.showDialog({
-              width: 760,
-              height: 410,
-              ele: ele,
-              params:
-                seriesName + "_" + name + "_" + JSON.stringify(searchRuler)
-            });
-          });
+  // 初始化中左面板
+  function initMidLeft(type = 1) {
+    let id = type == 1 ? "mid1-left" : "mid2-left";
+    let { deptId, date1, date2 } = searchRuler;
+    sugon
+      .request(sugon.interFaces.zxyp.ylld.initMidLeft, {
+        deptId,
+        date1,
+        date2,
+        type
+      })
+      .then(result => {
+        let data = result.data,
+          total = 0;
+        data.map(val => {
+          total += Number(val.value);
         });
-
-        var option = {
-          color: [
-            "rgb(21, 175, 137)",
-            "rgb(42, 155, 213)",
-            "rgb(167, 112, 179)"
-          ],
-          tooltip: {
-            trigger: "axis",
-            formatter: function(params) {
-              var tempStr =
-                params[0].name +
-                "<br />" +
-                params[0].seriesName +
-                "：" +
-                params[0].value +
-                "%<br />" +
-                params[1].seriesName +
-                "：" +
-                params[1].value +
-                "%<br />" +
-                params[2].seriesName +
-                "：" +
-                params[2].value +
-                "%";
-              return tempStr;
-            }
-          },
-          legend: {
-            show: true
-          },
-          grid: {
-            top: 25,
-            bottom: 25,
-            left: 45,
-            right: 15
-          },
-          xAxis: [
-            {
-              type: "category",
-              axisTick: {
-                show: false
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: "#426791"
-                }
-              },
-              axisLabel: {
-                interval: 0,
-                textStyle: {
-                  color: "#b3cce2"
-                }
-              },
-              splitLine: {
-                show: false,
-                lineStyle: {
-                  color: "#c9d3df"
-                }
-              },
-              data: xData
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              splitNumber: 5,
-              min: min,
-              max: max,
-              axisTick: {
-                show: false
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: "#426791"
-                }
-              },
-              axisLabel: {
-                formatter: "{value}%",
-                textStyle: {
-                  color: "#b3cce2"
-                }
-              },
-              splitLine: {
-                show: false,
-                lineStyle: {
-                  color: "#c9d3df"
-                }
-              }
-            } /*,
-                    {
-                        type: 'value',
-                        splitNumber: 5,
-                        min: min2,
-                        max: max2,
-                        axisTick: {
-                            show: false
-                        },
-                        axisLine: {
-                            onZero: false,
-                            lineStyle: {
-                                color: '#426791'
-                            }
-                        },
-                        axisLabel: {
-                            formatter: "{value}%",
-                            textStyle: {
-                                color: '#b3cce2'
-                            }
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: '#c9d3df'
-                            }
-                        }
-                    }*/
-          ],
-          series: [
-            {
-              name: "社会治安满意度",
-              showSymbol: true,
-              symbolSize: 8,
-              type: "line",
-              data: yData1
-            },
-            {
-              name: "公安队伍满意度",
-              showSymbol: true,
-              symbolSize: 8,
-              type: "line",
-              data: yData2
-            },
-            {
-              name: "社区民警熟悉率",
-              showSymbol: true,
-              symbolSize: 8,
-              type: "line",
-              //yAxisIndex: 1,
-              data: yData3
-            }
-          ]
-        };
-
-        Chart3.setOption(option);
-      }
-    );
-  };
-
-  $("#chart_title").bind("click", function() {
-    param3 = "";
-    initJqfx("");
-    initInfo("");
-  });
-
-  var initJqfx = function(param) {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
-        url: sugon.interFaces.zxyp.ylld.Dwjxz,
-        data: { id: param, search: JSON.stringify(searchRuler) }
-      },
-      function(result) {
-        var scaleData = result.data;
-        if (result.data.length == 0) {
-          return;
-        }
-
-        var Chart0 = ec.init(document.getElementById("chart0"));
-
-        Chart0.off();
-        Chart0.on("click", function(params) {
-          param3 = params.data.name;
-          $("#chart_title").html(params.data.name);
-          initJqfx(params.data.id);
-          initInfo(params.data.id);
-        });
-
-        if (!param3) {
-          $("#chart_title").html("总量");
-        }
-
-        var data = [];
-
-        for (var i = 0; i < scaleData.length; i++) {
-          data.push({
-            value: scaleData[i].value,
-            name: scaleData[i].name,
-            id: scaleData[i].id,
-            itemStyle: {
-              normal: {
-                borderColor: "rgba(255, 255, 255, 0.7)",
-                borderWidth: 1
-              }
-            }
-          });
-        }
-
-        var option = {
+        $(`.chart-pop${type} .pop-amount`).html(total);
+        let chart = ec.init(document.getElementById(id));
+        let option = {
           tooltip: {
             show: true
           },
           series: [
             {
+              color: [
+                "#A770B3",
+                "#AF8744",
+                "#ED7D31",
+                "#3A9BBE",
+                "#1D84C6",
+                "#6463AF"
+              ],
               name: "",
               type: "pie",
               clockWise: false,
@@ -730,20 +581,19 @@ requirejs(["common", "ec"], function(sugon, ec) {
                     show: true,
                     position: "outside",
                     formatter: function(params) {
-                      var tempStr = "";
-                      tempStr = params.name + "\n" + params.value;
-                      return tempStr;
+                      return params.name + "\n" + params.value;
                     },
                     rich: {
                       white: {
                         color: "#ddd",
-                        align: "center",
-                        padding: [10, 0]
+                        align: "center"
                       }
                     }
                   },
                   labelLine: {
-                    show: true
+                    show: true,
+                    length: 8,
+                    length2: 5
                   }
                 }
               },
@@ -751,193 +601,417 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           ]
         };
+        chart.setOption(option);
+        chart.off();
+        chart.on("click", param => {
+          initMidRight(type, param.data.id);
+        });
+      });
+  }
 
-        Chart0.setOption(option);
-      }
-    );
+  // 初始化中右面板
+  function initMidRight(type = 1, leftId = "") {
+    let id = type == 1 ? "mid1-right" : "mid2-right";
+    let { deptId, date1, date2 } = searchRuler;
+    sugon
+      .request(sugon.interFaces.zxyp.ylld.initMidRight, {
+        deptId,
+        date1,
+        date2,
+        type,
+        id: leftId
+      })
+      .then(result => {
+        let chart = ec.init(document.getElementById(id)),
+          xData = [],
+          yData = [],
+          data = result.data;
+        data.map(val => {
+          xData.push(val.name);
+          yData.push(val.value);
+        });
+        let minAndMax = sugon.handleMinAndMax(data);
+        let option = {
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow"
+            }
+          },
+          color: ["#1a9cd9"],
+          grid: {
+            left: 0,
+            top: 20,
+            right: 0,
+            bottom: 0,
+            containLabel: true
+          },
+          xAxis: [
+            {
+              type: "category",
+              axisTick: { show: false },
+              splitArea: { show: false },
+              data: xData,
+              axisLabel: {
+                interval: 0,
+                textStyle: {
+                  color: "#000"
+                }
+              },
+              axisLine: {
+                lineStyle: {
+                  color: "#000"
+                }
+              }
+            }
+          ],
+          yAxis: [
+            {
+              type: "value",
+              // min: minAndMax.min,
+              // max: minAndMax.max,
+              axisTick: { show: false },
+              splitLine: {
+                show: false,
+                lineStyle: {
+                  color: "#000"
+                }
+              },
+              splitArea: { show: false },
+              splitNumber: 5,
+              axisLabel: {
+                textStyle: {
+                  color: "#000"
+                }
+              },
+              axisLine: {
+                lineStyle: {
+                  color: "#000"
+                }
+              }
+            }
+          ],
+          series: [
+            {
+              type: "bar",
+              barWidth: 20,
+              itemStyle: {
+                barBorderRadius: [3, 3, 0, 0]
+              },
+              data: yData
+            }
+          ]
+        };
+        chart.setOption(option);
+      });
+  }
+
+  // 初始化中1面板
+  var initMid1 = function() {
+    initMidLeft(1);
+    initMidRight(1);
   };
 
-  var initInfo = function(param) {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
-        url: sugon.interFaces.zxyp.ylld.Info,
-        data: { id: param, search: JSON.stringify(searchRuler) }
-      },
-      function(result) {
-        $(".infoT").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          $(".infoT").append(
-            "<div>" +
-              "<span class='dort'></span>" +
-              "<span class='l' style='margin-left: 10px;'>" +
-              result.data[i].name +
-              "</span>" +
-              "<span class='y r img val8 tw'>" +
-              result.data[i].value2 +
-              "%" +
-              "</span>" +
-              "<span class='y img b val9'>" +
-              result.data[i].value1 +
-              "</span>" +
-              "</div>"
-          );
+  // 初始化中2面板
+  var initMid2 = function() {
+    initMidLeft(2);
+    initMidRight(2);
+  };
+
+  // 初始化中3面板
+  var initMid3 = function() {
+    let { deptId, date1, date2 } = searchRuler;
+    sugon
+      .request(sugon.interFaces.zxyp.ylld.initMid3, { deptId, date1, date2 })
+      .then(result => {
+        let $body = $(".mid3").empty(),
+          data = result.data,
+          dom = "";
+        data.map(val => {
+          dom += `<div>
+                  <div>${val.name}</div>
+                  <div>${val.value1}</div>
+                  <div>${val.value2}</div>
+                  <div>${val.value3}</div>
+                </div>`;
+        });
+        $body.append(dom);
+      });
+  };
+
+  // 初始化右1面板
+  var initRight1 = function() {
+    let { deptId, date1, date2 } = searchRuler;
+    sugon
+      .request(sugon.interFaces.zxyp.ylld.initRight1, { deptId, date1, date2 })
+      .then(result => {
+        let data1 = result.data1,
+          data = result.data2,
+          xData = [],
+          yData = [],
+          len = data.length,
+          colorArr = [
+            "#489EF1",
+            "#F2D50F",
+            "#FF7170",
+            "#70C0B3",
+            "#56ABE1",
+            "#7FE3FB",
+            "#5cc8e1",
+            "#53aec3",
+            "#3d91a4"
+          ],
+          transparentData = {
+            value: 0,
+            name: "",
+            itemStyle: {
+              normal: {
+                color: "transparent"
+              },
+              label: {
+                show: false
+              },
+              labelLine: {
+                show: false
+              }
+            }
+          };
+        for (var i = 0; i < len; i++) {
+          xData.push(data[i].name);
+          var obj = {
+            name: data[i].name,
+            value: data[i].value,
+            itemStyle: {
+              normal: {
+                color: colorArr[i],
+                label: {
+                  show: false
+                },
+                labelLine: {
+                  show: false
+                }
+              }
+            }
+          };
+          yData.push(obj);
         }
-      }
-    );
-  };
-
-  var initZfzs = function(param) {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
-        url: sugon.interFaces.zxyp.ylld.Zfzs,
-        data: { id: param, search: JSON.stringify(searchRuler) }
-      },
-      function(result) {
-        $(".zfList").empty();
-        $(".zfList").append(
-          "<div>" +
-            "<div class='num2'>序号</div>" +
-            "<div>姓名</div>" +
-            "<div>号码</div>" +
-            "<div>社区</div>" +
-            "<div>派出所</div>" +
-            "<div> 操作</div>" +
-            "</div>"
-        );
-        for (var i = 0; i < result.data.length; i++) {
-          $(".zfList").append(
-            "<div id=" +
-              result.data[i].id +
-              ">" +
-              "<div class='num'>" +
-              (i + 1) +
-              "</div>" +
-              "<div>" +
-              result.data[i].name +
-              "</div>" +
-              "<div>" +
-              result.data[i].tel +
-              "</div>" +
-              "<div>" +
-              result.data[i].address +
-              "</div>" +
-              "<div>" +
-              result.data[i].place +
-              "</div>" +
-              "<div class='det'>详情</div>" +
-              "</div>"
-          );
+        for (var i = 0; i < len; i++) {
+          yData.push(transparentData);
         }
-        $(".det")
-          .unbind()
-          .bind("click", function() {
-            sessionStorage.setItem("myKeywords", this.parentNode.id);
-            location.href = "index.html";
-          });
-      }
-    );
+        $("#right1-strong").html(data1 + "%");
+        let chart = ec.init(document.getElementById("right1-chart"));
+        let option = {
+          calculable: true,
+          tooltip: {
+            trigger: "item",
+            formatter: "{b}:{c}"
+          },
+          series: [
+            {
+              type: "pie",
+              radius: [50, 140],
+              avoidLabelOverlap: false,
+              startAngle: 0,
+              center: ["50%", "10%"],
+              roseType: "area",
+              label: {
+                show: true,
+                formatter: function(param) {
+                  return param.data.name + "\n" + param.data.value;
+                }
+              },
+              labelLine: {
+                show: true,
+                length: -5,
+                length2: 2
+              },
+              selectedMode: "single",
+              data: yData
+            }
+          ]
+        };
+        chart.setOption(option);
+      });
   };
 
-  $("#check2").bind("click", function() {
-    initZfzs($("#zfzs").val());
-  });
-
-  var initTs = function(param) {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
-        url: sugon.interFaces.zxyp.ylld.Ts,
-        data: { id: param, search: JSON.stringify(searchRuler) }
-      },
-      function(result) {
-        $(".tsList").empty();
-        $(".tsList").append(
-          "<div>" +
-            "<div class='num2'>序号</div>" +
-            "<div>姓名</div>" +
-            "<div>身份证号</div>" +
-            "<div>号码</div>" +
-            "<div>属性</div>" +
-            "</div>"
-        );
-        for (var i = 0; i < result.data.length; i++) {
-          $(".tsList").append(
-            "<div id=" +
-              result.data[i].id +
-              ">" +
-              "<div class='num2'>" +
-              (i + 1) +
-              "</div>" +
-              "<div>" +
-              result.data[i].name +
-              "</div>" +
-              "<div>" +
-              result.data[i].id +
-              "</div>" +
-              "<div>" +
-              result.data[i].tel +
-              "</div>" +
-              "<div>" +
-              result.data[i].type +
-              "</div>" +
-              "</div>"
-          );
-        }
-      }
-    );
+  // 初始化右2面板
+  var initRight2 = function() {
+    let { deptId, date1, date2 } = searchRuler;
+    sugon
+      .request(sugon.interFaces.zxyp.ylld.initRight2, { deptId, date1, date2 })
+      .then(result => {
+        let chart = ec.init(document.getElementById("right2-chart"));
+        $("#right2-strong").html(result.data2);
+        let data = [
+          {
+            value: result.data1
+          }
+        ];
+        let option = {
+          tooltip: {
+            formatter: "{b} : {c}%"
+          },
+          series: [
+            {
+              type: "gauge",
+              radius: "90%",
+              center: ["50%", "59%"],
+              detail: {
+                color: "#0380FF",
+                fontSize: "16",
+                formatter: "{value}%"
+              },
+              data: data,
+              min: 0,
+              max: 100,
+              title: {
+                show: false
+              },
+              axisLine: {
+                // 坐标轴线
+                show: true,
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: [
+                    [
+                      0.98,
+                      new ec.graphic.LinearGradient(0, 0, 1, 0, [
+                        { offset: 0, color: "#8FE8F0" },
+                        { offset: 1, color: "#A6BAFF" }
+                      ])
+                    ],
+                    [1, "red"]
+                  ],
+                  width: 5,
+                  shadowColor: "#fff" //默认透明
+                  //shadowBlur: 10
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                show: false,
+                length: 4, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "#BDBDBD",
+                  shadowColor: "#fff"
+                  //默认透明
+                }
+              },
+              axisLabel: {
+                show: true,
+                distance: -45,
+                fontSize: 10
+              },
+              pointer: {
+                show: true,
+                length: "80%",
+                width: 2
+              },
+              itemStyle: {
+                color: "#8692AC"
+              },
+              splitLine: {
+                show: false
+              }
+            }
+          ]
+        };
+        chart.setOption(option);
+      });
   };
 
-  $("#dept3").change(function() {
-    initTs(0);
-  });
+  // 初始化右3面板
+  var initRight3 = function() {
+    let { deptId, date1, date2, type1, type2 } = searchRuler;
+    sugon
+      .request(sugon.interFaces.zxyp.ylld.initRight3, {
+        deptId,
+        date1,
+        date2,
+        type1,
+        type2
+      })
+      .then(result => {
+        let dom = "";
+        result.data.map((val, index) => {
+          let icon;
+          switch (index) {
+            case 0:
+              icon = "one";
+              break;
+            case 1:
+              icon = "two";
+              break;
+            case 2:
+              icon = "three";
+              break;
+            case 3:
+              icon = "four";
+              break;
+            case 4:
+              icon = "five";
+              break;
+          }
+          dom += `<div>
+                  <div style="background:url(../../img/zxyp/jcj/${icon}.png) no-repeat center center;"></div>
+                  <div>${val.value1}</div>
+                  <div>${val.value2}%</div>
+                </div>`;
+        });
+        $(".right3")
+          .empty()
+          .append(dom);
+      });
+  };
 
-  $("#export").bind("click", function() {
-    alert("导出");
-  });
-
-  $("#export2").bind("click", function() {
-    alert("导出");
-  });
+  // 初始化下拉框
+  function initSelector() {
+    sugon.request(sugon.interFaces.zxyp.ylld.initSelector, {}).then(result => {
+      let dom = "";
+      result.data.map(val => {
+        dom += `<option value="${val.id}">${val.name}</option>`;
+      });
+      $("#type2")
+        .empty()
+        .append(dom);
+      searchRuler.type2 = "0";
+    });
+  }
 
   var initView = function() {
-    //左上文本
-    initTxt();
-    //社会治安满意度具体问题
-    initWtyc();
-    //排行榜
-    initRank();
-    //进度条
-    initRdfx(0);
-    //一率两度走势
-    initYlld();
-    //多维解析-左
-    initJqfx("");
-    //多维解析-右
-    initInfo("");
-    //走访助手
-    initZfzs("");
-    //空错号、人号不一推送
-    initTs(0);
+    initSelector();
+    // 左1
+    initLeft1();
+    // 左2
+    initLeft2();
+    // 左3
+    initLeft3(0);
+    // 中1
+    initMid1();
+    // 中2
+    initMid2();
+    // 中3
+    initMid3();
+    // 右1
+    initRight1();
+    // 右1
+    initRight2();
+    // 右3
+    initRight3();
   };
 
   var initPage = function() {
     // 初始化查询栏
     initSearchBar();
-    // 分析报告下载
-    $(".view-header-right").bind("click", function() {
-      alert("分析报告下载...");
-    });
     // 初始化页面
     $(".search-btn").bind("click", function() {
       searchRuler.deptId = $("#placeCode").val();
       searchRuler.date1 = $("#date-input1").val();
       searchRuler.date2 = $("#date-input2").val();
       searchRuler.deptName = $("#place").val();
+      searchRuler.type1 = "0";
+      searchRuler.type2 = "0";
       initView();
     });
     initView();
@@ -946,5 +1020,59 @@ requirejs(["common", "ec"], function(sugon, ec) {
   // 页面入口
   $(function() {
     initPage();
+  });
+
+  $("#dept2").change(function() {
+    initLeft3(0);
+  });
+
+  $(".tab2>div")
+    .unbind()
+    .bind("click", function() {
+      $(".tab2 .selected").removeClass("selected");
+      $(this).attr("class", "selected");
+      var index = $(".tab2>div").index(this);
+      initLeft3(index);
+    });
+
+  // 右3第一个select改变事件
+  $("#type1").on("change", e => {
+    searchRuler.type1 = $(e.target).val();
+    initRight3();
+  });
+
+  // 右3第二个select改变事件
+  $("#type2").on("change", e => {
+    searchRuler.type2 = $(e.target).val();
+    initRight3();
+  });
+
+  // 左上鼠标悬停事件
+  $("#left_top > div:nth-child(2n + 1)").on({
+    mouseover: function() {
+      let index = $(this).index("#left_top > div:nth-child(2n + 1)");
+      let top = "",
+        $container = $(".pop-container")
+          .show()
+          .empty();
+      switch (index) {
+        case 0:
+          top = "83px";
+          break;
+        case 1:
+          top = "163px";
+          break;
+        case 2:
+          top = "243px";
+          break;
+      }
+      $container.css("top", top).append(`
+      <div>${popData[index].name1}： <strong>${popData[index].value1}</strong></div>
+      <div>${popData[index].name2}： <strong>${popData[index].value2}</strong></div>
+      <div>${popData[index].name3}： <strong>${popData[index].value3}</strong></div>`);
+    },
+    mouseout: function() {
+      $(".pop-container").hide();
+    }
   });
 });

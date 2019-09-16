@@ -650,6 +650,34 @@ define([], function() {
         Dyzj: {
           localUrl: "./static/json/ylld/Dyzj.json",
           remoteUrl: base.server + "zxyp/ylld/getDyzj"
+        },
+        initMidLeft: {
+          localUrl: "./static/json/ylld/chart.json",
+          remoteUrl: base.server + "zxyp/ylld/getMydfxLeft"
+        },
+        initMidRight: {
+          localUrl: "./static/json/ylld/chart.json",
+          remoteUrl: base.server + "zxyp/ylld/getMydfxRight"
+        },
+        initMid3: {
+          localUrl: "./static/json/ylld/chart.json",
+          remoteUrl: base.server + "zxyp/ylld/getSxl"
+        },
+        initRight1: {
+          localUrl: "./static/json/ylld/Dcybfx.json",
+          remoteUrl: base.server + "zxyp/ylld/getDcybfx"
+        },
+        initRight2: {
+          localUrl: "./static/json/ylld/Jmhd.json",
+          remoteUrl: base.server + "zxyp/ylld/getJmhd"
+        },
+        initRight3: {
+          localUrl: "./static/json/ylld/chart.json",
+          remoteUrl: base.server + "zxyp/ylld/getPhb"
+        },
+        initSelector: {
+          localUrl: "./static/json/ylld/dept.json",
+          remoteUrl: base.server + "zxyp/ylld/getPhbDw"
         }
       },
       rx: {

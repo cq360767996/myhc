@@ -85,6 +85,47 @@
     <div class="mid_view" style="width: calc(40% - 20px);">
       <div class="group">
         <div class="subTitle">
+          <span>社会治安满意度分析</span>
+        </div>
+
+        <div class="content mid1">
+          <div>
+            <div class="chart-title">业务分析</div>
+            <div class="chart-pop chart-pop1">
+              <div><img src="../../img/zxyp/ylld/shza.png" /></div>
+              <div>社会治安</div>
+              <div class="pop-amount">121</div>
+            </div>
+            <div class="chart-body" id="mid1-left">
+            </div>
+          </div>
+          <div>
+            <div class="chart-title">问题分析</div>
+            <div class="chart-body" id="mid1-right">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right_view" style="width: 30%;">
+      <div class="group">
+        <div class="subTitle">
+          <span>调查样本分析</span>
+        </div>
+
+        <div class="content right1">
+          <div><span>号码准确率</span><strong id="right1-strong"></strong></div>
+          <div id="right1-chart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="left_view" style="width: 30%;">
+      <div class="group">
+        <div class="subTitle">
           <span>一率两度走势分析</span>
         </div>
 
@@ -94,7 +135,46 @@
       </div>
     </div>
 
+    <div class="mid_view" style="width: calc(40% - 20px);">
+      <div class="group">
+        <div class="subTitle">
+          <span>公安队伍满意度分析</span>
+        </div>
+
+        <div class="content mid2">
+          <div>
+            <div class="chart-title">业务分析</div>
+            <div class="chart-pop chart-pop2">
+                <div><img src="../../img/zxyp/ylld/gadw.png" /></div>
+                <div>公安队伍</div>
+                <div class="pop-amount"></div>
+            </div>
+            <div class="chart-body" id="mid2-left"></div>
+          </div>
+          <div>
+            <div class="chart-title">问题分析</div>
+            <div class="chart-body" id="mid2-right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="right_view" style="width: 30%;">
+      <div class="group">
+        <div class="subTitle">
+          <span>警民互动分析</span>
+        </div>
+
+        <div class="content right2">
+          <div id="right2-chart"></div>
+          <div id="right2-strong"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="left_view" style="width: 30%;">
       <div class="group">
         <div class="subTitle2">
           <span class="l">一率两度单位情况</span>
@@ -123,99 +203,37 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div>
-    <div class="left_view" style="width: 30%;">
-      <div class="group">
-        <div class="subTitle">
-          <span>治安晴雨表</span>
-        </div>
-
-        <div class="content">
-          <div class="wtList"></div>
-        </div>
-      </div>
-    </div>
 
     <div class="mid_view" style="width: calc(40% - 20px);">
       <div class="group">
         <div class="subTitle">
-          <span>队伍门诊室</span>
+          <span>社区民警熟悉率分析</span>
         </div>
 
-        <div class="content">
-          <div id="chart_title"></div>
-
-          <div id="chart0"></div>
-
-          <div class="infoT"></div>
-        </div>
+        <div class="content mid3"></div>
       </div>
     </div>
 
     <div class="right_view" style="width: 30%;">
       <div class="group">
-        <div class="subTitle2">
-          <span class="l">百姓贴心人</span>
-
-          <span class="y">
-            <select id="dept">
-              <option value="0">本期最高</option>
-
-              <option value="1">增速最快</option>
+        <div class="subTitle">
+          <span>满意度排行榜</span>
+          <div>
+            <select id="type1">
+              <option value="0">社会治安</option>
+              <option value="1">公安队伍</option>
+              <option value="2">社区民警熟悉率</option>
             </select>
-          </span>
+            <select id="type2"></select>
+          </div>
         </div>
-
-        <div class="content">
-          <div class="rankList"></div>
+        <div class="content right3">
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div>
-    <div class="left_view_2">
-      <div class="group">
-        <div class="subTitle2">
-          <span class="l">走访助手</span>
-
-          <span class="y">
-            <span id="export2"><img src="../../img/download.png"/></span>
-
-            <input id="zfzs" type="text" /><span id="check2"
-              ><img src="../../img/myhc/rdwt/btn_search.png"
-            /></span>
-          </span>
-        </div>
-
-        <div class="content">
-          <div class="zfList"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="right_view_2">
-      <div class="group">
-        <div class="subTitle2">
-          <span class="l">号码诊断</span>
-
-          <span class="y">
-            <span id="export"><img src="../../img/download.png"/></span>
-
-            <select id="dept3">
-              <option value="0">空错号</option>
-
-              <option value="1">人号不一</option>
-            </select>
-          </span>
-        </div>
-
-        <div class="content">
-          <div class="tsList"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="pop-container">
+  
 </div>
