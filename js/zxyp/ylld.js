@@ -957,8 +957,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
           }
           dom += `<div>
                   <div style="background:url(../../img/zxyp/jcj/${icon}.png) no-repeat center center;"></div>
-                  <div>${val.value1}</div>
-                  <div>${val.value2}%</div>
+                  <div>${val.name1}</div>
+                  <div>${val.name2}</div>
+                  <div>${val.value}%</div>
                 </div>`;
         });
         $(".right3")

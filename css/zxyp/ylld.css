@@ -999,10 +999,14 @@ select {
 }
 
 .right3 > div > div:nth-child(2) {
-  width: calc(100% - 110px);
+  width: 70px;
 }
 
 .right3 > div > div:nth-child(3) {
+  width: calc(100% - 180px);
+}
+
+.right3 > div > div:nth-child(4) {
   width: 80px;
   color: #4a7fb2;
 }
