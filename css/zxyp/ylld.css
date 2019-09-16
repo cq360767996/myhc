@@ -999,11 +999,11 @@ select {
 }
 
 .right3 > div > div:nth-child(2) {
-  width: 70px;
+  width: 110px;
 }
 
 .right3 > div > div:nth-child(3) {
-  width: calc(100% - 180px);
+  width: calc(100% - 220px);
 }
 
 .right3 > div > div:nth-child(4) {
