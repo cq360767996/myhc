@@ -999,11 +999,11 @@ select {
 }
 
 .right3 > div > div:nth-child(2) {
-  width: 110px;
+  width: 130px;
 }
 
 .right3 > div > div:nth-child(3) {
-  width: calc(100% - 220px);
+  width: calc(100% - 240px);
 }
 
 .right3 > div > div:nth-child(4) {
@@ -1040,7 +1040,6 @@ select {
 }
 
 .pop-container {
-  width: 120px;
   height: 60px;
   line-height: 20px;
   position: absolute;
@@ -1050,6 +1049,7 @@ select {
   border-radius: 3px;
   box-shadow: 0px 0px 8px #939cab;
   display: none;
+  padding: 0 15px;
 }
 
 .pop-container::before {
@@ -1067,21 +1067,26 @@ select {
   margin-top: -8px;
 }
 
-.pop-container > div {
-  width: calc(100% - 30px);
+.pop-container > p {
   height: 20px;
-  margin: 0 auto;
   color: #4d4d4d;
+  margin: 0;
 }
 
-.pop-container > div:first-child > strong {
+.pop-container > p:first-child > strong {
   color: rgb(71, 140, 201);
 }
 
-.pop-container > div:nth-child(2) > strong {
+.pop-container > p:nth-child(2) > strong {
   color: rgb(225, 145, 101);
 }
 
-.pop-container > div:nth-child(3) > strong {
+.pop-container > p:nth-child(3) > strong {
   color: rgb(230, 65, 73);
+}
+
+.chart-title > img {
+  float: right;
+  cursor: pointer;
+  display: none;
 }

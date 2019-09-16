@@ -606,6 +606,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         chart.setOption(option);
         chart.off();
         chart.on("click", param => {
+          $(`.mid${type} .chart-title > img`).show();
           initMidRight(type, param.data.id);
         });
       });
@@ -658,6 +659,13 @@ requirejs(["common", "ec"], function(sugon, ec) {
                 interval: 0,
                 textStyle: {
                   color: "#000"
+                },
+                formatter: function(param) {
+                  let result = "";
+                  for (let i = 0, len = param.length; i < len; i++) {
+                    result += i % 4 == 3 ? param[i] + "\n" : param[i];
+                  }
+                  return result;
                 }
               },
               axisLine: {
@@ -985,7 +993,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         $("#type2")
           .empty()
           .append(dom);
-        searchRuler.type2 = "0";
+        searchRuler.type2 = $("#type2").val();
       });
   }
 
@@ -1020,8 +1028,6 @@ requirejs(["common", "ec"], function(sugon, ec) {
       searchRuler.date1 = $("#date-input1").val();
       searchRuler.date2 = $("#date-input2").val();
       searchRuler.deptName = $("#place").val();
-      searchRuler.type1 = "0";
-      searchRuler.type2 = "0";
       initView();
     });
     initView();
@@ -1077,12 +1083,35 @@ requirejs(["common", "ec"], function(sugon, ec) {
           break;
       }
       $container.css("top", top).append(`
-      <div>${popData[index].name1}： <strong>${popData[index].value1}</strong></div>
-      <div>${popData[index].name2}： <strong>${popData[index].value2}</strong></div>
-      <div>${popData[index].name3}： <strong>${popData[index].value3}</strong></div>`);
+      <p>${popData[index].name1}： <strong>${popData[index].value1}</strong></p>
+      <p>${popData[index].name2}： <strong>${popData[index].value2}</strong></p>
+      <p>${popData[index].name3}： <strong>${popData[index].value3}</strong></p>`);
     },
     mouseout: function() {
       $(".pop-container").hide();
+    }
+  });
+
+  $(".pop-container").on({
+    mouseover: function() {
+      $(".pop-container").show();
+    },
+    mouseout: function() {
+      $(".pop-container").hide();
+    }
+  });
+
+  // 返回按钮
+  $(".chart-title > img").on("click", function() {
+    let $this = $(this).hide(),
+      $parent = $this
+        .parent()
+        .parent()
+        .parent();
+    if ($parent.hasClass("mid1")) {
+      initMidRight(1);
+    } else {
+      initMidRight(2);
     }
   });
 });
