@@ -7,7 +7,7 @@
   width: 95%;
   height: calc(100% - 85px);
   margin: 10px auto;
-  color: #000;
+  color: #75787a;
 }
 .view-header-left {
   float: left;
@@ -22,7 +22,7 @@
   margin-left: 10px;
   line-height: 42px;
   font-size: 16px;
-  color: #000;
+  color: #5d707e;
   cursor: pointer;
 }
 .view-header-right > span {
@@ -157,7 +157,7 @@ input {
   font-size: 18px;
   border-bottom: 2px solid #ced7e0;
   /*font-weight: bold;*/
-  color: #000;
+  color: #75787a;
   font-size: 16px;
 }
 .group {
@@ -204,7 +204,7 @@ input {
   font-size: 18px;
   border-bottom: 2px solid #ced7e0;
   /*font-weight: bold;*/
-  color: #000;
+  color: #75787a;
   font-size: 16px;
 }
 .l {
@@ -222,7 +222,6 @@ input {
   border: 0px;
   border-radius: 5px;
   font-size: 16px;
-  font-weight: 200;
 }
 #dept2 {
   width: 145px;
@@ -720,13 +719,13 @@ div.jqcloud span {
   background: rgba(0, 0, 0, 0.1);
 }
 .t {
-  color: #000;
+  color: #626262;
 }
 #left_top {
   font-size: 16px;
 }
 select {
-  color: #89a3c6;
+  color: #666666;
   background-color: white !important;
   border: 1px solid rgb(169, 169, 169) !important;
 }
@@ -894,7 +893,7 @@ select {
   height: 20px;
   line-height: 20px;
   text-align: center;
-  color: #000;
+  color: #75787a;
   font-size: 16px;
 }
 
@@ -925,10 +924,8 @@ select {
 }
 
 .mid3 > div {
-  height: 30px;
-  line-height: 30px;
   border-bottom: #bcc9d8 1px solid;
-  color: #000;
+  color: #75787a;
 }
 
 .mid3 > div > div {
@@ -1020,6 +1017,8 @@ select {
   width: 70px;
   height: 70px;
   border-radius: 35px;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .chart-pop > div {
@@ -1081,12 +1080,6 @@ select {
 
 .pop-container > p:nth-child(3) > strong {
   color: rgb(230, 65, 73);
-}
-
-.chart-title > img {
-  float: right;
-  cursor: pointer;
-  display: none;
 }
 
 .right3 > div > div:nth-child(4) {

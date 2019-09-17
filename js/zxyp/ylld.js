@@ -26,8 +26,6 @@ requirejs(["common", "ec"], function(sugon, ec) {
     searchRuler.date1 = getDate(-7);
     searchRuler.date2 = getDate(-2);
     searchRuler.deptName = "南京市公安局";
-    searchRuler.type1 = "0";
-    searchRuler.type2 = "0";
 
     $("#place").val("南京市公安局");
     $("#placeCode").val("2014110416460086100000002942");
@@ -145,59 +143,40 @@ requirejs(["common", "ec"], function(sugon, ec) {
           yData1 = [],
           yData2 = [],
           yData3 = [],
-          iData = [],
-          min = 0,
-          max = 0; /*, min2 = 0, max2 = 0*/
+          iData = [];
         if (result.data.length == 0) {
           xData.push("暂无数据");
           yData1.push(0);
           yData2.push(0);
           yData3.push(0);
         } else {
-          (min = result.data[0].value1),
-            (max =
-              result.data[0]
-                .value1) /*, min2 = result.data[0].value3, max2 = result.data[0].value3*/;
           for (var i = 0; i < result.data.length; i++) {
             xData.push(result.data[i].name);
             yData1.push(result.data[i].value1);
             yData2.push(result.data[i].value2);
             yData3.push(result.data[i].value3);
             iData.push(result.data[i].id);
-            min = Math.min(
-              result.data[i].value1,
-              result.data[i].value2,
-              result.data[i].value3,
-              min
-            );
-            max = Math.max(
-              result.data[i].value1,
-              result.data[i].value2,
-              result.data[i].value3,
-              max
-            );
-            /*min2 = Math.min(result.data[i].value3, min2);
-                    max2 = Math.max(result.data[i].value3, max2);*/
           }
-          min = min - 5;
         }
+        let minAndMax = sugon.handleMinAndMax(
+          yData1.concat(yData2).concat(yData3)
+        );
         var Chart3 = ec.init(document.getElementById("chart3"));
         Chart3.off();
         Chart3.on("click", function(params) {
-          if (params.data == 0) {
-            return;
-          }
-          var seriesName = params.seriesName;
-          var name = params.name;
-          requirejs(["text!../views/zxyp/myd.html"], function(ele) {
-            sugon.showDialog({
-              width: 760,
-              height: 410,
-              ele: ele,
-              params:
-                seriesName + "_" + name + "_" + JSON.stringify(searchRuler)
+          if (params.data != 0) {
+            var seriesName = params.seriesName;
+            var name = params.name;
+            requirejs(["text!../views/zxyp/myd.html"], function(ele) {
+              sugon.showDialog({
+                width: 760,
+                height: 410,
+                ele: ele,
+                params:
+                  seriesName + "_" + name + "_" + JSON.stringify(searchRuler)
+              });
             });
-          });
+          }
         });
 
         var option = {
@@ -228,7 +207,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
             // }
           },
           legend: {
-            show: true
+            show: true,
+            inactiveColor: "#999"
           },
           grid: {
             top: 25,
@@ -245,19 +225,19 @@ requirejs(["common", "ec"], function(sugon, ec) {
               axisLine: {
                 onZero: false,
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               axisLabel: {
                 interval: 0,
                 textStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               splitLine: {
                 show: false,
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               data: xData
@@ -267,27 +247,27 @@ requirejs(["common", "ec"], function(sugon, ec) {
             {
               type: "value",
               splitNumber: 5,
-              min: min,
-              max: max,
+              min: minAndMax.min,
+              max: minAndMax.max,
               axisTick: {
                 show: false
               },
               axisLine: {
                 onZero: false,
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               axisLabel: {
                 formatter: "{value}%",
                 textStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               splitLine: {
                 show: false,
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               }
             }
@@ -317,8 +297,27 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           ]
         };
-
         Chart3.setOption(option);
+        Chart3.on("legendselectchanged", function(e) {
+          let arr = [
+              { name: "社会治安满意度", arr: yData1 },
+              { name: "公安队伍满意度", arr: yData2 },
+              { name: "社区民警熟悉率", arr: yData3 }
+            ],
+            resultArr = [];
+          arr.map(val => {
+            if (e.selected[val.name]) {
+              val.arr.map(v => {
+                resultArr.push(v);
+              });
+            }
+          });
+          let minAndMax = sugon.handleMinAndMax(resultArr);
+          let newOption = Chart3.getOption();
+          newOption.yAxis[0].min = minAndMax.min;
+          newOption.yAxis[0].max = minAndMax.max;
+          Chart3.setOption(newOption);
+        });
       }
     );
   };
@@ -345,14 +344,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
           endValue = 100,
           markData = [],
           show = false,
-          max = 0,
-          min = 0,
           markNum = 0;
         if (data.length == 0) {
           xData.push("暂无数据");
           yData.push(0);
         } else {
-          (max = data[0].value), (min = data[0].value);
           if (data.length > 6) {
             endValue = Math.floor((6 / data.length) * 100);
             show = true;
@@ -378,16 +374,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
               xData.push(data[i].name);
               yData.push(data[i].value);
             }
-            if (data[i].value > max) {
-              max = data[i].value;
-            }
-            if (data[i].value < min) {
-              min = data[i].value;
-            }
           }
         }
-        min = min - 5;
-
+        let minAndMax = sugon.handleMinAndMax(result.data);
         var chart6 = ec.init(document.getElementById("chart6"));
 
         var option = {
@@ -470,8 +459,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
               splitLine: { show: false },
               splitArea: { show: false },
               splitNumber: 3,
-              min: min,
-              max: max,
+              min: minAndMax.min,
+              max: minAndMax.max,
               axisLabel: {
                 show: true,
                 formatter: "{value}%",
@@ -523,7 +512,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           ]
         };
 
-        chart6.setOption(option);
+        chart6.setOption(option, true);
       }
     );
   };
@@ -596,7 +585,6 @@ requirejs(["common", "ec"], function(sugon, ec) {
         chart.setOption(option);
         chart.off();
         chart.on("click", param => {
-          $(`.mid${type} .chart-title > img`).show();
           initMidRight(type, param.data.id);
         });
       });
@@ -648,7 +636,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
               axisLabel: {
                 interval: 0,
                 textStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 },
                 formatter: function(param) {
                   let result = "";
@@ -660,7 +648,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
               },
               axisLine: {
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               }
             }
@@ -674,19 +662,19 @@ requirejs(["common", "ec"], function(sugon, ec) {
               splitLine: {
                 show: false,
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               splitArea: { show: false },
               splitNumber: 5,
               axisLabel: {
                 textStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               },
               axisLine: {
                 lineStyle: {
-                  color: "#000"
+                  color: "#5d707e"
                 }
               }
             }
@@ -725,10 +713,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
       .request(sugon.interFaces.zxyp.ylld.initMid3, { deptId, date1, date2 })
       .then(result => {
         let $body = $(".mid3").empty(),
+          height = $body.height() / 5,
           data = result.data,
           dom = "";
         data.map(val => {
-          dom += `<div>
+          dom += `<div style="height: ${height}px; line-height: ${height}px;">
                   <div>${val.name}</div>
                   <div>${val.value1}</div>
                   <div>${val.value2}</div>
@@ -914,6 +903,53 @@ requirejs(["common", "ec"], function(sugon, ec) {
               splitLine: {
                 show: false
               }
+            },
+            {
+              type: "gauge",
+              radius: "80%",
+              center: ["50%", "59%"],
+              detail: { show: false },
+              data: data,
+              min: 0,
+              max: 100,
+              title: { show: false },
+              axisLine: {
+                // 坐标轴线
+                show: false,
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: [[0.98, "transparent"], [1, "transparent"]],
+                  width: 5
+                  //shadowBlur: 10
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                show: true,
+                length: 4, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "#BDBDBD",
+                  shadowColor: "#fff"
+                  //默认透明
+                }
+              },
+              axisLabel: {
+                show: false,
+                distance: -45,
+                fontSize: 10
+              },
+              pointer: {
+                show: true,
+                length: "80%",
+                width: 2
+              },
+              itemStyle: {
+                color: "#8692AC"
+              },
+              splitLine: {
+                show: false
+              }
             }
           ]
         };
@@ -923,7 +959,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
 
   // 初始化右3面板
   var initRight3 = function() {
-    let { deptId, date1, date2, type1, type2 } = searchRuler;
+    let { deptId, date1, date2, type1 = 0, type2 = 0 } = searchRuler;
     sugon
       .request(sugon.interFaces.zxyp.ylld.initRight3, {
         deptId,
@@ -1029,6 +1065,10 @@ requirejs(["common", "ec"], function(sugon, ec) {
   });
 
   $("#dept2").change(function() {
+    $(".tab2 > div")
+      .removeClass("selected")
+      .eq(0)
+      .addClass("selected");
     initLeft3(0);
   });
 
@@ -1092,13 +1132,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
   });
 
   // 返回按钮
-  $(".chart-title > img").on("click", function() {
-    let $this = $(this).hide(),
-      $parent = $this
-        .parent()
-        .parent()
-        .parent();
-    if ($parent.hasClass("mid1")) {
+  $(".chart-pop").on("click", function() {
+    let $this = $(this);
+    if ($this.hasClass("chart-pop1")) {
       initMidRight(1);
     } else {
       initMidRight(2);
