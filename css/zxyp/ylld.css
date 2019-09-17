@@ -7,7 +7,7 @@
   width: 95%;
   height: calc(100% - 85px);
   margin: 10px auto;
-  color: #4d4d4d;
+  color: #000;
 }
 .view-header-left {
   float: left;
@@ -135,7 +135,7 @@ input {
 .g {
   color: #4ac396 !important;
 }
-.r {
+.q {
   color: #d24e4a !important;
 }
 .p {
@@ -144,7 +144,7 @@ input {
 .o {
   color: #ed7d33 !important;
 }
-.q {
+.r {
   color: #009eb1 !important;
 }
 .hh {
@@ -155,7 +155,6 @@ input {
   height: 40px;
   line-height: 40px;
   font-size: 18px;
-  color: #888f95;
   border-bottom: 2px solid #ced7e0;
   /*font-weight: bold;*/
   color: #000;
@@ -203,7 +202,6 @@ input {
   height: 40px;
   line-height: 40px;
   font-size: 18px;
-  color: #888f95;
   border-bottom: 2px solid #ced7e0;
   /*font-weight: bold;*/
   color: #000;
@@ -896,7 +894,7 @@ select {
   height: 20px;
   line-height: 20px;
   text-align: center;
-  color: #75787a;
+  color: #000;
   font-size: 16px;
 }
 
@@ -927,10 +925,10 @@ select {
 }
 
 .mid3 > div {
-  height: 35px;
-  line-height: 35px;
+  height: 30px;
+  line-height: 30px;
   border-bottom: #bcc9d8 1px solid;
-  color: #75787a;
+  color: #000;
 }
 
 .mid3 > div > div {
@@ -1089,4 +1087,28 @@ select {
   float: right;
   cursor: pointer;
   display: none;
+}
+
+.right3 > div > div:nth-child(4) {
+  font-size: 18px;
+}
+
+.right3 > div:nth-child(1) > div:nth-child(4) {
+  color: #00a386;
+}
+
+.right3 > div:nth-child(2) > div:nth-child(4) {
+  color: #0082c4;
+}
+
+.right3 > div:nth-child(3) > div:nth-child(4) {
+  color: #b17130;
+}
+
+.right3 > div:nth-child(4) > div:nth-child(4) {
+  color: #4a7fb2;
+}
+
+.right3 > div:nth-child(5) > div:nth-child(4) {
+  color: #a670b2;
 }

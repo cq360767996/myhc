@@ -245,19 +245,19 @@ requirejs(["common", "ec"], function(sugon, ec) {
               axisLine: {
                 onZero: false,
                 lineStyle: {
-                  color: "#426791"
+                  color: "#000"
                 }
               },
               axisLabel: {
                 interval: 0,
                 textStyle: {
-                  color: "#b3cce2"
+                  color: "#000"
                 }
               },
               splitLine: {
                 show: false,
                 lineStyle: {
-                  color: "#c9d3df"
+                  color: "#000"
                 }
               },
               data: xData
@@ -275,19 +275,19 @@ requirejs(["common", "ec"], function(sugon, ec) {
               axisLine: {
                 onZero: false,
                 lineStyle: {
-                  color: "#426791"
+                  color: "#000"
                 }
               },
               axisLabel: {
                 formatter: "{value}%",
                 textStyle: {
-                  color: "#b3cce2"
+                  color: "#000"
                 }
               },
               splitLine: {
                 show: false,
                 lineStyle: {
-                  color: "#c9d3df"
+                  color: "#000"
                 }
               }
             }
@@ -495,23 +495,13 @@ requirejs(["common", "ec"], function(sugon, ec) {
               data: yData,
               itemStyle: {
                 normal: {
-                  /*borderWidth: 1,
-                                borderColor: 'rgba(18, 86, 108, 0.5)',*/
                   color: function(params) {
                     var tempColor = "red";
                     if (params.data > markNum) {
-                      tempColor = "#25548a";
+                      tempColor = "#209cb7";
                     }
                     return tempColor;
                   },
-                  /*color: new ec.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [
-                                        {offset: 0, color: '#4292cd'},
-                                        {offset: 0.5, color: '#3376ad'},
-                                        {offset: 1, color: '#25548a'}
-                                    ]
-                                ),*/
                   label: {
                     show: false
                   }
@@ -523,7 +513,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
                 },
                 symbol: ["circle", "none"],
                 lineStyle: {
-                  color: "#25548a",
+                  color: "#209cb7",
                   width: "1",
                   type: "dashed"
                 },
@@ -564,18 +554,18 @@ requirejs(["common", "ec"], function(sugon, ec) {
           series: [
             {
               color: [
-                "#A770B3",
-                "#AF8744",
-                "#ED7D31",
-                "#3A9BBE",
                 "#1D84C6",
+                "#ED7D31",
+                "#A770B3",
+                "#3A9BBE",
+                "#AF8744",
                 "#6463AF"
               ],
               name: "",
               type: "pie",
               clockWise: false,
               center: ["50%", "50%"],
-              radius: ["40%", "56%"],
+              radius: ["52%", "68%"],
               hoverAnimation: false,
               itemStyle: {
                 normal: {
@@ -761,12 +751,12 @@ requirejs(["common", "ec"], function(sugon, ec) {
           yData = [],
           len = data.length,
           colorArr = [
-            "#489EF1",
-            "#F2D50F",
-            "#FF7170",
-            "#70C0B3",
-            "#56ABE1",
-            "#7FE3FB",
+            "#3A64EA",
+            "#4384D9",
+            "#4B9FE1",
+            "#5DADEA",
+            "#6ABEEE",
+            "#78DFF7",
             "#5cc8e1",
             "#53aec3",
             "#3d91a4"
@@ -887,13 +877,13 @@ requirejs(["common", "ec"], function(sugon, ec) {
                       0.98,
                       new ec.graphic.LinearGradient(0, 0, 1, 0, [
                         { offset: 0, color: "#8FE8F0" },
-                        { offset: 1, color: "#A6BAFF" }
+                        { offset: 0.8, color: "#A6BAFF" },
+                        { offset: 1, color: "#ff0000" }
                       ])
                     ],
-                    [1, "red"]
+                    [1, "#ff0000"]
                   ],
-                  width: 5,
-                  shadowColor: "#fff" //默认透明
+                  width: 5
                   //shadowBlur: 10
                 }
               },

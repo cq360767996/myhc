@@ -6,7 +6,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
       {
         type: "post",
         url: sugon.interFaces.zxyp.ylld.Zsfx,
-        data: condition
+        data: condition,
+        async: true
       },
       function(result) {
         drawZsfx(result);
@@ -105,7 +106,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
       {
         type: "post",
         url: sugon.interFaces.zxyp.ylld.Dyqkfx,
-        data: condition
+        data: condition,
+        async: true
       },
       function(result) {
         if (result.level == 0) {
@@ -137,7 +139,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
       {
         type: "post",
         url: sugon.interFaces.zxyp.ylld.Dyzj,
-        data: condition
+        data: condition,
+        async: true
       },
       function(result) {
         $("#dyzj").html(result.value);
