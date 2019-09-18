@@ -14,23 +14,8 @@ var myChart1,
   Chart10;
 requirejs(["common"], function(sugon) {
   var tData = [];
-  // 当前月加减固定值
-  var getDate = function(difference) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var sum = year * 12 + month + difference;
-    var resultYear = parseInt(sum / 12);
-    var resultMonth = sum % 12;
-    if (resultMonth == 0) {
-      return resultYear - 1 + "-12";
-    } else {
-      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-      return resultYear + "-" + resultMonth;
-    }
-  };
-  var maxDate = getDate(-2);
-  var minDate = getDate(-7);
+  var maxDate = sugon.getDate(-2);
+  var minDate = sugon.getDate(-7);
   $("#left-tree").css("width", $("#place").css("width"));
 
   $("#place").bind("click", function() {

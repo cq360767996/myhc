@@ -909,22 +909,6 @@ requirejs(
       }
     };
 
-    // 获取当前时间并加减固定月份
-    function getDate(difference) {
-      let now = new Date();
-      let year = now.getFullYear();
-      let month = now.getMonth() + 1;
-      let sum = year * 12 + month + difference;
-      let resultYear = parseInt(sum / 12);
-      let resultMonth = sum % 12;
-      if (resultMonth == 0) {
-        return resultYear - 1 + "-12";
-      } else {
-        resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-        return resultYear + "-" + resultMonth;
-      }
-    }
-
     //获取树数据
     function getTree() {
       var treeData = [];
@@ -947,9 +931,9 @@ requirejs(
         $deptId = $("#deptId"),
         $deptName = $("#deptName"),
         $leftTree = $(".left-tree");
-      let lastMonth = getDate(-1);
-      $date1.val((searchRuler.date1 = getDate(-4)));
-      $date2.val((searchRuler.date2 = getDate(-2)));
+      let lastMonth = sugon.getDate(-1);
+      $date1.val((searchRuler.date1 = sugon.getDate(-4)));
+      $date2.val((searchRuler.date2 = sugon.getDate(-2)));
       $deptId.val((searchRuler.deptId = "2014110416460086100000002942"));
       $deptName.val((searchRuler.deptName = "南京市公安局"));
 

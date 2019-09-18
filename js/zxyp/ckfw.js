@@ -6,32 +6,16 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   var hfrcData = [],
     gddwfbData = [],
     mydData = [];
-  // 获取当前时间并加减固定月份
-  var getDate = function(difference) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var sum = year * 12 + month + difference;
-    var resultYear = parseInt(sum / 12);
-    var resultMonth = sum % 12;
-    if (resultMonth == 0) {
-      return resultYear - 1 + "-12";
-    } else {
-      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-      return resultYear + "-" + resultMonth;
-    }
-  };
-
   // 初始化查询栏
   var initSearchBar = function() {
-    var lastMonth = getDate(-1);
+    var lastMonth = sugon.getDate(-1);
     searchRuler.deptId = "2014110416460086100000002942";
-    searchRuler.date1 = getDate(-7);
-    searchRuler.date2 = getDate(-2);
+    searchRuler.date1 = sugon.getDate(-7);
+    searchRuler.date2 = sugon.getDate(-2);
     searchRuler.deptName = "南京市公安局";
     search.deptId = "2014110416460086100000002942";
-    search.date1 = getDate(-7);
-    search.date2 = getDate(-2);
+    search.date1 = searchRuler.date1;
+    search.date2 = searchRuler.date2;
     search.deptName = "南京市公安局";
 
     $("#place").val("南京市公安局");

@@ -2,30 +2,13 @@ requirejs(
   ["common", "L", "ec", "iclient", "heat", "markerCluster", "plot"],
   (sugon, L, echarts) => {
     // 全局查询尺度
-    var searchRuler = {};
+    let searchRuler = {};
     // 单位情况数据缓存
-    var dwqkData = [],
+    let dwqkData = [],
       tData = [],
       sqfxData = []; // 诉求分析数据;
-
-    // 获取当前时间并加减固定月份
-    var getDate = function(difference) {
-      var now = new Date();
-      var year = now.getFullYear();
-      var month = now.getMonth() + 1;
-      var sum = year * 12 + month + difference;
-      var resultYear = parseInt(sum / 12);
-      var resultMonth = sum % 12;
-      if (resultMonth == 0) {
-        return resultYear - 1 + "-12";
-      } else {
-        resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-        return resultYear + "-" + resultMonth;
-      }
-    };
-
-    var initList = function() {
-      var date = "";
+    let initList = function() {
+      let date = "";
       sugon.requestJson(
         { type: "POST", url: sugon.interFaces.myjz.Date, async: false },
         function(result) {
@@ -36,7 +19,7 @@ requirejs(
     };
 
     function onLoad(param) {
-      var date = !param ? initList() : param;
+      let date = !param ? initList() : param;
       //渲染树
       $("#left-tree").treeview({
         data: getTree(date, false),
@@ -51,13 +34,13 @@ requirejs(
       });
       $("#place").val(tData[0].text);
       $("#placeCode").val(tData[0].id);
-      $("#date1").val(getDate(-4));
-      $("#date2").val(getDate(-2));
+      $("#date1").val(sugon.getDate(-4));
+      $("#date2").val(sugon.getDate(-2));
     }
 
     //获取树数据
     function getTree(param, isAsync) {
-      var treeData = [];
+      let treeData = [];
       sugon.requestJson(
         {
           type: "POST",
@@ -85,8 +68,32 @@ requirejs(
         language: "zh-CN"
       })
       .change(function() {
-        initSideData();
-        initLevelLayer();
+        let $control = $(".search-control").val();
+        if ($control == "1") {
+          initSideData();
+          initLevelLayer();
+        } else {
+          sugon
+            .request(sugon.interFaces.myzs.DeptId, {
+              deptId: $("#placeCode").val()
+            })
+            .then(result => {
+              switch (currentLevel) {
+                case 0:
+                  initMyzs();
+                  break;
+                case 1:
+                  getPcsDataByFjCode(result.CODE, true);
+                  break;
+                case 2:
+                  getZrqDataByPcsCode(result.CODE, true);
+                  break;
+                case 3:
+                  getDataByZrqCode(result.CODE, true);
+                  break;
+              }
+            });
+        }
       });
 
     $("#date2")
@@ -100,53 +107,77 @@ requirejs(
         language: "zh-CN"
       })
       .change(function() {
-        initSideData();
-        initLevelLayer();
+        let $control = $(".search-control").val();
+        if ($control == "1") {
+          initSideData();
+          initLevelLayer();
+        } else {
+          sugon
+            .request(sugon.interFaces.myzs.DeptId, {
+              deptId: $("#placeCode").val()
+            })
+            .then(result => {
+              switch (currentLevel) {
+                case 0:
+                  initMyzs();
+                  break;
+                case 1:
+                  getPcsDataByFjCode(result.CODE, true);
+                  break;
+                case 2:
+                  getZrqDataByPcsCode(result.CODE, true);
+                  break;
+                case 3:
+                  getDataByZrqCode(result.CODE, true);
+                  break;
+              }
+            });
+        }
       });
 
     // 获取左侧上部数据
-    var getRightUpData = function() {
-      var condition = {
+    let getRightUpData = function() {
+      let condition = {
         dept: $("#placeCode").val(),
         date1: $("#date1").val(),
         date2: $("#date2").val()
       };
-      var ajaxObj = {
+      let ajaxObj = {
         url: sugon.interFaces.myzs.getLeftData,
         type: "post",
         data: condition,
         async: true
       };
       sugon.requestJson(ajaxObj, function(result) {
-        var $div = $(".right-amount1");
-        for (var i = 0; i < $div.length; i++) {
+        let $div = $(".right-amount1");
+        for (let i = 0; i < $div.length; i++) {
           $div.eq(i).html(result.data[i]);
         }
       });
     };
 
     // 获取左侧中间数据
-    var getRightMidData = function() {
-      var condition = {
+    let getRightMidData = function() {
+      let condition = {
         deptId: $("#placeCode").val(),
         date1: $("#date1").val(),
         date2: $("#date2").val()
       };
-      var ajaxObj = {
+      let ajaxObj = {
         url: sugon.interFaces.myzs.getRightMidData,
         type: "post",
         data: condition,
         async: true
       };
       sugon.requestJson(ajaxObj, function(result) {
-        var data1 = result.data1,
+        let data1 = result.data1,
           data2 = result.data2;
-        var $div = $(".right-mid-amount");
+        let $div = $(".right-mid-amount");
         data1.map(function(value, index) {
           $div.eq(index).html(value);
         });
-        var chart = echarts.init(document.getElementById("right-banner-chart"));
-        var option = {
+        let chart = echarts.init(document.getElementById("right-banner-chart"));
+        let option = {
           title: {
             subtext: "诉求集中\n单位",
             left: "center",
@@ -210,25 +241,25 @@ requirejs(
     };
 
     // 获取右侧下部数据
-    var getRightDownData = function() {
-      var condition = {
+    let getRightDownData = function() {
+      let condition = {
         deptId: $("#placeCode").val(),
         date: $("#date2").val(),
         timestamp: new Date(),
         pageSize: "10",
         pageNum: "1"
       };
-      var ajaxObj = {
+      let ajaxObj = {
         url: sugon.interFaces.myzs.getRightData,
         type: "post",
         data: condition,
         async: true
       };
       sugon.requestJson(ajaxObj, function(result) {
-        var data = result.data;
-        var $body = $(".right-panel-body");
+        let data = result.data;
+        let $body = $(".right-panel-body");
         $body.empty();
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           $body.append(
             '<div title="' +
               data[i].content +
@@ -243,7 +274,7 @@ requirejs(
     };
 
     // 初始化两侧数据
-    var initSideData = function() {
+    let initSideData = function() {
       // 加载右上侧数据
       getRightUpData();
       // 加载右中间数据
@@ -253,24 +284,24 @@ requirejs(
     };
 
     // 指标组成接口调用
-    var getZbzc = function() {
-      var condition = {
+    let getZbzc = function() {
+      let condition = {
         deptId: $("#placeCode").val(),
         date1: $("#date1").val(),
         date2: $("#date2").val()
       };
-      var ajaxObj = {
+      let ajaxObj = {
         url: sugon.interFaces.myzs.getZbzc,
         type: "post",
         data: condition,
         async: true
       };
       sugon.requestJson(ajaxObj, function(result) {
-        var data = result.data;
-        var data1 = [],
+        let data = result.data;
+        let data1 = [],
           data2 = [];
-        for (var i = 0; i < data.length; i++) {
-          for (var j = 0; j < data[i].length; j++) {
+        for (let i = 0; i < data.length; i++) {
+          for (let j = 0; j < data[i].length; j++) {
             if (j == 0) {
               data1.push(data[i][j]);
             } else {
@@ -278,10 +309,10 @@ requirejs(
             }
           }
         }
-        for (var i = 0; i < data1.length; i++) {
+        for (let i = 0; i < data1.length; i++) {
           $(".cell-color" + (i + 1)).html(data1[i]);
         }
-        for (var i = 0; i < data2.length; i++) {
+        for (let i = 0; i < data2.length; i++) {
           $(".cell-color")
             .eq(i)
             .html(data2[i]);
@@ -290,13 +321,13 @@ requirejs(
     };
 
     // 执法公信力走势分析接口调用
-    var getZfgxl = function() {
-      var condition = {
+    let getZfgxl = function() {
+      let condition = {
         deptId: $("#placeCode").val(),
         date1: $("#date1").val(),
         date2: $("#date2").val()
       };
-      var ajaxObj = {
+      let ajaxObj = {
         url: sugon.interFaces.myzs.getZfgxl,
         type: "post",
         data: condition,
@@ -308,8 +339,8 @@ requirejs(
     };
 
     // 渲染执法公信力走势分析echarts图
-    var renderZfgxl = function(data) {
-      var xData = [],
+    let renderZfgxl = function(data) {
+      let xData = [],
         yData = [],
         min = 0,
         max = 0;
@@ -317,7 +348,7 @@ requirejs(
         min = Number(data[0].value);
         max = Number(data[0].value);
       }
-      for (var i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         xData.push(data[i].name);
         yData.push(data[i].value);
         min = Math.min(min, Number(data[i].value));
@@ -325,8 +356,8 @@ requirejs(
       }
       min = Number(min - (max - min) / 2).toFixed(2);
       max = Number(max + (max - min) / 2).toFixed(2);
-      var chart = echarts.init(document.getElementById("pop-chart1"));
-      var option = {
+      let chart = echarts.init(document.getElementById("pop-chart1"));
+      let option = {
         color: "#3cb2fc",
         tooltip: {
           trigger: "axis"
@@ -419,13 +450,13 @@ requirejs(
     };
 
     // 单位情况接口调用
-    var getDwqk = function() {
-      var condition = {
+    let getDwqk = function() {
+      let condition = {
         deptId: $("#placeCode").val(),
         date1: $("#date1").val(),
         date2: $("#date2").val()
       };
-      var ajaxObj = {
+      let ajaxObj = {
         url: sugon.interFaces.myzs.getDwqk,
         type: "post",
         data: condition,
@@ -438,8 +469,8 @@ requirejs(
     };
 
     // 渲染执法公信力走势分析echarts图
-    var renderDwqk = function(data) {
-      var xData = [],
+    let renderDwqk = function(data) {
+      let xData = [],
         yData = [],
         min = 0,
         max = 0,
@@ -455,7 +486,7 @@ requirejs(
         isShow = true;
         endValue = Math.floor((6 / data.length) * 100);
       }
-      for (var i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         min = Math.min(min, Number(data[i].value));
         max = Math.max(max, Number(data[i].value));
         xData.push(data[i].name);
@@ -479,8 +510,8 @@ requirejs(
       }
       min = Number(min - (max - min) / 2).toFixed(2);
       max = Number(max + (max - min) / 2).toFixed(2);
-      var chart = echarts.init(document.getElementById("pop-chart2"));
-      var option = {
+      let chart = echarts.init(document.getElementById("pop-chart2"));
+      let option = {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -524,9 +555,9 @@ requirejs(
                 color: "#6c7177"
               },
               formatter: function(param) {
-                var tempStr = "";
+                let tempStr = "";
                 if (param.length > 4) {
-                  for (var i = 0; i < param.length; i++) {
+                  for (let i = 0; i < param.length; i++) {
                     if (i % 4 == 3) {
                       tempStr += param[i] + "\n";
                     } else {
@@ -591,16 +622,16 @@ requirejs(
       chart.setOption(option);
     };
 
-    var renderMyd = function(data) {
-      var xData = [],
+    let renderMyd = function(data) {
+      let xData = [],
         symbolData = [];
       data.map(function(val) {
-        var obj = { value: val.value, symbolPosition: "end", id: val.id };
+        let obj = { value: val.value, symbolPosition: "end", id: val.id };
         xData.push(val.name);
         symbolData.push(obj);
       });
-      var chart = echarts.init(document.getElementById("pop2-chart"));
-      var option = {
+      let chart = echarts.init(document.getElementById("pop2-chart"));
+      let option = {
         tooltip: {
           formatter: "{b}：{c}"
         },
@@ -622,9 +653,9 @@ requirejs(
           axisLabel: {
             show: true,
             formatter: function(param) {
-              var tempStr = "";
+              let tempStr = "";
               if (param.length > 4) {
-                for (var i = 0; i < param.length; i++) {
+                for (let i = 0; i < param.length; i++) {
                   if (i % 4 == 3) {
                     tempStr += param[i] + "\n";
                   } else {
@@ -747,14 +778,14 @@ requirejs(
     };
 
     // 初始化弹出框
-    var initPopPage = function() {
+    let initPopPage = function() {
       getZbzc();
       getZfgxl();
       getDwqk();
     };
 
     // 初始化第二弹出页
-    var initPopPage2 = function() {
+    let initPopPage2 = function() {
       sugon.requestJson(
         {
           type: "post",
@@ -844,7 +875,7 @@ requirejs(
       });
 
     // 初始化执法公信力指数录入数据
-    var initPopSetting1 = function() {
+    let initPopSetting1 = function() {
       sugon.requestJson(
         {
           type: "post",
@@ -855,7 +886,7 @@ requirejs(
         function(result) {
           result.data.map(function(val1, i) {
             val1.map(function(val2, j) {
-              var index = i * 12 + j;
+              let index = i * 12 + j;
               $(".tab-cell > input")
                 .eq(index)
                 .val(val2);
@@ -865,7 +896,7 @@ requirejs(
       );
     };
 
-    var initPopSetting2 = function(isRest) {
+    let initPopSetting2 = function(isRest) {
       sugon.requestJson(
         {
           type: "post",
@@ -885,7 +916,7 @@ requirejs(
       );
     };
 
-    var initPopSetting3 = function(isRest) {
+    let initPopSetting3 = function(isRest) {
       sugon.requestJson(
         {
           type: "post",
@@ -932,21 +963,21 @@ requirejs(
     };
 
     // 提交执法公信力指数录入数据
-    var submitPopSetting1 = function() {
-      var arr = [];
+    let submitPopSetting1 = function() {
+      let arr = [];
       // 写入数据
-      for (var i = 0; i < 13; i++) {
-        var innerArr = [];
-        for (var j = 0; j < 12; j++) {
-          var index = i * 12 + j;
-          var str = $(".tab-cell > input")
+      for (let i = 0; i < 13; i++) {
+        let innerArr = [];
+        for (let j = 0; j < 12; j++) {
+          let index = i * 12 + j;
+          let str = $(".tab-cell > input")
             .eq(index)
             .val();
           innerArr.push(str);
         }
         arr.push(innerArr);
       }
-      var condition = {
+      let condition = {
         time: $("#pop-date1").val(),
         data: JSON.stringify(arr)
       };
@@ -970,17 +1001,17 @@ requirejs(
     };
 
     // 提交系数配置
-    var submitPopSetting2 = function() {
-      var arr = [];
+    let submitPopSetting2 = function() {
+      let arr = [];
       // 写入数据
-      for (var i = 0; i < $(".right-tab1 > div > input").length; i++) {
+      for (let i = 0; i < $(".right-tab1 > div > input").length; i++) {
         arr.push(
           $(".right-tab1 > div > input")
             .eq(i)
             .val()
         );
       }
-      var condition = {
+      let condition = {
         time: $("#pop-date2").val(),
         data: JSON.stringify(arr)
       };
@@ -1004,15 +1035,15 @@ requirejs(
     };
 
     // 提交展示配置
-    var submitPopSetting3 = function() {
-      var data = [];
-      var condition = {
+    let submitPopSetting3 = function() {
+      let data = [];
+      let condition = {
         deptId: $("#pop-dept-id").val(),
         date1: $("#pop-date3").val(),
         date2: $("#pop-date4").val()
       };
-      var $inputArr = $(".right-tab2 > div > input");
-      for (var i = 0; i < $inputArr.length; i++) {
+      let $inputArr = $(".right-tab2 > div > input");
+      for (let i = 0; i < $inputArr.length; i++) {
         data.push($inputArr.eq(i).val());
       }
       condition.data = JSON.stringify(data);
@@ -1037,10 +1068,10 @@ requirejs(
 
     // input失去焦点的时候计算新的指标
     $(".right-tab2 > div > input").blur(function() {
-      var condition = {};
-      var data = [];
-      var $inputArr = $(".right-tab2 > div > input");
-      for (var i = 0; i < $inputArr.length; i++) {
+      let condition = {};
+      let data = [];
+      let $inputArr = $(".right-tab2 > div > input");
+      for (let i = 0; i < $inputArr.length; i++) {
         data.push($inputArr.eq(i).val());
       }
       condition.data = JSON.stringify(data);
@@ -1075,7 +1106,7 @@ requirejs(
 
     // 左侧容器点击事件
     $(".right-panel-up-1-up > div").click(function() {
-      var index = $(this).index();
+      let index = $(this).index();
       $(".pop-mask").show();
       if (index == 0) {
         $(".pop-panel").show();
@@ -1109,8 +1140,8 @@ requirejs(
 
     // 导航切换事件
     $(".pop-nav > div").click(function() {
-      var $this = $(this);
-      var index = $this.index();
+      let $this = $(this);
+      let index = $this.index();
       if (!$this.hasClass("nav-selected")) {
         $(".nav-selected").removeClass("nav-selected");
         $this.addClass("nav-selected");
@@ -1120,7 +1151,7 @@ requirejs(
 
     // 云搜查询事件监听
     $(".input-group-btn").click(function() {
-      var value = $(".search-box").val();
+      let value = $(".search-box").val();
       if (value) {
         window.parent.location.href = sugon.server + "#myys/ysxq?txt=" + value;
       }
@@ -1129,8 +1160,8 @@ requirejs(
     // 折叠按钮点击事件
     $(".fold-btn").click(function() {
       $(".select-tab").hide();
-      var rightPanel = $(".right-panel");
-      var foldBtn = $(".fold-img");
+      let rightPanel = $(".right-panel");
+      let foldBtn = $(".fold-img");
       if (parseInt(rightPanel.css("right")) < 0) {
         $(".right-panel").animate({ right: "15px" });
         foldBtn.css("transform", "rotateY(0deg)");
@@ -1142,10 +1173,10 @@ requirejs(
 
     // 设置按钮点击事件
     $(".setting-btn").click(function() {
-      var $selectTab = $(".select-tab");
-      var $this = $(this);
-      var position = $this.offset();
-      var display = $selectTab.css("display");
+      let $selectTab = $(".select-tab");
+      let $this = $(this);
+      let position = $this.offset();
+      let display = $selectTab.css("display");
       if (display == "block") {
         $selectTab.slideUp(100);
       } else {
@@ -1157,7 +1188,7 @@ requirejs(
 
     // 下拉框选择事件
     $(".select-option").click(function() {
-      var index = $(this).index();
+      let index = $(this).index();
       $(".pop-mask").show();
       $(".pop-setting" + index).show();
       $(".select-tab").hide();
@@ -1229,8 +1260,8 @@ requirejs(
 
     // 弹出框单位选择事件
     $("#pop-dept-name").click(function() {
-      var position = $(this).offset();
-      var $tree = $("#left-tree");
+      let position = $(this).offset();
+      let $tree = $("#left-tree");
       $tree
         .css("visibility", "visible")
         .css("left", position.left + "px")
@@ -1240,8 +1271,8 @@ requirejs(
 
     // 鼠标经过显示
     $(".body-row-body").mouseover(function(e) {
-      var $this = $(this);
-      var index = $this.index(".body-row-body");
+      let $this = $(this);
+      let index = $this.index(".body-row-body");
       $(".inner-pop-panel").show();
       sugon.requestJson(
         {
@@ -1256,7 +1287,7 @@ requirejs(
           async: true
         },
         function(result) {
-          var $ul = $(".inner-pop-panel > ul");
+          let $ul = $(".inner-pop-panel > ul");
           $ul.empty();
           result.data.map(function(val) {
             $ul.append(
@@ -1280,49 +1311,134 @@ requirejs(
 
     /******************************************************************/
 
-    var map;
+    let map;
     // 分别记录分局、派出所、责任区的zoom、上级code、center
-    var zoomArr = [
+    let zoomArr = [
         { zoom: 11, upDeptCode: "", center: [32.03613281, 118.78211975] }
       ],
       mapLayer = [];
-    var allFjLayerGroup = L.layerGroup(),
+    let allFjLayerGroup = L.layerGroup(),
       allFjMarkerGroup = L.layerGroup(); // 所有分局layer相关数据
-    var pcsLayerGroup = L.layerGroup(),
+    let pcsLayerGroup = L.layerGroup(),
       pcsMarkerGroup = L.layerGroup(); // 派出所layer相关数据
-    var zrqLayerGroup = L.layerGroup(),
+    let zrqLayerGroup = L.layerGroup(),
       zrqMarkerGroup = L.layerGroup(); // 责任区layer相关数据
-    var singleZrqLayerGroup = L.layerGroup(),
+    let singleZrqLayerGroup = L.layerGroup(),
       singleZrqMarkerGroup = L.layerGroup(); // 单个责任区layer相关数据
-    var heatLayerGroup = [],
+    let heatLayerGroup = [],
       currentLevel = ""; // 聚合点数据
-    var markerClusterGroup = L.markerClusterGroup({
+    let markerClusterGroup = L.markerClusterGroup({
         spiderfyOnMaxZoom: false,
         showCoverageOnHover: false,
         zoomToBoundsOnClick: false,
         singleMarkerMode: true
       }),
       queryGroup = L.layerGroup(),
-      mapMarkData = [];
-    var searchInput,
+      mapMarkData = [],
+      hiddenMapMarkData = [];
+    let searchInput,
       ckGroup = L.layerGroup(); // 1、输入框文本；2、窗口图层group
 
     // 圈选相关变量
-    var serverUrl, queryPlottingLayer, drawControl, plotting;
-    var bounds,
+    let serverUrl, queryPlottingLayer, drawControl, plotting;
+    let bounds,
       queryResult = [],
       selectedData = [],
+      hiddenSelectedData = [],
       isQuery; // 圈选的数据
-    var ckMarkerGroups1 = L.layerGroup(),
+    let ckMarkerGroups1 = L.layerGroup(),
       ckMarkerGroups2 = [],
       ckCircleGroups = L.layerGroup(),
       centerMarker,
       latLng; // 窗口mark，窗口圆，圆心点mark，圆心经纬度
-    var popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
-    var ckBorderGroup = L.layerGroup(),
+    let popMarkerGroup = L.layerGroup(); // 随机跳动的计时器，弹出marker组
+    let ckBorderGroup = L.layerGroup(),
       isLoadBounds = true,
       syncPulse = false; // 窗口的边界图层，窗口页面是否加载边界
-    var isRenderSearchChart = false; // 是否渲染查询的echarts图
+    let isRenderSearchChart = false; // 是否渲染查询的echarts图
+    let fjData = [
+      {
+        code: 320116000000,
+        name: "六合分局",
+        lat: "32.424774169921875",
+        lng: "118.8446044921875"
+      },
+      {
+        code: 320112000000,
+        name: "江北新区分局",
+        lat: "32.202301025390625",
+        lng: "118.69903564453125"
+      },
+      {
+        code: 320111000000,
+        name: "浦口分局",
+        lat: "32.03819274902344",
+        lng: "118.50608825683594"
+      },
+      {
+        code: 320113000000,
+        name: "栖霞分局",
+        lat: "32.130889892578125",
+        lng: "118.95034790039062"
+      },
+      {
+        code: 320192000000,
+        name: "经济技术开发区分局",
+        lat: "32.149085998535156",
+        lng: "118.87327194213867"
+      },
+      {
+        code: 320106000000,
+        name: "鼓楼分局",
+        lat: "32.085914611816406",
+        lng: "118.75019073486328"
+      },
+      {
+        code: 320102000000,
+        name: "玄武分局",
+        lat: "32.069091796875",
+        lng: "118.83224487304688"
+      },
+      {
+        code: 320104000000,
+        name: "秦淮分局",
+        lat: "32.010040283203125",
+        lng: "118.81061553955078"
+      },
+      {
+        code: 320105000000,
+        name: "建邺分局",
+        lat: "32.010040283203125",
+        lng: "118.69903564453125"
+      },
+      {
+        code: 320114000000,
+        name: "雨花台分局",
+        lat: "31.9427490234375",
+        lng: "118.69800567626953"
+      },
+      {
+        code: 320115000000,
+        name: "江宁分局",
+        lat: "31.837005615234375",
+        lng: "118.81027221679688"
+      },
+      {
+        code: 320124000000,
+        name: "溧水分局",
+        lat: "31.604232788085938",
+        lng: "119.02381896972656"
+      },
+      {
+        code: 320125000000,
+        name: "高淳分局",
+        lat: "31.324081420898438",
+        lng: "118.96202087402344"
+      }
+    ];
+    let rdwtData = {},
+      selected_ywid; // 1.热点问题数据 2.选中的业务id
+    let sjPcsData; // 市局派出所数据
 
     // 创建地图
     function createMapL() {
@@ -1350,13 +1466,18 @@ requirejs(
       );
       mapLayer.addTo(map);
       // 加载所有分局信息
-      getAllFjData();
+      // getAllFjData();
+      initMyzs();
     }
 
     //初始化地图数据 绘制出所有的分局
     function getAllFjData() {
+      $(".leaflet-marker-icon").remove();
+      removeAllLayers();
+      $(".right-panel-panel2").hide();
+      $(".right-panel-panel").show();
       currentLevel = 0;
-      var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+      let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
         queryParameter: {
           name: "gajg_pcszrq_3201_pg@ORCL_gt8",
           attributeFilter: "DWBM like '%000000' ",
@@ -1366,17 +1487,17 @@ requirejs(
         datasetNames: ["ORCL_gt8:gajg_pcszrq_3201_pg"],
         toIndex: -1
       });
-      var url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
+      let url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
       L.supermap
         .featureService(url)
         .getFeaturesBySQL(sqlParam, function(serviceResult) {
-          var resultData = serviceResult.result.features.features;
+          let resultData = serviceResult.result.features.features;
           map.setView(zoomArr[0].center, zoomArr[0].zoom);
           allFjLayerGroup = L.layerGroup();
           allFjMarkerGroup = L.layerGroup();
           // 在添加之前置空
           resultData.map(function(val) {
-            var resultLayer = L.polygon(
+            let resultLayer = L.polygon(
               changeLonAndLat(val.geometry.coordinates),
               {
                 color: "#386AFB",
@@ -1386,7 +1507,7 @@ requirejs(
                 code: val.properties.DWBM
               }
             );
-            var center = L.latLngBounds(
+            let center = L.latLngBounds(
               changeLonAndLat(val.geometry.coordinates)
             ).getCenter();
             resultLayer.on(
@@ -1415,120 +1536,30 @@ requirejs(
               if (isRenderSearchChart) {
                 renderSearchChart();
               }
-              var mapParams =
-                '{"code": "' +
-                result.ID +
-                '", "codeName": "' +
-                result.NAME +
-                '", "mold": "1", "mapCode": "' +
-                result.CODE +
-                '"}';
-              sessionStorage.setItem("mapParams", mapParams);
             }
           );
           // 加载热力图
           loadHeatMap();
           map.addLayer(allFjLayerGroup);
+          fjData.map(function(val) {
+            let len = val.name.length * 16 + 30;
+            let divIcon = L.divIcon({
+              className: "fj-icon",
+              html:
+                '<div class="bubblefj" code="' +
+                val.code +
+                '" style="width: ' +
+                len +
+                'px;">' +
+                val.name +
+                "</div>",
+              iconAnchor: [len / 2, 0]
+            });
+            let marker = L.marker([val.lat, val.lng], { icon: divIcon });
+            allFjMarkerGroup.addLayer(marker);
+          });
+          map.addLayer(allFjMarkerGroup);
         });
-      var fjData = [
-        {
-          code: 320116000000,
-          name: "六合分局",
-          lat: "32.424774169921875",
-          lng: "118.8446044921875"
-        },
-        {
-          code: 320112000000,
-          name: "江北新区分局",
-          lat: "32.202301025390625",
-          lng: "118.69903564453125"
-        },
-        {
-          code: 320111000000,
-          name: "浦口分局",
-          lat: "32.03819274902344",
-          lng: "118.50608825683594"
-        },
-        {
-          code: 320113000000,
-          name: "栖霞分局",
-          lat: "32.130889892578125",
-          lng: "118.95034790039062"
-        },
-        {
-          code: 320192000000,
-          name: "经济技术开发区分局",
-          lat: "32.149085998535156",
-          lng: "118.87327194213867"
-        },
-        {
-          code: 320106000000,
-          name: "鼓楼分局",
-          lat: "32.085914611816406",
-          lng: "118.75019073486328"
-        },
-        {
-          code: 320102000000,
-          name: "玄武分局",
-          lat: "32.069091796875",
-          lng: "118.83224487304688"
-        },
-        {
-          code: 320104000000,
-          name: "秦淮分局",
-          lat: "32.010040283203125",
-          lng: "118.81061553955078"
-        },
-        {
-          code: 320105000000,
-          name: "建邺分局",
-          lat: "32.010040283203125",
-          lng: "118.69903564453125"
-        },
-        {
-          code: 320114000000,
-          name: "雨花台分局",
-          lat: "31.9427490234375",
-          lng: "118.69800567626953"
-        },
-        {
-          code: 320115000000,
-          name: "江宁分局",
-          lat: "31.837005615234375",
-          lng: "118.81027221679688"
-        },
-        {
-          code: 320124000000,
-          name: "溧水分局",
-          lat: "31.604232788085938",
-          lng: "119.02381896972656"
-        },
-        {
-          code: 320125000000,
-          name: "高淳分局",
-          lat: "31.324081420898438",
-          lng: "118.96202087402344"
-        }
-      ];
-      fjData.map(function(val) {
-        var len = val.name.length * 16 + 30;
-        var divIcon = L.divIcon({
-          className: "fj-icon",
-          html:
-            '<div class="bubblefj" code="' +
-            val.code +
-            '" style="width: ' +
-            len +
-            'px;">' +
-            val.name +
-            "</div>",
-          iconAnchor: [len / 2, 0]
-        });
-        var marker = L.marker([val.lat, val.lng], { icon: divIcon });
-        allFjMarkerGroup.addLayer(marker);
-      });
-
-      map.addLayer(allFjMarkerGroup);
     }
 
     // 鼠标经过边框加粗事件
@@ -1543,7 +1574,7 @@ requirejs(
           });
         }
         if (layer._leaflet_id == e.target._leaflet_id) {
-          var $div = $('div.bubblefj[code="' + e.target.options.code + '"]');
+          let $div = $('div.bubblefj[code="' + e.target.options.code + '"]');
           $div
             .css("color", "#ffe200")
             .stop()
@@ -1572,9 +1603,47 @@ requirejs(
       });
     }
 
+    // 民意指数鼠标移入事件
+    function myzsMouseoverEvent(e) {
+      map.eachLayer(function(layer) {
+        if (layer.options.weight == 3) {
+          layer.setStyle({
+            color: "#386AFB",
+            fillOpacity: 0.15,
+            weight: 2
+          });
+        }
+        if (layer._leaflet_id == e.target._leaflet_id) {
+          let $div = $(
+            'div.bubble-marker[code="' + e.target.options.code + '"]'
+          );
+          $div.stop().animate({ top: "5px" }, 200, function() {
+            $div.stop().animate({ top: "0" }, 200);
+          });
+          layer.setStyle({
+            weight: 3,
+            fillOpacity: 0.3
+          });
+        }
+      });
+    }
+
+    // 民意指数鼠标移出事件
+    function myzsMouseoutEvent() {
+      map.eachLayer(function(layer) {
+        if (layer.options.weight == 3) {
+          layer.setStyle({
+            color: "#386AFB",
+            fillOpacity: 0.15,
+            weight: 2
+          });
+        }
+      });
+    }
+
     // 单位层级由0 ==》 1
-    function level021(deptCode, upDeptCode, center) {
-      var zoomArrObj = {};
+    function level021(deptCode, upDeptCode, center, isMyzs) {
+      let zoomArrObj = {};
       zoomArrObj.zoom = 12;
       zoomArrObj.upDeptCode = upDeptCode;
       if (center) {
@@ -1592,37 +1661,22 @@ requirejs(
         function(result) {
           $("#place").val(result.NAME);
           $("#placeCode").val(result.ID);
-          var mapParams =
-            '{"code": "' +
-            result.ID +
-            '", "codeName": "' +
-            result.NAME +
-            '", "mold": "1", "mapCode": "' +
-            result.CODE +
-            '"}';
-          sessionStorage.setItem("mapParams", mapParams);
         }
       );
-
-      // 根据分局code获取所有派出所数据
-      getPcsDataByFjCode(deptCode);
-      $(".fj-icon").hide();
-      // 初始化左右两侧数据
-      initSideData();
+      if (isMyzs) {
+        getPcsDataByFjCode(deptCode, true);
+      } else {
+        // 根据分局code获取所有派出所数据
+        getPcsDataByFjCode(deptCode);
+        $(".fj-icon").hide();
+        // 初始化左右两侧数据
+        initSideData();
+      }
     }
 
     // 单位层级由1 ==》 2
-    function level122(deptCode, upDeptCode, center) {
-      // 隐藏热力图层
-      map.removeLayer(heatLayerGroup);
-      // 隐藏左右两侧页面
-      $(".right-panel-up")
-        .show()
-        .css("height", "50%");
-      $(".right-panel-down").css("height", "50%");
-      $(".right-panel-up-1").hide();
-      $(".right-panel-up-2").show();
-      var zoomArrObj = {};
+    function level122(deptCode, upDeptCode, center, isMyzs) {
+      let zoomArrObj = {};
       zoomArrObj.zoom = 14;
       zoomArrObj.upDeptCode = upDeptCode;
       if (center) {
@@ -1643,15 +1697,6 @@ requirejs(
         function(result) {
           $("#place").val(result.NAME.replace(result.UP_NAME, ""));
           $("#placeCode").val(result.ID);
-          var mapParams =
-            '{"code": "' +
-            result.ID +
-            '", "codeName": "' +
-            result.NAME +
-            '", "mold": "1", "mapCode": "' +
-            result.CODE +
-            '"}';
-          sessionStorage.setItem("mapParams", mapParams);
         }
       );
       sugon.requestJson(
@@ -1666,8 +1711,8 @@ requirejs(
           }
         },
         function(result) {
-          var $body = $(".right-panel-up-2");
-          var nameArr = [
+          let $body = $(".right-panel-up-2");
+          let nameArr = [
             "110接处警满意度",
             "窗口服务满意度",
             "案件综合评价",
@@ -1680,7 +1725,7 @@ requirejs(
           $body.empty();
           result.data.map(function(val, index) {
             if (val) {
-              var html =
+              let html =
                 '<div><div class="right-amount2">' +
                 val +
                 '</div><div class="right-name2">' +
@@ -1691,13 +1736,26 @@ requirejs(
           });
         }
       );
-      loadMarkerCluster();
-      // 根据派出所code获取责任区数据
-      getZrqDataByPcsCode(deptCode);
+      if (isMyzs) {
+        getZrqDataByPcsCode(deptCode, true);
+      } else {
+        // 隐藏热力图层
+        map.removeLayer(heatLayerGroup);
+        // 隐藏左右两侧页面
+        $(".right-panel-up")
+          .show()
+          .css("height", "50%");
+        $(".right-panel-down").css("height", "50%");
+        $(".right-panel-up-1").hide();
+        $(".right-panel-up-2").show();
+        loadMarkerCluster();
+        // 根据派出所code获取责任区数据
+        getZrqDataByPcsCode(deptCode);
+      }
     }
 
     // 单位层级由2 ==》 3
-    function level223(deptCode) {
+    function level223(deptCode, isMyzs) {
       // 隐藏左右两侧页面
       $(".right-panel-up").hide();
       $(".right-panel-down").css("height", "100%");
@@ -1714,35 +1772,26 @@ requirejs(
         function(result) {
           $("#place").val(result.NAME);
           $("#placeCode").val(result.ID);
-          var mapParams =
-            '{"code": "' +
-            result.ID +
-            '", "codeName": "' +
-            result.NAME +
-            '", "mold": "1", "mapCode": "' +
-            result.CODE +
-            '"}';
-          sessionStorage.setItem("mapParams", mapParams);
         }
       );
       // 初始化数据panel
-      initDataPanel($(".search-yw").val());
+      !isMyzs && initDataPanel($(".search-yw").val());
       // 根据派出所code获取责任区数据
-      getDataByZrqCode(deptCode);
+      getDataByZrqCode(deptCode, isMyzs);
     }
 
     //处理geometry数据数组中经纬度 与 leaflet.js API中构建polygon(纬，经)矛盾
     function changeLonAndLat(arr) {
-      var result = [];
-      for (var k = 0; k < arr.length; k++) {
-        var arr1 = [];
-        for (var i = 0; i < arr[k].length; i++) {
-          var arr2 = [];
-          for (var j = 0; j < arr[k][i].length; j++) {
-            var arr3 = [];
-            var temp = arr[k][i][j][0];
-            var t1 = arr[k][i][j][0];
-            var t2 = arr[k][i][j][1];
+      let result = [];
+      for (let k = 0; k < arr.length; k++) {
+        let arr1 = [];
+        for (let i = 0; i < arr[k].length; i++) {
+          let arr2 = [];
+          for (let j = 0; j < arr[k][i].length; j++) {
+            let arr3 = [];
+            let temp = arr[k][i][j][0];
+            let t1 = arr[k][i][j][0];
+            let t2 = arr[k][i][j][1];
             temp = t1;
             t1 = t2;
             t2 = temp;
@@ -1756,14 +1805,280 @@ requirejs(
       return result;
     }
 
+    // 诉求分布的派出所页面
+    function renderSqfbPcsPage(resultData) {
+      // 清空map上的分局数据
+      map.removeLayer(allFjLayerGroup);
+      map.removeLayer(allFjMarkerGroup);
+      allFjLayerGroup = L.layerGroup();
+      allFjMarkerGroup = L.layerGroup();
+
+      map.removeLayer(pcsLayerGroup);
+      map.removeLayer(pcsMarkerGroup);
+      pcsLayerGroup = L.layerGroup();
+      pcsMarkerGroup = L.layerGroup();
+      resultData.map(function(val) {
+        let resultLayer = L.polygon(changeLonAndLat(val.geometry.coordinates), {
+          color: "#386AFB",
+          fillOpacity: 0,
+          className: "fj-layer",
+          weight: 1,
+          code: val.properties.DWBM
+        });
+        let center = L.latLngBounds(
+          changeLonAndLat(val.geometry.coordinates)
+        ).getCenter();
+        let len = val.properties.DWMC.length * 16 + 30;
+        let divIcon = L.divIcon({
+          className: "pcs-icon",
+          html:
+            '<div class="bubblefj" code="' +
+            val.properties.DWBM +
+            '" style="width: ' +
+            len +
+            'px;">' +
+            val.properties.DWMC +
+            "</div>",
+          iconAnchor: [len / 2, 0]
+        });
+        let marker = L.marker(center, { icon: divIcon });
+        resultLayer.on({
+          mouseover: mouseoverEvent,
+          mouseout: mouseoutEvent,
+          click: function() {
+            let deptCode = val.properties.DWBM;
+            level122(deptCode, deptCode, center);
+          },
+          mouseup: function(e) {
+            let which = e.originalEvent.which;
+            let deptCode = val.properties.DWBM;
+            if (which == 3) {
+              // 移除派出所图层
+              map.removeLayer(pcsLayerGroup);
+              map.removeLayer(pcsMarkerGroup);
+              pcsLayerGroup = L.layerGroup();
+              pcsLayerGroup = L.layerGroup();
+              $(".right-panel-up-2").hide();
+              $(".right-panel-up-1").show();
+              $(".pcs-icon").hide();
+              $(".pcs-layer").hide();
+              // 右键时，记录上级id
+              sugon.requestJson(
+                {
+                  type: "POST",
+                  url: sugon.interFaces.myzs.DeptId,
+                  async: false,
+                  data: { deptCode: deptCode }
+                },
+                function(result) {
+                  $("#place").val(result.UP_NAME);
+                  $("#placeCode").val(result.UP_ID);
+                  getAllFjData();
+                }
+              );
+              // 重设中心点和zoom值
+              map.setView(zoomArr[0].center, zoomArr[0].zoom);
+            }
+          }
+        });
+        pcsLayerGroup.addLayer(resultLayer);
+        pcsMarkerGroup.addLayer(marker);
+      });
+      loadHeatMap();
+      map.addLayer(pcsLayerGroup);
+      map.addLayer(pcsMarkerGroup);
+    }
+
+    // 民意指数派出所页面
+    function renderMyzsPcsPage(resultData) {
+      let condition = {
+        deptId: $("#placeCode").val(),
+        date1: $("#date1").val(),
+        date2: $("#date2").val(),
+        type: $(".search-yw2").val()
+      };
+      sugon
+        .request(sugon.interFaces.myzs.getYlldMapData, condition)
+        .then(result => {
+          map.setView(zoomArr[1].center, zoomArr[1].zoom);
+          // 清空map上的分局数据
+          map.removeLayer(allFjLayerGroup);
+          map.removeLayer(allFjMarkerGroup);
+          allFjLayerGroup = L.layerGroup();
+          allFjMarkerGroup = L.layerGroup();
+
+          map.removeLayer(pcsLayerGroup);
+          map.removeLayer(pcsMarkerGroup);
+          pcsLayerGroup = L.layerGroup();
+          pcsMarkerGroup = L.layerGroup();
+          let data = [];
+          resultData.map(val1 => {
+            let center = L.latLngBounds(
+                changeLonAndLat(val1.geometry.coordinates)
+              ).getCenter(),
+              obj = {
+                code: val1.properties.DWBM,
+                name: val1.properties.DWMC,
+                lat: center.lat,
+                lng: center.lng,
+                data: val1.geometry.coordinates,
+                type: "2",
+                layerType: "0",
+                value: ""
+              };
+            result.data.map(val2 => {
+              if (obj.code == val2.code) {
+                obj.value = val2.value;
+                obj.type = val2.type;
+              }
+            });
+            sjPcsData.map(val2 => {
+              if (obj.code == val2.code) {
+                obj.layerType = val2.type;
+              }
+            });
+            data.push(obj);
+          });
+          // 在添加之前置空
+          data.map(function(val) {
+            let color, layerColor;
+            switch (val.type) {
+              case "1":
+                color = "#51BDAE";
+                break;
+              case "2":
+                color = "#FBA102";
+                break;
+              case "3":
+                color = "#ED5554";
+                break;
+            }
+            switch (val.layerType) {
+              case "0":
+                layerColor = "#fff";
+                break;
+              case "1":
+                layerColor = "#cddc39";
+                break;
+              case "2":
+                layerColor = "#ffeb3b";
+                break;
+              case "3":
+                layerColor = "#fbc02d";
+                break;
+              case "4":
+                layerColor = "#ffa000";
+                break;
+              case "5":
+                layerColor = "#ef6c00";
+                break;
+              case "6":
+                layerColor = "#e64a19";
+                break;
+            }
+            let resultLayer = L.polygon(changeLonAndLat(val.data), {
+              color: "#fff",
+              fillOpacity: 0.55,
+              fillColor: layerColor,
+              weight: 2,
+              code: val.code
+            });
+            let center = L.latLngBounds(changeLonAndLat(val.data)).getCenter();
+            resultLayer.on(
+              {
+                click: function() {
+                  level122(val.code, val.code, center, true);
+                },
+                mouseover: function(e) {
+                  map.eachLayer(function(layer) {
+                    if (layer.options.fillOpacity == "0.55") {
+                      layer.setStyle({
+                        fillOpacity: 0.45
+                      });
+                    }
+                    if (layer._leaflet_id == e.target._leaflet_id) {
+                      let $div = $(
+                        'div.bubble-marker[code="' +
+                          e.target.options.code +
+                          '"]'
+                      );
+                      $div.stop().animate({ top: "5px" }, 200, function() {
+                        $div.stop().animate({ top: "0" }, 200);
+                      });
+                      layer.setStyle({
+                        fillOpacity: 0.65
+                      });
+                    }
+                  });
+                },
+                mouseout: function(e) {
+                  map.eachLayer(function(layer) {
+                    if (layer.options.fillOpacity == "0.65") {
+                      layer.setStyle({
+                        color: "#fff",
+                        fillOpacity: 0.45
+                      });
+                    }
+                  });
+                },
+                mouseup: function(e) {
+                  let which = e.originalEvent.which;
+                  if (which == 3) {
+                    // 移除派出所图层
+                    map.removeLayer(pcsLayerGroup);
+                    map.removeLayer(pcsMarkerGroup);
+                    pcsLayerGroup = L.layerGroup();
+                    pcsMarkerGroup = L.layerGroup();
+                    // 右键时，记录上级id
+                    sugon.requestJson(
+                      {
+                        type: "POST",
+                        url: sugon.interFaces.myzs.DeptId,
+                        async: false
+                      },
+                      function(result) {
+                        $("#place").val(result.NAME);
+                        $("#placeCode").val(result.ID);
+                        initMyzs();
+                      }
+                    );
+                    // 重设中心点和zoom值
+                    map.setView(zoomArr[0].center, zoomArr[0].zoom);
+                  }
+                }
+              },
+              true
+            );
+            pcsLayerGroup.addLayer(resultLayer);
+            let len = val.name.length * 14 + 20;
+            let html = val.value ? "" : "display:none;";
+            let value = Number(val.value).toFixed(2);
+            let percentLen = value.length * 14;
+            let divIcon = L.divIcon({
+              html: `<div style="width: ${len}px;" code="${val.code}" class="bubble-marker bubble-marker${val.type}">
+                                    <div></div>
+                                    <div style="width: ${percentLen}px;${html}">${value}%</div>
+                                    <div>${val.name}</div>
+                               </div>`,
+              iconAnchor: [len / 2, 65]
+            });
+            let marker = L.marker([val.lat, val.lng], { icon: divIcon });
+            pcsMarkerGroup.addLayer(marker);
+          });
+          map.addLayer(pcsLayerGroup);
+          map.addLayer(pcsMarkerGroup);
+          initRightPanel2($(".search-yw2").val());
+        });
+    }
+
     //获取分局下所有派出所数据
-    function getPcsDataByFjCode(fjCode) {
+    function getPcsDataByFjCode(fjCode, isMyzs) {
       if (isRenderSearchChart) {
         renderSearchChart();
       }
       currentLevel = 1;
-      var subCode = fjCode.substring(0, 6);
-      var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+      let subCode = fjCode.substring(0, 6);
+      let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
         queryParameter: {
           name: "gajg_pcszrq_3201_pg@ORCL_gt8",
           attributeFilter:
@@ -1775,114 +2090,247 @@ requirejs(
         fromIndex: 1,
         toIndex: -1
       });
-      var url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
+      let url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
       L.supermap
         .featureService(url)
         .getFeaturesBySQL(sqlParam, function(serviceResult) {
-          var resultData = serviceResult.result.features.features;
-          // 清空map上的分局数据
-          map.removeLayer(allFjLayerGroup);
-          map.removeLayer(allFjMarkerGroup);
-          allFjLayerGroup = L.layerGroup();
-          allFjMarkerGroup = L.layerGroup();
+          let resultData = serviceResult.result.features.features;
+          if (isMyzs) {
+            renderMyzsPcsPage(resultData);
+          } else {
+            renderSqfbPcsPage(resultData);
+          }
+        });
+    }
 
+    // 诉求分布责任区页面
+    function renderSqfbZrqPage(resultData, pcsCode) {
+      currentLevel = 2;
+      // 清空map上的分局数据
+      map.removeLayer(pcsLayerGroup);
+      map.removeLayer(pcsMarkerGroup);
+      pcsLayerGroup = L.layerGroup();
+      pcsMarkerGroup = L.layerGroup();
+      // 清空派出所layer和marker
+      resultData.map(function(val) {
+        let resultLayer = L.polygon(changeLonAndLat(val.geometry.coordinates), {
+          color: "#386AFB",
+          fillOpacity: 0,
+          className: "fj-layer",
+          weight: 1,
+          code: val.properties.DWBM
+        });
+        let center = L.latLngBounds(
+          changeLonAndLat(val.geometry.coordinates)
+        ).getCenter();
+        let dwmc = val.properties.DWMC.replace($("#place").val(), "");
+        let len = dwmc.length * 16 + 30;
+        let divIcon = L.divIcon({
+          className: "zrq-icon",
+          html:
+            '<div class="bubblefj" code="' +
+            val.properties.DWBM +
+            '" style="width: ' +
+            len +
+            'px;">' +
+            dwmc +
+            "</div>",
+          iconAnchor: [len / 2, 0]
+        });
+        let marker = L.marker(center, { icon: divIcon });
+        resultLayer.on({
+          mouseover: mouseoverEvent,
+          mouseout: mouseoutEvent,
+          click: function() {
+            let deptCode = val.properties.DWBM;
+            level223(deptCode);
+          },
+          mouseup: function(e) {
+            if (searchInput) {
+              isRenderSearchChart = true;
+            }
+            let deptCode = val.properties.DWBM;
+            let which = e.originalEvent.which;
+            if (which == 3) {
+              // 显示左右两侧页面
+              $(".data-panel").hide();
+              $(".right-panel-up").show();
+              $(".right-panel-up-1").show();
+              $(".right-panel-up")
+                .show()
+                .css("height", "70%");
+              $(".right-panel-down").css("height", "30%");
+              $(".right-panel-up-2").hide();
+              // 移除聚合图层
+              map.removeLayer(markerClusterGroup);
+              markerClusterGroup = L.markerClusterGroup({
+                spiderfyOnMaxZoom: false,
+                showCoverageOnHover: false,
+                zoomToBoundsOnClick: false,
+                singleMarkerMode: true
+              });
+              // 移除责任区图层
+              map.removeLayer(zrqLayerGroup);
+              map.removeLayer(zrqMarkerGroup);
+              zrqLayerGroup = L.layerGroup();
+              zrqMarkerGroup = L.layerGroup();
+
+              $(".zrq-icon").hide();
+              $(".zrq-layer").hide();
+              // 右键时，记录上级id
+              sugon.requestJson(
+                {
+                  type: "POST",
+                  url: sugon.interFaces.myzs.DeptId,
+                  async: false,
+                  data: { deptCode: pcsCode }
+                },
+                function(result) {
+                  $("#place").val(result.UP_NAME);
+                  $("#placeCode").val(result.UP_ID);
+                }
+              );
+              getPcsDataByFjCode(zoomArr[1].upDeptCode);
+              // 重设中心店和zoom值
+              map.setView(zoomArr[1].center, zoomArr[1].zoom);
+            }
+          }
+        });
+        zrqLayerGroup.addLayer(resultLayer);
+        zrqMarkerGroup.addLayer(marker);
+      });
+      map.addLayer(zrqLayerGroup);
+      map.addLayer(zrqMarkerGroup);
+    }
+
+    // 民意指数责任区页面
+    function renderMyzsZrqPage(resultData) {
+      currentLevel = 2;
+      let condition = {
+        deptId: $("#placeCode").val(),
+        date1: $("#date1").val(),
+        date2: $("#date2").val(),
+        type: $(".search-yw2").val()
+      };
+      sugon
+        .request(sugon.interFaces.myzs.getYlldMapData, condition)
+        .then(result => {
+          map.setView(zoomArr[2].center, zoomArr[2].zoom);
+          // 清空map上的分局数据
           map.removeLayer(pcsLayerGroup);
           map.removeLayer(pcsMarkerGroup);
           pcsLayerGroup = L.layerGroup();
           pcsMarkerGroup = L.layerGroup();
-          resultData.map(function(val) {
-            var resultLayer = L.polygon(
-              changeLonAndLat(val.geometry.coordinates),
-              {
-                color: "#386AFB",
-                fillOpacity: 0,
-                className: "fj-layer",
-                weight: 1,
-                code: val.properties.DWBM
-              }
-            );
-            var center = L.latLngBounds(
-              changeLonAndLat(val.geometry.coordinates)
-            ).getCenter();
-            var len = val.properties.DWMC.length * 16 + 30;
-            var divIcon = L.divIcon({
-              className: "pcs-icon",
-              html:
-                '<div class="bubblefj" code="' +
-                val.properties.DWBM +
-                '" style="width: ' +
-                len +
-                'px;">' +
-                val.properties.DWMC +
-                "</div>",
-              iconAnchor: [len / 2, 0]
-            });
-            var marker = L.marker(center, { icon: divIcon });
-            resultLayer.on({
-              mouseover: mouseoverEvent,
-              mouseout: mouseoutEvent,
-              click: function() {
-                var deptCode = val.properties.DWBM;
-                level122(deptCode, deptCode, center);
-              },
-              mouseup: function(e) {
-                var which = e.originalEvent.which;
-                var deptCode = val.properties.DWBM;
-                if (which == 3) {
-                  // 移除派出所图层
-                  map.removeLayer(pcsLayerGroup);
-                  map.removeLayer(pcsMarkerGroup);
-                  pcsLayerGroup = L.layerGroup();
-                  pcsLayerGroup = L.layerGroup();
-                  $(".right-panel-up-2").hide();
-                  $(".right-panel-up-1").show();
-                  $(".pcs-icon").hide();
-                  $(".pcs-layer").hide();
-                  // 右键时，记录上级id
-                  sugon.requestJson(
-                    {
-                      type: "POST",
-                      url: sugon.interFaces.myzs.DeptId,
-                      async: false,
-                      data: { deptCode: deptCode }
-                    },
-                    function(result) {
-                      $("#place").val(result.UP_NAME);
-                      $("#placeCode").val(result.UP_ID);
-                      var mapParams =
-                        '{"code": "' +
-                        result.UP_ID +
-                        '", "codeName": "' +
-                        result.UP_NAME +
-                        '", "mold": "1", "mapCode": "' +
-                        result.UP_CODE +
-                        '"}';
-                      sessionStorage.setItem("mapParams", mapParams);
-                      getAllFjData();
-                    }
-                  );
-                  // 重设中心点和zoom值
-                  map.setView(zoomArr[0].center, zoomArr[0].zoom);
-                }
+          map.removeLayer(zrqLayerGroup);
+          map.removeLayer(zrqMarkerGroup);
+          zrqLayerGroup = L.layerGroup();
+          zrqMarkerGroup = L.layerGroup();
+          let data = [];
+          resultData.map(val1 => {
+            let center = L.latLngBounds(
+                changeLonAndLat(val1.geometry.coordinates)
+              ).getCenter(),
+              obj = {
+                code: val1.properties.DWBM,
+                name: val1.properties.DWMC.replace(/^\S+派出所/g, ""),
+                lat: center.lat,
+                lng: center.lng,
+                data: val1.geometry.coordinates,
+                type: "2",
+                value: ""
+              };
+            result.data.map(val2 => {
+              if (obj.code == val2.code) {
+                obj.value = val2.value;
+                obj.type = val2.type;
               }
             });
-            pcsLayerGroup.addLayer(resultLayer);
-            pcsMarkerGroup.addLayer(marker);
+            data.push(obj);
           });
-          loadHeatMap();
-          map.addLayer(pcsLayerGroup);
-          map.addLayer(pcsMarkerGroup);
+          // 在添加之前置空
+          data.map(function(val) {
+            let resultLayer = L.polygon(changeLonAndLat(val.data), {
+              color: "#386AFB",
+              weight: 3,
+              fillOpacity: 0,
+              code: val.code
+            });
+            let center = L.latLngBounds(changeLonAndLat(val.data)).getCenter();
+            resultLayer.on(
+              {
+                mouseover: myzsMouseoverEvent,
+                mouseout: myzsMouseoutEvent,
+                click: function() {
+                  level223(val.code, val.code, center, true);
+                },
+                mouseup: function(e) {
+                  let deptId = $("#placeCode").val();
+                  let which = e.originalEvent.which;
+                  if (which == 3) {
+                    $(".data-panel4").hide();
+                    $(".data-panel3").hide();
+                    // 移除聚合图层
+                    map.removeLayer(markerClusterGroup);
+                    markerClusterGroup = L.layerGroup();
+                    // 移除责任区图层
+                    map.removeLayer(zrqLayerGroup);
+                    map.removeLayer(zrqMarkerGroup);
+                    zrqLayerGroup = L.layerGroup();
+                    zrqMarkerGroup = L.layerGroup();
+
+                    // 右键时，记录上级id
+                    sugon.requestJson(
+                      {
+                        type: "POST",
+                        url: sugon.interFaces.myzs.DeptId,
+                        async: false,
+                        data: { deptId: deptId }
+                      },
+                      function(result) {
+                        $("#place").val(result.UP_NAME);
+                        $("#placeCode").val(result.UP_ID);
+                      }
+                    );
+                    getPcsDataByFjCode(zoomArr[1].upDeptCode, true);
+                    // 重设中心店和zoom值
+                    map.setView(zoomArr[1].center, zoomArr[1].zoom);
+                  }
+                }
+              },
+              true
+            );
+            zrqLayerGroup.addLayer(resultLayer);
+            let len = val.name.length * 14 + 20;
+            // let html = val.value ? "" : " style='display:none;'";
+            let divIcon = L.divIcon({
+              html: `<div style="width: ${len}px;" code="${
+                val.code
+              }" class="bubble-marker bubble-marker2">
+                                    <div></div>
+                                    <div style="display:none;">${Number(
+                                      val.value
+                                    ).toFixed(2)}%</div>
+                                    <div>${val.name}</div>
+                               </div>`,
+              iconAnchor: [len / 2, 30]
+            });
+            let marker = L.marker([val.lat, val.lng], { icon: divIcon });
+            zrqMarkerGroup.addLayer(marker);
+          });
+          map.addLayer(zrqLayerGroup);
+          map.addLayer(zrqMarkerGroup);
+          initRightPanel2($(".search-yw2").val());
         });
+      loadMyzsMarker();
     }
 
     //传入派出所编码 绘制责任区数据
-    function getZrqDataByPcsCode(pcsCode) {
+    function getZrqDataByPcsCode(pcsCode, isMyzs) {
       if (isRenderSearchChart) {
         renderSearchChart();
       }
-      currentLevel = 2;
-      var subCode = pcsCode.substring(0, 8);
-      var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+      let subCode = pcsCode.substring(0, 8);
+      let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
         queryParameter: {
           name: "gajg_pcszrq_3201_pg@ORCL_gt8",
           attributeFilter:
@@ -1894,129 +2342,196 @@ requirejs(
         fromIndex: 1,
         toIndex: -1
       });
-      var url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
+      let url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
       L.supermap
         .featureService(url)
         .getFeaturesBySQL(sqlParam, function(serviceResult) {
-          var resultData = serviceResult.result.features.features;
-          // 清空map上的分局数据
-          map.removeLayer(pcsLayerGroup);
-          map.removeLayer(pcsMarkerGroup);
-          pcsLayerGroup = L.layerGroup();
-          pcsMarkerGroup = L.layerGroup();
-          // 清空派出所layer和marker
-          resultData.map(function(val) {
-            var resultLayer = L.polygon(
-              changeLonAndLat(val.geometry.coordinates),
-              {
-                color: "#386AFB",
-                fillOpacity: 0,
-                className: "fj-layer",
-                weight: 1,
-                code: val.properties.DWBM
-              }
-            );
-            var center = L.latLngBounds(
-              changeLonAndLat(val.geometry.coordinates)
-            ).getCenter();
-            var dwmc = val.properties.DWMC.replace($("#place").val(), "");
-            var len = dwmc.length * 16 + 30;
-            var divIcon = L.divIcon({
-              className: "zrq-icon",
-              html:
-                '<div class="bubblefj" code="' +
-                val.properties.DWBM +
-                '" style="width: ' +
-                len +
-                'px;">' +
-                dwmc +
-                "</div>",
-              iconAnchor: [len / 2, 0]
-            });
-            var marker = L.marker(center, { icon: divIcon });
-            resultLayer.on({
-              mouseover: mouseoverEvent,
-              mouseout: mouseoutEvent,
-              click: function() {
-                var deptCode = val.properties.DWBM;
-                level223(deptCode);
-              },
-              mouseup: function(e) {
-                if (searchInput) {
-                  isRenderSearchChart = true;
-                }
-                var deptCode = val.properties.DWBM;
-                var which = e.originalEvent.which;
-                if (which == 3) {
-                  // 显示左右两侧页面
-                  $(".data-panel").hide();
-                  $(".right-panel-up").show();
-                  $(".right-panel-up-1").show();
-                  $(".right-panel-up")
-                    .show()
-                    .css("height", "70%");
-                  $(".right-panel-down").css("height", "30%");
-                  $(".right-panel-up-2").hide();
-                  // 移除聚合图层
-                  map.removeLayer(markerClusterGroup);
-                  markerClusterGroup = L.markerClusterGroup({
-                    spiderfyOnMaxZoom: false,
-                    showCoverageOnHover: false,
-                    zoomToBoundsOnClick: false,
-                    singleMarkerMode: true
-                  });
-                  // 移除责任区图层
-                  map.removeLayer(zrqLayerGroup);
-                  map.removeLayer(zrqMarkerGroup);
-                  zrqLayerGroup = L.layerGroup();
-                  zrqMarkerGroup = L.layerGroup();
-
-                  $(".zrq-icon").hide();
-                  $(".zrq-layer").hide();
-                  // 右键时，记录上级id
-                  sugon.requestJson(
-                    {
-                      type: "POST",
-                      url: sugon.interFaces.myzs.DeptId,
-                      async: false,
-                      data: { deptCode: pcsCode }
-                    },
-                    function(result) {
-                      $("#place").val(result.UP_NAME);
-                      $("#placeCode").val(result.UP_ID);
-                      var mapParams =
-                        '{"code": "' +
-                        result.UP_ID +
-                        '", "codeName": "' +
-                        result.UP_NAME +
-                        '", "mold": "1", "mapCode": "' +
-                        result.UP_CODE +
-                        '"}';
-                      sessionStorage.setItem("mapParams", mapParams);
-                    }
-                  );
-                  getPcsDataByFjCode(zoomArr[1].upDeptCode);
-                  // 重设中心店和zoom值
-                  map.setView(zoomArr[1].center, zoomArr[1].zoom);
-                }
-              }
-            });
-            zrqLayerGroup.addLayer(resultLayer);
-            zrqMarkerGroup.addLayer(marker);
-          });
-          map.addLayer(zrqLayerGroup);
-          map.addLayer(zrqMarkerGroup);
+          let resultData = serviceResult.result.features.features;
+          if (isMyzs) {
+            renderMyzsZrqPage(resultData);
+          } else {
+            renderSqfbZrqPage(resultData, pcsCode);
+          }
         });
     }
 
+    // 诉求分布单个责任区页面
+    function renderSqfbSingleZrqPage(resultData, zrqCode) {
+      $(".search-pop-panel").hide();
+      currentLevel = 3;
+      // 清空map上的分局数据
+      map.removeLayer(zrqLayerGroup);
+      map.removeLayer(zrqMarkerGroup);
+      zrqLayerGroup = L.layerGroup();
+      zrqMarkerGroup = L.layerGroup();
+      // 清空责任区layer和marker
+      let bounds = "";
+      resultData.map(function(val) {
+        let resultLayer = L.polygon(changeLonAndLat(val.geometry.coordinates), {
+          color: "#386AFB",
+          fillOpacity: 0,
+          className: "fj-layer",
+          weight: 1,
+          code: val.properties.DWBM
+        });
+        let center = L.latLngBounds(
+          changeLonAndLat(val.geometry.coordinates)
+        ).getCenter();
+        let len = val.properties.DWMC.length * 16 + 30;
+        let divIcon = L.divIcon({
+          className: "single-zrq-icon",
+          html:
+            '<div class="bubblefj"  code="' +
+            val.properties.DWBM +
+            '" style="width: ' +
+            len +
+            'px;">' +
+            val.properties.DWMC +
+            "</div>",
+          iconAnchor: [len / 2, 0]
+        });
+        bounds = resultLayer.getBounds();
+        let marker = L.marker(center, { icon: divIcon });
+        resultLayer.on("mouseup", function(e) {
+          let deptCode = val.properties.DWBM;
+          let which = e.originalEvent.which;
+          if (which == 3) {
+            // 显示左右两侧页面
+            $(".data-panel").hide();
+            $(".right-panel-up")
+              .show()
+              .css("height", "50%");
+            $(".right-panel-down").css("height", "50%");
+            $(".right-panel-up-1").hide();
+            $(".right-panel-up-2").show();
+            // 移除责任区图层
+            map.removeLayer(singleZrqLayerGroup);
+            map.removeLayer(singleZrqMarkerGroup);
+            map.removeLayer(queryGroup);
+            singleZrqLayerGroup = L.layerGroup();
+            singleZrqMarkerGroup = L.layerGroup();
+            queryGroup = L.layerGroup();
+            // 清空派出所layer和marker
+            $(".single-zrq-icon").hide();
+            $(".single-zrq-layer").hide();
+            // 右键时，记录上级id
+            sugon.requestJson(
+              {
+                type: "POST",
+                url: sugon.interFaces.myzs.DeptId,
+                async: false,
+                data: { deptCode: zrqCode, isZrq2Pcs: true }
+              },
+              function(result) {
+                $("#place").val(result.UP_NAME);
+                $("#placeCode").val(result.UP_ID);
+              }
+            );
+            loadMarkerCluster();
+            getZrqDataByPcsCode(zoomArr[2].upDeptCode);
+
+            // 重设中心店和zoom值
+            map.setView(zoomArr[2].center, zoomArr[2].zoom);
+          }
+        });
+        singleZrqLayerGroup.addLayer(resultLayer);
+        singleZrqMarkerGroup.addLayer(marker);
+      });
+      map.addLayer(singleZrqLayerGroup);
+      map.addLayer(singleZrqMarkerGroup);
+      map.fitBounds(bounds);
+    }
+
+    // 民意指数单个责任区页面
+    function renderMyzsSingleZrqPage(resultData) {
+      $(".data-panel4").hide();
+      currentLevel = 3;
+      // 清空责任区图层
+      map.removeLayer(zrqLayerGroup);
+      map.removeLayer(zrqMarkerGroup);
+      map.removeLayer(markerClusterGroup);
+      zrqLayerGroup = L.layerGroup();
+      zrqMarkerGroup = L.layerGroup();
+      markerClusterGroup = L.layerGroup();
+
+      // 清空当前图层
+      map.removeLayer(singleZrqLayerGroup);
+      map.removeLayer(singleZrqMarkerGroup);
+      singleZrqLayerGroup = L.layerGroup();
+      singleZrqMarkerGroup = L.layerGroup();
+      // 清空责任区layer和marker
+      let bounds = "";
+      resultData.map(function(val) {
+        let resultLayer = L.polygon(changeLonAndLat(val.geometry.coordinates), {
+          color: "#386AFB",
+          weight: 3,
+          fillOpacity: 0.15
+        });
+        let center = L.latLngBounds(
+          changeLonAndLat(val.geometry.coordinates)
+        ).getCenter();
+        let len =
+          val.properties.DWMC.replace(/^\S+派出所/g, "").length * 16 + 30;
+        let divIcon = L.divIcon({
+          html: `<div style="width: ${len}px;" class="bubble-marker bubble-marker2">
+                                <div></div>
+                                <div style="display: none;"></div>
+                                <div>${val.properties.DWMC.replace(
+                                  /^\S+派出所/g,
+                                  ""
+                                )}</div>
+                           </div>`,
+          iconAnchor: [len / 2, 30]
+        });
+        bounds = resultLayer.getBounds();
+        let marker = L.marker(center, { icon: divIcon });
+        resultLayer.on("mouseup", function(e) {
+          let deptId = $("#placeCode").val();
+          let which = e.originalEvent.which;
+          if (which == 3) {
+            $(".data-panel4").hide();
+            // 移除责任区图层
+            map.removeLayer(singleZrqLayerGroup);
+            map.removeLayer(singleZrqMarkerGroup);
+            map.removeLayer(markerClusterGroup);
+            singleZrqLayerGroup = L.layerGroup();
+            singleZrqMarkerGroup = L.layerGroup();
+            markerClusterGroup = L.layerGroup();
+            // 右键时，记录上级id
+            sugon.requestJson(
+              {
+                type: "POST",
+                url: sugon.interFaces.myzs.DeptId,
+                async: false,
+                data: { deptId: deptId }
+              },
+              function(result) {
+                $("#place").val(result.UP_NAME);
+                $("#placeCode").val(result.UP_ID);
+              }
+            );
+            getZrqDataByPcsCode(zoomArr[2].upDeptCode, true);
+
+            // 重设中心店和zoom值
+            map.setView(zoomArr[2].center, zoomArr[2].zoom);
+          }
+        });
+        singleZrqLayerGroup.addLayer(resultLayer);
+        singleZrqMarkerGroup.addLayer(marker);
+      });
+      loadMyzsMarker();
+      map.addLayer(singleZrqLayerGroup);
+      map.addLayer(singleZrqMarkerGroup);
+      map.fitBounds(bounds);
+      initRightPanel2($(".search-yw2").val());
+    }
+
     // 根据责任区id获取责任区边界
-    function getDataByZrqCode(zrqCode) {
+    function getDataByZrqCode(zrqCode, isMyzs) {
       if (searchInput) {
         isRenderSearchChart = false;
       }
-      $(".search-pop-panel").hide();
-      currentLevel = 3;
-      var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+      let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
         queryParameter: {
           name: "gajg_pcszrq_3201_pg@ORCL_gt8",
           attributeFilter: "DWBM = '" + zrqCode + "' and DWMC like '%责任区'",
@@ -2027,104 +2542,16 @@ requirejs(
         fromIndex: 1,
         toIndex: -1
       });
-      var url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
+      let url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
       L.supermap
         .featureService(url)
         .getFeaturesBySQL(sqlParam, function(serviceResult) {
-          var resultData = serviceResult.result.features.features;
-          // 清空map上的分局数据
-          map.removeLayer(zrqLayerGroup);
-          map.removeLayer(zrqMarkerGroup);
-          zrqLayerGroup = L.layerGroup();
-          zrqMarkerGroup = L.layerGroup();
-          // 清空责任区layer和marker
-          var bounds = "";
-          resultData.map(function(val) {
-            var resultLayer = L.polygon(
-              changeLonAndLat(val.geometry.coordinates),
-              {
-                color: "#386AFB",
-                fillOpacity: 0,
-                className: "fj-layer",
-                weight: 1,
-                code: val.properties.DWBM
-              }
-            );
-            var center = L.latLngBounds(
-              changeLonAndLat(val.geometry.coordinates)
-            ).getCenter();
-            var len = val.properties.DWMC.length * 16 + 30;
-            var divIcon = L.divIcon({
-              className: "single-zrq-icon",
-              html:
-                '<div class="bubblefj"  code="' +
-                val.properties.DWBM +
-                '" style="width: ' +
-                len +
-                'px;">' +
-                val.properties.DWMC +
-                "</div>",
-              iconAnchor: [len / 2, 0]
-            });
-            bounds = resultLayer.getBounds();
-            var marker = L.marker(center, { icon: divIcon });
-            resultLayer.on("mouseup", function(e) {
-              var deptCode = val.properties.DWBM;
-              var which = e.originalEvent.which;
-              if (which == 3) {
-                // 显示左右两侧页面
-                $(".data-panel").hide();
-                $(".right-panel-up")
-                  .show()
-                  .css("height", "50%");
-                $(".right-panel-down").css("height", "50%");
-                $(".right-panel-up-1").hide();
-                $(".right-panel-up-2").show();
-                // 移除责任区图层
-                map.removeLayer(singleZrqLayerGroup);
-                map.removeLayer(singleZrqMarkerGroup);
-                map.removeLayer(queryGroup);
-                singleZrqLayerGroup = L.layerGroup();
-                singleZrqMarkerGroup = L.layerGroup();
-                queryGroup = L.layerGroup();
-                // 清空派出所layer和marker
-                $(".single-zrq-icon").hide();
-                $(".single-zrq-layer").hide();
-                // 右键时，记录上级id
-                sugon.requestJson(
-                  {
-                    type: "POST",
-                    url: sugon.interFaces.myzs.DeptId,
-                    async: false,
-                    data: { deptCode: zrqCode, isZrq2Pcs: true }
-                  },
-                  function(result) {
-                    $("#place").val(result.UP_NAME);
-                    $("#placeCode").val(result.UP_ID);
-                    var mapParams =
-                      '{"code": "' +
-                      result.UP_ID +
-                      '", "codeName": "' +
-                      result.UP_NAME +
-                      '", "mold": "1", "mapCode": "' +
-                      result.UP_CODE +
-                      '"}';
-                    sessionStorage.setItem("mapParams", mapParams);
-                  }
-                );
-                loadMarkerCluster();
-                getZrqDataByPcsCode(zoomArr[2].upDeptCode);
-
-                // 重设中心店和zoom值
-                map.setView(zoomArr[2].center, zoomArr[2].zoom);
-              }
-            });
-            singleZrqLayerGroup.addLayer(resultLayer);
-            singleZrqMarkerGroup.addLayer(marker);
-          });
-          map.addLayer(singleZrqLayerGroup);
-          map.addLayer(singleZrqMarkerGroup);
-          map.fitBounds(bounds);
+          let resultData = serviceResult.result.features.features;
+          if (isMyzs) {
+            renderMyzsSingleZrqPage(resultData);
+          } else {
+            renderSqfbSingleZrqPage(resultData, zrqCode);
+          }
         });
     }
 
@@ -2137,12 +2564,12 @@ requirejs(
 
     // 初始化查询面板
     function initSearch(type) {
-      var $search = $(".data-panel-search");
+      let $search = $(".data-panel-search");
       $search.empty();
       $search.append($("<span/>").html("业务类型："));
-      var data = getSearchData(type);
+      let data = getSearchData(type);
       data.map(function(value, index) {
-        var $div = $("<div/>");
+        let $div = $("<div/>");
         if (index < 1) {
           $div.addClass("search-selected");
         }
@@ -2152,7 +2579,7 @@ requirejs(
 
     // 获取查询栏的数据
     function getSearchData(type) {
-      var data = [],
+      let data = [],
         countData = [0, 0, 0, 0, 0];
       if (isQuery) {
         selectedData.map(function(value) {
@@ -2214,10 +2641,10 @@ requirejs(
     function getTabData(type, pageNum) {
       type = type || 0;
       pageNum = pageNum || 1;
-      var data = [];
+      let data = [];
       if (isQuery) {
         // 请求责任区接口
-        var splitData = [[], [], [], [], []];
+        let splitData = [[], [], [], [], []];
         selectedData.map(function(value) {
           splitData[0].push(value);
           switch (value.sjly) {
@@ -2232,7 +2659,7 @@ requirejs(
               break;
           }
         });
-        for (var i = (pageNum - 1) * 100; i < pageNum * 100; i++) {
+        for (let i = (pageNum - 1) * 100; i < pageNum * 100; i++) {
           if (splitData[type][i]) {
             data.push(splitData[type][i]);
           }
@@ -2263,10 +2690,10 @@ requirejs(
     // 初始化tab面板
     function initTab(type, pageNum, searchType) {
       searchType = searchType || 0;
-      var $tab = $(".data-panel .data-panel-tab");
-      var header1 = "",
+      let $tab = $(".data-panel .data-panel-tab");
+      let header1 = "",
         header2 = "";
-      var realType = type == 0 ? searchType : Number(type);
+      let realType = type == 0 ? searchType : Number(type);
       switch (realType) {
         case 0:
           header1 = "数据来源";
@@ -2295,7 +2722,7 @@ requirejs(
           header2 +
           "</div</div>"
       );
-      var data = getTabData(realType, pageNum);
+      let data = getTabData(realType, pageNum);
       // 移除派出所层级marker
       map.removeLayer(markerClusterGroup);
       markerClusterGroup = L.markerClusterGroup({
@@ -2308,7 +2735,7 @@ requirejs(
       map.removeLayer(queryGroup);
       queryGroup = L.layerGroup();
       data.map(function(value, index) {
-        var $div = $("<div/>")
+        let $div = $("<div/>")
           .addClass("data-panel-tab-row")
           .attr("ywid", value.ywid);
         $div.append(
@@ -2337,9 +2764,9 @@ requirejs(
             .html(value["ywlx"])
         );
         $tab.append($div);
-        var icon;
+        let icon;
 
-        var str = "";
+        let str = "";
         switch (value.sjly) {
           case "110接处警":
             str += "<p>姓名：" + value.sqr + "</p>";
@@ -2388,7 +2815,7 @@ requirejs(
             });
             break;
         }
-        var resultLayer = L.marker([value.lat, value.lng], { icon: icon });
+        let resultLayer = L.marker([value.lat, value.lng], { icon: icon });
         resultLayer.bindPopup(
           '<div ywid="' +
             value.ywid +
@@ -2399,19 +2826,19 @@ requirejs(
             "</div>"
         );
         resultLayer.on("popupopen", function(e) {
-          var content = e.popup._content;
-          var reg = /ywid\="\S*"/;
-          var resultArr = content.match(reg);
-          var ywid = "";
+          let content = e.popup._content;
+          let reg = /ywid\="\S*"/;
+          let resultArr = content.match(reg);
+          let ywid = "";
           if (resultArr) {
             ywid = resultArr[0].substring(6, resultArr[0].length - 1).trim();
           }
           if (ywid) {
-            var tabRow = $(".data-panel-tab-row"),
+            let tabRow = $(".data-panel-tab-row"),
               className = "data-panel-tab-row-hover";
             tabRow.removeClass(className);
-            for (var i = 0; i < tabRow.length; i++) {
-              var row = tabRow.eq(i);
+            for (let i = 0; i < tabRow.length; i++) {
+              let row = tabRow.eq(i);
               if (row.attr("ywid") == ywid) {
                 row.addClass(className);
               }
@@ -2424,12 +2851,12 @@ requirejs(
         queryGroup.addLayer(resultLayer);
       });
       queryGroup.addTo(map);
-      var pageStr = $(".search-selected").html();
-      var totalCount = pageStr.substring(
+      let pageStr = $(".search-selected").html();
+      let totalCount = pageStr.substring(
         pageStr.indexOf("(") + 1,
         pageStr.lastIndexOf(")")
       );
-      var pages =
+      let pages =
         totalCount % 100 == 0
           ? parseInt(totalCount / 100)
           : parseInt(totalCount / 100) + 1;
@@ -2441,7 +2868,7 @@ requirejs(
     // 处理颜色和icon
     function handleColorAndIcon(data) {
       data = Number(data);
-      var result = {
+      let result = {
         color: "",
         icon: ""
       };
@@ -2461,7 +2888,7 @@ requirejs(
     // 初始化窗口mark
     function initCkMark(deptCode, isNotZoomIn) {
       map.removeLayer(allFjLayerGroup);
-      var className = !isNotZoomIn ? "pop-ck-down-true" : "";
+      let className = !isNotZoomIn ? "pop-ck-down-true" : "";
       deptCode = deptCode || "";
       sugon.requestJson(
         {
@@ -2476,8 +2903,8 @@ requirejs(
           }
         },
         function(result) {
-          var data = result.data;
-          var fjData = [
+          let data = result.data;
+          let fjData = [
             {
               code: 320116000000,
               name: "六合分局",
@@ -2565,16 +2992,16 @@ requirejs(
                 value.lng = value2.lng;
               }
             });
-            var width = value.name.length * 16 + 40,
+            let width = value.name.length * 16 + 40,
               top = "";
-            var height = value.ismost ? 130 : 90;
+            let height = value.ismost ? 130 : 90;
             if (value.ismost == "1") {
               top = '<div class="pop-ck-up pop-ck-up-top"></div>';
             } else if (value.ismost == "2") {
               top = '<div class="pop-ck-up pop-ck-up-alarm"></div>';
             }
 
-            var html =
+            let html =
               '<div code="' +
               value.code +
               '" style="width: ' +
@@ -2588,13 +3015,13 @@ requirejs(
               '</div></div><div class="pop-ck-down ' +
               className +
               '"></div></div>';
-            var divIcon = L.divIcon({
+            let divIcon = L.divIcon({
               className: "ck-popup",
               html: html,
               popupAnchor: [width / 2 - 8, 0],
               iconAnchor: [width / 2 + 3, height - 30]
             });
-            var marker = L.marker([value.lat, value.lng], { icon: divIcon });
+            let marker = L.marker([value.lat, value.lng], { icon: divIcon });
             ckGroup.addLayer(marker);
           });
           ckGroup.addTo(map);
@@ -2618,14 +3045,14 @@ requirejs(
           async: true
         },
         function(result) {
-          var data = result.data;
+          let data = result.data;
           if (data && data.length > 0) {
-            var $banner = $(".right-up-banner");
-            var $body = $(".right-up-body");
+            let $banner = $(".right-up-banner");
+            let $body = $(".right-up-body");
             $banner.empty();
             $body.empty();
-            var colorIcon1 = handleColorAndIcon(data[0][2]);
-            var colorIcon2 = handleColorAndIcon(data[0][3]);
+            let colorIcon1 = handleColorAndIcon(data[0][2]);
+            let colorIcon2 = handleColorAndIcon(data[0][3]);
             $banner.append(
               '<div class="right-up-banner-left">' +
                 data[0][1] +
@@ -2648,9 +3075,9 @@ requirejs(
             );
             data.map(function(value, index) {
               if (index > 0) {
-                var img = "";
-                var colorIcon1 = handleColorAndIcon(value[2]);
-                var colorIcon2 = handleColorAndIcon(value[3]);
+                let img = "";
+                let colorIcon1 = handleColorAndIcon(value[2]);
+                let colorIcon2 = handleColorAndIcon(value[3]);
                 switch (value[0]) {
                   case "户籍业务":
                     img = "hz";
@@ -2671,7 +3098,7 @@ requirejs(
                     img = "jg";
                     break;
                 }
-                var str;
+                let str;
                 if (!isPcs) {
                   str =
                     '<div class="down-left" id="' +
@@ -2694,7 +3121,7 @@ requirejs(
                       : "") +
                     "</span></div>";
                 }
-                var html =
+                let html =
                   '<div><div><div class="up-left"><img src="../../img/myhc/myzs/' +
                   img +
                   '.png"><span>' +
@@ -2790,7 +3217,7 @@ requirejs(
       if (isLoadBounds) {
         map.removeLayer(allFjLayerGroup);
         allFjLayerGroup = L.layerGroup();
-        var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+        let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
           queryParameter: {
             name: "gajg_pcszrq_3201_pg@ORCL_gt8",
             attributeFilter: "DWBM like '%000000' ",
@@ -2800,14 +3227,14 @@ requirejs(
           datasetNames: ["ORCL_gt8:gajg_pcszrq_3201_pg"],
           toIndex: -1
         });
-        var url =
+        let url =
           "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
         L.supermap
           .featureService(url)
           .getFeaturesBySQL(sqlParam, function(serviceResult) {
-            var resultData = serviceResult.result.features.features;
+            let resultData = serviceResult.result.features.features;
             map.setView(zoomArr[0].center, zoomArr[0].zoom);
-            var colorArr = [
+            let colorArr = [
               "#66edda",
               "#eb5c64",
               "#66dc2b",
@@ -2826,7 +3253,7 @@ requirejs(
             allFjLayerGroup = L.layerGroup();
             // 在添加之前置空
             resultData.map(function(val, index) {
-              var resultLayer = L.polygon(
+              let resultLayer = L.polygon(
                 changeLonAndLat(val.geometry.coordinates),
                 {
                   color: "#fff",
@@ -2908,12 +3335,12 @@ requirejs(
           async: true
         },
         function(result) {
-          var maxLen = 25000;
-          var len = result.data.length;
+          let maxLen = 25000;
+          let len = result.data.length;
           result.data.map(function(val) {
             val[2] = (10 * maxLen) / len;
           });
-          var heatLayer = [];
+          let heatLayer = [];
           heatLayer.push(
             L.heatLayer(result.data, {
               radius: 10,
@@ -2964,9 +3391,99 @@ requirejs(
       markerClusterGroup.addTo(map);
     }
 
+    // 加载民意指数点位图
+    function loadMyzsMarker() {
+      map.removeLayer(markerClusterGroup);
+      markerClusterGroup = L.layerGroup();
+      sugon.requestJson(
+        {
+          type: "post",
+          url: sugon.interFaces.myzs.getYlldDetailMapData,
+          data: {
+            deptId: $("#placeCode").val(),
+            date1: $("#date1").val(),
+            date2: $("#date2").val(),
+            type: $(".search-yw2").val()
+          },
+          async: true
+        },
+        function(result) {
+          rdwtData = result;
+          renderMyzsMarker(rdwtData.data);
+        }
+      );
+    }
+
+    // 渲染民意指数点位图
+    function renderMyzsMarker(data, isQuery) {
+      markerClusterGroup = L.layerGroup();
+      $(".data-panel3")
+        .show()
+        .attr("isQuery", isQuery ? 1 : 0);
+      $(".data-panel-banner3").html(rdwtData.content);
+      let $body = $(".data-panel-tab3").empty()
+        .append(`<div class="data-tab-header">
+                            <div class="col1">序号</div>
+                            <div class="col2">时间</div>
+                            <div class="col3">诉求人</div>
+                            <div class="col4">数据来源</div>
+                            <div class="col5">业务类型</div>
+                         </div>`);
+      data.map((val, index) => {
+        let row = `<div class="data-panel-tab-row" ywid="${val.ywid}">
+                                      <div class="col1">${index + 1}</div>
+                                      <div class="col2">${val.sj}</div>
+                                      <div class="col3">${val.sqr}</div>
+                                      <div class="col4">${val.sqlb}</div>
+                                      <div class="col5">${val.ywlb}</div>
+                                   </div>`;
+        $body.append(row);
+        let icon = L.icon({
+          iconUrl: `../../img/myhc/myzs/location_12345.png`,
+          popupAnchor: [10, 5]
+        });
+        let marker = L.marker([val.lat, val.lng], {
+          icon: icon,
+          ywid: val.ywid
+        });
+        let bjnr = val.num == 2 ? `<p>报警内容：${val.bjnr}</p>` : "";
+        let bindHtml = `<div ywid="${val.ywid}" class="pop-map-mark-header">诉求信息
+                                        </div><div class="pop-map-mark-body">
+                                            <p>姓名：${val.sqr}</p>
+                                            <p>电话：${val.dh}</p>
+                                            <p>诉求时间：${val.sj}</p>
+                                            <p>业务归口：${val.ywgk}</p>
+                                            <p>诉求来源：${val.sqlb}</p>
+                                            <p>诉求地址：${val.sqdz}</p>
+                                            ${bjnr}
+                                            <p>诉求内容：${val.sqnr}</p>
+                                        </div>`;
+        marker.bindPopup(bindHtml);
+        marker.on({
+          popupopen: function(e) {
+            let ywid = e.target.options.ywid;
+            $(".data-panel3 .data-panel-tab-row").each(function(index, dom) {
+              let $dom = $(dom);
+              if ($dom.attr("ywid") == ywid) {
+                $dom.addClass("data-panel-tab-row-hover");
+              }
+            });
+          },
+          popupclose: function() {
+            $(".data-panel3 .data-panel-tab-row").removeClass(
+              "data-panel-tab-row-hover"
+            );
+          }
+        });
+        markerClusterGroup.addLayer(marker);
+        map.addLayer(markerClusterGroup);
+      });
+      markerClusterGroup.addTo(map);
+    }
+
     // 加载工具
     function loadGj(index) {
-      var defaultStyle = plotting.getDefaultStyle();
+      let defaultStyle = plotting.getDefaultStyle();
       defaultStyle.defaultFlag = true;
       defaultStyle.lineColor = "#ff0000";
       queryResult = [];
@@ -2989,7 +3506,7 @@ requirejs(
 
     // 加载查询的echarts图
     function renderSearchChart() {
-      var $panel = $(".search-pop-panel");
+      let $panel = $(".search-pop-panel");
       if (isRenderSearchChart) {
         $panel.show();
       } else {
@@ -3008,7 +3525,7 @@ requirejs(
           async: true
         },
         function(result) {
-          var data1 = result.data1;
+          let data1 = result.data1;
           sqfxData = result.data2;
           data1.map(function(val, index) {
             $(".left-mid-amount")
@@ -3023,14 +3540,14 @@ requirejs(
     // 重新渲染echarts图
     function reRenderChart(index) {
       index = index || 1;
-      var data = [];
+      let data = [];
       sqfxData.map(function(val) {
         if (val.dy == index) {
           data.push(val);
         }
       });
-      var chart = echarts.init(document.getElementById("search-pop-chart"));
-      var xData = [],
+      let chart = echarts.init(document.getElementById("search-pop-chart"));
+      let xData = [],
         yData = [],
         min = 0,
         max = 0,
@@ -3046,7 +3563,7 @@ requirejs(
         min = Number(data[0].value);
         max = Number(data[0].value);
         isSet = true;
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           min = Math.min(min, data[i].value);
           max = Math.max(max, data[i].value);
           xData.push(data[i].name);
@@ -3058,10 +3575,10 @@ requirejs(
         endValue = Math.floor((5 / data.length) * 100);
       }
 
-      var diff = (max - min) / 2;
+      let diff = (max - min) / 2;
       min = Number(min - diff).toFixed(2);
       max = Number(max + diff).toFixed(2);
-      var option = {
+      let option = {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -3152,49 +3669,62 @@ requirejs(
 
     // 复位页面
     function resetPage(type, isSearch) {
-      var searchYw = $(".search-yw");
-      var searchGj = $(".search-gj");
-      latLng = "";
-      $(".data-panel2").hide();
-      $(".toolbar-panel3").hide();
-      map.off("click");
-      $(".toolbar-panel3 > div").removeClass("toolbar-panel3-hover");
-      if (!isSearch) {
-        isRenderSearchChart = false;
-        $(".search-pop-panel").hide();
-        searchInput = "";
-        $(".search-input").val("");
-        searchYw.removeAttr("disabled");
-        searchGj.removeAttr("disabled");
-        onLoad("");
+      let $control = $(".search-control").val();
+      if ($control == "1") {
+        let searchYw = $(".search-yw");
+        let searchGj = $(".search-gj");
+        latLng = "";
+        $(".data-panel2").hide();
+        $(".toolbar-panel3").hide();
+        map.off("click");
+        $(".toolbar-panel3 > div").removeClass("toolbar-panel3-hover");
+        if (!isSearch) {
+          isRenderSearchChart = false;
+          $(".search-pop-panel").hide();
+          searchInput = "";
+          $(".search-input").val("");
+          searchYw.removeAttr("disabled");
+          searchGj.removeAttr("disabled");
+          onLoad("");
+        }
+        type = type || 0;
+        searchYw.val(type);
+        $(".analysis-btn").hide();
+        isQuery = false;
+        $(".toolbar-panel2").hide();
+        $(".pop-rdwtfx").hide();
+        $(".toolbar-panel2-pop").hide();
+        searchGj.val(0);
+        $(".toolbar-panel2 > div").removeClass("toolbar-panel2-hover");
+        removeAllLayers();
+        bounds = "";
+        map.off("moveend");
+        if (drawControl) {
+          drawControl.handler.disable();
+        }
+        $(".right-panel-up-2").hide();
+        $(".right-panel-up-3").hide();
+        $(".right-panel-ck").hide();
+        $(".right-panel-up-1").show();
+        $(".right-panel-up")
+          .show()
+          .css("height", "70%");
+        $(".right-panel-down").css("height", "30%");
+        $(".data-panel").hide();
+        queryGroup = L.layerGroup();
+        map.setView(zoomArr[0].center, zoomArr[0].zoom);
+        getAllFjData();
+      } else {
+        sugon.request(sugon.interFaces.myzs.DeptId).then(result => {
+          $("#placeCode").val(result.ID);
+          $("#place").val(result.NAME);
+          $(".data-panel3").hide();
+          $(".data-panel4").hide();
+          $(".search-pop-panel").hide();
+          removeAllLayers();
+          initMyzs();
+        });
       }
-      type = type || 0;
-      searchYw.val(type);
-      $(".analysis-btn").hide();
-      isQuery = false;
-      $(".toolbar-panel2").hide();
-      $(".pop-rdwtfx").hide();
-      $(".toolbar-panel2-pop").hide();
-      searchGj.val(0);
-      $(".toolbar-panel2 > div").removeClass("toolbar-panel2-hover");
-      removeAllLayers();
-      bounds = "";
-      map.off("moveend");
-      if (drawControl) {
-        drawControl.handler.disable();
-      }
-      $(".right-panel-up-2").hide();
-      $(".right-panel-up-3").hide();
-      $(".right-panel-ck").hide();
-      $(".right-panel-up-1").show();
-      $(".right-panel-up")
-        .show()
-        .css("height", "70%");
-      $(".right-panel-down").css("height", "30%");
-      $(".data-panel").hide();
-      queryGroup = L.layerGroup();
-      map.setView(zoomArr[0].center, zoomArr[0].zoom);
-      getAllFjData();
     }
 
     // 清除圈选页面
@@ -3204,10 +3734,14 @@ requirejs(
         if (drawControl) {
           drawControl.handler.disable();
         }
+        $(".data-panel3").hide();
+        $(".data-panel4").hide();
         $(".search-gj").val(0);
         $(".data-panel").hide();
         map.removeLayer(queryGroup);
         queryGroup = L.layerGroup();
+        map.removeLayer(markerClusterGroup);
+        markerClusterGroup = L.layerGroup();
         map.removeLayer(queryPlottingLayer);
         $(".pop-rdwtfx").hide();
       }
@@ -3231,7 +3765,7 @@ requirejs(
     }
 
     // 加载plot图
-    function loadPlot() {
+    function loadPlot(isMyzs) {
       serverUrl =
         "http://10.33.66.183:2334/iserver/services/plot-jingyong/rest/plot/";
       queryPlottingLayer = L.supermap.plotting.plottingLayer("plot", serverUrl);
@@ -3239,21 +3773,23 @@ requirejs(
       drawControl = L.supermap.plotting.drawControl(queryPlottingLayer);
       drawControl.addTo(map);
       plotting = L.supermap.plotting.getControl(map, serverUrl);
-      loadSymbolLib();
+      loadSymbolLib(isMyzs);
     }
 
-    function loadSymbolLib() {
-      var symbolLibManager = plotting.getSymbolLibManager();
+    function loadSymbolLib(isMyzs) {
+      let symbolLibManager = plotting.getSymbolLibManager();
       symbolLibManager.libIDs = [421];
       symbolLibManager.on(
         SuperMap.Plot.Event.initializecompleted,
-        symbolLibInitializeCompleted
+        isMyzs
+          ? myzsSymbolLibInitializeCompleted
+          : sqfbSymbolLibInitializeCompleted
       );
       symbolLibManager.initializeAsync();
       drawControl.on(SuperMap.Plot.Event.featureadded, function(event) {
-        var layer = event.feature;
-        var latLngs = layer.getLatLngs();
-        var symbolType = layer.symbolType;
+        let layer = event.feature;
+        let latLngs = layer.getLatLngs();
+        let symbolType = layer.symbolType;
         // queryPlottingLayer.removeFeatures(layer);
         if (symbolType === SuperMap.Plot.SymbolType.ARBITRARYPOLYGONSYMBOL) {
           queryResult = L.supermap.plotting
@@ -3261,7 +3797,7 @@ requirejs(
             .getGObjectsInPolygon(latLngs);
         }
         if (symbolType === SuperMap.Plot.SymbolType.CIRCLESYMBOL) {
-          var radius = Math.sqrt(
+          let radius = Math.sqrt(
             Math.pow(latLngs[1].lng - latLngs[0].lng, 2) +
               Math.pow(latLngs[1].lat - latLngs[0].lat, 2)
           );
@@ -3276,24 +3812,39 @@ requirejs(
         }
         if (queryResult && queryResult.length !== 0) {
           selectedData = [];
+          hiddenSelectedData = [];
           queryResult.map(function(value1) {
             mapMarkData.map(function(value2) {
               if (value1.uuid == value2.ywid) {
                 selectedData.push(value2);
               }
             });
+            hiddenMapMarkData.map(value2 => {
+              if (value1.uuid == value2.ywid) {
+                hiddenSelectedData.push(value2);
+              }
+            });
           });
-          isQuery = true;
-          initDataPanel($(".search-yw").val());
+          if (isMyzs) {
+            rdwtData.content = rdwtData.content.replace(
+              /[0-9]+/g,
+              selectedData.length
+            );
+            renderMyzsMarker(selectedData, true);
+          } else {
+            isQuery = true;
+            initDataPanel($(".search-yw").val());
+          }
         }
         drawControl.handler.disable();
         $(".search-gj").val(0);
       });
     }
 
-    function symbolLibInitializeCompleted() {
-      var libID = 421;
-      var code = 20100;
+    // 诉求分布symbol初始化完成事件
+    function sqfbSymbolLibInitializeCompleted() {
+      let libID = 421;
+      let code = 20100;
       SuperMap.Plot.PlottingUtil.getDataFromServer(
         serverUrl,
         libID,
@@ -3302,7 +3853,7 @@ requirejs(
         {},
         null,
         function(res) {
-          var newBounds = map.getBounds();
+          let newBounds = map.getBounds();
           if (!bounds || JSON.stringify(bounds) != JSON.stringify(newBounds)) {
             // 判断边界非空或者相等
             bounds = newBounds;
@@ -3324,7 +3875,64 @@ requirejs(
             function(result) {
               mapMarkData = result.data;
               result.data.map(function(value) {
-                var latLngs = [];
+                let latLngs = [];
+                latLngs.push(L.latLng(value.lat, value.lng));
+                queryPlottingLayer.createSymbol(
+                  libID,
+                  code,
+                  latLngs,
+                  value.ywid,
+                  {
+                    color: "transparent"
+                  },
+                  { symbolData: res.result, serverUrl: serverUrl }
+                );
+              });
+            }
+          );
+        },
+        null
+      );
+    }
+
+    // 民意指数symbol初始化完成事件
+    function myzsSymbolLibInitializeCompleted() {
+      let libID = 421;
+      let code = 20100;
+      SuperMap.Plot.PlottingUtil.getDataFromServer(
+        serverUrl,
+        libID,
+        code,
+        null,
+        {},
+        null,
+        function(res) {
+          let newBounds = map.getBounds();
+          if (!bounds || JSON.stringify(bounds) != JSON.stringify(newBounds)) {
+            // 判断边界非空或者相等
+            bounds = newBounds;
+          }
+          // 加载图形数据
+          sugon.requestJson(
+            {
+              type: "post",
+              url: sugon.interFaces.myzs.getYlldDetailMapDataByBound,
+              data: {
+                northEast: JSON.stringify(bounds._northEast),
+                southWest: JSON.stringify(bounds._southWest),
+                date1: $("#date1").val(),
+                date2: $("#date2").val(),
+                type: $(".search-yw2").val()
+              },
+              async: true
+            },
+            function(result) {
+              rdwtData = result;
+              mapMarkData = result.data;
+              hiddenMapMarkData = result.data0;
+              let data = result.data.concat(hiddenMapMarkData);
+              data.map(function(value) {
+                let latLngs = [];
                 latLngs.push(L.latLng(value.lat, value.lng));
                 queryPlottingLayer.createSymbol(
                   libID,
@@ -3358,10 +3966,10 @@ requirejs(
           async: true
         },
         function(result) {
-          var data1 = result.data1,
+          let data1 = result.data1,
             data2 = result.data2,
             titleData;
-          var rightData = "",
+          let rightData = "",
             xData = [],
             yData = [],
             min = 0,
@@ -3406,8 +4014,8 @@ requirejs(
               value.count +
               "）</span></div>";
           });
-          var random = parseInt(Math.random() * 10000);
-          var html =
+          let random = parseInt(Math.random() * 10000);
+          let html =
             '<div class="pop-map-mark-header">满意度分析</div>' +
             '<div class="ck-pop-mark-body pop-map-mark-body"><div class="map-mark-left" ' +
             'id="marker-chart-' +
@@ -3418,7 +4026,7 @@ requirejs(
             '<span style="float: right;">问题量</span></div><div class="map-mark-right-body">' +
             rightData +
             "</div></div></div>";
-          var popupOption = {};
+          let popupOption = {};
           if (type == 1) {
             popupOption.offset = L.point(-48, -50);
           }
@@ -3427,7 +4035,7 @@ requirejs(
             .openPopup()
             .unbindPopup();
 
-          var text =
+          let text =
             !titleData ||
             "{d|" +
               titleData.name +
@@ -3437,7 +4045,7 @@ requirejs(
               "%} {a|全市排名}{b|" +
               titleData.rank +
               "}";
-          var option = {
+          let option = {
             title: {
               show: !!titleData,
               text: text,
@@ -3516,7 +4124,7 @@ requirejs(
                   align: "center",
                   lineHeight: 16,
                   formatter: function(param) {
-                    var inc = "",
+                    let inc = "",
                       rank = param.data.rank
                         ? "{a|全局第}{c|" + param.data.rank + "}\n"
                         : "";
@@ -3551,7 +4159,7 @@ requirejs(
               }
             ]
           };
-          var chart = echarts.init(
+          let chart = echarts.init(
             document.getElementById("marker-chart-" + random)
           );
           chart.setOption(option);
@@ -3574,8 +4182,8 @@ requirejs(
           async: true
         },
         function(result) {
-          var data = result.data;
-          var xData = [],
+          let data = result.data;
+          let xData = [],
             data1 = [],
             data2 = [],
             rightData = "",
@@ -3592,7 +4200,7 @@ requirejs(
             xData.push(value.name);
             data1.push(value.qj);
             data2.push(value.bdw);
-            var colorIcon1 = handleColorAndIcon(value.tb),
+            let colorIcon1 = handleColorAndIcon(value.tb),
               colorIcon2 = handleColorAndIcon(value.hb);
             rightData +=
               '<div class="map-mark-right-body-row"><div class="mark-header">' +
@@ -3627,8 +4235,8 @@ requirejs(
           if (min < 0) {
             min = 0;
           }
-          var random = parseInt(Math.random() * 10000);
-          var html =
+          let random = parseInt(Math.random() * 10000);
+          let html =
             '<div class="pop-map-mark-header">满意度分析</div>' +
             '<div class="ck-pop-mark-body pop-map-mark-body"><div class="map-mark-right2" ' +
             'id="marker-chart-' +
@@ -3641,10 +4249,10 @@ requirejs(
             .bindPopup(html)
             .openPopup()
             .unbindPopup();
-          var chart = echarts.init(
+          let chart = echarts.init(
             document.getElementById("marker-chart-" + random)
           );
-          var option = {
+          let option = {
             tooltip: {
               show: true
             },
@@ -3701,7 +4309,7 @@ requirejs(
     // 渲染标记点(便民服务圈和服务点)
     function renderMarks(data, index, isTimeChange) {
       ckMarkerGroups2[index] = L.layerGroup();
-      var iconUrl = "../../img/myhc/myzs/";
+      let iconUrl = "../../img/myhc/myzs/";
       switch (index) {
         case 0:
           iconUrl += "hz_icon.png";
@@ -3713,7 +4321,7 @@ requirejs(
           iconUrl += isTimeChange ? "crj_icon.png" : "cjg_icon.png";
           break;
       }
-      var divIcon = L.icon({
+      let divIcon = L.icon({
         iconUrl: iconUrl,
         iconAnchor: [13, 43],
         popupAnchor: [2, -35]
@@ -3721,13 +4329,13 @@ requirejs(
       data.map(function(value) {
         if (index == 3) {
           iconUrl = "../../img/myhc/myzs/fwd_icon" + value.value + ".png";
-          var mult = value.value < 3 ? 2 : 3;
+          let mult = value.value < 3 ? 2 : 3;
           divIcon = L.icon({
             iconUrl: iconUrl,
             iconAnchor: [12 * mult, 10]
           });
         }
-        var marker = L.marker([value.lat, value.lng], {
+        let marker = L.marker([value.lat, value.lng], {
           icon: divIcon,
           ywid: value.code,
           type: value.type
@@ -3745,18 +4353,18 @@ requirejs(
           mouseover: function() {
             map.removeLayer(popMarkerGroup);
             popMarkerGroup = L.layerGroup();
-            var width = value.name.length * 16 + 30;
-            var html =
+            let width = value.name.length * 16 + 30;
+            let html =
               '<div class="pop-marker-bg" style="width: ' +
               width +
               'px;">' +
               value.name +
               "</div>";
-            var popIcon = L.divIcon({
+            let popIcon = L.divIcon({
               html: html,
               iconAnchor: [width / 2, 90]
             });
-            var popMarker = L.marker([value.lat, value.lng], { icon: popIcon });
+            let popMarker = L.marker([value.lat, value.lng], { icon: popIcon });
             popMarkerGroup.addLayer(popMarker);
             popMarkerGroup.addTo(map);
           },
@@ -3803,8 +4411,9 @@ requirejs(
 
     // 查询功能
     function searchFunc() {
-      var inputVal = $(".search-input").val();
-      var reg = /\S/;
+      $(".search-control").val(1);
+      let inputVal = $(".search-input").val();
+      let reg = /\S/;
       if (reg.test(inputVal)) {
         $(".analysis-btn").hide();
         searchInput = inputVal;
@@ -3813,9 +4422,9 @@ requirejs(
             searchInput +
             "</span>”的群众诉求共计："
         );
-        var type = 0;
-        var searchYw = $(".search-yw");
-        var searchGj = $(".search-gj");
+        let type = 0;
+        let searchYw = $(".search-yw");
+        let searchGj = $(".search-gj");
         searchYw.attr("disabled", "disabled").val(type);
         searchGj.attr("disabled", "disabled");
         sugon.requestJson(
@@ -3832,7 +4441,7 @@ requirejs(
             }
           },
           function(result) {
-            var totalCount = result.data[0].substring(
+            let totalCount = result.data[0].substring(
               result.data[0].indexOf("(") + 1,
               result.data[0].lastIndexOf(")")
             );
@@ -3959,146 +4568,132 @@ requirejs(
         });
     }
 
-    // 页面入口
-    $(function() {
-      // 加载数据接口
-      onLoad("");
-      // 加载地图
-      createMapL();
-      var mapParams = $.parseJSON(sessionStorage.getItem("mapParams"));
-      if (mapParams != undefined && mapParams != null && mapParams != "") {
-        $("#place").val(mapParams.codeName);
-        $("#placeCode").val(mapParams.code);
-      }
-    });
-
-    // 禁用全局右击事件
-    $("#mainMap").bind("contextmenu", function() {
-      return false;
-    });
-
-    // pop-ck-down-true点击事件
-    document.addEventListener(
-      "click",
-      function(e) {
-        var $target = $(e.target);
-        if ($target.hasClass("pop-mid")) {
-          e.stopPropagation();
-          var $parent = $target.parent();
-          var code = $parent.attr("code") || $parent.parent().attr("code");
-          var codeExist = false,
-            index;
-          for (var key in ckGroup._layers) {
-            if (
-              ckGroup._layers[key].options.icon.options.html.indexOf(code) != -1
-            ) {
-              codeExist = true;
-              index = key;
-              break;
+    // 回复marker的颜色
+    function recoverMarker() {
+      map.eachLayer(function(layer) {
+        if (
+          layer._popup &&
+          layer.options.icon.options.iconUrl.indexOf("selected") > -1
+        ) {
+          rdwtData.data.map(val => {
+            if (layer.options.ywid == val.ywid && layer.setIcon) {
+              layer.setIcon(
+                L.icon({
+                  iconUrl: `../../img/myhc/myzs/location_12345.png`,
+                  popupAnchor: [10, 5]
+                })
+              );
             }
-          }
-          if (codeExist) {
-            map.eachLayer(function(layer) {
-              if (layer._leaflet_id == index) {
-                openCkPopup(code, layer, 1);
-              }
-            });
-          }
-        }
-        if ($target.hasClass("pop-ck-down-true")) {
-          e.stopPropagation();
-          var code = $target.parent().attr("code");
-          var subCode = code.substring(0, 6);
-          map.removeLayer(ckGroup);
-          map.closePopup();
-          isLoadBounds = true;
-          var sqlParam = new SuperMap.GetFeaturesBySQLParameters({
-            queryParameter: {
-              name: "gajg_pcszrq_3201_pg@ORCL_gt8",
-              attributeFilter:
-                "DWBM like '" + subCode + "%' and DWMC like '%派出所'",
-              fields: ["DWBM", "DWMC"],
-              orderBy: "DWBM"
-            },
-            datasetNames: ["ORCL_gt8:gajg_pcszrq_3201_pg"],
-            toIndex: -1
           });
-          var url =
-            "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
-          L.supermap
-            .featureService(url)
-            .getFeaturesBySQL(sqlParam, function(serviceResult) {
-              map.on("mouseup", function(e) {
-                var which = e.originalEvent.which;
-                if (which == 3) {
-                  initCk();
-                }
-              });
-              var data = serviceResult.result.features.features;
-              if (data && data.length > 0) {
-                map.removeLayer(ckBorderGroup);
-                ckBorderGroup = L.layerGroup();
-                data.map(function(val) {
-                  var resultLayer = L.polygon(
-                    changeLonAndLat(val.geometry.coordinates),
-                    {
-                      color: "#386AFB",
-                      weight: 2,
-                      fillOpacity: 0.15
-                    }
-                  );
-                  ckBorderGroup.addLayer(resultLayer);
-                });
-                map.addLayer(ckBorderGroup);
-                map.setZoom(12);
-              }
+        }
+      });
+    }
+
+    // 诉求分布工具切换事件
+    function sqfbGjChange(index) {
+      let $panel3 = $(".toolbar-panel3");
+      if (index == 4) {
+        removeAllLayers();
+        $panel3
+          .show()
+          .off()
+          .on("click", "div", function(e) {
+            let $target = $(e.target),
+              className = "toolbar-panel3-hover";
+            $target.hasClass(className)
+              ? $target.removeClass(className)
+              : $target.addClass(className);
+            let $hover = $(".toolbar-panel3-hover"),
+              typeArr = [],
+              $panel2 = $(".data-panel2");
+            $hover.each((index, dom) => {
+              let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
+              typeArr.push(indexOfDiv);
             });
-          // 刷新mark
-          initCkMark(code, true);
-          // 刷新右侧面板
-          initCkRight(code, true);
-        }
-      },
-      true
-    );
+            map.removeLayer(ckMarkerGroups1);
+            map.removeLayer(ckCircleGroups);
+            ckMarkerGroups1 = L.layerGroup();
+            ckCircleGroups = L.layerGroup();
+            ckMarkerGroups2.map(val => {
+              val && map.removeLayer(val);
+            });
 
-    // 业务下拉框改变事件
-    $(".search-yw").change(function() {
-      var index = $(this).val();
-      if (currentLevel == 5) {
-        resetPage(index);
+            if (typeArr.length > 0) {
+              latLng && getBmfwq(typeArr);
+              map.off("click").on("click", function(e) {
+                centerMarker && map.removeLayer(centerMarker);
+                $panel2.show();
+                map.closePopup();
+                map.removeLayer(ckMarkerGroups1);
+                map.removeLayer(ckCircleGroups);
+                ckMarkerGroups1 = L.layerGroup();
+                ckCircleGroups = L.layerGroup();
+                ckMarkerGroups2.map(val => {
+                  val && map.removeLayer(val);
+                });
+                latLng = e.latlng;
+                let icon = L.icon({
+                  iconUrl: "../../img/myhc/myzs/center_point.png",
+                  iconAnchor: [17, 37]
+                });
+                centerMarker = L.marker([latLng.lat, latLng.lng], { icon });
+                map.addLayer(centerMarker);
+                getBmfwq(typeArr);
+              });
+            } else {
+              $panel2.hide();
+              map.off("click");
+            }
+          });
       } else {
-        if (index == 4) {
-          currentLevel = 5;
-          $(".data-panel").hide();
-          $(".toolbar-panel2").show();
-          initCk();
-        } else {
-          initLevelLayer();
+        $panel3.hide();
+        map.off("click");
+        $(".analysis-btn").show();
+        $(".data-panel").hide();
+        isLoadBounds = true;
+        removeAllLayers();
+        map.setZoom(16, { animate: false });
+        let $searchYw = $(".search-yw");
+        if ($searchYw.val() == 4) {
+          $searchYw.val(0);
+          $(".toolbar-panel2").hide();
+          $(".toolbar-panel2-pop").hide();
         }
+
+        // 绑定移动事件
+        map.on("moveend", function() {
+          if (currentLevel == 3) {
+            if (drawControl) {
+              drawControl.handler.disable();
+            }
+            $(".search-gj").val(0);
+          }
+        });
+        currentLevel = 3;
+        loadPlot();
+        loadGj(index);
       }
-    });
+    }
 
-    // 左下查询条件改变事件
-    $(".data-panel-search").on("click", "div", function(e) {
-      var $div = $(".data-panel-search > div");
-      var index = $div.index(e.target);
-      if (!$(e.target).hasClass("search-selected")) {
-        $div.removeClass("search-selected");
-        $(e.target).addClass("search-selected");
-        initTab($(".search-yw").val(), "", index);
-      }
-    });
+    // 民意指数工具切换事件
+    function myzsGjChange(index) {
+      map.off("click");
+      removeAllLayers();
+      map.setZoom(15, { animate: false });
 
-    // 数据panel关闭事件
-    $(".data-panel .data-panel-header > i").click(function() {
-      $(".data-panel").hide();
-    });
-
-    // 数据panel2关闭事件
-    $(".data-panel2 .data-panel-header > i").click(function() {
-      $(".data-panel2").hide();
-    });
+      // 绑定移动事件
+      map.on("moveend", function() {
+        if (currentLevel == 3) {
+          if (drawControl) {
+            drawControl.handler.disable();
+          }
+          $(".search-gj").val(0);
+        }
+      });
+      currentLevel = 3;
+      loadPlot(true);
+      loadGj(index);
+    }
 
     // 画便民服务圈
     function drawCircle(index, lat, lng) {
@@ -4168,91 +4763,778 @@ requirejs(
       });
     }
 
-    // 工具切换时
-    $(".search-gj").on("change", function() {
-      var index = $(this).val(),
-        $panel3 = $(".toolbar-panel3");
-      if (index == 4) {
-        removeAllLayers();
-        $panel3
-          .show()
-          .off()
-          .on("click", "div", function(e) {
-            let $target = $(e.target),
-              className = "toolbar-panel3-hover";
-            $target.hasClass(className)
-              ? $target.removeClass(className)
-              : $target.addClass(className);
-            let $hover = $(".toolbar-panel3-hover"),
-              typeArr = [],
-              $panel2 = $(".data-panel2");
-            $hover.each((index, dom) => {
-              let indexOfDiv = $(dom).index(".toolbar-panel3 > div");
-              typeArr.push(indexOfDiv);
-            });
-            map.removeLayer(ckMarkerGroups1);
-            map.removeLayer(ckCircleGroups);
-            ckMarkerGroups1 = L.layerGroup();
-            ckCircleGroups = L.layerGroup();
-            ckMarkerGroups2.map(val => {
-              val && map.removeLayer(val);
-            });
-
-            if (typeArr.length > 0) {
-              latLng && getBmfwq(typeArr);
-              map.off("click").on("click", function(e) {
-                centerMarker && map.removeLayer(centerMarker);
-                $panel2.show();
-                map.closePopup();
-                map.removeLayer(ckMarkerGroups1);
-                map.removeLayer(ckCircleGroups);
-                ckMarkerGroups1 = L.layerGroup();
-                ckCircleGroups = L.layerGroup();
-                ckMarkerGroups2.map(val => {
-                  val && map.removeLayer(val);
+    // 初始化民意指数地图以及右侧面板
+    function initMyzs(type) {
+      currentLevel = 0;
+      type = type || "1";
+      $(".right-panel-panel").hide();
+      $(".right-panel-panel2").show();
+      let condition = {
+        deptId: $("#placeCode").val(),
+        date1: $("#date1").val(),
+        date2: $("#date2").val(),
+        type
+      };
+      let url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
+      sugon
+        .request(sugon.interFaces.myzs.getYlldPcsData, condition)
+        .then(result => {
+          sjPcsData = result.data;
+          let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+            queryParameter: {
+              name: "gajg_pcszrq_3201_pg@ORCL_gt8",
+              attributeFilter: "DWBM like '3201%' and DWMC like '%派出所'",
+              fields: ["DWBM", "DWMC"],
+              orderBy: "DWBM"
+            },
+            datasetNames: ["ORCL_gt8:gajg_pcszrq_3201_pg"],
+            toIndex: -1
+          });
+          L.supermap
+            .featureService(url)
+            .getFeaturesBySQL(sqlParam, function(serviceResult) {
+              let resultData = serviceResult.result.features.features;
+              map.removeLayer(pcsLayerGroup);
+              pcsLayerGroup = L.layerGroup();
+              resultData.map(val1 => {
+                sjPcsData.map(val2 => {
+                  let color;
+                  if (val1.properties.DWBM == val2.code) {
+                    switch (val2.type) {
+                      case "0":
+                        color = "#fff";
+                        break;
+                      case "1":
+                        color = "#cddc39";
+                        break;
+                      case "2":
+                        color = "#ffeb3b";
+                        break;
+                      case "3":
+                        color = "#fbc02d";
+                        break;
+                      case "4":
+                        color = "#ffa000";
+                        break;
+                      case "5":
+                        color = "#ef6c00";
+                        break;
+                      case "6":
+                        color = "#e64a19";
+                        break;
+                    }
+                    let layer = L.polygon(
+                      changeLonAndLat(val1.geometry.coordinates),
+                      {
+                        color: color,
+                        fillOpacity: 0.6,
+                        weight: 0,
+                        code: val1.properties.DWBM
+                      }
+                    );
+                    pcsLayerGroup.addLayer(layer);
+                  }
                 });
-                latLng = e.latlng;
-                var icon = L.icon({
-                  iconUrl: "../../img/myhc/myzs/center_point.png",
-                  iconAnchor: [17, 37]
-                });
-                centerMarker = L.marker([latLng.lat, latLng.lng], { icon });
-                map.addLayer(centerMarker);
-                getBmfwq(typeArr);
               });
-            } else {
-              $panel2.hide();
-              map.off("click");
+              map.addLayer(pcsLayerGroup);
+              sugon
+                .request(sugon.interFaces.myzs.getYlldMapData, condition)
+                .then(result => {
+                  let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+                    queryParameter: {
+                      name: "gajg_pcszrq_3201_pg@ORCL_gt8",
+                      attributeFilter: "DWBM like '%000000' ",
+                      fields: ["DWBM", "DWMC"],
+                      orderBy: "DWBM"
+                    },
+                    datasetNames: ["ORCL_gt8:gajg_pcszrq_3201_pg"],
+                    toIndex: -1
+                  });
+                  L.supermap
+                    .featureService(url)
+                    .getFeaturesBySQL(sqlParam, function(serviceResult) {
+                      let resultData = serviceResult.result.features.features;
+                      map.setView(zoomArr[0].center, zoomArr[0].zoom);
+                      map.removeLayer(allFjLayerGroup);
+                      map.removeLayer(allFjMarkerGroup);
+                      allFjLayerGroup = L.layerGroup();
+                      allFjMarkerGroup = L.layerGroup();
+                      result.data.map(val1 => {
+                        let code = val1.code;
+                        resultData.map(val2 => {
+                          code == val2.properties.DWBM &&
+                            (val1.data = val2.geometry.coordinates);
+                        });
+                        fjData.map(val2 => {
+                          if (code == val2.code) {
+                            val1.name = val2.name;
+                            val1.lat = val2.lat;
+                            val1.lng = val2.lng;
+                          }
+                        });
+                      });
+                      // 在添加之前置空
+                      result.data.map(function(val) {
+                        let resultLayer = L.polygon(changeLonAndLat(val.data), {
+                          color: "#fff",
+                          fillOpacity: 0,
+                          weight: 2,
+                          code: val.code
+                        });
+                        let center = L.latLngBounds(
+                          changeLonAndLat(val.data)
+                        ).getCenter();
+                        resultLayer.on(
+                          {
+                            click: function() {
+                              level021(val.code, val.code, center, true);
+                            },
+                            mouseover: function(e) {
+                              let code = e.target.options.code,
+                                subCode = code.substring(0, 6);
+                              map.eachLayer(function(layer) {
+                                if (
+                                  layer.options.code &&
+                                  layer.options.code.indexOf(subCode) > -1 &&
+                                  code != layer.options.code &&
+                                  layer.setStyle
+                                ) {
+                                  layer.setStyle({
+                                    fillOpacity: 0.75
+                                  });
+                                }
+                                if (layer.options.code == code) {
+                                  layer.setStyle({
+                                    weight: 8
+                                  });
+                                }
+                                if (layer._leaflet_id == e.target._leaflet_id) {
+                                  let $div = $(
+                                    'div.bubble-marker[code="' +
+                                      e.target.options.code +
+                                      '"]'
+                                  );
+                                  $div
+                                    .stop()
+                                    .animate({ top: "5px" }, 200, function() {
+                                      $div.stop().animate({ top: "0" }, 200);
+                                    });
+                                }
+                              });
+                            },
+                            mouseout: function(e) {
+                              map.eachLayer(function(layer) {
+                                if (
+                                  layer.options.code &&
+                                  layer.options.fillOpacity == "0.75" &&
+                                  layer.setStyle
+                                ) {
+                                  layer.setStyle({
+                                    fillOpacity: 0.6
+                                  });
+                                }
+                                if (layer.options.weight == "8") {
+                                  layer.setStyle({
+                                    weight: 2
+                                  });
+                                }
+                              });
+                            }
+                          },
+                          true
+                        );
+                        allFjLayerGroup.addLayer(resultLayer);
+                        let len = val.name.length * 14 + 20;
+                        let value = Number(val.value).toFixed(2);
+                        let percentLen = value.length * 14;
+                        let divIcon = L.divIcon({
+                          html: `<div style="width: ${len}px;" code="${val.code}" class="bubble-marker bubble-marker${val.type}">
+                                                    <div></div>
+                                                    <div style="width: ${percentLen}px;">${value}%</div>
+                                                    <div>${val.name}</div>
+                                                    </div>`,
+                          iconAnchor: [len / 2, 65]
+                        });
+                        let marker = L.marker([val.lat, val.lng], {
+                          icon: divIcon
+                        });
+                        allFjMarkerGroup.addLayer(marker);
+                      });
+                      map.addLayer(allFjLayerGroup);
+                      map.addLayer(allFjMarkerGroup);
+                    });
+                });
+            });
+        });
+      initRightPanel2(type);
+    }
+
+    // 初始化右侧面板
+    function initRightPanel2(type) {
+      let title;
+      switch (type) {
+        case "1":
+          title = "社会治安满意度";
+          break;
+        case "2":
+          title = "公安队伍满意度";
+          break;
+        case "3":
+          title = "窗口服务";
+          break;
+      }
+      $(".right-up-title2").html(title);
+      let option = {
+        deptId: $("#placeCode").val(),
+        date1: $("#date1").val(),
+        date2: $("#date2").val(),
+        type
+      };
+      initYlldRight1(option);
+      initYlldRight3(option);
+      initYlldRight4(option);
+    }
+
+    // 初始化右1面板
+    function initYlldRight1(condition) {
+      sugon
+        .request(sugon.interFaces.myzs.getYlldMapRight1, condition)
+        .then(result => {
+          let data = result;
+          $(".right-up-banner-left2").html(data.data[0] + "%");
+          let $body = $(".right-up-banner-right2").empty();
+          let colorIconArr = [];
+          for (let i = 0, len = data.data.length; i < len; i++) {
+            colorIconArr.push(handleColorAndIcon(data.data[i]));
+            data.data[i] = Math.abs(Number(data.data[i]));
+          }
+          let html = `<div>
+                                <span>同比</span>
+                                <div class="${colorIconArr[1].color}">
+                                    <i class="glyphicon ${
+                                      colorIconArr[1].icon
+                                    }"></i><strong>${data.data[1]}%</strong>
+                                </div>
+                             </div>
+                             <div>
+                                <span>环比</span>
+                                <div class="${colorIconArr[2].color}">
+                                    <i class="glyphicon ${
+                                      colorIconArr[2].icon
+                                    }"></i><strong>${data.data[2]}%</strong>
+                                </div>
+                             </div>`;
+          $body.append(html);
+          let text = `<span style="margin-left: 5px;">市局排名:第<strong class="${
+            colorIconArr[3].color
+          }">${data.data[3]}</strong>名
+                            </span><i class="glyphicon ${
+                              colorIconArr[3].icon
+                            } ${colorIconArr[3].color}"></i>
+                                    <strong class="${colorIconArr[3].color}">${
+            data.data[4]
+          }</strong>`;
+          let $ybfx = $("#right-ybfx").css("height", "180px"),
+            $banner2 = $(".right-banner2").show();
+          switch (data.type) {
+            case "0":
+              $ybfx.css("height", "220px");
+              $banner2.hide();
+              break;
+            case "1":
+              text = `<span style="margin-left: 5px;">
+                                    市局排名:第<strong class="${
+                                      colorIconArr[3].color
+                                    }">${data.data[3]}</strong>名
+                                </span>
+                                <span style="margin-left: 15px;">
+                                    较上期:<i class="glyphicon ${
+                                      colorIconArr[3].icon
+                                    } ${colorIconArr[3].color}"></i>
+                                        <strong class="${
+                                          colorIconArr[3].color
+                                        }">${data.data[4]}</strong>
+                                </span>`;
+              break;
+            case "2":
+              text += `<span style="margin-left: 10px;">
+                                    分局排名:第<strong class="${
+                                      colorIconArr[5].color
+                                    }">${data.data[5]}</strong>名
+                                 </span>
+                                 <i class="glyphicon ${colorIconArr[6].color} ${
+                colorIconArr[6].icon
+              }"></i>
+                                 <strong class="${colorIconArr[6].color}">${
+                data.data[6]
+              }</strong>`;
+              break;
+            case "4":
+              text += `<span style="margin-left: 10px;">
+                                    所队排名:第<strong class="${
+                                      colorIconArr[5].color
+                                    }">${data.data[5]}</strong>名
+                                 </span>
+                                 <i class="glyphicon ${colorIconArr[6].color} ${
+                colorIconArr[6].icon
+              }"></i>
+                                 <strong class="${colorIconArr[6].color}">${
+                data.data[6]
+              }</strong>`;
+              break;
+          }
+          $(".right-banner2").html(text);
+          initYlldRight2(condition);
+        });
+    }
+
+    // 初始化右2面板
+    function initYlldRight2(condition) {
+      sugon
+        .request(sugon.interFaces.myzs.getYlldMapRight2, condition)
+        .then(result => {
+          let data = result.data,
+            sum = 0;
+          data.map(val => {
+            sum += Number(val.value);
+          });
+          let chart = echarts.init(document.getElementById("right-ybfx"));
+          let option = {
+            title: {
+              text: sum,
+              subtext: "有效样本量",
+              left: "center",
+              top: "25%",
+              padding: [24, 0],
+              subtextStyle: {
+                color: "#000",
+                fontSize: "14"
+              },
+              textStyle: {
+                color: "#1D84C6"
+              }
+            },
+            tooltip: {
+              show: true
+            },
+            series: [
+              {
+                color: [
+                  "#A770B3",
+                  "#AF8744",
+                  "#ED7D31",
+                  "#3A9BBE",
+                  "#1D84C6",
+                  "#6463AF"
+                ],
+                name: "",
+                type: "pie",
+                clockWise: false,
+                center: ["50%", "50%"],
+                radius: ["40%", "56%"],
+                hoverAnimation: false,
+                itemStyle: {
+                  normal: {
+                    label: {
+                      show: true,
+                      position: "outside",
+                      formatter: function(params) {
+                        return params.name + "\n" + params.value;
+                      },
+                      rich: {
+                        white: {
+                          color: "#ddd",
+                          align: "center"
+                        }
+                      }
+                    },
+                    labelLine: {
+                      show: true,
+                      length: 8,
+                      length2: 5
+                    }
+                  }
+                },
+                data: data
+              }
+            ]
+          };
+          chart.setOption(option);
+          chart.resize();
+        });
+    }
+
+    // 初始化右3面板
+    function initYlldRight3(condition) {
+      condition.id || (condition.id = "");
+      sugon
+        .request(sugon.interFaces.myzs.getYlldMapRight3, condition)
+        .then(result => {
+          let data = result.data;
+          let chart = echarts.init(document.getElementById("right-sqfl"));
+          let xData = [],
+            yData = [];
+          data.map(val => {
+            let { id, value } = val;
+            xData.push(val.name);
+            yData.push({ id, value });
+          });
+          let option = {
+            tooltip: {
+              trigger: "axis",
+              axisPointer: {
+                type: "shadow"
+              }
+            },
+            color: ["#E28C51"],
+            grid: {
+              left: 20,
+              top: 15,
+              right: 10,
+              bottom: 0,
+              containLabel: true
+            },
+            xAxis: [
+              {
+                type: "category",
+                axisTick: { show: false },
+                splitArea: { show: false },
+                data: xData,
+                axisLabel: {
+                  interval: 0,
+                  textStyle: {
+                    color: "#000"
+                  }
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: "#d5d8e1"
+                  }
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: "value",
+                axisTick: { show: false },
+                splitLine: {
+                  lineStyle: {
+                    color: "#d5d8e1"
+                  }
+                },
+                splitArea: { show: false },
+                splitNumber: 5,
+                axisLabel: {
+                  formatter: "{value}",
+                  textStyle: {
+                    color: "#000"
+                  }
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: "#d5d8e1"
+                  }
+                }
+              }
+            ],
+            series: [
+              {
+                type: "bar",
+                barWidth: 20,
+                data: yData,
+                label: {
+                  show: true,
+                  position: "top",
+                  color: "#000"
+                }
+              }
+            ]
+          };
+          chart.setOption(option);
+          chart.off();
+          chart.on("click", param => {
+            if (param.data.id) {
+              condition.id = param.data.id;
+              initYlldRight3(condition);
+              $(".img-sqfl").show();
             }
           });
-      } else {
-        $panel3.hide();
-        map.off("click");
-        $(".analysis-btn").show();
-        $(".data-panel").hide();
-        isLoadBounds = true;
-        removeAllLayers();
-        map.setZoom(16, { animate: false });
-        var $searchYw = $(".search-yw");
-        if ($searchYw.val() == 4) {
-          $searchYw.val(0);
-          $(".toolbar-panel2").hide();
-          $(".toolbar-panel2-pop").hide();
-        }
-
-        // 绑定移动事件
-        map.on("moveend", function() {
-          if (currentLevel == 3) {
-            if (drawControl) {
-              drawControl.handler.disable();
-            }
-            $(".search-gj").val(0);
-          }
         });
-        currentLevel = 3;
-        loadPlot();
-        loadGj(index);
+    }
+
+    // 初始化右4面板
+    function initYlldRight4(condition, color = "#027ecb") {
+      condition.orderBy || (condition.orderBy = "asc");
+      sugon
+        .request(sugon.interFaces.myzs.getYlldMapRight4, condition)
+        .then(result => {
+          let data = result.data;
+          let $body = $(".right-phb").empty();
+          data.map(val => {
+            $body.append(
+              `<div><div>第${val.order}名</div><div>${val.name}</div><div>${val.value}%</div></div>`
+            );
+          });
+          $(".right-phb > div > div:nth-child(3)").css("color", color);
+        });
+    }
+
+    // 渲染热点问题面板
+    function renderRdwtPanel(result) {
+      let $body = $(".data-panel4").empty(),
+        html = "";
+      html += `<div class="data-panel-header4">
+                            <img src="../../img/myhc/myzs/cube.png">
+                            <span>区域群众诉求</span>
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </div><h5>区域热点问题：</h5>`;
+      result.data1.map((val, index) => {
+        html += `<p ywid="${val.ywid}">${index + 1}、${val.name}</p>`;
+      });
+      html += `<h5>问题预警：</h5>`;
+      html += "<div class='clear-div'></div>";
+      result.data2.map((val, index) => {
+        let colorAndIcon = handleColorAndIcon(val.trend);
+        html += `<div class="rdwt-row">
+                            <div>${index + 1}、${val.name}</div>
+                            <div>词频： ${val.value}<i class="glyphicon ${
+          colorAndIcon.icon
+        } ${colorAndIcon.color}"></i></div>
+                         </div>`;
+      });
+      $body.append(html);
+    }
+
+    function openCkfwqRankPopup(isDept, e) {
+      let value = $(e.target)
+          .find("option:selected")
+          .text(),
+        className;
+      className = isDept ? "tab1" : "tab2";
+      if (value == "工单量") {
+        $("." + className).on("click", "row", function() {
+          let $this = $(this);
+          let condition = {
+            type1: $("#type1").val(),
+            type2: Number(!isDept),
+            name: $this.find(".dept-name").html(),
+            date1: $("#date1").val(),
+            date2: $("#date2").val()
+          };
+          sugon
+            .request(sugon.interFaces.myzs.getCkfwqRankPopup, condition)
+            .then(result => {
+              let str = "",
+                data = result.data;
+              str +=
+                '<div class="map-mark-right-pop-header"><div class="pop-col1">工单编号</div>' +
+                '<div class="pop-col2">姓名</div><div class="pop-col6">电话</div>' +
+                '<div class="pop-col7">回访内容</div></div>';
+              data.map(function(value) {
+                str +=
+                  '<div><div class="pop-col1">' +
+                  value.gdbh +
+                  '</div><div class="pop-col2">' +
+                  value.xm +
+                  '</div><div class="pop-col6">' +
+                  value.dh +
+                  '</div><div title="' +
+                  value.hfnr +
+                  '" class="pop-col7">' +
+                  value.hfnr +
+                  "</div></div>";
+              });
+              let ele = '<div class="map-mark-right-pop">' + str + "</div>";
+              sugon.renderDialog({
+                width: 560,
+                height: 300,
+                ele: ele,
+                title: "工单详情"
+              });
+            });
+        });
+      } else {
+        $(".tab1").off("click");
       }
+    }
+
+    // 页面入口
+    $(function() {
+      // 加载数据接口
+      onLoad("");
+      // 加载地图
+      createMapL();
+    });
+
+    // 禁用全局右击事件
+    $("#mainMap").bind("contextmenu", function() {
+      return false;
+    });
+
+    // pop-ck-down-true点击事件
+    document.addEventListener(
+      "click",
+      function(e) {
+        let $target = $(e.target);
+        if ($target.hasClass("pop-mid")) {
+          e.stopPropagation();
+          let $parent = $target.parent();
+          let code = $parent.attr("code") || $parent.parent().attr("code");
+          let codeExist = false,
+            index;
+          for (let key in ckGroup._layers) {
+            if (
+              ckGroup._layers[key].options.icon.options.html.indexOf(code) != -1
+            ) {
+              codeExist = true;
+              index = key;
+              break;
+            }
+          }
+          if (codeExist) {
+            map.eachLayer(function(layer) {
+              if (layer._leaflet_id == index) {
+                openCkPopup(code, layer, 1);
+              }
+            });
+          }
+        }
+        if ($target.hasClass("pop-ck-down-true")) {
+          e.stopPropagation();
+          let code = $target.parent().attr("code");
+          let subCode = code.substring(0, 6);
+          map.removeLayer(ckGroup);
+          map.closePopup();
+          isLoadBounds = true;
+          let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
+            queryParameter: {
+              name: "gajg_pcszrq_3201_pg@ORCL_gt8",
+              attributeFilter:
+                "DWBM like '" + subCode + "%' and DWMC like '%派出所'",
+              fields: ["DWBM", "DWMC"],
+              orderBy: "DWBM"
+            },
+            datasetNames: ["ORCL_gt8:gajg_pcszrq_3201_pg"],
+            toIndex: -1
+          });
+          let url =
+            "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
+          L.supermap
+            .featureService(url)
+            .getFeaturesBySQL(sqlParam, function(serviceResult) {
+              map.on("mouseup", function(e) {
+                let which = e.originalEvent.which;
+                if (which == 3) {
+                  initCk();
+                }
+              });
+              let data = serviceResult.result.features.features;
+              if (data && data.length > 0) {
+                map.removeLayer(ckBorderGroup);
+                ckBorderGroup = L.layerGroup();
+                data.map(function(val) {
+                  let resultLayer = L.polygon(
+                    changeLonAndLat(val.geometry.coordinates),
+                    {
+                      color: "#386AFB",
+                      weight: 2,
+                      fillOpacity: 0.15
+                    }
+                  );
+                  ckBorderGroup.addLayer(resultLayer);
+                });
+                map.addLayer(ckBorderGroup);
+                map.setZoom(12);
+              }
+            });
+          // 刷新mark
+          initCkMark(code, true);
+          // 刷新右侧面板
+          initCkRight(code, true);
+        }
+      },
+      true
+    );
+
+    // 业务下拉框改变事件
+    $(".toolbar-panel").on("change", ".search-yw", function() {
+      let index = $(this).val();
+      if (currentLevel == 5) {
+        resetPage(index);
+      } else {
+        if (index == 4) {
+          currentLevel = 5;
+          $(".data-panel").hide();
+          $(".toolbar-panel2").show();
+          initCk();
+        } else {
+          initLevelLayer();
+        }
+      }
+    });
+
+    // 左下查询条件改变事件
+    $(".data-panel-search").on("click", "div", function(e) {
+      let $div = $(".data-panel-search > div");
+      let index = $div.index(e.target);
+      if (!$(e.target).hasClass("search-selected")) {
+        $div.removeClass("search-selected");
+        $(e.target).addClass("search-selected");
+        initTab($(".search-yw").val(), "", index);
+      }
+    });
+
+    // 数据panel关闭事件
+    $(".data-panel .data-panel-header > i").click(function() {
+      $(".data-panel").hide();
+    });
+
+    // 数据panel2关闭事件
+    $(".data-panel2 .data-panel-header > i").click(function() {
+      $(".data-panel2").hide();
+    });
+
+    // 诉求分类返回按钮
+    $(".right-header").on("click", ".img-sqfl", e => {
+      let conditon = {
+        deptId: $("#placeCode").val(),
+        date1: $("#date1").val(),
+        date2: $("#date2").val(),
+        type: $(".search-yw2").val()
+      };
+      initYlldRight3(conditon);
+      $(e.target).hide();
+    });
+
+    // 排行榜排序方式按钮
+    $(".right-header").on("click", ".img-phb", e => {
+      let $target = $(e.target),
+        className = "img-phb-rotate",
+        condition = {
+          deptId: $("#placeCode").val(),
+          date1: $("#date1").val(),
+          date2: $("#date2").val(),
+          type: $(".search-yw2").val(),
+          orderBy: ""
+        },
+        color;
+      if ($target.hasClass(className)) {
+        condition.orderBy = "asc";
+        color = "#027ecb";
+        $target.removeClass(className);
+      } else {
+        condition.orderBy = "desc";
+        $target.addClass(className);
+        color = "#ED5554";
+      }
+      initYlldRight4(condition, color);
+    });
+
+    // 工具切换时
+    $(".search-gj").on("change", function() {
+      let index = $(this).val(),
+        type = $(".search-control").val();
+      type == "1" ? sqfbGjChange(index) : myzsGjChange(index);
     });
 
     // 清除按钮事件
@@ -4282,12 +5564,12 @@ requirejs(
       "click",
       ".data-panel-tab-row",
       function(e) {
-        var $target = $(e.target);
+        let $target = $(e.target);
         $target = $target.hasClass("data-panel-tab-row")
           ? $target
           : $target.parent();
-        var ywid = $target.attr("ywid");
-        for (var key in queryGroup._layers) {
+        let ywid = $target.attr("ywid");
+        for (let key in queryGroup._layers) {
           if (queryGroup._layers[key]._popup._content.indexOf(ywid) > 0) {
             queryGroup._layers[key].openPopup();
           }
@@ -4300,11 +5582,11 @@ requirejs(
       "click",
       ".data-panel-tab-row",
       function(e) {
-        var $target = $(e.target);
+        let $target = $(e.target);
         $target = $target.hasClass("data-panel-tab-row")
           ? $target
           : $target.parent();
-        var ywid = $target.attr("ywid");
+        let ywid = $target.attr("ywid");
 
         ckMarkerGroups2.map(val => {
           for (let key in val._layers) {
@@ -4326,16 +5608,36 @@ requirejs(
       }
     );
 
+    // 左下tab点击事件
+    $(".data-panel3 .data-panel-tab3").on(
+      "click",
+      ".data-panel-tab-row",
+      function(e) {
+        let $target = $(e.target);
+        $target = $target.hasClass("data-panel-tab-row")
+          ? $target
+          : $target.parent();
+        let ywid = $target.attr("ywid");
+        for (let key in markerClusterGroup._layers) {
+          if (
+            markerClusterGroup._layers[key]._popup._content.indexOf(ywid) > 0
+          ) {
+            markerClusterGroup._layers[key].openPopup();
+          }
+        }
+      }
+    );
+
     // 分析按钮点击事件
     $(".analysis-btn").click(function() {
-      var keywordArr = [],
+      let keywordArr = [],
         timesArr = [],
         idArr = {},
         result = [];
       selectedData.map(function(value) {
-        var sqwtArr = (value.sqwt || "").split(",");
+        let sqwtArr = (value.sqwt || "").split(",");
         sqwtArr.map(function(value1) {
-          var index = keywordArr.indexOf(value1);
+          let index = keywordArr.indexOf(value1);
           if (index == -1 && value1) {
             timesArr[keywordArr.length] = 1;
             keywordArr.push(value1);
@@ -4349,20 +5651,20 @@ requirejs(
         });
       });
       keywordArr.map(function(value, index) {
-        var obj = { name: value, value: timesArr[index], id: idArr[value] };
+        let obj = { name: value, value: timesArr[index], id: idArr[value] };
         result.push(obj);
       });
       result.map(function(val1, i) {
         result.map(function(val2, j) {
           if (val1.value > val2.value) {
-            var temp = result[i];
+            let temp = result[i];
             result[i] = result[j];
             result[j] = temp;
           }
         });
       });
-      var $container = $(".pop-rdwtfx");
-      var $body = $('<div class="pop-map-mark-body"></div>');
+      let $container = $(".pop-rdwtfx");
+      let $body = $('<div class="pop-map-mark-body"></div>');
       $container
         .show()
         .empty()
@@ -4371,8 +5673,8 @@ requirejs(
             '<div class="pop-map-mark-header">区域热点问题<i class="glyphicon glyphicon-remove"></i></div>'
           )
         );
-      var size = result.length < 4 ? result.length : 3;
-      for (var i = 0; i < size; i++) {
+      let size = result.length < 4 ? result.length : 3;
+      for (let i = 0; i < size; i++) {
         $body.append(
           '<p ywid="' +
             result[i].id +
@@ -4390,7 +5692,7 @@ requirejs(
 
     // 窗口toolbar点击事件
     $(".toolbar-panel2 > div").on("click", function() {
-      var $this = $(this),
+      let $this = $(this),
         index = $this.index(".toolbar-panel2 > div"),
         className = "toolbar-panel2-hover",
         $panel = $(".toolbar-panel2 > div");
@@ -4486,59 +5788,6 @@ requirejs(
       initCkRightBottom();
     });
 
-    function openCkfwqRankPopup(isDept, e) {
-      let value = $(e.target)
-          .find("option:selected")
-          .text(),
-        className;
-      className = isDept ? "tab1" : "tab2";
-      if (value == "工单量") {
-        $("." + className).on("click", "row", function() {
-          let $this = $(this);
-          let condition = {
-            type1: $("#type1").val(),
-            type2: Number(!isDept),
-            name: $this.find(".dept-name").html(),
-            date1: $("#date1").val(),
-            date2: $("#date2").val()
-          };
-          sugon
-            .request(sugon.interFaces.myzs.getCkfwqRankPopup, condition)
-            .then(result => {
-              let str = "",
-                data = result.data;
-              str +=
-                '<div class="map-mark-right-pop-header"><div class="pop-col1">工单编号</div>' +
-                '<div class="pop-col2">姓名</div><div class="pop-col6">电话</div>' +
-                '<div class="pop-col7">回访内容</div></div>';
-              data.map(function(value) {
-                str +=
-                  '<div><div class="pop-col1">' +
-                  value.gdbh +
-                  '</div><div class="pop-col2">' +
-                  value.xm +
-                  '</div><div class="pop-col6">' +
-                  value.dh +
-                  '</div><div title="' +
-                  value.hfnr +
-                  '" class="pop-col7">' +
-                  value.hfnr +
-                  "</div></div>";
-              });
-              let ele = '<div class="map-mark-right-pop">' + str + "</div>";
-              sugon.renderDialog({
-                width: 560,
-                height: 300,
-                ele: ele,
-                title: "工单详情"
-              });
-            });
-        });
-      } else {
-        $(".tab1").off("click");
-      }
-    }
-
     // type3改变事件
     $("#type3").on("change", function(e) {
       initCkfwqDwbd();
@@ -4558,11 +5807,11 @@ requirejs(
 
     // 分析弹出页点击事件
     $(".pop-rdwtfx").on("click", ".pop-map-mark-body > p", function() {
-      var $this = $(this);
-      var idArr = $this.attr("ywid").split(",");
+      let $this = $(this);
+      let idArr = $this.attr("ywid").split(",");
       map.eachLayer(function(layer) {
         if (layer._popup) {
-          var content = layer._popup._content;
+          let content = layer._popup._content;
           idArr.map(function(val) {
             if (content.indexOf(val) > -1) {
               if (layer.setIcon) {
@@ -4581,8 +5830,8 @@ requirejs(
 
     // 弹出页的点击事件
     $("#mainMap").on("click", ".map-mark-right-body > div > span", function() {
-      var deptCode = $(".map-mark-right-title").attr("deptCode");
-      var code = $(this).attr("code");
+      let deptCode = $(".map-mark-right-title").attr("deptCode");
+      let code = $(this).attr("code");
       sugon.requestJson(
         {
           type: "post",
@@ -4596,7 +5845,7 @@ requirejs(
           async: true
         },
         function(result) {
-          var str = "",
+          let str = "",
             data = result.data;
           str +=
             '<div class="map-mark-right-pop-header"><div class="pop-col1">工单编号</div><div class="pop-col2">姓名</div><div class="pop-col3">电话</div><div class="pop-col4">工单类别</div><div class="pop-col5">回访内容</div></div>';
@@ -4616,7 +5865,7 @@ requirejs(
               value.hfnr +
               "</div></div>";
           });
-          var ele = '<div class="map-mark-right-pop">' + str + "</div>";
+          let ele = '<div class="map-mark-right-pop">' + str + "</div>";
           sugon.renderDialog({
             width: 560,
             height: 300,
@@ -4629,13 +5878,142 @@ requirejs(
 
     // 切换事件
     $(".search-pop-nav > div").on("click", function() {
-      var className = "search-nav-selected",
+      let className = "search-nav-selected",
         $this = $(this);
       if (!$this.hasClass(className)) {
         $(".search-pop-nav > div").removeClass(className);
         $this.addClass(className);
         reRenderChart($this.index(".search-pop-nav > div") + 1);
       }
+    });
+
+    // 面板第四列控制下拉框改变时间
+    $(".search-control").on("change", function() {
+      let $this = $(this),
+        index = $this.val(),
+        yw1 = $(".search-yw"),
+        yw2 = $(".search-yw2"),
+        $toolbar = $(".toolbar-panel > div:nth-child(5)"),
+        bmqOption = $(".bmq-option");
+      if (index == 1) {
+        yw2.hide();
+        yw1.show();
+        $toolbar.css(
+          "background",
+          "url('../../img/myhc/myzs/service.png') no-repeat 0 50%"
+        );
+        bmqOption.show();
+        getAllFjData();
+      } else {
+        yw1.hide();
+        yw2.show();
+        bmqOption.hide();
+        $toolbar.css("background", "none");
+        removeAllLayers();
+        initMyzs();
+      }
+    });
+
+    // 业务2改变时间
+    $(".toolbar-panel").on("change", ".search-yw2", function() {
+      initMyzs($(this).val());
+    });
+
+    // data-panel3关闭按钮事件
+    $(".data-panel-header3 > i").click(() => {
+      $(".data-panel3").hide();
+    });
+
+    // 热点问题弹出页
+    $(".analysis-btn3").click(() => {
+      $(".data-panel3").hide();
+      $(".data-panel4").show();
+      let flag = $(".data-panel3").attr("isQuery");
+      if (flag == "1") {
+        let bound = map.getBounds();
+        let idArr = [],
+          id0Arr = [];
+        selectedData.map(val => {
+          idArr.push(val.ywid);
+        });
+        hiddenSelectedData.map(val => {
+          id0Arr.push(val.ywid);
+        });
+        let condition = {
+          deptId: $("#placeCode").val(),
+          date1: $("#date1").val(),
+          date2: $("#date2").val(),
+          northEast: JSON.stringify(bound._northEast),
+          southWest: JSON.stringify(bound._southWest),
+          type: $(".search-yw2").val(),
+          ids: idArr.join(","),
+          ids0: id0Arr.join(",")
+        };
+        sugon
+          .request(sugon.interFaces.myzs.getYlldRdsjByBound, condition)
+          .then(result => {
+            renderRdwtPanel(result);
+          });
+      } else {
+        renderRdwtPanel(rdwtData);
+      }
+    });
+
+    // 热点问题弹出页关闭
+    $(".data-panel4").on("click", ".data-panel-header4 > i", () => {
+      $(".data-panel4").hide();
+      $(".data-panel3").show();
+      recoverMarker();
+    });
+
+    // 热点问题p标签点击事件
+    $(".data-panel4").on("click", "p", e => {
+      let $target = $(e.target);
+      $(".data-panel4 > p").css("background-color", "transparent");
+      $target.css("background-color", "#409cf1");
+      recoverMarker();
+      selected_ywid = $(e.target).attr("ywid");
+      let arr = selected_ywid.split(" ");
+      map.eachLayer(function(layer) {
+        if (layer._popup) {
+          arr.map(val => {
+            if (layer.options.ywid == val && layer.setIcon) {
+              layer.setIcon(
+                L.icon({
+                  iconUrl: "../../img/myhc/myzs/location_selected.png",
+                  popupAnchor: [10, 5]
+                })
+              );
+            }
+          });
+        }
+      });
+    });
+
+    // 下拉按钮事件
+    $(".btn-up-down > div").on("click", e => {
+      let $target = $(e.target),
+        className = $target.attr("class"),
+        up = "btn-up",
+        down = "btn-down",
+        newClassName,
+        $panel = $(".data-panel3"),
+        height,
+        mapHeight = $("#mainMap").height(),
+        $tab = $(".data-tab-container"),
+        overflow;
+      if (className == up) {
+        newClassName = down;
+        height = "110px";
+        overflow = "auto";
+      } else {
+        newClassName = up;
+        height = `${mapHeight - 180}px`;
+        overflow = "hidden";
+      }
+      $target.removeClass(className).addClass(newClassName);
+      $panel.animate({ height: height });
+      $tab.css("overflow", overflow);
     });
   }
 );

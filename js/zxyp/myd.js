@@ -1,5 +1,8 @@
 /* Created by handsome qiu */
 requirejs(["common", "ec"], function(sugon, ec) {
+  // 传过来的名称转换成的数组
+  let nameArr;
+
   // 弹出框走势分析接口定义
   var getZsfx = function(condition) {
     sugon.requestJson(
@@ -31,6 +34,21 @@ requirejs(["common", "ec"], function(sugon, ec) {
     }
     // data2Min -= 5;
     var zsfxChart = ec.init(document.getElementById("pop-zsfx"));
+    let seriesName = $("#pop-title")
+        .html()
+        .trim(),
+      nameArr;
+    switch (seriesName) {
+      case "社会治安满意度":
+        nameArr = ["一般", "不满意"];
+        break;
+      case "公安队伍满意度":
+        nameArr = ["一般", "不安全"];
+        break;
+      case "社区民警熟悉率":
+        nameArr = ["间接知道", "不知道"];
+        break;
+    }
     var option = {
       tooltip: {
         trigger: "axis",
@@ -42,7 +60,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         }
       },
       legend: {
-        data: ["一般", "不安全"]
+        data: nameArr
       },
       grid: {
         top: 30,
@@ -72,7 +90,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
       ],
       series: [
         {
-          name: "一般",
+          name: nameArr[0],
           type: "bar",
           data: yData1,
           barWidth: "15",
@@ -89,7 +107,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           }
         },
         {
-          name: "不安全",
+          name: nameArr[1],
           type: "line",
           yAxisIndex: 1,
           data: yData2

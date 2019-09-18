@@ -5,7 +5,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
 
   // 初始化查询栏
   var initSearchBar = function() {
-    var lastMonth = getDate(-1);
+    var lastMonth = sugon.getDate(-1);
     var date = sugon.getParam("date");
     var deptName = sugon.getParam("deptName");
     var deptId = sugon.getParam("deptId");
@@ -18,7 +18,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
       searchRuler.deptName = deptName;
     } else {
       searchRuler.deptId = "2014110416460086100000002942";
-      searchRuler.date = getDate(-7);
+      searchRuler.date = sugon.getDate(-7);
       searchRuler.deptName = "南京市公安局";
       $("#place").val("南京市公安局");
       $("#placeCode").val("2014110416460086100000002942");
@@ -48,22 +48,6 @@ requirejs(["common", "ec"], function(sugon, ec) {
       },
       showCheckbox: false //是否显示多选
     });
-  };
-
-  // 获取当前时间并加减固定月份
-  var getDate = function(difference) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var sum = year * 12 + month + difference;
-    var resultYear = parseInt(sum / 12);
-    var resultMonth = sum % 12;
-    if (resultMonth == 0) {
-      return resultYear - 1 + "-12";
-    } else {
-      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-      return resultYear + "-" + resultMonth;
-    }
   };
 
   //获取树数据

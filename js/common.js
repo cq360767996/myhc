@@ -13,7 +13,7 @@ define([], function() {
         remoteUrl: base.server + "/myzs/getDwTree"
       },
       // 根据单位code获取单位id
-      DeptId: { remoteUrl: base.server + "/myzs/getDeptId" },
+      DeptId: { remoteUrl: base.server + "/myzs/getDwInfo" },
       // 加载左侧数据
       getLeftData: { remoteUrl: base.server + "/myzs/getLeftData" },
       // 加载右侧中间部分数据
@@ -152,6 +152,42 @@ define([], function() {
       getBmfwq: {
         localUrl: "../../static/json/myzs/getBmfwq.json",
         remoteUrl: base.server + "myzs/getBmfwq"
+      },
+      getYlldMapData: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldMapData"
+      },
+      getYlldMapRight1: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldMapRight1"
+      },
+      getYlldMapRight2: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldMapRight2"
+      },
+      getYlldMapRight3: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldMapRight3"
+      },
+      getYlldMapRight4: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldMapRight4"
+      },
+      getYlldDetailMapData: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldDetailMapData"
+      },
+      getYlldPcsData: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldPcsData"
+      },
+      getYlldDetailMapDataByBound: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldDetailMapDataByBound"
+      },
+      getYlldRdsjByBound: {
+        localUrl: "../../static/json/myzs/getBmfwq.json",
+        remoteUrl: base.server + "myzs/getYlldRdsjByBound"
       }
     },
     myjz: {
@@ -1263,9 +1299,8 @@ define([], function() {
   };
 
   // 处理最大值和最小值
-  base.handleMinAndMax = function(arr) {
-    let result = { min: null, max: null },
-      diff;
+  base.handleMinAndMax = function(arr = [], isNotPercent) {
+    let result = { min: null, max: null };
     if (arr.length > 0) {
       result.min = Number(arr[0]);
       result.max = Number(arr[0]);
@@ -1273,13 +1308,41 @@ define([], function() {
         result.min = Math.min(result.min, Number(val));
         result.max = Math.max(result.max, Number(val));
       });
-      diff = (result.max - result.min) / 2;
+      let diff = (result.max - result.min) / 2;
       result.min =
         result.min - diff < 0 ? 0 : Number(result.min - diff).toFixed(2);
-      result.max =
-        result.max + diff > 100 ? 100 : Number(result.max + diff).toFixed(2);
+      result.max = Number(result.max + diff).toFixed(2);
+      if (!isNotPercent) {
+        result.max =
+          result.max > 100 ? 100 : result.max;
+      }
     }
     return result;
+  };
+
+  // 处理字符串换行
+  base.handleStrLineFeed = function(str = "", perChar = 4) {
+    let result = "";
+    for (let i = 0, len = str.length; i < len; i++) {
+      result += i % perChar == perChar - 1 ? str[i] + "\n" : str[i];
+    }
+    return result;
+  };
+
+  // 获取当前时间并加减固定月份
+  base.getDate = function(difference) {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var sum = year * 12 + month + difference;
+    var resultYear = parseInt(sum / 12);
+    var resultMonth = sum % 12;
+    if (resultMonth == 0) {
+      return resultYear - 1 + "-12";
+    } else {
+      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
+      return resultYear + "-" + resultMonth;
+    }
   };
 
   base.initRightMenu = function() {

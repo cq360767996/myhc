@@ -1,37 +1,22 @@
-var zsfxChart;
+let zsfxChart;
 requirejs(["common", "ec"], function(sugon, ec) {
   // 全局查询尺度
-  var searchRuler = {};
-  var popData = []; // 弹出页数据
-  // 获取当前时间并加减固定月份
-  var getDate = function(difference) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var sum = year * 12 + month + difference;
-    var resultYear = parseInt(sum / 12);
-    var resultMonth = sum % 12;
-    if (resultMonth == 0) {
-      return resultYear - 1 + "-12";
-    } else {
-      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-      return resultYear + "-" + resultMonth;
-    }
-  };
+  let searchRuler = {};
+  let popData = []; // 弹出页数据
 
   // 初始化查询栏
-  var initSearchBar = function() {
-    var lastMonth = getDate(-1);
-    searchRuler.deptId = "2014110416460086100000002942";
-    searchRuler.date1 = getDate(-7);
-    searchRuler.date2 = getDate(-2);
-    searchRuler.deptName = "南京市公安局";
-
-    $("#place").val("南京市公安局");
-    $("#placeCode").val("2014110416460086100000002942");
-    $("#date-input1").val(searchRuler.date1);
-    $("#date-input2").val(searchRuler.date2);
-    $("#date-input1").datetimepicker({
+  let initSearchBar = function() {
+    let lastMonth = sugon.getDate(-1),
+      $date1 = $("#date-input1"),
+      $date2 = $("#date-input2"),
+      $tree = $("#left-tree"),
+      $detpId = $("#placeCode"),
+      $detpName = $("#place");
+      $detpName.val((searchRuler.deptName = "南京市公安局"));
+    $detpId.val((searchRuler.deptId = "2014110416460086100000002942"));
+    $date1.val((searchRuler.date1 = sugon.getDate(-7)));
+    $date2.val((searchRuler.date2 = sugon.getDate(-2)));
+    $date1.datetimepicker({
       format: "yyyy-mm",
       autoclose: true,
       todayBtn: true,
@@ -41,7 +26,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
       endDate: lastMonth,
       language: "zh-CN"
     });
-    $("#date-input2").datetimepicker({
+    $date2.datetimepicker({
       format: "yyyy-mm",
       autoclose: true,
       todayBtn: true,
@@ -52,15 +37,15 @@ requirejs(["common", "ec"], function(sugon, ec) {
       language: "zh-CN"
     });
     // 设置下拉框宽度
-    $("#left-tree").css("width", $("#place").outerWidth());
+    $tree.css("width", $("#place").outerWidth());
     //渲染树
-    $("#left-tree").treeview({
+    $tree.treeview({
       data: getTree(),
       levels: 1,
       onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
-        $("#left-tree").css("visibility", "hidden");
+        $detpName.val(node.text);
+        $detpId.val(node.id);
+        $tree.css("visibility", "hidden");
       },
       showCheckbox: false //是否显示多选
     });
@@ -68,7 +53,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
 
   //获取树数据
   function getTree() {
-    var treeData = [];
+    let treeData = [];
     sugon.requestJson(
       {
         type: "POST",
@@ -87,7 +72,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   });
 
   // 初始化左1面板
-  var initLeft1 = function() {
+  let initLeft1 = function() {
     sugon.requestJson(
       {
         type: "POST",
@@ -96,7 +81,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         data: { search: JSON.stringify(searchRuler) }
       },
       function(result) {
-        for (var i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i++) {
           if (i % 2 == 1) {
             $("#left_top .val")
               .eq(i)
@@ -130,7 +115,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   };
 
   // 初始化左2面板
-  var initLeft2 = function() {
+  let initLeft2 = function() {
     sugon.requestJson(
       {
         type: "POST",
@@ -139,7 +124,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         data: { search: JSON.stringify(searchRuler) }
       },
       function(result) {
-        var xData = [],
+        let xData = [],
           yData1 = [],
           yData2 = [],
           yData3 = [],
@@ -150,7 +135,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           yData2.push(0);
           yData3.push(0);
         } else {
-          for (var i = 0; i < result.data.length; i++) {
+          for (let i = 0; i < result.data.length; i++) {
             xData.push(result.data[i].name);
             yData1.push(result.data[i].value1);
             yData2.push(result.data[i].value2);
@@ -158,15 +143,13 @@ requirejs(["common", "ec"], function(sugon, ec) {
             iData.push(result.data[i].id);
           }
         }
-        let minAndMax = sugon.handleMinAndMax(
-          yData1.concat(yData2).concat(yData3)
-        );
-        var Chart3 = ec.init(document.getElementById("chart3"));
-        Chart3.off();
-        Chart3.on("click", function(params) {
+        let minAndMax = sugon.handleMinAndMax(yData1);
+        let chart3 = ec.init(document.getElementById("chart3"));
+        chart3.off();
+        chart3.on("click", function(params) {
           if (params.data != 0) {
-            var seriesName = params.seriesName;
-            var name = params.name;
+            let seriesName = params.seriesName;
+            let name = params.name;
             requirejs(["text!../views/zxyp/myd.html"], function(ele) {
               sugon.showDialog({
                 width: 760,
@@ -179,7 +162,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           }
         });
 
-        var option = {
+        let option = {
           color: [
             "rgb(21, 175, 137)",
             "rgb(42, 155, 213)",
@@ -188,7 +171,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           tooltip: {
             trigger: "axis"
             // formatter: function(params) {
-            //   var tempStr =
+            //   let tempStr =
             //     params[0].name +
             //     "<br />" +
             //     params[0].seriesName +
@@ -208,7 +191,12 @@ requirejs(["common", "ec"], function(sugon, ec) {
           },
           legend: {
             show: true,
-            inactiveColor: "#999"
+            inactiveColor: "#999",
+            selected: {
+              社会治安满意度: true,
+              公安队伍满意度: false,
+              社区民警熟悉率: false
+            }
           },
           grid: {
             top: 25,
@@ -259,7 +247,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
                 }
               },
               axisLabel: {
-                formatter: "{value}%",
+                formatter: function(param) {
+                  return Number(param).toFixed(0) + "%";
+                },
                 textStyle: {
                   color: "#5d707e"
                 }
@@ -292,13 +282,12 @@ requirejs(["common", "ec"], function(sugon, ec) {
               showSymbol: true,
               symbolSize: 8,
               type: "line",
-              //yAxisIndex: 1,
               data: yData3
             }
           ]
         };
-        Chart3.setOption(option);
-        Chart3.on("legendselectchanged", function(e) {
+        chart3.setOption(option);
+        chart3.on("legendselectchanged", function(e) {
           let arr = [
               { name: "社会治安满意度", arr: yData1 },
               { name: "公安队伍满意度", arr: yData2 },
@@ -313,17 +302,17 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           });
           let minAndMax = sugon.handleMinAndMax(resultArr);
-          let newOption = Chart3.getOption();
+          let newOption = chart3.getOption();
           newOption.yAxis[0].min = minAndMax.min;
           newOption.yAxis[0].max = minAndMax.max;
-          Chart3.setOption(newOption);
+          chart3.setOption(newOption);
         });
       }
     );
   };
 
   // 初始化左3面板
-  var initLeft3 = function(index) {
+  let initLeft3 = function(index) {
     sugon.requestJson(
       {
         type: "POST",
@@ -337,8 +326,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
         } else {
           $(".tab2").css("display", "block");
         }
-        var data = result.data[index];
-        var xData = [],
+        let data = result.data[index];
+        let xData = [],
           yData = [],
           startValue = 0,
           endValue = 100,
@@ -349,11 +338,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
           xData.push("暂无数据");
           yData.push(0);
         } else {
-          if (data.length > 6) {
-            endValue = Math.floor((6 / data.length) * 100);
+          if (data.length > 5) {
+            endValue = Math.floor((5 / data.length) * 100);
             show = true;
           }
-          for (var i = 0; i < data.length; i++) {
+          for (let i = 0; i < data.length; i++) {
             if (data[i].select) {
               markNum = data[i].value;
               markData = [
@@ -376,17 +365,17 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           }
         }
-        let minAndMax = sugon.handleMinAndMax(result.data);
-        var chart6 = ec.init(document.getElementById("chart6"));
+        let minAndMax = sugon.handleMinAndMax(yData);
+        let chart6 = ec.init(document.getElementById("chart6"));
 
-        var option = {
+        let option = {
           tooltip: {
             trigger: "axis",
             axisPointer: {
               type: "shadow"
             },
             formatter: function(params) {
-              var tempStr =
+              let tempStr =
                 params[0].name + "<br />数值：" + params[0].value + "%";
               return tempStr;
             }
@@ -395,7 +384,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
             left: 10,
             right: 10,
             bottom: 20,
-            top: 5,
+            top: 10,
             containLabel: true
           },
           dataZoom: [
@@ -430,19 +419,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
                   color: "#6c7177"
                 },
                 formatter: function(param) {
-                  var tempStr = "";
-                  if (param.length > 4) {
-                    for (var i = 0; i < param.length; i++) {
-                      if (i % 4 == 3) {
-                        tempStr += param[i] + "\n";
-                      } else {
-                        tempStr += param[i];
-                      }
-                    }
-                  } else {
-                    tempStr = param;
-                  }
-                  return tempStr;
+                  return sugon.handleStrLineFeed(param, 5);
                 }
               },
               axisLine: {
@@ -463,13 +440,15 @@ requirejs(["common", "ec"], function(sugon, ec) {
               max: minAndMax.max,
               axisLabel: {
                 show: true,
-                formatter: "{value}%",
+                formatter: function(param) {
+                  return Number(param).toFixed(0) + "%";
+                },
                 textStyle: {
                   color: "#6c7177"
                 }
               },
               axisLine: {
-                show: false,
+                show: true,
                 lineStyle: {
                   color: "#6c7177"
                 }
@@ -485,7 +464,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
               itemStyle: {
                 normal: {
                   color: function(params) {
-                    var tempColor = "red";
+                    let tempColor = "red";
                     if (params.data > markNum) {
                       tempColor = "#209cb7";
                     }
@@ -611,7 +590,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           xData.push(val.name);
           yData.push(val.value);
         });
-        let minAndMax = sugon.handleMinAndMax(data);
+        // let minAndMax = sugon.handleMinAndMax(yData, true);
         let option = {
           tooltip: {
             trigger: "axis",
@@ -624,7 +603,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
             left: 0,
             top: 20,
             right: 0,
-            bottom: 0,
+            bottom: 5,
             containLabel: true
           },
           xAxis: [
@@ -634,17 +613,15 @@ requirejs(["common", "ec"], function(sugon, ec) {
               splitArea: { show: false },
               data: xData,
               axisLabel: {
+                lineHeight: 14,
                 interval: 0,
                 textStyle: {
                   color: "#5d707e"
                 },
                 formatter: function(param) {
-                  let result = "";
-                  for (let i = 0, len = param.length; i < len; i++) {
-                    result += i % 4 == 3 ? param[i] + "\n" : param[i];
-                  }
-                  return result;
-                }
+                  return sugon.handleStrLineFeed(param);
+                },
+                rich: {}
               },
               axisLine: {
                 lineStyle: {
@@ -659,6 +636,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
               // min: minAndMax.min,
               // max: minAndMax.max,
               axisTick: { show: false },
+              minInterval: 1,
               splitLine: {
                 show: false,
                 lineStyle: {
@@ -695,19 +673,19 @@ requirejs(["common", "ec"], function(sugon, ec) {
   }
 
   // 初始化中1面板
-  var initMid1 = function() {
+  let initMid1 = function() {
     initMidLeft(1);
     initMidRight(1);
   };
 
   // 初始化中2面板
-  var initMid2 = function() {
+  let initMid2 = function() {
     initMidLeft(2);
     initMidRight(2);
   };
 
   // 初始化中3面板
-  var initMid3 = function() {
+  let initMid3 = function() {
     let { deptId, date1, date2 } = searchRuler;
     sugon
       .request(sugon.interFaces.zxyp.ylld.initMid3, { deptId, date1, date2 })
@@ -729,7 +707,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   };
 
   // 初始化右1面板
-  var initRight1 = function() {
+  let initRight1 = function() {
     let { deptId, date1, date2 } = searchRuler;
     sugon
       .request(sugon.interFaces.zxyp.ylld.initRight1, { deptId, date1, date2 })
@@ -765,9 +743,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
               }
             }
           };
-        for (var i = 0; i < len; i++) {
+        for (let i = 0; i < len; i++) {
           xData.push(data[i].name);
-          var obj = {
+          let obj = {
             name: data[i].name,
             value: data[i].value,
             itemStyle: {
@@ -784,7 +762,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           };
           yData.push(obj);
         }
-        for (var i = 0; i < len; i++) {
+        for (let i = 0; i < len; i++) {
           yData.push(transparentData);
         }
         $("#right1-strong").html(data1 + "%");
@@ -824,7 +802,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   };
 
   // 初始化右2面板
-  var initRight2 = function() {
+  let initRight2 = function() {
     let { deptId, date1, date2 } = searchRuler;
     sugon
       .request(sugon.interFaces.zxyp.ylld.initRight2, { deptId, date1, date2 })
@@ -958,7 +936,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   };
 
   // 初始化右3面板
-  var initRight3 = function() {
+  let initRight3 = function() {
     let { deptId, date1, date2, type1 = 0, type2 = 0 } = searchRuler;
     sugon
       .request(sugon.interFaces.zxyp.ylld.initRight3, {
@@ -1006,11 +984,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   function initSelector() {
     let deptId = searchRuler.deptId;
     sugon
-      .request(
-        sugon.interFaces.zxyp.ylld.initSelector,
-        { deptId },
-        { async: false }
-      )
+      .request(sugon.interFaces.zxyp.ylld.initSelector, { deptId })
       .then(result => {
         let dom = "";
         result.data.map(val => {
@@ -1020,10 +994,12 @@ requirejs(["common", "ec"], function(sugon, ec) {
           .empty()
           .append(dom);
         searchRuler.type2 = $("#type2").val();
+        // 右3
+        initRight3();
       });
   }
 
-  var initView = function() {
+  let initView = function() {
     initSelector();
     // 左1
     initLeft1();
@@ -1041,11 +1017,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
     initRight1();
     // 右1
     initRight2();
-    // 右3
-    initRight3();
   };
 
-  var initPage = function() {
+  let initPage = function() {
     // 初始化查询栏
     initSearchBar();
     // 初始化页面
@@ -1065,10 +1039,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
   });
 
   $("#dept2").change(function() {
+    let className = "selected";
     $(".tab2 > div")
-      .removeClass("selected")
+      .removeClass(className)
       .eq(0)
-      .addClass("selected");
+      .addClass(className);
     initLeft3(0);
   });
 
@@ -1077,7 +1052,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     .bind("click", function() {
       $(".tab2 .selected").removeClass("selected");
       $(this).attr("class", "selected");
-      var index = $(".tab2>div").index(this);
+      let index = $(".tab2>div").index(this);
       initLeft3(index);
     });
 

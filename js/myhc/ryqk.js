@@ -8,8 +8,8 @@ requirejs(["common"], function(sugon) {
 
   // 初始化查询状态栏
   var initSearchBar = function() {
-    var date1 = getDate(-13);
-    var date2 = getDate(-1);
+    var date1 = sugon.getDate(-13);
+    var date2 = sugon.getDate(-1);
     var $popDate1 = $("#pop-date1");
     var $popDate2 = $("#pop-date2");
     $popDate1.val(date1);
@@ -38,22 +38,6 @@ requirejs(["common"], function(sugon) {
       endDate: date2,
       language: "zh-CN"
     });
-  };
-
-  // 获取当前时间并加减固定月份
-  var getDate = function(difference) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var sum = year * 12 + month + difference;
-    var resultYear = parseInt(sum / 12);
-    var resultMonth = sum % 12;
-    if (resultMonth == 0) {
-      return resultYear - 1 + "-12";
-    } else {
-      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-      return resultYear + "-" + resultMonth;
-    }
   };
 
   // 获取行高

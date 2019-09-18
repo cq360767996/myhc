@@ -1,22 +1,7 @@
 requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
   var tData = [];
-  // 当前月加减固定值
-  var getDate = function(difference) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var sum = year * 12 + month + difference;
-    var resultYear = parseInt(sum / 12);
-    var resultMonth = sum % 12;
-    if (resultMonth == 0) {
-      return resultYear - 1 + "-12";
-    } else {
-      resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
-      return resultYear + "-" + resultMonth;
-    }
-  };
-  var maxDate = getDate(-1);
-  var minDate = getDate(-7);
+  var maxDate = sugon.getDate(-1);
+  var minDate = sugon.getDate(-7);
   var searchRule = { code: "", date1: "", date2: "" };
 
   $("#left-tree").css("width", $("#place").css("width"));
