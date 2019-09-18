@@ -1,4 +1,3 @@
-let zsfxChart;
 requirejs(["common", "ec"], function(sugon, ec) {
   // 全局查询尺度
   let searchRuler = {};
@@ -12,7 +11,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
       $tree = $("#left-tree"),
       $detpId = $("#placeCode"),
       $detpName = $("#place");
-      $detpName.val((searchRuler.deptName = "南京市公安局"));
+    $detpName.val((searchRuler.deptName = "南京市公安局"));
     $detpId.val((searchRuler.deptId = "2014110416460086100000002942"));
     $date1.val((searchRuler.date1 = sugon.getDate(-7)));
     $date2.val((searchRuler.date2 = sugon.getDate(-2)));
@@ -143,7 +142,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
             iData.push(result.data[i].id);
           }
         }
-        let minAndMax = sugon.handleMinAndMax(yData1);
+        let minAndMax = sugon.handleMinAndMax(
+          yData1.concat(yData2).concat(yData3)
+        );
         let chart3 = ec.init(document.getElementById("chart3"));
         chart3.off();
         chart3.on("click", function(params) {
@@ -191,12 +192,12 @@ requirejs(["common", "ec"], function(sugon, ec) {
           },
           legend: {
             show: true,
-            inactiveColor: "#999",
-            selected: {
-              社会治安满意度: true,
-              公安队伍满意度: false,
-              社区民警熟悉率: false
-            }
+            inactiveColor: "#999"
+            // selected: {
+            //   社会治安满意度: true,
+            //   公安队伍满意度: false,
+            //   社区民警熟悉率: false
+            // }
           },
           grid: {
             top: 25,

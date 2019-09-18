@@ -1313,8 +1313,7 @@ define([], function() {
         result.min - diff < 0 ? 0 : Number(result.min - diff).toFixed(2);
       result.max = Number(result.max + diff).toFixed(2);
       if (!isNotPercent) {
-        result.max =
-          result.max > 100 ? 100 : result.max;
+        result.max = result.max > 100 ? 100 : result.max;
       }
     }
     return result;
