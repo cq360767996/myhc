@@ -5005,6 +5005,9 @@ requirejs(
           let $body = $(".right-up-banner-right2").empty();
           let colorIconArr = [];
           for (let i = 0, len = data.data.length; i < len; i++) {
+            if (i === 4 || i === 6) {
+              data.data[i] = -data.data[i];
+            }
             colorIconArr.push(handleColorAndIcon(data.data[i]));
             data.data[i] = Math.abs(Number(data.data[i]));
           }
@@ -5029,9 +5032,9 @@ requirejs(
             colorIconArr[3].color
           }">${data.data[3]}</strong>名
                             </span><i class="glyphicon ${
-                              colorIconArr[3].icon
-                            } ${colorIconArr[3].color}"></i>
-                                    <strong class="${colorIconArr[3].color}">${
+                              colorIconArr[4].icon
+                            } ${colorIconArr[4].color}"></i>
+                                    <strong class="${colorIconArr[4].color}">${
             data.data[4]
           }</strong>`;
           let $ybfx = $("#right-ybfx").css("height", "180px"),
@@ -5049,10 +5052,10 @@ requirejs(
                                 </span>
                                 <span style="margin-left: 15px;">
                                     较上期:<i class="glyphicon ${
-                                      colorIconArr[3].icon
-                                    } ${colorIconArr[3].color}"></i>
+                                      colorIconArr[4].icon
+                                    } ${colorIconArr[4].color}"></i>
                                         <strong class="${
-                                          colorIconArr[3].color
+                                          colorIconArr[4].color
                                         }">${data.data[4]}</strong>
                                 </span>`;
               break;
