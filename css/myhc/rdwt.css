@@ -115,11 +115,15 @@ button {
   float: left;
   font-size: 18px;
 }
-.mid-panel > header > div:last-child {
+.mid-panel > header > div:last-child,
+.mid-panel > header > div:nth-child(2) {
   float: right;
   cursor: pointer;
   position: relative;
   top: 1px;
+}
+.mid-panel > header > div:last-child {
+  margin-right: 10px;
 }
 .mid-panel > section {
   float: left;
@@ -127,6 +131,7 @@ button {
   margin-left: 35px;
   margin-top: 20px;
   height: calc(100% - 240px);
+  cursor: pointer;
 }
 .mid-panel > section:nth-child(2) > div:first-child {
   border-bottom: 8px solid #f08988;
@@ -274,4 +279,13 @@ button {
   color: #1d84c6;
   font-size: 20px;
   font-weight: 500;
+}
+.pop-panel {
+  position: absolute;
+  z-index: 1001;
+  background: url('../../img/myhc/rdwt/mybd/bg.png') no-repeat;
+  background-size: 100% 100%;
+  display: none;
+  top: 0;
+  left: 0;
 }

@@ -124,12 +124,17 @@ button {
         font-size: 18px;
       }
 
-      &:last-child {
+      &:last-child, &:nth-child(2) {
         float: right;
         cursor: pointer;
         position: relative;
         top: 1px;
       }
+
+      &:last-child {
+        margin-right: 10px;
+      }
+
     }
   }
 
@@ -139,6 +144,7 @@ button {
     margin-left: 35px;
     margin-top: 20px;
     height: calc(~"100% - 240px");
+    cursor: pointer;
 
     &:nth-child(2) {
       & > div {
@@ -322,4 +328,14 @@ button {
       }
     }
   }
+}
+
+.pop-panel {
+  position: absolute;
+  z-index: 1001;
+  background: url('../../img/myhc/rdwt/mybd/bg.png') no-repeat;
+  background-size: 100% 100%;
+  display: none;
+  top: 0;
+  left: 0;
 }

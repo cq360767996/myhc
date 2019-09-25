@@ -17,101 +17,107 @@ requirejs(["common", "ec"], (sugon, ec) => {
       });
   };
   // 初始化查询栏
-  const initSearchBar = new Promise((resolve, reject) => {
-    const $deptTree = $("#dept-tree");
-    const $deptName = $("#dept-name");
-    const $deptId = $("#dept-id");
-    sugon.request(sugon.interFaces.rdwt.tree).then(result => {
-      //渲染树
-      $deptTree.css("width", $deptName.outerWidth()).treeview({
-        data: result.data,
-        levels: 1,
-        onNodeSelected: function(event, node) {
-          $deptName.val(node.text);
-          $deptId.val(node.id);
-          $deptTree.css("visibility", "hidden");
-        },
-        showCheckbox: false //是否显示多选
+  const initSearchBar = () => {
+    return new Promise((resolve, reject) => {
+      const $deptTree = $("#dept-tree");
+      const $deptName = $("#dept-name");
+      const $deptId = $("#dept-id");
+      sugon.request(sugon.interFaces.rdwt.tree).then(result => {
+        //渲染树
+        $deptTree.css("width", $deptName.outerWidth()).treeview({
+          data: result.data,
+          levels: 1,
+          onNodeSelected: function(event, node) {
+            $deptName.val(node.text);
+            $deptId.val(node.id);
+            $deptTree.css("visibility", "hidden");
+          },
+          showCheckbox: false //是否显示多选
+        });
       });
+      // 为单位名称绑定点击事件
+      $("#dept-name").on("click", () => {
+        $deptTree.css(
+          "visibility",
+          $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
+        );
+      });
+      initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
+      initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
+      $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
+      $deptName.val((searchParams.deptName = "南京市公安局"));
+      resolve();
     });
-    // 为单位名称绑定点击事件
-    $("#dept-name").on("click", () => {
-      $deptTree.css(
-        "visibility",
-        $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
-      );
-    });
-    initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
-    initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
-    $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
-    $deptName.val((searchParams.deptName = "南京市公安局"));
-    resolve();
-  });
+  };
 
   // 初始化中间的面板
-  const initMidPanel = new Promise(async (resolve, reject) => {
-    const $upThree = $(".mid-panel > section > div:last-child"),
-      height = `${$upThree.height() / 3}px`;
-    await sugon
-      .request(sugon.interFaces.rdwt.getMidData, searchParams)
-      .then(result => {
-        if (result.data.length > 0) {
-          let { deptId, model, code } = result.data[0];
-          Object.assign(searchParams, { detailDeptId: deptId, model, code });
-        }
-        let $body = $(".mid-panel > fieldset"),
-          leftHtml = "",
-          rightHtml = "";
-        result.data.map((val, index) => {
-          let html = `<row>
-                        <div deptId="${val.deptId}"
-                            model="${val.model}"
-                            code="${val.code}" 
-                            class="content-row">${val.content}</div>
-                        <div>
-                          <span>热度：</span>
-                          <strong>${val.freq}</strong>
-                          <img src="../../img/zxyp/aj/redian.png">
-                        </div>
-                      </row>`;
-          if (index < 3) {
-            $upThree
-              .parent()
-              .attr("deptId", val.deptId)
-              .attr("model", val.model)
-              .attr("code", val.code);
-            $upThree
-              .eq(index)
-              .css("line-height", height)
-              .html(
-                `<div 
-                style="font-size: 20px;
-                  height: ${height};">
-                  <strong>NO.</strong>
-                  <img class="up-img"
-                    style="
-                      width:${height};
-                      height:${height};"
-                    src="../../img/myhc/rdwt/${index + 1}.png" />
-               </div>
-               <div style="height:${height};">${val.content}</div>
-               <div>
-                <span>热度：</span>
-                <strong>${val.freq}</strong>
-                <img class="down-img" src="../../img/zxyp/aj/redian.png"/>
-                </div>`
-              );
-          } else if (index < 6) {
-            leftHtml += html;
-          } else if (index < 9) {
-            rightHtml += html;
+  const initMidPanel = () => {
+    return new Promise(async (resolve, reject) => {
+      const $upThree = $(".mid-panel > section > div:last-child"),
+        height = `${$upThree.height() / 3}px`;
+      await sugon
+        .request(sugon.interFaces.rdwt.getMidData, searchParams)
+        .then(result => {
+          if (result.data.length > 0) {
+            let { deptId, model, code } = result.data[0];
+            Object.assign(searchParams, { detailDeptId: deptId, model, code });
           }
+          let $body = $(".mid-panel > fieldset"),
+            leftHtml = "",
+            rightHtml = "";
+          result.data.map((val, index) => {
+            let html = `<row>
+                          <div deptId="${val.deptId}"
+                              model="${val.model}"
+                              code="${val.code}" 
+                              class="content-row">
+                              ${index + 1}、${val.content}
+                          </div>
+                          <div>
+                            <span>热度：</span>
+                            <strong>${val.freq}</strong>
+                            <img src="../../img/zxyp/aj/redian.png">
+                          </div>
+                        </row>`;
+            if (index < 3) {
+              $upThree
+                .parent()
+                .attr("deptId", val.deptId)
+                .attr("model", val.model)
+                .attr("code", val.code);
+              $upThree
+                .eq(index)
+                .css("line-height", height)
+                .html(
+                  `<div 
+                  style="font-size: 20px;
+                    height: ${height};">
+                    <strong>NO.</strong>
+                    <img class="up-img"
+                      style="
+                        width:${height};
+                        height:${height};"
+                      src="../../img/myhc/rdwt/${index + 1}.png" />
+                 </div>
+                 <div style="height:${height};">${val.content}</div>
+                 <div>
+                  <span>热度：</span>
+                  <strong>${val.freq}</strong>
+                  <img class="down-img" src="../../img/zxyp/aj/redian.png"/>
+                  </div>`
+                );
+            } else if (index < 6) {
+              leftHtml += html;
+            } else if (index < 9) {
+              rightHtml += html;
+            }
+          });
+          $body.eq(0).html(leftHtml);
+          $body.eq(1).html(rightHtml);
         });
-        $body.eq(0).html(leftHtml);
-        $body.eq(1).html(rightHtml);
-      });
-    resolve();
-  });
+      resolve();
+    });
+  };
 
   // 初始化下面的面板
   const initBottomPanel = () => {
@@ -124,7 +130,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
       $chart2.show();
       initChart2();
     } else {
-      title = "具体问题分析";
+      title = searchParams.model === "2" ? "具体问题分析" : "业务归口分析";
       $chart1.css("width", "calc(50% - 8px)");
       $chart2.hide();
     }
@@ -139,7 +145,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
     const chart = ec.init(document.getElementById(id));
     needRezise && chart && chart.resize();
     chart.setOption(option, true);
-    callback && chart.on("click", callback);
+    callback && (chart.off(), chart.on("click", callback));
   };
 
   // 第一个ecahrts图
@@ -498,7 +504,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
     let { detailDeptId, model, code, date1, date2, id } = searchParams;
     sugon
       .request(sugon.interFaces.rdwt.getChart4, {
-        deptIdL: detailDeptId,
+        deptId: detailDeptId,
         model,
         code,
         date1,
@@ -598,9 +604,6 @@ requirejs(["common", "ec"], (sugon, ec) => {
               max: minAndMax.max,
               axisLabel: {
                 show: true,
-                formatter: function(param) {
-                  return Number(param).toFixed(0) + "%";
-                },
                 textStyle: {
                   color: "#6c7177"
                 }
@@ -637,25 +640,23 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 页面入口
   function initPage() {
-    initSearchBar
-      .then(() => {
-        return initMidPanel;
-      })
-      .then(() => {
-        initBottomPanel();
-      });
+    Promise.resolve()
+      .then(() => initSearchBar())
+      .then(() => initMidPanel())
+      .then(() => initBottomPanel());
   }
 
   // 页面入口
   initPage();
 
   // 前三个盒子点击事件
-  $(".mid-panel > section").on("click", e => {
-    let $target = $(e.target),
-      deptId = $target.attr("deptId"),
-      model = $target.attr("model"),
-      code = $target.attr("code");
-    initBottomPanel({ deptId, model, code });
+  $(".mid-panel > section").on("click", function() {
+    let $this = $(this),
+      deptId = $this.attr("deptId"),
+      model = $this.attr("model"),
+      code = $this.attr("code");
+    Object.assign(searchParams, { detailDeptId: deptId, model, code });
+    initBottomPanel();
     $(".content-row").css(
       "background-image",
       "url(../../img/myhc/rdwt/list_normal.png)"
@@ -668,12 +669,13 @@ requirejs(["common", "ec"], (sugon, ec) => {
       deptId = $target.attr("deptId"),
       model = $target.attr("model"),
       code = $target.attr("code");
+    Object.assign(searchParams, { detailDeptId: deptId, model, code });
     $(".content-row").css(
       "background-image",
       "url(../../img/myhc/rdwt/list_normal.png)"
     );
     $target.css("background-image", "url(../../img/myhc/rdwt/list_hover.png)");
-    initBottomPanel({ deptId, model, code });
+    initBottomPanel();
   });
 
   // 查询按钮功能
@@ -682,11 +684,23 @@ requirejs(["common", "ec"], (sugon, ec) => {
     searchParams.deptName = $("#dept-name").val();
     searchParams.date1 = $("#date1").val();
     searchParams.date2 = $("#date2").val();
-    initPage();
+    Promise.resolve()
+      .then(() => initMidPanel())
+      .then(() => initBottomPanel());
   });
   // 返回按钮事件
   $(".pop-title > div:first-child").on("click", () => {
     searchParams.id = "";
     initChart4();
+  });
+  // 民意榜单按钮事件
+  $(".mybd-btn").on("click", () => {
+    requirejs(["text!../views/myhc/ryqk.html"], function(ele) {
+      $(".pop-panel")
+        .html(ele)
+        .show()
+        .css("width", "100%")
+        .css("height", "100%");
+    });
   });
 });

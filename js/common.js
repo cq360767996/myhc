@@ -341,6 +341,26 @@ define([], function() {
       getChart4: {
         localUrl: base.localPath + "ylld/chart.json",
         remoteUrl: base.remotePath + "rdwt/getDwfb"
+      },
+      // 获取接处警数据
+      getJcj: {
+        localUrl: base.localPath + "rdwt/jcj.json",
+        remoteUrl: base.remotePath + "rdwt/ranking"
+      },
+      // 获取窗口服务数据
+      getCkfw: {
+        localUrl: base.localPath + "rdwt/jcj.json",
+        remoteUrl: base.remotePath + "rdwt/ranking"
+      },
+      // 获取案件数据
+      getAj: {
+        localUrl: base.localPath + "rdwt/jcj.json",
+        remoteUrl: base.remotePath + "rdwt/ranking"
+      },
+      // 获取社区民警熟悉率数据
+      getMjsxl: {
+        localUrl: base.localPath + "rdwt/sxl.json",
+        remoteUrl: base.remotePath + "rdwt/ranking"
       }
     },
     zxyp: {
