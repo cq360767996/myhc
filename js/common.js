@@ -3,907 +3,866 @@ define([], function() {
 
   base.isPublished = false;
 
-  base.server = "../";
+  base.remotePath = "../";
+  base.localPath = "./static/json/";
 
   base.interFaces = {
     myzs: {
       //下拉树
       Tree: {
-        localUrl: "../../static/json/Tree.json",
-        remoteUrl: base.server + "/myzs/getDwTree"
+        localUrl: base.localPath + "Tree.json",
+        remoteUrl: base.remotePath + "myzs/getDwTree"
       },
       // 根据单位code获取单位id
-      DeptId: { remoteUrl: base.server + "/myzs/getDwInfo" },
+      DeptId: { remoteUrl: base.remotePath + "myzs/getDwInfo" },
       // 加载左侧数据
-      getLeftData: { remoteUrl: base.server + "/myzs/getLeftData" },
+      getLeftData: { remoteUrl: base.remotePath + "myzs/getLeftData" },
       // 加载右侧中间部分数据
-      getRightMidData: { remoteUrl: base.server + "/myzs/getRightMidData" },
+      getRightMidData: { remoteUrl: base.remotePath + "myzs/getRightMidData" },
       // 加载右侧数据
-      getRightData: { remoteUrl: base.server + "/myrd/getRdwtList" },
+      getRightData: { remoteUrl: base.remotePath + "myrd/getRdwtList" },
       // 获取指标组成
       getZbzc: {
-        localUrl: "../../static/json/myzs/pop-zbzs.json",
-        remoteUrl: base.server + "/myzs/getZbzc"
+        localUrl: base.localPath + "myzs/pop-zbzs.json",
+        remoteUrl: base.remotePath + "myzs/getZbzc"
       },
       // 指标展示悬停弹框
       getZbzcDetail: {
-        localUrl: "../../static/json/myzs/pop-zbzs-detail.json",
-        remoteUrl: base.server + "/myzs/getZbzcDetail"
+        localUrl: base.localPath + "myzs/pop-zbzs-detail.json",
+        remoteUrl: base.remotePath + "myzs/getZbzcDetail"
       },
       // 执法公信力走势分析
-      getZfgxl: { remoteUrl: base.server + "/myzs/getZfgxl" },
+      getZfgxl: { remoteUrl: base.remotePath + "myzs/getZfgxl" },
       // 单位情况
-      getDwqk: { remoteUrl: base.server + "/myzs/getDwqk" },
+      getDwqk: { remoteUrl: base.remotePath + "myzs/getDwqk" },
       // 根据单位id获取单位层级
-      getDwLevel: { remoteUrl: base.server + "/myzs/getDwLevel" },
+      getDwLevel: { remoteUrl: base.remotePath + "myzs/getDwLevel" },
       // 社会治安满意度调查情况
       getMyd: {
-        localUrl: "../../static/json/myd.json",
-        remoteUrl: base.server + "myzs/getMyd"
+        localUrl: base.localPath + "myd.json",
+        remoteUrl: base.remotePath + "myzs/getMyd"
       },
       // 获取数据录入初始化数据
       getSjlr: {
-        localUrl: "../../static/json/myzs/pop1.json",
-        remoteUrl: base.server + "myzs/getSjlr"
+        localUrl: base.localPath + "myzs/pop1.json",
+        remoteUrl: base.remotePath + "myzs/getSjlr"
       },
       // 提交数据录入
       submitSjlr: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/submitSjlr"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/submitSjlr"
       },
       // 获取系数配置初始化数据
       getXspz: {
-        localUrl: "../../static/json/myzs/pop2.json",
-        remoteUrl: base.server + "myzs/getXspz"
+        localUrl: base.localPath + "myzs/pop2.json",
+        remoteUrl: base.remotePath + "myzs/getXspz"
       },
       // 重置系数配置
       resetXspz: {
-        localUrl: "../../static/json/myzs/pop2.json",
-        remoteUrl: base.server + "myzs/resetXspz"
+        localUrl: base.localPath + "myzs/pop2.json",
+        remoteUrl: base.remotePath + "myzs/resetXspz"
       },
       // 提交系数配置
       submitXspz: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/submitXspz"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/submitXspz"
       },
       // 获取展示配置初始化数据
       getZspz: {
-        localUrl: "../../static/json/myzs/pop3.json",
-        remoteUrl: base.server + "myzs/getZspz"
+        localUrl: base.localPath + "myzs/pop3.json",
+        remoteUrl: base.remotePath + "myzs/getZspz"
       },
       // 重置展示配置
       resetZspz: {
-        localUrl: "../../static/json/myzs/pop3.json",
-        remoteUrl: base.server + "myzs/resetZspz"
+        localUrl: base.localPath + "myzs/pop3.json",
+        remoteUrl: base.remotePath + "myzs/resetZspz"
       },
       // 计算展示配置数据
       calcZspz: {
-        localUrl: "../../static/json/myzs/pop3.json",
-        remoteUrl: base.server + "myzs/calcZspz"
+        localUrl: base.localPath + "myzs/pop3.json",
+        remoteUrl: base.remotePath + "myzs/calcZspz"
       },
       // 提交展示配置
       submitZspz: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/submitZspz"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/submitZspz"
       },
       getPoint: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getTestJwd"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getTestJwd"
       },
       getMapData: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getMapData"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getMapData"
       },
       getPcsZb: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getPcsZb"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getPcsZb"
       },
       getDetailMapData: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getDetailMapData"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getDetailMapData"
       },
       getMapCount: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getMapCount"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getMapCount"
       },
       getMapDataByBounds: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getMapDataByBounds"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getMapDataByBounds"
       },
       getCkfw: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getCkfw"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getCkfw"
       },
       getCkMapData: {
-        localUrl: "../../static/json/myzs/success.json",
-        remoteUrl: base.server + "myzs/getCkMapData"
+        localUrl: base.localPath + "myzs/success.json",
+        remoteUrl: base.remotePath + "myzs/getCkMapData"
       },
       getCkfwq: {
-        remoteUrl: base.server + "myzs/getCkfwq"
+        remoteUrl: base.remotePath + "myzs/getCkfwq"
       },
       getCkDetail: {
-        remoteUrl: base.server + "myzs/getCkDetail"
+        remoteUrl: base.remotePath + "myzs/getCkDetail"
       },
       getPointByCode: {
-        remoteUrl: base.server + "myzs/getPointByCode"
+        remoteUrl: base.remotePath + "myzs/getPointByCode"
       },
       getCkRdwtDetail: {
-        remoteUrl: base.server + "myzs/getCkRdwtDetail"
+        remoteUrl: base.remotePath + "myzs/getCkRdwtDetail"
       },
       getCkfwqDetail: {
-        remoteUrl: base.server + "myzs/getCkfwqDetail"
+        remoteUrl: base.remotePath + "myzs/getCkfwqDetail"
       },
       getCkfwqZb: {
-        localUrl: "../../static/json/myzs/getCkfwqZb.json",
-        remoteUrl: base.server + "myzs/getCkfwqZb"
+        localUrl: base.localPath + "myzs/getCkfwqZb.json",
+        remoteUrl: base.remotePath + "myzs/getCkfwqZb"
       },
       getCkfwqRybd: {
-        localUrl: "../../static/json/myzs/getCkfwqRank.json",
-        remoteUrl: base.server + "myzs/getCkfwqRybd"
+        localUrl: base.localPath + "myzs/getCkfwqRank.json",
+        remoteUrl: base.remotePath + "myzs/getCkfwqRybd"
       },
       getCkfwqDwbd: {
-        localUrl: "../../static/json/myzs/getCkfwqRank.json",
-        remoteUrl: base.server + "myzs/getCkfwqDwbd"
+        localUrl: base.localPath + "myzs/getCkfwqRank.json",
+        remoteUrl: base.remotePath + "myzs/getCkfwqDwbd"
       },
       getCkfwqRankPopup: {
-        localUrl: "../../static/json/myzs/getCkfwqRankPopup.json",
-        remoteUrl: base.server + "myzs/getCkfwqRankPopup"
+        localUrl: base.localPath + "myzs/getCkfwqRankPopup.json",
+        remoteUrl: base.remotePath + "myzs/getCkfwqRankPopup"
       },
       getBmfwq: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getBmfwq"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getBmfwq"
       },
       getYlldMapData: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldMapData"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldMapData"
       },
       getYlldMapRight1: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldMapRight1"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldMapRight1"
       },
       getYlldMapRight2: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldMapRight2"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldMapRight2"
       },
       getYlldMapRight3: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldMapRight3"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldMapRight3"
       },
       getYlldMapRight4: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldMapRight4"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldMapRight4"
       },
       getYlldDetailMapData: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldDetailMapData"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldDetailMapData"
       },
       getYlldPcsData: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldPcsData"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldPcsData"
       },
       getYlldDetailMapDataByBound: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldDetailMapDataByBound"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldDetailMapDataByBound"
       },
       getYlldRdsjByBound: {
-        localUrl: "../../static/json/myzs/getBmfwq.json",
-        remoteUrl: base.server + "myzs/getYlldRdsjByBound"
+        localUrl: base.localPath + "myzs/getBmfwq.json",
+        remoteUrl: base.remotePath + "myzs/getYlldRdsjByBound"
       }
     },
     myjz: {
       //下拉树
       Tree: {
-        localUrl: "./static/json/Tree.json",
-        remoteUrl: base.server + "/myjz/getDwTree"
+        localUrl: base.localPath + "Tree.json",
+        remoteUrl: base.remotePath + "myjz/getDwTree"
       },
       //民意矩阵中间数据
       List: {
-        localUrl: "./static/json/List.json",
-        remoteUrl: base.server + "/myjz/getMyjz"
+        localUrl: base.localPath + "List.json",
+        remoteUrl: base.remotePath + "myjz/getMyjz"
       },
       //查询栏日期默认值
       Date: {
-        localUrl: "./static/json/Date.json",
-        remoteUrl: base.server + "/myjz/getRecentDate"
+        localUrl: base.localPath + "Date.json",
+        remoteUrl: base.remotePath + "myjz/getRecentDate"
       },
       //极坐标弹窗接口
       Window1: {
-        localUrl: "./static/json/Window1.json",
-        remoteUrl: base.server + "/myjz/getMyjzDialogData"
+        localUrl: base.localPath + "Window1.json",
+        remoteUrl: base.remotePath + "myjz/getMyjzDialogData"
       },
       //环形图弹窗接口
       Window2: {
-        localUrl: "./static/json/Window2.json",
-        remoteUrl: base.server + "/myjz/getMyjzDialogData"
+        localUrl: base.localPath + "Window2.json",
+        remoteUrl: base.remotePath + "myjz/getMyjzDialogData"
       },
       //雷达图弹窗接口
       Window3: {
-        localUrl: "./static/json/Window3.json",
-        remoteUrl: base.server + "/myjz/getMyjzDialogData"
+        localUrl: base.localPath + "Window3.json",
+        remoteUrl: base.remotePath + "myjz/getMyjzDialogData"
       },
       //部门列表
       bmList: {
-        localUrl: "./static/json/bmList.json",
-        remoteUrl: base.server + "/myjz/getMyjz"
+        localUrl: base.localPath + "bmList.json",
+        remoteUrl: base.remotePath + "myjz/getMyjz"
       }
     },
     dwjx: {
       //初始化标签
       Tab: {
-        localUrl: "./static/json/Tab.json",
-        remoteUrl: base.server + "/dwjx/getNavigor"
+        localUrl: base.localPath + "Tab.json",
+        remoteUrl: base.remotePath + "dwjx/getNavigor"
       },
       //初始化标签
       Chart: {
-        localUrl: "./static/json/Chart.json",
-        remoteUrl: base.server + "/dwjx/getChartData"
+        localUrl: base.localPath + "Chart.json",
+        remoteUrl: base.remotePath + "dwjx/getChartData"
       },
       //下拉树
       Tree: {
-        localUrl: "./static/json/Tree.json",
-        remoteUrl: base.server + "/dwjx/getDwTree"
+        localUrl: base.localPath + "Tree.json",
+        remoteUrl: base.remotePath + "dwjx/getDwTree"
       },
       //二级标签
       Tab2: {
-        localUrl: "./static/json/Tab2.json",
-        remoteUrl: base.server + "/dwjx/getNavigor"
+        localUrl: base.localPath + "Tab2.json",
+        remoteUrl: base.remotePath + "dwjx/getNavigor"
       },
       //标红功能
       Keywords: {
-        localUrl: "./static/json/Keywords.json",
-        remoteUrl: base.server + "/dwjx/search"
+        localUrl: base.localPath + "Keywords.json",
+        remoteUrl: base.remotePath + "dwjx/search"
       },
       //可操作图表
       TopChart: {
-        localUrl: "./static/json/TopChart.json",
-        remoteUrl: base.server + "/dwjx/getNavigor"
+        localUrl: base.localPath + "TopChart.json",
+        remoteUrl: base.remotePath + "dwjx/getNavigor"
       },
       //其他图标数据
       OtherCharts: {
-        localUrl: "./static/json/OtherCharts.json",
-        remoteUrl: base.server + "/dwjx/getChartData"
+        localUrl: base.localPath + "OtherCharts.json",
+        remoteUrl: base.remotePath + "dwjx/getChartData"
       }
     },
     myys: {
       //民意热词
       HotWords: {
-        localUrl: "./static/json/HotWords.json",
-        remoteUrl: base.server + "/myys/getReSouList"
+        localUrl: base.localPath + "HotWords.json",
+        remoteUrl: base.remotePath + "myys/getReSouList"
       },
       //热搜-换一换
       SearchList: {
-        localUrl: "./static/json/SearchList.json",
-        remoteUrl: base.server + "/myys/getReSouList"
+        localUrl: base.localPath + "SearchList.json",
+        remoteUrl: base.remotePath + "myys/getReSouList"
       },
       //查询列表
       DataList: {
-        localUrl: "./static/json/DataList.json",
-        remoteUrl: base.server + "/myys/search"
+        localUrl: base.localPath + "DataList.json",
+        remoteUrl: base.remotePath + "myys/search"
       },
       // 更新查询列表缓存
       cacheDataList: {
-        localUrl: "./static/json/DataList.json",
-        remoteUrl: base.server + "/myys/cacheSearch"
+        localUrl: base.localPath + "DataList.json",
+        remoteUrl: base.remotePath + "myys/cacheSearch"
       },
       //详情
       Detail: {
-        localUrl: "./static/json/Detail.json",
-        remoteUrl: base.server + "/myys/getDetail"
+        localUrl: base.localPath + "Detail.json",
+        remoteUrl: base.remotePath + "myys/getDetail"
       },
       // 缓存详情页
       cacheDetail: {
-        localUrl: "./static/json/Detail.json",
-        remoteUrl: base.server + "/myys/cacheDetail"
+        localUrl: base.localPath + "Detail.json",
+        remoteUrl: base.remotePath + "myys/cacheDetail"
       },
       // 弹出详细信息
       PopDetail: {
-        localUrl: "./static/json/Detail.json",
-        remoteUrl: base.server + "myys/getPopDetail"
+        localUrl: base.localPath + "Detail.json",
+        remoteUrl: base.remotePath + "myys/getPopDetail"
       },
       //详情表格
       Grid: {
-        localUrl: "./static/json/Grid.json",
-        remoteUrl: base.server + "/myys/getGrid"
+        localUrl: base.localPath + "Grid.json",
+        remoteUrl: base.remotePath + "myys/getGrid"
       },
       // 更新详情表格
       cacheGrid: {
-        localUrl: "./static/json/Grid.json",
-        remoteUrl: base.server + "/myys/cacheGrid"
+        localUrl: base.localPath + "Grid.json",
+        remoteUrl: base.remotePath + "myys/cacheGrid"
       },
       //详情表格
       saveKeyWord: {
-        localUrl: "./static/json/Grid.json",
-        remoteUrl: base.server + "/myys/saveKeyWord"
+        localUrl: base.localPath + "Grid.json",
+        remoteUrl: base.remotePath + "myys/saveKeyWord"
       }
     },
     rdwt: {
-      Tree: { remoteUrl: base.server + "/myrd/getDwTree" }, // 加载树
-      RdList: {
-        localUrl: "./static/json/rdwt.json",
-        remoteUrl: base.server + "myrd/getRdwtList"
-      }, // 获取左侧数据
-      Rdwt: {
-        localUrl: "./static/json/ChartData.json",
-        remoteUrl: base.server + "myrd/getWtTrend"
-      }, // 加载热点问题
-      Sqxz: {
-        localUrl: "./static/json/ChartData.json",
-        remoteUrl: base.server + "myrd/getSqxzFx"
-      }, // 加载诉求性质
-      Sjly: {
-        localUrl: "./static/json/ChartData.json",
-        remoteUrl: base.server + "myrd/getSjlyFx"
-      }, // 加载数据来源
-      Jtwt: {
-        localUrl: "./static/json/ChartData.json",
-        remoteUrl: base.server + "myrd/getTagAnalysis"
-      }, // 加载具体问题
-      Dwfx: {
-        localUrl: "./static/json/ChartData.json",
-        remoteUrl: base.server + "myrd/getTagAnalysisByDw"
-      }, // 加载单位分析
-      Rcfx: {
-        localUrl: "./static/json/ChartData.json",
-        remoteUrl: base.server + "myrd/getFkrcFx"
-      }, // 加载热词分析
-      // "exportReport" : {localUrl: "./static/json/ChartData.json", remoteUrl: base.server + "myrd/exportReport"}, // 导出报告
-      getTags: {
-        localUrl: "./static/json/getTags.json",
-        remoteUrl: base.server + "myrd/getTags"
-      }, // 获取初始化查询条件
-      getTab: {
-        localUrl: "./static/json/TabData.json",
-        remoteUrl: base.server + "myrd/getTableData"
-      }, // 加载表单数据,
-      getRightList: {
-        localUrl: "./static/json/rightData.json",
-        remoteUrl: base.server + "myrd/getSelectedTableData"
-      }, // 获取右侧list
-      getDetail: {
-        localUrl: "./static/json/getDetail.json",
-        remoteUrl: base.server + "myrd/preview"
-      }, // 加载详细信息
-      publish: {
-        localUrl: "./static/json/getDetail.json",
-        remoteUrl: base.server + "myrd/publish"
-      }, // 发布数据,
-      getJcj: {
-        localUrl: "./static/json/rdwt/jcj.json",
-        remoteUrl: base.server + "myrd/ranking"
-      }, // 获取接处警数据
-      getCkfw: {
-        localUrl: "./static/json/rdwt/jcj.json",
-        remoteUrl: base.server + "myrd/ranking"
-      }, // 获取窗口服务数据
-      getAj: {
-        localUrl: "./static/json/rdwt/jcj.json",
-        remoteUrl: base.server + "myrd/ranking"
-      }, // 获取案件数据
-      getMjsxl: {
-        localUrl: "./static/json/rdwt/sxl.json",
-        remoteUrl: base.server + "myrd/ranking"
-      } // 获取社区民警熟悉率数据
+      tree: {
+        localUrl: base.localPath + "Tree.json",
+        remoteUrl: base.remotePath + "myzs/getDwTree"
+      },
+      getMidData: {
+        localUrl: base.localPath + "rdwt/midData.json",
+        remoteUrl: base.remotePath + "rdwt/getRdwtList"
+      },
+      getChart1: {
+        localUrl: base.localPath + "ylld/chart.json",
+        remoteUrl: base.remotePath + "rdwt/getTrend"
+      },
+      getChart2: {
+        localUrl: base.localPath + "ylld/chart.json",
+        remoteUrl: base.remotePath + "rdwt/getSqxz"
+      },
+      getChart3: {
+        localUrl: base.localPath + "ylld/chart.json",
+        remoteUrl: base.remotePath + "rdwt/getWt"
+      },
+      getChart4: {
+        localUrl: base.localPath + "ylld/chart.json",
+        remoteUrl: base.remotePath + "rdwt/getDwfb"
+      }
     },
     zxyp: {
       aj: {
         Tree: {
-          localUrl: "./static/json/Tree.json",
-          remoteUrl: base.server + "zxyp/aj/getDwTree"
+          localUrl: base.localPath + "Tree.json",
+          remoteUrl: base.remotePath + "zxyp/aj/getDwTree"
         }, // 加载树
         getZbzs: {
-          localUrl: "./static/json/aj/zbzs.json",
-          remoteUrl: base.server + "zxyp/aj/zbzs"
+          localUrl: base.localPath + "aj/zbzs.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zbzs"
         }, // 加载指标展示
         getHfrc: {
-          localUrl: "./static/json/aj/hfrc.json",
-          remoteUrl: base.server + "zxyp/aj/hfrc"
+          localUrl: base.localPath + "aj/hfrc.json",
+          remoteUrl: base.remotePath + "zxyp/aj/hfrc"
         }, // 加载热词
         getZhpjzsfxTrend: {
-          localUrl: "./static/json/aj/zhpjzsfxTrend.json",
-          remoteUrl: base.server + "zxyp/aj/zhpjzsfxTrend"
+          localUrl: base.localPath + "aj/zhpjzsfxTrend.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zhpjzsfxTrend"
         }, // 加载趋势分析
         getZhpjzsfx: {
-          localUrl: "./static/json/aj/zhpjzsfx.json",
-          remoteUrl: base.server + "zxyp/aj/zhpjzsfx"
+          localUrl: base.localPath + "aj/zhpjzsfx.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zhpjzsfx"
         }, // 加载案件综合评价指数分析
         getHjwtfx: {
-          localUrl: "./static/json/aj/hjwtfx.json",
-          remoteUrl: base.server + "zxyp/aj/hjwtfx"
+          localUrl: base.localPath + "aj/hjwtfx.json",
+          remoteUrl: base.remotePath + "zxyp/aj/hjwtfx"
         }, // 加载环节问题分析
         getAjdwfb: {
-          localUrl: "./static/json/aj/ajdwfb.json",
-          remoteUrl: base.server + "zxyp/aj/ajdwfb"
+          localUrl: base.localPath + "aj/ajdwfb.json",
+          remoteUrl: base.remotePath + "zxyp/aj/ajdwfb"
         }, // 加载案件问题单位分布
         getAjbljtwtfx: {
-          localUrl: "./static/json/aj/ajbljtwtfx.json",
-          remoteUrl: base.server + "zxyp/aj/ajbljtwtfx"
+          localUrl: base.localPath + "aj/ajbljtwtfx.json",
+          remoteUrl: base.remotePath + "zxyp/aj/ajbljtwtfx"
         }, // 加载办案小助手-案件办理具体问题分析
         getZxfxpjzs: {
-          localUrl: "./static/json/aj/zxfxpjzs.json",
-          remoteUrl: base.server + "zxyp/aj/zxfxpjzs"
+          localUrl: base.localPath + "aj/zxfxpjzs.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zxfxpjzs"
         }, // 加载专项分析评价指数
         getZsmyb: {
-          localUrl: "./static/json/aj/zsmyb.json",
-          remoteUrl: base.server + "zxyp/aj/zsmyb"
+          localUrl: base.localPath + "aj/zsmyb.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zsmyb"
         }, // 加载案件办理综合评价指数满意榜
         getZxfxzhpjzs: {
-          localUrl: "./static/json/aj/zxfxzhpjzs.json",
-          remoteUrl: base.server + "zxyp/aj/zxfxzhpjzs"
+          localUrl: base.localPath + "aj/zxfxzhpjzs.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zxfxzhpjzs"
         }, // 加载弹出框案件综合评价指数分析分析
         getZxgf: {
-          localUrl: "./static/json/aj/zxgf.json",
-          remoteUrl: base.server + "zxyp/aj/zxgf"
+          localUrl: base.localPath + "aj/zxgf.json",
+          remoteUrl: base.remotePath + "zxyp/aj/zxgf"
         } // 加载执行规范
       },
       jcj: {
         // 加载树
         Tree: {
-          localUrl: "./static/json/Tree.json",
-          remoteUrl: base.server + "zxyp/jcj/getDwTree"
+          localUrl: base.localPath + "Tree.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/getDwTree"
         },
         //左上文本
         Txt: {
-          localUrl: "./static/json/jcj/Txt.json",
-          remoteUrl: base.server + "zxyp/jcj/zbzs"
+          localUrl: base.localPath + "jcj/Txt.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/zbzs"
         },
         //知识库
         Zsk: {
-          localUrl: "./static/json/jcj/Zsk.json",
-          remoteUrl: base.server + "zxyp/jcj/zsk"
+          localUrl: base.localPath + "jcj/Zsk.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/zsk"
         },
         //下滑预警
         Xhyj: {
-          localUrl: "./static/json/jcj/Xhyj.json",
-          remoteUrl: base.server + "zxyp/jcj/xhyjfx"
+          localUrl: base.localPath + "jcj/Xhyj.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/xhyjfx"
         },
         //排行榜
         Rank: {
-          localUrl: "./static/json/jcj/Rank.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjmydrank"
+          localUrl: base.localPath + "jcj/Rank.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjmydrank"
         },
         //标签云
         Tag: {
-          localUrl: "./static/json/jcj/Tag.json",
-          remoteUrl: base.server + "zxyp/jcj/rcfx"
+          localUrl: base.localPath + "jcj/Tag.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/rcfx"
         },
         //满意度
         Myd: {
-          localUrl: "./static/json/jcj/Myd.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjmydfxTrend"
+          localUrl: base.localPath + "jcj/Myd.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjmydfxTrend"
         },
         //单位情况
         Dwqk: {
-          localUrl: "./static/json/jcj/Dwqk.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjdwqk"
+          localUrl: base.localPath + "jcj/Dwqk.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjdwqk"
         },
         //雷达图1
         Rador1: {
-          localUrl: "./static/json/jcj/Rador.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjmydfx"
+          localUrl: base.localPath + "jcj/Rador.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjmydfx"
         },
         //雷达图2
         Rador2: {
-          localUrl: "./static/json/jcj/Rador.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjmydsdfx"
+          localUrl: base.localPath + "jcj/Rador.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjmydsdfx"
         },
         //警情分析
         Jqfx: {
-          localUrl: "./static/json/jcj/Jqfx.json",
-          remoteUrl: base.server + "zxyp/jcj/jqfx"
+          localUrl: base.localPath + "jcj/Jqfx.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jqfx"
         },
         //环节问题
         Hjwt: {
-          localUrl: "./static/json/jcj/Jqfx.json",
-          remoteUrl: base.server + "zxyp/jcj/jqjtwtfx"
+          localUrl: base.localPath + "jcj/Jqfx.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jqjtwtfx"
         },
         //问题单位
         Wtdw: {
-          localUrl: "./static/json/jcj/Wtdw.json",
-          remoteUrl: base.server + "zxyp/jcj/jqjtwtdwfx"
+          localUrl: base.localPath + "jcj/Wtdw.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jqjtwtdwfx"
         },
         //警情类型
         Jqlx: {
-          localUrl: "./static/json/jcj/Jqlx.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjjqlxsd"
+          localUrl: base.localPath + "jcj/Jqlx.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjjqlxsd"
         },
         //视频
         Video: {
-          localUrl: "./static/json/jcj/Video.json",
-          remoteUrl: base.server + "zxyp/jcj/videoList"
+          localUrl: base.localPath + "jcj/Video.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/videoList"
         },
         //弹窗民警信息
         User: {
-          localUrl: "./static/json/jcj/User.json",
-          remoteUrl: base.server + "zxyp/jcj/mjxx"
+          localUrl: base.localPath + "jcj/User.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/mjxx"
         },
         //弹窗标签云
         Tag2: {
-          localUrl: "./static/json/jcj/Tag.json",
-          remoteUrl: base.server + "zxyp/jcj/mjcy"
+          localUrl: base.localPath + "jcj/Tag.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/mjcy"
         },
         //弹窗折线图
         Line: {
-          localUrl: "./static/json/ylld/Ylld.json",
-          remoteUrl: base.server + "zxyp/jcj/cjtsfx"
+          localUrl: base.localPath + "ylld/Ylld.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/cjtsfx"
         },
         //弹窗雷达-左
         Rador3: {
-          localUrl: "./static/json/jcj/Rador.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjmydfx"
+          localUrl: base.localPath + "jcj/Rador.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjmydfx"
         },
         //弹窗雷达-右
         Rador4: {
-          localUrl: "./static/json/jcj/Rador.json",
-          remoteUrl: base.server + "zxyp/jcj/jcjmydsdfx"
+          localUrl: base.localPath + "jcj/Rador.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/jcjmydsdfx"
         },
         // 一般工单量走势分析
         getGdzsgx: {
-          localUrl: "./static/json/rx/Chart.json",
-          remoteUrl: base.server + "zxyp/jcj/getGdzsgx"
+          localUrl: base.localPath + "rx/Chart.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/getGdzsgx"
         },
         // 一般工单业务分析
         getGdywfx: {
-          localUrl: "./static/json/rx/Chart.json",
-          remoteUrl: base.server + "zxyp/jcj/getGdywfx"
+          localUrl: base.localPath + "rx/Chart.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/getGdywfx"
         },
         // 一般工单各单位情况
         getGddwfb: {
-          localUrl: "./static/json/rx/Sqdwfb.json",
-          remoteUrl: base.server + "zxyp/jcj/getGddwfb"
+          localUrl: base.localPath + "rx/Sqdwfb.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/getGddwfb"
         }
       },
       ckfw: {
         //左上文本
         Txt: {
-          localUrl: "./static/json/jcj/Txt.json",
-          remoteUrl: base.server + "zxyp/ckfw/zbzs"
+          localUrl: base.localPath + "jcj/Txt.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/zbzs"
         },
         //满意度走势
         Myd: {
-          localUrl: "./static/json/jcj/Myd.json",
-          remoteUrl: base.server + "zxyp/ckfw/ckfwmydtrend"
+          localUrl: base.localPath + "jcj/Myd.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/ckfwmydtrend"
         },
         //单位情况
         Dwqk: {
-          localUrl: "./static/json/jcj/Dwqk.json",
-          remoteUrl: base.server + "zxyp/ckfw/ckfwmyddwqk"
+          localUrl: base.localPath + "jcj/Dwqk.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/ckfwmyddwqk"
         },
         //雷达图
         Rador: {
-          localUrl: "./static/json/jcj/Rador.json",
-          remoteUrl: base.server + "zxyp/ckfw/ckfwmydfx"
+          localUrl: base.localPath + "jcj/Rador.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/ckfwmydfx"
         },
         //具体问题
         Jtwt: {
-          localUrl: "./static/json/jcj/Jqfx.json",
-          remoteUrl: base.server + "zxyp/ckfw/ckfwjtwtfx"
+          localUrl: base.localPath + "jcj/Jqfx.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/ckfwjtwtfx"
         },
         //案件问题
         Ajwt: {
-          localUrl: "./static/json/ckfw/Ajwt.json",
-          remoteUrl: base.server + "zxyp/ckfw/ajwtdwfx"
+          localUrl: base.localPath + "ckfw/Ajwt.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/ajwtdwfx"
         },
         //排行榜按钮
         Menu: {
-          localUrl: "./static/json/ckfw/Menu.json",
-          remoteUrl: base.server + "zxyp/ckfw/mydrankbutton"
+          localUrl: base.localPath + "ckfw/Menu.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/mydrankbutton"
         },
         //排行榜
         Rank: {
-          localUrl: "./static/json/ckfw/Rank.json",
-          remoteUrl: base.server + "zxyp/ckfw/mydrankmenu"
+          localUrl: base.localPath + "ckfw/Rank.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/mydrankmenu"
         },
         //中上文本
         Yw: {
-          localUrl: "./static/json/ckfw/Yw.json",
-          remoteUrl: base.server + "zxyp/ckfw/flzbzs"
+          localUrl: base.localPath + "ckfw/Yw.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/flzbzs"
         },
         //词云
         Tag: {
-          localUrl: "./static/json/jcj/Tag.json",
-          remoteUrl: base.server + "zxyp/ckfw/rcfx"
+          localUrl: base.localPath + "jcj/Tag.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/rcfx"
         },
         //问题预测
         Ckfw: {
-          localUrl: "./static/json/ckfw/Ckfw.json",
-          remoteUrl: base.server + "zxyp/ckfw/ckfwwtyc"
+          localUrl: base.localPath + "ckfw/Ckfw.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/ckfwwtyc"
         },
         // 一般工单量走势分析
         getGdzsgx: {
-          localUrl: "./static/json/rx/Chart.json",
-          remoteUrl: base.server + "zxyp/ckfw/getGdzsgx"
+          localUrl: base.localPath + "rx/Chart.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/getGdzsgx"
         },
         // 一般工单业务分析
         getGdywfx: {
-          localUrl: "./static/json/rx/Chart.json",
-          remoteUrl: base.server + "zxyp/ckfw/getGdywfx"
+          localUrl: base.localPath + "rx/Chart.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/getGdywfx"
         },
         // 一般工单各单位情况
         getGddwfb: {
-          localUrl: "./static/json/rx/Sqdwfb.json",
-          remoteUrl: base.server + "zxyp/ckfw/getGddwfb"
+          localUrl: base.localPath + "rx/Sqdwfb.json",
+          remoteUrl: base.remotePath + "zxyp/ckfw/getGddwfb"
         }
       },
       ylld: {
         // 加载树
         Tree: {
-          localUrl: "./static/json/Tree.json",
-          remoteUrl: base.server + "zxyp/ylld/getDwTree"
+          localUrl: base.localPath + "Tree.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getDwTree"
         },
         //左上文本
         Txt: {
-          localUrl: "./static/json/ylld/Txt.json",
-          remoteUrl: base.server + "zxyp/ylld/zbzs"
+          localUrl: base.localPath + "ylld/Txt.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/zbzs"
         },
         //排行榜
         Rank: {
-          localUrl: "./static/json/ylld/Rank.json",
-          remoteUrl: base.server + "zxyp/ylld/zjjml"
+          localUrl: base.localPath + "ylld/Rank.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/zjjml"
         },
         //社会治安满意度
         Shza: {
-          localUrl: "./static/json/ckfw/Ckfw.json",
-          remoteUrl: base.server + "zxyp/ylld/jtwt"
+          localUrl: base.localPath + "ckfw/Ckfw.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/jtwt"
         },
         //单位情况分析
         Rdfx: {
-          localUrl: "./static/json/ylld/Rdfx.json",
-          remoteUrl: base.server + "zxyp/ylld/dwqkfx"
+          localUrl: base.localPath + "ylld/Rdfx.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/dwqkfx"
         },
         //一率两度走势
         Ylld: {
-          localUrl: "./static/json/ylld/Ylld.json",
-          remoteUrl: base.server + "zxyp/ylld/ylldTrend"
+          localUrl: base.localPath + "ylld/Ylld.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/ylldTrend"
         },
         //多维解析-左
         Dwjxz: {
-          localUrl: "./static/json/jcj/Jqfx.json",
-          remoteUrl: base.server + "zxyp/ylld/getDwjs"
+          localUrl: base.localPath + "jcj/Jqfx.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getDwjs"
         },
         //多维解析-右
         Info: {
-          localUrl: "./static/json/ylld/Info.json",
-          remoteUrl: base.server + "zxyp/ylld/getDwjsInfo"
+          localUrl: base.localPath + "ylld/Info.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getDwjsInfo"
         },
         //走访助手
         Zfzs: {
-          localUrl: "./static/json/ylld/Zfzs.json",
-          remoteUrl: base.server + "zxyp/ylld/zfzs"
+          localUrl: base.localPath + "ylld/Zfzs.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/zfzs"
         },
         //推送
         Ts: {
-          localUrl: "./static/json/ylld/Ts.json",
-          remoteUrl: base.server + "zxyp/ylld/kchts"
+          localUrl: base.localPath + "ylld/Ts.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/kchts"
         },
         Zsfx: {
-          localUrl: "./static/json/ylld/Zsfx.json",
-          remoteUrl: base.server + "zxyp/ylld/getZsfx"
+          localUrl: base.localPath + "ylld/Zsfx.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getZsfx"
         },
         Dyqkfx: {
-          localUrl: "./static/json/ylld/Dyqkfx.json",
-          remoteUrl: base.server + "zxyp/ylld/getDyqkfx"
+          localUrl: base.localPath + "ylld/Dyqkfx.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getDyqkfx"
         },
         Dyzj: {
-          localUrl: "./static/json/ylld/Dyzj.json",
-          remoteUrl: base.server + "zxyp/ylld/getDyzj"
+          localUrl: base.localPath + "ylld/Dyzj.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getDyzj"
         },
         initMidLeft: {
-          localUrl: "./static/json/ylld/chart.json",
-          remoteUrl: base.server + "zxyp/ylld/getMydfxLeft"
+          localUrl: base.localPath + "ylld/chart.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getMydfxLeft"
         },
         initMidRight: {
-          localUrl: "./static/json/ylld/chart.json",
-          remoteUrl: base.server + "zxyp/ylld/getMydfxRight"
+          localUrl: base.localPath + "ylld/chart.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getMydfxRight"
         },
         initMid3: {
-          localUrl: "./static/json/ylld/chart.json",
-          remoteUrl: base.server + "zxyp/ylld/getSxl"
+          localUrl: base.localPath + "ylld/chart.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getSxl"
         },
         initRight1: {
-          localUrl: "./static/json/ylld/Dcybfx.json",
-          remoteUrl: base.server + "zxyp/ylld/getDcybfx"
+          localUrl: base.localPath + "ylld/Dcybfx.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getDcybfx"
         },
         initRight2: {
-          localUrl: "./static/json/ylld/Jmhd.json",
-          remoteUrl: base.server + "zxyp/ylld/getJmhd"
+          localUrl: base.localPath + "ylld/Jmhd.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getJmhd"
         },
         initRight3: {
-          localUrl: "./static/json/ylld/chart.json",
-          remoteUrl: base.server + "zxyp/ylld/getPhb"
+          localUrl: base.localPath + "ylld/chart.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getPhb"
         },
         initSelector: {
-          localUrl: "./static/json/ylld/dept.json",
-          remoteUrl: base.server + "zxyp/ylld/getPhbDw"
+          localUrl: base.localPath + "ylld/dept.json",
+          remoteUrl: base.remotePath + "zxyp/ylld/getPhbDw"
         }
       },
       rx: {
         // 加载树
         Tree: {
-          localUrl: "./static/json/Tree.json",
-          remoteUrl: base.server + "zxyp/rx/getDwTree"
+          localUrl: base.localPath + "Tree.json",
+          remoteUrl: base.remotePath + "zxyp/rx/getDwTree"
         },
         //左上文本
         Txt: {
-          localUrl: "./static/json/jcj/Txt.json",
-          remoteUrl: base.server + "zxyp/rx/zbzs"
+          localUrl: base.localPath + "jcj/Txt.json",
+          remoteUrl: base.remotePath + "zxyp/rx/zbzs"
         },
         //热词
         Tag: {
-          localUrl: "./static/json/jcj/Tag.json",
-          remoteUrl: base.server + "zxyp/rx/rc"
+          localUrl: base.localPath + "jcj/Tag.json",
+          remoteUrl: base.remotePath + "zxyp/rx/rc"
         },
         //热线分析
         Rxfx: {
-          localUrl: "./static/json/jcj/Myd.json",
-          remoteUrl: base.server + "zxyp/rx/mydAndBdFx"
+          localUrl: base.localPath + "jcj/Myd.json",
+          remoteUrl: base.remotePath + "zxyp/rx/mydAndBdFx"
         },
         //热点事件排行榜
         Rank: {
-          localUrl: "./static/json/rx/Rank.json",
-          remoteUrl: base.server + "zxyp/rx/rdsjRank"
+          localUrl: base.localPath + "rx/Rank.json",
+          remoteUrl: base.remotePath + "zxyp/rx/rdsjRank"
         },
         // 群众诉求量
         Qzsql: {
-          localUrl: "./static/json/rx/Chart.json",
-          remoteUrl: base.server + "zxyp/rx/sqlTrend"
+          localUrl: base.localPath + "rx/Chart.json",
+          remoteUrl: base.remotePath + "zxyp/rx/sqlTrend"
         },
         // 诉求性质分析
         Sqxz: {
-          localUrl: "./static/json/rx/Chart.json",
-          remoteUrl: base.server + "zxyp/rx/sqxzfx"
+          localUrl: base.localPath + "rx/Chart.json",
+          remoteUrl: base.remotePath + "zxyp/rx/sqxzfx"
         },
         // 诉求单位分布
         Sqdwfb: {
-          localUrl: "./static/json/rx/Sqdwfb.json",
-          remoteUrl: base.server + "zxyp/rx/sqdwfb"
+          localUrl: base.localPath + "rx/Sqdwfb.json",
+          remoteUrl: base.remotePath + "zxyp/rx/sqdwfb"
         },
         // 办事效能分析
         Bsxn: {
-          localUrl: "./static/json/rx/Point.json",
-          remoteUrl: base.server + "zxyp/rx/xnfx"
+          localUrl: base.localPath + "rx/Point.json",
+          remoteUrl: base.remotePath + "zxyp/rx/xnfx"
         },
         // 12345工单办理优秀案例
         getYxal: {
-          localUrl: "./static/json/rx/yxal.json",
+          localUrl: base.localPath + "rx/yxal.json",
           remoteUrl: "zxyp/rx/getYxal"
         },
         // 12345工单办理优秀案例弹出页
         getPopupYxal: {
-          localUrl: "./static/json/rx/popupYxal.json",
+          localUrl: base.localPath + "rx/popupYxal.json",
           remoteUrl: "zxyp/rx/getPopupYxal"
         },
         // 热点专题
         Rdzt: {
-          localUrl: "./static/json/rx/Rdzt.json",
-          remoteUrl: base.server + "zxyp/rx/rdzt"
+          localUrl: base.localPath + "rx/Rdzt.json",
+          remoteUrl: base.remotePath + "zxyp/rx/rdzt"
         },
         // 诉求性质分析
         Zhpjzs: {
-          localUrl: "./static/json/aj/hjwtfx.json",
-          remoteUrl: base.server + "zxyp/rx/popsqxz"
+          localUrl: base.localPath + "aj/hjwtfx.json",
+          remoteUrl: base.remotePath + "zxyp/rx/popsqxz"
         },
         // 各单位诉求量及满意度分析
         Myd: {
-          localUrl: "./static/json/jcj/Myd.json",
-          remoteUrl: base.server + "zxyp/rx/popdwfx"
+          localUrl: base.localPath + "jcj/Myd.json",
+          remoteUrl: base.remotePath + "zxyp/rx/popdwfx"
         },
         // 群众诉求走势分析
         Qzsqzsgx: {
-          localUrl: "./static/json/jcj/Myd.json",
-          remoteUrl: base.server + "zxyp/rx/poptrend"
+          localUrl: base.localPath + "jcj/Myd.json",
+          remoteUrl: base.remotePath + "zxyp/rx/poptrend"
         },
         popup: {
           getTop: {
-            localUrl: "./static/json/rx/top.json",
-            remoteUrl: base.server + "zxyp/rx/popup/getTop"
+            localUrl: base.localPath + "rx/top.json",
+            remoteUrl: base.remotePath + "zxyp/rx/popup/getTop"
           },
           getMidLeft: {
-            localUrl: "./static/json/rx/Chart.json",
-            remoteUrl: base.server + "zxyp/rx/popup/getMidLeft"
+            localUrl: base.localPath + "rx/Chart.json",
+            remoteUrl: base.remotePath + "zxyp/rx/popup/getMidLeft"
           },
           getMidRightTop: {
-            localUrl: "./static/json/rx/midRightTop.json",
-            remoteUrl: base.server + "zxyp/rx/popup/getMidRightTop"
+            localUrl: base.localPath + "rx/midRightTop.json",
+            remoteUrl: base.remotePath + "zxyp/rx/popup/getMidRightTop"
           },
           getMidRight: {
-            localUrl: "./static/json/rx/midRight.json",
-            remoteUrl: base.server + "zxyp/rx/popup/getMidRight"
+            localUrl: base.localPath + "rx/midRight.json",
+            remoteUrl: base.remotePath + "zxyp/rx/popup/getMidRight"
           },
           getBottomLeft: {
-            localUrl: "./static/json/rx/bottomLeft.json",
-            remoteUrl: base.server + "zxyp/rx/popup/getBottomLeft"
+            localUrl: base.localPath + "rx/bottomLeft.json",
+            remoteUrl: base.remotePath + "zxyp/rx/popup/getBottomLeft"
           },
           getBottomRight: {
-            localUrl: "./static/json/rx/bottomRight.json",
-            remoteUrl: base.server + "zxyp/rx/popup/getBottomRight"
+            localUrl: base.localPath + "rx/bottomRight.json",
+            remoteUrl: base.remotePath + "zxyp/rx/popup/getBottomRight"
           }
         },
         setting: {
           left1: {
-            localUrl: "./static/json/rx/setting/left1.json",
-            remoteUrl: base.server + "zxyp/rx/setting/left1"
+            localUrl: base.localPath + "rx/setting/left1.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/left1"
           },
           left2: {
-            localUrl: "./static/json/rx/setting/left2.json",
-            remoteUrl: base.server + "zxyp/rx/setting/left2"
+            localUrl: base.localPath + "rx/setting/left2.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/left2"
           },
           right1: {
-            localUrl: "./static/json/rx/setting/right1.json",
-            remoteUrl: base.server + "zxyp/rx/setting/right1"
+            localUrl: base.localPath + "rx/setting/right1.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/right1"
           },
           right2: {
-            localUrl: "./static/json/rx/setting/right2.json",
-            remoteUrl: base.server + "zxyp/rx/setting/right2"
+            localUrl: base.localPath + "rx/setting/right2.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/right2"
           },
           addRight1: {
-            localUrl: "./static/json/myzs/success.json",
-            remoteUrl: base.server + "zxyp/rx/setting/addRight1"
+            localUrl: base.localPath + "myzs/success.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/addRight1"
           },
           deleteRight1: {
-            localUrl: "./static/json/myzs/success.json",
-            remoteUrl: base.server + "zxyp/rx/setting/deleteRight1"
+            localUrl: base.localPath + "myzs/success.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/deleteRight1"
           },
           addRight2: {
-            localUrl: "./static/json/myzs/success.json",
-            remoteUrl: base.server + "zxyp/rx/setting/addRight2"
+            localUrl: base.localPath + "myzs/success.json",
+            remoteUrl: base.remotePath + "zxyp/rx/setting/addRight2"
           }
         }
       },
       jtsg: {
         // 树结构
         Tree: {
-          localUrl: "./static/json/Tree.json",
-          remoteUrl: base.server + "zxyp/jcj/getDwTree"
+          localUrl: base.localPath + "Tree.json",
+          remoteUrl: base.remotePath + "zxyp/jcj/getDwTree"
         },
         // 左上指标
         left1: {
-          localUrl: "./static/json/jtsg/left1.json",
-          remoteUrl: base.server + "zxyp/jtsg/getJqAndJtsg"
+          localUrl: base.localPath + "jtsg/left1.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getJqAndJtsg"
         },
         // 左下满意度走势分析
         left2: {
-          localUrl: "./static/json/jtsg/left2.json",
-          remoteUrl: base.server + "zxyp/jtsg/getMydzsfx"
+          localUrl: base.localPath + "jtsg/left2.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getMydzsfx"
         },
         // 中1-1交通警情分析
         mid1_1: {
-          localUrl: "./static/json/jtsg/left2.json",
-          remoteUrl: base.server + "zxyp/jtsg/getJtjqfx"
+          localUrl: base.localPath + "jtsg/left2.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getJtjqfx"
         },
         // 中1-2具体问题分析
         mid1_2: {
-          localUrl: "./static/json/jtsg/left2.json",
-          remoteUrl: base.server + "zxyp/jtsg/getJtwtfx"
+          localUrl: base.localPath + "jtsg/left2.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getJtwtfx"
         },
         // 中1-3具体问题单位分布
         mid1_3: {
-          localUrl: "./static/json/jtsg/mid1-3.json",
-          remoteUrl: base.server + "zxyp/jtsg/getJtwtdwfb"
+          localUrl: base.localPath + "jtsg/mid1-3.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getJtwtdwfb"
         },
         // 中2-1窗口服务满意度
         mid2_1: {
-          localUrl: "./static/json/jtsg/mid2-1.json",
-          remoteUrl: base.server + "zxyp/jtsg/getJtsgclzhpj"
+          localUrl: base.localPath + "jtsg/mid2-1.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getJtsgclzhpj"
         },
         // 中2-2环节问题分析
         mid2_2: {
-          localUrl: "./static/json/jtsg/left2.json",
-          remoteUrl: base.server + "zxyp/jtsg/getHjwtfx"
+          localUrl: base.localPath + "jtsg/left2.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getHjwtfx"
         },
         // 中2-3环节问题单位分布
         mid2_3: {
-          localUrl: "./static/json/jtsg/mid1-3.json",
-          remoteUrl: base.server + "zxyp/jtsg/getHjwtdwfx"
+          localUrl: base.localPath + "jtsg/mid1-3.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getHjwtdwfx"
         },
         // 右1满意度下滑预警分析
         right1: {
-          localUrl: "./static/json/jtsg/right1.json",
-          remoteUrl: base.server + "zxyp/jtsg//getMydxhyj"
+          localUrl: base.localPath + "jtsg/right1.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg//getMydxhyj"
         },
         // 右1综合评价排行榜
         right2: {
-          localUrl: "./static/json/jtsg/right2.json",
-          remoteUrl: base.server + "zxyp/jtsg/getZhpjphb"
+          localUrl: base.localPath + "jtsg/right2.json",
+          remoteUrl: base.remotePath + "zxyp/jtsg/getZhpjphb"
         }
       }
     },
@@ -911,80 +870,80 @@ define([], function() {
       ywfxbg: {
         submitSetting: {
           // 设置接口
-          localUrl: "./static/json/ywfxbg/submitSetting.json",
-          remoteUrl: base.server + "znbg/ywfxbg/submitSetting"
+          localUrl: base.localPath + "ywfxbg/submitSetting.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/submitSetting"
         },
         generateReport: {
           // 生成报告
-          localUrl: "./static/json/ywfxbg/generateReport.json",
-          remoteUrl: base.server + "znbg/ywfxbg/generateReport"
+          localUrl: base.localPath + "ywfxbg/generateReport.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/generateReport"
         },
         getFileList: {
           // 获取文件列表
-          localUrl: "./static/json/ywfxbg/getFileList.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getFileList"
+          localUrl: base.localPath + "ywfxbg/getFileList.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getFileList"
         },
         postImg: {
-          localUrl: "./static/json/ywfxbg/postImg.json",
-          remoteUrl: base.server + "znbg/ywfxbg/postImg"
+          localUrl: base.localPath + "ywfxbg/postImg.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/postImg"
         },
         getJcjPreview: {
-          localUrl: "./static/json/ywfxbg/jcjPreview.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getJcjPreview"
+          localUrl: base.localPath + "ywfxbg/jcjPreview.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getJcjPreview"
         },
         getCkPreview: {
-          localUrl: "./static/json/ywfxbg/ckPreview.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getCkPreview"
+          localUrl: base.localPath + "ywfxbg/ckPreview.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getCkPreview"
         },
         getAjPreview: {
-          localUrl: "./static/json/ywfxbg/ajPreview.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getAjPreview"
+          localUrl: base.localPath + "ywfxbg/ajPreview.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getAjPreview"
         },
         getRxPreview: {
-          localUrl: "./static/json/ywfxbg/rxPreview.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getRxPreview"
+          localUrl: base.localPath + "ywfxbg/rxPreview.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getRxPreview"
         },
         getJtsgPreview: {
-          localUrl: "./static/json/ywfxbg/jtsgPreview.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getJtsgPreview"
+          localUrl: base.localPath + "ywfxbg/jtsgPreview.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getJtsgPreview"
         },
         getYlldPreview: {
-          localUrl: "./static/json/ywfxbg/ylldPreview.json",
-          remoteUrl: base.server + "znbg/ywfxbg/getYlldPreview"
+          localUrl: base.localPath + "ywfxbg/ylldPreview.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/getYlldPreview"
         },
         uploadImg: {
-          localUrl: "./static/json/ywfxbg/uploadImg.json",
-          remoteUrl: base.server + "znbg/ywfxbg/uploadImg"
+          localUrl: base.localPath + "ywfxbg/uploadImg.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/uploadImg"
         },
         deleteReport: {
           // 删除报告
-          localUrl: "./static/json/ywfxbg/deleteReport.json",
-          remoteUrl: base.server + "znbg/ywfxbg/deleteReport"
+          localUrl: base.localPath + "ywfxbg/deleteReport.json",
+          remoteUrl: base.remotePath + "znbg/ywfxbg/deleteReport"
         }
       },
       zhfxbg: {
         getLeft: {
-          localUrl: "./static/json/zhfxbg/getLeft.json",
-          remoteUrl: base.server + "znbg/zhfxbg/getLeft"
+          localUrl: base.localPath + "zhfxbg/getLeft.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/getLeft"
         },
         generateReport: {
           // 生成报告
-          localUrl: "./static/json/zhfxbg/generateReport.json",
-          remoteUrl: base.server + "znbg/zhfxbg/generateReport"
+          localUrl: base.localPath + "zhfxbg/generateReport.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/generateReport"
         },
         getFileList: {
           // 获取文件列表
-          localUrl: "./static/json/ywfxbg/getFileList.json",
-          remoteUrl: base.server + "znbg/zhfxbg/getFileList"
+          localUrl: base.localPath + "ywfxbg/getFileList.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/getFileList"
         },
         uploadImg: {
-          localUrl: "./static/json/ywfxbg/uploadImg.json",
-          remoteUrl: base.server + "znbg/zhfxbg/uploadImg"
+          localUrl: base.localPath + "ywfxbg/uploadImg.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/uploadImg"
         },
         deleteReport: {
           // 删除报告
-          localUrl: "./static/json/ywfxbg/deleteReport.json",
-          remoteUrl: base.server + "znbg/zhfxbg/deleteReport"
+          localUrl: base.localPath + "ywfxbg/deleteReport.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/deleteReport"
         }
       }
     }
@@ -1342,6 +1301,29 @@ define([], function() {
       resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
       return resultYear + "-" + resultMonth;
     }
+  };
+
+  // 防抖函数
+  base.debounce = (fn, wait) => {
+    let timeout = null;
+    return function() {
+      timeout !== null && clearTimeout(timeout);
+      timeout = setTimeout(fn, wait);
+    };
+  };
+
+  // 节流函数
+  base.throttle = function(fn, delay) {
+    var prev = Date.now();
+    return function() {
+      var context = this;
+      var args = arguments;
+      var now = Date.now();
+      if (now - prev >= delay) {
+        fn.apply(context, args);
+        prev = Date.now();
+      }
+    };
   };
 
   base.initRightMenu = function() {
