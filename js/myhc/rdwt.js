@@ -125,12 +125,12 @@ requirejs(["common", "ec"], (sugon, ec) => {
     const $chart1 = $("#chart1").parent(),
       $chart2 = $("#chart2").parent();
     if (searchParams.model === "1") {
-      title = "业务归口分析";
+      title = "具体问题分析";
       $chart1.css("width", "calc((100% - 48px) / 4)");
       $chart2.show();
       initChart2();
     } else {
-      title = searchParams.model === "2" ? "具体问题分析" : "业务归口分析";
+      title = searchParams.model === "2" ? "业务归口分析" : "具体问题分析";
       $chart1.css("width", "calc(50% - 8px)");
       $chart2.hide();
     }
@@ -688,11 +688,13 @@ requirejs(["common", "ec"], (sugon, ec) => {
       .then(() => initMidPanel())
       .then(() => initBottomPanel());
   });
+
   // 返回按钮事件
   $(".pop-title > div:first-child").on("click", () => {
     searchParams.id = "";
     initChart4();
   });
+
   // 民意榜单按钮事件
   $(".mybd-btn").on("click", () => {
     requirejs(["text!../views/myhc/ryqk.html"], function(ele) {
@@ -702,5 +704,10 @@ requirejs(["common", "ec"], (sugon, ec) => {
         .css("width", "100%")
         .css("height", "100%");
     });
+  });
+
+  // 设置按钮入口
+  $(".setting-btn").on("click", () => {
+    location.hash = vipspa.stringify("rdwt/setting");
   });
 });

@@ -1,80 +1,121 @@
 <link rel="stylesheet" href="../../css/myhc/rdwt_setting.css" />
 
-<div class="header-panel">
-  <input type="text" id="place" placeholder="市局/分局" readonly />
-  <input type="hidden" id="placeCode" />
-  <input type="hidden" id="tempID" />
-  <input type="hidden" id="tempTYPE" />
-  <div id="left-tree"></div>
+<header class="up-panel">
+  <input id="dept-name" placeholder="市局/分局" readonly />
+  <input type="hidden" id="dept-id" disabled />
+  <input id="date1" placeholder="时间" readonly />
+  <input id="date2" placeholder="时间" readonly />
+  <button class="search-btn"></button>
+  <div id="dept-tree"></div>
+</header>
 
-  <input id="date-input" placeholder="时间" type="text" readonly="readonly" />
-  <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
-</div>
-
-<div class="body-panel">
-  <div class="left-panel">
-    <div class="left-panel-header">
-      <div class="left-panel-header-tab left-panel-header-tab-hover">
-        模型一
-      </div>
-      <div class="left-panel-header-tab">
-        模型二
-      </div>
-      <div class="left-panel-header-tab">
-        模型三
-      </div>
-      <div class="left-panel-header-tab">
-        模型四
-      </div>
-      <div class="left-panel-header-tab">
-        模型五
-      </div>
+<section class="left-panel">
+  <header>
+    <section class="nav-hover">业务归口模型</section>
+    <section>具体问题模型</section>
+    <section>队伍管理模型</section>
+  </header>
+  <tab>
+    <div class="row-head">
+      <row class="row-header1">
+        <cell
+          ><img class="head-checkbox" src="../../img/znbg/checkbox.png"/><span
+            >单位</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell
+          ><span>一级标签</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell
+          ><span>二级标签</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell
+          ><span>三级标签</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell>四级标签</cell>
+        <cell
+          ><span>绝对量</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+        <cell
+          ><span>增量</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_desc.png"
+        /></cell>
+        <cell
+          ><span>增幅</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+        <cell
+          ><span title="民意110渠道">民意110渠道</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+        <cell
+          ><span>12345渠道</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+      </row>
+      <row class="row-header2">
+        <cell
+          ><img class="head-checkbox" src="../../img/znbg/checkbox.png"/><span
+            >单位</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell
+          ><span>一级标签</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell
+          ><span>二级标签</span
+          ><img class="head-img1" src="../../img/myhc/rdwt/selector.png"
+        /></cell>
+        <cell><span>三级标签</span></cell>
+        <cell
+          ><span>绝对量</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+        <cell
+          ><span>增量</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_desc.png"
+        /></cell>
+        <cell
+          ><span>增幅</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+        <cell
+          ><span title="民意110渠道">民意110渠道</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+        <cell
+          ><span>12345渠道</span
+          ><img class="head-img2" src="../../img/myhc/rdwt/sort_defalut.png"
+        /></cell>
+      </row>
     </div>
-    <div class="left-panel-body">
-      <div class="tab-selector">
-        <div>
-          <span>显示记录数：</span>
-          <select id="display-num">
-            <option value="">20</option>
-            <option value="">50</option>
-            <option value="">100</option>
-          </select>
-        </div>
-      </div>
-      <div class="tag-selector"></div>
-      <div class="tag-selector"></div>
-      <div class="tag-selector"></div>
-      <div id="tab-container"></div>
-    </div>
-  </div>
-  <div class="right-panel">
-    <div class="right-panel-header">
-      <div>
-        <img src="../../img/myhc/rdwt/hottopics.png" />
-        <span>数据选择列表</span>
-      </div>
-    </div>
-    <div class="right-panel-body"></div>
-  </div>
-</div>
-
-<div class="footer-panel">
-  <div class="footer-panel-btnGroup">
-    <div class="footer-panel-btn" id="preview-btn">预览</div>
-    <div class="footer-panel-btn" id="back-btn">返回</div>
-  </div>
-</div>
-<div class="pop-cover"></div>
-<div class="pop-container">
-  <div class="pop-header">
-    <span>热点问题发布</span>
-    <i class="glyphicon glyphicon-remove close-btn"></i>
-  </div>
-  <div class="pop-body"></div>
-  <div class="pop-footer">
+    <div class="row-body"></div>
+  </tab>
+  <footer>
     <div>
-      <div class="pop-footer-btn" id="pop-btn-ok">发布</div>
-      <div class="pop-footer-btn close-btn">返回</div>
+      <button>发布</button>
+      <button>返回</button>
     </div>
-  </div>
-</div>
+  </footer>
+</section>
+<section class="right-panel">
+  <header>
+    <img src="../../img/myhc/rdwt/hottopics.png" />
+    <span>数据选择列表</span>
+  </header>
+  <section>
+    <row>
+      <cell>1、养多条犬</cell>
+      <cell>南京市公安局</cell>
+      <cell>
+        <span class="span-model3">业务</span>
+        <i class="glyphicon glyphicon-remove"></i>
+      </cell>
+    </row>
+  </section>
+</section>

@@ -342,6 +342,18 @@ define([], function() {
         localUrl: base.localPath + "ylld/chart.json",
         remoteUrl: base.remotePath + "rdwt/getDwfb"
       },
+      getLeft: {
+        localUrl: base.localPath + "rdwt/left.json",
+        remoteUrl: base.remotePath + "rdwt/getTableData"
+      },
+      getRight: {
+        localUrl: base.localPath + "rdwt/right.json",
+        remoteUrl: base.remotePath + "rdwt/getSelectedTableData"
+      },
+      getPopMenu: {
+        localUrl: base.localPath + "rdwt/tags.json",
+        remoteUrl: base.remotePath + "rdwt/getTags"
+      },
       // 获取接处警数据
       getJcj: {
         localUrl: base.localPath + "rdwt/jcj.json",

@@ -89,10 +89,10 @@ requirejs(["common"], function(sugon) {
       }
       if (condition.type == 0) {
         // 设置字体颜色
-        $("strong").addClass("red-strong");
+        $(".pop-panel strong").addClass("red-strong");
       } else {
         // 设置字体颜色
-        $("strong").addClass("green-strong");
+        $(".pop-panel strong").addClass("green-strong");
       }
     });
   };
