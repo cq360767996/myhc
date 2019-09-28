@@ -61,7 +61,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 初始化左侧面板
   const initLeftPanel = (index = 0) => {
-    let { date1, date2, deptId, model } = searchParams;
+    let { date1, date2, deptId, model, sortCol, sortType } = searchParams;
     let tags = ["", "", "", ""];
     popMenuData.map((val = [], index) => {
       val.map(v => {
@@ -75,6 +75,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
           date2,
           deptId,
           model,
+          sortCol,
+          sortType,
           deptName: tags[0]
             ? tags[0].substring(0, tags[0].lastIndexOf(","))
             : "",
@@ -111,12 +113,15 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 初始化右侧面板
   const initRightPanel = () => {
+    let { date1, date2, deptId } = searchParams;
     return new Promise(async (resolve, reject) => {
-      await sugon.request(sugon.interFaces.rdwt.getRight).then(result => {
-        rightData = result.data;
-        let html = "";
-        result.data.map((val, index) => {
-          html += `<row>
+      await sugon
+        .request(sugon.interFaces.rdwt.getRight, { date1, date2, deptId })
+        .then(result => {
+          rightData = result.data;
+          let html = "";
+          result.data.map((val, index) => {
+            html += `<row>
                     <cell>${index + 1}、${val.tag}</cell>
                     <cell>${val.deptName}</cell>
                     <cell>
@@ -124,11 +129,11 @@ requirejs(["common", "ec"], (sugon, ec) => {
                       <i class="glyphicon glyphicon-remove"></i>
                     </cell>
                   </row>`;
+          });
+          $(".right-panel > section")
+            .empty()
+            .append(html);
         });
-        $(".right-panel > section")
-          .empty()
-          .append(html);
-      });
       resolve();
     });
   };
