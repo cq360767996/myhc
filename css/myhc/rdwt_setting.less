@@ -42,6 +42,7 @@ button {
 
 // 滚动条样式
 .scroll-style {
+  overflow-y: auto;
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -104,7 +105,6 @@ button {
     visibility: hidden;
     margin-top: -5px;
     height: 230px;
-    overflow: auto;
     position: absolute;
     z-index: 9999;
     .scroll-style();
@@ -216,7 +216,6 @@ button {
       &:last-child {
         width: 100%;
         height: calc(~"100% -" @tab-height);
-        overflow-y: auto;
         .scroll-style();
 
         .row-selected {
@@ -285,6 +284,7 @@ button {
   & > section {
     height: calc(~"100% - 55px");
     padding: 10px 0;
+    .scroll-style();
 
     & > row {
       line-height: 60px;
@@ -292,6 +292,7 @@ button {
       background-color: rgba(215, 229, 245, 1);
       border-radius: 5px;
       padding: 0 0 0 10px;
+      margin-top: 10px;
 
       & > cell {
         float: left;
@@ -342,6 +343,7 @@ button {
             margin-left: 7px;
             font-size: 20px;
             color: rgba(118, 158, 206, 1);
+            cursor: pointer;
           }
         }
       }
@@ -363,15 +365,19 @@ button {
   border-radius: 4px;
   color: #424e67;
 
-  & > div {
+  & > section {
     margin-bottom: 10px;
-    cursor: pointer;
-    &:hover {
-      color: #3083eb;
-    }
+    .scroll-style();
 
-    .span-selected {
-      color: #3083eb;
+    & > div {
+      cursor: pointer;
+      &:hover {
+        color: #3083eb;
+      }
+
+      .span-selected {
+        color: #3083eb;
+      }
     }
   }
 
@@ -413,5 +419,75 @@ button {
     transform: rotate(-45deg);
     left: 50%;
     margin-left: -5px;
+  }
+}
+
+.simple_content {
+  & > section {
+    width: calc(~"100% - 40px");
+    height: calc(~"100% - 60px");
+    margin: 0 auto;
+    border-top: 1px solid #4d4d4d;
+    .scroll-style();
+    color: #000;
+
+    & > article {
+      height: 32px;
+      line-height: 32px;
+      background-color: #d7e5f5;
+      margin-top: 10px;
+      padding: 0 8px;
+      border-radius: 4px;
+
+      & > div {
+        float: left;
+        width: 60px;
+        height: 100%;
+
+        &:first-child {
+          width: calc(~"100% - 60px");
+          .single-text-ellipse();
+        }
+
+        & > img {
+          margin-left: 5px;
+          cursor: pointer;
+        }
+
+        & > input {
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          border: 0;
+          background-color: transparent;
+        }
+
+      }
+    }
+  }
+
+  & > footer {
+    width: 145px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 auto 8px;
+
+    & > button {
+      width: 60px;
+      height: 32px;
+
+      &:first-child {
+        margin-right: 20px;
+        background-color: #3b8cc1;
+        color: #fff;
+        border-radius: 2px;
+      }
+
+      &:last-child {
+        background-color: #e6ecf4;
+        border-radius: 2px;
+        border: solid 1px #4a9dd3;
+      }
+    }
   }
 }

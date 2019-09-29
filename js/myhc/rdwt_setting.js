@@ -9,6 +9,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
   let popMenuData = [];
   // 右侧面板数据
   let rightData;
+  // 预览数据缓存
+  let previewData = [];
   const $mainBody = $("body");
 
   // 初始化日期控件
@@ -86,22 +88,39 @@ requirejs(["common", "ec"], (sugon, ec) => {
         })
         .then(result => {
           let html = "";
+          rightData &&
+            rightData.map(v1 => {
+              result.data.map(v2 => {
+                v2.selected = v1.id === v2.id;
+              });
+            });
           result.data.map(val => {
-            html += `<row>
-                    <cell>
-                      <img class="head-checkbox" src="../../img/znbg/checkbox.png" />
-                      <span>${val.deptName}</span>
-                    </cell>
-                    <cell>${val.tag1}</cell>
-                    <cell>${val.tag2}</cell>
-                    <cell>${val.tag3}</cell>
-                    ${index == 2 ? "" : `<cell>${val.tag4}</cell>`}
-                    <cell>${val.value1}</cell>
-                    <cell>${val.value2}</cell>
-                    <cell>${val.value3}</cell>
-                    <cell>${val.value4}</cell>
-                    <cell>${val.value5}</cell>
-                  </row>`;
+            let className = "",
+              hover = "";
+            val.selected &&
+              ({ className, hover } = {
+                className: `class="row-selected"`,
+                hover: "_hover"
+              });
+            html += `<row rowid="${val.id}"
+                      tag="${val.tag4}"
+                      ${className}>
+                      <cell>
+                        <img
+                        class="head-checkbox" 
+                        src="../../img/znbg/checkbox${hover}.png" />
+                        <span>${val.deptName}</span>
+                      </cell>
+                      <cell>${val.tag1}</cell>
+                      <cell>${val.tag2}</cell>
+                      <cell>${val.tag3}</cell>
+                      ${index == 2 ? "" : `<cell>${val.tag4}</cell>`}
+                      <cell>${val.value1}</cell>
+                      <cell>${val.value2}</cell>
+                      <cell>${val.value3}</cell>
+                      <cell>${val.value4}</cell>
+                      <cell>${val.value5}</cell>
+                    </row>`;
           });
           $(".row-body")
             .empty()
@@ -109,6 +128,26 @@ requirejs(["common", "ec"], (sugon, ec) => {
           resolve();
         });
     });
+  };
+
+  // 渲染右侧面板
+  const renderRightPanel = () => {
+    let html = "";
+    rightData.map((val, index) => {
+      html += `<row 
+                rowid="${val.id}"
+                tag1="${val.tag1}">
+                  <cell>${index + 1}、${val.tag}</cell>
+                  <cell>${val.deptName}</cell>
+                  <cell>
+                    <span class="span-model${val.model}">业务</span>
+                    <i class="glyphicon glyphicon-remove"></i>
+                      </cell>
+               </row>`;
+    });
+    $(".right-panel > section")
+      .empty()
+      .append(html);
   };
 
   // 初始化右侧面板
@@ -119,20 +158,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
         .request(sugon.interFaces.rdwt.getRight, { date1, date2, deptId })
         .then(result => {
           rightData = result.data;
-          let html = "";
-          result.data.map((val, index) => {
-            html += `<row>
-                    <cell>${index + 1}、${val.tag}</cell>
-                    <cell>${val.deptName}</cell>
-                    <cell>
-                      <span class="span-model3">业务</span>
-                      <i class="glyphicon glyphicon-remove"></i>
-                    </cell>
-                  </row>`;
-          });
-          $(".right-panel > section")
-            .empty()
-            .append(html);
+          renderRightPanel();
         });
       resolve();
     });
@@ -151,7 +177,9 @@ requirejs(["common", "ec"], (sugon, ec) => {
                  </div>`;
       });
       $mainBody.append(`<div class="pop-menu" index="${index}">
+                          <section>
                           ${html}
+                          </section>
                           <footer>
                             <button class="menu-reset">重置</button>
                             <button class="menu-confirm">确定</button>
@@ -210,6 +238,74 @@ requirejs(["common", "ec"], (sugon, ec) => {
     }
   };
 
+  // 渲染预览页面
+  const renderPreview = () => {
+    let html = "";
+    previewData.map((val, index) => {
+      html += `<article rowid="${val.id}">
+                  <div>${index + 1}、${val.content}</div>
+                  <div>
+                    <img class="edit-btn" src="../../img/myhc/rdwt/edit.png" />
+                    <img class="top-btn" src="../../img/myhc/rdwt/top.png" />
+                  </div>
+               </article>`;
+    });
+    $(".simple_content > section")
+      .empty()
+      .append(html);
+  };
+
+  // 初始化预览页面
+  const initPreview = () => {
+    let { date1, date2, deptId } = searchParams,
+      data = rightData.slice(0, 9);
+    sugon
+      .request(sugon.interFaces.rdwt.getPreview, {
+        date1,
+        date2,
+        deptId,
+        data: JSON.stringify(data)
+      })
+      .then(result => {
+        previewData = result.data;
+        rightData.map(val1 => {
+          let id = val1.id;
+          result.data.map(val2 => {
+            id === val2.id && Object.assign(val2, val1);
+          });
+        });
+        sugon.renderDialog({
+          width: 685,
+          height: 500,
+          title: "热点问题发布",
+          ele: `<section></section>
+                <footer>
+                  <button>发布</button>
+                  <button>返回</button>
+                </footer>`
+        });
+        renderPreview();
+      });
+  };
+
+  // 预览页面输入框完成事件
+  const inputComplete = e => {
+    let $target = $(e.target),
+      id = $target
+        .parent()
+        .parent()
+        .attr("rowid"),
+      input = $target.val(),
+      index;
+    previewData.map((val, i) => {
+      if (id === val.id) {
+        val.content = input;
+        index = i;
+      }
+    });
+    $target.parent().html(`${index + 1}、${input}`);
+  };
+
   // 初始化页面
   function initPage() {
     Promise.resolve()
@@ -245,6 +341,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
         $header2.hide();
         cellWidth = "10%";
       }
+      // 置空下拉框缓存数据
+      popMenuData = [];
       Promise.resolve()
         .then(() => initLeftPanel(index))
         .then(() => {
@@ -277,16 +375,38 @@ requirejs(["common", "ec"], (sugon, ec) => {
   $(".row-body").on("click", "row", function() {
     let $this = $(this),
       className = "row-selected",
-      img = ``;
+      img = ``,
+      id = $this.attr("rowid");
     if ($this.hasClass(className)) {
       $this.removeClass(className);
+      for (let i = 0, len = rightData.length; i < len; i++) {
+        if (rightData[i].id === id) {
+          rightData.splice(i, 1);
+          break;
+        }
+      }
     } else {
       img = "_hover";
       $this.addClass(className);
+      let deptName = $this
+          .children(":first")
+          .find("span")
+          .html(),
+        tag1 = $this.eq(1).html(),
+        model = 1 + $(".nav-hover").index(".left-panel > header > section"),
+        tag = $this.attr("tag");
+      rightData.push({
+        deptName,
+        tag1,
+        model,
+        id,
+        tag
+      });
     }
     $this
       .find(".head-checkbox")
       .attr("src", `../../img/znbg/checkbox${img}.png`);
+    renderRightPanel();
   });
 
   // 排序按钮事件
@@ -315,7 +435,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   });
 
   // 下拉框行点击事件
-  $mainBody.on("click", ".pop-menu > div", function() {
+  $mainBody.on("click", ".pop-menu > section > div", function() {
     let $this = $(this),
       img = "",
       className = "span-selected";
@@ -358,5 +478,101 @@ requirejs(["common", "ec"], (sugon, ec) => {
     });
     Promise.resolve().then(() => initLeftPanel());
     $popMenu.remove();
+  });
+
+  // 右侧面板删除按钮事件
+  $(".right-panel > section").on("click", "i", e => {
+    let $target = $(e.target),
+      id = $target
+        .parent()
+        .parent()
+        .attr("rowid"),
+      delData,
+      index;
+    rightData.map((val, i) => {
+      id === val.id && ((delData = val), (index = i));
+    });
+    rightData.splice(index, 1);
+    renderRightPanel();
+  });
+
+  // 打开预览以及返回按钮事件
+  $(".left-panel > footer > div > button").on("click", e => {
+    let btnName = $(e.target).html();
+    if (btnName === "预览") {
+      initPreview();
+    } else {
+      location.hash = vipspa.stringify("rdwt");
+    }
+  });
+
+  // 置顶以及编辑页面事件
+  $mainBody.on(
+    "click",
+    ".simple_content > section > article > div > img",
+    e => {
+      let $target = $(e.target),
+        className = $target.attr("class"),
+        id = $target
+          .parent()
+          .parent()
+          .attr("rowid"),
+        selectData,
+        index;
+      previewData.map((val, i) => {
+        id === val.id && ((selectData = val), (index = i));
+      });
+      if (className === "edit-btn") {
+        let $text = $target.parent().prev();
+        $text.html(`<input value="${selectData.content}" />`);
+      } else {
+        previewData.splice(index, 1);
+        previewData.unshift(selectData);
+        renderPreview();
+      }
+    }
+  );
+
+  // input失焦事件
+  $mainBody.on(
+    "blur",
+    ".simple_content > section > article > div > input",
+    inputComplete
+  );
+
+  // input会车事件
+  $mainBody.on(
+    "keyup",
+    ".simple_content > section > article > div > input",
+    e => {
+      e.keyCode === 13 && inputComplete(e);
+    }
+  );
+
+  // 预览页面的发布以及返回按钮事件
+  $mainBody.on("click", ".simple_content > footer > button", e => {
+    let $target = $(e.target),
+      btnName = $target.html(),
+      { date1, date2, deptId } = searchParams,
+      data = [];
+    previewData.map(val => {
+      let { id, deptName, tag, tag1, model, content } = val;
+      data.push({ id, deptName, tag, tag1, model, content });
+    });
+    if (btnName === "发布") {
+      sugon
+        .request(sugon.interFaces.rdwt.publish, {
+          date1,
+          date2,
+          deptId,
+          data: JSON.stringify(data)
+        })
+        .then(result => {
+          result.code == 200 && (location.hash = vipspa.stringify("rdwt"));
+        });
+    } else {
+      $(".simple_shade").remove();
+      $(".simple_showDialog").remove();
+    }
   });
 });

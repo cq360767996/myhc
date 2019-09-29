@@ -350,6 +350,14 @@ define([], function() {
         localUrl: base.localPath + "rdwt/right.json",
         remoteUrl: base.remotePath + "rdwt/getSelectedTableData"
       },
+      getPreview: {
+        localUrl: base.localPath + "rdwt/preview.json",
+        remoteUrl: base.remotePath + "rdwt/preview"
+      },
+      publish: {
+        localUrl: base.localPath + "rdwt/publish.json",
+        remoteUrl: base.remotePath + "rdwt/publish"
+      },
       getPopMenu: {
         localUrl: base.localPath + "rdwt/tags.json",
         remoteUrl: base.remotePath + "rdwt/getTags"

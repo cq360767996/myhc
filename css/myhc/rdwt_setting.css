@@ -14,6 +14,9 @@ button {
   box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
   border-radius: 7px;
 }
+.scroll-style {
+  overflow-y: auto;
+}
 .scroll-style::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -66,9 +69,9 @@ button {
   visibility: hidden;
   margin-top: -5px;
   height: 230px;
-  overflow: auto;
   position: absolute;
   z-index: 9999;
+  overflow-y: auto;
 }
 .up-panel #dept-tree::-webkit-scrollbar {
   width: 6px;
@@ -249,6 +252,22 @@ button {
 .right-panel > section {
   height: calc(100% - 55px);
   padding: 10px 0;
+  overflow-y: auto;
+}
+.right-panel > section::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+}
+.right-panel > section::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.right-panel > section::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
 }
 .right-panel > section > row {
   line-height: 60px;
@@ -256,6 +275,7 @@ button {
   background-color: #d7e5f5;
   border-radius: 5px;
   padding: 0 0 0 10px;
+  margin-top: 10px;
 }
 .right-panel > section > row > cell {
   float: left;
@@ -302,6 +322,7 @@ button {
   margin-left: 7px;
   font-size: 20px;
   color: #769ece;
+  cursor: pointer;
 }
 .pop-menu {
   position: absolute;
@@ -317,14 +338,32 @@ button {
   border-radius: 4px;
   color: #424e67;
 }
-.pop-menu > div {
+.pop-menu > section {
   margin-bottom: 10px;
+  overflow-y: auto;
+}
+.pop-menu > section::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+}
+.pop-menu > section::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.pop-menu > section::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
+}
+.pop-menu > section > div {
   cursor: pointer;
 }
-.pop-menu > div:hover {
+.pop-menu > section > div:hover {
   color: #3083eb;
 }
-.pop-menu > div .span-selected {
+.pop-menu > section > div .span-selected {
   color: #3083eb;
 }
 .pop-menu > footer {
@@ -361,4 +400,78 @@ button {
   transform: rotate(-45deg);
   left: 50%;
   margin-left: -5px;
+}
+.simple_content > section {
+  width: calc(100% - 40px);
+  height: calc(100% - 60px);
+  margin: 0 auto;
+  border-top: 1px solid #4d4d4d;
+  overflow-y: auto;
+  color: #000;
+}
+.simple_content > section::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+}
+.simple_content > section::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.simple_content > section::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
+}
+.simple_content > section > article {
+  height: 32px;
+  line-height: 32px;
+  background-color: #d7e5f5;
+  margin-top: 10px;
+  padding: 0 8px;
+  border-radius: 4px;
+}
+.simple_content > section > article > div {
+  float: left;
+  width: 60px;
+  height: 100%;
+}
+.simple_content > section > article > div:first-child {
+  width: calc(100% - 60px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.simple_content > section > article > div > img {
+  margin-left: 5px;
+  cursor: pointer;
+}
+.simple_content > section > article > div > input {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background-color: transparent;
+}
+.simple_content > footer {
+  width: 145px;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 auto 8px;
+}
+.simple_content > footer > button {
+  width: 60px;
+  height: 32px;
+}
+.simple_content > footer > button:first-child {
+  margin-right: 20px;
+  background-color: #3b8cc1;
+  color: #fff;
+  border-radius: 2px;
+}
+.simple_content > footer > button:last-child {
+  background-color: #e6ecf4;
+  border-radius: 2px;
+  border: solid 1px #4a9dd3;
 }
