@@ -125,6 +125,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
           $(".row-body")
             .empty()
             .append(html);
+          let cellWidth = index == 2 ? "calc(100% / 9)" : "10%";
+          $(".left-panel > tab > div > row > cell").css("width", cellWidth);
           resolve();
         });
     });
@@ -328,8 +330,10 @@ requirejs(["common", "ec"], (sugon, ec) => {
       $header1 = $(".row-header1"),
       $header2 = $(".row-header2"),
       cellWidth;
-    searchParams.model = 1 + index;
     if (!$this.hasClass(className)) {
+      searchParams.model = 1 + index;
+      searchParams.sortCol = 2;
+      searchParams.sortType = "desc";
       $(".left-panel > header > section").removeClass(className);
       $this.addClass(className);
       if (index == 2) {
@@ -343,11 +347,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
       }
       // 置空下拉框缓存数据
       popMenuData = [];
-      Promise.resolve()
-        .then(() => initLeftPanel(index))
-        .then(() => {
-          $(".left-panel > tab > div > row > cell").css("width", cellWidth);
-        });
+      Promise.resolve().then(() => initLeftPanel(index));
     }
   });
 
@@ -431,7 +431,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
     $target
       .attr("selected", "selected")
       .attr("src", `../../img/myhc/rdwt/sort_${sort}.png`);
-    Promise.resolve().then(() => initLeftPanel());
+    Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
   });
 
   // 下拉框行点击事件
@@ -461,13 +461,14 @@ requirejs(["common", "ec"], (sugon, ec) => {
       popMenuData[i] = [];
     }
     $popMenu.remove();
-    Promise.resolve().then(() => initLeftPanel());
+    debugger;
+    Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
   });
 
   // 下拉框确定事件
   $mainBody.on("click", ".menu-confirm", e => {
     let $popMenu = $(".pop-menu"),
-      index = $popMenu.attr("index");
+      index = Number($popMenu.attr("index"));
     popMenuData[index] = [];
     $popMenu.find("div").each((i, dom) => {
       let $span = $(dom).find("span");
@@ -476,7 +477,10 @@ requirejs(["common", "ec"], (sugon, ec) => {
         name: $span.html()
       });
     });
-    Promise.resolve().then(() => initLeftPanel());
+    for (let i = 1 + index; i < 4; i++) {
+      popMenuData[i] = [];
+    }
+    Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
     $popMenu.remove();
   });
 
@@ -540,7 +544,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
     inputComplete
   );
 
-  // input会车事件
+  // input回车事件
   $mainBody.on(
     "keyup",
     ".simple_content > section > article > div > input",

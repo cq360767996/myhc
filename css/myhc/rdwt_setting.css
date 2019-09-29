@@ -14,24 +14,6 @@ button {
   box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
   border-radius: 7px;
 }
-.scroll-style {
-  overflow-y: auto;
-}
-.scroll-style::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.scroll-style::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.scroll-style::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
 .up-panel {
   margin: 20px auto;
   width: calc(100% - 40px);
@@ -184,7 +166,7 @@ button {
   overflow-y: auto;
 }
 .left-panel > tab > div:last-child::-webkit-scrollbar {
-  width: 6px;
+  width: 0;
   height: 6px;
   background-color: #fff;
 }
@@ -332,13 +314,13 @@ button {
   padding: 8px;
   min-width: 100px;
   min-height: 50px;
-  max-height: 300px;
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.26);
   border: solid 1px #e5ebf1;
   border-radius: 4px;
   color: #424e67;
 }
 .pop-menu > section {
+  max-height: 205px;
   margin-bottom: 10px;
   overflow-y: auto;
 }
