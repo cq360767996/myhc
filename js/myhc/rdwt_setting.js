@@ -136,13 +136,14 @@ requirejs(["common", "ec"], (sugon, ec) => {
   const renderRightPanel = () => {
     let html = "";
     rightData.map((val, index) => {
+      let yw = val.model == 1 ? "业务" : val.model == 2 ? "问题" : "队伍";
       html += `<row 
                 rowid="${val.id}"
                 tag1="${val.tag1}">
                   <cell>${index + 1}、${val.tag}</cell>
                   <cell>${val.deptName}</cell>
                   <cell>
-                    <span class="span-model${val.model}">业务</span>
+                    <span class="span-model${val.model}">${yw}</span>
                     <i class="glyphicon glyphicon-remove"></i>
                       </cell>
                </row>`;
@@ -198,7 +199,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 请求下拉框
   const requestPopMenu = $target => {
-    let index = $target.index(".head-img1");
+    let type = searchParams.model == 3 ? 2 : 1;
+    let index = $target.index(`.row-header${type} .head-img1`);
     let { date1, date2, deptId, model } = searchParams;
     let tags = ["", "", "", ""];
     popMenuData.map((val = [], index) => {
@@ -392,7 +394,10 @@ requirejs(["common", "ec"], (sugon, ec) => {
           .children(":first")
           .find("span")
           .html(),
-        tag1 = $this.eq(1).html(),
+        tag1 = $this
+          .children()
+          .eq(1)
+          .html(),
         model = 1 + $(".nav-hover").index(".left-panel > header > section"),
         tag = $this.attr("tag");
       rightData.push({
@@ -491,12 +496,18 @@ requirejs(["common", "ec"], (sugon, ec) => {
         .parent()
         .parent()
         .attr("rowid"),
-      delData,
       index;
     rightData.map((val, i) => {
       id === val.id && ((delData = val), (index = i));
     });
     rightData.splice(index, 1);
+    $(".row-selected").each((index, dom) => {
+      let $dom = $(dom);
+      if ($dom.attr("rowid") == id) {
+        $dom.removeAttr("class");
+        $dom.find("img").attr("src", "../../img/znbg/checkbox.png");
+      }
+    });
     renderRightPanel();
   });
 
@@ -578,5 +589,18 @@ requirejs(["common", "ec"], (sugon, ec) => {
       $(".simple_shade").remove();
       $(".simple_showDialog").remove();
     }
+  });
+
+  // 全局查询条件事件
+  $(".search-btn").on("click", () => {
+    searchParams.deptId = $("#dept-id").val();
+    searchParams.date1 = $("#date1").val();
+    searchParams.date2 = $("#date2").val();
+    Promise.resolve()
+      .then(() => initRightPanel())
+      .then(() => initLeftPanel())
+      .catch(err => {
+        throw err;
+      });
   });
 });
