@@ -540,6 +540,7 @@ requirejs(["common"], sugon => {
       if (className === "edit-btn") {
         let $text = $target.parent().prev();
         $text.html(`<input value="${selectData.content}" />`);
+        $(".simple_content > section > article > div > input").focus();
       } else {
         previewData.splice(index, 1);
         previewData.unshift(selectData);
@@ -575,7 +576,6 @@ requirejs(["common"], sugon => {
         let { id, deptName, tag, tag1, model, content } = val;
         data.push({ id, deptName, tag, tag1, model, content });
       });
-      debugger;
       if (btnName === "发布") {
         sugon
           .request(sugon.interFaces.rdwt.publish, {

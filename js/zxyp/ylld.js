@@ -751,7 +751,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           let obj = {
             name: data[i].name,
             value: data[i].value,
-            selected: i === len - 1,
+            selected: data[i].name === "空错号",
             itemStyle: {
               normal: {
                 color: colorArr[i],
