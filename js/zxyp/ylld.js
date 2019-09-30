@@ -718,6 +718,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           yData = [],
           percentData = [],
           sum = 0,
+          index,
           len = data.length,
           colorArr = [
             "#3A64EA",
@@ -746,6 +747,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           };
         for (let i = 0; i < len; i++) {
+          data[i].name === "空错号" && (index = i);
           sum += Number(data[i].value);
           xData.push(data[i].name);
           let obj = {
@@ -772,8 +774,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
         for (let i = 0; i < len; i++) {
           yData.push(transparentData);
         }
-        let text = `“<span>${xData[len - 1]}”类样本占调查样本总量</span>
-              <strong id="right1-strong">${percentData[len - 1]}%</strong>`;
+        let text = `“<span>${xData[index]}”类样本占调查样本总量</span>
+              <strong id="right1-strong">${percentData[index]}%</strong>`;
         $(".right1-text").html(text);
         let chart = ec.init(document.getElementById("right1-chart"));
         let option = {
