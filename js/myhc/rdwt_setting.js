@@ -1,4 +1,4 @@
-requirejs(["common", "ec"], (sugon, ec) => {
+requirejs(["common"], sugon => {
   // 查询栏参数
   let searchParams = {
     model: 1,
@@ -11,6 +11,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   let rightData;
   // 预览数据缓存
   let previewData = [];
+  // body容器
   const $mainBody = $("body");
 
   // 初始化日期控件
@@ -28,6 +29,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
         language: "zh-CN"
       });
   };
+
   // 初始化查询栏
   const initSearchBar = () => {
     return new Promise((resolve, reject) => {
@@ -91,7 +93,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
           rightData &&
             rightData.map(v1 => {
               result.data.map(v2 => {
-                v2.selected = v1.id === v2.id;
+                v1.id === v2.id && (v2.selected = true);
               });
             });
           result.data.map(val => {
@@ -466,7 +468,6 @@ requirejs(["common", "ec"], (sugon, ec) => {
       popMenuData[i] = [];
     }
     $popMenu.remove();
-    debugger;
     Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
   });
 
@@ -522,10 +523,9 @@ requirejs(["common", "ec"], (sugon, ec) => {
   });
 
   // 置顶以及编辑页面事件
-  $mainBody.on(
-    "click",
-    ".simple_content > section > article > div > img",
-    e => {
+  $mainBody
+    .off("click", ".simple_content > section > article > div > img")
+    .on("click", ".simple_content > section > article > div > img", e => {
       let $target = $(e.target),
         className = $target.attr("class"),
         id = $target
@@ -545,51 +545,53 @@ requirejs(["common", "ec"], (sugon, ec) => {
         previewData.unshift(selectData);
         renderPreview();
       }
-    }
-  );
+    });
 
   // input失焦事件
-  $mainBody.on(
-    "blur",
-    ".simple_content > section > article > div > input",
-    inputComplete
-  );
+  $mainBody
+    .off("blur", ".simple_content > section > article > div > input")
+    .on(
+      "blur",
+      ".simple_content > section > article > div > input",
+      inputComplete
+    );
 
   // input回车事件
-  $mainBody.on(
-    "keyup",
-    ".simple_content > section > article > div > input",
-    e => {
+  $mainBody
+    .off("keyup", ".simple_content > section > article > div > input")
+    .on("keyup", ".simple_content > section > article > div > input", e => {
       e.keyCode === 13 && inputComplete(e);
-    }
-  );
+    });
 
   // 预览页面的发布以及返回按钮事件
-  $mainBody.on("click", ".simple_content > footer > button", e => {
-    let $target = $(e.target),
-      btnName = $target.html(),
-      { date1, date2, deptId } = searchParams,
-      data = [];
-    previewData.map(val => {
-      let { id, deptName, tag, tag1, model, content } = val;
-      data.push({ id, deptName, tag, tag1, model, content });
+  $mainBody
+    .off("click", ".simple_content > footer > button")
+    .on("click", ".simple_content > footer > button", e => {
+      let $target = $(e.target),
+        btnName = $target.html(),
+        { date1, date2, deptId } = searchParams,
+        data = [];
+      previewData.map(val => {
+        let { id, deptName, tag, tag1, model, content } = val;
+        data.push({ id, deptName, tag, tag1, model, content });
+      });
+      debugger;
+      if (btnName === "发布") {
+        sugon
+          .request(sugon.interFaces.rdwt.publish, {
+            date1,
+            date2,
+            deptId,
+            data: JSON.stringify(data)
+          })
+          .then(result => {
+            result.code == 200 && (location.hash = vipspa.stringify("rdwt"));
+          });
+      } else {
+        $(".simple_shade").remove();
+        $(".simple_showDialog").remove();
+      }
     });
-    if (btnName === "发布") {
-      sugon
-        .request(sugon.interFaces.rdwt.publish, {
-          date1,
-          date2,
-          deptId,
-          data: JSON.stringify(data)
-        })
-        .then(result => {
-          result.code == 200 && (location.hash = vipspa.stringify("rdwt"));
-        });
-    } else {
-      $(".simple_shade").remove();
-      $(".simple_showDialog").remove();
-    }
-  });
 
   // 全局查询条件事件
   $(".search-btn").on("click", () => {

@@ -713,10 +713,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon
       .request(sugon.interFaces.zxyp.ylld.initRight1, { deptId, date1, date2 })
       .then(result => {
-        let data1 = result.data1,
-          data = result.data2,
+        let data = result.data,
           xData = [],
           yData = [],
+          percentData = [],
+          sum = 0,
           len = data.length,
           colorArr = [
             "#3A64EA",
@@ -745,10 +746,12 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           };
         for (let i = 0; i < len; i++) {
+          sum += Number(data[i].value);
           xData.push(data[i].name);
           let obj = {
             name: data[i].name,
             value: data[i].value,
+            selected: i === len - 1,
             itemStyle: {
               normal: {
                 color: colorArr[i],
@@ -763,10 +766,15 @@ requirejs(["common", "ec"], function(sugon, ec) {
           };
           yData.push(obj);
         }
+        data.map(v => {
+          percentData.push(Number((v.value / sum) * 100).toFixed(2));
+        });
         for (let i = 0; i < len; i++) {
           yData.push(transparentData);
         }
-        $("#right1-strong").html(data1 + "%");
+        let text = `“<span>${xData[len - 1]}”类样本占调查样本总量</span>
+              <strong id="right1-strong">${percentData[len - 1]}%</strong>`;
+        $(".right1-text").html(text);
         let chart = ec.init(document.getElementById("right1-chart"));
         let option = {
           calculable: true,
@@ -793,12 +801,29 @@ requirejs(["common", "ec"], function(sugon, ec) {
                 length: -5,
                 length2: 2
               },
-              selectedMode: "single",
+              selectedMode: "multiple",
               data: yData
             }
           ]
         };
         chart.setOption(option);
+        chart.on("pieselectchanged", e => {
+          let selectedNameArr = [],
+            percentSum = 0;
+          Object.keys(e.selected).forEach(key => {
+            e.selected[key] && selectedNameArr.push(key);
+          });
+          data.map((v1, index) => {
+            selectedNameArr.map(v2 => {
+              v1.name === v2 && (percentSum += Number(percentData[index]));
+            });
+          });
+          percentSum = percentSum > 100 ? 100 : percentSum;
+          let text = `“<span>${selectedNameArr.join(",")}”
+                        类样本占调查样本总量</span>
+                <strong id="right1-strong">${percentSum.toFixed(2)}%</strong>`;
+          $(".right1-text").html(text);
+        });
       });
   };
 
