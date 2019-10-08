@@ -12,7 +12,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
         startView: "year",
         minView: "year",
         maxView: "decade",
-        endDate: sugon.getDate(-1),
+        endDate: sugon.getDate(-2),
         language: "zh-CN"
       });
   };
@@ -42,8 +42,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
           $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
         );
       });
-      initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
-      initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
+      initDateInput("date1", (searchParams.date1 = sugon.getDate(-4)));
+      initDateInput("date2", (searchParams.date2 = sugon.getDate(-2)));
       $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
       $deptName.val((searchParams.deptName = "南京市公安局"));
       resolve();
@@ -54,7 +54,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   const initMidPanel = () => {
     return new Promise(async (resolve, reject) => {
       const $upThree = $(".mid-panel > section > div:last-child"),
-        height = `${$upThree.height() / 3}px`;
+        height = `${$upThree.height() / 2}px`;
       await sugon
         .request(sugon.interFaces.rdwt.getMidData, searchParams)
         .then(result => {
@@ -67,10 +67,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
             rightHtml = "";
           result.data.map((val, index) => {
             let html = `<row>
-                          <div deptId="${val.deptId}"
-                              model="${val.model}"
-                              code="${val.code}" 
-                              class="content-row">
+                          <div deptId="${val.deptId}" model="${val.model}"
+                              code="${val.code}" class="content-row">
                               ${index + 1}、${val.content}
                           </div>
                           <div>
@@ -81,6 +79,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
                         </row>`;
             if (index < 3) {
               $upThree
+                .eq(index)
                 .parent()
                 .attr("deptId", val.deptId)
                 .attr("model", val.model)
@@ -89,21 +88,17 @@ requirejs(["common", "ec"], (sugon, ec) => {
                 .eq(index)
                 .css("line-height", height)
                 .html(
-                  `<div 
-                  style="font-size: 20px;
-                    height: ${height};">
+                  `<div style="font-size: 18px;height: ${height};">
                     <strong>NO.</strong>
                     <img class="up-img"
-                      style="
-                        width:${height};
-                        height:${height};"
+                      style="width:${height};height:${height};"
                       src="../../img/myhc/rdwt/${index + 1}.png" />
-                 </div>
-                 <div style="height:${height};">${val.content}</div>
-                 <div>
-                  <span>热度：</span>
-                  <strong>${val.freq}</strong>
-                  <img class="down-img" src="../../img/zxyp/aj/redian.png"/>
+                    <span>${val.content}</span>
+                  </div>
+                  <div style="font-size: 20px;height: ${height};">
+                    <span>热度：</span>
+                    <strong>${val.freq}</strong>
+                    <img class="down-img" src="../../img/zxyp/aj/redian.png"/>
                   </div>`
                 );
             } else if (index < 6) {
@@ -465,7 +460,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
               type: "pie",
               clockWise: false,
               center: ["50%", "50%"],
-              radius: ["52%", "68%"],
+              radius: ["45%", "54%"],
               hoverAnimation: false,
               itemStyle: {
                 normal: {
@@ -522,8 +517,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
           xData.push("暂无数据");
           yData.push(0);
         } else {
-          if (data.length > 5) {
-            endValue = Math.floor((5 / data.length) * 100);
+          if (data.length > 4) {
+            endValue = Math.floor((4 / data.length) * 100);
             show = true;
           }
           for (let i = 0; i < data.length; i++) {
@@ -531,7 +526,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
             yData.push(data[i].value);
           }
         }
-        let minAndMax = sugon.handleMinAndMax(yData, true);
+        // let minAndMax = sugon.handleMinAndMax(yData, true);
         let option = {
           tooltip: {
             trigger: "axis",
@@ -600,8 +595,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
               splitLine: { show: false },
               splitArea: { show: false },
               splitNumber: 3,
-              min: minAndMax.min,
-              max: minAndMax.max,
+              // min: minAndMax.min,
+              // max: minAndMax.max,
               axisLabel: {
                 show: true,
                 textStyle: {
@@ -622,13 +617,14 @@ requirejs(["common", "ec"], (sugon, ec) => {
               type: "bar",
               barWidth: 20,
               data: yData,
+              label: {
+                show: true,
+                position: "top"
+              },
               itemStyle: {
                 normal: {
                   barBorderRadius: [3, 3, 0, 0],
-                  color: "rgba(46, 146, 213, 1.000)",
-                  label: {
-                    show: false
-                  }
+                  color: "rgba(46, 146, 213, 1.000)"
                 }
               }
             }

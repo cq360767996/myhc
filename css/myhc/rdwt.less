@@ -7,6 +7,14 @@
 // header的高度
 @header-height: 30px;
 
+// 单行省略
+.single-text-ellipse() {
+  // 单行省略
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 // banner样式
 .banner-mixin {
   @banner-height: calc(~"50% - 64px");
@@ -193,6 +201,9 @@ button {
         & > div {
           text-align: center;
           color: #fff;
+          font-family: "CenturyGothic";
+          padding: 0 5px;
+          .single-text-ellipse();
 
           .up-img {
             display: inline-block;
@@ -203,13 +214,12 @@ button {
 
           .down-img {
             position: relative;
-            top: -3px;
+            top: -1px;
             left: 1px;
           }
-
-          &:first-child,
-          &:last-child {
-            font-family: "CenturyGothic";
+          
+          span {
+            font-size: 16px;
           }
         }
       }
@@ -319,6 +329,7 @@ button {
         height: 35px;
         line-height: 35px;
         text-align: center;
+        font-size: 18px;
 
         &:first-child {
           color: #1d84c6;

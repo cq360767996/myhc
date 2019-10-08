@@ -163,6 +163,11 @@ button {
 .mid-panel > section > div:last-child > div {
   text-align: center;
   color: #fff;
+  font-family: "CenturyGothic";
+  padding: 0 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .mid-panel > section > div:last-child > div .up-img {
   display: inline-block;
@@ -172,12 +177,11 @@ button {
 }
 .mid-panel > section > div:last-child > div .down-img {
   position: relative;
-  top: -3px;
+  top: -1px;
   left: 1px;
 }
-.mid-panel > section > div:last-child > div:first-child,
-.mid-panel > section > div:last-child > div:last-child {
-  font-family: "CenturyGothic";
+.mid-panel > section > div:last-child > div span {
+  font-size: 16px;
 }
 .mid-panel > fieldset {
   width: 50%;
@@ -274,6 +278,7 @@ button {
   height: 35px;
   line-height: 35px;
   text-align: center;
+  font-size: 18px;
 }
 .down-panel > section .pop-title > div:first-child {
   color: #1d84c6;
