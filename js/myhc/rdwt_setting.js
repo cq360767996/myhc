@@ -1,4 +1,4 @@
-requirejs(["common"], sugon => {
+requirejs(["common", "Sortable"], (sugon, Sortable) => {
   // 查询栏参数
   let searchParams = {
     model: 1,
@@ -116,7 +116,7 @@ requirejs(["common"], sugon => {
                       <cell>${val.tag1}</cell>
                       <cell>${val.tag2}</cell>
                       <cell>${val.tag3}</cell>
-                      ${index == 2 ? "" : `<cell>${val.tag4}</cell>`}
+                      ${index == 1 ? `<cell>${val.tag4}</cell>` : ""}
                       <cell>${val.value1}</cell>
                       <cell>${val.value2}</cell>
                       <cell>${val.value3}</cell>
@@ -127,8 +127,11 @@ requirejs(["common"], sugon => {
           $(".row-body")
             .empty()
             .append(html);
-          let cellWidth = index == 2 ? "calc(100% / 9)" : "10%";
-          $(".left-panel > tab > div > row > cell").css("width", cellWidth);
+          let cellWidth = index == 1 ? "10%" : "calc(100% / 9)";
+          $(".left-panel > tab > div.row-body > row > cell").css(
+            "width",
+            cellWidth
+          );
           resolve();
         });
     });
@@ -290,6 +293,23 @@ requirejs(["common"], sugon => {
                   <button>返回</button>
                 </footer>`
         });
+        let dom = document.querySelector(".simple_content > section");
+        Sortable.create(dom, {
+          animation: 150,
+          onEnd: function(e) {
+            console.log(previewData);
+            let resultData = [];
+            $(".simple_content > section > article").each((index, dom) => {
+              let $dom = $(dom),
+                rowId = $dom.attr("rowid");
+              previewData.map(val => {
+                val.id === rowId && resultData.push(val);
+              });
+            });
+            previewData = resultData;
+            renderPreview();
+          }
+        });
         renderPreview();
       });
   };
@@ -340,14 +360,14 @@ requirejs(["common"], sugon => {
       searchParams.sortType = "desc";
       $(".left-panel > header > section").removeClass(className);
       $this.addClass(className);
-      if (index == 2) {
+      if (index == 1) {
         $header1.hide();
         $header2.show();
-        cellWidth = "calc(100% / 9)";
+        cellWidth = "10%";
       } else {
         $header1.show();
         $header2.hide();
-        cellWidth = "10%";
+        cellWidth = "calc(100% / 9)";
       }
       // 置空下拉框缓存数据
       popMenuData = [];
@@ -419,13 +439,13 @@ requirejs(["common"], sugon => {
   // 排序按钮事件
   $(".head-img2").on("click", e => {
     let $target = $(e.target),
-      parentClassName = $target
+      parentType = $target
         .parent()
         .parent()
-        .attr("class"),
-      index = $target.index(`.${parentClassName} .head-img2`),
+        .attr("type"),
+      index = $target.index(`.row-header${parentType} .head-img2`),
       selected = $target.attr("selected"),
-      $allImg = $(`.${parentClassName} .head-img2`),
+      $allImg = $(`.row-header${parentType} .head-img2`),
       sort;
     $allImg.attr("src", "../../img/myhc/rdwt/sort_defalut.png");
     if (selected == "selected" && searchParams.sortType == "desc") {

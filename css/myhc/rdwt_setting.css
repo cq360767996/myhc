@@ -110,8 +110,22 @@ button {
 .left-panel > tab > div .row-header1 {
   display: block;
 }
+.left-panel > tab > div .row-header1 > cell {
+  width: calc(100% / 9);
+}
+.left-panel > tab > div .row-header1 > cell:last-child {
+  padding: 0;
+  width: calc(100% / 3);
+}
 .left-panel > tab > div .row-header2 {
   display: none;
+}
+.left-panel > tab > div .row-header2 > cell {
+  width: 10%;
+}
+.left-panel > tab > div .row-header2 > cell:last-child {
+  padding: 0;
+  width: 30%;
 }
 .left-panel > tab > div > row {
   height: 40px;
@@ -120,7 +134,7 @@ button {
 .left-panel > tab > div > row > cell {
   width: 10%;
   float: left;
-  height: 40px;
+  height: 100%;
   border-right: 1px solid #bcc9d8;
   padding: 0 5px;
   text-overflow: ellipsis;
@@ -145,16 +159,19 @@ button {
   cursor: pointer;
 }
 .left-panel > tab > div > row > cell .head-img1 {
-  top: 12px;
+  top: 16px;
 }
 .left-panel > tab > div > row > cell .head-img2 {
-  top: 11px;
+  top: 16px;
+}
+.left-panel > tab > div > row > cell .sub-head-img {
+  top: 4px;
 }
 .left-panel > tab > div > row > cell:first-child {
   border-left: 1px solid #bcc9d8;
 }
 .left-panel > tab > div:first-child {
-  height: 40px;
+  height: 50px;
   font-size: 15px;
 }
 .left-panel > tab > div:first-child > row {
@@ -162,7 +179,7 @@ button {
 }
 .left-panel > tab > div:last-child {
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% -  50px);
   overflow-y: auto;
 }
 .left-panel > tab > div:last-child::-webkit-scrollbar {
@@ -187,6 +204,35 @@ button {
 .left-panel > tab > div:last-child > row:hover {
   background-color: #1c84c6;
   color: #fff;
+}
+.left-panel > tab > div.row-head > row {
+  line-height: 50px;
+  height: 50px;
+}
+.left-panel > tab > div.row-head > row > cell {
+  height: 100%;
+}
+.left-panel > tab > div.row-head > row > cell > row {
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+.left-panel > tab > div.row-head > row > cell > row:first-child {
+  width: 100%;
+  border-bottom: 1px solid #bcc9d8;
+}
+.left-panel > tab > div.row-head > row > cell > row:last-child > cell {
+  width: calc(100% / 3);
+}
+.left-panel > tab > div.row-head > row > cell > row > cell {
+  border-left: 1px solid #bcc9d8;
+  float: left;
+  height: 100%;
+  padding: 0 5px;
+  text-align: left;
+}
+.left-panel > tab > div.row-head > row > cell > row > cell:first-child {
+  border-left: 0;
 }
 .left-panel > footer {
   height: 32px;

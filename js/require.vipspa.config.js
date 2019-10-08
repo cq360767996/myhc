@@ -17,7 +17,8 @@ requirejs.config({
     domtoimage: "../lib/dom-to-image.min",
     jqcloud: "../lib/jqcloud",
     vipspa: "../lib/vipspa.min",
-    rx_setting: "zxyp/rx_setting"
+    rx_setting: "zxyp/rx_setting",
+    Sortable: "../lib/Sortable.min"
   },
   shim: {
     high3D: {
