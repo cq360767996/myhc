@@ -25,7 +25,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
         startView: "year",
         minView: "year",
         maxView: "decade",
-        endDate: sugon.getDate(-1),
+        endDate: sugon.getDate(-2),
         language: "zh-CN"
       });
   };
@@ -56,8 +56,8 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
           $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
         );
       });
-      initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
-      initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
+      initDateInput("date1", (searchParams.date1 = sugon.getDate(-4)));
+      initDateInput("date2", (searchParams.date2 = sugon.getDate(-2)));
       $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
       resolve();
     });
