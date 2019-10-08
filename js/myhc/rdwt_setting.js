@@ -2,7 +2,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
   // 查询栏参数
   let searchParams = {
     model: 1,
-    sortCol: 2,
+    sortCol: 1,
     sortType: "desc"
   };
   // 下拉框缓存数据
@@ -356,7 +356,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
       cellWidth;
     if (!$this.hasClass(className)) {
       searchParams.model = 1 + index;
-      searchParams.sortCol = 2;
+      searchParams.sortCol = 1;
       searchParams.sortType = "desc";
       $(".left-panel > header > section").removeClass(className);
       $this.addClass(className);
