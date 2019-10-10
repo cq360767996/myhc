@@ -168,9 +168,11 @@ requirejs(
           len = data[0].length;
         }
         let $body = $("#" + id),
-          $chart = $("<chart/>")
-            .addClass("tab-container")
-            .css("width", 120 + (len - 1) * 56 + "px");
+          $chart = $("<chart/>").addClass("tab-container");
+        $(`#${id}`).css({
+          width: 122 + (len - 1) * 81 + "px",
+          height: data.length * 32 + "px"
+        });
         data.map(val1 => {
           let $row = $("<row/>");
           val1.map(val2 => {
@@ -190,16 +192,21 @@ requirejs(
           uuid = sugon.uuid();
         $("#" + id)
           .append(`<div style="height: 30px;line-height:30px;color:#000;">
-        <div style="width: 20px;height:20px;float:left;margin-top:5px;
-        background-color:#3A9BBE;margin-left:50px;"></div><div 
-        style="margin-left:5px;float:left;">${tag1}</div>
-        <div style="width: 30px;height:2px;margin-left:15px;margin-top: 14px;float:left;
-        background-color:red;"></div><div style="margin-left:5px;float:left;">${tag2}</div>
-        </div><div id="${uuid}" style="height: calc(100% - 30px);"></div>`);
+                      <div style="width: 20px;height:20px;float:left;margin-top:5px;
+                        background-color:#3A9BBE;margin-left:50px;">
+                      </div>
+                      <div style="margin-left:5px;float:left;">${tag1}</div>
+                      <div style="width: 30px;height:2px;margin-left:15px;
+                        margin-top: 14px;float:left;background-color:red;">
+                      </div>
+                      <div style="margin-left:5px;float:left;">${tag2}</div>
+                  </div>
+                  <div id="${uuid}" style="height: calc(100% - 30px);"></div>`);
         data.map(val => {
           xData.push(val.name);
           yData.push(val.value);
         });
+        let minAndMax = sugon.handleMinAndMax(yData);
         let option = {
           animation: false,
           tooltip: {
@@ -225,7 +232,7 @@ requirejs(
                 color: "#000",
                 interval: 0,
                 formatter: param => {
-                  let prefix = 4;
+                  let prefix = data.length > 10 ? 2 : 4;
                   let tempStr = "";
                   if (param.length > prefix) {
                     for (var i = 0; i < param.length; i++) {
@@ -251,6 +258,8 @@ requirejs(
               type: "value",
               show: true,
               splitNumber: 3,
+              min: minAndMax.min,
+              max: minAndMax.max,
               splitLine: {
                 show: false
               },
@@ -432,7 +441,7 @@ requirejs(
                   popFunc.initTab(val.data, id);
                   break;
                 case "1":
-                  popFunc.initBarX(val.data, id);
+                  popFunc.initBarX(val.data, id, true);
                   break;
                 case "2":
                   popFunc.initBarWithLine(val.data, id);

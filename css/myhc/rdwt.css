@@ -43,7 +43,7 @@ button {
   background-color: #a4b7cd;
   border-radius: 2px;
   padding: 10px 20px;
-  color: #75787a;
+  color: #000;
 }
 .up-panel input,
 .up-panel button {
@@ -99,7 +99,7 @@ button {
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
   border-radius: 7px;
-  color: #75787a;
+  color: #000;
   padding: 10px 0;
 }
 .mid-panel > header {
@@ -180,9 +180,6 @@ button {
   top: -1px;
   left: 1px;
 }
-.mid-panel > section > div:last-child > div span {
-  font-size: 16px;
-}
 .mid-panel > fieldset {
   width: 50%;
   height: 170px;
@@ -209,7 +206,7 @@ button {
   background-size: 100% 100%;
   padding: 0 10px;
   font-size: 16px;
-  color: #4d4d4d;
+  color: #000;
   cursor: pointer;
 }
 .mid-panel > fieldset > row > div:first-child:hover {
@@ -234,7 +231,7 @@ button {
   width: calc(100% - 40px);
   margin-left: 20px;
   margin-top: 20px;
-  color: #75787a;
+  color: #000;
 }
 .down-panel > section {
   width: calc((100% - 48px) / 4);

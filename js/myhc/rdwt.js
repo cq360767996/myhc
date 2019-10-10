@@ -116,6 +116,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 初始化下面的面板
   const initBottomPanel = () => {
+    searchParams.id = "";
     let title;
     const $chart1 = $("#chart1").parent(),
       $chart2 = $("#chart2").parent();
