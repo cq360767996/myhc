@@ -381,19 +381,20 @@
   height: 300px;
 }
 .tab-container {
-  border: solid 1px #dcdcdc;
+  color: #000;
+  border: solid 1px #000;
 }
 .tab-container > row {
   height: 32px;
   line-height: 32px;
-  border-top: solid 1px #dcdcdc;
+  border-top: solid 1px #000;
 }
 .tab-container > row:first-child {
   border-top: 0;
   background-color: #f0f3fa;
 }
 .tab-container > row > cell {
-  border-left: solid 1px #dcdcdc;
+  border-left: solid 1px #000;
   width: 80px;
   height: 32px;
   text-align: center;

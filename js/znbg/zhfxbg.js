@@ -441,6 +441,7 @@ requirejs(
                   popFunc.initTab(val.data, id);
                   break;
                 case "1":
+                  val.data.length > 10 && $(`#${id}`).css("width", "600px");
                   popFunc.initBarX(val.data, id, true);
                   break;
                 case "2":
