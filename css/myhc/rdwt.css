@@ -169,6 +169,9 @@ button {
   overflow: hidden;
   white-space: nowrap;
 }
+.mid-panel > section > div:last-child > div:first-child > * {
+  font-weight: 900;
+}
 .mid-panel > section > div:last-child > div .up-img {
   display: inline-block;
   position: relative;
