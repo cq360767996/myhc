@@ -1,58 +1,30 @@
-.window1 {
+.main-container {
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  margin-top: 20px;
+  height: calc(100% - 40px);
+}
+.container1 {
+  background: url(../../img/myhc/myzd/1.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+.container1 > div {
+  width: 104px;
+  height: 118px;
   position: absolute;
-  top: 50%;
-  left: 46%;
-  margin-left: -500px;
-  margin-top: -280px;
-  width: 820px;
-  height: 655px;
-  display: none;
-  /*border-radius: 8px;*/
-  /*box-shadow: 10px 10px 30px #939cab;*/
-  z-index: 999999;
-  background: url('../../img/1.png') no-repeat;
+  top: 144px;
+  right: 314px;
+  cursor: pointer;
 }
-
-.leftPannel {
-  float: left;
-  width: calc(100% - 390px);
-  height: 100%;
-  background: url('../../img/2.png') no-repeat center;
+.container2 {
+  background: url(../../img/myhc/myzd/2.jpg) no-repeat;
+  background-size: 100% 100%;
 }
-
-.rightPannel {
-  float: left;
-  width: 390px;
-  height: calc(100% - 75px);
-  overflow: hidden;
-}
-
-.flag {
+.container2 > div {
+  width: 20px;
+  height: 20px;
   position: absolute;
-  width: 254px;
-  height: 224px;
-  top: 113px;
-  left: 566px;
-}
-
-.ddb {
-  position: absolute;
-  width: 675px;
-  height: 500px;
-  top: 346px;
-  left: 318px;
-}
-
-#gotoMap {
-  width: 390px;
-  height: 75px;
-  line-height: 75px;
-  float: right;
-}
-#gotoMap span {
-  float: right;
-  margin-right: 35px;
-  color: red;
-  font-size: 20px;
+  top: 21px;
+  right: 22px;
   cursor: pointer;
 }

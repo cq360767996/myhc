@@ -1,27 +1,10 @@
-requirejs(["common"], function(sugon) {
-  $(".flag").bind("click", function() {
-    $(".window1").css(
-      "background",
-      'url("../../img/alert2.png") no-repeat center'
-    );
-    $(".window1").show();
+requirejs(["common"], sugon => {
+  $(".main-container > div").on("click", e => {
+    let $parent = $(e.target).parent();
+    if ($parent.hasClass("container1")) {
+      $parent.removeClass("container1").addClass("container2");
+    } else {
+      $parent.removeClass("container2").addClass("container1");
+    }
   });
-
-  $(".ddb").bind("click", function() {
-    $(".window1").css(
-      "background",
-      'url("../../img/alert1.png") no-repeat center'
-    );
-    $(".window1").show();
-  });
-
-  $(".window1").bind("click", function() {
-    $(".window1").hide();
-  });
-
-  $("#gotoMap").bind("click", function() {
-    location.hash = vipspa.stringify("myzs", { type: "myzs" });
-  });
-
-  sugon.initRightMenu();
 });
