@@ -12,7 +12,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
         startView: "year",
         minView: "year",
         maxView: "decade",
-        endDate: sugon.getDate(-2),
+        endDate: sugon.getDate(-1),
         language: "zh-CN"
       });
   };
@@ -42,8 +42,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
           $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
         );
       });
-      initDateInput("date1", (searchParams.date1 = sugon.getDate(-4)));
-      initDateInput("date2", (searchParams.date2 = sugon.getDate(-2)));
+      initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
+      initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
       $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
       $deptName.val((searchParams.deptName = "南京市公安局"));
       resolve();
@@ -89,10 +89,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
                 .css("line-height", height)
                 .html(
                   `<div style="font-size: 18px;height: ${height};">
-                    <strong>NO.</strong>
-                    <img class="up-img"
-                      style="width:${height};height:${height};"
-                      src="../../img/myhc/rdwt/${index + 1}.png" />
+                    <strong>NO.${index + 1}</strong>
                     <span>${val.content}</span>
                   </div>
                   <div style="font-size: 20px;height: ${height};">
@@ -134,6 +131,9 @@ requirejs(["common", "ec"], (sugon, ec) => {
     initChart1();
     initChart3();
     initChart4();
+    if (location.hash && location.hash.indexOf("click") != -1) {
+      $(".mybd-btn").click();
+    }
   };
 
   // 渲染echarts图表

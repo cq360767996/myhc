@@ -424,4 +424,9 @@ requirejs(["common"], function(sugon) {
     searchRuler.date2 = $("#pop-date2").val();
     initData();
   });
+
+  // 跳转档案页面
+  $(".ajbl-container").on("click", "div", () => {
+    location.hash = "pjda";
+  });
 });

@@ -323,8 +323,7 @@
   margin-bottom: 20px;
   position: relative;
 }
-.main-container > section .right-aside > section::after {
-  content: "";
+.main-container > section .right-aside > section .fold-btn {
   width: 26px;
   height: 26px;
   background: #ffffff url(../../img/slhy/pjda/arrow_up.png) no-repeat center center;

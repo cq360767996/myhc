@@ -348,6 +348,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   function initTop() {
     sugon.request(sugon.interFaces.slhy.pjda.initTop).then(result => {
       chart.fluid("chart1", result.data2[0]);
+      $(`.good-rank`).html(result.data2[1]);
+      $(`.bad-rank`).html(result.data2[2]);
     });
   }
 
@@ -364,7 +366,11 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   function initBottom() {
     Promise.resolve()
       .then(() => initTimeLine())
-      .then(date => getBottomDetail(date));
+      .then(date => {
+        $(".main-container > section .right-aside").empty();
+        getBottomDetail(date, 0);
+        getBottomDetail(date, 1);
+      });
   }
 
   // 渲染时间线
@@ -393,12 +399,14 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   }
 
   // 获取最下层的细节数据
-  function getBottomDetail(date) {
-    sugon.request(sugon.interFaces.slhy.pjda.getBottomDetail).then(result => {
-      let html = "",
-        data1 = result.data1;
-      let uuid = sugon.uuid();
-      html += `<section id="${uuid}">
+  function getBottomDetail(date, type) {
+    sugon
+      .request(sugon.interFaces.slhy.pjda.getBottomDetail, { type })
+      .then(result => {
+        let html = "",
+          data1 = result.data1;
+        let uuid = sugon.uuid();
+        html += `<section id="${uuid}">
                 <header>
                   <img src="../../img/slhy/pjda/img10.png" />
                   <span>${date.date1}—${date.date2}</span>
@@ -463,20 +471,21 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
                   </aside>
                 </section>
               </section>`;
-      $(".main-container > section .right-aside")
-        .empty()
-        .append(html);
-      chart.pie2(`${uuid}-left`, result.data2);
-      chart.lineAndBar2(`${uuid}-right`, result.data3);
-      let $listDom = $(
-          `#${uuid} > section > aside:first-child > section:last-child > aside > section`
-        ),
-        $RankDom = $(`#${uuid} > section > aside:last-child > section > aside`);
-      renderList($listDom.eq(0), result.data4);
-      renderList($listDom.eq(1), result.data5);
-      renderRank($RankDom.eq(0), result.data6);
-      renderRank($RankDom.eq(1), result.data7);
-    });
+        // <div class="fold-btn"></div>
+        $(".main-container > section .right-aside").append(html);
+        chart.pie2(`${uuid}-left`, result.data2);
+        chart.lineAndBar2(`${uuid}-right`, result.data3);
+        let $listDom = $(
+            `#${uuid} > section > aside:first-child > section:last-child > aside > section`
+          ),
+          $RankDom = $(
+            `#${uuid} > section > aside:last-child > section > aside`
+          );
+        renderList($listDom.eq(0), result.data4);
+        renderList($listDom.eq(1), result.data5);
+        renderRank($RankDom.eq(0), result.data6);
+        renderRank($RankDom.eq(1), result.data7);
+      });
   }
 
   // 渲染最下层detail的列表
@@ -512,4 +521,31 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
 
   // 页面入口
   initPage();
+
+  $(".close-btn").on("click", () => {
+    location.hash = "rdwt?click=1";
+  });
+
+  // // 伸缩按钮事件
+  // $(".right-aside").on("click", ".fold-btn", e => {
+  //   let $target = $(e.target),
+  //     $parent = $target.parent(),
+  //     height = $parent.css("height"),
+  //     targetHeight,
+  //     hideSection = $parent.find(
+  //       "section > aside:first-child > section:last-child"
+  //     ),
+  //     className = "";
+  //   $target.removeClass("fold-btn-up");
+  //   if (height == "340px") {
+  //     targetHeight = "530px";
+  //     hideSection.show();
+  //   } else {
+  //     targetHeight = "340px";
+  //     hideSection.hide();
+  //     className = "fold-btn-up";
+  //   }
+  //   $parent.animate({ height: targetHeight });
+  //   $target.addClass(className);
+  // });
 });

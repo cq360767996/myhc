@@ -146,6 +146,7 @@
   box-shadow: inset -1px -1px 1px #ecf4f7;
   margin: 3px auto 0;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .pop-body-col-body > div > div {
