@@ -150,7 +150,6 @@ requirejs(["vipspa"], function(vipspa) {
       templateUrl: "views/zxyp/jtsg.html",
       controller: "js/zxyp/jtsg.js"
     },
-
     ywfxbg: {
       parent: "znbg",
       templateUrl: "views/znbg/ywfxbg.html",
@@ -160,6 +159,16 @@ requirejs(["vipspa"], function(vipspa) {
       parent: "znbg",
       templateUrl: "views/znbg/zhfxbg.html",
       controller: "js/znbg/zhfxbg.js"
+    },
+    zhzs: {
+      parent: "slhy",
+      templateUrl: "views/slhy/zhzs.html",
+      controller: "js/slhy/zhzs.js"
+    },
+    pjda: {
+      parent: "slhy",
+      templateUrl: "views/slhy/pjda.html",
+      controller: "js/slhy/pjda.js"
     },
     defaults: "myzs"
   };
@@ -215,6 +224,7 @@ requirejs(["vipspa"], function(vipspa) {
             arr = ["jcj", "ckfw", "jtsg", "aj", "rx", "ylld"];
             break;
           case "slhy":
+            arr = ["zhzs", "pjda"];
             break;
           case "znbg":
             arr = ["ywfxbg", "zhfxbg"];

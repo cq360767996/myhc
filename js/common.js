@@ -1,7 +1,7 @@
 define([], function() {
   var base = {};
 
-  base.isPublished = false;
+  base.isPublished = true;
 
   base.remotePath = "../";
   base.localPath = "./static/json/";
@@ -906,6 +906,26 @@ define([], function() {
         }
       }
     },
+    slhy: {
+      pjda: {
+        initTop: {
+          localUrl: base.localPath + "pjda/initTop.json",
+          remoteUrl: base.remotePath + "slhy/pjda/initTop"
+        },
+        initMid: {
+          localUrl: base.localPath + "pjda/initMid.json",
+          remoteUrl: base.remotePath + "slhy/pjda/initMid"
+        },
+        initTimeLine: {
+          localUrl: base.localPath + "pjda/initTimeLine.json",
+          remoteUrl: base.remotePath + "slhy/pjda/initTimeLine"
+        },
+        getBottomDetail: {
+          localUrl: base.localPath + "pjda/getBottomDetail.json",
+          remoteUrl: base.remotePath + "slhy/pjda/getBottomDetail"
+        }
+      }
+    },
     znbg: {
       ywfxbg: {
         submitSetting: {
@@ -955,8 +975,8 @@ define([], function() {
           localUrl: base.localPath + "ywfxbg/uploadImg.json",
           remoteUrl: base.remotePath + "znbg/ywfxbg/uploadImg"
         },
+        // 删除报告
         deleteReport: {
-          // 删除报告
           localUrl: base.localPath + "ywfxbg/deleteReport.json",
           remoteUrl: base.remotePath + "znbg/ywfxbg/deleteReport"
         }

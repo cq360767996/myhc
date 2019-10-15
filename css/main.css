@@ -170,6 +170,19 @@ html {
   background: url('../img/znbg/zhfxbg_hover.png') no-repeat;
 }
 
+.zhzs-menu {
+  background: url('../img/slhy/zhzs_normal.png') no-repeat;
+}
+.pjda-menu {
+  background: url('../img/slhy/pjda_normal.png') no-repeat;
+}
+.zhzs-menu-hover {
+  background: url('../img/slhy/zhzs_hover.png') no-repeat;
+}
+.pjda-menu-hover {
+  background: url('../img/slhy/pjda_hover.png') no-repeat;
+}
+
 .tab {
   width: 480px;
   height: 100%;

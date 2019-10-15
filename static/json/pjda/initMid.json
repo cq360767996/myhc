@@ -1,0 +1,42 @@
+{
+  "data1": {"name": "交通警情类", "value": 99.15},
+  "data2": {"name": "殴打他人", "value": 92.05},
+  "data3": [
+    {
+      "name": "1月",
+      "value1": 96,
+      "value2": 95,
+      "value3": 92
+    },
+    {
+      "name": "2月",
+      "value1": 78,
+      "value2": 96,
+      "value3": 93
+    },
+    {
+      "name": "3月",
+      "value1": 89,
+      "value2": 88,
+      "value3": 88
+    },
+    {
+      "name": "4月",
+      "value1": 87,
+      "value2": 87,
+      "value3": 87
+    },
+    {
+      "name": "5月",
+      "value1": 96,
+      "value2": 96,
+      "value3": 96
+    },
+    {
+      "name": "6月",
+      "value1": 95,
+      "value2": 95,
+      "value3": 95
+    }
+  ]
+}

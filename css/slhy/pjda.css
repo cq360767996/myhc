@@ -1,0 +1,517 @@
+@font-face {
+  font-family: "ZHSCNMT--GBK1-0";
+  src: url("../../fonts/zhscnm.ttf");
+}
+@font-face {
+  font-family: "FZHTJW--GBK1-0";
+  src: url("../../fonts/FZHTJW.TTF");
+}
+.color-gradient {
+  background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.clear-div {
+  clear: both;
+}
+#ui-view {
+  overflow: auto;
+}
+.main-container {
+  width: 1440px;
+  margin: 10px auto;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+.main-container > header {
+  height: 459px;
+  background: url(../../img/slhy/pjda/header_bg.png) no-repeat center center / 100% 100%;
+  position: relative;
+  font-family: "FZHTJW--GBK1-0";
+}
+.main-container > header > header {
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: "ZHSCNMT--GBK1-0";
+  background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.main-container > header .output-btn {
+  position: absolute;
+  top: 28px;
+  right: 69px;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.main-container > header .close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+.main-container > header > aside {
+  float: left;
+  width: calc(50% - 150px);
+  height: 344px;
+  color: #fff;
+}
+.main-container > header .left-aside {
+  background: url(../../img/slhy/pjda/left_bg.png) no-repeat center center / 100% 100%;
+  margin-left: 140px;
+  padding: 20px 30px;
+}
+.main-container > header .left-aside > div:first-child {
+  height: 180px;
+}
+.main-container > header .left-aside > div:first-child > * {
+  float: left;
+}
+.main-container > header .left-aside > div:first-child > img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 58px;
+  margin: 30px 20px;
+}
+.main-container > header .left-aside > div:first-child > article {
+  width: calc(100% - 160px);
+  height: 100%;
+}
+.main-container > header .left-aside > div:first-child > article > div {
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  letter-spacing: -1px;
+}
+.main-container > header .left-aside > div:first-child > article > div > div {
+  float: left;
+  width: 40%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.main-container > header .left-aside > div:first-child > article > div > div:last-child {
+  width: 60%;
+}
+.main-container > header .left-aside > div:last-child {
+  height: 120px;
+}
+.main-container > header .left-aside > div:last-child > p {
+  margin-bottom: 3px;
+  margin-left: 50px;
+  font-size: 20px;
+}
+.main-container > header .left-aside > div:last-child > p .span-line {
+  display: inline-block;
+  width: 90px;
+  height: 2px;
+  border-top: 1px solid #00c0ff;
+  margin: 0 5px;
+}
+.main-container > header .left-aside > div:last-child > p strong {
+  color: #fbc137;
+  font-size: 22px;
+}
+.main-container > header .right-aside {
+  background: url(../../img/slhy/pjda/right_bg.png) no-repeat center center / 100% 100%;
+  margin-left: 20px;
+}
+.main-container > header .right-aside > div:first-child {
+  height: 145px;
+  padding: 7px 9px 0 9px;
+  line-height: 145px;
+  font-family: "FZHTJW--GBK1-0";
+  font-size: 28px;
+  background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.main-container > header .right-aside > div:first-child > div {
+  height: 100%;
+  float: left;
+}
+.main-container > header .right-aside > div:first-child > div:first-child {
+  width: calc(100% - 260px);
+}
+.main-container > header .right-aside > div:first-child > div:first-child > span {
+  margin: 0 20px;
+}
+.main-container > header .right-aside > div:first-child > div:first-child > img:first-child {
+  margin-left: 50px;
+}
+.main-container > header .right-aside > div:first-child #chart1 {
+  width: 260px;
+  height: 100%;
+}
+.main-container > header .right-aside > div:last-child {
+  height: 191px;
+}
+.main-container > header .right-aside > div:last-child > div {
+  float: left;
+  width: 277px;
+  height: 100%;
+  padding: 9px 0 0 9px;
+}
+.main-container > header .right-aside > div:last-child > div > header {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+.main-container > header .right-aside > div:last-child > div > header > img {
+  position: relative;
+  top: -4px;
+}
+.main-container > header .right-aside > div:last-child > div > header > span {
+  margin: 0 20px;
+  background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+}
+.main-container > header .right-aside > div:last-child > div > section {
+  height: calc(100% - 50px);
+}
+.main-container > header .right-aside > div:last-child > div > section > div {
+  text-align: center;
+}
+.main-container > header .right-aside > div:last-child > div > section > div:first-child {
+  height: 50px;
+  line-height: 50px;
+  font-size: 26px;
+}
+.main-container > header .right-aside > div:last-child > div > section > div:last-child {
+  height: 70px;
+}
+.main-container > header .right-aside > div:last-child > div > section > div .good-rank {
+  background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 36px;
+}
+.main-container > header .right-aside > div:last-child > div > section > div .bad-rank {
+  color: #fb556c;
+  font-size: 36px;
+}
+.main-container > header .right-aside > div:last-child > div:last-child {
+  margin-left: 3px;
+}
+.main-container > banner {
+  width: calc(100% - 280px);
+  display: block;
+  height: 230px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 0 auto 20px auto;
+  padding: 10px 20px;
+  color: #333;
+}
+.main-container > banner > div {
+  height: 100%;
+  float: left;
+  position: relative;
+}
+.main-container > banner > div:first-child {
+  width: 35%;
+}
+.main-container > banner > div:first-child > header {
+  height: 40px;
+  line-height: 40px;
+  color: #000;
+}
+.main-container > banner > div:first-child > header > span {
+  margin-left: 5px;
+}
+.main-container > banner > div:first-child > section {
+  height: calc(100% - 40px);
+}
+.main-container > banner > div:first-child > section > aside {
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+.main-container > banner > div:first-child > section > div {
+  position: absolute;
+  font-size: 16px;
+  color: #333;
+  width: 50%;
+  text-align: center;
+}
+.main-container > banner > div:first-child > section .left-div {
+  left: 0;
+}
+.main-container > banner > div:first-child > section .right-div {
+  left: 50%;
+}
+.main-container > banner > div:last-child {
+  width: 65%;
+}
+.main-container > section {
+  margin: 0 auto;
+  width: calc(100% - 280px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  color: #333;
+}
+.main-container > section > header {
+  height: 40px;
+  line-height: 40px;
+  color: #000;
+}
+.main-container > section > header > span {
+  margin-left: 5px;
+}
+.main-container > section > aside {
+  float: left;
+}
+.main-container > section .left-aside {
+  width: 150px;
+  min-height: 100px;
+}
+.main-container > section .left-aside > ul {
+  margin: 0;
+  padding-left: 28px;
+  list-style: none;
+}
+.main-container > section .left-aside > ul > li {
+  margin-bottom: 52px;
+  line-height: 20px;
+  position: relative;
+  cursor: pointer;
+}
+.main-container > section .left-aside > ul > li:last-child > span:last-child {
+  display: none;
+}
+.main-container > section .left-aside > ul > li > span:first-child {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  top: 5px;
+  left: -20px;
+  background-color: #e4e7ed;
+}
+.main-container > section .left-aside > ul > li > span:last-child {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  top: 17px;
+  left: -15px;
+  background-color: #e4e7ed;
+}
+.main-container > section .left-aside > ul .li-selected > span:first-child {
+  background-color: #509ce9;
+}
+.main-container > section .right-aside {
+  width: calc(100% - 150px);
+}
+.main-container > section .right-aside > section {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: solid 1px #f2f2f2;
+  height: 510px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.main-container > section .right-aside > section::after {
+  content: "";
+  width: 26px;
+  height: 26px;
+  background: #ffffff url(../../img/slhy/pjda/arrow_up.png) no-repeat center center;
+  box-shadow: 0 0 2px 2px rgba(141, 141, 141, 0.25);
+  position: absolute;
+  bottom: -13px;
+  border-radius: 13px;
+  left: 50%;
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+.main-container > section .right-aside > section > header {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #f2f2f2;
+  background-color: #f6faff;
+  padding: 0 10px;
+}
+.main-container > section .right-aside > section > header > span {
+  margin-left: 40px;
+}
+.main-container > section .right-aside > section > header > span:nth-child(2) {
+  margin-left: 5px;
+}
+.main-container > section .right-aside > section > header strong {
+  font-size: 18px;
+}
+.main-container > section .right-aside > section > header .strong1 {
+  color: #1890ff;
+}
+.main-container > section .right-aside > section > header .strong2 {
+  color: #fa6075;
+}
+.main-container > section .right-aside > section > header .strong3 {
+  color: #3ec1a1;
+}
+.main-container > section .right-aside > section > section {
+  height: calc(100% - 50px);
+  padding: 10px;
+}
+.main-container > section .right-aside > section > section > aside {
+  float: left;
+  width: 292px;
+  height: 100%;
+}
+.main-container > section .right-aside > section > section > aside:first-child {
+  width: calc(100% - 292px);
+  border-right: 2px dashed #e0e0e0;
+  padding: 0 10px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section {
+  height: 40%;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section > header {
+  height: 30px;
+  line-height: 30px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section > header > span {
+  margin-left: 5px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section > section {
+  height: calc(100% - 30px);
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child {
+  height: 60%;
+  border-bottom: 2px dashed #e0e0e0;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child > aside {
+  height: 100%;
+  float: left;
+  position: relative;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child > aside .pop-div {
+  position: absolute;
+  width: 116px;
+  height: 40px;
+  left: 50%;
+  top: 59%;
+  margin-top: -58px;
+  margin-left: -57px;
+  text-align: center;
+  border-radius: 58px;
+  line-height: 20px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child > aside:first-child {
+  width: 40%;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child > aside:first-child > header {
+  height: 30px;
+  line-height: 30px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child > aside:first-child > section {
+  height: calc(100% - 30px);
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:first-child > aside:last-child {
+  width: 60%;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside {
+  width: calc(50% - 10px);
+  height: 100%;
+  float: left;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside:first-child {
+  margin-right: 20px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > header {
+  height: 30px;
+  line-height: 30px;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section {
+  height: calc(100% - 30px);
+  border: solid 1px #e5e5e5;
+  overflow: auto;
+  overflow-y: auto;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+  background-color: #fff;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section > row {
+  padding: 0 15px;
+  display: block;
+  line-height: 25px;
+  height: 75px;
+  border-bottom: 1px dashed #e5e5e5;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section > row:hover {
+  background-color: #f5f5f5;
+}
+.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section > row > p {
+  margin: 0;
+  padding: 0;
+}
+.main-container > section .right-aside > section > section > aside:last-child {
+  padding: 0 10px;
+}
+.main-container > section .right-aside > section > section > aside:last-child > header {
+  height: 30px;
+  line-height: 30px;
+}
+.main-container > section .right-aside > section > section > aside:last-child > header > span {
+  margin-left: 5px;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section {
+  height: calc(100% - 30px);
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside {
+  float: left;
+  width: 50%;
+  line-height: 30px;
+  height: 100%;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > header {
+  height: 30px;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > row {
+  display: block;
+  height: 30px;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > row > cell {
+  display: block;
+  width: 24px;
+  height: 100%;
+  float: left;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > row > cell:last-child {
+  margin-left: 6px;
+  width: calc(100% - 30px);
+  height: 100%;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > row .span-top1 {
+  background: url(../../img/slhy/pjda/img14.png) no-repeat center center;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > row .span-top2 {
+  background: url(../../img/slhy/pjda/img15.png) no-repeat center center;
+}
+.main-container > section .right-aside > section > section > aside:last-child > section > aside > row .span-top3 {
+  background: url(../../img/slhy/pjda/img16.png) no-repeat center center;
+}
