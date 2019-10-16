@@ -204,7 +204,7 @@ button {
   float: left;
 }
 .mid-panel > fieldset > row > div:first-child {
-  width: calc(100% - 200px);
+  width: calc(100% - 180px);
   background: url(../../img/myhc/rdwt/list_normal.png) no-repeat;
   background-size: 100% 100%;
   padding: 0 10px;
@@ -218,7 +218,7 @@ button {
   background-size: 100% 100%;
 }
 .mid-panel > fieldset > row > div:last-child {
-  width: 200px;
+  width: 180px;
   padding-left: 30px;
   font-size: 20px;
 }

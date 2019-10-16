@@ -1,7 +1,7 @@
 define([], function() {
   var base = {};
 
-  base.isPublished = true;
+  base.isPublished = false;
 
   base.remotePath = "../";
   base.localPath = "./static/json/";

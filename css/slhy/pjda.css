@@ -169,14 +169,15 @@
 }
 .main-container > header .right-aside > div:last-child > div > header > img {
   position: relative;
-  top: -4px;
+  top: -2px;
 }
 .main-container > header .right-aside > div:last-child > div > header > span {
   margin: 0 20px;
   background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: 600;
 }
 .main-container > header .right-aside > div:last-child > div > section {
   height: calc(100% - 50px);
@@ -458,7 +459,6 @@
   padding: 0 15px;
   display: block;
   line-height: 25px;
-  height: 75px;
   border-bottom: 1px dashed #e5e5e5;
 }
 .main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section > row:hover {

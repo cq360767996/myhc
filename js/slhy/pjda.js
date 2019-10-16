@@ -368,8 +368,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
       .then(() => initTimeLine())
       .then(date => {
         $(".main-container > section .right-aside").empty();
-        getBottomDetail(date, 0);
         getBottomDetail(date, 1);
+        getBottomDetail(date, 0);
       });
   }
 
@@ -382,7 +382,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
           html += `<li class="${i === 1 ? "li-selected" : ""}">
                     <span></span>
                     <span></span>
-                    <span>${result.data[i - 1]}-${result.data[i]}</span>
+                    <span>${result.data[i]}-${result.data[i - 1]}</span>
                     <span></span>
                   </li>`;
         }
@@ -409,7 +409,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
         html += `<section id="${uuid}">
                 <header>
                   <img src="../../img/slhy/pjda/img10.png" />
-                  <span>${date.date1}—${date.date2}</span>
+                  <span>${date.date2}—${date.date1}</span>
                   <span>${data1[0]}</span>
                   <span>岗位：${data1[1]}</span>
                   <span>业务量：
