@@ -882,7 +882,8 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
   });
   $("#check").click();
 
-  sugon.initRightMenu();
+  let { code, date1, date2 } = searchRule;
+  sugon.initRightMenu({ deptId: code, date1, date2 });
 
   $(window).resize(function() {
     chart1.resize();

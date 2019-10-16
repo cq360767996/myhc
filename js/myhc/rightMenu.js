@@ -1,70 +1,58 @@
-requirejs(["common"], function(sugon) {
-  //history.back(-1):
+requirejs(["common"], sugon => {
+  // 加载热点问题数据
+  function initRdwtList() {
+    sugon
+      .request(sugon.interFaces.rdwt.getMidData, window.rightParams)
+      .then(result => {
+        let html = "",
+          $body = $(".rcGrid");
+        result.data.map((val, index) => {
+          html += `<div 
+                  title="${val.content}">
+                  ${index + 1}、${val.content}
+                 </div>`;
+        });
+        $body
+          .empty()
+          .append(html)
+          .css("lineHeight", $body.find("div").css("height"));
+      });
+  }
 
-  sugon.requestJson(
-    {
-      type: "POST",
-      url: sugon.interFaces.rdwt.RdList,
-      data: {
-        date: "2018-06",
-        pageSize: 10,
-        pageNum: 1,
-        deptId: "2014110416460086100000002942"
-      },
-      async: false
-    },
-    function(result) {
-      $(".rcGrid").empty();
-      for (var i = 0; i < result.data.length; i++) {
-        var str = i + 1 + "、" + result.data[i].content;
-        $(".rcGrid").append(
-          "<div id=" +
-            result.data[i].id +
-            ' title="' +
-            str +
-            '">' +
-            str +
-            "</div>"
-        );
-      }
-      $(".rcGrid>div").css("lineHeight", $(".rcGrid>div").css("height"));
-    }
-  );
-
-  $(".search_bar img").bind("click", function() {
-    if ($("#keywords").val()) {
+  // 查询按钮事件
+  $(".search_bar img").on("click", function() {
+    let $keyword = $("#keywords");
+    if ($keyword.val()) {
       location.hash = vipspa.stringify("myys/ysxq", {
-        txt: $("#keywords").val()
+        txt: $keyword.val()
       });
     }
   });
 
-  var initSearchList = function() {
-    sugon.requestJson(
-      { type: "POST", url: sugon.interFaces.myys.SearchList, async: false },
-      function(result) {
-        $(".hot_list").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          $(".hot_list").append(
-            "<div id=" +
-              result.data[i].value +
-              ">" +
-              result.data[i].name +
-              "</div>"
-          );
-        }
-        $(".hot_list>div")
-          .unbind()
-          .bind("click", function() {
-            $("#keywords").val($(this).html());
-          });
-      }
-    );
-  };
+  // 初始化查询列表
+  function initSearchList() {
+    sugon.request(sugon.interFaces.myys.SearchList).then(result => {
+      let html = "";
+      result.data.map(val => {
+        html += `<div id="${val.value}">${val.name}</div>`;
+      });
+      $(".hot_list")
+        .empty()
+        .append(html);
+    });
+  }
 
-  $(".refresh").bind("click", function() {
+  // 绑定点击事件
+  $(".hot_list").on("click", "div", e => {
+    $("#keywords").val($(e.target).html());
+  });
+
+  // 刷新查询列表数据
+  $(".refresh").on("click", function() {
     initSearchList();
   });
 
-  $(".refresh").click();
+  // 入口
+  initRdwtList();
+  initSearchList();
 });

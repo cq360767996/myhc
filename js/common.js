@@ -20,7 +20,7 @@ define([], function() {
       // 加载右侧中间部分数据
       getRightMidData: { remoteUrl: base.remotePath + "myzs/getRightMidData" },
       // 加载右侧数据
-      getRightData: { remoteUrl: base.remotePath + "myrd/getRdwtList" },
+      getRightData: { remoteUrl: base.remotePath + "rdwt/getCkRdwtList" },
       // 获取指标组成
       getZbzc: {
         localUrl: base.localPath + "myzs/pop-zbzs.json",
@@ -1386,8 +1386,9 @@ define([], function() {
     };
   };
 
-  base.initRightMenu = function() {
-    requirejs(["text!../views/myhc/rightMenu.html"], function(ele) {
+  base.initRightMenu = params => {
+    window.rightParams = params;
+    requirejs(["text!../views/myhc/rightMenu.html"], ele => {
       $(".rightPannel").html(ele);
     });
   };

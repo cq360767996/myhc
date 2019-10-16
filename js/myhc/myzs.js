@@ -34,8 +34,8 @@ requirejs(
       });
       $("#place").val(tData[0].text);
       $("#placeCode").val(tData[0].id);
-      $("#date1").val(sugon.getDate(-4));
-      $("#date2").val(sugon.getDate(-2));
+      $("#date1").val(sugon.getDate(-6));
+      $("#date2").val(sugon.getDate(-1));
     }
 
     //获取树数据
@@ -80,7 +80,11 @@ requirejs(
             .then(result => {
               switch (currentLevel) {
                 case 0:
-                  initMyzs();
+                  if ($(".search-yw2").val() == 3) {
+                    initCk();
+                  } else {
+                    initMyzs();
+                  }
                   break;
                 case 1:
                   getPcsDataByFjCode(result.CODE, true);
@@ -244,10 +248,8 @@ requirejs(
     let getRightDownData = function() {
       let condition = {
         deptId: $("#placeCode").val(),
-        date: $("#date2").val(),
-        timestamp: new Date(),
-        pageSize: "10",
-        pageNum: "1"
+        date1: $("#date1").val(),
+        date2: $("#date2").val()
       };
       let ajaxObj = {
         url: sugon.interFaces.myzs.getRightData,
@@ -262,11 +264,11 @@ requirejs(
         for (let i = 0; i < data.length; i++) {
           $body.append(
             '<div title="' +
-              data[i].content +
+              data[i].name +
               '">' +
               (i + 1) +
               "、" +
-              data[i].content +
+              data[i].name +
               "</div>"
           );
         }
@@ -1314,7 +1316,7 @@ requirejs(
     let map;
     // 分别记录分局、派出所、责任区的zoom、上级code、center
     let zoomArr = [
-        { zoom: 11, upDeptCode: "", center: [32.03613281, 118.78211975] }
+        { zoom: 10, upDeptCode: "", center: [32.03613281, 118.78211975] }
       ],
       mapLayer = [];
     let allFjLayerGroup = L.layerGroup(),
@@ -1439,7 +1441,7 @@ requirejs(
     let rdwtData = {},
       selected_ywid; // 1.热点问题数据 2.选中的业务id
     let sjPcsData; // 市局派出所数据
-
+    let timer; // 热力图的计时器
     // 创建地图
     function createMapL() {
       // 创建地图
@@ -1449,7 +1451,7 @@ requirejs(
         center: [32.03613281, 118.78211975],
         maxZoom: 18,
         minZoom: 10,
-        zoom: 11,
+        zoom: 10,
         zoomControl: false,
         attributionControl: false,
         closePopupOnClick: false //点击地图不关闭popup框
@@ -1900,18 +1902,26 @@ requirejs(
       sugon
         .request(sugon.interFaces.myzs.getYlldMapData, condition)
         .then(result => {
+          $(".search-down-panel > button")
+            .removeAttr("class")
+            .addClass("animate-btn-start");
+          clearInterval(timer);
           map.setView(zoomArr[1].center, zoomArr[1].zoom);
           // 清空map上的分局数据
           map.removeLayer(allFjLayerGroup);
           map.removeLayer(allFjMarkerGroup);
+          map.removeLayer(heatLayerGroup);
           allFjLayerGroup = L.layerGroup();
           allFjMarkerGroup = L.layerGroup();
+          heatLayerGroup = L.layerGroup();
 
           map.removeLayer(pcsLayerGroup);
           map.removeLayer(pcsMarkerGroup);
           pcsLayerGroup = L.layerGroup();
           pcsMarkerGroup = L.layerGroup();
           let data = [];
+          // 热力图数据
+          let heatMapData = [];
           resultData.map(val1 => {
             let center = L.latLngBounds(
                 changeLonAndLat(val1.geometry.coordinates)
@@ -1935,13 +1945,23 @@ requirejs(
             sjPcsData.map(val2 => {
               if (obj.code == val2.code) {
                 obj.layerType = val2.type;
+                if (val2.type == 5) {
+                  val2.latlng.map((val, index) => {
+                    if (!heatMapData[index]) {
+                      heatMapData[index] = [];
+                    }
+                    heatMapData[index].push(...val);
+                  });
+                }
               }
             });
             data.push(obj);
           });
           // 在添加之前置空
           data.map(function(val) {
-            let color, layerColor;
+            let color,
+              layerColor,
+              fillOpacity = 0.2;
             switch (val.type) {
               case "1":
                 color = "#51BDAE";
@@ -1958,27 +1978,25 @@ requirejs(
                 layerColor = "#fff";
                 break;
               case "1":
-                layerColor = "#cddc39";
+                layerColor = "#fff176";
                 break;
               case "2":
-                layerColor = "#ffeb3b";
+                layerColor = "#ffee58";
                 break;
               case "3":
-                layerColor = "#fbc02d";
+                layerColor = "#ffeb3b";
                 break;
               case "4":
-                layerColor = "#ffa000";
+                layerColor = "#fdd835";
                 break;
               case "5":
-                layerColor = "#ef6c00";
-                break;
-              case "6":
-                layerColor = "#e64a19";
+                layerColor = "#fbc02d";
+                fillOpacity = 0.4;
                 break;
             }
             let resultLayer = L.polygon(changeLonAndLat(val.data), {
-              color: "#fff",
-              fillOpacity: 0.55,
+              color: "#41b5ff",
+              fillOpacity,
               fillColor: layerColor,
               weight: 2,
               code: val.code
@@ -1991,11 +2009,6 @@ requirejs(
                 },
                 mouseover: function(e) {
                   map.eachLayer(function(layer) {
-                    if (layer.options.fillOpacity == "0.55") {
-                      layer.setStyle({
-                        fillOpacity: 0.45
-                      });
-                    }
                     if (layer._leaflet_id == e.target._leaflet_id) {
                       let $div = $(
                         'div.bubble-marker[code="' +
@@ -2005,18 +2018,31 @@ requirejs(
                       $div.stop().animate({ top: "5px" }, 200, function() {
                         $div.stop().animate({ top: "0" }, 200);
                       });
-                      layer.setStyle({
-                        fillOpacity: 0.65
-                      });
+                      if (layer.options.fillOpacity == 0.2) {
+                        layer.setStyle({
+                          fillOpacity: 0.35
+                        });
+                      }
+                      if (layer.options.fillOpacity == 0.4) {
+                        layer.setStyle({
+                          fillOpacity: 0.6
+                        });
+                      }
                     }
                   });
                 },
                 mouseout: function(e) {
                   map.eachLayer(function(layer) {
-                    if (layer.options.fillOpacity == "0.65") {
+                    if (layer.options.fillOpacity == 0.35) {
                       layer.setStyle({
-                        color: "#fff",
-                        fillOpacity: 0.45
+                        color: "#41b5ff",
+                        fillOpacity: 0.2
+                      });
+                    }
+                    if (layer.options.fillOpacity == 0.6) {
+                      layer.setStyle({
+                        color: "#41b5ff",
+                        fillOpacity: 0.4
                       });
                     }
                   });
@@ -2067,6 +2093,7 @@ requirejs(
           });
           map.addLayer(pcsLayerGroup);
           map.addLayer(pcsMarkerGroup);
+          dynamicHeat(heatMapData);
           initRightPanel2($(".search-yw2").val());
         });
     }
@@ -2215,12 +2242,18 @@ requirejs(
       sugon
         .request(sugon.interFaces.myzs.getYlldMapData, condition)
         .then(result => {
+          $(".search-down-panel > button")
+            .removeAttr("class")
+            .addClass("animate-btn-disabled");
+          clearInterval(timer);
           map.setView(zoomArr[2].center, zoomArr[2].zoom);
           // 清空map上的分局数据
           map.removeLayer(pcsLayerGroup);
           map.removeLayer(pcsMarkerGroup);
+          map.removeLayer(heatLayerGroup);
           pcsLayerGroup = L.layerGroup();
           pcsMarkerGroup = L.layerGroup();
+          heatLayerGroup = L.layerGroup();
           map.removeLayer(zrqLayerGroup);
           map.removeLayer(zrqMarkerGroup);
           zrqLayerGroup = L.layerGroup();
@@ -3161,6 +3194,10 @@ requirejs(
 
     // 初始化窗口面板
     function initCk() {
+      $(".search-down-panel > button")
+        .removeAttr("class")
+        .addClass("animate-btn-disabled");
+      clearInterval(timer);
       $(".data-panel2").hide();
       $(".toolbar-panel3").hide();
       $(".right-panel-up")
@@ -3173,7 +3210,8 @@ requirejs(
       $(".right-panel-up-2").hide();
       $(".right-panel-up-3").show();
       $(".right-panel-ck").hide();
-      onLoad();
+      $(".right-panel-panel").show();
+      $(".right-panel-panel2").hide();
       map.off("mouseup");
       removeAllLayers();
       isLoadBounds = true;
@@ -3294,9 +3332,6 @@ requirejs(
         case 4:
           initSearchPanel();
           break;
-        case 5:
-          initCk();
-          break;
       }
     }
 
@@ -3358,6 +3393,33 @@ requirejs(
           map.addLayer(heatLayerGroup);
         }
       );
+    }
+
+    // 渲染热力图
+    function renderHeatMap(data) {
+      map.removeLayer(heatLayerGroup);
+      heatLayerGroup = L.layerGroup();
+      let maxLen = 25000;
+      let len = data.length;
+      data.map(function(val) {
+        val[2] = (10 * maxLen) / len;
+      });
+      let heatLayer = [];
+      heatLayer.push(
+        L.heatLayer(data, {
+          radius: 10,
+          maxOpacity: 0.7,
+          featureWeight: "value",
+          gradient: {
+            "0.3": "#fff",
+            "0.4": "#31ff00",
+            "0.8": "#f8ff00",
+            "0.95": "#ff0500"
+          }
+        })
+      );
+      heatLayerGroup = L.layerGroup(heatLayer);
+      map.addLayer(heatLayerGroup);
     }
 
     // 加载聚合图
@@ -3423,19 +3485,17 @@ requirejs(
       $(".data-panel-banner3").html(rdwtData.content);
       let $body = $(".data-panel-tab3").empty()
         .append(`<div class="data-tab-header">
-                            <div class="col1">序号</div>
-                            <div class="col2">时间</div>
-                            <div class="col3">诉求人</div>
-                            <div class="col4">数据来源</div>
-                            <div class="col5">业务类型</div>
+                            <div class="col11">序号</div>
+                            <div class="col11">时间</div>
+                            <div class="col11">诉求人</div>
+                            <div class="col11">诉求类型</div>
                          </div>`);
       data.map((val, index) => {
         let row = `<div class="data-panel-tab-row" ywid="${val.ywid}">
-                                      <div class="col1">${index + 1}</div>
-                                      <div class="col2">${val.sj}</div>
-                                      <div class="col3">${val.sqr}</div>
-                                      <div class="col4">${val.sqlb}</div>
-                                      <div class="col5">${val.ywlb}</div>
+                                      <div class="col11">${index + 1}</div>
+                                      <div class="col11">${val.sj}</div>
+                                      <div class="col11">${val.sqr}</div>
+                                      <div class="col11">${val.ywlb}</div>
                                    </div>`;
         $body.append(row);
         let icon = L.icon({
@@ -3669,6 +3729,10 @@ requirejs(
 
     // 复位页面
     function resetPage(type, isSearch) {
+      $(".search-down-panel > button")
+        .removeAttr("class")
+        .addClass("animate-btn-disabled");
+      clearInterval(timer);
       let $control = $(".search-control").val();
       if ($control == "1") {
         let searchYw = $(".search-yw");
@@ -3718,9 +3782,14 @@ requirejs(
         sugon.request(sugon.interFaces.myzs.DeptId).then(result => {
           $("#placeCode").val(result.ID);
           $("#place").val(result.NAME);
+          $(".data-panel2").hide();
           $(".data-panel3").hide();
           $(".data-panel4").hide();
+          $(".toolbar-panel3").hide();
           $(".search-pop-panel").hide();
+          $(".search-yw2").val(1);
+          $(".search-gj").val(0);
+          map.off("click");
           removeAllLayers();
           initMyzs();
         });
@@ -3968,65 +4037,107 @@ requirejs(
         function(result) {
           let data1 = result.data1,
             data2 = result.data2,
+            data3 = result.data3,
             titleData;
           let rightData = "",
             xData = [],
             yData = [],
-            min = 0,
-            max = 0,
-            diff;
-          if (data1 && data1.length > 0) {
-            min = data1[0].value;
-            max = data1[0].value;
-          }
+            subData = [],
+            rightUpData = "",
+            rightClassName = "map-mark-right-all";
           data1.map(function(value) {
             if (value.type) {
               titleData = value;
             } else {
-              min = Math.min(value.value, min);
-              max = Math.max(value.value, max);
               xData.push(value.name);
               yData.push(value.value);
+              subData.push(value);
             }
           });
-          diff = (max - min) / 2;
-          min = Number(min - diff).toFixed(2);
-          max = Number(max + diff).toFixed(2);
 
-          if (min < 0) {
-            min = 0;
-          }
-          if (max > 100) {
-            max = 100;
+          if (data2.length == 0) {
+            rightData = `<img src="../../img/myhc/myzs/nodata.png" class="no-data"/>`;
           }
 
           data2.map(function(value, index) {
-            rightData +=
-              '<div><div title="' +
-              value.content +
-              '">' +
-              (index + 1) +
-              "、" +
-              value.content +
-              '</div><span code="' +
-              value.code +
-              '">（' +
-              value.count +
-              "）</span></div>";
+            rightData += `<div>
+                                <div title="${value.content}">${index + 1}、${
+              value.content
+            }</div>
+                                <span code="${value.code}">（${
+              value.count
+            }）</span>
+                            </div>`;
           });
+
+          if (data3) {
+            rightClassName = "map-mark-right-half";
+            if (data3.length > 0) {
+              rightUpData += `<div class="map-mark-row">
+                                                <div></div>
+                                                <div>办理量</div>
+                                                <div>一般工单</div>
+                                                <div>不满意工单</div>
+                                            </div>`;
+              data3.map(val => {
+                let img;
+                switch (val.name) {
+                  case "户籍":
+                    img = "hz";
+                    break;
+                  case "身份证":
+                    img = "sfz";
+                    break;
+                  case "出入境":
+                    img = "crj";
+                    break;
+                  case "驾证":
+                    img = "cgjz";
+                    break;
+                  case "车辆":
+                    img = "cgcl";
+                    break;
+                  case "监管":
+                    img = "jg";
+                    break;
+                }
+                rightUpData += `<div class="map-mark-row">
+                                                    <div>
+                                                        <img src="../../img/myhc/myzs/${img}.png"/>
+                                                        <span style="margin-left: 3px;">${val.name}</span>
+                                                    </div>
+                                                    <div>${val.value1}</div>
+                                                    <div>${val.value2}</div>
+                                                    <div>${val.value3}</div>
+                                            </div>`;
+              });
+            }
+          }
+          let rightUp = `<div class="${rightClassName}" style="border-bottom: 1px dashed #ccc;">${rightUpData}</div>`;
+          rightClassName == "map-mark-right-all" && (rightUp = "");
+          let rightDown = `<div class="${rightClassName}">
+                                        <div deptCode="${code}" class="map-mark-right-title">
+                                            <span style="float: left;">本期热点问题：</span>
+                                            <span style="float: right;">问题量</span>
+                                        </div>
+                                        <div class="map-mark-right-body">
+                                            ${rightData}
+                                        </div>
+                                     </div>`;
           let random = parseInt(Math.random() * 10000);
-          let html =
-            '<div class="pop-map-mark-header">满意度分析</div>' +
-            '<div class="ck-pop-mark-body pop-map-mark-body"><div class="map-mark-left" ' +
-            'id="marker-chart-' +
-            random +
-            '"></div><div class="map-mark-right"><div deptCode="' +
-            code +
-            '" class="map-mark-right-title"><span style="float: left;">本期热点问题：</span>' +
-            '<span style="float: right;">问题量</span></div><div class="map-mark-right-body">' +
-            rightData +
-            "</div></div></div>";
-          let popupOption = {};
+          let html = `<div class="pop-map-mark-header">满意度分析</div>
+                         <div class="ck-pop-mark-body pop-map-mark-body">
+                            <div class="map-mark-left" id="marker-chart-${random}" style="width:${
+            rightUp ? "50%;" : "60%"
+          }"></div>
+                            <div class="map-mark-right" style="width:${
+                              rightUp ? "50%" : "40%"
+                            };">
+                            ${rightUp + rightDown}
+                            </div>
+                         </div>`;
+          let popupOption = {},
+            minAndMax = sugon.handleMinAndMax(yData);
           if (type == 1) {
             popupOption.offset = L.point(-48, -50);
           }
@@ -4080,7 +4191,7 @@ requirejs(
             color: ["#008fef"],
             grid: {
               left: 0,
-              top: "25%",
+              top: 90,
               right: 0,
               bottom: 20
             },
@@ -4107,15 +4218,15 @@ requirejs(
               {
                 type: "value",
                 show: false,
-                min: min,
-                max: max
+                min: minAndMax.min,
+                max: minAndMax.max
               }
             ],
             series: [
               {
                 type: "bar",
                 barWidth: 20,
-                data: data1,
+                data: subData,
                 label: {
                   position: "top",
                   show: true,
@@ -4130,11 +4241,11 @@ requirejs(
                         : "";
                     if (param.data.inc) {
                       if (param.data.inc > 0) {
-                        inc = "{b|↑ " + param.data.inc + "名}";
+                        inc = "{c|↑ " + param.data.inc + "名}";
                       } else if (param.data.inc == 0) {
                         inc = "{d|持平}";
                       } else {
-                        inc = "{c|↓ " + Math.abs(param.data.inc) + "名}";
+                        inc = "{b|↓ " + Math.abs(param.data.inc) + "名}";
                       }
                       inc += "\n";
                     }
@@ -4592,6 +4703,37 @@ requirejs(
     // 诉求分布工具切换事件
     function sqfbGjChange(index) {
       let $panel3 = $(".toolbar-panel3");
+      $panel3.hide();
+      map.off("click");
+      $(".analysis-btn").show();
+      $(".data-panel").hide();
+      isLoadBounds = true;
+      removeAllLayers();
+      map.setZoom(16, { animate: false });
+      let $searchYw = $(".search-yw");
+      if ($searchYw.val() == 4) {
+        $searchYw.val(0);
+        $(".toolbar-panel2").hide();
+        $(".toolbar-panel2-pop").hide();
+      }
+
+      // 绑定移动事件
+      map.on("moveend", function() {
+        if (currentLevel == 3) {
+          if (drawControl) {
+            drawControl.handler.disable();
+          }
+          $(".search-gj").val(0);
+        }
+      });
+      currentLevel = 3;
+      loadPlot();
+      loadGj(index);
+    }
+
+    // 民意指数工具切换事件
+    function myzsGjChange(index) {
+      let $panel3 = $(".toolbar-panel3");
       if (index == 4) {
         removeAllLayers();
         $panel3
@@ -4646,19 +4788,9 @@ requirejs(
             }
           });
       } else {
-        $panel3.hide();
         map.off("click");
-        $(".analysis-btn").show();
-        $(".data-panel").hide();
-        isLoadBounds = true;
         removeAllLayers();
-        map.setZoom(16, { animate: false });
-        let $searchYw = $(".search-yw");
-        if ($searchYw.val() == 4) {
-          $searchYw.val(0);
-          $(".toolbar-panel2").hide();
-          $(".toolbar-panel2-pop").hide();
-        }
+        map.setZoom(15, { animate: false });
 
         // 绑定移动事件
         map.on("moveend", function() {
@@ -4670,29 +4802,9 @@ requirejs(
           }
         });
         currentLevel = 3;
-        loadPlot();
+        loadPlot(true);
         loadGj(index);
       }
-    }
-
-    // 民意指数工具切换事件
-    function myzsGjChange(index) {
-      map.off("click");
-      removeAllLayers();
-      map.setZoom(15, { animate: false });
-
-      // 绑定移动事件
-      map.on("moveend", function() {
-        if (currentLevel == 3) {
-          if (drawControl) {
-            drawControl.handler.disable();
-          }
-          $(".search-gj").val(0);
-        }
-      });
-      currentLevel = 3;
-      loadPlot(true);
-      loadGj(index);
     }
 
     // 画便民服务圈
@@ -4796,38 +4908,47 @@ requirejs(
               let resultData = serviceResult.result.features.features;
               map.removeLayer(pcsLayerGroup);
               pcsLayerGroup = L.layerGroup();
+              // 热力图数据
+              let heatMapData = [];
               resultData.map(val1 => {
                 sjPcsData.map(val2 => {
-                  let color;
+                  let color,
+                    fillOpacity = 0.2;
                   if (val1.properties.DWBM == val2.code) {
+                    if (val2.type == 5) {
+                      val2.latlng.map((val, index) => {
+                        if (!heatMapData[index]) {
+                          heatMapData[index] = [];
+                        }
+                        heatMapData[index].push(...val);
+                      });
+                    }
                     switch (val2.type) {
                       case "0":
                         color = "#fff";
                         break;
                       case "1":
-                        color = "#cddc39";
+                        color = "#fff176";
                         break;
                       case "2":
-                        color = "#ffeb3b";
+                        color = "#ffee58";
                         break;
                       case "3":
-                        color = "#fbc02d";
+                        color = "#ffeb3b";
                         break;
                       case "4":
-                        color = "#ffa000";
+                        color = "#fdd835";
                         break;
                       case "5":
-                        color = "#ef6c00";
-                        break;
-                      case "6":
-                        color = "#e64a19";
+                        color = "#fbc02d";
+                        fillOpacity = 0.4;
                         break;
                     }
                     let layer = L.polygon(
                       changeLonAndLat(val1.geometry.coordinates),
                       {
                         color: color,
-                        fillOpacity: 0.6,
+                        fillOpacity,
                         weight: 0,
                         code: val1.properties.DWBM
                       }
@@ -4862,8 +4983,9 @@ requirejs(
                       result.data.map(val1 => {
                         let code = val1.code;
                         resultData.map(val2 => {
-                          code == val2.properties.DWBM &&
-                            (val1.data = val2.geometry.coordinates);
+                          if (code == val2.properties.DWBM) {
+                            val1.data = val2.geometry.coordinates;
+                          }
                         });
                         fjData.map(val2 => {
                           if (code == val2.code) {
@@ -4876,7 +4998,7 @@ requirejs(
                       // 在添加之前置空
                       result.data.map(function(val) {
                         let resultLayer = L.polygon(changeLonAndLat(val.data), {
-                          color: "#fff",
+                          color: "#41b5ff",
                           fillOpacity: 0,
                           weight: 2,
                           code: val.code
@@ -4899,13 +5021,17 @@ requirejs(
                                   code != layer.options.code &&
                                   layer.setStyle
                                 ) {
+                                  let fillOpacity =
+                                    layer.options.fillOpacity == 0.2
+                                      ? 0.35
+                                      : 0.6;
                                   layer.setStyle({
-                                    fillOpacity: 0.75
+                                    fillOpacity
                                   });
                                 }
                                 if (layer.options.code == code) {
                                   layer.setStyle({
-                                    weight: 8
+                                    weight: 4
                                   });
                                 }
                                 if (layer._leaflet_id == e.target._leaflet_id) {
@@ -4926,16 +5052,25 @@ requirejs(
                               map.eachLayer(function(layer) {
                                 if (
                                   layer.options.code &&
-                                  layer.options.fillOpacity == "0.75" &&
+                                  layer.options.fillOpacity == 0.6 &&
                                   layer.setStyle
                                 ) {
                                   layer.setStyle({
-                                    fillOpacity: 0.6
+                                    fillOpacity: 0.4
                                   });
                                 }
-                                if (layer.options.weight == "8") {
+                                if (layer.options.weight == "4") {
                                   layer.setStyle({
                                     weight: 2
+                                  });
+                                }
+                                if (
+                                  layer.options.code &&
+                                  layer.options.fillOpacity == 0.35 &&
+                                  layer.setStyle
+                                ) {
+                                  layer.setStyle({
+                                    fillOpacity: 0.2
                                   });
                                 }
                               });
@@ -4962,6 +5097,7 @@ requirejs(
                       });
                       map.addLayer(allFjLayerGroup);
                       map.addLayer(allFjMarkerGroup);
+                      dynamicHeat(heatMapData);
                     });
                 });
             });
@@ -4969,29 +5105,68 @@ requirejs(
       initRightPanel2(type);
     }
 
+    // 绑定动态热力图
+    function dynamicHeat(heatMapData) {
+      renderHeatMap(heatMapData.reduce((a, b) => a.concat(b)));
+      let flag = 0,
+        start = "animate-btn-start",
+        stop = "animate-btn-stop",
+        disabled = "animate-btn-disabled";
+      $(`.${disabled}`)
+        .removeClass(disabled)
+        .addClass(start);
+      $(".search-down-panel > button")
+        .off("click")
+        .on("click", e => {
+          let $target = $(e.target),
+            className = $target.attr("class");
+          if (className != disabled) {
+            if (className == start) {
+              $(`.${start}`)
+                .removeClass(start)
+                .addClass(stop);
+              renderHeatMap(heatMapData[flag]);
+              flag++;
+              timer = setInterval(function() {
+                if (flag == heatMapData.length) {
+                  flag = 0;
+                  clearInterval(timer);
+                  $(".search-down-panel > button")
+                    .removeAttr("class")
+                    .addClass("animate-btn-start");
+                  renderHeatMap(heatMapData.reduce((a, b) => a.concat(b)));
+                } else {
+                  renderHeatMap(heatMapData[flag]);
+                  flag++;
+                }
+              }, 1000);
+            } else {
+              $(`.${stop}`)
+                .removeClass(stop)
+                .addClass(start);
+              clearInterval(timer);
+              renderHeatMap(heatMapData.reduce((a, b) => a.concat(b)));
+            }
+          }
+        });
+      $(".bubble-marker > div:nth-child(2)").hide();
+    }
+
     // 初始化右侧面板
     function initRightPanel2(type) {
-      let title;
-      switch (type) {
-        case "1":
-          title = "社会治安满意度";
-          break;
-        case "2":
-          title = "公安队伍满意度";
-          break;
-        case "3":
-          title = "窗口服务";
-          break;
-      }
-      $(".right-up-title2").html(title);
-      let option = {
-        deptId: $("#placeCode").val(),
-        date1: $("#date1").val(),
-        date2: $("#date2").val(),
-        type
-      };
-      initYlldRight1(option);
-      initYlldRight3(option);
+      let deptId = $("#placeCode").val(),
+        date1 = $("#date1").val(),
+        date2 = $("#date2").val();
+      let option = { deptId, date1, date2, type };
+      let optionArr = [
+        { deptId, date1, date2, type: 1 },
+        { deptId, date1, date2, type: 2 }
+      ];
+      optionArr.map(val => {
+        initYlldRight1(val);
+      });
+      initYlldRight2(option);
+      // initYlldRight3(option);
       initYlldRight4(option);
     }
 
@@ -5000,9 +5175,10 @@ requirejs(
       sugon
         .request(sugon.interFaces.myzs.getYlldMapRight1, condition)
         .then(result => {
-          let data = result;
-          $(".right-up-banner-left2").html(data.data[0] + "%");
-          let $body = $(".right-up-banner-right2").empty();
+          let data = result,
+            $container = $(".right-up-banner2").eq(condition.type - 1);
+          $container.find(".right-up-banner-left2").html(data.data[0] + "%");
+          let $body = $container.find(".right-up-banner-right2").empty();
           let colorIconArr = [];
           for (let i = 0, len = data.data.length; i < len; i++) {
             if (i === 4 || i === 6) {
@@ -5011,42 +5187,43 @@ requirejs(
             colorIconArr.push(handleColorAndIcon(data.data[i]));
             data.data[i] = Math.abs(Number(data.data[i]));
           }
-          let html = `<div>
-                                <span>同比</span>
-                                <div class="${colorIconArr[1].color}">
+          let html = `<div><span>同比</span>
+                                    <div class="${colorIconArr[1].color}">
                                     <i class="glyphicon ${
                                       colorIconArr[1].icon
                                     }"></i><strong>${data.data[1]}%</strong>
+                                    </div>
                                 </div>
-                             </div>
-                             <div>
-                                <span>环比</span>
-                                <div class="${colorIconArr[2].color}">
+                                <div><span>环比</span>
+                                    <div class="${colorIconArr[2].color}">
                                     <i class="glyphicon ${
                                       colorIconArr[2].icon
                                     }"></i><strong>${data.data[2]}%</strong>
-                                </div>
-                             </div>`;
+                                    </div>
+                                </div>`;
           $body.append(html);
-          let text = `<span style="margin-left: 5px;">市局排名:第<strong class="${
-            colorIconArr[3].color
-          }">${data.data[3]}</strong>名
-                            </span><i class="glyphicon ${
-                              colorIconArr[4].icon
-                            } ${colorIconArr[4].color}"></i>
+          let text = `<span style="margin-left: 5px;">市局排名:
+                                    <strong class="${colorIconArr[3].color}">${
+            data.data[3]
+          }</strong>名
+                                </span>
+                                ${
+                                  data.data[4] == 0
+                                    ? ""
+                                    : `<i class="glyphicon ${
+                                        colorIconArr[4].icon
+                                      } ${colorIconArr[4].color}"></i>
                                     <strong class="${colorIconArr[4].color}">${
-            data.data[4]
-          }</strong>`;
-          let $ybfx = $("#right-ybfx").css("height", "180px"),
-            $banner2 = $(".right-banner2").show();
+                                        data.data[4]
+                                      }</strong>`
+                                }`;
           switch (data.type) {
             case "0":
-              $ybfx.css("height", "220px");
-              $banner2.hide();
+              text = "";
               break;
             case "1":
               text = `<span style="margin-left: 5px;">
-                                    市局排名:第<strong class="${
+                                    市局排名:<strong class="${
                                       colorIconArr[3].color
                                     }">${data.data[3]}</strong>名
                                 </span>
@@ -5061,33 +5238,42 @@ requirejs(
               break;
             case "2":
               text += `<span style="margin-left: 10px;">
-                                    分局排名:第<strong class="${
+                                    分局排名:<strong class="${
                                       colorIconArr[5].color
                                     }">${data.data[5]}</strong>名
-                                 </span>
-                                 <i class="glyphicon ${colorIconArr[6].color} ${
-                colorIconArr[6].icon
-              }"></i>
+                                 </span>${
+                                   data.data[6] == 0
+                                     ? ""
+                                     : `<i class="glyphicon ${
+                                         colorIconArr[6].color
+                                       } ${colorIconArr[6].icon}"></i>
                                  <strong class="${colorIconArr[6].color}">${
-                data.data[6]
-              }</strong>`;
+                                         data.data[6]
+                                       }</strong>`
+                                 }`;
               break;
             case "4":
               text += `<span style="margin-left: 10px;">
-                                    所队排名:第<strong class="${
+                                    所队排名:<strong class="${
                                       colorIconArr[5].color
                                     }">${data.data[5]}</strong>名
                                  </span>
-                                 <i class="glyphicon ${colorIconArr[6].color} ${
-                colorIconArr[6].icon
-              }"></i>
+                                 ${
+                                   data.data[6] == 0
+                                     ? ""
+                                     : `<i class="glyphicon ${
+                                         colorIconArr[6].color
+                                       } ${colorIconArr[6].icon}"></i>
                                  <strong class="${colorIconArr[6].color}">${
-                data.data[6]
-              }</strong>`;
+                                         data.data[6]
+                                       }</strong>`
+                                 }`;
               break;
           }
-          $(".right-banner2").html(text);
-          initYlldRight2(condition);
+          $container.css("height", text ? "125px" : "100px");
+          $container.find(".banner-pop").remove();
+          let $div = $("<div/>").addClass("banner-pop");
+          $div.append(text).appendTo($container);
         });
     }
 
@@ -5176,11 +5362,18 @@ requirejs(
           let data = result.data;
           let chart = echarts.init(document.getElementById("right-sqfl"));
           let xData = [],
-            yData = [];
-          data.map(val => {
+            yData = [],
+            colorArr = ["#4e99dd", "#E28C51", "#6eaba3"];
+          data.map((val, index) => {
             let { id, value } = val;
             xData.push(val.name);
-            yData.push({ id, value });
+            yData.push({
+              id,
+              value,
+              itemStyle: {
+                color: colorArr[index]
+              }
+            });
           });
           let option = {
             tooltip: {
@@ -5189,12 +5382,11 @@ requirejs(
                 type: "shadow"
               }
             },
-            color: ["#E28C51"],
             grid: {
-              left: 20,
-              top: 15,
-              right: 10,
-              bottom: 0,
+              left: 10,
+              top: 30,
+              right: 20,
+              bottom: 10,
               containLabel: true
             },
             xAxis: [
@@ -5243,12 +5435,13 @@ requirejs(
             series: [
               {
                 type: "bar",
-                barWidth: 20,
+                barWidth: 30,
                 data: yData,
                 label: {
                   show: true,
                   position: "top",
-                  color: "#000"
+                  color: "#000",
+                  fontSize: 16
                 }
               }
             ]
@@ -5297,10 +5490,14 @@ requirejs(
       html += `<h5>问题预警：</h5>`;
       html += "<div class='clear-div'></div>";
       result.data2.map((val, index) => {
-        let colorAndIcon = handleColorAndIcon(val.trend);
+        let colorAndIcon = handleColorAndIcon(val.trend),
+          inc = val.trend > 0 ? "上升" : "下降";
         html += `<div class="rdwt-row">
                             <div>${index + 1}、${val.name}</div>
-                            <div>词频： ${val.value}<i class="glyphicon ${
+                            <div>词频： ${val.value}</div>
+                            <div>较上期呈:<span class="${
+                              colorAndIcon.color
+                            }">${inc}趋势</span><i class="glyphicon ${
           colorAndIcon.icon
         } ${colorAndIcon.color}"></i></div>
                          </div>`;
@@ -5465,14 +5662,7 @@ requirejs(
       if (currentLevel == 5) {
         resetPage(index);
       } else {
-        if (index == 4) {
-          currentLevel = 5;
-          $(".data-panel").hide();
-          $(".toolbar-panel2").show();
-          initCk();
-        } else {
-          initLevelLayer();
-        }
+        initLevelLayer();
       }
     });
 
@@ -5498,7 +5688,7 @@ requirejs(
     });
 
     // 诉求分类返回按钮
-    $(".right-header").on("click", ".img-sqfl", e => {
+    $("body").on("click", ".img-sqfl", e => {
       let conditon = {
         deptId: $("#placeCode").val(),
         date1: $("#date1").val(),
@@ -5537,6 +5727,10 @@ requirejs(
     $(".search-gj").on("change", function() {
       let index = $(this).val(),
         type = $(".search-control").val();
+      $(".search-down-panel > button")
+        .removeAttr("class")
+        .addClass("animate-btn-disabled");
+      clearInterval(timer);
       type == "1" ? sqfbGjChange(index) : myzsGjChange(index);
     });
 
@@ -5892,6 +6086,10 @@ requirejs(
 
     // 面板第四列控制下拉框改变时间
     $(".search-control").on("change", function() {
+      $(".search-down-panel > button")
+        .removeAttr("class")
+        .addClass("animate-btn-disabled");
+      clearInterval(timer);
       let $this = $(this),
         index = $this.val(),
         yw1 = $(".search-yw"),
@@ -5905,12 +6103,12 @@ requirejs(
           "background",
           "url('../../img/myhc/myzs/service.png') no-repeat 0 50%"
         );
-        bmqOption.show();
+        bmqOption.hide();
         getAllFjData();
       } else {
         yw1.hide();
         yw2.show();
-        bmqOption.hide();
+        bmqOption.show();
         $toolbar.css("background", "none");
         removeAllLayers();
         initMyzs();
@@ -5919,7 +6117,13 @@ requirejs(
 
     // 业务2改变时间
     $(".toolbar-panel").on("change", ".search-yw2", function() {
-      initMyzs($(this).val());
+      let index = $(this).val();
+      if (index == 3) {
+        initCk();
+      } else {
+        $(".ck-popup").remove();
+        initMyzs(index);
+      }
     });
 
     // data-panel3关闭按钮事件
@@ -6017,6 +6221,28 @@ requirejs(
       $target.removeClass(className).addClass(newClassName);
       $panel.animate({ height: height });
       $tab.css("overflow", overflow);
+    });
+
+    // 右侧面板弹出页事件
+    $(".right-up-banner2").on("click", function() {
+      let $this = $(this),
+        index = $this.index(".right-up-banner2"),
+        title = index === 0 ? "社会治安" : "公安队伍",
+        condition = {
+          deptId: $("#placeCode").val(),
+          date1: $("#date1").val(),
+          date2: $("#date2").val(),
+          type: index + 1
+        };
+      sugon.renderDialog({
+        width: 600,
+        height: 400,
+        ele: `<div id="right-sqfl"></div>
+                      <img src="../../img/myhc/myzs/return-btn.png" class="img-sqfl">`,
+        title: `${title}满意度群众不满意诉求`
+      });
+      $(".simple_shade").remove();
+      initYlldRight3(condition);
     });
   }
 );

@@ -416,7 +416,11 @@ requirejs(["common"], function(sugon) {
     });
   });
 
-  sugon.initRightMenu();
+  sugon.initRightMenu({
+    deptId: $("#placeCode").val(),
+    date1: $("#date1").val(),
+    date2: $("#date2").val()
+  });
 
   /!*-----页面pannel内容区高度自适应 start-----*!/;
   $(window).resize(function() {
