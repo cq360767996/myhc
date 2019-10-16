@@ -3185,6 +3185,7 @@ requirejs(
                     '<strong style="color: #3286ff;">' + value[1] + "%</strong>"
                   );
                 }
+                getRightDownData();
               }
             });
           }
