@@ -2,8 +2,7 @@
 requirejs(
   ["common", "ec", "domtoimage", "jqcloud"],
   (sugon, ec, domtoimage) => {
-    let rightPanelData,
-      idArr = []; // 1.右侧数据;2.类型数组，用于传给后台
+    let rightPanelData; // 右侧数据
     // 全局查询尺度
     let searchRuler = {};
     let popFunc = {
@@ -26,7 +25,7 @@ requirejs(
             left: 0,
             top: 20,
             right: 0,
-            bottom: 30,
+            bottom: 10,
             containLabel: true
           },
           xAxis: [
@@ -162,17 +161,25 @@ requirejs(
         }
         chart.setOption(option, true);
       },
-      initTab(data, id) {
+      initTab(data, id, hide) {
         let len;
         if (data.length > 0) {
           len = data[0].length;
         }
         let $body = $("#" + id),
-          $chart = $("<chart/>").addClass("tab-container");
-        $(`#${id}`).css({
-          width: 122 + (len - 1) * 81 + "px",
-          height: data.length * 32 + "px"
-        });
+          $chart = $("<chart/>"),
+          className;
+        if (hide) {
+          className = "tab-container-hidden";
+          $(`#${id}`).css({
+            width: 122 + (len - 1) * 81 + "px",
+            height: data.length * 32 + "px"
+          });
+        } else {
+          className = "tab-container-block";
+          $chart.css("font-size", "12px");
+        }
+        $chart.addClass(className);
         data.map(val1 => {
           let $row = $("<row/>");
           val1.map(val2 => {
@@ -180,28 +187,30 @@ requirejs(
           });
           $chart.append($row);
         });
-        $body.append($chart);
+        $body.empty().append($chart);
       },
-      initBarWithLine(rawData, id) {
+      initBarWithLine(rawData, id, isDisplay) {
         let data = rawData.data1,
           lineData = rawData.data2,
           tag1 = rawData.tag1,
           tag2 = rawData.tag2,
           xData = [],
           yData = [],
-          uuid = sugon.uuid();
-        $("#" + id)
-          .append(`<div style="height: 30px;line-height:30px;color:#000;">
-                      <div style="width: 20px;height:20px;float:left;margin-top:5px;
-                        background-color:#3A9BBE;margin-left:50px;">
-                      </div>
-                      <div style="margin-left:5px;float:left;">${tag1}</div>
-                      <div style="width: 30px;height:2px;margin-left:15px;
-                        margin-top: 14px;float:left;background-color:red;">
-                      </div>
-                      <div style="margin-left:5px;float:left;">${tag2}</div>
-                  </div>
-                  <div id="${uuid}" style="height: calc(100% - 30px);"></div>`);
+          uuid = sugon.uuid(),
+          fontSize = isDisplay ? 12 : 14,
+          margin = isDisplay ? 19 : 50;
+        $("#" + id).empty().append(`<div style="font-size: ${fontSize}px;
+                                 height: 30px;line-height:30px;color:#000;">
+                              <div style="width: 20px;height:20px;float:left;margin-top:5px;
+                                   background-color:#3A9BBE;margin-left:${margin}px;">
+                              </div>
+                              <div style="margin-left:5px;float:left;">${tag1}</div>
+                              <div style="width: 30px;height:2px;margin-left:15px;
+                                margin-top: 14px;float:left;background-color:red;">
+                              </div>
+                              <div style="margin-left:5px;float:left;">${tag2}</div>
+                          </div>
+                          <div id="${uuid}" style="height: calc(100% - 30px);"></div>`);
         data.map(val => {
           xData.push(val.name);
           yData.push(val.value);
@@ -219,7 +228,7 @@ requirejs(
             left: 0,
             top: 20,
             right: 0,
-            bottom: 30,
+            bottom: isDisplay ? 0 : 10,
             containLabel: true
           },
           xAxis: [
@@ -232,7 +241,12 @@ requirejs(
                 color: "#000",
                 interval: 0,
                 formatter: param => {
-                  let prefix = data.length > 10 ? 2 : 4;
+                  let prefix;
+                  if (isDisplay) {
+                    prefix = 1;
+                  } else {
+                    prefix = data.length > 10 ? 2 : 4;
+                  }
                   let tempStr = "";
                   if (param.length > prefix) {
                     for (var i = 0; i < param.length; i++) {
@@ -275,7 +289,7 @@ requirejs(
               barWidth: 15,
               color: "#3A9BBE",
               label: {
-                show: true,
+                show: !isDisplay,
                 position: "top",
                 color: "#000"
               },
@@ -305,6 +319,114 @@ requirejs(
         };
         let chart = ec.init(document.getElementById(uuid));
         chart.setOption(option, true);
+      },
+      postImg() {
+        // 把img生成的img图片传给后台
+        domtoimage
+          .toJpeg(document.getElementById("pop-container"))
+          .then(dataUrl => {
+            if (sugon.isPublished) {
+              return sugon.request(sugon.interFaces.znbg.zhfxbg.postImg, {
+                uuid: searchRuler.uuid,
+                url: dataUrl
+              });
+            } else {
+              return new Promise((resolve, reject) => {
+                let a = document.createElement("a");
+                a.href = dataUrl;
+                a.style.display = "none";
+                a.download = "xx.jpg";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                resolve();
+              });
+            }
+          })
+          .then(result => {
+            initRightPanel();
+            sugon.removeLoading();
+            sugon.showMessage("报告已生成！", "success");
+          });
+      },
+      initPopPage(condition) {
+        let $body = $("#pop-container").show();
+        sugon
+          .request(sugon.interFaces.znbg.zhfxbg.getPreview, condition)
+          .then(result => {
+            // title
+            result.title.data.map((val, index) => {
+              $(".header-val")
+                .eq(index)
+                .html(val);
+            });
+            // data1
+            result.data1.data.map((val, index) => {
+              $(".cell-val")
+                .eq(index)
+                .html(index === 3 ? val + "%" : val);
+            });
+            // data2
+            $(".fieldset1 article").html(result.data2.content);
+            this.initBarWithLine(result.data2.data1, "chart1", true);
+            this.initBarWithLine(result.data2.data2, "chart2", true);
+            this.initBarWithLine(result.data2.data3, "chart3", true);
+            // data3
+            $(".fieldset2 article").html(result.data3.content);
+            this.initTab(result.data3.data, "tab1");
+            // data4
+            this.initTab(result.data4.data, "tab2");
+            $(".fieldset3 article")
+              .eq(0)
+              .html(result.data4.content);
+            // data5
+            $(".fieldset3 article")
+              .eq(1)
+              .html(result.data5.content1);
+            this.initAnnual(result.data5.data1, "chart4");
+            $(".fieldset4 article")
+              .eq(0)
+              .html(result.data5.content2);
+            this.initAnnual(result.data5.data2, "chart5");
+            $(".fieldset4 article")
+              .eq(1)
+              .html(result.data5.content3);
+            // data6
+            $(".fieldset4 article")
+              .eq(2)
+              .html(result.data6.content);
+            this.initBarX(result.data6.data, "chart6", true);
+            // data7
+            $(".fieldset4 article")
+              .eq(3)
+              .html(result.data7);
+            if (condition.content === undefined) {
+              $body.css({
+                top: "50%",
+                left: "50%",
+                "margin-left": "-720px",
+                "margin-top": "-360px",
+                "z-index": "3"
+              });
+              let $i = $("#pop-container > header > div:nth-child(3) i").show(),
+                $mask = $(".pop-mask").show();
+              $i.unbind().bind("click", e => {
+                // 绑定关闭按钮
+                $i.hide();
+                $mask.hide();
+                $body
+                  .css("top", 0)
+                  .css("left", 0)
+                  .css("margin-top", 0)
+                  .css("margin-left", 0)
+                  .css("z-index", -2)
+                  .hide();
+              });
+              sugon.removeLoading();
+            } else {
+              this.postImg();
+            }
+          });
       }
     };
 
@@ -400,23 +522,25 @@ requirejs(
         },
         result => {
           rightPanelData = result.data;
-          let $tabBody = $(".tab-body").empty();
+          let html = "";
           result.data.map(val => {
-            $tabBody.append(
-              '<div url="' +
-                val.url +
-                '" containImg="' +
-                val.containImg +
-                '">' +
-                '<div><img src="../../img/znbg/checkbox.png"></div><div><img src="../../img/znbg/word.png"><span>' +
-                val.name +
-                "</span></div><div>" +
-                val.date +
-                '</div><div><img class="report-preview" src="../../img/znbg/preview.png">' +
-                '<img class="report-download" src="../../img/znbg/download.png">' +
-                '<img class="report-delete" src="../../img/znbg/delete.png"></div></div>'
-            );
+            html += `<div url="${val.url}" containImg="${val.containImg}">
+                      <div><img src="../../img/znbg/checkbox.png"></div>
+                      <div>
+                      <img src="../../img/znbg/word.png">
+                      <span>${val.name}</span>
+                      </div>
+                      <div>${val.date}</div>
+                      <div>
+                      <img class="report-preview" src="../../img/znbg/preview.png">
+                      <img class="report-download" src="../../img/znbg/download.png">
+                      <img class="report-delete" src="../../img/znbg/delete.png">
+                      </div>
+                    </div>`;
           });
+          $(".tab-body")
+            .empty()
+            .append(html);
         }
       );
     }
@@ -426,7 +550,7 @@ requirejs(
       searchRuler.code = codeArr.join(",");
       searchRuler.content = $(".textarea-div").val();
       searchRuler.uuid = uuid;
-      idArr.length === 1 && popFunc.initPopPage(searchRuler, idArr[0]);
+      popFunc.initPopPage(searchRuler);
       sugon
         .request(sugon.interFaces.znbg.zhfxbg.generateReport, searchRuler)
         .then(result => {
@@ -438,7 +562,7 @@ requirejs(
               let $id = $("#" + id);
               switch (val.type) {
                 case "0.1":
-                  popFunc.initTab(val.data, id);
+                  popFunc.initTab(val.data, id, true);
                   break;
                 case "1":
                   val.data.length > 10 && $(`#${id}`).css("width", "600px");
@@ -493,10 +617,6 @@ requirejs(
           });
         }
       });
-      if (idArr.length !== 1) {
-        sugon.removeLoading();
-        sugon.showMessage("报告已生成！", "success");
-      }
     }
 
     // 刷新左侧面板

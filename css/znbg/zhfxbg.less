@@ -1,11 +1,29 @@
+@banner-height: 20px;
+@header-height: 65px;
+@text-indent: 32px;
+
+chart,
+tab,
+row,
+cell {
+  display: block;
+}
+
+article {
+  text-indent: @text-indent;
+  line-height: 20px;
+  .text-ellipse(3);
+}
+
 .header {
   & > header {
     clear: both;
-    width: 180px;
+    width: 200px;
     height: 30px;
     line-height: 24px;
     font-size: 16px;
     background: url("../../img/znbg/preview/title.png") no-repeat;
+    background-size: 100% 80%;
 
     & > span {
       margin-left: 15px;
@@ -19,6 +37,19 @@
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
   box-shadow: 0 0 8px #939cab;
+}
+
+.banner {
+  width: 100%;
+  height: @banner-height;
+  line-height: @banner-height;
+  color: #485053;
+  font-weight: 600;
+
+  & > img {
+    float: right;
+    margin-top: 5px;
+  }
 }
 
 .single-text-ellipse() {
@@ -343,14 +374,30 @@
   }
 }
 
-.tab-container {
+.tab-container-hidden {
+  @tab-width: 80px;
+  @tab-height: 32px;
+  .tab-container(@tab-width, @tab-height);
+
+  & > row > cell:first-child {
+    width: 120px !important;
+  }
+}
+
+.tab-container-block {
+  @tab-width: 65px;
+  @tab-height: 30px;
+  .tab-container(@tab-width, @tab-height);
+}
+
+.tab-container(@tab-width, @tab-height) {
   color: #000;
   @border: solid 1px #000;
   border: @border;
 
   & > row {
-    height: 32px;
-    line-height: 32px;
+    height: @tab-height;
+    line-height: @tab-height;
     border-top: @border;
 
     &:first-child {
@@ -360,14 +407,258 @@
 
     & > cell {
       border-left: @border;
-      width: 80px;
-      height: 32px;
+      width: @tab-width;
+      height: @tab-height;
       text-align: center;
       float: left;
 
       &:first-child {
         border-left: 0;
-        width: 120px;
+        width: calc(~"100% - 5 * " @tab-width);
+      }
+    }
+  }
+}
+
+.pop-menu {
+  background-color: #fff;
+  position: absolute;
+  z-index: 4;
+  border-radius: 1px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    bottom: -9px;
+    transform: rotate(-45deg);
+    left: 50%;
+    margin-left: -8px;
+    top: -8px;
+  }
+
+  & > a {
+    display: block;
+    padding: 3px 10px;
+    line-height: 24px;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: #2e91fe;
+    }
+  }
+}
+
+#pop-container {
+  @width: 1440px;
+  @height: 720px;
+  @fieldWidth: 21%;
+  @bg: url("../../img/znbg/preview/header2.png") no-repeat;
+
+  position: absolute;
+  width: @width;
+  height: @height;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  background-color: #ffffff;
+  color: #485053;
+  display: none;
+
+  & > header {
+    width: 100%;
+    height: @header-height;
+    background: @bg;
+    background-size: 100% 100%;
+
+    & > div {
+      float: left;
+      height: 100%;
+
+      &:first-child {
+        width: 129px;
+        line-height: 58px;
+        font-size: 48px;
+        letter-spacing: 5px;
+        margin-left: 308px;
+        font-family: CenturyGothic-Bold;
+        color: #a9aac2;
+        text-align: center;
+      }
+
+      &:nth-child(2) {
+        width: calc(~"100% - 452px");
+        margin-left: 5px;
+
+        & > div {
+          width: 100%;
+          color: #ebecfa;
+          font-family: ZHSCNMT--GBK1-0;
+
+          &:first-child {
+            height: 33px;
+            line-height: 33px;
+            font-size: 24px;
+          }
+
+          &:nth-child(2) {
+            height: 32px;
+            line-height: 32px;
+            font-size: 18px;
+            text-align: right;
+          }
+        }
+      }
+
+      &:nth-child(3) {
+        width: 10px;
+        height: 100%;
+        color: #ebecfa;
+
+        i {
+          position: relative;
+          top: 8px;
+          right: 13px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  & > section {
+    @border: 1px solid #dbdbdb;
+    width: 100%;
+    height: calc(~"100% - @{header-height}");
+
+    fieldset {
+      float: left;
+      width: @fieldWidth;
+      height: 100%;
+      border-right: @border;
+      padding: 10px;
+
+      .header();
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    .fieldset1 {
+      & > section {
+        height: 190px;
+        padding: 10px;
+
+        & > div {
+          height: 36px;
+          line-height: 36px;
+
+          &:first-child {
+            & > div:first-child {
+              background: url(../../img/znbg/preview/icon21.png) no-repeat;
+            }
+          }
+
+          &:nth-child(2) {
+            & > div:first-child {
+              background: url(../../img/znbg/preview/icon18.png) no-repeat;
+            }
+          }
+
+          &:nth-child(3) {
+            & > div:first-child {
+              background: url(../../img/znbg/preview/icon19.png) no-repeat;
+            }
+          }
+
+          &:last-child {
+            & > div:first-child {
+              background: url(../../img/znbg/preview/icon20.png) no-repeat;
+            }
+          }
+
+          & > div {
+            height: 100%;
+            float: left;
+
+            &:first-child {
+              width: 36px;
+            }
+            &:nth-child(2) {
+              margin-left: 10px;
+              width: calc(~"100% - 130px");
+            }
+            &:last-child {
+              float: right;
+              width: 84px;
+              text-align: right;
+              color: #ff6000;
+              font-size: 22px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      & > article {
+        .text-ellipse(3);
+        height: 60px;
+      }
+
+      #chart1 {
+        height: calc(~"100% - 330px");
+      }
+    }
+
+    .fieldset2 {
+      #chart2 {
+        height: 245px;
+      }
+
+      #chart3 {
+        height: 245px;
+      }
+
+      article {
+        height: 80px;
+        .text-ellipse(4);
+      }
+    }
+
+    .fieldset3 {
+      width: 31%;
+
+      #tab1,
+      #tab2 {
+        height: 128px;
+      }
+
+      & > article {
+        height: 60px;
+      }
+
+      #chart4 {
+        height: 185px;
+      }
+    }
+
+    .fieldset4 {
+      width: 27%;
+
+      & > article {
+        height: 60px;
+      }
+
+      #chart5 {
+        height: 150px;
+      }
+
+      #chart6 {
+        height: 170px;
       }
     }
   }

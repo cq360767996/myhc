@@ -986,13 +986,13 @@ define([], function() {
           localUrl: base.localPath + "zhfxbg/getLeft.json",
           remoteUrl: base.remotePath + "znbg/zhfxbg/getLeft"
         },
+        // 生成报告
         generateReport: {
-          // 生成报告
           localUrl: base.localPath + "zhfxbg/generateReport.json",
           remoteUrl: base.remotePath + "znbg/zhfxbg/generateReport"
         },
+        // 获取文件列表
         getFileList: {
-          // 获取文件列表
           localUrl: base.localPath + "ywfxbg/getFileList.json",
           remoteUrl: base.remotePath + "znbg/zhfxbg/getFileList"
         },
@@ -1000,10 +1000,18 @@ define([], function() {
           localUrl: base.localPath + "ywfxbg/uploadImg.json",
           remoteUrl: base.remotePath + "znbg/zhfxbg/uploadImg"
         },
+        // 删除报告
         deleteReport: {
-          // 删除报告
           localUrl: base.localPath + "ywfxbg/deleteReport.json",
           remoteUrl: base.remotePath + "znbg/zhfxbg/deleteReport"
+        },
+        getPreview: {
+          localUrl: base.localPath + "zhfxbg/getPreview.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/getPreview"
+        },
+        postImg: {
+          localUrl: base.localPath + "ywfxbg/postImg.json",
+          remoteUrl: base.remotePath + "znbg/zhfxbg/postImg"
         }
       }
     }
