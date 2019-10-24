@@ -1,30 +1,143 @@
+@font-face {
+  font-family: "FZSXSLKJW--GB1-0";
+  src: url("../../fonts/fzsxslkjt.ttf");
+}
+@font-face {
+  font-family: "FZLTZH--GB1-0";
+  src: url("../../fonts/fzltzh.TTF");
+}
+main {
+  display: block;
+  font-family: "FZLTZH--GB1-0";
+}
+.border-style {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
+  border-radius: 7px;
+}
 .main-container {
-  width: calc(100% - 40px);
-  margin-left: 20px;
-  margin-top: 20px;
-  height: calc(100% - 40px);
+  height: 100%;
+  padding: 10px 20px 30px 20px;
 }
-.container1 {
-  background: url(../../img/myhc/myzd/1.png) no-repeat;
-  background-size: 100% 100%;
+.main-container > header {
+  height: 63px;
+  background: url(../../img/myhc/myzd/1.png) no-repeat center center / 100% 100%;
 }
-.container1 > div {
-  width: 104px;
-  height: 118px;
+.main-container > header > div {
+  float: left;
+  width: 32%;
+  height: 45px;
+  margin-top: 18px;
+  text-align: center;
+}
+.main-container > header > div:nth-child(2) {
+  margin: 0;
+  height: 100%;
+  font-size: 42px;
+  line-height: 63px;
+  color: #3667a3;
+  width: 36%;
+  font-family: "FZSXSLKJW--GB1-0";
+}
+.main-container > header > div > div {
+  width: 230px;
+  margin-left: 28%;
+  font-size: 24px;
+  color: #4d4d4d;
+  line-height: 45px;
+}
+.main-container > header > div > div .strong-left {
+  color: #1d84c6;
+}
+.main-container > header > div > div .strong-right {
+  color: #c6901d;
+}
+.main-container > header > div > div > strong {
+  font-weight: normal;
+  font-size: 34px;
+  font-family: CenturyGothic;
+}
+.main-container > header > div > div > strong > span:last-child {
+  font-size: 18px;
+  position: relative;
+  top: -5px;
+}
+.main-container > header > div:first-child {
+  background: url(../../img/myhc/myzd/2.png) no-repeat 65% 50%;
+}
+.main-container > header > div:last-child {
+  background: url(../../img/myhc/myzd/2.png) no-repeat 38% 50%;
+}
+.main-container > header > div:last-child > div {
+  margin-left: 24%;
+}
+.main-container > section {
+  margin-top: 10px;
+  height: calc(100% - 73px);
+  position: relative;
+  background: url(../../img/myhc/myzd/3.png) no-repeat center center / 100% 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
+  border-radius: 7px;
+}
+.main-container > section > img {
   position: absolute;
-  top: 293px;
-  left: 409px;
+  left: 50%;
+  top: 50%;
+  margin-left: -152.5px;
+  margin-top: -97px;
+}
+.main-container > section > div {
+  position: absolute;
+  width: 175px;
+  height: 141px;
+  background: url(../../img/myhc/myzd/5.png) no-repeat center center / 100% 100%;
+  padding: 33px 48px 42px 48px;
+  text-align: center;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1266ae;
   cursor: pointer;
 }
-.container2 {
-  background: url(../../img/myhc/myzd/2.png) no-repeat;
-  background-size: 100% 100%;
+.main-container > section > div:nth-child(1) {
+  top: 5%;
+  left: 10%;
 }
-.container2 > div {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 21px;
-  right: 22px;
-  cursor: pointer;
+.main-container > section > div:nth-child(2) {
+  top: 4.6%;
+  left: 46.5%;
+  color: #1d8ab7;
+}
+.main-container > section > div:nth-child(3) {
+  top: 6.5%;
+  left: 70.2%;
+  color: #1b9394;
+}
+.main-container > section > div:nth-child(4) {
+  top: 54.5%;
+  left: 8.2%;
+  color: #1d8ab7;
+}
+.main-container > section > div:nth-child(5) {
+  top: 27%;
+  left: 24%;
+  color: #158fde;
+}
+.main-container > section > div:nth-child(6) {
+  top: 40.8%;
+  left: 79.8%;
+}
+.main-container > section > div:nth-child(7) {
+  top: 67%;
+  left: 36%;
+  color: #0f94b1;
+}
+.main-container > section > div:nth-child(8) {
+  top: 67%;
+  left: 63%;
+  color: #1266ae;
+}
+.main-container > section > div > div:last-child {
+  font-size: 14px;
 }

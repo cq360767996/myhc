@@ -1,0 +1,370 @@
+@basic-color: #000;
+
+@font-face {
+  font-family: "fzzzhjt";
+  src: url("../../fonts/fzzzhjt.ttf");
+}
+
+main,
+chart {
+  display: block;
+  height: 100%;
+}
+
+// 边框以及阴影样式
+.border-style {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
+  border-radius: 7px;
+}
+
+// 滚动条样式
+.scroll-style {
+  // 滚动条样式
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #c1c1c1;
+  }
+}
+
+.top-panel {
+  height: 40px;
+  line-height: 40px;
+  font-family: "fzzzhjt";
+  text-align: center;
+  font-size: 24px;
+  color: #3667a3;
+  margin-top: 10px;
+  position: relative;
+
+  & > i {
+    font-size: 18px;
+    color: #3385ff;
+    position: absolute;
+    top: 3px;
+    right: 20px;
+    cursor: pointer;
+  }
+}
+
+.up-panel {
+  @input-height: 28px;
+  margin: 0 auto 20px;
+  width: calc(~"100% - 40px");
+  height: 48px;
+  background-color: rgba(164, 183, 205, 1);
+  border-radius: 2px;
+  padding: 10px 20px;
+  color: @basic-color;
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0; //自定义边框
+    outline: none;
+  }
+
+  input,
+  button {
+    height: @input-height;
+    line-height: @input-height;
+  }
+
+  input {
+    border: 0;
+    vertical-align: top;
+    width: 410px;
+    margin-left: 20px;
+    padding: 0 10px;
+
+    &::-webkit-input-placeholder {
+      color: #808080;
+    }
+  }
+
+  #dept-name {
+    margin-left: 0;
+    width: calc(~"100% - 939px");
+  }
+
+  button {
+    width: 43px;
+    margin-left: 20px;
+    background: url(../../img//myhc/rdwt/btn_search.png) no-repeat;
+  }
+
+  #dept-tree {
+    visibility: hidden;
+    margin-top: -5px;
+    height: 230px;
+    overflow: auto;
+    position: absolute;
+    z-index: 9999;
+    .scroll-style();
+  }
+}
+
+.down-panel {
+  float: left;
+  width: calc(~"(100% - 80px) / 3");
+  height: calc(~"100% - 138px");
+  margin-left: 20px;
+
+  & > fieldset {
+    height: calc(~"50% - 10px");
+    padding: 0 10px;
+    position: relative;
+    .border-style();
+
+    &:last-child {
+      margin-top: 20px;
+    }
+
+    & > header {
+      height: 40px;
+      line-height: 40px;
+      background: url(../../img/myhc/myzd/6.png) no-repeat center center;
+      text-align: center;
+      font-size: 18px;
+      color: #75787a;
+    }
+
+    & > section {
+      height: calc(~"100% - 40px");
+
+      & > tab {
+        display: block;
+        text-align: center;
+        height: calc(~"100% - 40px");
+        color: #4c4c4c;
+
+        & > row {
+          display: block;
+          height: 35px;
+          line-height: 35px;
+          border-bottom: 1px solid #bcc9d8;
+
+          &:first-child {
+            font-weight: 600;
+          }
+
+          & > cell {
+            float: left;
+            height: 100%;
+            display: block;
+          }
+        }
+      }
+
+      #tab1 {
+        & > row > cell {
+          &:first-child {
+            width: 60px;
+          }
+
+          &:nth-child(2) {
+            width: calc(~"100% - 180px");
+          }
+
+          &:last-child {
+            width: 120px;
+          }
+        }
+      }
+
+      #tab2 {
+        & > row > cell {
+          &:first-child {
+            width: 60px;
+          }
+
+          &:nth-child(2) {
+            width: 80px;
+          }
+
+          &:nth-child(3) {
+            width: calc(~"100% - 260px");
+          }
+
+          &:last-child {
+            width: 120px;
+          }
+        }
+      }
+
+      & > footer {
+        height: 40px;
+
+        & > div {
+          float: right;
+        }
+      }
+    }
+
+    & > chart {
+      display: block;
+      height: calc(~"50% - 40px");
+    }
+
+    & > aside {
+      position: absolute;
+      top: 32%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      margin: -50px 0 0 -50px;
+      text-align: center;
+      color: #75787a;
+      cursor: pointer;
+
+      & > div {
+        line-height: 30px;
+        font-size: 24px;
+      }
+    }
+
+    & > div {
+      margin-top: 10px;
+      width: calc(~"100% / 3");
+      height: calc(~"100% - 20px");
+      border-left: 1px solid #bfcfe2;
+      float: left;
+      text-align: center;
+
+      & > div {
+        height: 26px;
+        line-height: 26px;
+        font-size: 18px;
+        font-family: "fzzzhjt";
+        color: #75787a;
+
+        &:first-child {
+          margin: 0 auto;
+          width: 46px;
+          height: 46px;
+        }
+
+        &:last-child {
+          color: #1d84c6;
+        }
+      }
+
+      &:first-child {
+        border-left: 0;
+        & > div:first-child {
+          background: url(../../img/myhc/myzd/7.png) no-repeat;
+        }
+      }
+
+      &:nth-child(2) {
+        & > div:first-child {
+          background: url(../../img/myhc/myzd/9.png) no-repeat;
+        }
+      }
+
+      &:last-child {
+        & > div:first-child {
+          background: url(../../img/myhc/myzd/8.png) no-repeat;
+        }
+      }
+    }
+  }
+
+  &:nth-child(4) {
+    & > fieldset {
+      &:first-child {
+        height: 125px;
+      }
+
+      &:last-child {
+        height: calc(~"100% - 145px");
+      }
+    }
+  }
+}
+
+.jqcloud {
+  font-family: "微软雅黑", "宋体", sans-serif;
+  font-size: 10px;
+  line-height: normal;
+  color: #09f;
+  overflow: hidden;
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  span {
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      color: #1a86d1;
+      font-weight: bold;
+    }
+  }
+
+  .w10 {
+    font-size: 250%;
+    color: #7a833c;
+  }
+
+  .w9 {
+    font-size: 240%;
+    color: #53609b;
+  }
+
+  .w8 {
+    font-size: 230%;
+    color: #bc78de;
+  }
+
+  .w7 {
+    font-size: 220%;
+    color: #cf3876;
+  }
+
+  .w6 {
+    font-size: 210%;
+    color: #1d84c6;
+  }
+
+  .w5 {
+    font-size: 200%;
+    color: #7a833c;
+  }
+
+  .w4 {
+    font-size: 190%;
+    color: #1d84c6;
+  }
+
+  .w3 {
+    font-size: 180%;
+    color: #e8a31c;
+  }
+
+  .w2 {
+    font-size: 170%;
+    color: #bc78de;
+  }
+
+  .w1 {
+    font-size: 160%;
+    color: #ed8166;
+  }
+}

@@ -1,10 +1,26 @@
 requirejs(["common"], sugon => {
-  $(".main-container > div").on("click", e => {
-    let $parent = $(e.target).parent();
-    if ($parent.hasClass("container1")) {
-      $parent.removeClass("container1").addClass("container2");
-    } else {
-      $parent.removeClass("container2").addClass("container1");
-    }
+  function initPage() {
+    sugon.request(sugon.interFaces.myhc.myzd.getCount).then(result => {
+      result.data1.map((val, index) => {
+        $(".span-val")
+          .eq(index)
+          .html(val);
+      });
+      Object.keys(result.data2).forEach(key => {
+        $(`.${key}`).html(`${result.data2[key]}人`);
+      });
+    });
+  }
+  // 页面入口
+  initPage();
+
+  // 路由事件
+  $(".main-container > section > div").on("click", function() {
+    let $this = $(this),
+      className = $this
+        .find("div")
+        .eq(1)
+        .attr("class");
+    location.hash = vipspa.stringify("myzd/jsfx", { type: className });
   });
 });

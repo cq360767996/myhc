@@ -1,54 +1,6 @@
 requirejs(["common", "ec"], (sugon, ec) => {
   // 查询栏参数
   let searchParams = {};
-  // 初始化日期控件
-  const initDateInput = (id, date) => {
-    $(`#${id}`)
-      .val(date)
-      .datetimepicker({
-        format: "yyyy-mm",
-        autoclose: true,
-        todayBtn: true,
-        startView: "year",
-        minView: "year",
-        maxView: "decade",
-        endDate: sugon.getDate(-1),
-        language: "zh-CN"
-      });
-  };
-  // 初始化查询栏
-  const initSearchBar = () => {
-    return new Promise((resolve, reject) => {
-      const $deptTree = $("#dept-tree");
-      const $deptName = $("#dept-name");
-      const $deptId = $("#dept-id");
-      sugon.request(sugon.interFaces.rdwt.tree).then(result => {
-        //渲染树
-        $deptTree.css("width", $deptName.outerWidth()).treeview({
-          data: result.data,
-          levels: 1,
-          onNodeSelected: function(event, node) {
-            $deptName.val(node.text);
-            $deptId.val(node.id);
-            $deptTree.css("visibility", "hidden");
-          },
-          showCheckbox: false //是否显示多选
-        });
-      });
-      // 为单位名称绑定点击事件
-      $("#dept-name").on("click", () => {
-        $deptTree.css(
-          "visibility",
-          $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
-        );
-      });
-      initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
-      initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
-      $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
-      $deptName.val((searchParams.deptName = "南京市公安局"));
-      resolve();
-    });
-  };
 
   // 初始化中间的面板
   const initMidPanel = () => {
@@ -635,12 +587,22 @@ requirejs(["common", "ec"], (sugon, ec) => {
       });
   };
 
+  // 查询按钮事件方法
+  function searchFunc() {
+    searchParams.deptId = $("#dept-id").val();
+    searchParams.deptName = $("#dept-name").val();
+    searchParams.date1 = $("#date1").val();
+    searchParams.date2 = $("#date2").val();
+    Promise.resolve()
+      .then(() => initMidPanel())
+      .then(() => initBottomPanel());
+  }
+
   // 页面入口
   function initPage() {
     Promise.resolve()
-      .then(() => initSearchBar())
-      .then(() => initMidPanel())
-      .then(() => initBottomPanel());
+      .then(() => sugon.initSearchBar({ cb: searchFunc }))
+      .then(() => searchFunc());
   }
 
   // 页面入口
@@ -673,17 +635,6 @@ requirejs(["common", "ec"], (sugon, ec) => {
     );
     $target.css("background-image", "url(../../img/myhc/rdwt/list_hover.png)");
     initBottomPanel();
-  });
-
-  // 查询按钮功能
-  $(".search-btn").on("click", () => {
-    searchParams.deptId = $("#dept-id").val();
-    searchParams.deptName = $("#dept-name").val();
-    searchParams.date1 = $("#date1").val();
-    searchParams.date2 = $("#date2").val();
-    Promise.resolve()
-      .then(() => initMidPanel())
-      .then(() => initBottomPanel());
   });
 
   // 返回按钮事件

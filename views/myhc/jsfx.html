@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="../../css/myhc/jsfx.css" />
+
+<main>
+  <header class="top-panel">
+    <span>党代表意见建议分析</span>
+    <i class="glyphicon glyphicon-remove"></i>
+  </header>
+
+  <header class="up-panel">
+    <input id="dept-name" placeholder="市局/分局" readonly />
+    <input type="hidden" id="dept-id" disabled />
+    <input id="date1" placeholder="时间" readonly />
+    <input id="date2" placeholder="时间" readonly />
+    <button class="search-btn"></button>
+    <div id="dept-tree"></div>
+  </header>
+
+  <section class="down-panel">
+    <fieldset>
+      <header>人员分布</header>
+      <section id="chart1"></section>
+    </fieldset>
+    <fieldset>
+      <header>群体聚焦</header>
+      <section>
+        <tab id="tab1">
+          <row>
+            <cell>关注排名</cell>
+            <cell>聚焦点</cell>
+            <cell>数量</cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>dasdasdasdasdasd</cell>
+            <cell>1212</cell>
+          </row>
+        </tab>
+        <footer>
+          <div></div>
+        </footer>
+      </section>
+    </fieldset>
+  </section>
+  <section class="down-panel">
+    <fieldset>
+      <div>
+        <div></div>
+        <div>群体人数</div>
+        <div class="div-val"></div>
+      </div>
+      <div>
+        <div></div>
+        <div>参与度</div>
+        <div class="div-val"></div>
+      </div>
+      <div>
+        <div></div>
+        <div>意见建议数</div>
+        <div class="div-val"></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <header>诉求性质分析</header>
+      <chart id="chart2"></chart>
+      <header>意见建议分布</header>
+      <chart id="chart3"></chart>
+    </fieldset>
+  </section>
+  <section class="down-panel">
+    <fieldset>
+      <header>参与度排行</header>
+      <section>
+        <tab id="tab2">
+          <row>
+            <cell>排名</cell>
+            <cell>姓名</cell>
+            <cell>职务</cell>
+            <cell>意见建议数</cell>
+          </row>
+        </tab>
+        <footer>
+          <div></div>
+        </footer>
+      </section>
+    </fieldset>
+    <fieldset>
+      <header>意见建议热词</header>
+      <section id="chart4" class="jqcloud"></section>
+    </fieldset>
+  </section>
+</main>

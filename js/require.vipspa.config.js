@@ -80,6 +80,11 @@ requirejs(["vipspa"], function(vipspa) {
       templateUrl: "views/myhc/myzd.html",
       controller: "js/myhc/myzd.js"
     },
+    "myzd/jsfx": {
+      parent: "myhc",
+      templateUrl: "views/myhc/jsfx.html",
+      controller: "js/myhc/jsfx.js"
+    },
     myys: {
       parent: "myhc",
       templateUrl: "views/myhc/myys.html",

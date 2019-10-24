@@ -1,0 +1,303 @@
+@font-face {
+  font-family: "fzzzhjt";
+  src: url("../../fonts/fzzzhjt.ttf");
+}
+main,
+chart {
+  display: block;
+  height: 100%;
+}
+.border-style {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
+  border-radius: 7px;
+}
+.scroll-style::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+}
+.scroll-style::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.scroll-style::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
+}
+.top-panel {
+  height: 40px;
+  line-height: 40px;
+  font-family: "fzzzhjt";
+  text-align: center;
+  font-size: 24px;
+  color: #3667a3;
+  margin-top: 10px;
+  position: relative;
+}
+.top-panel > i {
+  font-size: 18px;
+  color: #3385ff;
+  position: absolute;
+  top: 3px;
+  right: 20px;
+  cursor: pointer;
+}
+.up-panel {
+  margin: 0 auto 20px;
+  width: calc(100% - 40px);
+  height: 48px;
+  background-color: #a4b7cd;
+  border-radius: 2px;
+  padding: 10px 20px;
+  color: #000;
+}
+.up-panel button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+.up-panel input,
+.up-panel button {
+  height: 28px;
+  line-height: 28px;
+}
+.up-panel input {
+  border: 0;
+  vertical-align: top;
+  width: 410px;
+  margin-left: 20px;
+  padding: 0 10px;
+}
+.up-panel input::-webkit-input-placeholder {
+  color: #808080;
+}
+.up-panel #dept-name {
+  margin-left: 0;
+  width: calc(100% - 939px);
+}
+.up-panel button {
+  width: 43px;
+  margin-left: 20px;
+  background: url(../../img//myhc/rdwt/btn_search.png) no-repeat;
+}
+.up-panel #dept-tree {
+  visibility: hidden;
+  margin-top: -5px;
+  height: 230px;
+  overflow: auto;
+  position: absolute;
+  z-index: 9999;
+}
+.up-panel #dept-tree::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+}
+.up-panel #dept-tree::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.up-panel #dept-tree::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
+}
+.down-panel {
+  float: left;
+  width: calc((100% - 80px) / 3);
+  height: calc(100% - 138px);
+  margin-left: 20px;
+}
+.down-panel > fieldset {
+  height: calc(50% - 10px);
+  padding: 0 10px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 3px 6px 0px rgba(1, 24, 49, 0.67);
+  border-radius: 7px;
+}
+.down-panel > fieldset:last-child {
+  margin-top: 20px;
+}
+.down-panel > fieldset > header {
+  height: 40px;
+  line-height: 40px;
+  background: url(../../img/myhc/myzd/6.png) no-repeat center center;
+  text-align: center;
+  font-size: 18px;
+  color: #75787a;
+}
+.down-panel > fieldset > section {
+  height: calc(100% - 40px);
+}
+.down-panel > fieldset > section > tab {
+  display: block;
+  text-align: center;
+  height: calc(100% - 40px);
+  color: #4c4c4c;
+}
+.down-panel > fieldset > section > tab > row {
+  display: block;
+  height: 35px;
+  line-height: 35px;
+  border-bottom: 1px solid #bcc9d8;
+}
+.down-panel > fieldset > section > tab > row:first-child {
+  font-weight: 600;
+}
+.down-panel > fieldset > section > tab > row > cell {
+  float: left;
+  height: 100%;
+  display: block;
+}
+.down-panel > fieldset > section #tab1 > row > cell:first-child {
+  width: 60px;
+}
+.down-panel > fieldset > section #tab1 > row > cell:nth-child(2) {
+  width: calc(100% - 180px);
+}
+.down-panel > fieldset > section #tab1 > row > cell:last-child {
+  width: 120px;
+}
+.down-panel > fieldset > section #tab2 > row > cell:first-child {
+  width: 60px;
+}
+.down-panel > fieldset > section #tab2 > row > cell:nth-child(2) {
+  width: 80px;
+}
+.down-panel > fieldset > section #tab2 > row > cell:nth-child(3) {
+  width: calc(100% - 260px);
+}
+.down-panel > fieldset > section #tab2 > row > cell:last-child {
+  width: 120px;
+}
+.down-panel > fieldset > section > footer {
+  height: 40px;
+}
+.down-panel > fieldset > section > footer > div {
+  float: right;
+}
+.down-panel > fieldset > chart {
+  display: block;
+  height: calc(50% - 40px);
+}
+.down-panel > fieldset > aside {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  text-align: center;
+  color: #75787a;
+  cursor: pointer;
+}
+.down-panel > fieldset > aside > div {
+  line-height: 30px;
+  font-size: 24px;
+}
+.down-panel > fieldset > div {
+  margin-top: 10px;
+  width: calc(100% / 3);
+  height: calc(100% - 20px);
+  border-left: 1px solid #bfcfe2;
+  float: left;
+  text-align: center;
+}
+.down-panel > fieldset > div > div {
+  height: 26px;
+  line-height: 26px;
+  font-size: 18px;
+  font-family: "fzzzhjt";
+  color: #75787a;
+}
+.down-panel > fieldset > div > div:first-child {
+  margin: 0 auto;
+  width: 46px;
+  height: 46px;
+}
+.down-panel > fieldset > div > div:last-child {
+  color: #1d84c6;
+}
+.down-panel > fieldset > div:first-child {
+  border-left: 0;
+}
+.down-panel > fieldset > div:first-child > div:first-child {
+  background: url(../../img/myhc/myzd/7.png) no-repeat;
+}
+.down-panel > fieldset > div:nth-child(2) > div:first-child {
+  background: url(../../img/myhc/myzd/9.png) no-repeat;
+}
+.down-panel > fieldset > div:last-child > div:first-child {
+  background: url(../../img/myhc/myzd/8.png) no-repeat;
+}
+.down-panel:nth-child(4) > fieldset:first-child {
+  height: 125px;
+}
+.down-panel:nth-child(4) > fieldset:last-child {
+  height: calc(100% - 145px);
+}
+.jqcloud {
+  font-family: "微软雅黑", "宋体", sans-serif;
+  font-size: 10px;
+  line-height: normal;
+  color: #09f;
+  overflow: hidden;
+  position: relative;
+}
+.jqcloud a {
+  text-decoration: none;
+}
+.jqcloud span {
+  cursor: pointer;
+  padding: 0;
+}
+.jqcloud span:hover {
+  color: #1a86d1;
+  font-weight: bold;
+}
+.jqcloud .w10 {
+  font-size: 250%;
+  color: #7a833c;
+}
+.jqcloud .w9 {
+  font-size: 240%;
+  color: #53609b;
+}
+.jqcloud .w8 {
+  font-size: 230%;
+  color: #bc78de;
+}
+.jqcloud .w7 {
+  font-size: 220%;
+  color: #cf3876;
+}
+.jqcloud .w6 {
+  font-size: 210%;
+  color: #1d84c6;
+}
+.jqcloud .w5 {
+  font-size: 200%;
+  color: #7a833c;
+}
+.jqcloud .w4 {
+  font-size: 190%;
+  color: #1d84c6;
+}
+.jqcloud .w3 {
+  font-size: 180%;
+  color: #e8a31c;
+}
+.jqcloud .w2 {
+  font-size: 170%;
+  color: #bc78de;
+}
+.jqcloud .w1 {
+  font-size: 160%;
+  color: #ed8166;
+}

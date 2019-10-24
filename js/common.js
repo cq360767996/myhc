@@ -383,6 +383,42 @@ define([], function() {
         remoteUrl: base.remotePath + "rdwt/ranking"
       }
     },
+    myhc: {
+      myzd: {
+        getCount: {
+          localUrl: base.localPath + "myzd/getCount.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getSummary"
+        },
+        getLeft1: {
+          localUrl: base.localPath + "chartTemplate.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getLeft1"
+        },
+        getLeft2: {
+          localUrl: base.localPath + "chartTemplate.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getLeft2"
+        },
+        getMid1: {
+          localUrl: base.localPath + "myzd/mid1.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getMid1"
+        },
+        getMid2: {
+          localUrl: base.localPath + "chartTemplate.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getMid2"
+        },
+        getMid3: {
+          localUrl: base.localPath + "chartTemplate.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getMid3"
+        },
+        getRight1: {
+          localUrl: base.localPath + "chartTemplate.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getRight1"
+        },
+        getRight2: {
+          localUrl: base.localPath + "jcj/Tag.json",
+          remoteUrl: base.remotePath + "myhc/myzs/getRight2"
+        }
+      }
+    },
     zxyp: {
       aj: {
         Tree: {
@@ -1032,19 +1068,16 @@ define([], function() {
     return decodeURI(str);
   };
 
+  // 解析hash值里面的参数
   base.getParam = function(name) {
-    var strArr = window.location.hash.split("?");
-    var result = {};
-    if (strArr[1]) {
-      var dataArr = strArr[1].split("&");
-      if (dataArr) {
-        for (var i = 0; i < dataArr.length; i++) {
-          var arr = dataArr[i].split("=");
-          result[arr[0]] = arr[1];
-        }
-      }
-    }
-    return result[name] ? decodeURI(result[name]) : "";
+    let result = {};
+    name.replace(/\?(.*)/g, function($1, $2) {
+      $2.split("&").map(val => {
+        let arr = val.split("=");
+        result[arr[0]] = arr[1];
+      });
+    });
+    return result;
   };
 
   base.backFill = function(data) {
@@ -1225,10 +1258,8 @@ define([], function() {
   };
 
   // 分页组件
-  base.renderNav = function($div, pageNum, totalPage, callback) {
+  base.renderNav = function($div, pageNum = 1, totalPage = 0, callback) {
     $div.addClass("com-nav");
-    pageNum = pageNum || 1;
-    totalPage = totalPage || 0;
     pageNum = pageNum < 0 ? 1 : pageNum;
     pageNum = pageNum > totalPage ? totalPage : pageNum;
     var arr = [];
@@ -1392,6 +1423,60 @@ define([], function() {
         prev = Date.now();
       }
     };
+  };
+
+  // 初始化日期控件
+  base.initDateInput = (id, date) => {
+    $(`#${id}`)
+      .val(date)
+      .datetimepicker({
+        format: "yyyy-mm",
+        autoclose: true,
+        todayBtn: true,
+        startView: "year",
+        minView: "year",
+        maxView: "decade",
+        endDate: base.getDate(-1),
+        language: "zh-CN"
+      });
+  };
+  // 初始化查询栏
+  base.initSearchBar = ({ date1 = -7, date2 = -1, cb = null }) => {
+    return new Promise((resolve, reject) => {
+      const $deptTree = $("#dept-tree");
+      const $deptName = $("#dept-name");
+      const $deptId = $("#dept-id");
+      base.request(base.interFaces.rdwt.tree).then(result => {
+        //渲染树
+        $deptTree.css("width", $deptName.outerWidth()).treeview({
+          data: result.data,
+          levels: 1,
+          onNodeSelected: function(event, node) {
+            $deptName.val(node.text);
+            $deptId.val(node.id);
+            $deptTree.css("visibility", "hidden");
+          },
+          showCheckbox: false //是否显示多选
+        });
+      });
+      // 为单位名称绑定点击事件
+      $("#dept-name").on("click", () => {
+        $deptTree.css(
+          "visibility",
+          $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
+        );
+      });
+      base.initDateInput("date1", base.getDate(date1));
+      base.initDateInput("date2", base.getDate(date2));
+      $deptId.val("2014110416460086100000002942");
+      $deptName.val("南京市公安局");
+      // 绑定查询按钮回调事件
+      typeof cb === "function" &&
+        $(".search-btn")
+          .off()
+          .on("click", cb);
+      resolve();
+    });
   };
 
   base.initRightMenu = params => {
