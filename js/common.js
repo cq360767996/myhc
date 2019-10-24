@@ -387,35 +387,35 @@ define([], function() {
       myzd: {
         getCount: {
           localUrl: base.localPath + "myzd/getCount.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getSummary"
+          remoteUrl: base.remotePath + "myhc/myzd/getSummary"
         },
         getLeft1: {
           localUrl: base.localPath + "chartTemplate.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getLeft1"
+          remoteUrl: base.remotePath + "myhc/myzd/getLeft1"
         },
         getLeft2: {
           localUrl: base.localPath + "chartTemplate.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getLeft2"
+          remoteUrl: base.remotePath + "myhc/myzd/getLeft2"
         },
         getMid1: {
           localUrl: base.localPath + "myzd/mid1.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getMid1"
+          remoteUrl: base.remotePath + "myhc/myzd/getMid1"
         },
         getMid2: {
           localUrl: base.localPath + "chartTemplate.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getMid2"
+          remoteUrl: base.remotePath + "myhc/myzd/getMid2"
         },
         getMid3: {
           localUrl: base.localPath + "chartTemplate.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getMid3"
+          remoteUrl: base.remotePath + "myhc/myzd/getMid3"
         },
         getRight1: {
           localUrl: base.localPath + "chartTemplate.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getRight1"
+          remoteUrl: base.remotePath + "myhc/myzd/getRight1"
         },
         getRight2: {
           localUrl: base.localPath + "jcj/Tag.json",
-          remoteUrl: base.remotePath + "myhc/myzs/getRight2"
+          remoteUrl: base.remotePath + "myhc/myzd/getRight2"
         }
       }
     },
