@@ -172,6 +172,9 @@ chart {
 }
 .down-panel > fieldset > section #tab2 > row > cell:nth-child(3) {
   width: calc(100% - 260px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .down-panel > fieldset > section #tab2 > row > cell:last-child {
   width: 120px;

@@ -250,14 +250,15 @@ requirejs(["common", "ec", "jqcloud"], (sugon, ec) => {
                     <cell>职务</cell>
                     <cell>意见建议数</cell>
                   </row>`;
-      data.map((val, index) => {
-        let firstCell = val.rank
-          ? `<img src="../../img/myhc/myzd/n${val.rank}.png"/>`
-          : index + 1;
+      data.map(val => {
+        let firstCell =
+          Number(val.rank) < 4
+            ? `<img src="../../img/myhc/myzd/n${val.rank}.png"/>`
+            : val.rank;
         html += `<row>
                   <cell>${firstCell}</cell>
                   <cell>${val.name1}</cell>
-                  <cell>${val.name2}</cell>
+                  <cell title="${val.name2}">${val.name2}</cell>
                   <cell>${val.value}</cell>
                 </row>`;
       });
@@ -326,7 +327,7 @@ requirejs(["common", "ec", "jqcloud"], (sugon, ec) => {
         $(`#tab2 + footer > div`),
         pageNum,
         result.totalPage,
-        initLeft2
+        initRight1
       );
     });
   }
