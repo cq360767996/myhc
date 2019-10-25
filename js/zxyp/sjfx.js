@@ -124,12 +124,14 @@ requirejs(["common", "ec"], function(sugon, ec) {
           data: params
         },
         result => {
-          let body = $(".select1").empty();
+          $(".sjfx-body-right strong").html(result.data.length);
+          let html = "";
           result.data.map(val => {
-            body.append(
-              '<option value="' + val.id + '">' + val.value + "</option>"
-            );
+            html += `<option value="${val.id}">${val.value}</option>`;
           });
+          $(".select1")
+            .empty()
+            .append(html);
         }
       );
     },
@@ -143,11 +145,10 @@ requirejs(["common", "ec"], function(sugon, ec) {
           data: condition
         },
         result => {
-          $(".sjfx-body-right strong").html(result.data.times);
           let $body = $(".time-box > ul")
             .empty()
             .css("margin-left", 0);
-          let data = result.data.cluster;
+          let data = result.data;
           let len =
             data.length % 3 == 0
               ? parseInt(data.length / 3)

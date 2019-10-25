@@ -14,55 +14,6 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
   // body容器
   const $mainBody = $("body");
 
-  // 初始化日期控件
-  const initDateInput = (id, date) => {
-    $(`#${id}`)
-      .val(date)
-      .datetimepicker({
-        format: "yyyy-mm",
-        autoclose: true,
-        todayBtn: true,
-        startView: "year",
-        minView: "year",
-        maxView: "decade",
-        endDate: sugon.getDate(-2),
-        language: "zh-CN"
-      });
-  };
-
-  // 初始化查询栏
-  const initSearchBar = () => {
-    return new Promise((resolve, reject) => {
-      const $deptTree = $("#dept-tree");
-      const $deptName = $("#dept-name");
-      const $deptId = $("#dept-id");
-      sugon.request(sugon.interFaces.rdwt.tree).then(result => {
-        //渲染树
-        $deptTree.css("width", $deptName.outerWidth()).treeview({
-          data: result.data,
-          levels: 1,
-          onNodeSelected: function(event, node) {
-            $deptName.val(node.text);
-            $deptId.val(node.id);
-            $deptTree.css("visibility", "hidden");
-          },
-          showCheckbox: false //是否显示多选
-        });
-      });
-      // 为单位名称绑定点击事件
-      $("#dept-name").on("click", () => {
-        $deptTree.css(
-          "visibility",
-          $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
-        );
-      });
-      initDateInput("date1", (searchParams.date1 = sugon.getDate(-4)));
-      initDateInput("date2", (searchParams.date2 = sugon.getDate(-2)));
-      $deptId.val((searchParams.deptId = "2014110416460086100000002942"));
-      resolve();
-    });
-  };
-
   // 初始化左侧面板
   const initLeftPanel = (index = 0) => {
     let { date1, date2, deptId, model, sortCol, sortType } = searchParams;
@@ -204,7 +155,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
 
   // 请求下拉框
   const requestPopMenu = $target => {
-    let type = searchParams.model == 3 ? 2 : 1;
+    let type = searchParams.model == 2 ? 2 : 1;
     let index = $target.index(`.row-header${type} .head-img1`);
     let { date1, date2, deptId, model } = searchParams;
     let tags = ["", "", "", ""];
@@ -332,15 +283,24 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     $target.parent().html(`${index + 1}、${input}`);
   };
 
-  // 初始化页面
-  function initPage() {
+  // 查询按钮功能
+  const searchFunc = function() {
+    searchParams.deptId = $("#dept-id").val();
+    searchParams.date1 = $("#date1").val();
+    searchParams.date2 = $("#date2").val();
     Promise.resolve()
-      .then(() => initSearchBar())
       .then(() => initRightPanel())
       .then(() => initLeftPanel())
       .catch(err => {
         throw err;
       });
+  };
+
+  // 初始化页面
+  function initPage() {
+    Promise.resolve()
+      .then(() => sugon.initSearchBar({ cb: searchFunc }))
+      .then(() => searchFunc());
   }
 
   // 页面入口
@@ -612,17 +572,4 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
         $(".simple_showDialog").remove();
       }
     });
-
-  // 全局查询条件事件
-  $(".search-btn").on("click", () => {
-    searchParams.deptId = $("#dept-id").val();
-    searchParams.date1 = $("#date1").val();
-    searchParams.date2 = $("#date2").val();
-    Promise.resolve()
-      .then(() => initRightPanel())
-      .then(() => initLeftPanel())
-      .catch(err => {
-        throw err;
-      });
-  });
 });
