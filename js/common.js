@@ -1106,6 +1106,7 @@ define([], function() {
       dataType: "json",
       async: urlOrInterfaceObj.async ? urlOrInterfaceObj.async : false,
       traditional: true,
+      headers: { Token: base.identityInfo.token },
       success: function(result) {
         if (result != null) {
           if (window.location.hash == currentPage && callBack) {
@@ -1133,6 +1134,7 @@ define([], function() {
         success: resolve,
         error: reject,
         dataType: "json",
+        headers: { Token: base.identityInfo.token },
         traditional: true
       };
       let finalOpt = {};
@@ -1241,7 +1243,7 @@ define([], function() {
         iClass = "glyphicon-info-sign";
         break;
     }
-    $("#ui-view").append(
+    $("body").append(
       '<div class="pop-message ' +
         divClass +
         '">' +

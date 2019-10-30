@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="css/login.css" />
+    <title>登录页</title>
   </head>
   <body>
-    123
+    <div class="container">
+      <header>
+        <div>
+          <img src="img/login/google.png" /><span>谷歌浏览器安装包</span>
+        </div>
+        <div><img src="img/login/about.png" /><span>关于本系统</span></div>
+        <div><img src="img/login/help.png" /><span>使用帮助</span></div>
+      </header>
+      <main>
+        <div></div>
+        <div>南京市公安局民意合成应用系统</div>
+        <div class="password-panel">
+          <div><span>普通登录 </span><strong> USER LOGIN</strong></div>
+          <div><input id="username" placeholder="用户名" /></div>
+          <div><input id="password" type="password" placeholder="密码" /></div>
+          <div><span>忘记密码？</span></div>
+          <div><button class="login-btn">登录</button></div>
+          <div><span class="switch-btn">数字证书登录</span></div>
+        </div>
+        <div class="certification-panel">
+          <div><span>数字证书登录 </span><strong> DC LOGIN</strong></div>
+          <div><img src="img/login/notpass.png" /></div>
+          <div><input type="password" placeholder="PIN码" /></div>
+          <div><span>CA数字证书驱动下载</span></div>
+          <div><button class="login-btn">登录</button></div>
+          <div><span class="switch-btn">账号密码登录</span></div>
+        </div>
+      </main>
+      <footer>© 南京市公安局版权所有 版权所有</footer>
+    </div>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

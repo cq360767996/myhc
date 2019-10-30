@@ -48,7 +48,7 @@ requirejs.config({
   }
 });
 
-requirejs(["vipspa"], function(vipspa) {
+requirejs(["vipspa", "common"], function(vipspa, sugon) {
   let router = {
     myzs: {
       parent: "myhc",
@@ -251,5 +251,17 @@ requirejs(["vipspa"], function(vipspa) {
     var tempTxt = sessionStorage.getItem("myKeywords");
     sessionStorage.removeItem("myKeywords");
     location.hash = vipspa.stringify("myys/ysxq", { txt: tempTxt });
+  }
+
+  // 判断是否登录过
+  if (!sessionStorage.getItem("token")) {
+    location.href = "login.html";
+  } else {
+    // 确认登录过，将token等信息写入缓存
+    sugon.identityInfo = {
+      token: sessionStorage.getItem("token"),
+      deptCode: sessionStorage.getItem("deptCode"),
+      role: sessionStorage.getItem("role")
+    };
   }
 });
