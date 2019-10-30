@@ -1120,7 +1120,7 @@ define([], function() {
       error: function(result) {
         if (result.status === 302) {
           sessionStorage.clear();
-          location.href = base.isPublished ? "/login" : "login.html";
+          location.href = base.isPublished ? "/" : "login.html";
         }
       }
     };
@@ -1138,7 +1138,7 @@ define([], function() {
         error: function(result) {
           if (result.status === 302) {
             sessionStorage.clear();
-            location.href = base.isPublished ? "/login" : "login.html";
+            location.href = base.isPublished ? "/" : "login.html";
           }
           reject(result);
         },

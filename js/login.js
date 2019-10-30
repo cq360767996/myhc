@@ -2,8 +2,8 @@ const sugon = {
   isPublished: false,
   api: {
     login: {
-      localUrl: "/static/json/login/verify.json",
-      remoteUrl: "/login/verify"
+      localUrl: "/static/json/login/login.json",
+      remoteUrl: "/login"
     }
   },
   request: function(url, data, config) {
@@ -83,7 +83,7 @@ $(".login-btn").on("click", e => {
           sessionStorage.setItem("deptId", result.deptId);
           sessionStorage.setItem("role", result.role);
           sessionStorage.setItem("username", username);
-          location.href = sugon.isPublished ? "/" : "index.html";
+          location.href = sugon.isPublished ? "/index" : "index.html";
         }
         if (result.code === 1001) {
           sugon.showMessage("用户名或密码错误！", "error");
@@ -91,6 +91,6 @@ $(".login-btn").on("click", e => {
       });
     }
   } else {
-    location.href = sugon.isPublished ? "/" : "index.html";
+    location.href = sugon.isPublished ? "/index" : "index.html";
   }
 });

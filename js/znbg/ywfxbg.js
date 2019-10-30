@@ -1475,8 +1475,7 @@ requirejs(
           url,
           imgUrl,
           pdfUrl,
-          uuid,
-          username: sugon.identityInfo.username
+          uuid
         })
         .then(result => {
           initRightPanel();
