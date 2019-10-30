@@ -328,7 +328,8 @@ requirejs(
             if (sugon.isPublished) {
               return sugon.request(sugon.interFaces.znbg.zhfxbg.postImg, {
                 uuid: searchRuler.uuid,
-                url: dataUrl
+                url: dataUrl,
+                username: sugon.identityInfo.username
               });
             } else {
               return new Promise((resolve, reject) => {
@@ -517,7 +518,8 @@ requirejs(
           type: "post",
           url: sugon.interFaces.znbg.zhfxbg.getFileList,
           data: {
-            deptId: searchRuler.deptId
+            deptId: searchRuler.deptId,
+            username: sugon.identityInfo.username
           }
         },
         result => {
@@ -550,9 +552,11 @@ requirejs(
       searchRuler.code = codeArr.join(",");
       searchRuler.content = $(".textarea-div").val();
       searchRuler.uuid = uuid;
+      let params = { username: sugon.identityInfo.username };
+      Object.assign(params, searchRuler);
       popFunc.initPopPage(searchRuler);
       sugon
-        .request(sugon.interFaces.znbg.zhfxbg.generateReport, searchRuler)
+        .request(sugon.interFaces.znbg.zhfxbg.generateReport, params)
         .then(result => {
           let $body = $(".hidden-chart").empty();
           if (result.data.length > 0) {
@@ -847,7 +851,8 @@ requirejs(
           url,
           imgUrl,
           pdfUrl,
-          uuid
+          uuid,
+          username: sugon.identityInfo.username
         })
         .then(result => {
           initRightPanel();

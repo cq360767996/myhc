@@ -1117,8 +1117,11 @@ define([], function() {
         }
         config = null;
       },
-      error: function() {
-        //接口调用失败
+      error: function(result) {
+        if (result.status === 302) {
+          sessionStorage.clear();
+          location.href = base.isPublished ? "/login" : "login.html";
+        }
       }
     };
     $.ajax(config);
@@ -1132,7 +1135,13 @@ define([], function() {
         type: "get",
         data,
         success: resolve,
-        error: reject,
+        error: function(result) {
+          if (result.status === 302) {
+            sessionStorage.clear();
+            location.href = base.isPublished ? "/login" : "login.html";
+          }
+          reject(result);
+        },
         dataType: "json",
         headers: { Token: base.identityInfo.token },
         traditional: true

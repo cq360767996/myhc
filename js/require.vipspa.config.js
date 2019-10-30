@@ -235,11 +235,11 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
             arr = ["ywfxbg", "zhfxbg"];
             break;
         }
-        $('.tab > div[type="' + arr[0] + '"]').addClass(className);
+        $(`.tab > div[type="${arr[0]}"]`).addClass(className);
         arr.map(value => {
           let className =
             type.indexOf(value) > -1 ? value + "-menu-hover" : value + "-menu";
-          html += '<div class="' + className + '" type="' + value + '"></div>';
+          html += `<div class="${className}" type="${value}"></div>`;
         });
         $menu.empty().append(html);
         return;
@@ -254,14 +254,15 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
   }
 
   // 判断是否登录过
-  if (!sessionStorage.getItem("token")) {
-    location.href = "login.html";
-  } else {
+  if (sessionStorage.getItem("token")) {
     // 确认登录过，将token等信息写入缓存
     sugon.identityInfo = {
       token: sessionStorage.getItem("token"),
       deptCode: sessionStorage.getItem("deptCode"),
-      role: sessionStorage.getItem("role")
+      role: sessionStorage.getItem("role"),
+      username: sessionStorage.getItem("username")
     };
+  } else {
+    location.href = sugon.ispublished ? "/login" : "login.html";
   }
 });

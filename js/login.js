@@ -53,6 +53,7 @@ function verify(username, password) {
   return isPass;
 }
 
+// 切换数字登录和账号密码登录
 $(".switch-btn").on("click", e => {
   let $target = $(e.target),
     text = $target.html();
@@ -77,13 +78,19 @@ $(".login-btn").on("click", e => {
       password = $("#password").val();
     if (verify(username, password)) {
       sugon.request(sugon.api.login, { username, password }).then(result => {
-        sessionStorage.setItem("token", result.token);
-        sessionStorage.setItem("deptId", result.deptId);
-        sessionStorage.setItem("role", result.role);
-        location.href = "index.html";
+        if (result.code === 1000) {
+          sessionStorage.setItem("token", result.token);
+          sessionStorage.setItem("deptId", result.deptId);
+          sessionStorage.setItem("role", result.role);
+          sessionStorage.setItem("username", username);
+          location.href = sugon.isPublished ? "/" : "index.html";
+        }
+        if (result.code === 1001) {
+          sugon.showMessage("用户名或密码错误！", "error");
+        }
       });
     }
   } else {
-    location.href = "index.html";
+    location.href = sugon.isPublished ? "/" : "index.html";
   }
 });
