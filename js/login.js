@@ -3,7 +3,7 @@ const sugon = {
   api: {
     login: {
       localUrl: "/static/json/login/verifyLogin.json",
-      remoteUrl: "/login/verrify"
+      remoteUrl: "/login/verify"
     }
   },
   request: function(url, data, config) {
