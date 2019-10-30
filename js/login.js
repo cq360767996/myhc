@@ -2,7 +2,7 @@ const sugon = {
   isPublished: false,
   api: {
     login: {
-      localUrl: "/static/json/login/verifyLogin.json",
+      localUrl: "/static/json/login/verify.json",
       remoteUrl: "/login/verify"
     }
   },
