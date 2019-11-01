@@ -70,6 +70,7 @@ html {
   position: relative;
   margin-left: 5px;
   top: -1px;
+  cursor: pointer;
 }
 
 .myzs-menu {

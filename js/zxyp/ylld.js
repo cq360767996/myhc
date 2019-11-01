@@ -3,73 +3,6 @@ requirejs(["common", "ec"], function(sugon, ec) {
   let searchRuler = {};
   let popData = []; // 弹出页数据
 
-  // 初始化查询栏
-  let initSearchBar = function() {
-    let lastMonth = sugon.getDate(-1),
-      $date1 = $("#date-input1"),
-      $date2 = $("#date-input2"),
-      $tree = $("#left-tree"),
-      $detpId = $("#placeCode"),
-      $detpName = $("#place");
-    $detpName.val((searchRuler.deptName = "南京市公安局"));
-    $detpId.val((searchRuler.deptId = "2014110416460086100000002942"));
-    $date1.val((searchRuler.date1 = sugon.getDate(-7)));
-    $date2.val((searchRuler.date2 = sugon.getDate(-2)));
-    $date1.datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    $date2.datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    // 设置下拉框宽度
-    $tree.css("width", $("#place").outerWidth());
-    //渲染树
-    $tree.treeview({
-      data: getTree(),
-      levels: 1,
-      onNodeSelected: function(event, node) {
-        $detpName.val(node.text);
-        $detpId.val(node.id);
-        $tree.css("visibility", "hidden");
-      },
-      showCheckbox: false //是否显示多选
-    });
-  };
-
-  //获取树数据
-  function getTree() {
-    let treeData = [];
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.zxyp.ylld.Tree
-      },
-      function(result) {
-        treeData = result.data;
-      }
-    );
-    return treeData;
-  }
-
-  // 绑定单位输入框点击事件
-  $("#place").bind("click", function() {
-    $("#left-tree").css("visibility", "visible");
-  });
-
   // 初始化左1面板
   let initLeft1 = function() {
     sugon.requestJson(
@@ -1028,6 +961,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
   }
 
   let initView = function() {
+    searchRuler.deptId = $("#dept-id").val();
+    searchRuler.deptName = $("#dept-name").val();
+    searchRuler.date1 = $("#date1").val();
+    searchRuler.date2 = $("#date2").val();
+
     initSelector();
     // 左1
     initLeft1();
@@ -1049,15 +987,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
 
   let initPage = function() {
     // 初始化查询栏
-    initSearchBar();
-    // 初始化页面
-    $(".search-btn").bind("click", function() {
-      searchRuler.deptId = $("#placeCode").val();
-      searchRuler.date1 = $("#date-input1").val();
-      searchRuler.date2 = $("#date-input2").val();
-      searchRuler.deptName = $("#place").val();
-      initView();
-    });
+    sugon.initSearchBar({ date1: -7, date2: -2, cb: initView });
     initView();
   };
 

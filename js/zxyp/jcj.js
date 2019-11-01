@@ -5,77 +5,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     gddwfbData = [];
   var param1, param2;
 
-  // 初始化查询栏
-  var initSearchBar = function() {
-    var lastMonth = sugon.getDate(-1);
-    searchRuler.deptId = "2014110416460086100000002942";
-    searchRuler.date1 = sugon.getDate(-10);
-    searchRuler.date2 = sugon.getDate(-4);
-    searchRuler.deptName = "南京市公安局";
-    search.deptId = "2014110416460086100000002942";
-    search.date1 = searchRuler.date1;
-    search.date2 = searchRuler.date2;
-    search.deptName = "南京市公安局";
-
-    $("#place").val("南京市公安局");
-    $("#placeCode").val("2014110416460086100000002942");
-    $("#date-input1").val(search.date1);
-    $("#date-input2").val(search.date2);
-    $("#date-input1").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    $("#date-input2").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    // 设置下拉框宽度
-    $("#left-tree").css("width", $("#place").outerWidth());
-    //渲染树
-    $("#left-tree").treeview({
-      data: getTree(),
-      levels: 1,
-      onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
-        $("#left-tree").css("visibility", "hidden");
-      },
-      showCheckbox: false //是否显示多选
-    });
-  };
-
-  //获取树数据
-  function getTree() {
-    var treeData = [];
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.zxyp.jcj.Tree
-      },
-      function(result) {
-        treeData = result.data;
-      }
-    );
-    return treeData;
-  }
-
-  // 绑定单位输入框点击事件
-  $("#place").bind("click", function() {
-    $("#left-tree").css("visibility", "visible");
-  });
-
   var initVideo = function() {
     sugon.requestJson(
       {
@@ -167,20 +96,23 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { search: JSON.stringify(search) }
       },
       function(result) {
-        $("#jcjzsk .content").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          $("#jcjzsk .content").append(
-            "<div id=" +
-              result.data[i].id +
-              ">" +
-              "<span class='pic'><img src='../img/zxyp/jcj/file.png' /></span>" +
-              "<span class='name'>" +
-              result.data[i].name +
-              "</span>" +
-              "<span class='pic2'><img src='../img/zxyp/jcj/chayue.png' /></span>" +
-              "</div>"
-          );
-        }
+        let html = "";
+        result.data.map(val => {
+          html += `<div>
+                    <div class="div-left">
+                      <img src='../img/zxyp/jcj/file.png' />
+                    <span>${val.name}</span>
+                    </div>
+                    <div class="div-right">
+                      <span class="pic2">
+                      <img src='../img/zxyp/jcj/chayue.png' />
+                      </span>
+                    </div>
+                   </div>`;
+        });
+        $("#jcjzsk .content")
+          .empty()
+          .append(html);
       }
     );
   };
@@ -194,26 +126,21 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { search: JSON.stringify(search) }
       },
       function(result) {
-        $("#xhyj .content").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          $("#xhyj .content").append(
-            "<div id=" +
-              result.data[i].id +
-              ">" +
-              "<span class='pic'>" +
-              (i + 1) +
-              "</span>" +
-              "<span class='name'>" +
-              result.data[i].name +
-              "</span>" +
-              "<span class='pic2'><img src='../img/zxyp/jcj/fall.png' /></span>" +
-              "<span class='val2'>" +
-              result.data[i].value +
-              "</span>" +
-              "<span class='name2'>本周起环比下滑</span>" +
-              "</div>"
-          );
-        }
+        let html = "";
+
+        result.data.map((val, index) => {
+          html += `<div>
+                    <div class="div-left">${index + 1}、${val.name}</div>
+                    <div class="div-right">
+                      <span>本周起环比下滑</span>
+                      <span class="val2">${val.value}</span>
+                      <img src='../img/zxyp/jcj/fall.png' />
+                    </div>
+                  </div>`;
+        });
+        $("#xhyj .content")
+          .empty()
+          .append(html);
       }
     );
   };
@@ -938,10 +865,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       }
     );
   };
-
-  /*$("#dept3").change(function() {
-        initMyd();
-    });*/
 
   var initDwqk = function(index, flag) {
     sugon.requestJson(
@@ -1684,6 +1607,14 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   });
 
   var initView = function() {
+    searchRuler.deptId = $("#dept-id").val();
+    searchRuler.deptName = $("#dept-name").val();
+    searchRuler.date1 = $("#date1").val();
+    searchRuler.date2 = $("#date2").val();
+    search.deptId = $("#dept-id").val();
+    search.deptName = $("#dept-name").val();
+    search.date1 = $("#date1").val();
+    search.date2 = $("#date2").val();
     // 视频加载
     initVideo();
     // 左上文本
@@ -1722,23 +1653,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
 
   var initPage = function() {
     // 初始化查询栏
-    initSearchBar();
-    // 分析报告下载
-    $(".view-header-right").bind("click", function() {
-      alert("分析报告下载...");
-    });
-    // 初始化页面
-    $(".search-btn").bind("click", function() {
-      searchRuler.deptId = $("#placeCode").val();
-      searchRuler.date1 = $("#date-input1").val();
-      searchRuler.date2 = $("#date-input2").val();
-      searchRuler.deptName = $("#place").val();
-      search.deptId = $("#placeCode").val();
-      search.date1 = $("#date-input1").val();
-      search.date2 = $("#date-input2").val();
-      search.deptName = $("#place").val();
-      initView();
-    });
+    sugon.initSearchBar({ date1: -10, date2: -4, cb: initView });
     initView();
   };
 

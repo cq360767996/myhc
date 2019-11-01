@@ -128,17 +128,7 @@ requirejs(["common"], function(sugon) {
         async: false
       },
       function(result) {
-        sugon.requestJson(
-          {
-            type: "post",
-            url: sugon.interFaces.myys.cacheDetail,
-            data: { id: param[0] },
-            async: true
-          },
-          function() {}
-        );
         sugon.backFill(result.data1);
-
         sugon.backFill(result.data2);
 
         for (var i = 0; i < result.data3.length; i++) {
@@ -164,19 +154,6 @@ requirejs(["common"], function(sugon) {
               async: false
             },
             function(result) {
-              sugon.requestJson(
-                {
-                  type: "POST",
-                  url: sugon.interFaces.myys.cacheGrid,
-                  data: {
-                    sfzh: param[0],
-                    dhs: $("#tel").html(),
-                    type: this.id
-                  },
-                  async: true
-                },
-                function() {}
-              );
               $(".grid").empty();
               $(".grid").append("<div class='header'></div>");
               var len = result.data.colums.length;

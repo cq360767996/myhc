@@ -53,21 +53,8 @@ function verify(username, password) {
   return isPass;
 }
 
-// 切换数字登录和账号密码登录
-$(".switch-btn").on("click", e => {
-  let $target = $(e.target),
-    text = $target.html();
-  if (text === "数字证书登录") {
-    $(".certification-panel").show();
-    $(".password-panel").hide();
-  } else {
-    $(".password-panel").show();
-    $(".certification-panel").hide();
-  }
-});
-
-// 登录按钮事件
-$(".login-btn").on("click", e => {
+// 密码登录
+function passwordLogin(e) {
   let $parent = $(e.target)
       .parent()
       .parent(),
@@ -83,7 +70,9 @@ $(".login-btn").on("click", e => {
           sessionStorage.setItem("deptId", result.deptId);
           sessionStorage.setItem("role", result.role);
           sessionStorage.setItem("username", username);
-          location.href = sugon.isPublished ? "/index" : "index.html";
+          location.href = sugon.isPublished
+            ? "/index?#myzs"
+            : "index.html?#myzs";
         }
         if (result.code === 1001) {
           sugon.showMessage("用户名或密码错误！", "error");
@@ -91,6 +80,29 @@ $(".login-btn").on("click", e => {
       });
     }
   } else {
-    location.href = sugon.isPublished ? "/index" : "index.html";
+    location.href = sugon.isPublished ? "/index?#myzs" : "index.html?#myzs";
+  }
+}
+
+// 切换数字登录和账号密码登录
+$(".switch-btn").on("click", e => {
+  let $target = $(e.target),
+    text = $target.html();
+  if (text === "数字证书登录") {
+    $(".certification-panel").show();
+    $(".password-panel").hide();
+  } else {
+    $(".password-panel").show();
+    $(".certification-panel").hide();
+  }
+});
+
+// 登录按钮事件
+$(".login-btn").on("click", passwordLogin);
+
+// 登录回车键
+$("#password").on("keyup", e => {
+  if (e.keyCode === 13) {
+    passwordLogin(e);
   }
 });

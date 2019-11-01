@@ -1,34 +1,13 @@
 <link rel="stylesheet" href="../../css/zxyp/jcj.css" />
 
-<div class="view-header">
-  <div class="view-header-left">
-    <input type="text" id="place" placeholder="市局/分局" readonly />
-    <input type="hidden" id="placeCode" />
-    <input type="hidden" id="tempID" />
-    <input type="hidden" id="tempTYPE" />
-    <div id="left-tree"></div>
-    <input
-      id="date-input1"
-      class="date-input"
-      placeholder="时间"
-      type="text"
-      readonly="readonly"
-    />
-    <input
-      id="date-input2"
-      class="date-input"
-      placeholder="时间"
-      type="text"
-      readonly="readonly"
-    />
-    <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
-  </div>
-
-  <div class="view-header-right">
-    <img src="../../img/zxyp/aj/download.png" />
-    <span>分析报告下载</span>
-  </div>
-</div>
+<header class="up-panel">
+  <input id="dept-name" placeholder="市局/分局" readonly />
+  <input type="hidden" id="dept-id" disabled />
+  <input id="date1" placeholder="时间" readonly />
+  <input id="date2" placeholder="时间" readonly />
+  <button class="search-btn"></button>
+  <div id="dept-tree"></div>
+</header>
 
 <div class="view-body">
   <div>
@@ -254,37 +233,45 @@
           <div class="content">
             <div class="rect">
               <div>
-                <span class="dort"></span>
-
-                <span class="lab">最满意警情类型：</span>
-
-                <span class="val3"></span>
+                <div class="div-left">
+                  <span class="dort"></span>
+                  <span class="lab">最满意警情类型：</span>
+                </div>
+                <div class="div-right">
+                  <span class="val3"></span>
+                </div>
               </div>
 
               <div>
-                <span class="dort"></span>
-
-                <span class="lab">最满意时段：</span>
-
-                <span class="val3"></span>
+                <div class="div-left">
+                  <span class="dort"></span>
+                  <span class="lab">最满意时段：</span>
+                </div>
+                <div class="div-right">
+                  <span class="val3"></span>
+                </div>
               </div>
             </div>
 
             <div class="rect">
               <div>
-                <span class="dort"></span>
-
-                <span class="lab">最不满意警情类型：</span>
-
-                <span class="val3"></span>
+                <div class="div-left">
+                  <span class="dort"></span>
+                  <span class="lab">最不满意警情类型：</span>
+                </div>
+                <div class="div-right">
+                  <span class="val3"></span>
+                </div>
               </div>
 
               <div>
-                <span class="dort"></span>
-
-                <span class="lab">最不满意时段：</span>
-
-                <span class="val3"></span>
+                <div class="div-left">
+                  <span class="dort"></span>
+                  <span class="lab">最不满意时段：</span>
+                </div>
+                <div class="div-right">
+                  <span class="val3"></span>
+                </div>
               </div>
             </div>
           </div>

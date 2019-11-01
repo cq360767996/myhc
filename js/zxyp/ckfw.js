@@ -1,83 +1,13 @@
 requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   // 全局查询尺度
-  var searchRuler = {},
+  let searchRuler = {},
     search = {};
-  var param1, param2;
-  var hfrcData = [],
+  let param1, param2;
+  let hfrcData = [],
     gddwfbData = [],
     mydData = [];
-  // 初始化查询栏
-  var initSearchBar = function() {
-    var lastMonth = sugon.getDate(-1);
-    searchRuler.deptId = "2014110416460086100000002942";
-    searchRuler.date1 = sugon.getDate(-7);
-    searchRuler.date2 = sugon.getDate(-2);
-    searchRuler.deptName = "南京市公安局";
-    search.deptId = "2014110416460086100000002942";
-    search.date1 = searchRuler.date1;
-    search.date2 = searchRuler.date2;
-    search.deptName = "南京市公安局";
 
-    $("#place").val("南京市公安局");
-    $("#placeCode").val("2014110416460086100000002942");
-    $("#date-input1").val(searchRuler.date1);
-    $("#date-input2").val(searchRuler.date2);
-    $("#date-input1").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    $("#date-input2").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    // 设置下拉框宽度
-    $("#left-tree").css("width", $("#place").outerWidth());
-    //渲染树
-    $("#left-tree").treeview({
-      data: getTree(),
-      levels: 1,
-      onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
-        $("#left-tree").css("visibility", "hidden");
-      },
-      showCheckbox: false //是否显示多选
-    });
-  };
-
-  //获取树数据
-  function getTree() {
-    var treeData = [];
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.zxyp.jcj.Tree
-      },
-      function(result) {
-        treeData = result.data;
-      }
-    );
-    return treeData;
-  }
-
-  // 绑定单位输入框点击事件
-  $("#place").bind("click", function() {
-    $("#left-tree").css("visibility", "visible");
-  });
-
-  var initTxt = function() {
+  let initTxt = function() {
     sugon.requestJson(
       {
         type: "POST",
@@ -86,7 +16,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { search: JSON.stringify(search) }
       },
       function(result) {
-        for (var i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i++) {
           $("#left_top .val")
             .eq(i)
             .html(result.data[i].value);
@@ -99,8 +29,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   // 工单量走势分析
-  var getGdzsfx = function() {
-    var condition = { search: JSON.stringify(search) };
+  let getGdzsfx = function() {
+    let condition = { search: JSON.stringify(search) };
     sugon.requestJson(
       {
         url: sugon.interFaces.zxyp.ckfw.getGdzsgx,
@@ -115,20 +45,20 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   // 画工单量走势分析echarts图
-  var drawGdzsfx = function(data) {
-    var xData = [],
+  let drawGdzsfx = function(data) {
+    let xData = [],
       yData = [],
       min = Number(data[0].value),
       max = Number(data[0].value);
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       xData.push(data[i].name);
       yData.push(data[i].value);
       min = Number(data[i].value) < min ? data[i].value : min;
       max = Number(data[i].value) > max ? data[i].value : max;
     }
-    var chart3 = ec.init(document.getElementById("chart11"));
+    let chart3 = ec.init(document.getElementById("chart11"));
 
-    var option = {
+    let option = {
       color: "#3cb2fc",
       tooltip: {
         trigger: "axis"
@@ -231,8 +161,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   // 工单业务分析
-  var getYwfx = function() {
-    var condition = { search: JSON.stringify(search) };
+  let getYwfx = function() {
+    let condition = { search: JSON.stringify(search) };
     if (searchRuler.id1 || searchRuler.id1 == "0") {
       condition.id1 = searchRuler.id1;
     }
@@ -250,13 +180,13 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   // 画工单业务分析echarts图
-  var drawYwfx = function(data) {
-    var total = 0;
-    for (var i = 0; i < data.length; i++) {
+  let drawYwfx = function(data) {
+    let total = 0;
+    for (let i = 0; i < data.length; i++) {
       total += Number(data[i].value);
     }
-    var chart = ec.init(document.getElementById("chart22"));
-    var option = {
+    let chart = ec.init(document.getElementById("chart22"));
+    let option = {
       title: {
         text: total,
         subtext: "业务分析",
@@ -296,7 +226,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
                 show: true,
                 position: "outside",
                 formatter: function(params) {
-                  var percent = "" + params.value / total;
+                  let percent = "" + params.value / total;
                   percent = Math.round((percent * 100000) / 100) / 10 + "%";
                   return params.name + "\n" + percent;
                 },
@@ -327,8 +257,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   // 工单单位分布
-  var getGddwfb = function() {
-    var condition = { search: JSON.stringify(search) };
+  let getGddwfb = function() {
+    let condition = { search: JSON.stringify(search) };
     if (searchRuler.id1 || searchRuler.id1 == "0") {
       condition.id1 = searchRuler.id1;
     }
@@ -356,8 +286,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   // 画诉求单位分布echarts图
-  var drawGddwfb = function(data) {
-    var xData = [],
+  let drawGddwfb = function(data) {
+    let xData = [],
       yData = [],
       startValue = 0,
       endValue = 100,
@@ -367,7 +297,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       isShow = true;
       startValue = Math.floor((1 - 4 / data.length) * 100);
     }
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       yData.push(data[i].name);
       xData.push(data[i].value);
       if (data[i].selected) {
@@ -377,8 +307,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    var chart = ec.init(document.getElementById("chart33"));
-    var option = {
+    let chart = ec.init(document.getElementById("chart33"));
+    let option = {
       color: ["#269AE5"],
       tooltip: {
         trigger: "axis",
@@ -465,7 +395,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     chart.setOption(option);
   };
 
-  var initMyd = function() {
+  let initMyd = function() {
     sugon.requestJson(
       {
         type: "POST",
@@ -474,12 +404,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { dept: $("#dept3").val(), search: JSON.stringify(search) }
       },
       function(result) {
-        var xData = [],
+        let xData = [],
           yData = [],
           iData = [],
           min = result.data[0].value1,
           max = result.data[0].value1;
-        for (var i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i++) {
           xData.push(result.data[i].name);
           yData.push(result.data[i].value1);
           iData.push(result.data[i].value2);
@@ -487,9 +417,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           result.data[i].value1 > max ? (max = result.data[i].value1) : max;
         }
 
-        var Chart3 = ec.init(document.getElementById("chart3"));
+        let Chart3 = ec.init(document.getElementById("chart3"));
 
-        var option = {
+        let option = {
           color: "#3cb2fc",
           tooltip: {
             trigger: "axis"
@@ -592,7 +522,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     initMyd();
   });
 
-  var initDwqk = function(index, flag) {
+  let initDwqk = function(index, flag) {
     sugon.requestJson(
       {
         type: "POST",
@@ -601,13 +531,13 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { search: JSON.stringify(search) }
       },
       function(result) {
-        var data = result.data[index];
+        let data = result.data[index];
         if (result.data.length == 1) {
           $(".tab2").css("display", "none");
         } else {
           $(".tab2").css("display", "block");
         }
-        var xData = [],
+        let xData = [],
           yData = [],
           min = Number(data[0].value),
           max = Number(data[0].value),
@@ -622,7 +552,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
             return;
           }
         } else {
-          for (var i = 0; i < data.length; i++) {
+          for (let i = 0; i < data.length; i++) {
             xData.push(data[i].name);
             yData.push(data[i].value);
             min = Math.min(min, data[i].value);
@@ -633,11 +563,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           isShow = true;
           endValue = Math.floor((5 / data.length) * 100);
         }
-        var diff = max - min;
+        let diff = max - min;
         min = Number(min - diff).toFixed(2);
         max = Number(max + diff).toFixed(2);
-        var Chart4 = ec.init(document.getElementById("chart4"));
-        var option = {
+        let Chart4 = ec.init(document.getElementById("chart4"));
+        let option = {
           tooltip: {
             trigger: "axis",
             axisPointer: {
@@ -734,7 +664,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   $(".switch-panel").on("click", ".tab2>div", function() {
     $(".tab2 .selected").removeClass("selected");
     $(this).attr("class", "selected");
-    var index = $(".tab2>div").index(this);
+    let index = $(".tab2>div").index(this);
     initDwqk(index, 1);
   });
 
@@ -742,11 +672,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   $(".switch-panel").on("click", ".tab4>div", function() {
     $(".tab4 .selected").removeClass("selected");
     $(this).attr("class", "selected");
-    var index = $(".tab4>div").index(this);
+    let index = $(".tab4>div").index(this);
     drawGddwfb(gddwfbData[index]);
   });
 
-  var initMydfx = function(param) {
+  let initMydfx = function(param) {
     sugon.requestJson(
       {
         type: "POST",
@@ -755,12 +685,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { id: param, search: JSON.stringify(search) }
       },
       function(result) {
-        var indicatorData = [],
+        let indicatorData = [],
           seriesData = [];
         if (result.data.length == 0) {
           return;
         }
-        for (var i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i++) {
           indicatorData.push({
             text: result.data[i].name,
             max: result.data[i].value
@@ -768,7 +698,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           seriesData.push(result.data[i].value);
         }
 
-        var Chart2 = ec.init(document.getElementById("chart2"));
+        let Chart2 = ec.init(document.getElementById("chart2"));
 
         Chart2.off();
         Chart2.on("click", function(params) {
@@ -783,8 +713,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
             return;
           }
           if (params.targetType) {
-            var tempId = "";
-            for (var i = 0; i < result.data.length; i++) {
+            let tempId = "";
+            for (let i = 0; i < result.data.length; i++) {
               if (params.name == result.data[i].name) {
                 tempId = result.data[i].id;
                 break;
@@ -797,7 +727,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           }
         });
 
-        var option = {
+        let option = {
           color: "rgba(52, 237, 255, 0.35)",
           radar: [
             {
@@ -868,7 +798,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     );
   };
 
-  var initJtwt = function(param) {
+  let initJtwt = function(param) {
     sugon.requestJson(
       {
         type: "POST",
@@ -877,12 +807,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { id: param, search: JSON.stringify(search) }
       },
       function(result) {
-        var scaleData = result.data;
+        let scaleData = result.data;
         if (result.data.length == 0) {
           return;
         }
 
-        var Chart5 = ec.init(document.getElementById("chart5"));
+        let Chart5 = ec.init(document.getElementById("chart5"));
 
         Chart5.off();
         Chart5.on("click", function(params) {
@@ -890,9 +820,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           initAjwt(param1, param2, 0);
         });
 
-        var data = [];
+        let data = [];
 
-        for (var i = 0; i < scaleData.length; i++) {
+        for (let i = 0; i < scaleData.length; i++) {
           data.push({
             value: scaleData[i].value,
             name: scaleData[i].name,
@@ -906,7 +836,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           });
         }
 
-        var option = {
+        let option = {
           tooltip: {
             show: true
           },
@@ -925,7 +855,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
                     show: true,
                     position: "outside",
                     formatter: function(params) {
-                      var tempStr = "";
+                      let tempStr = "";
                       tempStr = params.name + "\n" + params.value;
                       return tempStr;
                     },
@@ -952,7 +882,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     );
   };
 
-  var initAjwt = function(param11, param22, index, flag) {
+  let initAjwt = function(param11, param22, index, flag) {
     sugon.requestJson(
       {
         type: "POST",
@@ -961,13 +891,13 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { id1: param11, id2: param22, search: JSON.stringify(search) }
       },
       function(result) {
-        var data = result.data[index];
+        let data = result.data[index];
         if (result.data.length == 1) {
           $(".tab3").css("display", "none");
         } else {
           $(".tab3").css("display", "block");
         }
-        var xData = [],
+        let xData = [],
           yData = [];
         if (data.length == 0) {
           if (flag) {
@@ -977,15 +907,15 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
             return;
           }
         } else {
-          for (var i = 0; i < data.length; i++) {
+          for (let i = 0; i < data.length; i++) {
             xData.push(data[i].name);
             yData.push(data[i].value);
           }
         }
 
-        var Chart6 = ec.init(document.getElementById("chart6"));
+        let Chart6 = ec.init(document.getElementById("chart6"));
 
-        var option = {
+        let option = {
           tooltip: {
             trigger: "axis",
             axisPointer: {
@@ -1024,11 +954,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   $(".tab3>div").bind("click", function() {
     $(".tab3 .selected").removeClass("selected");
     $(this).attr("class", "selected");
-    var index = $(".tab3>div").index(this);
+    let index = $(".tab3>div").index(this);
     initAjwt(param1, param2, index, 1);
   });
 
-  var initRankList = function() {
+  let initRankList = function() {
     searchRuler.id3 = $(".first-selector").val();
     searchRuler.id4 = $(".second-selector").val();
     sugon.requestJson(
@@ -1045,18 +975,18 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     );
   };
 
-  var renderRankList = function() {
-    var $body = $(".rank-list-body");
+  let renderRankList = function() {
+    let $body = $(".rank-list-body");
     $body.empty();
-    var data = [];
+    let data = [];
     mydData.map(function(val) {
       if (searchRuler.id3 == val.type) {
         data = val.values;
       }
     });
     data.map(function(val, index) {
-      var $div = $("<div/>");
-      var $img,
+      let $div = $("<div/>");
+      let $img,
         color = "p";
       switch (index) {
         case 0:
@@ -1074,11 +1004,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           $img = index + 1;
           break;
       }
-      var rankLab = $("<div/>")
+      let rankLab = $("<div/>")
         .addClass("rankLab")
         .append($("<div/>").append($img))
         .append($("<div/>").html(val.name));
-      var rankImg = $('<div class="rankImg lh"></div>')
+      let rankImg = $('<div class="rankImg lh"></div>')
         .addClass(color)
         .html(val.value);
       $div.append(rankLab).append(rankImg);
@@ -1087,7 +1017,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   $(".newMenu").on("change", "select", function() {
-    var $this = $(this);
+    let $this = $(this);
     if ($this.hasClass("first-selector")) {
       searchRuler.id3 = $this.val();
       renderRankList();
@@ -1096,7 +1026,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     }
   });
 
-  var initTxt2 = function() {
+  let initTxt2 = function() {
     sugon.requestJson(
       {
         type: "POST",
@@ -1105,7 +1035,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { search: JSON.stringify(search) }
       },
       function(result) {
-        for (var i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i++) {
           $(".mid_title")
             .eq(i)
             .html(result.data[i].name);
@@ -1127,18 +1057,18 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   $(".check").bind("click", function() {
-    if ($("#keywords").val()) {
-      sessionStorage.setItem("myKeywords", $("#keywords").val());
-      location.href = "index.html";
+    let keyword = $("#keywords").val();
+    if (keyword) {
+      location.hash = vipspa.stringify("myys/ysxq", { txt: keyword });
     }
   });
 
   // 加载标签云
-  var loadLabelCloud = function(data) {
-    var string_ = "";
-    for (var i = 0; i < data.length; i++) {
-      var string_f = data[i].name;
-      var string_n = data[i].value;
+  let loadLabelCloud = function(data) {
+    let string_ = "";
+    for (let i = 0; i < data.length; i++) {
+      let string_f = data[i].name;
+      let string_n = data[i].value;
       string_ +=
         "{text: '" +
         string_f +
@@ -1146,12 +1076,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         string_n +
         "',html: {'class': 'span_list'}},";
     }
-    var string_list = string_;
-    var word_list = eval("[" + string_list + "]");
+    let string_list = string_;
+    let word_list = eval("[" + string_list + "]");
     $("#word_cloud").jQCloud(word_list);
   };
 
-  var initWordCloud = function(param) {
+  let initWordCloud = function(param) {
     $(".world_cloud").empty();
     if (param == 0) {
       sugon.requestJson(
@@ -1170,14 +1100,14 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     }
   };
   $("#dept").change(function() {
-    var container = $(".world_cloud");
+    let container = $(".world_cloud");
     container.empty();
-    var value = $(this).val();
+    let value = $(this).val();
     if (value == 0) {
       loadLabelCloud(hfrcData);
     } else {
       container.removeClass("jqcloud");
-      for (var i = 0; i < hfrcData.length; i++) {
+      for (let i = 0; i < hfrcData.length; i++) {
         container.append(
           $("<div/>")
             .append($("<span/>").html(i + 1 + "、" + hfrcData[i].name))
@@ -1190,7 +1120,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     }
   });
 
-  var initWtyc = function(param) {
+  let initWtyc = function(param) {
     sugon.requestJson(
       {
         type: "POST",
@@ -1200,13 +1130,13 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       },
       function(result) {
         $(".wtList").empty();
-        for (var i = 0; i < result.data.length; i++) {
-          var str =
+        for (let i = 0; i < result.data.length; i++) {
+          let str =
             result.data[i].name.length > 15
               ? result.data[i].name.substr(0, 15) + "..."
               : result.data[i].name;
-          var tempStr = i + 1 + ". " + str;
-          var tempImg =
+          let tempStr = i + 1 + ". " + str;
+          let tempImg =
             result.data[i].type == "1"
               ? "../../img/zxyp/ckfw/red.png"
               : "../../img/zxyp/ckfw/blue.png";
@@ -1234,9 +1164,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
 
   // 中间层右上角切换事件
   $(".switch-panel").on("click", ".switch-btn", function() {
-    var $thisPanel = $(".switch-panel");
-    var $this = $(this);
-    var threePanel =
+    let $thisPanel = $(".switch-panel");
+    let $this = $(this);
+    let threePanel =
       '<div class="group_child"><div class="subTitle"><span>一般工单量走势分析</span>' +
       '</div><div class="content"><div id="chart11"></div></div></div><div class="group_child">' +
       '<div class="subTitle"><span>一般工单业务分析</span></div><div class="content">' +
@@ -1246,7 +1176,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       '</div><div class="content"><div class="tab4"><div class="selected">一单元</div>' +
       '<div>二单元</div><div>三单元</div><div style="border-right: 0px;">其他</div>' +
       '</div><div id="chart33"></div></div></div>';
-    var twoPanel =
+    let twoPanel =
       '<div class="myd">' +
       '<div class="subTitle2">' +
       '<span class="l" style="font-size: 16px;">窗口服务满意度趋势分析</span>' +
@@ -1294,7 +1224,15 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     }
   });
 
-  var initView = function() {
+  let initView = function() {
+    searchRuler.deptId = $("#dept-id").val();
+    searchRuler.deptName = $("#dept-name").val();
+    searchRuler.date1 = $("#date1").val();
+    searchRuler.date2 = $("#date2").val();
+    search.deptId = $("#dept-id").val();
+    search.deptName = $("#dept-name").val();
+    search.date1 = $("#date1").val();
+    search.date2 = $("#date2").val();
     //左上文本
     initTxt();
     if ($(".switch-btn").hasClass("switch-three")) {
@@ -1325,25 +1263,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     initWtyc("");
   };
 
-  var initPage = function() {
+  let initPage = function() {
     // 初始化查询栏
-    initSearchBar();
-    // 分析报告下载
-    $(".view-header-right").bind("click", function() {
-      alert("分析报告下载...");
-    });
-    // 初始化页面
-    $(".search-btn").bind("click", function() {
-      searchRuler.deptId = $("#placeCode").val();
-      searchRuler.date1 = $("#date-input1").val();
-      searchRuler.date2 = $("#date-input2").val();
-      searchRuler.deptName = $("#place").val();
-      search.deptId = $("#placeCode").val();
-      search.date1 = $("#date-input1").val();
-      search.date2 = $("#date-input2").val();
-      search.deptName = $("#place").val();
-      initView();
-    });
+    sugon.initSearchBar({ date1: -7, date2: -2, cb: initView });
     initView();
   };
 

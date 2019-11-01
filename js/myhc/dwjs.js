@@ -83,7 +83,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tree,
+        url: sugon.interFaces.common.getDeptTree,
         data: { type: 1 },
         async: false
       },

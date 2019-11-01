@@ -1,122 +1,28 @@
-var zhpjzsfxChart,
-  hjwrfxChart,
-  ajdwfbChart,
-  zhpjzsfxTrendChart,
-  ajbljtwtfxChartArr = [],
-  airBubbleChart1,
-  airBubbleChart2,
-  popShlAjzhpjzsChart,
-  popAjzhpjzsChart,
-  popShlAjzhpjzsfxChart,
-  popHjwtfxChart,
-  popAjwtdwfbChart;
 requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   // 全局查询尺度
-  var searchRuler = {};
+  let searchRuler = {};
 
   // 热词回访数据
-  var hfrcData = [];
+  let hfrcData = [];
 
   // 案件问题单位分布数据
-  var ajwddwfbData = [];
+  let ajwddwfbData = [];
 
   // 弹出页案件问题单位分布数据
-  var popAjwddwfbData = [];
+  let popAjwddwfbData = [];
 
   // 案件综合评价指数分析id
-  var zhpjzsfxId;
+  let zhpjzsfxId;
 
   // 案件综合评价指数分析data
-  var zhpjzsfxData = [];
+  let zhpjzsfxData = [];
 
   // 专项分析评价指数
-  var zxfxpjzsData = [];
-
-  // 初始化查询栏
-  var initSearchBar = function() {
-    var lastMonth = sugon.getDate(-1);
-    if (isNullObject(searchRuler)) {
-      searchRuler.deptId = "2014110416460086100000002942";
-      searchRuler.date1 = sugon.getDate(-7);
-      searchRuler.date2 = sugon.getDate(-2);
-      searchRuler.deptName = "南京市公安局";
-
-      $("#place").val(searchRuler.deptName);
-      $("#placeCode").val(searchRuler.deptId);
-      $("#date-input1").val(searchRuler.date1);
-      $("#date-input2").val(searchRuler.date2);
-    } else {
-      searchRuler.deptId = $("#placeCode").val();
-      searchRuler.date1 = $("#date-input1").val();
-      searchRuler.date2 = $("#date-input2").val();
-      searchRuler.deptName = $("#place").val();
-    }
-    $("#date-input1").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    $("#date-input2").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    // 设置下拉框宽度
-    $("#left-tree").css("width", $("#place").outerWidth());
-    //渲染树
-    $("#left-tree").treeview({
-      data: getTree(),
-      levels: 1,
-      onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
-        $("#left-tree").css("visibility", "hidden");
-      },
-      showCheckbox: false //是否显示多选
-    });
-  };
-
-  // 判断对象是否为空
-  var isNullObject = function(obj) {
-    for (var key in obj) {
-      return false;
-    }
-    return true;
-  };
-
-  //获取树数据
-  function getTree() {
-    var treeData = [];
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.zxyp.aj.Tree
-      },
-      function(result) {
-        treeData = result.data;
-      }
-    );
-    return treeData;
-  }
-
-  // 绑定单位输入框点击事件
-  $("#place").bind("click", function() {
-    $("#left-tree").css("visibility", "visible");
-  });
+  let zxfxpjzsData = [];
 
   // 指标展示接口定义
-  var getZbzs = function() {
-    var condition = {
+  let getZbzs = function() {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -132,9 +38,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       },
       function(result) {
         if (!sugon.isPublished || result.timestamp == searchRuler.timestamp) {
-          var data = result.data;
+          let data = result.data;
           zxfxpjzsData[2] = data.zhpjzs;
-          for (var key in data) {
+          for (let key in data) {
             $("#" + key).html(data[key]);
           }
         }
@@ -143,8 +49,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 案件回访热词接口定义
-  var getHfrc = function() {
-    var condition = {
+  let getHfrc = function() {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -168,12 +74,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 加载标签云
-  var loadLabelCloud = function(data) {
+  let loadLabelCloud = function(data) {
     $("#label-cloud").empty();
-    var string_ = "";
-    for (var i = 0; i < data.length; i++) {
-      var string_f = data[i].name;
-      var string_n = data[i].value;
+    let string_ = "";
+    for (let i = 0; i < data.length; i++) {
+      let string_f = data[i].name;
+      let string_n = data[i].value;
       string_ +=
         "{text: '" +
         string_f +
@@ -181,14 +87,14 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         string_n +
         "',html: {'class': 'span_list'}},";
     }
-    var string_list = string_;
-    var word_list = eval("[" + string_list + "]");
+    let string_list = string_;
+    let word_list = eval("[" + string_list + "]");
     $("#label-cloud").jQCloud(word_list);
   };
 
   // 案件综合评价指数分析接口定义
-  var getZhpjzsfx = function(id) {
-    var condition = {
+  let getZhpjzsfx = function(id) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -217,10 +123,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画案件综合评价指数分析echarts图
-  var drawZhpjzsfx = function(data, id) {
-    var xData = [],
+  let drawZhpjzsfx = function(data, id) {
+    let xData = [],
       yData = [];
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       if (zhpjzsfxId == data[i].id && id) {
         xData.push({
           text: data[i].name + "\n" + data[i].value + "%",
@@ -237,8 +143,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       }
       yData.push(data[i].value);
     }
-    zhpjzsfxChart = ec.init(document.getElementById("zhpjzsfx"));
-    var option = {
+    let chart = ec.init(document.getElementById("zhpjzsfx"));
+    let option = {
       color: ["rgba(60, 136, 194, 0.8)", "rgba(29, 132, 198, 0.2)"],
       radar: [
         {
@@ -303,17 +209,17 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    zhpjzsfxChart.setOption(option);
-    if (zhpjzsfxChart) {
-      zhpjzsfxChart.resize();
+    chart.setOption(option);
+    if (chart) {
+      chart.resize();
     }
-    zhpjzsfxChart.off();
-    zhpjzsfxChart.on("click", function(param) {
+    chart.off();
+    chart.on("click", function(param) {
       $("#hjwtfx-title").html("环节问题分析");
       if (param.targetType) {
-        var name = param.name;
-        var index = 0;
-        for (var i = 0; i < xData.length; i++) {
+        let name = param.name;
+        let index = 0;
+        for (let i = 0; i < xData.length; i++) {
           if (name == xData[i].text) {
             index = i;
             break;
@@ -332,8 +238,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 环节问题分析接口定义
-  var getHjwtfx = function(id, hjwtId) {
-    var condition = {
+  let getHjwtfx = function(id, hjwtId) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -363,13 +269,13 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画案件环节问题分析echarts图
-  var drawHjwtfx = function(data) {
-    var total = 0;
-    for (var i = 0; i < data.length; i++) {
+  let drawHjwtfx = function(data) {
+    let total = 0;
+    for (let i = 0; i < data.length; i++) {
       total += Number(data[i].value);
     }
-    hjwrfxChart = ec.init(document.getElementById("hjwtfx"));
-    var option = {
+    let chart = ec.init(document.getElementById("hjwtfx"));
+    let option = {
       title: {
         text: total,
         subtext: "环节问题",
@@ -409,7 +315,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
                 show: true,
                 position: "outside",
                 formatter: function(params) {
-                  var percent = "" + params.value / total;
+                  let percent = "" + params.value / total;
                   percent = Math.round((percent * 100000) / 100) / 10 + "%";
                   return params.name + "\n" + percent;
                 },
@@ -431,9 +337,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    hjwrfxChart.setOption(option);
-    hjwrfxChart.off();
-    hjwrfxChart.on("click", function(param) {
+    chart.setOption(option);
+    chart.off();
+    chart.on("click", function(param) {
       $("#hjwtfx-title").html("具体问题分析");
       if (param.data.id) {
         getHjwtfx(zhpjzsfxId, param.data.id);
@@ -443,8 +349,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 案件问题单位分布接口定义
-  var getAjdwfb = function(id, id1) {
-    var condition = {
+  let getAjdwfb = function(id, id1) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -475,8 +381,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画案件问题单位分布echarts图
-  var drawAjdwfb = function(data) {
-    var xData = [],
+  let drawAjdwfb = function(data) {
+    let xData = [],
       yData = [],
       startValue = 0,
       endValue = 100,
@@ -486,7 +392,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       isShow = true;
       startValue = Math.floor((1 - 4 / data.length) * 100);
     }
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       yData.push(data[i].name);
       xData.push(data[i].value);
       if (data[i].selected) {
@@ -496,8 +402,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    ajdwfbChart = ec.init(document.getElementById("ajdwfb"));
-    var option = {
+    let chart = ec.init(document.getElementById("ajdwfb"));
+    let option = {
       color: ["#269AE5"],
       tooltip: {
         trigger: "axis",
@@ -544,9 +450,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         //         color: '#6c7177'
         //     },
         //     formatter: function(param) {
-        //         var tempStr = "";
+        //         let tempStr = "";
         //         if(param.length > 4) {
-        //             for(var i=0;i<param.length;i++) {
+        //             for(let i=0;i<param.length;i++) {
         //                 if(i % 4 == 3) {
         //                     tempStr += param[i] + "\n";
         //                 }else {
@@ -586,12 +492,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    ajdwfbChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 案件综合评价指数趋势分析接口定义
-  var getZhpjzsfxTrend = function(id) {
-    var condition = {
+  let getZhpjzsfxTrend = function(id) {
+    let condition = {
       deptId: searchRuler.deptId,
       date2: searchRuler.date2,
       id: id,
@@ -614,15 +520,15 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画案件综合评价指数趋势分析echarts图
-  var drawZhpjzsfxTrend = function(result) {
-    var data1 = result.data1;
-    var data2 = result.data2;
-    var xData = [],
+  let drawZhpjzsfxTrend = function(result) {
+    let data1 = result.data1;
+    let data2 = result.data2;
+    let xData = [],
       yData1 = [],
       yData2 = [],
       data2Max = 100,
       data2Min = data2[0].value;
-    for (var i = 0; i < data1.length; i++) {
+    for (let i = 0; i < data1.length; i++) {
       data2Min = Math.min(Number(data2[i].value), data2Min);
       // data2Max = Math.max(Number(data2[i].value), data2Max);
       xData.push(data1[i].name);
@@ -630,8 +536,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       yData2.push(data2[i].value);
     }
     data2Min -= 5;
-    zhpjzsfxTrendChart = ec.init(document.getElementById("zhpjzsfxTrend"));
-    var option = {
+    let chart = ec.init(document.getElementById("zhpjzsfxTrend"));
+    let option = {
       tooltip: {
         trigger: "axis",
         axisPointer: {
@@ -701,12 +607,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       ]
     };
 
-    zhpjzsfxTrendChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 办案小助手-案件办理具体问题分析接口定义
-  var getAjbljtwtfx = function(index) {
-    var condition = {
+  let getAjbljtwtfx = function(index) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -725,8 +631,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       },
       function(result) {
         if (!sugon.isPublished || result.timestamp == searchRuler.timestamp) {
-          var data = result.data;
-          var $body, chartId;
+          let data = result.data;
+          let $body, chartId;
           if (index === undefined || index === null || index === "") {
             $body = $("#ajbljtwtfx");
             chartId = "tab-chart";
@@ -735,7 +641,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
             chartId = "tab-chart-pop";
           }
           createAjbljtwtfxDom(data, $body, chartId);
-          for (var i = 0; i < data.length; i++) {
+          for (let i = 0; i < data.length; i++) {
             drawAjbljtwtfx(i, data[i].wtzs, chartId);
           }
         }
@@ -744,15 +650,15 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画办案小助手-案件办理具体问题分析echarts图
-  var drawAjbljtwtfx = function(i, data, chartId) {
-    var xData = [],
+  let drawAjbljtwtfx = function(i, data, chartId) {
+    let xData = [],
       yData = [];
-    for (var j = 0; j < data.length; j++) {
+    for (let j = 0; j < data.length; j++) {
       xData.push(data[j].name);
       yData.push(data[j].value);
     }
-    var chart = ec.init(document.getElementById(chartId + i));
-    var option = {
+    let chart = ec.init(document.getElementById(chartId + i));
+    let option = {
       color: ["#A9D1EB"],
       grid: {
         left: 0,
@@ -783,11 +689,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       ]
     };
     chart.setOption(option);
-    ajbljtwtfxChartArr.push(chart);
   };
 
   // 拼接办案小助手-案件办理具体问题分析dom
-  var createAjbljtwtfxDom = function(data, $body, chartId) {
+  let createAjbljtwtfxDom = function(data, $body, chartId) {
     $body.empty();
     $('<div class="tab-row"/>')
       .append($('<div class="tab-td" style="width: 60px;">排行</div>'))
@@ -804,7 +709,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         )
       )
       .appendTo($body);
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       $('<div class="tab-row"/>')
         .append(
           $('<div class="tab-td" style="width: 60px;">' + data[i].ph + "</div>")
@@ -841,8 +746,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 专项分析评价指数接口定义
-  var getZxfxpjzs = function() {
-    var condition = {
+  let getZxfxpjzs = function() {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -867,10 +772,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 专项分析评价指数数据加载
-  var drawZxfxpjzs = function(data) {
-    airBubbleChart1 = ec.init(document.getElementById("air-bubble1"));
-    airBubbleChart2 = ec.init(document.getElementById("air-bubble2"));
-    var option = {
+  let drawZxfxpjzs = function(data) {
+    let chart1 = ec.init(document.getElementById("air-bubble1"));
+    let chart2 = ec.init(document.getElementById("air-bubble2"));
+    let option = {
       title: {
         text: "水滴",
         textStyle: {
@@ -916,25 +821,25 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    var data1 = [data.shlaj / 100, 0.5, 0.4, 0.3];
-    var data2 = [data.qclaj / 100, 0.5, 0.4, 0.3];
+    let data1 = [data.shlaj / 100, 0.5, 0.4, 0.3];
+    let data2 = [data.qclaj / 100, 0.5, 0.4, 0.3];
     option.series[0].data = data1;
     option.title.text = data.shlaj + "%";
-    airBubbleChart1.setOption(option);
+    chart1.setOption(option);
     option.series[0].data = data2;
     option.title.text = data.qclaj + "%";
-    airBubbleChart2.setOption(option);
-    if (airBubbleChart1) {
-      airBubbleChart1.resize();
+    chart2.setOption(option);
+    if (chart1) {
+      chart1.resize();
     }
-    if (airBubbleChart2) {
-      airBubbleChart2.resize();
+    if (chart2) {
+      chart2.resize();
     }
   };
 
   // 案件办理综合评价指数满意榜接口定义
-  var getZsmyb = function(index, id) {
-    var condition = {
+  let getZsmyb = function(index, id) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -958,12 +863,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 渲染案件办理综合评价指数满意榜dom
-  var renderZsmybDom = function(index, data) {
-    var level = data.level;
-    var $this = $(".view-right-bottom-body>div").eq(index);
-    var $img1 = $('<img src="../../img/zxyp/aj/top_fj.png">');
-    var $img2 = $('<img src="../../img/zxyp/aj/top_sd.png">');
-    var $img3 = $('<img src="../../img/zxyp/aj/top_mj.png">');
+  let renderZsmybDom = function(index, data) {
+    let level = data.level;
+    let $this = $(".view-right-bottom-body>div").eq(index);
+    let $img1 = $('<img src="../../img/zxyp/aj/top_fj.png">');
+    let $img2 = $('<img src="../../img/zxyp/aj/top_sd.png">');
+    let $img3 = $('<img src="../../img/zxyp/aj/top_mj.png">');
     $this.find("div.view-right-bottom-row").remove();
     switch (level) {
       case "2":
@@ -1014,15 +919,15 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 伤害类/侵财类案件综合评价指数
-  var getPopShlZhpjzsfx = function(index) {
-    popShlAjzhpjzsChart = ec.init(document.getElementById("pop-shl-ajzhpjzs"));
-    var data = [
+  let getPopShlZhpjzsfx = function(index) {
+    let chart = ec.init(document.getElementById("pop-shl-ajzhpjzs"));
+    let data = [
       {
         value: zxfxpjzsData[index],
         name: index == 0 ? "伤害类案件综合评价指数" : "侵财类案件综合评价指数"
       }
     ];
-    var option = {
+    let option = {
       tooltip: {
         formatter: "{b} : {c}%"
       },
@@ -1092,19 +997,19 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    popShlAjzhpjzsChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 案件综合评价指数
-  var getPopAjzhpjzs = function() {
-    popAjzhpjzsChart = ec.init(document.getElementById("pop-ajzhpjzs"));
-    var data = [
+  let getPopAjzhpjzs = function() {
+    let chart = ec.init(document.getElementById("pop-ajzhpjzs"));
+    let data = [
       {
         value: zxfxpjzsData[2].substring(0, zxfxpjzsData[2].length - 1),
         name: "案件综合评价指数"
       }
     ];
-    var option = {
+    let option = {
       tooltip: {
         formatter: "{b} : {c}%"
       },
@@ -1174,12 +1079,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    popAjzhpjzsChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 伤害类/侵财类案件综合评价指数分析接口定义
-  var getPopShlAjzhpjzsfx = function(index) {
-    var condition = {
+  let getPopShlAjzhpjzsfx = function(index) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -1203,20 +1108,17 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画伤害类/侵财类案件综合评价指数分析echarts图
-  var drawPopShlAjzhpjzsfx = function(result, type) {
-    if (popShlAjzhpjzsfxChart) {
-      popShlAjzhpjzsfxChart.dispose();
-    }
-    var data1 = result.data1;
-    var data2 = result.data2;
-    var xData = [],
+  let drawPopShlAjzhpjzsfx = function(result, type) {
+    let data1 = result.data1;
+    let data2 = result.data2;
+    let xData = [],
       yData1 = [],
       yData2 = [],
       data2Max = 100,
       data2Min = Number(data2[0].value),
       data1Min = Number(data1[0].value),
       data1Max = Number(data1[0].value);
-    for (var i = 0; i < data1.length; i++) {
+    for (let i = 0; i < data1.length; i++) {
       data1Min = Math.min(Number(data1[i].value), data1Min);
       data2Min = Math.min(Number(data2[i].value), data2Min);
       data1Max = Math.max(Number(data1[i].value), data1Max);
@@ -1226,12 +1128,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       yData2.push(data2[i].value);
     }
     data2Min -= 5;
-    var diff = (data1Max - data1Min) / 2;
+    let diff = (data1Max - data1Min) / 2;
     data1Min = Number(data1Min - diff).toFixed(2);
-    popShlAjzhpjzsfxChart = ec.init(
-      document.getElementById("pop-shl-ajzhpjzsfx")
-    );
-    var option = {
+    let chart = ec.init(document.getElementById("pop-shl-ajzhpjzsfx"));
+    let option = {
       tooltip: {
         trigger: "axis",
         axisPointer: {
@@ -1329,12 +1229,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         min: data1Min
       });
     }
-    popShlAjzhpjzsfxChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 弹出页环节问题分析
-  var getPopHjwtfx = function(index) {
-    var condition = {
+  let getPopHjwtfx = function(index) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -1358,11 +1258,11 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画弹出页环节问题分析echarts图
-  var drawPopHjwtfx = function(data) {
-    var len = data.length;
-    var xData = [],
+  let drawPopHjwtfx = function(data) {
+    let len = data.length;
+    let xData = [],
       yData = [];
-    var colorArr = [
+    let colorArr = [
       "#4068EC",
       "#4B89DE",
       "#53A4E5",
@@ -1370,7 +1270,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       "#73C3F4",
       "#7FE3FB"
     ];
-    var transparentData = {
+    let transparentData = {
       value: 0,
       name: "",
       itemStyle: {
@@ -1385,9 +1285,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       }
     };
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
       xData.push(data[i].name);
-      var obj = {
+      let obj = {
         name: data[i].name,
         value: data[i].value,
         itemStyle: {
@@ -1404,12 +1304,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       };
       yData.push(obj);
     }
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
       yData.push(transparentData);
     }
-    popHjwtfxChart = ec.init(document.getElementById("pop-hjwtfx"));
+    let chart = ec.init(document.getElementById("pop-hjwtfx"));
 
-    var option = {
+    let option = {
       calculable: true,
       tooltip: {
         trigger: "item",
@@ -1448,12 +1348,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    popHjwtfxChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 弹出页案件问题单位分布接口定义
-  var getPopAjwtdwfb = function(index) {
-    var condition = {
+  let getPopAjwtdwfb = function(index) {
+    let condition = {
       deptId: searchRuler.deptId,
       date1: searchRuler.date1,
       date2: searchRuler.date2,
@@ -1478,8 +1378,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 画弹出页案件问题单位分布echarts图
-  var drawPopAjwtdwfb = function(data) {
-    var xData = [],
+  let drawPopAjwtdwfb = function(data) {
+    let xData = [],
       yData = [],
       markData = [],
       startValue = 0,
@@ -1489,7 +1389,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       isShow = true;
       endValue = Math.floor((6 / data.length) * 100);
     }
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       xData.push(data[i].name);
       yData.push(data[i].value);
       if (data[i].selected) {
@@ -1509,8 +1409,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    popAjwtdwfbChart = ec.init(document.getElementById("pop-ajwtdwfb"));
-    var option = {
+    let chart = ec.init(document.getElementById("pop-ajwtdwfb"));
+    let option = {
       tooltip: {
         trigger: "axis",
         axisPointer: {
@@ -1554,9 +1454,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
               color: "#6c7177"
             },
             formatter: function(param) {
-              var tempStr = "";
+              let tempStr = "";
               if (param.length > 4) {
-                for (var i = 0; i < param.length; i++) {
+                for (let i = 0; i < param.length; i++) {
                   if (i % 4 == 3) {
                     tempStr += param[i] + "\n";
                   } else {
@@ -1612,14 +1512,14 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     } else {
       option.series[0].markLine = "";
     }
-    popAjwtdwfbChart.setOption(option);
+    chart.setOption(option);
   };
 
   // 加载办案小助手-案件办理具体问题分析弹窗dom
-  var renderAjbljtwtfxDom = function(data) {
-    var $body = $(".pop-view2-body");
+  let renderAjbljtwtfxDom = function(data) {
+    let $body = $(".pop-view2-body");
     $body.empty();
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       $body.append(
         '<div><div class="pop-view2-up">' +
           data[i].title +
@@ -1631,9 +1531,11 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 初始化页面
-  var initPage = function() {
-    // 初始化查询栏
-    initSearchBar();
+  let initPage = function() {
+    searchRuler.deptId = $("#dept-id").val();
+    searchRuler.deptName = $("#dept-name").val();
+    searchRuler.date1 = $("#date1").val();
+    searchRuler.date2 = $("#date2").val();
     // 初始化指标展示
     getZbzs();
     // 初始化热词
@@ -1651,8 +1553,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     // 初始化专项分析评价指数
     getZxfxpjzs();
     // 初始化案件办理综合评价指数满意榜
-    var $div = $(".view-right-bottom-body>div");
-    for (var i = 0; i < $div.length; i++) {
+    let $div = $(".view-right-bottom-body>div");
+    for (let i = 0; i < $div.length; i++) {
       getZsmyb(
         i,
         $div
@@ -1664,17 +1566,17 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   };
 
   // 初始化弹出页
-  var initPopPage = function(index) {
-    var str1 = index == 0 ? "伤害" : "侵财";
-    var difference =
+  let initPopPage = function(index) {
+    let str1 = index == 0 ? "伤害" : "侵财";
+    let difference =
       (parseInt(zxfxpjzsData[index] * 100) -
         parseInt(
           zxfxpjzsData[2].substring(0, zxfxpjzsData[2].length - 1) * 100
         )) /
       100;
-    var str2 = difference > 0 ? "高于" : "低于";
+    let str2 = difference > 0 ? "高于" : "低于";
     difference = "" + Math.abs(difference);
-    var str =
+    let str =
       str1 +
       '类案件评价指数<strong style="color: red;">' +
       str2 +
@@ -1699,14 +1601,14 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 案件群众回访热词下拉框改变事件
   $("#hfrc").change(function() {
-    var container = $(".view-left-col-bottom-body");
+    let container = $(".view-left-col-bottom-body");
     container.empty();
-    var value = $(this).val();
+    let value = $(this).val();
     if (value == 0) {
       loadLabelCloud(hfrcData);
     } else {
       container.removeClass("jqcloud");
-      for (var i = 0; i < hfrcData.length; i++) {
+      for (let i = 0; i < hfrcData.length; i++) {
         container.append(
           $("<div/>")
             .append($("<span/>").html(i + 1 + "、" + hfrcData[i].name))
@@ -1721,15 +1623,15 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 单元切换事件
   $(".view-mid-nav>div").click(function() {
-    var $parent = $(this).parent();
-    var divClass;
+    let $parent = $(this).parent();
+    let divClass;
     if ($parent.hasClass("inner-nav")) {
       divClass = ".inner-nav";
-      var index = $(this).index(divClass + ">div");
+      let index = $(this).index(divClass + ">div");
       drawAjdwfb(ajwddwfbData[index]);
     } else if ($parent.hasClass("pop-nav")) {
       divClass = ".pop-nav";
-      var index = $(this).index(divClass + ">div");
+      let index = $(this).index(divClass + ">div");
       drawPopAjwtdwfb(popAjwddwfbData[index]);
     }
     if (!$(this).hasClass("nav-selected")) {
@@ -1740,12 +1642,11 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 云搜跳转按钮事件监听
   $(".input-group>span").click(function() {
-    var value = $(this)
+    let value = $(this)
       .prev()
       .val();
     if (value) {
-      sessionStorage.setItem("myKeywords", value);
-      location.href = "index.html";
+      location.hash = vipspa.stringify("myys/ysxq", { txt: value });
     }
   });
   // 监听列表办案小助手列表点击事件
@@ -1753,7 +1654,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     "click",
     ".tab-td-click",
     function() {
-      var isView1Show = $(".pop-view").css("display");
+      let isView1Show = $(".pop-view").css("display");
       if (isView1Show == "block") {
         $(".pop-view-mask").css("z-index", "1002");
       } else {
@@ -1768,7 +1669,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
           .prev()
           .html() + "  执行规范说明"
       );
-      var condition = { id: $(this).attr("top-id"), timestamp: new Date() };
+      let condition = { id: $(this).attr("top-id"), timestamp: new Date() };
       searchRuler.timestamp = condition.timestamp;
       sugon.requestJson(
         {
@@ -1787,7 +1688,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 弹窗2的关闭按钮点击事件
   $(".pop-view2-header>i").click(function() {
-    var isView1Show = $(".pop-view").css("display");
+    let isView1Show = $(".pop-view").css("display");
     if (isView1Show == "none") {
       $(".pop-view-mask").css("display", "none");
     } else {
@@ -1815,9 +1716,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   $(".click-div").click(function() {
     $(".pop-view-mask").css("display", "block");
     $(".pop-view").css("display", "block");
-    var index = $(this).index(".click-div");
-    var str1 = index == 0 ? "伤害类案件评价指数" : "侵财类案件评价指数";
-    var str2 = index == 0 ? "伤害类案件评价指数分析" : "侵财类案件评价指数分析";
+    let index = $(this).index(".click-div");
+    let str1 = index == 0 ? "伤害类案件评价指数" : "侵财类案件评价指数";
+    let str2 = index == 0 ? "伤害类案件评价指数分析" : "侵财类案件评价指数分析";
     $("#pop-shl-ajzhpjzs-span").html(str1);
     $("#pop-shl-ajzhpjzsfx-span").html(str2);
     // 初始化弹出页
@@ -1830,11 +1731,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     $(".pop-view-mask").css("display", "none");
   });
 
-  // 点击查询按钮初始化页面
-  $(".search-btn").click(initPage);
-
   // 页面入口
   $(function() {
+    // 初始化查询栏
+    sugon.initSearchBar({ date1: -7, date2: -2, cb: initPage });
     initPage();
   });
 });

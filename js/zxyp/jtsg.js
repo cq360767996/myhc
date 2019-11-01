@@ -4,88 +4,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
     mid1_3Data = [],
     mid2_3Data = [];
 
-  // 初始化查询栏
-  var initSearchBar = function() {
-    var lastMonth = sugon.getDate(-1);
-    if (isNullObject(searchRuler)) {
-      searchRuler.deptId = "2014110416460086100000002942";
-      searchRuler.date1 = sugon.getDate(-7);
-      searchRuler.date2 = sugon.getDate(-2);
-      searchRuler.deptName = "南京市公安局";
-
-      $("#place").val(searchRuler.deptName);
-      $("#placeCode").val(searchRuler.deptId);
-      $("#date-input1").val(searchRuler.date1);
-      $("#date-input2").val(searchRuler.date2);
-    } else {
-      searchRuler.deptId = $("#placeCode").val();
-      searchRuler.date1 = $("#date-input1").val();
-      searchRuler.date2 = $("#date-input2").val();
-      searchRuler.deptName = $("#place").val();
-    }
-    $("#date-input1").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    $("#date-input2").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    // 设置下拉框宽度
-    $("#left-tree").css("width", $("#place").outerWidth());
-    //渲染树
-    $("#left-tree").treeview({
-      data: getTree(),
-      levels: 1,
-      onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
-        $("#left-tree").css("visibility", "hidden");
-      },
-      showCheckbox: false //是否显示多选
-    });
-  };
-
-  // 判断对象是否为空
-  var isNullObject = function(obj) {
-    for (var key in obj) {
-      return false;
-    }
-    return true;
-  };
-
-  //获取树数据
-  function getTree() {
-    var treeData = [];
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.zxyp.jtsg.Tree
-      },
-      function(result) {
-        treeData = result.data;
-      }
-    );
-    return treeData;
-  }
-
-  // 绑定单位输入框点击事件
-  $("#place").bind("click", function() {
-    $("#left-tree").css("visibility", "visible");
-  });
-
   // 初始化切换框
   var initSwitchPanel = function($div) {
     $div.removeClass("switch-selected");
@@ -103,9 +21,9 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
     $("#right2-2").val(0);
     $("#right2-3").val(0);
     searchRuler = {
-      deptId: $("#placeCode").val(),
-      date1: $("#date-input1").val(),
-      date2: $("#date-input2").val()
+      deptId: $("#dept-id").val(),
+      date1: $("#date1").val(),
+      date2: $("#date2").val()
     };
   };
 
@@ -1082,7 +1000,16 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
   // 初始化页面
   var initPage = function() {
     // 初始化查询栏
-    initSearchBar();
+    sugon.initSearchBar({
+      date1: -7,
+      date2: -2,
+      cb: function() {
+        // 初始化所有子查询条件
+        initCondition();
+        // 初始化数据展示页
+        initDataPanel();
+      }
+    });
     // 初始化所有子查询条件
     initCondition();
     // 初始化数据展示页
@@ -1091,11 +1018,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
 
   // 页面入口
   $(function() {
-    initPage();
-  });
-
-  // 查询按钮点击事件
-  $(".search-btn").click(function() {
     initPage();
   });
 

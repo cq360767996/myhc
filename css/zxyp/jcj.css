@@ -1,62 +1,72 @@
-.view-header {
-  width: 95%;
-  height: 50px;
-  margin: 10px auto;
-}
-.view-body {
-  width: 95%;
-  height: calc(100% - 80px);
-  margin: 10px auto;
-}
-.view-header-left {
-  float: left;
-  width: calc(100% - 160px);
-  height: 50px;
-  background: #adc3db;
-}
-.view-header-right {
-  float: right;
-  width: 150px;
-  height: 50px;
-  margin-left: 10px;
-  line-height: 42px;
-  font-size: 16px;
+.up-panel {
+  margin: 20px auto;
+  width: calc(100% - 40px);
+  height: 48px;
+  background-color: #a4b7cd;
+  border-radius: 2px;
+  padding: 10px 20px;
   color: #000;
-  cursor: pointer;
 }
-.view-header-right > span {
-  margin-left: 10px;
-}
-input {
-  height: 30px;
-  text-indent: 15px;
-}
-#place {
-  width: 50%;
-  border-radius: 3px;
-  margin: 10px 10px;
+.up-panel button {
+  margin: 0;
+  padding: 0;
   border: 0;
+  outline: none;
 }
-#left-tree {
-  margin-top: -10px;
-  margin-left: 10px;
-  height: 230px;
+.up-panel input,
+.up-panel button {
+  height: 28px;
+  line-height: 28px;
+}
+.up-panel input {
+  border: 0;
+  vertical-align: top;
+  width: 410px;
+  margin-left: 20px;
+  padding: 0 10px;
+}
+.up-panel input::-webkit-input-placeholder {
+  color: #808080;
+}
+.up-panel #dept-name {
+  margin-left: 0;
+  width: calc(100% - 939px);
+}
+.up-panel button {
+  width: 43px;
+  margin-left: 20px;
+  background: url(../../img//myhc/rdwt/btn_search.png) no-repeat;
+}
+.up-panel #dept-tree {
   visibility: hidden;
+  margin-top: -5px;
+  height: 230px;
   overflow: auto;
   position: absolute;
-  width: 26.75%;
   z-index: 9999;
 }
-.date-input {
-  width: 20%;
-  border-radius: 3px;
-  margin: 10px 10px;
-  border: 0;
+.up-panel #dept-tree::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
 }
-.search-btn {
-  cursor: pointer;
-  margin-top: -5px;
+.up-panel #dept-tree::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
 }
+.up-panel #dept-tree::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
+}
+
+.view-body {
+  margin: 20px auto;
+  width: calc(100% - 40px);
+  height: calc(100% - 98px);
+}
+
 .view-body > div {
   width: 100%;
   height: calc(100% / 3 - 10px);
@@ -159,17 +169,20 @@ input {
   box-sizing: border-box;
   border-bottom: 1px solid #ced7e0;
 }
-.pic,
-.name {
+
+.div-left {
   float: left;
-  margin-left: 10px;
 }
-.pic2,
-.name2,
-.val2 {
+
+.div-right {
   float: right;
-  margin-right: 10px;
 }
+
+#xhyj .content > div,
+jcjzsk .content > div {
+  padding: 0 5px;
+}
+
 .val2 {
   color: #e45581;
 }
@@ -367,6 +380,7 @@ input {
   width: 100%;
   height: 50%;
   line-height: 40px;
+  padding: 0 5px;
 }
 .dort {
   display: inline-block;
@@ -381,7 +395,6 @@ input {
 }
 .val3 {
   color: #1a86d1;
-  float: right;
   margin-right: 5px;
 }
 .video {
@@ -460,7 +473,7 @@ select {
 }
 /*词云*/
 div.jqcloud {
-  font-family: '微软雅黑', '宋体', sans-serif;
+  font-family: "微软雅黑", "宋体", sans-serif;
   font-size: 10px;
   line-height: normal;
 }
@@ -570,12 +583,12 @@ div.jqcloud span {
 }
 
 .switch-two {
-  background: url('../../img/zxyp/jcj/common.png') no-repeat;
+  background: url("../../img/zxyp/jcj/common.png") no-repeat;
   background-size: 100% 100%;
 }
 
 .switch-three {
-  background: url('../../img/zxyp/jcj/backup.png') no-repeat;
+  background: url("../../img/zxyp/jcj/backup.png") no-repeat;
   background-size: 100% 100%;
 }
 

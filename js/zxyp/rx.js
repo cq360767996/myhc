@@ -9,77 +9,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   // 优秀案例数据
   var yxalData = [];
 
-  // 初始化查询栏
-  var initSearchBar = function() {
-    var lastMonth = sugon.getDate(-1);
-    search.deptId = "2014110416460086100000002942";
-    search.date1 = sugon.getDate(-7);
-    search.date2 = sugon.getDate(-2);
-    search.deptName = "南京市公安局";
-    searchRuler.deptId = "2014110416460086100000002942";
-    searchRuler.date1 = search.date1;
-    searchRuler.date2 = search.date2;
-    searchRuler.deptName = "南京市公安局";
-
-    $("#place").val("南京市公安局");
-    $("#placeCode").val("2014110416460086100000002942");
-    $("#date-input1").val(search.date1);
-    $("#date-input2").val(search.date2);
-    $("#date-input1").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    $("#date-input2").datetimepicker({
-      format: "yyyy-mm",
-      autoclose: true,
-      todayBtn: true,
-      startView: "year",
-      minView: "year",
-      maxView: "decade",
-      endDate: lastMonth,
-      language: "zh-CN"
-    });
-    // 设置下拉框宽度
-    $("#left-tree").css("width", $("#place").outerWidth());
-    //渲染树
-    $("#left-tree").treeview({
-      data: getTree(),
-      levels: 1,
-      onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
-        $("#left-tree").css("visibility", "hidden");
-      },
-      showCheckbox: false //是否显示多选
-    });
-  };
-
-  //获取树数据
-  function getTree() {
-    var treeData = [];
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.zxyp.rx.Tree
-      },
-      function(result) {
-        treeData = result.data;
-      }
-    );
-    return treeData;
-  }
-
-  // 绑定单位输入框点击事件
-  $("#place").bind("click", function() {
-    $("#left-tree").css("visibility", "visible");
-  });
-
   var initTxt = function() {
     sugon.requestJson(
       {
@@ -1007,9 +936,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   };
 
   $(".check").bind("click", function() {
-    if ($("#keywords").val()) {
-      sessionStorage.setItem("myKeywords", $("#keywords").val());
-      location.href = "index.html";
+    let keyword = $("#keywords").val();
+    if (keyword) {
+      location.hash = vipspa.stringify("myys/ysxq", { txt: keyword });
     }
   });
 
@@ -1262,6 +1191,14 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
   });
 
   var initView = function() {
+    searchRuler.deptId = $("#dept-id").val();
+    searchRuler.deptName = $("#dept-name").val();
+    searchRuler.date1 = $("#date1").val();
+    searchRuler.date2 = $("#date2").val();
+    search.deptId = $("#dept-id").val();
+    search.deptName = $("#dept-name").val();
+    search.date1 = $("#date1").val();
+    search.date2 = $("#date2").val();
     //左上文本
     initTxt();
     // 群众诉求量
@@ -1287,24 +1224,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
 
   var initPage = function() {
     // 初始化查询栏
-    initSearchBar();
-    // 分析报告下载
-    $(".view-header-right").bind("click", function() {
-      alert("分析报告下载...");
-    });
-    // 初始化页面
-    $(".search-btn").bind("click", function() {
-      search.deptId = $("#placeCode").val();
-      search.date1 = $("#date-input1").val();
-      search.date2 = $("#date-input2").val();
-      search.deptName = $("#place").val();
-      searchRuler = {};
-      searchRuler.deptId = $("#placeCode").val();
-      searchRuler.date1 = $("#date-input1").val();
-      searchRuler.date2 = $("#date-input2").val();
-      searchRuler.deptName = $("#place").val();
-      initView();
-    });
+    sugon.initSearchBar({ date1: -7, date2: -2, cb: initView });
     initView();
   };
 

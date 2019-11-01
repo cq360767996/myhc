@@ -1,18 +1,66 @@
 define([], function() {
-  var base = {};
+  var base = {
+    isPublished: false,
+    remotePath: "../",
+    localPath: "./static/json/"
+  };
 
-  base.isPublished = false;
-
-  base.remotePath = "../";
-  base.localPath = "./static/json/";
+  // 菜单权限配置文件
+  base.menuConfig = {
+    // 交警
+    jj: ["myzd", "jcj", "aj", "rx", "ylld", "zhfxbg"],
+    // 治安
+    za: ["myzd", "jcj", "ckfw", "jtsg", "rx", "ylld", "zhzs", "pjda", "zhfxbg"],
+    // 人口
+    rk: ["myzd", "jcj", "jtsg", "aj", "rx", "ylld", "zhzs", "pjda", "zhfxbg"],
+    // 出入境
+    crj: ["myzd", "jcj", "jtsg", "aj", "rx", "ylld", "zhzs", "pjda", "zhfxbg"],
+    // 巡特警
+    xtj: ["myzd", "ckfw", "jtsg", "aj", "rx", "ylld", "zhzs", "pjda", "zhfxbg"],
+    // 刑侦局
+    xzj: [
+      "myzd",
+      "jcj",
+      "ckfw",
+      "jtsg",
+      "rx",
+      "ylld",
+      "zhzs",
+      "pjda",
+      "zhfxbg"
+    ],
+    // 指挥中心
+    zhzx: [
+      "myzd",
+      "ckfw",
+      "jtsg",
+      "aj",
+      "rx",
+      "ylld",
+      "zhzs",
+      "pjda",
+      "zhfxbg"
+    ],
+    // 法制
+    fz: ["myzd", "ckfw", "jtsg", "rx", "ylld", "zhzs", "pjda", "zhfxbg"],
+    // 督查纪检
+    dcjj: ["myzd", "ylld", "zhzs", "pjda", "zhfxbg"],
+    // 交警大队
+    jjdd: ["myzd", "jcj", "ckfw", "aj", "ylld", "zhfxbg"],
+    // 派出所
+    pcs: ["myzd", "jtsg"],
+    // 警务站
+    jwz: ["myzd", "jtsg", "zhfxbg"]
+  };
 
   base.interFaces = {
-    myzs: {
-      //下拉树
-      Tree: {
+    common: {
+      getDeptTree: {
         localUrl: base.localPath + "Tree.json",
-        remoteUrl: base.remotePath + "myzs/getDwTree"
-      },
+        remoteUrl: base.remotePath + "common/getDeptTree"
+      }
+    },
+    myzs: {
       // 根据单位code获取单位id
       DeptId: { remoteUrl: base.remotePath + "myzs/getDwInfo" },
       // 加载左侧数据
@@ -239,11 +287,6 @@ define([], function() {
         localUrl: base.localPath + "Chart.json",
         remoteUrl: base.remotePath + "dwjx/getChartData"
       },
-      //下拉树
-      Tree: {
-        localUrl: base.localPath + "Tree.json",
-        remoteUrl: base.remotePath + "dwjx/getDwTree"
-      },
       //二级标签
       Tab2: {
         localUrl: base.localPath + "Tab2.json",
@@ -281,20 +324,10 @@ define([], function() {
         localUrl: base.localPath + "DataList.json",
         remoteUrl: base.remotePath + "myys/search"
       },
-      // 更新查询列表缓存
-      cacheDataList: {
-        localUrl: base.localPath + "DataList.json",
-        remoteUrl: base.remotePath + "myys/cacheSearch"
-      },
       //详情
       Detail: {
         localUrl: base.localPath + "Detail.json",
         remoteUrl: base.remotePath + "myys/getDetail"
-      },
-      // 缓存详情页
-      cacheDetail: {
-        localUrl: base.localPath + "Detail.json",
-        remoteUrl: base.remotePath + "myys/cacheDetail"
       },
       // 弹出详细信息
       PopDetail: {
@@ -306,11 +339,6 @@ define([], function() {
         localUrl: base.localPath + "Grid.json",
         remoteUrl: base.remotePath + "myys/getGrid"
       },
-      // 更新详情表格
-      cacheGrid: {
-        localUrl: base.localPath + "Grid.json",
-        remoteUrl: base.remotePath + "myys/cacheGrid"
-      },
       //详情表格
       saveKeyWord: {
         localUrl: base.localPath + "Grid.json",
@@ -318,10 +346,6 @@ define([], function() {
       }
     },
     rdwt: {
-      tree: {
-        localUrl: base.localPath + "Tree.json",
-        remoteUrl: base.remotePath + "myzs/getDwTree"
-      },
       getMidData: {
         localUrl: base.localPath + "rdwt/midData.json",
         remoteUrl: base.remotePath + "rdwt/getRdwtList"
@@ -421,10 +445,6 @@ define([], function() {
     },
     zxyp: {
       aj: {
-        Tree: {
-          localUrl: base.localPath + "Tree.json",
-          remoteUrl: base.remotePath + "zxyp/aj/getDwTree"
-        }, // 加载树
         getZbzs: {
           localUrl: base.localPath + "aj/zbzs.json",
           remoteUrl: base.remotePath + "zxyp/aj/zbzs"
@@ -471,11 +491,6 @@ define([], function() {
         } // 加载执行规范
       },
       jcj: {
-        // 加载树
-        Tree: {
-          localUrl: base.localPath + "Tree.json",
-          remoteUrl: base.remotePath + "zxyp/jcj/getDwTree"
-        },
         //左上文本
         Txt: {
           localUrl: base.localPath + "jcj/Txt.json",
@@ -660,11 +675,6 @@ define([], function() {
         }
       },
       ylld: {
-        // 加载树
-        Tree: {
-          localUrl: base.localPath + "Tree.json",
-          remoteUrl: base.remotePath + "zxyp/ylld/getDwTree"
-        },
         //左上文本
         Txt: {
           localUrl: base.localPath + "ylld/Txt.json",
@@ -752,11 +762,6 @@ define([], function() {
         }
       },
       rx: {
-        // 加载树
-        Tree: {
-          localUrl: base.localPath + "Tree.json",
-          remoteUrl: base.remotePath + "zxyp/rx/getDwTree"
-        },
         //左上文本
         Txt: {
           localUrl: base.localPath + "jcj/Txt.json",
@@ -885,11 +890,6 @@ define([], function() {
         }
       },
       jtsg: {
-        // 树结构
-        Tree: {
-          localUrl: base.localPath + "Tree.json",
-          remoteUrl: base.remotePath + "zxyp/jcj/getDwTree"
-        },
         // 左上指标
         left1: {
           localUrl: base.localPath + "jtsg/left1.json",
@@ -1457,7 +1457,7 @@ define([], function() {
       const $deptTree = $("#dept-tree");
       const $deptName = $("#dept-name");
       const $deptId = $("#dept-id");
-      base.request(base.interFaces.rdwt.tree).then(result => {
+      base.request(base.interFaces.common.getDeptTree).then(result => {
         //渲染树
         $deptTree.css("width", $deptName.outerWidth()).treeview({
           data: result.data,

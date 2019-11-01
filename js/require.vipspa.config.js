@@ -49,7 +49,25 @@ requirejs.config({
 });
 
 requirejs(["vipspa", "common"], function(vipspa, sugon) {
+  // 判断是否登录过
+  if (sessionStorage.getItem("token")) {
+    // 确认登录过，将token等信息写入缓存
+    sugon.identityInfo = {
+      token: sessionStorage.getItem("token"),
+      deptCode: sessionStorage.getItem("deptCode"),
+      role: sessionStorage.getItem("role"),
+      username: sessionStorage.getItem("username")
+    };
+  } else {
+    location.href = sugon.ispublished ? "/login" : "login.html";
+  }
+  // 路由配置
   let router = {
+    404: {
+      parent: "myhc",
+      templateUrl: "views/404.html",
+      controller: ""
+    },
     myzs: {
       parent: "myhc",
       templateUrl: "views/myhc/myzs.html",
@@ -175,52 +193,111 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/slhy/pjda.html",
       controller: "js/slhy/pjda.js"
     },
-    defaults: "myzs"
+    defaults: "404"
   };
-
+  // 菜单过滤器
+  let menuDispatch = sugon.menuConfig[sugon.identityInfo.role] || [];
+  // 过滤路由
+  Object.keys(router).forEach(key => {
+    menuDispatch.map(val => {
+      if (key.indexOf(val) > -1) {
+        delete router[key];
+      }
+    });
+  });
+  // 加载路由
   vipspa.start({
     view: "#ui-view",
     errorTemplateId: "#error",
     router: router
   });
-
+  // 控制tab的显示
+  handleTabDisplay();
+  // 加载左侧菜单
   loadMenu(location.hash);
+
+  // 浏览器历史记录改变时触发
+  window.addEventListener(
+    "popstate",
+    function(e) {
+      loadMenu(location.hash, false, true);
+    },
+    false
+  );
 
   // 菜单点击事件
   $(".menu").on("click", "div", function() {
     let $this = $(this),
       type = $this.attr("type");
-    location.hash = vipspa.stringify(type);
     loadMenu(type);
   });
-
-  // 浏览器历史记录改变时触发
-  window.addEventListener(
-    "popstate",
-    function() {
-      loadMenu(location.hash);
-    },
-    false
-  );
 
   // 上侧tab切换事件
   $(".tab > div").bind("click", function() {
     let $this = $(this),
       type = $this.attr("type");
-    location.hash = vipspa.stringify(type);
-    loadMenu(type);
+    loadMenu(type, true);
   });
 
-  // 加载菜单
-  function loadMenu(type) {
+  // 注销登录按钮事件
+  $(".exit").on("click", () => {
+    sessionStorage.clear();
+    location.href = sugon.ispublished ? "/login" : "login.html";
+  });
+
+  // 根据权限过滤菜单
+  function filterMenu(arr) {
+    return arr.filter(val => menuDispatch.indexOf(val) === -1);
+  }
+
+  // 控制菜单显示并改变hash值
+  function handleMenuDisplayAndToHash(arr, type, isTabClick, noHashChange) {
     let $menu = $(".menu"),
-      className = "header-tab-selected",
-      $tab = $(".tab > div").removeClass(className);
+      html = "";
+    if (isTabClick) {
+      arr.map((value, index) => {
+        let className = index === 0 ? `${value}-menu-hover` : `${value}-menu`;
+        html += `<div class="${className}" type="${value}"></div>`;
+      });
+      if (arr[0] && !noHashChange) {
+        location.hash = arr[0];
+      }
+    } else {
+      arr.map(val => {
+        let className =
+          type.indexOf(val) > -1 ? `${val}-menu-hover` : `${val}-menu`;
+        html += `<div class="${className}" type="${val}"></div>`;
+      });
+      if (!noHashChange) {
+        location.hash = type;
+      }
+    }
+    $menu.empty().append(html);
+  }
+
+  // 把tab的名称转换为菜单名称以便在路由中找到
+  function transformTab2Menu(type) {
+    if (["myhc", "zxyp", "slhy", "znbg"].indexOf(type) > -1) {
+      Object.keys(router).forEach(key => {
+        if (router[key].parent === type) {
+          type = key;
+        }
+      });
+    }
+    return type;
+  }
+
+  // 加载菜单
+  function loadMenu(type, isTabClick, noHashChange) {
+    let className = "header-tab-selected",
+      parent;
+    $(".tab > div").removeClass(className);
+    // 处理路由名称为tab名的情况
+    type = transformTab2Menu(type);
     for (let key in router) {
       if (type.indexOf(key) > -1) {
-        let parent = router[key].parent,
-          html = "",
-          arr = [];
+        parent = router[key].parent;
+        arr = [];
         switch (parent) {
           case "myhc":
             arr = ["myzs", "myjz", "rdwt", "dwjx", "myzd", "myys"];
@@ -235,34 +312,18 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
             arr = ["ywfxbg", "zhfxbg"];
             break;
         }
-        $(`.tab > div[type="${arr[0]}"]`).addClass(className);
-        arr.map(value => {
-          let className =
-            type.indexOf(value) > -1 ? value + "-menu-hover" : value + "-menu";
-          html += `<div class="${className}" type="${value}"></div>`;
-        });
-        $menu.empty().append(html);
-        return;
+        let filterArr = filterMenu(arr);
+        $(`.tab > div[type="${parent}"]`).addClass(className);
+        handleMenuDisplayAndToHash(filterArr, type, isTabClick, noHashChange);
+        break;
       }
     }
   }
 
-  if (sessionStorage.getItem("myKeywords")) {
-    var tempTxt = sessionStorage.getItem("myKeywords");
-    sessionStorage.removeItem("myKeywords");
-    location.hash = vipspa.stringify("myys/ysxq", { txt: tempTxt });
-  }
-
-  // 判断是否登录过
-  if (sessionStorage.getItem("token")) {
-    // 确认登录过，将token等信息写入缓存
-    sugon.identityInfo = {
-      token: sessionStorage.getItem("token"),
-      deptCode: sessionStorage.getItem("deptCode"),
-      role: sessionStorage.getItem("role"),
-      username: sessionStorage.getItem("username")
-    };
-  } else {
-    location.href = sugon.ispublished ? "/login" : "login.html";
+  // 处理tab显示
+  function handleTabDisplay() {
+    ["za", "rk", "crj", "xtj", "xzj", "zhzx", "fz", "dcjj"].indexOf(
+      sugon.identityInfo.role
+    ) > -1 && $("div[type=slhy]").hide();
   }
 });

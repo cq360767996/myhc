@@ -916,7 +916,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "POST",
-          url: sugon.interFaces.zxyp.aj.Tree
+          url: sugon.interFaces.common.getDeptTree
         },
         function(result) {
           treeData = result.data;

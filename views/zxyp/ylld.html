@@ -1,34 +1,13 @@
 <link rel="stylesheet" href="../../css/zxyp/ylld.css" />
 
-<div class="view-header">
-  <div class="view-header-left">
-    <input type="text" id="place" placeholder="市局/分局" readonly />
-    <input type="hidden" id="placeCode" />
-    <input type="hidden" id="tempID" />
-    <input type="hidden" id="tempTYPE" />
-    <div id="left-tree"></div>
-    <input
-      id="date-input1"
-      class="date-input"
-      placeholder="时间"
-      type="text"
-      readonly="readonly"
-    />
-    <input
-      id="date-input2"
-      class="date-input"
-      placeholder="时间"
-      type="text"
-      readonly="readonly"
-    />
-    <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
-  </div>
-
-  <div class="view-header-right">
-    <img src="../../img/zxyp/aj/download.png" />
-    <span>分析报告下载</span>
-  </div>
-</div>
+<header class="up-panel">
+  <input id="dept-name" placeholder="市局/分局" readonly />
+  <input type="hidden" id="dept-id" disabled />
+  <input id="date1" placeholder="时间" readonly />
+  <input id="date2" placeholder="时间" readonly />
+  <button class="search-btn"></button>
+  <div id="dept-tree"></div>
+</header>
 
 <div class="view-body">
   <div>
@@ -96,13 +75,11 @@
               <div>社会治安</div>
               <div class="pop-amount">121</div>
             </div>
-            <div class="chart-body" id="mid1-left">
-            </div>
+            <div class="chart-body" id="mid1-left"></div>
           </div>
           <div>
             <div class="chart-title">问题分析</div>
-            <div class="chart-body" id="mid1-right">
-            </div>
+            <div class="chart-body" id="mid1-right"></div>
           </div>
         </div>
       </div>
@@ -145,9 +122,9 @@
           <div>
             <div class="chart-title">业务分析</div>
             <div class="chart-pop chart-pop2">
-                <div><img src="../../img/zxyp/ylld/gadw.png" /></div>
-                <div>公安队伍</div>
-                <div class="pop-amount"></div>
+              <div><img src="../../img/zxyp/ylld/gadw.png" /></div>
+              <div>公安队伍</div>
+              <div class="pop-amount"></div>
             </div>
             <div class="chart-body" id="mid2-left"></div>
           </div>
@@ -227,13 +204,10 @@
             <select id="type2"></select>
           </div>
         </div>
-        <div class="content right3">
-        </div>
+        <div class="content right3"></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="pop-container">
-  
-</div>
+<div class="pop-container"></div>

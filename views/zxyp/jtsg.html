@@ -1,32 +1,13 @@
 <link rel="stylesheet" href="../../css/zxyp/jtsg.css" />
-<div class="view-header">
-  <div class="view-header-left">
-    <input type="text" id="place" placeholder="市局/分局" readonly />
-    <input type="hidden" id="placeCode" />
-    <input type="hidden" id="tempID" />
-    <input type="hidden" id="tempTYPE" />
-    <div id="left-tree"></div>
-    <input
-      id="date-input1"
-      class="date-input"
-      placeholder="时间"
-      type="text"
-      readonly="readonly"
-    />
-    <input
-      id="date-input2"
-      class="date-input"
-      placeholder="时间"
-      type="text"
-      readonly="readonly"
-    />
-    <img src="../../img/myhc/rdwt/btn_search.png" class="search-btn" />
-  </div>
-  <div class="view-header-right">
-    <img src="../../img/zxyp/aj/download.png" />
-    <span>分析报告下载</span>
-  </div>
-</div>
+
+<header class="up-panel">
+  <input id="dept-name" placeholder="市局/分局" readonly />
+  <input type="hidden" id="dept-id" disabled />
+  <input id="date1" placeholder="时间" readonly />
+  <input id="date2" placeholder="时间" readonly />
+  <button class="search-btn"></button>
+  <div id="dept-tree"></div>
+</header>
 <div class="view-body">
   <div class="view-col view-left-col">
     <div class="view-left-col-top border-model">

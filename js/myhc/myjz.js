@@ -131,7 +131,7 @@ requirejs(["common"], function(sugon) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.myjz.Tree,
+        url: sugon.interFaces.common.getDeptTree,
         data: { type: type },
         async: isAsync
       },
