@@ -9,10 +9,12 @@ requirejs(
       sqfxData = []; // 诉求分析数据;
     let initList = function() {
       let date = "";
+      let { deptCode, role } = sugon.identityInfo;
       sugon.requestJson(
         {
           type: "POST",
           url: sugon.interFaces.common.getDeptTree,
+          data: { deptCode, role },
           async: false
         },
         function(result) {
@@ -45,11 +47,12 @@ requirejs(
     //获取树数据
     function getTree(param, isAsync) {
       let treeData = [];
+      let { deptCode, role } = sugon.identityInfo;
       sugon.requestJson(
         {
           type: "POST",
           url: sugon.interFaces.common.getDeptTree,
-          data: { date: param },
+          data: { deptCode, role, date: param },
           async: isAsync
         },
         function(result) {

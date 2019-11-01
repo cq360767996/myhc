@@ -82,11 +82,12 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
   //获取树数据
   function getTree() {
     var treeData = [];
+    let { deptCode, role } = sugon.identityInfo;
     sugon.requestJson(
       {
         type: "POST",
         url: sugon.interFaces.common.getDeptTree,
-        data: { type: 1 },
+        data: { deptCode, role },
         async: false
       },
       function(result) {
@@ -773,7 +774,9 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
         async: true
       },
       function(result) {
-        if (result.timestamp == timestamp) initContent1(result.data1);
+        if (result.timestamp == timestamp || sugon.isPublished === false) {
+          initContent1(result.data1);
+        }
       }
     );
     sugon.requestJson(
@@ -792,7 +795,9 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
         async: true
       },
       function(result) {
-        if (result.timestamp == timestamp) initContent2(result.data2);
+        if (result.timestamp == timestamp || sugon.isPublished === false) {
+          initContent2(result.data2);
+        }
       }
     );
     sugon.requestJson(
@@ -811,7 +816,9 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
         async: true
       },
       function(result) {
-        if (result.timestamp == timestamp) initContent3(result.data3);
+        if (result.timestamp == timestamp || sugon.isPublished === false) {
+          initContent3(result.data3);
+        }
       }
     );
     sugon.requestJson(
@@ -830,7 +837,9 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
         async: true
       },
       function(result) {
-        if (result.timestamp == timestamp) initContent4(result.data4);
+        if (result.timestamp == timestamp || sugon.isPublished === false) {
+          initContent4(result.data4);
+        }
       }
     );
   };
@@ -856,7 +865,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
         async: true
       },
       function(result) {
-        if (result.timestamp == timestamp) {
+        if (result.timestamp == timestamp || sugon.isPublished === false) {
           timestamp = new Date().getTime();
           if (result.data.length == 0) {
             navigorData.pop();

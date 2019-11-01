@@ -1441,7 +1441,11 @@ define([], function() {
         const $deptTree = $("#dept-tree");
         const $deptName = $("#dept-name");
         const $deptId = $("#dept-id");
-        this.request(this.interFaces.common.getDeptTree).then(result => {
+        let { deptCode, role } = sugon.identityInfo;
+        this.request(this.interFaces.common.getDeptTree, {
+          deptCode,
+          role
+        }).then(result => {
           //渲染树
           $deptTree.css("width", $deptName.outerWidth()).treeview({
             data: result.data,

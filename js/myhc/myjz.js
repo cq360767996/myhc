@@ -127,12 +127,12 @@ requirejs(["common"], function(sugon) {
   //获取树数据
   function getTree(type, isAsync) {
     var treeData = [];
-
+    let { deptCode, role } = sugon.identityInfo;
     sugon.requestJson(
       {
         type: "POST",
         url: sugon.interFaces.common.getDeptTree,
-        data: { type: type },
+        data: { deptCode, role, type: type },
         async: isAsync
       },
       function(result) {

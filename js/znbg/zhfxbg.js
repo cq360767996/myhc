@@ -434,10 +434,12 @@ requirejs(
     //获取树数据
     function getTree() {
       var treeData = [];
+      let { deptCode, role } = sugon.identityInfo;
       sugon.requestJson(
         {
           type: "POST",
-          url: sugon.interFaces.common.getDeptTree
+          url: sugon.interFaces.common.getDeptTree,
+          data: { deptCode, role }
         },
         function(result) {
           treeData = result.data;
