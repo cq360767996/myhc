@@ -7,11 +7,11 @@ html {
   overflow: auto;
   min-width: 1600px;
   min-height: 900px;
-  font-family: '微软雅黑' !important;
+  font-family: "微软雅黑" !important;
   color: #89a3c6;
 }
 
-.logo {
+.main-header {
   width: 100%;
   height: 70px;
   line-height: 70px;
@@ -19,13 +19,13 @@ html {
   overflow: hidden;
 }
 
-#logo img {
+.logo img {
   position: relative;
   top: 0px;
   left: 20px;
 }
 
-.logo > div {
+.main-header > div {
   float: left;
 }
 
@@ -33,7 +33,7 @@ html {
   float: left;
   width: 100px;
   height: calc(100% - 70px);
-  background: url('../img/left_menu_bg.png') no-repeat;
+  background: url("../img/left_menu_bg.png") no-repeat;
   background-size: 100% 100%;
 }
 
@@ -53,7 +53,7 @@ html {
   float: left;
   width: calc(100% - 100px);
   height: calc(100% - 70px);
-  background: url('../img/myhc/hc_bg.jpg') no-repeat;
+  background: url("../img/myhc/hc_bg.jpg") no-repeat;
   background-size: 100% 100%;
   position: relative;
   overflow: hidden;
@@ -74,114 +74,114 @@ html {
 }
 
 .myzs-menu {
-  background: url('../img/myhc/menu1.png') no-repeat;
+  background: url("../img/myhc/menu1.png") no-repeat;
 }
 
 .myjz-menu {
-  background: url('../img/myhc/menu2.png') no-repeat;
+  background: url("../img/myhc/menu2.png") no-repeat;
 }
 
 .rdwt-menu {
-  background: url('../img/myhc/menu3.png') no-repeat;
+  background: url("../img/myhc/menu3.png") no-repeat;
 }
 
 .dwjx-menu {
-  background: url('../img/myhc/menu4.png') no-repeat;
+  background: url("../img/myhc/menu4.png") no-repeat;
 }
 
 .myzd-menu {
-  background: url('../img/myhc/menu5.png') no-repeat;
+  background: url("../img/myhc/menu5.png") no-repeat;
 }
 
 .myys-menu {
-  background: url('../img/myhc/menu6.png') no-repeat;
+  background: url("../img/myhc/menu6.png") no-repeat;
 }
 
 .myzs-menu-hover {
-  background: url('../img/myhc/menu1_hover.png') no-repeat;
+  background: url("../img/myhc/menu1_hover.png") no-repeat;
 }
 
 .myjz-menu-hover {
-  background: url('../img/myhc/menu2_hover.png') no-repeat;
+  background: url("../img/myhc/menu2_hover.png") no-repeat;
 }
 
 .rdwt-menu-hover {
-  background: url('../img/myhc/menu3_hover.png') no-repeat;
+  background: url("../img/myhc/menu3_hover.png") no-repeat;
 }
 
 .dwjx-menu-hover {
-  background: url('../img/myhc/menu4_hover.png') no-repeat;
+  background: url("../img/myhc/menu4_hover.png") no-repeat;
 }
 
 .myzd-menu-hover {
-  background: url('../img/myhc/menu5_hover.png') no-repeat;
+  background: url("../img/myhc/menu5_hover.png") no-repeat;
 }
 
 .myys-menu-hover {
-  background: url('../img/myhc/menu6_hover.png') no-repeat;
+  background: url("../img/myhc/menu6_hover.png") no-repeat;
 }
 
 .jcj-menu {
-  background: url('../img/zxyp/menu1_normal.png') no-repeat;
+  background: url("../img/zxyp/menu1_normal.png") no-repeat;
 }
 .ckfw-menu {
-  background: url('../img/zxyp/menu2_normal.png') no-repeat;
+  background: url("../img/zxyp/menu2_normal.png") no-repeat;
 }
 .jtsg-menu {
-  background: url('../img/zxyp/menu3_normal.png') no-repeat;
+  background: url("../img/zxyp/menu3_normal.png") no-repeat;
 }
 .aj-menu {
-  background: url('../img/zxyp/menu4_normal.png') no-repeat;
+  background: url("../img/zxyp/menu4_normal.png") no-repeat;
 }
 .rx-menu {
-  background: url('../img/zxyp/menu5_normal.png') no-repeat;
+  background: url("../img/zxyp/menu5_normal.png") no-repeat;
 }
 .ylld-menu {
-  background: url('../img/zxyp/menu6_normal.png') no-repeat;
+  background: url("../img/zxyp/menu6_normal.png") no-repeat;
 }
 .jcj-menu-hover {
-  background: url('../img/zxyp/menu1_hover.png') no-repeat;
+  background: url("../img/zxyp/menu1_hover.png") no-repeat;
 }
 .ckfw-menu-hover {
-  background: url('../img/zxyp/menu2_hover.png') no-repeat;
+  background: url("../img/zxyp/menu2_hover.png") no-repeat;
 }
 .jtsg-menu-hover {
-  background: url('../img/zxyp/menu3_hover.png') no-repeat;
+  background: url("../img/zxyp/menu3_hover.png") no-repeat;
 }
 .aj-menu-hover {
-  background: url('../img/zxyp/menu4_hover.png') no-repeat;
+  background: url("../img/zxyp/menu4_hover.png") no-repeat;
 }
 .rx-menu-hover {
-  background: url('../img/zxyp/menu5_hover.png') no-repeat;
+  background: url("../img/zxyp/menu5_hover.png") no-repeat;
 }
 .ylld-menu-hover {
-  background: url('../img/zxyp/menu6_hover.png') no-repeat;
+  background: url("../img/zxyp/menu6_hover.png") no-repeat;
 }
 
 .ywfxbg-menu {
-  background: url('../img/znbg/ywfxbg.png') no-repeat;
+  background: url("../img/znbg/ywfxbg.png") no-repeat;
 }
 .zhfxbg-menu {
-  background: url('../img/znbg/zhfxbg.png') no-repeat;
+  background: url("../img/znbg/zhfxbg.png") no-repeat;
 }
 .ywfxbg-menu-hover {
-  background: url('../img/znbg/ywfxbg_hover.png') no-repeat;
+  background: url("../img/znbg/ywfxbg_hover.png") no-repeat;
 }
 .zhfxbg-menu-hover {
-  background: url('../img/znbg/zhfxbg_hover.png') no-repeat;
+  background: url("../img/znbg/zhfxbg_hover.png") no-repeat;
 }
 
 .zhzs-menu {
-  background: url('../img/slhy/zhzs_normal.png') no-repeat;
+  background: url("../img/slhy/zhzs_normal.png") no-repeat;
 }
 .pjda-menu {
-  background: url('../img/slhy/pjda_normal.png') no-repeat;
+  background: url("../img/slhy/pjda_normal.png") no-repeat;
 }
 .zhzs-menu-hover {
-  background: url('../img/slhy/zhzs_hover.png') no-repeat;
+  background: url("../img/slhy/zhzs_hover.png") no-repeat;
 }
 .pjda-menu-hover {
-  background: url('../img/slhy/pjda_hover.png') no-repeat;
+  background: url("../img/slhy/pjda_hover.png") no-repeat;
 }
 
 .tab {
@@ -217,7 +217,7 @@ html {
 
 #gotoMap {
   cursor: pointer;
-  background: url('../img/right_pannel_back.png') no-repeat;
+  background: url("../img/right_pannel_back.png") no-repeat;
   background-position-y: 62%;
 }
 
@@ -393,5 +393,5 @@ html {
   left: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  background: url('../img/znbg/loading.gif') no-repeat;
+  background: url("../img/znbg/loading.gif") no-repeat;
 }

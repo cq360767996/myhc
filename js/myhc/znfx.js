@@ -88,7 +88,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tree,
+        url: sugon.interFaces.myhc.dwjx.Tree,
         data: { date1: date1, date2: date2 },
         async: true
       },
@@ -132,7 +132,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tab2,
+        url: sugon.interFaces.myhc.dwjx.Tab2,
         data: { navigor: JSON.stringify(navigorData) },
         async: true
       },
@@ -175,7 +175,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tab2,
+        url: sugon.interFaces.myhc.dwjx.Tab2,
         data: { navigor: JSON.stringify(navigorData) },
         async: true
       },
@@ -214,7 +214,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tab2,
+        url: sugon.interFaces.myhc.dwjx.Tab2,
         data: { navigor: JSON.stringify(navigorData) },
         async: true
       },
@@ -255,7 +255,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tab2,
+        url: sugon.interFaces.myhc.dwjx.Tab2,
         data: { navigor: JSON.stringify(navigorData) },
         async: true
       },
@@ -296,7 +296,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Tab,
+        url: sugon.interFaces.myhc.dwjx.Tab,
         data: { navigor: JSON.stringify(array) },
         async: false
       },
@@ -628,7 +628,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.Chart,
+        url: sugon.interFaces.myhc.dwjx.Chart,
         data: {
           navigor: JSON.stringify(array),
           date1: $("#date1").val(),
@@ -699,7 +699,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         sugon.requestJson(
           {
             type: "POST",
-            url: sugon.interFaces.dwjx.Keywords,
+            url: sugon.interFaces.myhc.dwjx.Keywords,
             data: { txt: $("#keywords").val() },
             async: true
           },

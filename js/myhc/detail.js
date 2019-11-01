@@ -123,13 +123,17 @@ requirejs(["common"], function(sugon) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.myys.Detail,
+        url: sugon.interFaces.myhc.myys.Detail,
         data: { id: param[0] },
         async: false
       },
       function(result) {
-        sugon.backFill(result.data1);
-        sugon.backFill(result.data2);
+        Object.keys(result.data1).forEach(key => {
+          $("#" + key).html(result.data1[key]);
+        });
+        Object.keys(result.data2).forEach(key => {
+          $("#" + key).html(result.data2[key]);
+        });
 
         for (var i = 0; i < result.data3.length; i++) {
           $(".tab_pannel").append(
@@ -149,7 +153,7 @@ requirejs(["common"], function(sugon) {
           sugon.requestJson(
             {
               type: "POST",
-              url: sugon.interFaces.myys.Grid,
+              url: sugon.interFaces.myhc.myys.Grid,
               data: { sfzh: param[0], dhs: $("#tel").html(), type: this.id },
               async: false
             },
@@ -224,7 +228,7 @@ requirejs(["common"], function(sugon) {
                     sugon.requestJson(
                       {
                         type: "POST",
-                        url: sugon.interFaces.myys.PopDetail,
+                        url: sugon.interFaces.myhc.myys.PopDetail,
                         data: { id: id, myd: myd, type: type },
                         async: false
                       },

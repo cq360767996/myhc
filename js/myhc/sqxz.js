@@ -736,7 +736,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.OtherCharts,
+        url: sugon.interFaces.myhc.dwjx.OtherCharts,
         data: {
           type: "sqxz",
           nav: JSON.stringify(navigorData),
@@ -757,7 +757,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.OtherCharts,
+        url: sugon.interFaces.myhc.dwjx.OtherCharts,
         data: {
           type: "sqxz",
           nav: JSON.stringify(navigorData),
@@ -778,7 +778,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.OtherCharts,
+        url: sugon.interFaces.myhc.dwjx.OtherCharts,
         data: {
           type: "sqxz",
           nav: JSON.stringify(navigorData),
@@ -799,7 +799,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.OtherCharts,
+        url: sugon.interFaces.myhc.dwjx.OtherCharts,
         data: {
           type: "sqxz",
           nav: JSON.stringify(navigorData),
@@ -831,7 +831,7 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.dwjx.TopChart,
+        url: sugon.interFaces.myhc.dwjx.TopChart,
         data: {
           type: "sqxz",
           nav: JSON.stringify(navigorData),

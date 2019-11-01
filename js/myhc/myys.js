@@ -1,7 +1,7 @@
 requirejs(["common"], function(sugon) {
   var initWord = function() {
     sugon.requestJson(
-      { type: "POST", url: sugon.interFaces.myys.HotWords, async: false },
+      { type: "POST", url: sugon.interFaces.myhc.myys.HotWords, async: false },
       function(result) {
         for (var i = 0; i < result.data.length; i++) {
           $(".hotWord").append(
@@ -18,7 +18,11 @@ requirejs(["common"], function(sugon) {
 
   var initSearchList = function() {
     sugon.requestJson(
-      { type: "POST", url: sugon.interFaces.myys.SearchList, async: false },
+      {
+        type: "POST",
+        url: sugon.interFaces.myhc.myys.SearchList,
+        async: false
+      },
       function(result) {
         $(".hotSearch .list").empty();
         for (var i = 0; i < result.data.length; i++) {

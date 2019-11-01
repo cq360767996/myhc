@@ -15,8 +15,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         data: { id: id, search: searchRuler }
       },
       function(result) {
-        sugon.backFill(result.data1);
-        sugon.backFill(result.data2);
+        Object.keys(result.data1).forEach(key => {
+          $("#" + key).html(result.data1[key]);
+        });
+        Object.keys(result.data2).forEach(key => {
+          $("#" + key).html(result.data2[key]);
+        });
         $("#typeList").empty();
         for (var i = 0; i < result.data3.length; i++) {
           $("#typeList").append(

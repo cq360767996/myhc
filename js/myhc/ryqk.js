@@ -64,16 +64,16 @@ requirejs(["common"], function(sugon) {
     };
     switch (col) {
       case 0:
-        ajaxObj.url = sugon.interFaces.rdwt.getJcj;
+        ajaxObj.url = sugon.interFaces.myhc.rdwt.getJcj;
         break;
       case 1:
-        ajaxObj.url = sugon.interFaces.rdwt.getCkfw;
+        ajaxObj.url = sugon.interFaces.myhc.rdwt.getCkfw;
         break;
       case 2:
-        ajaxObj.url = sugon.interFaces.rdwt.getAj;
+        ajaxObj.url = sugon.interFaces.myhc.rdwt.getAj;
         break;
       case 3:
-        ajaxObj.url = sugon.interFaces.rdwt.getMjsxl;
+        ajaxObj.url = sugon.interFaces.myhc.rdwt.getMjsxl;
         break;
     }
     sugon.requestJson(ajaxObj, function(result) {

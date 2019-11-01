@@ -25,7 +25,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     });
     return new Promise((resolve, reject) => {
       sugon
-        .request(sugon.interFaces.rdwt.getLeft, {
+        .request(sugon.interFaces.myhc.rdwt.getLeft, {
           date1,
           date2,
           deptId,
@@ -114,7 +114,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     let { date1, date2, deptId } = searchParams;
     return new Promise(async (resolve, reject) => {
       await sugon
-        .request(sugon.interFaces.rdwt.getRight, { date1, date2, deptId })
+        .request(sugon.interFaces.myhc.rdwt.getRight, { date1, date2, deptId })
         .then(result => {
           rightData = result.data;
           renderRightPanel();
@@ -165,7 +165,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
       });
     });
     sugon
-      .request(sugon.interFaces.rdwt.getPopMenu, {
+      .request(sugon.interFaces.myhc.rdwt.getPopMenu, {
         date1,
         date2,
         deptId,
@@ -220,7 +220,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     let { date1, date2, deptId } = searchParams,
       data = rightData.slice(0, 9);
     sugon
-      .request(sugon.interFaces.rdwt.getPreview, {
+      .request(sugon.interFaces.myhc.rdwt.getPreview, {
         date1,
         date2,
         deptId,
@@ -558,7 +558,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
       });
       if (btnName === "发布") {
         sugon
-          .request(sugon.interFaces.rdwt.publish, {
+          .request(sugon.interFaces.myhc.rdwt.publish, {
             date1,
             date2,
             deptId,

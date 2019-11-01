@@ -152,7 +152,7 @@ requirejs(["common"], function(sugon) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.myjz.bmList,
+        url: sugon.interFaces.myhc.myjz.bmList,
         data: { code: code, time1: time1, time2: time2, type: type },
         async: false
       },
@@ -187,7 +187,7 @@ requirejs(["common"], function(sugon) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.myjz.List,
+        url: sugon.interFaces.myhc.myjz.List,
         data: { code: code, time1: time1, time2: time2, type: type },
         async: false
       },

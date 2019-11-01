@@ -13,7 +13,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   sugon.requestJson(
     {
       type: "POST",
-      url: sugon.interFaces.myjz.Window2,
+      url: sugon.interFaces.myhc.myjz.Window2,
       data: {
         type: $("#tempTYPE").val(),
         id: $("#tempID").val(),

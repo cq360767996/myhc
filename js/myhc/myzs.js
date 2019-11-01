@@ -10,7 +10,11 @@ requirejs(
     let initList = function() {
       let date = "";
       sugon.requestJson(
-        { type: "POST", url: sugon.interFaces.myjz.Date, async: false },
+        {
+          type: "POST",
+          url: sugon.interFaces.common.getDeptTree,
+          async: false
+        },
         function(result) {
           date = result.data;
         }
@@ -44,7 +48,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "POST",
-          url: sugon.interFaces.myzs.Tree,
+          url: sugon.interFaces.common.getDeptTree,
           data: { date: param },
           async: isAsync
         },
@@ -74,7 +78,7 @@ requirejs(
           initLevelLayer();
         } else {
           sugon
-            .request(sugon.interFaces.myzs.DeptId, {
+            .request(sugon.interFaces.myhc.myzs.DeptId, {
               deptId: $("#placeCode").val()
             })
             .then(result => {
@@ -117,7 +121,7 @@ requirejs(
           initLevelLayer();
         } else {
           sugon
-            .request(sugon.interFaces.myzs.DeptId, {
+            .request(sugon.interFaces.myhc.myzs.DeptId, {
               deptId: $("#placeCode").val()
             })
             .then(result => {
@@ -147,7 +151,7 @@ requirejs(
         date2: $("#date2").val()
       };
       let ajaxObj = {
-        url: sugon.interFaces.myzs.getLeftData,
+        url: sugon.interFaces.myhc.myzs.getLeftData,
         type: "post",
         data: condition,
         async: true
@@ -168,7 +172,7 @@ requirejs(
         date2: $("#date2").val()
       };
       let ajaxObj = {
-        url: sugon.interFaces.myzs.getRightMidData,
+        url: sugon.interFaces.myhc.myzs.getRightMidData,
         type: "post",
         data: condition,
         async: true
@@ -252,7 +256,7 @@ requirejs(
         date2: $("#date2").val()
       };
       let ajaxObj = {
-        url: sugon.interFaces.myzs.getRightData,
+        url: sugon.interFaces.myhc.myzs.getRightData,
         type: "post",
         data: condition,
         async: true
@@ -293,7 +297,7 @@ requirejs(
         date2: $("#date2").val()
       };
       let ajaxObj = {
-        url: sugon.interFaces.myzs.getZbzc,
+        url: sugon.interFaces.myhc.myzs.getZbzc,
         type: "post",
         data: condition,
         async: true
@@ -330,7 +334,7 @@ requirejs(
         date2: $("#date2").val()
       };
       let ajaxObj = {
-        url: sugon.interFaces.myzs.getZfgxl,
+        url: sugon.interFaces.myhc.myzs.getZfgxl,
         type: "post",
         data: condition,
         async: true
@@ -459,7 +463,7 @@ requirejs(
         date2: $("#date2").val()
       };
       let ajaxObj = {
-        url: sugon.interFaces.myzs.getDwqk,
+        url: sugon.interFaces.myhc.myzs.getDwqk,
         type: "post",
         data: condition,
         async: true
@@ -791,7 +795,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getMyd,
+          url: sugon.interFaces.myhc.myzs.getMyd,
           data: {
             deptId: $("#placeCode").val(),
             date1: $("#date1").val(),
@@ -881,7 +885,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getSjlr,
+          url: sugon.interFaces.myhc.myzs.getSjlr,
           data: { date: $("#pop-date1").val() },
           async: true
         },
@@ -903,8 +907,8 @@ requirejs(
         {
           type: "post",
           url: isRest
-            ? sugon.interFaces.myzs.resetXspz
-            : sugon.interFaces.myzs.getXspz,
+            ? sugon.interFaces.myhc.myzs.resetXspz
+            : sugon.interFaces.myhc.myzs.getXspz,
           data: { date: $("#pop-date2").val() },
           async: true
         },
@@ -923,8 +927,8 @@ requirejs(
         {
           type: "post",
           url: isRest
-            ? sugon.interFaces.myzs.resetZspz
-            : sugon.interFaces.myzs.getZspz,
+            ? sugon.interFaces.myhc.myzs.resetZspz
+            : sugon.interFaces.myhc.myzs.getZspz,
           data: {
             deptId: $("#pop-dept-id").val(),
             date1: $("#pop-date3").val(),
@@ -986,7 +990,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.submitSjlr,
+          url: sugon.interFaces.myhc.myzs.submitSjlr,
           data: condition,
           async: true
         },
@@ -1020,7 +1024,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.submitXspz,
+          url: sugon.interFaces.myhc.myzs.submitXspz,
           data: condition,
           async: true
         },
@@ -1052,7 +1056,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.submitZspz,
+          url: sugon.interFaces.myhc.myzs.submitZspz,
           data: condition,
           async: true
         },
@@ -1080,7 +1084,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.calcZspz,
+          url: sugon.interFaces.myhc.myzs.calcZspz,
           data: condition,
           async: true
         },
@@ -1279,7 +1283,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getZbzcDetail,
+          url: sugon.interFaces.myhc.myzs.getZbzcDetail,
           data: {
             type: index,
             deptId: $("#placeCode").val(),
@@ -1527,7 +1531,7 @@ requirejs(
           sugon.requestJson(
             {
               type: "post",
-              url: sugon.interFaces.myzs.DeptId,
+              url: sugon.interFaces.myhc.myzs.DeptId,
               async: false
             },
             function(result) {
@@ -1656,7 +1660,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "POST",
-          url: sugon.interFaces.myzs.DeptId,
+          url: sugon.interFaces.myhc.myzs.DeptId,
           async: false,
           data: { deptCode: deptCode }
         },
@@ -1692,7 +1696,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "POST",
-          url: sugon.interFaces.myzs.DeptId,
+          url: sugon.interFaces.myhc.myzs.DeptId,
           async: false,
           data: { deptCode: deptCode }
         },
@@ -1705,7 +1709,7 @@ requirejs(
         {
           type: "post",
           async: true,
-          url: sugon.interFaces.myzs.getPcsZb,
+          url: sugon.interFaces.myhc.myzs.getPcsZb,
           data: {
             deptId: $("#placeCode").val(),
             date1: $("#date1").val(),
@@ -1767,7 +1771,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "POST",
-          url: sugon.interFaces.myzs.DeptId,
+          url: sugon.interFaces.myhc.myzs.DeptId,
           async: false,
           data: { deptCode: deptCode }
         },
@@ -1868,7 +1872,7 @@ requirejs(
               sugon.requestJson(
                 {
                   type: "POST",
-                  url: sugon.interFaces.myzs.DeptId,
+                  url: sugon.interFaces.myhc.myzs.DeptId,
                   async: false,
                   data: { deptCode: deptCode }
                 },
@@ -1900,7 +1904,7 @@ requirejs(
         type: $(".search-yw2").val()
       };
       sugon
-        .request(sugon.interFaces.myzs.getYlldMapData, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldMapData, condition)
         .then(result => {
           $(".search-down-panel > button")
             .removeAttr("class")
@@ -2059,7 +2063,7 @@ requirejs(
                     sugon.requestJson(
                       {
                         type: "POST",
-                        url: sugon.interFaces.myzs.DeptId,
+                        url: sugon.interFaces.myhc.myzs.DeptId,
                         async: false
                       },
                       function(result) {
@@ -2208,7 +2212,7 @@ requirejs(
               sugon.requestJson(
                 {
                   type: "POST",
-                  url: sugon.interFaces.myzs.DeptId,
+                  url: sugon.interFaces.myhc.myzs.DeptId,
                   async: false,
                   data: { deptCode: pcsCode }
                 },
@@ -2240,7 +2244,7 @@ requirejs(
         type: $(".search-yw2").val()
       };
       sugon
-        .request(sugon.interFaces.myzs.getYlldMapData, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldMapData, condition)
         .then(result => {
           $(".search-down-panel > button")
             .removeAttr("class")
@@ -2315,7 +2319,7 @@ requirejs(
                     sugon.requestJson(
                       {
                         type: "POST",
-                        url: sugon.interFaces.myzs.DeptId,
+                        url: sugon.interFaces.myhc.myzs.DeptId,
                         async: false,
                         data: { deptId: deptId }
                       },
@@ -2451,7 +2455,7 @@ requirejs(
             sugon.requestJson(
               {
                 type: "POST",
-                url: sugon.interFaces.myzs.DeptId,
+                url: sugon.interFaces.myhc.myzs.DeptId,
                 async: false,
                 data: { deptCode: zrqCode, isZrq2Pcs: true }
               },
@@ -2534,7 +2538,7 @@ requirejs(
             sugon.requestJson(
               {
                 type: "POST",
-                url: sugon.interFaces.myzs.DeptId,
+                url: sugon.interFaces.myhc.myzs.DeptId,
                 async: false,
                 data: { deptId: deptId }
               },
@@ -2652,7 +2656,7 @@ requirejs(
         sugon.requestJson(
           {
             type: "post",
-            url: sugon.interFaces.myzs.getMapCount,
+            url: sugon.interFaces.myhc.myzs.getMapCount,
             async: false,
             data: {
               deptId: $("#placeCode").val(),
@@ -2701,7 +2705,7 @@ requirejs(
         sugon.requestJson(
           {
             type: "post",
-            url: sugon.interFaces.myzs.getDetailMapData,
+            url: sugon.interFaces.myhc.myzs.getDetailMapData,
             async: false,
             data: {
               deptId: $("#placeCode").val(),
@@ -2926,7 +2930,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getCkMapData,
+          url: sugon.interFaces.myhc.myzs.getCkMapData,
           async: false,
           data: {
             deptCode: deptCode,
@@ -3068,7 +3072,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getCkfw,
+          url: sugon.interFaces.myhc.myzs.getCkfw,
           data: {
             deptCode: deptCode,
             deptId: $("#placeCode").val(),
@@ -3360,7 +3364,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getMapData,
+          url: sugon.interFaces.myhc.myzs.getMapData,
           data: {
             deptId: $("#placeCode").val(),
             date1: $("#date1").val(),
@@ -3435,7 +3439,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getMapData,
+          url: sugon.interFaces.myhc.myzs.getMapData,
           data: {
             deptId: $("#placeCode").val(),
             date1: $("#date1").val(),
@@ -3461,7 +3465,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getYlldDetailMapData,
+          url: sugon.interFaces.myhc.myzs.getYlldDetailMapData,
           data: {
             deptId: $("#placeCode").val(),
             date1: $("#date1").val(),
@@ -3576,7 +3580,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getRightMidData,
+          url: sugon.interFaces.myhc.myzs.getRightMidData,
           data: {
             deptId: $("#placeCode").val(),
             date1: $("#date1").val(),
@@ -3780,7 +3784,7 @@ requirejs(
         map.setView(zoomArr[0].center, zoomArr[0].zoom);
         getAllFjData();
       } else {
-        sugon.request(sugon.interFaces.myzs.DeptId).then(result => {
+        sugon.request(sugon.interFaces.myhc.myzs.DeptId).then(result => {
           $("#placeCode").val(result.ID);
           $("#place").val(result.NAME);
           $(".data-panel2").hide();
@@ -3932,7 +3936,7 @@ requirejs(
           sugon.requestJson(
             {
               type: "post",
-              url: sugon.interFaces.myzs.getMapDataByBounds,
+              url: sugon.interFaces.myhc.myzs.getMapDataByBounds,
               data: {
                 northEast: JSON.stringify(bounds._northEast),
                 southWest: JSON.stringify(bounds._southWest),
@@ -3986,7 +3990,7 @@ requirejs(
           sugon.requestJson(
             {
               type: "post",
-              url: sugon.interFaces.myzs.getYlldDetailMapDataByBound,
+              url: sugon.interFaces.myhc.myzs.getYlldDetailMapDataByBound,
               data: {
                 northEast: JSON.stringify(bounds._northEast),
                 southWest: JSON.stringify(bounds._southWest),
@@ -4027,7 +4031,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getCkDetail,
+          url: sugon.interFaces.myhc.myzs.getCkDetail,
           data: {
             deptCode: code,
             date1: $("#date1").val(),
@@ -4284,7 +4288,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getCkfwqDetail,
+          url: sugon.interFaces.myhc.myzs.getCkfwqDetail,
           data: {
             deptCode: code,
             date1: $("#date1").val(),
@@ -4509,7 +4513,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getCkfwq,
+          url: sugon.interFaces.myhc.myzs.getCkfwq,
           data: {
             type: index
           },
@@ -4542,7 +4546,7 @@ requirejs(
         sugon.requestJson(
           {
             type: "post",
-            url: sugon.interFaces.myzs.getMapCount,
+            url: sugon.interFaces.myhc.myzs.getMapCount,
             async: false,
             data: {
               deptId: $("#placeCode").val(),
@@ -4579,7 +4583,7 @@ requirejs(
         }
       });
       sugon
-        .request(sugon.interFaces.myzs.getCkfwqZb, { type: arr.join(",") })
+        .request(sugon.interFaces.myhc.myzs.getCkfwqZb, { type: arr.join(",") })
         .then(result => {
           $(".right-panel-down").hide();
           $(".right-panel-up").hide();
@@ -4636,7 +4640,7 @@ requirejs(
         date2: $("#date2").val()
       };
       sugon
-        .request(sugon.interFaces.myzs.getCkfwqRybd, condition)
+        .request(sugon.interFaces.myhc.myzs.getCkfwqRybd, condition)
         .then(result => {
           let $body = $(".tab2").empty();
           result.data.map((val, index) => {
@@ -4663,7 +4667,7 @@ requirejs(
         date2: $("#date2").val()
       };
       sugon
-        .request(sugon.interFaces.myzs.getCkfwqDwbd, condition)
+        .request(sugon.interFaces.myhc.myzs.getCkfwqDwbd, condition)
         .then(result => {
           let $body = $(".tab1").empty();
           result.data.map((val, index) => {
@@ -4835,7 +4839,7 @@ requirejs(
     function getBmfwq(typeArr) {
       let { lat, lng } = latLng;
       sugon
-        .request(sugon.interFaces.myzs.getBmfwq, {
+        .request(sugon.interFaces.myhc.myzs.getBmfwq, {
           lat,
           lng,
           date1: $("#date1").val(),
@@ -4890,7 +4894,7 @@ requirejs(
       };
       let url = "http://10.33.66.183:2334/iserver/services/data-gt8/rest/data";
       sugon
-        .request(sugon.interFaces.myzs.getYlldPcsData, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldPcsData, condition)
         .then(result => {
           sjPcsData = result.data;
           let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
@@ -4960,7 +4964,7 @@ requirejs(
               });
               map.addLayer(pcsLayerGroup);
               sugon
-                .request(sugon.interFaces.myzs.getYlldMapData, condition)
+                .request(sugon.interFaces.myhc.myzs.getYlldMapData, condition)
                 .then(result => {
                   let sqlParam = new SuperMap.GetFeaturesBySQLParameters({
                     queryParameter: {
@@ -5174,7 +5178,7 @@ requirejs(
     // 初始化右1面板
     function initYlldRight1(condition) {
       sugon
-        .request(sugon.interFaces.myzs.getYlldMapRight1, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldMapRight1, condition)
         .then(result => {
           let data = result,
             $container = $(".right-up-banner2").eq(condition.type - 1);
@@ -5281,7 +5285,7 @@ requirejs(
     // 初始化右2面板
     function initYlldRight2(condition) {
       sugon
-        .request(sugon.interFaces.myzs.getYlldMapRight2, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldMapRight2, condition)
         .then(result => {
           let data = result.data,
             sum = 0;
@@ -5358,7 +5362,7 @@ requirejs(
     function initYlldRight3(condition) {
       condition.id || (condition.id = "");
       sugon
-        .request(sugon.interFaces.myzs.getYlldMapRight3, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldMapRight3, condition)
         .then(result => {
           let data = result.data;
           let chart = echarts.init(document.getElementById("right-sqfl"));
@@ -5463,7 +5467,7 @@ requirejs(
     function initYlldRight4(condition, color = "#027ecb") {
       condition.orderBy || (condition.orderBy = "asc");
       sugon
-        .request(sugon.interFaces.myzs.getYlldMapRight4, condition)
+        .request(sugon.interFaces.myhc.myzs.getYlldMapRight4, condition)
         .then(result => {
           let data = result.data;
           let $body = $(".right-phb").empty();
@@ -5523,7 +5527,7 @@ requirejs(
             date2: $("#date2").val()
           };
           sugon
-            .request(sugon.interFaces.myzs.getCkfwqRankPopup, condition)
+            .request(sugon.interFaces.myhc.myzs.getCkfwqRankPopup, condition)
             .then(result => {
               let str = "",
                 data = result.data;
@@ -6033,7 +6037,7 @@ requirejs(
       sugon.requestJson(
         {
           type: "post",
-          url: sugon.interFaces.myzs.getCkRdwtDetail,
+          url: sugon.interFaces.myhc.myzs.getCkRdwtDetail,
           data: {
             deptCode: deptCode,
             date1: $("#date1").val(),
@@ -6158,7 +6162,7 @@ requirejs(
           ids0: id0Arr.join(",")
         };
         sugon
-          .request(sugon.interFaces.myzs.getYlldRdsjByBound, condition)
+          .request(sugon.interFaces.myhc.myzs.getYlldRdsjByBound, condition)
           .then(result => {
             renderRdwtPanel(result);
           });

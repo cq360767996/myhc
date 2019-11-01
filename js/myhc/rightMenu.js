@@ -2,7 +2,7 @@ requirejs(["common"], sugon => {
   // 加载热点问题数据
   function initRdwtList() {
     sugon
-      .request(sugon.interFaces.rdwt.getMidData, window.rightParams)
+      .request(sugon.interFaces.myhc.rdwt.getMidData, window.rightParams)
       .then(result => {
         let html = "",
           $body = $(".rcGrid");
@@ -31,7 +31,7 @@ requirejs(["common"], sugon => {
 
   // 初始化查询列表
   function initSearchList() {
-    sugon.request(sugon.interFaces.myys.SearchList).then(result => {
+    sugon.request(sugon.interFaces.myhc.myys.SearchList).then(result => {
       let html = "";
       result.data.map(val => {
         html += `<div id="${val.value}">${val.name}</div>`;

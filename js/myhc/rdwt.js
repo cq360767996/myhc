@@ -8,7 +8,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
       const $upThree = $(".mid-panel > section > div:last-child"),
         height = `${$upThree.height() / 2}px`;
       await sugon
-        .request(sugon.interFaces.rdwt.getMidData, searchParams)
+        .request(sugon.interFaces.myhc.rdwt.getMidData, searchParams)
         .then(result => {
           if (result.data.length > 0) {
             let { deptId, model, code } = result.data[0];
@@ -100,7 +100,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   const initChart1 = () => {
     let { date1, date2, model, code, detailDeptId } = searchParams;
     sugon
-      .request(sugon.interFaces.rdwt.getChart1, {
+      .request(sugon.interFaces.myhc.rdwt.getChart1, {
         deptId: detailDeptId,
         model,
         code,
@@ -186,7 +186,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   const initChart2 = () => {
     let { date1, date2, detailDeptId, code } = searchParams;
     sugon
-      .request(sugon.interFaces.rdwt.getChart2, {
+      .request(sugon.interFaces.myhc.rdwt.getChart2, {
         date1,
         date2,
         deptId: detailDeptId,
@@ -377,7 +377,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   const initChart3 = () => {
     let { detailDeptId, model, code, date1, date2 } = searchParams;
     sugon
-      .request(sugon.interFaces.rdwt.getChart3, {
+      .request(sugon.interFaces.myhc.rdwt.getChart3, {
         deptId: detailDeptId,
         model,
         code,
@@ -451,7 +451,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   const initChart4 = () => {
     let { detailDeptId, model, code, date1, date2, id } = searchParams;
     sugon
-      .request(sugon.interFaces.rdwt.getChart4, {
+      .request(sugon.interFaces.myhc.rdwt.getChart4, {
         deptId: detailDeptId,
         model,
         code,

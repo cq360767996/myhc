@@ -134,7 +134,7 @@ requirejs(["common"], function(sugon) {
         sugon.requestJson(
           {
             type: "POST",
-            url: sugon.interFaces.myys.saveKeyWord,
+            url: sugon.interFaces.myhc.myys.saveKeyWord,
             data: {
               keyWord: $(this)
                 .find("span.val")
@@ -199,7 +199,7 @@ requirejs(["common"], function(sugon) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.myys.DataList,
+        url: sugon.interFaces.myhc.myys.DataList,
         data: { txt: $("#keywords").val(), pageSize: 6, pageNum: 1 },
         async: false
       },
@@ -234,7 +234,7 @@ requirejs(["common"], function(sugon) {
             sugon.requestJson(
               {
                 type: "POST",
-                url: sugon.interFaces.myys.DataList,
+                url: sugon.interFaces.myhc.myys.DataList,
                 data: { txt: searchTxt, pageSize: 6, pageNum: page },
                 async: false
               },

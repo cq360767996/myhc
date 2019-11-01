@@ -2,5 +2,5 @@
   "code": 1000,
   "token": "mock token",
   "deptCode": "mock deptCode",
-  "role": "za"
+  "role": "admin"
 }

@@ -324,6 +324,6 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
   function handleTabDisplay() {
     ["za", "rk", "crj", "xtj", "xzj", "zhzx", "fz", "dcjj"].indexOf(
       sugon.identityInfo.role
-    ) > -1 && $("div[type=slhy]").hide();
+    ) > -1 && $("div[type=slhy]").remove();
   }
 });

@@ -16,7 +16,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
   sugon.requestJson(
     {
       type: "POST",
-      url: sugon.interFaces.myjz.Window1,
+      url: sugon.interFaces.myhc.myjz.Window1,
       data: {
         type: $("#tempTYPE").val(),
         id: $("#tempID").val(),

@@ -346,7 +346,7 @@ requirejs(
           })
           .then(result => {
             initRightPanel();
-            sugon.removeLoading();
+            $(".loading").remove();
             sugon.showMessage("报告已生成！", "success");
           });
       },
@@ -423,7 +423,7 @@ requirejs(
                   .css("z-index", -2)
                   .hide();
               });
-              sugon.removeLoading();
+              $(".loading").remove();
             } else {
               this.postImg();
             }
