@@ -3,7 +3,7 @@ define([], function() {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: true,
+    isPublished: false,
     // 菜单权限配置文件
     menuConfig: {
       // 交警
@@ -1441,9 +1441,9 @@ define([], function() {
         const $deptTree = $("#dept-tree");
         const $deptName = $("#dept-name");
         const $deptId = $("#dept-id");
-        let { deptCode, role } = this.identityInfo;
+        let { deptId, role } = this.identityInfo;
         this.request(this.interFaces.common.getDeptTree, {
-          deptCode,
+          deptId,
           role
         }).then(result => {
           //渲染树

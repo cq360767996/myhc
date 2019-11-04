@@ -54,12 +54,12 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     // 确认登录过，将token等信息写入缓存
     sugon.identityInfo = {
       token: sessionStorage.getItem("token"),
-      deptCode: sessionStorage.getItem("deptCode"),
+      deptId: sessionStorage.getItem("deptId"),
       role: sessionStorage.getItem("role"),
       username: sessionStorage.getItem("username")
     };
   } else {
-    location.href = sugon.ispublished ? "/login" : "login.html";
+    location.href = sugon.isPublished ? "/login" : "login.html";
   }
   // 路由配置
   let router = {

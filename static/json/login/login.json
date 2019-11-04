@@ -1,6 +1,6 @@
 {
   "code": 1000,
   "token": "mock token",
-  "deptCode": "mock deptCode",
+  "deptId": "mock deptId",
   "role": "admin"
 }
