@@ -3,7 +3,7 @@ define([], function() {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: false,
+    isPublished: true,
     // 菜单权限配置文件
     menuConfig: {
       // 交警
@@ -1441,7 +1441,7 @@ define([], function() {
         const $deptTree = $("#dept-tree");
         const $deptName = $("#dept-name");
         const $deptId = $("#dept-id");
-        let { deptCode, role } = sugon.identityInfo;
+        let { deptCode, role } = this.identityInfo;
         this.request(this.interFaces.common.getDeptTree, {
           deptCode,
           role
@@ -1490,8 +1490,6 @@ define([], function() {
         val = "  " + val;
       } else if (val.length == 3) {
         val = " " + val;
-      } else {
-        val = val;
       }
       return val;
     }
