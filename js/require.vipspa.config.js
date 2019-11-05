@@ -55,6 +55,8 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     sugon.identityInfo = {
       token: sessionStorage.getItem("token"),
       deptId: sessionStorage.getItem("deptId"),
+      deptName: sessionStorage.getItem("deptName"),
+      deptCode: sessionStorage.getItem("deptCode"),
       role: sessionStorage.getItem("role"),
       username: sessionStorage.getItem("username")
     };
@@ -195,6 +197,14 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     },
     defaults: "404"
   };
+  switch (sugon.identityInfo.role) {
+    case "fj":
+      router.myzs.controller = "js/myhc/myzs_fj.js";
+      break;
+    case "pcs":
+      router.myzs.controller = "js/myhc/myzs_pcs.js";
+      break;
+  }
   // 菜单过滤器
   let menuDispatch = sugon.menuConfig[sugon.identityInfo.role] || [];
   // 过滤路由

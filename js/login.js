@@ -68,6 +68,8 @@ function passwordLogin(e) {
         if (result.code === 1000) {
           sessionStorage.setItem("token", result.token);
           sessionStorage.setItem("deptId", result.deptId);
+          sessionStorage.setItem("deptName", result.deptName);
+          sessionStorage.setItem("deptCode", result.deptCode);
           sessionStorage.setItem("role", result.role);
           sessionStorage.setItem("username", username);
           location.href = sugon.isPublished
