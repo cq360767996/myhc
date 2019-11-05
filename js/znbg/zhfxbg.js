@@ -5,6 +5,8 @@ requirejs(
     let rightPanelData; // 右侧数据
     // 全局查询尺度
     let searchRuler = {};
+    // 树形结构数据
+    let treeData = [];
     let popFunc = {
       initBarX(data, id, render3Words) {
         let xData = [],
@@ -432,24 +434,18 @@ requirejs(
     };
 
     //获取树数据
-    function getTree() {
-      var treeData = [];
-      let { deptCode, role } = sugon.identityInfo;
-      sugon.requestJson(
-        {
-          type: "POST",
-          url: sugon.interFaces.common.getDeptTree,
-          data: { deptCode, role }
-        },
-        function(result) {
+    async function getTree() {
+      let { deptId, role } = sugon.identityInfo;
+      await sugon
+        .request(sugon.interFaces.common.getDeptTree, { deptId, role })
+        .then(result => {
           treeData = result.data;
-        }
-      );
-      return treeData;
+        });
     }
 
     // 初始化查询栏
-    function initSearchBar() {
+    async function initSearchBar() {
+      await getTree();
       let $date1 = $("#date1"),
         $date2 = $("#date2"),
         $deptId = $("#deptId"),
@@ -458,8 +454,8 @@ requirejs(
       let lastMonth = sugon.getDate(-1);
       $date1.val((searchRuler.date1 = sugon.getDate(-4)));
       $date2.val((searchRuler.date2 = sugon.getDate(-2)));
-      $deptId.val((searchRuler.deptId = "2014110416460086100000002942"));
-      $deptName.val((searchRuler.deptName = "南京市公安局"));
+      $deptId.val((searchRuler.deptId = treeData[0].id));
+      $deptName.val((searchRuler.deptName = treeData[0].text));
 
       $date1
         .datetimepicker({

@@ -1437,15 +1437,17 @@ define([], function() {
     },
     // 初始化查询栏
     initSearchBar({ date1 = -7, date2 = -1, cb = null }) {
-      return new Promise((resolve, reject) => {
+      return new Promise(async (resolve, reject) => {
         const $deptTree = $("#dept-tree");
         const $deptName = $("#dept-name");
         const $deptId = $("#dept-id");
         let { deptId, role } = this.identityInfo;
-        this.request(this.interFaces.common.getDeptTree, {
+        let treeData;
+        await this.request(this.interFaces.common.getDeptTree, {
           deptId,
           role
         }).then(result => {
+          treeData = result.data;
           //渲染树
           $deptTree.css("width", $deptName.outerWidth()).treeview({
             data: result.data,
@@ -1467,8 +1469,8 @@ define([], function() {
         });
         this.initDateInput("date1", this.getDate(date1));
         this.initDateInput("date2", this.getDate(date2));
-        $deptId.val("2014110416460086100000002942");
-        $deptName.val("南京市公安局");
+        $deptId.val(treeData[0].id);
+        $deptName.val(treeData[0].text);
         // 绑定查询按钮回调事件
         typeof cb === "function" &&
           $(".search-btn")
