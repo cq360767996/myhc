@@ -99,11 +99,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         let html = "";
         result.data.map(val => {
           html += `<div>
-                    <div class="div-left">
+                    <div>
                       <img src='../img/zxyp/jcj/file.png' />
                     <span>${val.name}</span>
                     </div>
-                    <div class="div-right">
+                    <div>
                       <span class="pic2">
                       <img src='../img/zxyp/jcj/chayue.png' />
                       </span>
@@ -130,8 +130,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
 
         result.data.map((val, index) => {
           html += `<div>
-                    <div class="div-left">${index + 1}、${val.name}</div>
-                    <div class="div-right">
+                    <div>${index + 1}、${val.name}</div>
+                    <div>
                       <span>本周起环比下滑</span>
                       <span class="val2">${val.value}</span>
                       <img src='../img/zxyp/jcj/fall.png' />
@@ -624,129 +624,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       {
         type: "POST",
         async: true,
-        url: sugon.interFaces.zxyp.ckfw.Myd,
-        data: { dept: $("#dept3").val(), search: JSON.stringify(search) }
-      },
-      function(result) {
-        var xData = [],
-          yData = [],
-          iData = [],
-          min = result.data[0].value1,
-          max = result.data[0].value1;
-        for (var i = 0; i < result.data.length; i++) {
-          xData.push(result.data[i].name);
-          yData.push(result.data[i].value1);
-          iData.push(result.data[i].value2);
-          result.data[i].value1 < min ? (min = result.data[i].value1) : min;
-          result.data[i].value1 > max ? (max = result.data[i].value1) : max;
-        }
-
-        var Chart3 = ec.init(document.getElementById("chart3"));
-
-        var option = {
-          color: "#3cb2fc",
-          tooltip: {
-            trigger: "axis"
-          },
-          grid: {
-            top: 25,
-            bottom: 25,
-            left: 40,
-            right: 0
-          },
-          xAxis: [
-            {
-              type: "category",
-              axisTick: {
-                show: false
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: "#426791"
-                }
-              },
-              axisLabel: {
-                interval: 0,
-                textStyle: {
-                  color: "#b3cce2"
-                }
-              },
-              splitLine: {
-                show: true,
-                lineStyle: {
-                  color: "#c9d3df"
-                }
-              },
-              data: xData
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              splitNumber: 5,
-              min: min,
-              max: max,
-              axisTick: {
-                show: false
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: "#426791"
-                }
-              },
-              axisLabel: {
-                formatter: "{value}%",
-                textStyle: {
-                  color: "#b3cce2"
-                }
-              },
-              splitLine: {
-                show: true,
-                lineStyle: {
-                  color: "#c9d3df"
-                }
-              }
-            }
-          ],
-          series: [
-            {
-              name: "数值",
-              showSymbol: true,
-              symbolSize: 8,
-              type: "line",
-              itemStyle: {
-                normal: {
-                  label: {
-                    show: true,
-                    backgroundColor: "#2d78b2",
-                    borderColor: "#3cb2fc",
-                    borderWidth: "1",
-                    borderRadius: [5, 5, 5, 5],
-                    padding: [2, 2, 2, 2],
-                    color: "#e6ecfa",
-                    formatter: function(params) {
-                      return iData[params.dataIndex];
-                    }
-                  }
-                }
-              },
-              data: yData
-            }
-          ]
-        };
-
-        Chart3.setOption(option);
-      }
-    );
-  };
-
-  var initMyd = function() {
-    sugon.requestJson(
-      {
-        type: "POST",
-        async: true,
         url: sugon.interFaces.zxyp.jcj.Myd,
         data: { search: JSON.stringify(search) }
       },
@@ -774,9 +651,10 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           },
           grid: {
             top: 25,
-            bottom: 25,
-            left: 40,
-            right: 0
+            bottom: 0,
+            left: 0,
+            right: 0,
+            containLabel: true
           },
           xAxis: [
             {
@@ -948,9 +826,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ],
           grid: {
             left: 0,
-            top: "20%",
-            width: "100%",
-            height: isShow ? "75%" : "80%",
+            top: 40,
+            right: 0,
+            bottom: 0,
             containLabel: true
           },
           xAxis: [
@@ -1547,10 +1425,10 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           },
           color: ["#1e9bdd"],
           grid: {
-            left: "0px",
-            right: "15px",
-            bottom: "5px",
-            top: "40px",
+            left: 0,
+            right: 15,
+            bottom: 5,
+            top: 40,
             containLabel: true
           },
           xAxis: {
@@ -1651,9 +1529,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     initWtdw("", "", 0);
   };
 
-  var initPage = function() {
+  var initPage = async function() {
     // 初始化查询栏
-    sugon.initSearchBar({ date1: -10, date2: -4, cb: initView });
+    await sugon.initSearchBar({ date1: -10, date2: -4, cb: initView });
     initView();
   };
 

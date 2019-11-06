@@ -985,9 +985,9 @@ requirejs(["common", "ec"], function(sugon, ec) {
     initRight2();
   };
 
-  let initPage = function() {
+  let initPage = async function() {
     // 初始化查询栏
-    sugon.initSearchBar({ date1: -7, date2: -2, cb: initView });
+    await sugon.initSearchBar({ date1: -7, date2: -2, cb: initView });
     initView();
   };
 

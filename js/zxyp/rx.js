@@ -1222,9 +1222,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     initRank();
   };
 
-  var initPage = function() {
+  var initPage = async function() {
     // 初始化查询栏
-    sugon.initSearchBar({ date1: -7, date2: -2, cb: initView });
+    await sugon.initSearchBar({ date1: -7, date2: -2, cb: initView, type: 3 });
     initView();
   };
 

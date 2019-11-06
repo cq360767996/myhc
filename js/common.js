@@ -75,11 +75,11 @@ define([], function() {
       // 督查纪检
       dcjj: ["myzd", "ylld", "zhzs", "pjda", "zhfxbg"],
       // 交警大队
-      jjdd: ["myzd", "jcj", "ckfw", "aj", "ylld", "zhfxbg"],
+      jjdd: ["myzd", "jcj", "ckfw", "rx", "aj", "ylld", "zhfxbg"],
       // 派出所
-      pcs: ["myzd", "jtsg"],
+      pcs: ["myzd", "rx", "jtsg"],
       // 警务站
-      jwz: ["myzd", "jtsg", "zhfxbg"]
+      jwz: ["myzd", "jtsg", "rx", "zhfxbg"]
     },
     // 所有接口
     interFaces: {
@@ -1427,7 +1427,7 @@ define([], function() {
         .datetimepicker({
           format: "yyyy-mm",
           autoclose: true,
-          todayBtn: true,
+          todayBtn: false,
           startView: "year",
           minView: "year",
           maxView: "decade",
@@ -1436,7 +1436,7 @@ define([], function() {
         });
     },
     // 初始化查询栏
-    initSearchBar({ date1 = -7, date2 = -1, cb = null }) {
+    initSearchBar({ date1 = -7, date2 = -1, cb = null, type = "" }) {
       return new Promise(async (resolve, reject) => {
         const $deptTree = $("#dept-tree");
         const $deptName = $("#dept-name");
@@ -1445,7 +1445,8 @@ define([], function() {
         let treeData;
         await this.request(this.interFaces.common.getDeptTree, {
           deptId,
-          role
+          role,
+          type
         }).then(result => {
           treeData = result.data;
           //渲染树

@@ -1732,9 +1732,9 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   });
 
   // 页面入口
-  $(function() {
+  $(async function() {
     // 初始化查询栏
-    sugon.initSearchBar({ date1: -7, date2: -2, cb: initPage });
+    await sugon.initSearchBar({ date1: -7, date2: -2, cb: initPage });
     initPage();
   });
 });

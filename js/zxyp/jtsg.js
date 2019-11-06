@@ -998,9 +998,9 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
   };
 
   // 初始化页面
-  var initPage = function() {
+  var initPage = async function() {
     // 初始化查询栏
-    sugon.initSearchBar({
+    await sugon.initSearchBar({
       date1: -7,
       date2: -2,
       cb: function() {

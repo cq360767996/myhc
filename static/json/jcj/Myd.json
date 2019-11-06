@@ -4,35 +4,35 @@
   "data": [
     {
       "name": "2018.06",
-      "value1": "30",
-      "value2": "56",
+      "value1": "91.1",
+      "value2": "91.1",
       "selected": "true"
     },
     {
       "name": "2018.07",
-      "value1": "65",
-      "value2": "56"
+      "value1": "91.2",
+      "value2": "91.2"
     },
     {
       "name": "2018.08",
-      "value1": "30",
-      "value2": "56"
+      "value1": "91.3",
+      "value2": "91.3"
     },
     {
       "name": "2018.09",
-      "value1": "40",
-      "value2": "56",
+      "value1": "91.4",
+      "value2": "91.4",
       "selected": true
     },
     {
       "name": "2018.10",
-      "value1": "80",
-      "value2": "56"
+      "value1": "91.5",
+      "value2": "91.5"
     },
     {
       "name": "2018.11",
-      "value1": "60",
-      "value2": "87"
+      "value1": "91.6",
+      "value2": "91.6"
     }
   ]
 }

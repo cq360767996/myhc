@@ -395,3 +395,9 @@ html {
   margin-top: -50px;
   background: url("../img/znbg/loading.gif") no-repeat;
 }
+
+.form-control {
+  display: inline;
+  padding: 0;
+  background-color: #fff !important;
+}
