@@ -1,7 +1,8 @@
 requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
-  var tData = [];
   var maxDate = sugon.getDate(-1);
   var minDate = sugon.getDate(-7);
+  // 树形结构数据
+  var treeData = [];
   var searchRule = { code: "", date1: "", date2: "" };
 
   $("#left-tree").css("width", $("#place").css("width"));
@@ -45,10 +46,11 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
   $("#date1").val(minDate);
   $("#date2").val(maxDate);
 
-  function onLoad() {
+  async function onLoad() {
+    await getTree();
     //渲染树
     $("#left-tree").treeview({
-      data: getTree(),
+      data: treeData,
       levels: 1,
       onNodeSelected: function(event, node) {
         $("#place").val(node.text);
@@ -57,45 +59,18 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
       },
       showCheckbox: false //是否显示多选
     });
-
-    if (sessionStorage.getItem("searchParams")) {
-      var temp = JSON.parse(sessionStorage.getItem("searchParams"));
-      $("#place").val(temp.codeName);
-      $("#placeCode").val(temp.code);
-      searchRule.code = temp.code;
-      sessionStorage.removeItem("searchParams");
-    } else {
-      if (sessionStorage.getItem("mapParams")) {
-        var temp = JSON.parse(sessionStorage.getItem("mapParams"));
-        $("#place").val(temp.codeName);
-        $("#placeCode").val(temp.code);
-        searchRule.code = temp.code;
-      } else {
-        $("#place").val(tData[0].text);
-        $("#placeCode").val(tData[0].id);
-        searchRule.code = tData[0].id;
-      }
-    }
+    $("#place").val(treeData[0].text);
+    $("#placeCode").val((searchRule.code = treeData[0].id));
   }
   //获取树数据
-  function getTree() {
-    var treeData = [];
-    let { deptCode, role } = sugon.identityInfo;
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.common.getDeptTree,
-        data: { deptCode, role },
-        async: false
-      },
-      function(result) {
+  async function getTree() {
+    let { deptId, role } = sugon.identityInfo;
+    await sugon
+      .request(sugon.interFaces.common.getDeptTree, { deptId, role })
+      .then(result => {
         treeData = result.data;
-        tData = treeData;
-      }
-    );
-    return treeData;
+      });
   }
-  onLoad();
 
   $("#back").bind("click", function() {
     location.hash = vipspa.stringify("dwjx", { type: "dwjx" });
@@ -881,10 +856,14 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
       .html("诉求性质数量分析");
     initChart({ name: "诉求性质", id: "sqxz" });
   });
-  $("#check").click();
-
-  let { code, date1, date2 } = searchRule;
-  sugon.initRightMenu({ deptId: code, date1, date2 });
+  async function initPage() {
+    await onLoad();
+    $("#check").click();
+    let { code, date1, date2 } = searchRule;
+    sugon.initRightMenu({ deptId: code, date1, date2 });
+  }
+  // 入口
+  initPage();
 
   $(window).resize(function() {
     chart1.resize();

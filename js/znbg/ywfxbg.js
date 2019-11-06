@@ -1254,8 +1254,8 @@ requirejs(
     }
 
     // 程序入口
-    $(function() {
-      initSearchBar();
+    $(async function() {
+      await initSearchBar();
       initRightPanel();
     });
 

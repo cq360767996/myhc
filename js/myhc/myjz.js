@@ -13,7 +13,7 @@ var myChart1,
   Chart9,
   Chart10;
 requirejs(["common"], function(sugon) {
-  var tData = [];
+  let treeData = [];
   var maxDate = sugon.getDate(-2);
   var minDate = sugon.getDate(-7);
   $("#left-tree").css("width", $("#place").css("width"));
@@ -99,10 +99,11 @@ requirejs(["common"], function(sugon) {
     }
   });
 
-  function onLoad(type) {
+  async function onLoad(type) {
+    await getTree(type, false);
     //渲染树
     $("#left-tree").treeview({
-      data: getTree(type, false),
+      data: treeData,
       levels: 1,
       onNodeSelected: function(event, node) {
         $("#place").val(node.text);
@@ -119,31 +120,19 @@ requirejs(["common"], function(sugon) {
       },
       showCheckbox: false //是否显示多选
     });
-
-    $("#place").val(tData[0].text);
-    $("#placeCode").val(tData[0].id);
+    $("#place").val(treeData[0].text);
+    $("#placeCode").val(treeData[0].id);
   }
 
   //获取树数据
-  function getTree(type, isAsync) {
-    var treeData = [];
+  async function getTree() {
     let { deptId, role } = sugon.identityInfo;
-    sugon.requestJson(
-      {
-        type: "POST",
-        url: sugon.interFaces.common.getDeptTree,
-        data: { deptId, role, type: type },
-        async: isAsync
-      },
-      function(result) {
+    await sugon
+      .request(sugon.interFaces.common.getDeptTree, { deptId, role })
+      .then(result => {
         treeData = result.data;
-        tData = treeData;
-      }
-    );
-
-    return treeData;
+      });
   }
-
   $("#gotoMap").bind("click", function() {
     location.hash = vipspa.stringify("myzs", { type: "myzs" });
   });
@@ -322,47 +311,20 @@ requirejs(["common"], function(sugon) {
       }
     );
   };
-
-  if (sessionStorage.getItem("searchParams")) {
-    var temp = JSON.parse(sessionStorage.getItem("searchParams"));
-    onLoad(temp.mold);
-    $("#mold").val(temp.mold);
-    $("#place").val(temp.codeName);
-    $("#placeCode").val(temp.code);
-    sessionStorage.removeItem("searchParams");
-    if (temp.mold == 1) {
-      $("#mold").val(1);
-      getList(temp.code, minDate, maxDate, 1);
-    } else {
-      getList2(temp.code, minDate, maxDate, 2);
-      $(".list").css("display", "none");
-      $(".list2").css("display", "block");
-    }
-  } else {
-    if (sessionStorage.getItem("mapParams")) {
-      var temp = JSON.parse(sessionStorage.getItem("mapParams"));
-      onLoad(temp.mold);
-      $("#mold").val(temp.mold);
-      $("#place").val(temp.codeName);
-      $("#placeCode").val(temp.code);
-      if (temp.mold == 1) {
-        $("#mold").val(1);
-        getList(temp.code, minDate, maxDate, 1);
-      } else {
-        getList2(temp.code, minDate, maxDate, 2);
-        $(".list").css("display", "none");
-        $(".list2").css("display", "block");
-      }
-    } else {
-      onLoad(1);
-      $("#mold").val(1);
-      getList(tData[0].id, minDate, maxDate, 1);
-    }
+  async function initPage() {
+    await onLoad(1);
+    $("#mold").val(1);
+    debugger;
+    getList(treeData[0].id, minDate, maxDate, 1);
+    setCenterHeight();
+    sugon.initRightMenu({
+      deptId: $("#placeCode").val(),
+      date1: $("#date1").val(),
+      date2: $("#date2").val()
+    });
   }
-  //getList(tData[0].id, tempDate1, tempDate2, 1);
-
-  setCenterHeight();
-
+  //页面入口
+  initPage();
   function setCenterHeight() {
     var height = $(window).height();
     var centerHight = height - 240;
@@ -414,12 +376,6 @@ requirejs(["common"], function(sugon) {
       $(".window").css("visibility", "visible");
       $(".window").html(ele);
     });
-  });
-
-  sugon.initRightMenu({
-    deptId: $("#placeCode").val(),
-    date1: $("#date1").val(),
-    date2: $("#date2").val()
   });
 
   /!*-----页面pannel内容区高度自适应 start-----*!/;

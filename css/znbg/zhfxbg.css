@@ -4,16 +4,6 @@ row,
 cell {
   display: block;
 }
-article {
-  text-indent: 32px;
-  line-height: 20px;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  text-align: justify;
-}
 .header > header {
   clear: both;
   width: 200px;
@@ -498,6 +488,16 @@ article {
   background-color: #ffffff;
   color: #485053;
   display: none;
+}
+#pop-container article {
+  text-indent: 32px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-align: justify;
 }
 #pop-container > header {
   width: 100%;

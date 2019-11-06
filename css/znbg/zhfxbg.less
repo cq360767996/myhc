@@ -9,12 +9,6 @@ cell {
   display: block;
 }
 
-article {
-  text-indent: @text-indent;
-  line-height: 20px;
-  .text-ellipse(3);
-}
-
 .header {
   & > header {
     clear: both;
@@ -468,6 +462,12 @@ article {
   background-color: #ffffff;
   color: #485053;
   display: none;
+
+  article {
+    text-indent: @text-indent;
+    line-height: 20px;
+    .text-ellipse(3);
+  }
 
   & > header {
     width: 100%;

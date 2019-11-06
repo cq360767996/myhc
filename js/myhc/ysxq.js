@@ -147,16 +147,6 @@ requirejs(["common"], function(sugon) {
         );
 
         if ($(this).attr("type") == "1") {
-          sessionStorage.setItem(
-            "searchParams",
-            '{"code": "' +
-              $(this).attr("id") +
-              '", "codeName": "' +
-              $(this).attr("name") +
-              '", "mold": "' +
-              $(this).attr("mold") +
-              '"}'
-          );
           location.hash = vipspa.stringify($(this).attr("url"), {
             type: $(this).attr("url")
           });
@@ -171,25 +161,6 @@ requirejs(["common"], function(sugon) {
       .unbind()
       .bind("click", function() {
         event.stopPropagation();
-        sessionStorage.setItem(
-          "searchParams",
-          '{"code": "' +
-            $(this)
-              .parent()
-              .parent()
-              .attr("id") +
-            '", "codeName": "' +
-            $(this)
-              .parent()
-              .parent()
-              .attr("name") +
-            '", "mold": "' +
-            $(this)
-              .parent()
-              .parent()
-              .attr("mold") +
-            '"}'
-        );
         var tempUrl = "dwjx/" + this.id;
         location.hash = vipspa.stringify(tempUrl, { type: tempUrl });
       });
