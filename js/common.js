@@ -3,7 +3,7 @@ define(["ec"], function(ec) {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: true,
+    isPublished: false,
     // 菜单权限配置文件
     menuConfig: {
       // 交警
