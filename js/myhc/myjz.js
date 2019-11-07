@@ -314,7 +314,6 @@ requirejs(["common"], function(sugon) {
   async function initPage() {
     await onLoad(1);
     $("#mold").val(1);
-    debugger;
     getList(treeData[0].id, minDate, maxDate, 1);
     setCenterHeight();
     sugon.initRightMenu({
