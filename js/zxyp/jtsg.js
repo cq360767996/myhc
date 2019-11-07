@@ -55,23 +55,12 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
       },
       function(result) {
         var xData = [],
-          yData = [],
-          min = Number(result.data[0].value),
-          max = Number(result.data[0].value);
+          yData = [];
         for (var i = 0; i < result.data.length; i++) {
           xData.push(result.data[i].name);
           yData.push(result.data[i].value);
-          Number(result.data[i].value) < min
-            ? (min = Number(result.data[i].value))
-            : min;
-          Number(result.data[i].value) > max
-            ? (max = Number(result.data[i].value))
-            : max;
         }
-        var diff = max - min;
-        max = max + diff;
-        min = min - diff;
-        var chart = ec.init(document.getElementById("left2"));
+        let minAndMax = sugon.handleMinAndMax(yData);
         var option = {
           color: "#3cb2fc",
           tooltip: {
@@ -114,8 +103,8 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             {
               type: "value",
               splitNumber: 5,
-              min: min,
-              max: max,
+              min: minAndMax.min,
+              max: minAndMax.max,
               axisTick: {
                 show: false
               },
@@ -164,7 +153,7 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             }
           ]
         };
-        chart.setOption(option);
+        sugon.renderChart({ id: "left2", data: result.data, option });
       }
     );
   };
@@ -210,7 +199,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
 
           yData.push(data[i].value);
         }
-        var chart = ec.init(document.getElementById("mid1-1"));
         var option = {
           color: ["rgba(60, 136, 194, 0.8)", "rgba(29, 132, 198, 0.2)"],
           radar: [
@@ -276,9 +264,10 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             }
           ]
         };
-        chart.setOption(option);
-        chart.off();
-        chart.on("click", function(param) {
+        sugon.renderChart({ id: "mid1-1", data: result.data, cb, option });
+
+        // 点击回调
+        function cb(param) {
           if (param.targetType) {
             var name = param.name;
             var index = 0;
@@ -299,7 +288,7 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
           initMid1_2();
           initMid1_3();
           $(".mid1-2-img").css("visibility", "hidden");
-        });
+        }
       }
     );
   };
@@ -319,7 +308,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         for (var i = 0; i < data.length; i++) {
           total += Number(data[i].value);
         }
-        var chart = ec.init(document.getElementById("mid1-2"));
         var option = {
           title: {
             text: total,
@@ -390,9 +378,9 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             }
           ]
         };
-        chart.setOption(option);
-        chart.off();
-        chart.on("click", function(param) {
+        sugon.renderChart({ id: "mid1-2", data: result.data, cb, option });
+        // 点击回调
+        function cb(param) {
           if (param.data.id) {
             searchRuler.mid1_2 = param.data.id;
             searchRuler.mid1_3 = 0;
@@ -401,7 +389,7 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             initMid1_3();
             $(".mid1-2-img").css("visibility", "visible");
           }
-        });
+        }
       }
     );
   };
@@ -465,7 +453,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         ];
       }
     }
-    var chart = ec.init(document.getElementById("mid1-3"));
     var option = {
       color: ["#269AE5"],
       tooltip: {
@@ -535,7 +522,7 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "mid1-3", data: yData, option });
   };
 
   // 初始化中2-1面板
@@ -565,8 +552,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
           }
         });
         var maxData = 100;
-        var chart1 = ec.init(document.getElementById("mid2-1-1"));
-        var chart2 = ec.init(document.getElementById("mid2-1-2"));
         var option = {
           xAxis: {
             max: maxData,
@@ -670,11 +655,11 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         option.series.map(function(val) {
           val.data = chart1_data;
         });
-        chart1.setOption(option);
+        sugon.renderChart({ id: "mid2-1-1", data: chart1_data, option });
         option.series.map(function(val) {
           val.data = chart2_data;
         });
-        chart2.setOption(option);
+        sugon.renderChart({ id: "mid2-1-2", data: chart2_data, option });
       }
     );
   };
@@ -694,7 +679,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         for (var i = 0; i < data.length; i++) {
           total += Number(data[i].value);
         }
-        var chart = ec.init(document.getElementById("mid2-2"));
         var option = {
           title: {
             text: total,
@@ -765,9 +749,9 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             }
           ]
         };
-        chart.setOption(option);
-        chart.off();
-        chart.on("click", function(param) {
+        sugon.renderChart({ id: "mid2-2", data, cb, option });
+        // 点击回调
+        function cb(param) {
           if (param.data.id) {
             searchRuler.mid2_2 = param.data.id;
             searchRuler.mid2_3 = 0;
@@ -776,7 +760,7 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
             initMid2_3();
             $(".mid2-2-img").css("visibility", "visible");
           }
-        });
+        }
       }
     );
   };
@@ -854,7 +838,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
     for (var i = 0; i < len; i++) {
       yData.push(transparentData);
     }
-    var chart = ec.init(document.getElementById("mid2-3"));
     var option = {
       calculable: true,
       tooltip: {
@@ -894,7 +877,7 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "mid2-3", data, option });
   };
 
   // 初始化右1面板

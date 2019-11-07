@@ -268,39 +268,35 @@ requirejs(["common", "ec"], function(sugon, ec) {
           markData = [],
           show = false,
           markNum = 0;
-        if (data.length == 0) {
-          xData.push("暂无数据");
-          yData.push(0);
-        } else {
-          if (data.length > 5) {
-            endValue = Math.floor((5 / data.length) * 100);
-            show = true;
-          }
-          for (let i = 0; i < data.length; i++) {
-            if (data[i].select) {
-              markNum = data[i].value;
-              markData = [
-                {
-                  name: data[i].name,
-                  value: data[i].value,
-                  xAxis: -1,
-                  yAxis: data[i].value
-                },
-                {
-                  name: data[i].name,
-                  value: data[i].value,
-                  xAxis: data.length,
-                  yAxis: data[i].value
-                }
-              ];
-            } else {
-              xData.push(data[i].name);
-              yData.push(data[i].value);
-            }
+
+        if (data.length > 5) {
+          endValue = Math.floor((5 / data.length) * 100);
+          show = true;
+        }
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].select) {
+            markNum = data[i].value;
+            markData = [
+              {
+                name: data[i].name,
+                value: data[i].value,
+                xAxis: -1,
+                yAxis: data[i].value
+              },
+              {
+                name: data[i].name,
+                value: data[i].value,
+                xAxis: data.length,
+                yAxis: data[i].value
+              }
+            ];
+          } else {
+            xData.push(data[i].name);
+            yData.push(data[i].value);
           }
         }
+
         let minAndMax = sugon.handleMinAndMax(yData);
-        let chart6 = ec.init(document.getElementById("chart6"));
 
         let option = {
           tooltip: {
@@ -425,7 +421,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           ]
         };
 
-        chart6.setOption(option, true);
+        sugon.renderChart({ id: "chart6", data, option });
       }
     );
   };
@@ -495,11 +491,11 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           ]
         };
-        chart.setOption(option);
-        chart.off();
-        chart.on("click", param => {
+        sugon.renderChart({ id, data, cb, option });
+        // 点击回调
+        function cb(param) {
           initMidRight(type, param.data.id);
-        });
+        }
       });
   }
 
@@ -516,8 +512,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         id: leftId
       })
       .then(result => {
-        let chart = ec.init(document.getElementById(id)),
-          xData = [],
+        let xData = [],
           yData = [],
           data = result.data;
         data.map(val => {
@@ -602,7 +597,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
             }
           ]
         };
-        chart.setOption(option);
+        sugon.renderChart({ id, data, option });
       });
   }
 

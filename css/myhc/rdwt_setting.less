@@ -40,28 +40,6 @@ button {
   border-radius: 7px;
 }
 
-// 滚动条样式
-.scroll-style(@width: 6px) {
-  overflow-y: auto;
-  &::-webkit-scrollbar {
-    width: @width;
-    height: 6px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #c1c1c1;
-  }
-}
-
 .up-panel {
   @input-height: 28px;
   margin: 20px auto;
@@ -107,7 +85,6 @@ button {
     height: 230px;
     position: absolute;
     z-index: 9999;
-    .scroll-style();
   }
 }
 
@@ -239,7 +216,6 @@ button {
       &:last-child {
         width: 100%;
         height: calc(~"100% - " @tab-header-height);
-        .scroll-style(0);
 
         .row-selected {
           background-color: #1c84c6;
@@ -343,7 +319,6 @@ button {
   & > section {
     height: calc(~"100% - 55px");
     padding: 10px 0;
-    .scroll-style();
 
     & > row {
       line-height: 60px;
@@ -426,7 +401,6 @@ button {
   & > section {
     max-height: 205px;
     margin-bottom: 10px;
-    .scroll-style();
 
     & > div {
       cursor: pointer;
@@ -487,7 +461,6 @@ button {
     height: calc(~"100% - 60px");
     margin: 0 auto;
     border-top: 1px solid #4d4d4d;
-    .scroll-style();
     color: #000;
 
     & > article {

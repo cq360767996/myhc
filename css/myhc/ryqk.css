@@ -116,27 +116,6 @@
   overflow-y: auto;
 }
 
-/*定义宽高以及背景*/
-.pop-body-col-body::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-
-/*定义滚动条轨道 内阴影+圆角*/
-.pop-body-col-body::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-
-/*定义滑块 内阴影+圆角*/
-.pop-body-col-body::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
-
 .pop-body-col-body > div {
   width: 95%;
   height: calc((100% - 24px) / 10);

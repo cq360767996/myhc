@@ -63,35 +63,11 @@ cell {
   text-align: justify;
 }
 
-.scroll-style {
-  // 滚动条样式
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #c1c1c1;
-  }
-}
-
 .row-width {
   // 表格宽度设置
-  &:nth-child(1) {
-    width: 40px;
-  }
 
-  &:nth-child(2) {
-    width: calc(~"100% - 320px");
+  &:nth-child(1) {
+    width: calc(~"100% - 280px");
 
     * {
       float: left;
@@ -111,11 +87,11 @@ cell {
     }
   }
 
-  &:nth-child(3) {
+  &:nth-child(2) {
     width: 140px;
   }
 
-  &:nth-child(4) {
+  &:nth-child(3) {
     width: 140px;
 
     img {
@@ -199,7 +175,6 @@ cell {
         background-color: #f6faff;
         overflow-y: auto;
         overflow-x: hidden;
-        .scroll-style();
 
         & > div {
           width: 100%;
@@ -227,7 +202,6 @@ cell {
           background-color: #f6faff;
           border: 0;
           outline: none;
-          .scroll-style();
         }
       }
 
@@ -304,7 +278,6 @@ cell {
         height: calc(~"100% - @{tab-height}");
         overflow-y: auto;
         overflow-x: hidden;
-        .scroll-style();
 
         & > div {
           width: 100%;
@@ -338,7 +311,7 @@ cell {
   display: none;
 }
 
-.left-tree {
+#left-tree {
   height: 230px;
   visibility: hidden;
   overflow: auto;

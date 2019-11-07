@@ -255,6 +255,30 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     location.href = sugon.ispublished ? "/login" : "login.html";
   });
 
+  $("body").on("click", e => {
+    let target = e.target;
+    let tree1 = document.getElementById("dept-tree");
+    let tree2 = document.getElementById("left-tree");
+    if (e.target.id !== "dept-name" && e.target.id !== "place" && target) {
+      if (
+        tree1 &&
+        tree1.contains &&
+        !tree1.contains(target) &&
+        tree1.style.visibility === "visible"
+      ) {
+        tree1.style.visibility = "hidden";
+      }
+      if (
+        tree2 &&
+        tree2.contains &&
+        !tree2.contains(target) &&
+        tree2.style.visibility === "visible"
+      ) {
+        tree2.style.visibility = "hidden";
+      }
+    }
+  });
+
   // 根据权限过滤菜单
   function filterMenu(arr) {
     return arr.filter(val => menuDispatch.indexOf(val) === -1);

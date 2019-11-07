@@ -30,27 +30,6 @@
   border-radius: 7px;
 }
 
-.scroll-style {
-  // 滚动条样式
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #c1c1c1;
-  }
-}
-
 .clear-div {
   clear: both;
 }
@@ -108,7 +87,6 @@
     overflow: auto;
     position: absolute;
     z-index: 9999;
-    .scroll-style();
   }
 }
 

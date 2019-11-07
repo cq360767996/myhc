@@ -11,27 +11,6 @@
   text-align: justify;
 }
 
-.scroll-style {
-  // 滚动条样式
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #c1c1c1;
-  }
-}
-
 .sjfx {
   width: 100%;
   height: calc(~'100% - 18px');
@@ -300,7 +279,6 @@
 
   .sjfx-left-bottom {
     overflow: auto;
-    .scroll-style();
 
     & > div {
       @height: 40px;
@@ -323,7 +301,6 @@
 
   .sjfx-right-bottom {
     overflow: auto;
-    .scroll-style();
 
     & > div {
       width: 100%;

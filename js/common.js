@@ -1,9 +1,9 @@
-define([], function() {
+define(["ec"], function(ec) {
   const remotePath = "../",
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: false,
+    isPublished: true,
     // 菜单权限配置文件
     menuConfig: {
       // 交警
@@ -1363,8 +1363,13 @@ define([], function() {
         result.min = Number(arr[0]);
         result.max = Number(arr[0]);
         arr.map(val => {
-          result.min = Math.min(result.min, Number(val));
-          result.max = Math.max(result.max, Number(val));
+          if (typeof val === "object") {
+            result.min = Math.min(result.min, Number(val.value));
+            result.max = Math.max(result.max, Number(val.value));
+          } else {
+            result.min = Math.min(result.min, Number(val));
+            result.max = Math.max(result.max, Number(val));
+          }
         });
         let diff = (result.max - result.min) / 2;
         result.min =
@@ -1406,6 +1411,30 @@ define([], function() {
         timeout !== null && clearTimeout(timeout);
         timeout = setTimeout(fn, wait);
       };
+    },
+    // 渲染echarts图
+    renderChart({ id, option, data = [], cb }) {
+      let chart = ec.init(document.getElementById(id));
+      if (data instanceof Array && data.length > 0) {
+        if (cb instanceof Function) {
+          chart.off();
+          chart.on("click", cb);
+        }
+      } else {
+        option = {
+          title: {
+            show: true,
+            text: "无数据",
+            left: "center",
+            top: "middle",
+            textStyle: {
+              color: "#000",
+              fontSize: 20
+            }
+          }
+        };
+      }
+      chart.setOption(option, true);
     },
     // 节流函数
     throttle: function(fn, delay) {

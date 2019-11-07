@@ -61,8 +61,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       min = Number(data[i].value) < min ? data[i].value : min;
       max = Number(data[i].value) > max ? data[i].value : max;
     }
-    var chart3 = ec.init(document.getElementById("qzsql"));
-
     var option = {
       color: "#3cb2fc",
       tooltip: {
@@ -155,13 +153,13 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       ]
     };
 
-    chart3.setOption(option);
-    chart3.off();
-    chart3.on("click", function(param) {
+    sugon.renderChart({ id: "qzsql", data, option });
+    // 点击回调
+    function cb(param) {
       searchRuler.id1 = param.name;
       getSqxz();
       getSqdwfb();
-    });
+    }
   };
 
   // 诉求性质分析
@@ -192,7 +190,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     for (var i = 0; i < data.length; i++) {
       total += Number(data[i].value);
     }
-    var chart = ec.init(document.getElementById("sqxzfx"));
     var option = {
       title: {
         text: total,
@@ -255,12 +252,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
-    chart.off();
-    chart.on("click", function(param) {
+    sugon.renderChart({ id: "sqxzfx", data, cb, option });
+    // 点击回调
+    function cb(param) {
       searchRuler.id2 = param.data.id;
       getSqdwfb();
-    });
+    }
   };
 
   // 诉求单位分布
@@ -312,7 +309,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    var chart = ec.init(document.getElementById("sqdwfb"));
     var option = {
       color: ["#269AE5"],
       tooltip: {
@@ -397,7 +393,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "sqdwfb", data, option });
   };
 
   // 满意度
@@ -433,7 +429,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         var diff = (max2 - min2) / 2;
         min2 = Number(min2 - diff).toFixed(2);
         max2 = Number(max2 + diff).toFixed(2);
-        var Chart3 = ec.init(document.getElementById("chart3"));
 
         var option = {
           color: "#2a9bd5",
@@ -558,7 +553,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        Chart3.setOption(option);
+        sugon.renderChart({ id: "chart3", data: result.data, option });
       }
     );
   };
@@ -579,12 +574,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
 
   // 渲染办事效能echarts
   var renderBsxn = function(data) {
-    var chart = ec.init(document.getElementById("bsxn"));
     var yMin = Number(data[0].value2),
       yMax = Number(data[0].value2),
       xMin = Number(data[0].value1),
       xMax = Number(data[0].value1);
-    var seriesData = data.map(function(item, index, array) {
+    var seriesData = data.map(function(item) {
       yMin = Math.min(yMin, Number(item["value2"]));
       yMax = Math.max(yMax, Number(item["value2"]));
       xMin = Math.min(xMin, Number(item["value1"]));
@@ -809,7 +803,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "bsxn", data, option });
   };
 
   // 12345工单办理优秀案例

@@ -45,21 +45,6 @@
   position: absolute;
   z-index: 9999;
 }
-.up-panel #dept-tree::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.up-panel #dept-tree::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.up-panel #dept-tree::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
 
 .view-body {
   margin: 20px auto;
@@ -710,23 +695,7 @@ div.jqcloud span {
 #chart6 {
   overflow: hidden;
 }
-.wtList::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
-  height: 4px;
-}
-.wtList::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.2);
-}
-.wtList::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.1);
-}
+
 .t {
   color: #626262;
 }
@@ -768,23 +737,7 @@ select {
   height: 100%;
   overflow: auto;
 }
-.infoT::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
-  height: 4px;
-}
-.infoT::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.2);
-}
-.infoT::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.1);
-}
+
 .infoT > div {
   width: calc(100% - 20px);
   margin-left: 10px;
@@ -912,24 +865,6 @@ select {
 
 .mid3 {
   overflow: auto;
-}
-
-.mid3::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
-  height: 4px;
-}
-.mid3::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.2);
-}
-.mid3::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.1);
 }
 
 .mid3 > div {

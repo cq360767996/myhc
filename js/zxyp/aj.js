@@ -143,7 +143,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       }
       yData.push(data[i].value);
     }
-    let chart = ec.init(document.getElementById("zhpjzsfx"));
     let option = {
       color: ["rgba(60, 136, 194, 0.8)", "rgba(29, 132, 198, 0.2)"],
       radar: [
@@ -209,12 +208,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
-    if (chart) {
-      chart.resize();
-    }
-    chart.off();
-    chart.on("click", function(param) {
+    sugon.renderChart({ id: "zhpjzsfx", data, cb, option });
+
+    // 点击回调
+    function cb(param) {
       $("#hjwtfx-title").html("环节问题分析");
       if (param.targetType) {
         let name = param.name;
@@ -234,7 +231,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         getHjwtfx();
         getAjdwfb();
       }
-    });
+    }
   };
 
   // 环节问题分析接口定义
@@ -274,7 +271,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     for (let i = 0; i < data.length; i++) {
       total += Number(data[i].value);
     }
-    let chart = ec.init(document.getElementById("hjwtfx"));
     let option = {
       title: {
         text: total,
@@ -337,15 +333,15 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
-    chart.off();
-    chart.on("click", function(param) {
+    sugon.renderChart({ id: "hjwtfx", data, cb, option });
+    // 点击回调
+    function cb(param) {
       $("#hjwtfx-title").html("具体问题分析");
       if (param.data.id) {
         getHjwtfx(zhpjzsfxId, param.data.id);
         getAjdwfb(zhpjzsfxId, param.data.id);
       }
-    });
+    }
   };
 
   // 案件问题单位分布接口定义
@@ -402,7 +398,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    let chart = ec.init(document.getElementById("ajdwfb"));
     let option = {
       color: ["#269AE5"],
       tooltip: {
@@ -492,7 +487,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "ajdwfb", data, option });
   };
 
   // 案件综合评价指数趋势分析接口定义
@@ -536,7 +531,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       yData2.push(data2[i].value);
     }
     data2Min -= 5;
-    let chart = ec.init(document.getElementById("zhpjzsfxTrend"));
     let option = {
       tooltip: {
         trigger: "axis",
@@ -607,7 +601,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       ]
     };
 
-    chart.setOption(option);
+    sugon.renderChart({ id: "zhpjzsfxTrend", data: result.data1, option });
   };
 
   // 办案小助手-案件办理具体问题分析接口定义
@@ -657,7 +651,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       xData.push(data[j].name);
       yData.push(data[j].value);
     }
-    let chart = ec.init(document.getElementById(chartId + i));
     let option = {
       color: ["#A9D1EB"],
       grid: {
@@ -688,7 +681,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: chartId + i, data, option });
   };
 
   // 拼接办案小助手-案件办理具体问题分析dom
@@ -773,8 +766,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 专项分析评价指数数据加载
   let drawZxfxpjzs = function(data) {
-    let chart1 = ec.init(document.getElementById("air-bubble1"));
-    let chart2 = ec.init(document.getElementById("air-bubble2"));
     let option = {
       title: {
         text: "水滴",
@@ -825,16 +816,10 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     let data2 = [data.qclaj / 100, 0.5, 0.4, 0.3];
     option.series[0].data = data1;
     option.title.text = data.shlaj + "%";
-    chart1.setOption(option);
+    sugon.renderChart({ id: "air-bubble1", data: data1, option });
     option.series[0].data = data2;
     option.title.text = data.qclaj + "%";
-    chart2.setOption(option);
-    if (chart1) {
-      chart1.resize();
-    }
-    if (chart2) {
-      chart2.resize();
-    }
+    sugon.renderChart({ id: "air-bubble2", data: data2, option });
   };
 
   // 案件办理综合评价指数满意榜接口定义
@@ -920,7 +905,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 伤害类/侵财类案件综合评价指数
   let getPopShlZhpjzsfx = function(index) {
-    let chart = ec.init(document.getElementById("pop-shl-ajzhpjzs"));
     let data = [
       {
         value: zxfxpjzsData[index],
@@ -997,12 +981,11 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "pop-shl-ajzhpjzs", data, option });
   };
 
   // 案件综合评价指数
   let getPopAjzhpjzs = function() {
-    let chart = ec.init(document.getElementById("pop-ajzhpjzs"));
     let data = [
       {
         value: zxfxpjzsData[2].substring(0, zxfxpjzsData[2].length - 1),
@@ -1079,7 +1062,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "pop-ajzhpjzs", data, option });
   };
 
   // 伤害类/侵财类案件综合评价指数分析接口定义
@@ -1130,7 +1113,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     data2Min -= 5;
     let diff = (data1Max - data1Min) / 2;
     data1Min = Number(data1Min - diff).toFixed(2);
-    let chart = ec.init(document.getElementById("pop-shl-ajzhpjzsfx"));
     let option = {
       tooltip: {
         trigger: "axis",
@@ -1229,7 +1211,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         min: data1Min
       });
     }
-    chart.setOption(option);
+    sugon.renderChart({ id: "pop-shl-ajzhpjzsfx", data: result.data1, option });
   };
 
   // 弹出页环节问题分析
@@ -1307,7 +1289,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     for (let i = 0; i < len; i++) {
       yData.push(transparentData);
     }
-    let chart = ec.init(document.getElementById("pop-hjwtfx"));
 
     let option = {
       calculable: true,
@@ -1348,7 +1329,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    sugon.renderChart({ id: "pop-hjwtfx", data, option });
   };
 
   // 弹出页案件问题单位分布接口定义
@@ -1409,7 +1390,6 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    let chart = ec.init(document.getElementById("pop-ajwtdwfb"));
     let option = {
       tooltip: {
         trigger: "axis",
@@ -1512,7 +1492,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     } else {
       option.series[0].markLine = "";
     }
-    chart.setOption(option);
+    sugon.renderChart({ id: "pop-ajwtdwfb", data, option });
   };
 
   // 加载办案小助手-案件办理具体问题分析弹窗dom

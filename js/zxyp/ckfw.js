@@ -56,8 +56,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       min = Number(data[i].value) < min ? data[i].value : min;
       max = Number(data[i].value) > max ? data[i].value : max;
     }
-    let chart3 = ec.init(document.getElementById("chart11"));
-
     let option = {
       color: "#3cb2fc",
       tooltip: {
@@ -150,14 +148,14 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       ]
     };
 
-    chart3.setOption(option);
-    chart3.off();
-    chart3.on("click", function(param) {
+    sugon.renderChart({ id: "chart11", cb, data, option });
+    // 点击事件回调
+    function cb(param) {
       searchRuler.id1 = param.name;
       searchRuler.id2 = "";
       getYwfx();
       getGddwfb();
-    });
+    }
   };
 
   // 工单业务分析
@@ -185,7 +183,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     for (let i = 0; i < data.length; i++) {
       total += Number(data[i].value);
     }
-    let chart = ec.init(document.getElementById("chart22"));
     let option = {
       title: {
         text: total,
@@ -248,12 +245,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
-    chart.off();
-    chart.on("click", function(param) {
+    sugon.renderChart({ id: "chart22", cb, data, option });
+    // 点击回调
+    function cb(param) {
       searchRuler.id2 = param.data.id;
       getGddwfb();
-    });
+    }
   };
 
   // 工单单位分布
@@ -307,7 +304,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         ];
       }
     }
-    let chart = ec.init(document.getElementById("chart33"));
     let option = {
       color: ["#269AE5"],
       tooltip: {
@@ -392,7 +388,10 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    chart.setOption(option);
+    if (!(data instanceof Array) || data.length === 0) {
+      option = null;
+    }
+    sugon.renderChart({ id: "chart33", option, data });
   };
 
   let initMyd = function() {
@@ -417,8 +416,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           result.data[i].value1 > max ? (max = result.data[i].value1) : max;
         }
 
-        let Chart3 = ec.init(document.getElementById("chart3"));
-
         let option = {
           color: "#3cb2fc",
           tooltip: {
@@ -427,8 +424,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           grid: {
             top: 25,
             bottom: 25,
-            left: 40,
-            right: 0
+            left: 0,
+            right: 0,
+            containLabel: true
           },
           xAxis: [
             {
@@ -512,8 +510,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
             }
           ]
         };
-
-        Chart3.setOption(option);
+        sugon.renderChart({ id: "chart3", data: result.data, option });
       }
     );
   };
@@ -539,34 +536,20 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
         let xData = [],
           yData = [],
-          min = Number(data[0].value),
-          max = Number(data[0].value),
           isShow = false,
           startValue = 0,
           endValue = 100;
-        if (data.length == 0) {
-          if (flag) {
-            xData.push("无数据");
-            yData.push(0);
-          } else {
-            return;
-          }
-        } else {
-          for (let i = 0; i < data.length; i++) {
-            xData.push(data[i].name);
-            yData.push(data[i].value);
-            min = Math.min(min, data[i].value);
-            max = Math.max(max, data[i].value);
-          }
+
+        for (let i = 0; i < data.length; i++) {
+          xData.push(data[i].name);
+          yData.push(data[i].value);
         }
+
         if (data.length > 5) {
           isShow = true;
           endValue = Math.floor((5 / data.length) * 100);
         }
-        let diff = max - min;
-        min = Number(min - diff).toFixed(2);
-        max = Number(max + diff).toFixed(2);
-        let Chart4 = ec.init(document.getElementById("chart4"));
+        let minAndMax = sugon.handleMinAndMax(yData);
         let option = {
           tooltip: {
             trigger: "axis",
@@ -596,9 +579,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ],
           grid: {
             left: 0,
-            top: "20%",
-            width: "100%",
-            height: isShow ? "75%" : "80%",
+            top: 25,
+            bottom: 0,
+            right: 0,
             containLabel: true
           },
           xAxis: [
@@ -611,6 +594,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
                 interval: 0,
                 textStyle: {
                   color: "#b3cce2"
+                },
+                formatter: function(param) {
+                  return sugon.handleStrLineFeed(param);
                 }
               },
               axisLine: {
@@ -623,8 +609,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           yAxis: [
             {
               type: "value",
-              min: min,
-              max: max,
+              min: minAndMax.min,
+              max: minAndMax.max,
               axisTick: { show: false },
               splitLine: {
                 lineStyle: {
@@ -655,7 +641,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        Chart4.setOption(option);
+        sugon.renderChart({ id: "chart4", data: result.data, option });
       }
     );
   };
@@ -687,9 +673,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       function(result) {
         let indicatorData = [],
           seriesData = [];
-        if (result.data.length == 0) {
-          return;
-        }
         for (let i = 0; i < result.data.length; i++) {
           indicatorData.push({
             text: result.data[i].name,
@@ -697,35 +680,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           });
           seriesData.push(result.data[i].value);
         }
-
-        let Chart2 = ec.init(document.getElementById("chart2"));
-
-        Chart2.off();
-        Chart2.on("click", function(params) {
-          if (!params.targetType) {
-            (param1 = ""), (param2 = "");
-            initMydfx("");
-            initJtwt("");
-            initAjwt("", "", 0);
-            return;
-          }
-          if (param2) {
-            return;
-          }
-          if (params.targetType) {
-            let tempId = "";
-            for (let i = 0; i < result.data.length; i++) {
-              if (params.name == result.data[i].name) {
-                tempId = result.data[i].id;
-                break;
-              }
-            }
-            param1 = tempId;
-            initMydfx(param1);
-            initJtwt(param1);
-            initAjwt(param1, param2, 0);
-          }
-        });
 
         let option = {
           color: "rgba(52, 237, 255, 0.35)",
@@ -793,7 +747,34 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        Chart2.setOption(option);
+        sugon.renderChart({ data: result.data, id: "chart2", option, cb });
+
+        // 饼图点击事件回调
+        function cb(params) {
+          if (!params.targetType) {
+            (param1 = ""), (param2 = "");
+            initMydfx("");
+            initJtwt("");
+            initAjwt("", "", 0);
+            return;
+          }
+          if (param2) {
+            return;
+          }
+          if (params.targetType) {
+            let tempId = "";
+            for (let i = 0; i < result.data.length; i++) {
+              if (params.name == result.data[i].name) {
+                tempId = result.data[i].id;
+                break;
+              }
+            }
+            param1 = tempId;
+            initMydfx(param1);
+            initJtwt(param1);
+            initAjwt(param1, param2, 0);
+          }
+        }
       }
     );
   };
@@ -812,13 +793,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           return;
         }
 
-        let Chart5 = ec.init(document.getElementById("chart5"));
-
-        Chart5.off();
-        Chart5.on("click", function(params) {
+        // 点击回调事件
+        function cb(params) {
           param2 = params.data.id;
           initAjwt(param1, param2, 0);
-        });
+        }
 
         let data = [];
 
@@ -877,12 +856,12 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        Chart5.setOption(option);
+        sugon.renderChart({ id: "chart5", data: result.data, cb, option });
       }
     );
   };
 
-  let initAjwt = function(param11, param22, index, flag) {
+  let initAjwt = function(param11, param22, index) {
     sugon.requestJson(
       {
         type: "POST",
@@ -899,25 +878,16 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
         let xData = [],
           yData = [];
-        if (data.length == 0) {
-          if (flag) {
-            xData.push("无数据");
-            yData.push(0);
-          } else {
-            return;
-          }
-        } else {
-          for (let i = 0; i < data.length; i++) {
-            xData.push(data[i].name);
-            yData.push(data[i].value);
-          }
-        }
 
-        let Chart6 = ec.init(document.getElementById("chart6"));
+        for (let i = 0; i < data.length; i++) {
+          xData.push(data[i].name);
+          yData.push(data[i].value);
+        }
 
         let option = {
           tooltip: {
             trigger: "axis",
+            confine: true,
             axisPointer: {
               type: "shadow"
             }
@@ -931,7 +901,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
             containLabel: true
           },
           xAxis: {
-            type: "value"
+            type: "value",
+            boundaryGap: ["20%", "20%"]
           },
           yAxis: {
             type: "category",
@@ -946,7 +917,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        Chart6.setOption(option);
+        sugon.renderChart({ id: "chart6", data: result.data, option });
       }
     );
   };
@@ -955,7 +926,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     $(".tab3 .selected").removeClass("selected");
     $(this).attr("class", "selected");
     let index = $(".tab3>div").index(this);
-    initAjwt(param1, param2, index, 1);
+    initAjwt(param1, param2, index);
   });
 
   let initRankList = function() {
@@ -1007,7 +978,11 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       let rankLab = $("<div/>")
         .addClass("rankLab")
         .append($("<div/>").append($img))
-        .append($("<div/>").html(val.name));
+        .append(
+          $("<div/>")
+            .attr("title", val.name)
+            .html(val.name)
+        );
       let rankImg = $('<div class="rankImg lh"></div>')
         .addClass(color)
         .html(val.value);

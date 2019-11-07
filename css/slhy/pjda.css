@@ -438,22 +438,6 @@
   height: calc(100% - 30px);
   border: solid 1px #e5e5e5;
   overflow: auto;
-  overflow-y: auto;
-}
-.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section::-webkit-scrollbar {
-  width: 4px;
-  height: 6px;
-  background-color: #fff;
-}
-.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
 }
 .main-container > section .right-aside > section > section > aside:first-child > section:last-child > aside > section > row {
   padding: 0 15px;

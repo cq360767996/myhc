@@ -86,6 +86,7 @@ column {
   overflow: hidden;
   white-space: nowrap;
   text-align: center;
+  height: 100%;
 }
 .simple_content .rx-left-panel > section:nth-child(2) > tab row > cell:nth-child(1) {
   width: 80px;

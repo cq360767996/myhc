@@ -33,34 +33,16 @@ cell {
   float: right;
   margin-top: 5px;
 }
-.scroll-style::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.scroll-style::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.scroll-style::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
 .row-width:nth-child(1) {
-  width: 40px;
+  width: calc(100% - 280px);
 }
-.row-width:nth-child(2) {
-  width: calc(100% - 320px);
-}
-.row-width:nth-child(2) * {
+.row-width:nth-child(1) * {
   float: left;
 }
-.row-width:nth-child(2) img {
+.row-width:nth-child(1) img {
   margin-top: 8px;
 }
-.row-width:nth-child(2) span {
+.row-width:nth-child(1) span {
   text-align: left;
   display: inline-block;
   width: calc(100% - 28px);
@@ -70,17 +52,17 @@ cell {
   overflow: hidden;
   white-space: nowrap;
 }
+.row-width:nth-child(2) {
+  width: 140px;
+}
 .row-width:nth-child(3) {
   width: 140px;
 }
-.row-width:nth-child(4) {
-  width: 140px;
-}
-.row-width:nth-child(4) img {
+.row-width:nth-child(3) img {
   margin-left: 8px;
   cursor: pointer;
 }
-.row-width:nth-child(4) img:first-child {
+.row-width:nth-child(3) img:first-child {
   margin-left: 0;
 }
 .left-section {
@@ -148,21 +130,6 @@ cell {
   overflow-y: auto;
   overflow-x: hidden;
 }
-.left-section section fieldset article::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.left-section section fieldset article::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.left-section section fieldset article::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
 .left-section section fieldset article > div {
   width: 100%;
   line-height: 30px;
@@ -185,21 +152,6 @@ cell {
   background-color: #f6faff;
   border: 0;
   outline: none;
-}
-.left-section section fieldset article textarea::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.left-section section fieldset article textarea::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.left-section section fieldset article textarea::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
 }
 .left-section section fieldset > footer {
   width: 100%;
@@ -260,18 +212,15 @@ cell {
   height: 100%;
 }
 .right-section section > div.tab-header div:nth-child(1) {
-  width: 40px;
+  width: calc(100% - 280px);
 }
-.right-section section > div.tab-header div:nth-child(2) {
-  width: calc(100% - 320px);
-}
-.right-section section > div.tab-header div:nth-child(2) * {
+.right-section section > div.tab-header div:nth-child(1) * {
   float: left;
 }
-.right-section section > div.tab-header div:nth-child(2) img {
+.right-section section > div.tab-header div:nth-child(1) img {
   margin-top: 8px;
 }
-.right-section section > div.tab-header div:nth-child(2) span {
+.right-section section > div.tab-header div:nth-child(1) span {
   text-align: left;
   display: inline-block;
   width: calc(100% - 28px);
@@ -281,38 +230,23 @@ cell {
   overflow: hidden;
   white-space: nowrap;
 }
+.right-section section > div.tab-header div:nth-child(2) {
+  width: 140px;
+}
 .right-section section > div.tab-header div:nth-child(3) {
   width: 140px;
 }
-.right-section section > div.tab-header div:nth-child(4) {
-  width: 140px;
-}
-.right-section section > div.tab-header div:nth-child(4) img {
+.right-section section > div.tab-header div:nth-child(3) img {
   margin-left: 8px;
   cursor: pointer;
 }
-.right-section section > div.tab-header div:nth-child(4) img:first-child {
+.right-section section > div.tab-header div:nth-child(3) img:first-child {
   margin-left: 0;
 }
 .right-section section > div.tab-body {
   height: calc(100% - 35px);
   overflow-y: auto;
   overflow-x: hidden;
-}
-.right-section section > div.tab-body::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.right-section section > div.tab-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.right-section section > div.tab-body::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
 }
 .right-section section > div.tab-body > div {
   width: 100%;
@@ -327,18 +261,15 @@ cell {
   height: 35px;
 }
 .right-section section > div.tab-body > div > div:nth-child(1) {
-  width: 40px;
+  width: calc(100% - 280px);
 }
-.right-section section > div.tab-body > div > div:nth-child(2) {
-  width: calc(100% - 320px);
-}
-.right-section section > div.tab-body > div > div:nth-child(2) * {
+.right-section section > div.tab-body > div > div:nth-child(1) * {
   float: left;
 }
-.right-section section > div.tab-body > div > div:nth-child(2) img {
+.right-section section > div.tab-body > div > div:nth-child(1) img {
   margin-top: 8px;
 }
-.right-section section > div.tab-body > div > div:nth-child(2) span {
+.right-section section > div.tab-body > div > div:nth-child(1) span {
   text-align: left;
   display: inline-block;
   width: calc(100% - 28px);
@@ -348,17 +279,17 @@ cell {
   overflow: hidden;
   white-space: nowrap;
 }
+.right-section section > div.tab-body > div > div:nth-child(2) {
+  width: 140px;
+}
 .right-section section > div.tab-body > div > div:nth-child(3) {
   width: 140px;
 }
-.right-section section > div.tab-body > div > div:nth-child(4) {
-  width: 140px;
-}
-.right-section section > div.tab-body > div > div:nth-child(4) img {
+.right-section section > div.tab-body > div > div:nth-child(3) img {
   margin-left: 8px;
   cursor: pointer;
 }
-.right-section section > div.tab-body > div > div:nth-child(4) img:first-child {
+.right-section section > div.tab-body > div > div:nth-child(3) img:first-child {
   margin-left: 0;
 }
 .pop-mask {
@@ -372,7 +303,7 @@ cell {
   left: 0;
   display: none;
 }
-.left-tree {
+#left-tree {
   height: 230px;
   visibility: hidden;
   overflow: auto;

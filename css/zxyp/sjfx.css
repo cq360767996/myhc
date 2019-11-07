@@ -1,18 +1,3 @@
-.scroll-style::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.scroll-style::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.scroll-style::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
 .sjfx {
   width: 100%;
   height: calc(100% - 18px);
@@ -239,21 +224,6 @@
 .sjfx .sjfx-left-bottom {
   overflow: auto;
 }
-.sjfx .sjfx-left-bottom::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.sjfx .sjfx-left-bottom::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.sjfx .sjfx-left-bottom::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
-}
 .sjfx .sjfx-left-bottom > div {
   width: 100%;
   height: 40px;
@@ -271,21 +241,6 @@
 }
 .sjfx .sjfx-right-bottom {
   overflow: auto;
-}
-.sjfx .sjfx-right-bottom::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #fff;
-}
-.sjfx .sjfx-right-bottom::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background-color: #fff;
-}
-.sjfx .sjfx-right-bottom::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #c1c1c1;
 }
 .sjfx .sjfx-right-bottom > div {
   width: 100%;

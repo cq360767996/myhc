@@ -749,8 +749,8 @@ requirejs(
               });
             }
           })
-          .then(result => {
-            initRightPanel();
+          .then(async result => {
+            await initRightPanel();
             $(".loading").remove();
             sugon.showMessage("报告已生成！", "success");
           });
@@ -928,9 +928,9 @@ requirejs(
       await getTree();
       let $date1 = $("#date1"),
         $date2 = $("#date2"),
-        $deptId = $("#deptId"),
-        $deptName = $("#deptName"),
-        $leftTree = $(".left-tree");
+        $deptId = $("#dept-id"),
+        $deptName = $("#dept-name"),
+        $leftTree = $("#left-tree");
       let lastMonth = sugon.getDate(-1);
       $date1.val((searchRuler.date1 = sugon.getDate(-4)));
       $date2.val((searchRuler.date2 = sugon.getDate(-2)));
@@ -1002,23 +1002,24 @@ requirejs(
         },
         result => {
           rightPanelData = result.data;
-          let $tabBody = $(".tab-body").empty();
+          let html = "";
           result.data.map(val => {
-            $tabBody.append(
-              '<div url="' +
-                val.url +
-                '" containImg="' +
-                val.containImg +
-                '">' +
-                '<div><img src="../../img/znbg/checkbox.png"></div><div><img src="../../img/znbg/word.png"><span>' +
-                val.name +
-                "</span></div><div>" +
-                val.date +
-                '</div><div><img class="report-preview" src="../../img/znbg/preview.png">' +
-                '<img class="report-download" src="../../img/znbg/download.png">' +
-                '<img class="report-delete" src="../../img/znbg/delete.png"></div></div>'
-            );
+            html += `<div url="${val.url}" containImg="${val.containImg}">
+                      <div>
+                        <img src="../../img/znbg/word.png">
+                        <span title="${val.name}">${val.name}</span>
+                      </div>
+                      <div>${val.date}</div>
+                      <div>
+                        <img class="report-preview" src="../../img/znbg/preview.png">
+                        <img class="report-download" src="../../img/znbg/download.png">
+                        <img class="report-delete" src="../../img/znbg/delete.png">
+                      </div>
+                    </div>`;
           });
+          $(".tab-body")
+            .empty()
+            .append(html);
         }
       );
     }
