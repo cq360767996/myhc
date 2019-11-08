@@ -174,7 +174,7 @@ requirejs(["common"], sugon => {
     let name = $(e.target)
       .prev()
       .html()
-      .replace(/\d、/, "");
+      .replace(/\d+、/, "");
     sugon
       .request(sugon.interFaces.zxyp.rx.setting.deleteRight1, {
         name,

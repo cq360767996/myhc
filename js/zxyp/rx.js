@@ -618,6 +618,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
             width: 1
           }
         },
+        confine: true,
         formatter: function(obj) {
           if (obj.componentType == "series") {
             return (
@@ -1039,15 +1040,21 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         $(".tempImg")
           .unbind()
           .bind("click", function() {
-            let keyword = $(this)
+            let $this = $(this),
+              keyword = $this
+                .parent()
+                .parent()
+                .attr("id");
+            let title = $this
               .parent()
-              .parent()
-              .attr("id");
+              .prev()
+              .prev()
+              .html();
             requirejs(["text!../views/zxyp/sjfx.html"], function(ele) {
               sugon.renderDialog({
                 width: 1000,
                 height: 600,
-                title: "正投事件分析",
+                title: `${title}事件分析`,
                 ele: ele,
                 params: {
                   deptId: searchRuler.deptId,

@@ -1031,13 +1031,13 @@ requirejs(["common", "ec"], function(sugon, ec) {
           .empty();
       switch (index) {
         case 0:
-          top = "83px";
+          top = "98px";
           break;
         case 1:
-          top = "163px";
+          top = "178px";
           break;
         case 2:
-          top = "243px";
+          top = "258px";
           break;
       }
       $container.css("top", top).append(`

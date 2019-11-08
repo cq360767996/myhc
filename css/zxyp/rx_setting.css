@@ -36,6 +36,7 @@ column {
   padding: 10px 15px;
 }
 .simple_content .rx-left-panel > section:first-child > search input {
+  padding-left: 35px;
   background: url('../../img/zxyp/aj/search_gray.png') no-repeat 1% 50%;
 }
 .simple_content .rx-left-panel > section:first-child > search-list {

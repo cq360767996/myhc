@@ -686,56 +686,32 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
 
   // 拼接办案小助手-案件办理具体问题分析dom
   let createAjbljtwtfxDom = function(data, $body, chartId) {
-    $body.empty();
-    $('<div class="tab-row"/>')
-      .append($('<div class="tab-td" style="width: 60px;">排行</div>'))
-      .append($('<div class="tab-td" style="width: 140px;">问题标签</div>'))
-      .append($('<div class="tab-td" style="width: 60px;">数量</div>'))
-      .append(
-        $(
-          '<div class="tab-td" style="width: calc(50% - 130px);">问题走势</div>'
-        )
-      )
-      .append(
-        $(
-          '<div class="tab-td" style="width: calc(50% - 130px);">执行规范</div>'
-        )
-      )
-      .appendTo($body);
-    for (let i = 0; i < data.length; i++) {
-      $('<div class="tab-row"/>')
-        .append(
-          $('<div class="tab-td" style="width: 60px;">' + data[i].ph + "</div>")
-        )
-        .append(
-          $(
-            '<div class="tab-td" style="width: 140px;">' +
-              data[i].wtbq +
-              "</div>"
-          )
-        )
-        .append(
-          $('<div class="tab-td" style="width: 60px;">' + data[i].sl + "</div>")
-        )
-        .append(
-          $(
-            '<div class="tab-td" id="' +
-              chartId +
-              i +
-              '" style="height:30px; margin:5px 0;width: calc(50% - 130px);"></div>'
-          )
-        )
-        .append(
-          $(
-            '<div class="tab-td tab-td-click" top-id="' +
-              data[i].id +
-              '" style="text-align: left; width: calc(50% - 130px);"><img src="../../img/zxyp/aj/file.png"><span>' +
-              data[i].zxgf +
-              "</span></div>"
-          )
-        )
-        .appendTo($body);
-    }
+    let html = "";
+    html += `<div class="tab-row">
+              <div class="tab-td" style="width: 60px;">排行</div>
+              <div class="tab-td" style="width: 140px;">问题标签</div>
+              <div class="tab-td" style="width: 60px;">数量</div>
+              <div class="tab-td" style="width: calc(50% - 130px);">问题走势</div>
+              <div class="tab-td" style="width: calc(50% - 130px);">执行规范</div>
+             </div>`;
+    data.map((val, i) => {
+      html += `<div class="tab-row">
+                <div class="tab-td" style="width: 60px;">${val.ph}</div>
+                <div class="tab-td" style="width: 140px;"
+                  title="${val.wtbq}">${val.wtbq}
+                </div>
+                <div class="tab-td" style="width: 60px;">${data[i].sl}</div>
+                <div class="tab-td" id="${chartId + i}"
+                  style="height:30px; margin:5px 0;width: calc(50% - 130px);">
+                </div>
+                <div class="tab-td tab-td-click" top-id="${data[i].id}"
+                  style="text-align: left; width: calc(50% - 130px);">
+                  <img src="../../img/zxyp/aj/file.png">
+                  <span title="${data[i].zxgf}">${data[i].zxgf}</span>
+                </div>
+               </div>`;
+    });
+    $body.empty().append(html);
   };
 
   // 专项分析评价指数接口定义
@@ -768,14 +744,12 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
   let drawZxfxpjzs = function(data) {
     let option = {
       title: {
-        text: "水滴",
         textStyle: {
           color: "#fff",
-          fontSize: "24",
-          fontWeight: "450"
+          fontSize: "20"
         },
-        left: "23%",
-        top: "33%"
+        left: "center",
+        top: "middle"
       },
       series: [
         {
@@ -855,6 +829,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     let $img2 = $('<img src="../../img/zxyp/aj/top_sd.png">');
     let $img3 = $('<img src="../../img/zxyp/aj/top_mj.png">');
     $this.find("div.view-right-bottom-row").remove();
+
     switch (level) {
       case "2":
         $this
@@ -1096,23 +1071,14 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     let data2 = result.data2;
     let xData = [],
       yData1 = [],
-      yData2 = [],
-      data2Max = 100,
-      data2Min = Number(data2[0].value),
-      data1Min = Number(data1[0].value),
-      data1Max = Number(data1[0].value);
+      yData2 = [];
     for (let i = 0; i < data1.length; i++) {
-      data1Min = Math.min(Number(data1[i].value), data1Min);
-      data2Min = Math.min(Number(data2[i].value), data2Min);
-      data1Max = Math.max(Number(data1[i].value), data1Max);
-      // data2Max = Math.max(Number(data2[i].value), data2Max);
       xData.push(data1[i].name);
       yData1.push(data1[i].value);
       yData2.push(data2[i].value);
     }
-    data2Min -= 5;
-    let diff = (data1Max - data1Min) / 2;
-    data1Min = Number(data1Min - diff).toFixed(2);
+    let data1MinAndMax = sugon.handleMinAndMax(yData1);
+    let data2MinAndMax = sugon.handleMinAndMax(yData2);
     let option = {
       tooltip: {
         trigger: "axis",
@@ -1180,8 +1146,8 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       option.yAxis.push({
         type: "value",
         name: "综合评价指数",
-        min: data2Min,
-        max: data2Max,
+        min: data2MinAndMax.min,
+        max: data2MinAndMax.max,
         axisLabel: {
           formatter: "{value}%"
         }
@@ -1208,7 +1174,7 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
       option.yAxis.push({
         type: "value",
         name: "综合评价指数",
-        min: data1Min
+        min: data1MinAndMax.min
       });
     }
     sugon.renderChart({ id: "pop-shl-ajzhpjzsfx", data: result.data1, option });

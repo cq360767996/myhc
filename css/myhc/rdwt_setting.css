@@ -164,6 +164,22 @@ button {
 .left-panel > tab > div:last-child {
   width: 100%;
   height: calc(100% -  50px);
+  overflow-y: auto;
+}
+.left-panel > tab > div:last-child::-webkit-scrollbar {
+  width: 0;
+  height: 6px;
+  background-color: #fff;
+}
+.left-panel > tab > div:last-child::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: #fff;
+}
+.left-panel > tab > div:last-child::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c1c1c1;
 }
 .left-panel > tab > div:last-child .row-selected {
   background-color: #1c84c6;

@@ -33,6 +33,28 @@ button {
   text-align: justify;
 }
 
+// 滚动条样式
+.scroll-style(@width: 6px) {
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: @width;
+    height: 6px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #c1c1c1;
+  }
+}
+
 // 边框以及阴影样式
 .border-style {
   background-color: rgba(255, 255, 255, 0.5);
@@ -216,6 +238,7 @@ button {
       &:last-child {
         width: 100%;
         height: calc(~"100% - " @tab-header-height);
+        .scroll-style(0);
 
         .row-selected {
           background-color: #1c84c6;

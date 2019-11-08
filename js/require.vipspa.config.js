@@ -255,11 +255,17 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     location.href = sugon.ispublished ? "/login" : "login.html";
   });
 
+  // 点击单位列表其他地方列表消失
   $("body").on("click", e => {
     let target = e.target;
     let tree1 = document.getElementById("dept-tree");
     let tree2 = document.getElementById("left-tree");
-    if (e.target.id !== "dept-name" && e.target.id !== "place" && target) {
+    if (
+      target.id !== "dept-name" &&
+      target.id !== "place" &&
+      !$(target).hasClass("expand-icon") &&
+      target
+    ) {
       if (
         tree1 &&
         tree1.contains &&

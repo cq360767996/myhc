@@ -1370,7 +1370,8 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           },
           xAxis: {
             type: "value",
-            boundaryGap: ["20%", "20%"]
+            boundaryGap: ["20%", "20%"],
+            min: 0
           },
           yAxis: {
             type: "category",

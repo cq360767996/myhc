@@ -20,8 +20,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
             fontSize: "24",
             fontWeight: "450"
           },
-          left: "32%",
-          top: "37%"
+          left: "center",
+          top: "middle"
         },
         series: [
           {

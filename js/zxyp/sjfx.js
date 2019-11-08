@@ -51,6 +51,10 @@ requirejs(["common", "ec"], function(sugon, ec) {
             yData.push(val.value);
           });
           let option = {
+            tooltip: {
+              show: true,
+              confine: true
+            },
             grid: {
               top: 20,
               left: 0,
@@ -149,6 +153,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
             .empty()
             .css("margin-left", 0);
           let data = result.data;
+          let html = "";
           let len =
             data.length % 3 == 0
               ? parseInt(data.length / 3)
@@ -157,27 +162,24 @@ requirejs(["common", "ec"], function(sugon, ec) {
           let liWidth = "calc((100% - " + 40 * len + "px) / " + len * 3 + ")";
           $body.width(ulWidth);
           data.map(val => {
-            $body.append(
-              '<li style="width: ' +
-                liWidth +
-                '"><div><p>' +
-                val.date +
-                "\n" +
-                removeRichText(val.content1) +
-                "</p></div><div><p>" +
-                removeRichText(val.content2) +
-                "</p></div></li>"
-            );
+            let content1 = removeRichText(val.content1);
+            let content2 = removeRichText(val.content2);
+            html += `<li style="width: ${liWidth}">
+                      <div>
+                        <p title="${content1}">${val.date}\n${content1}</p>
+                      </div>
+                      <div><p title="${content2}">${content2}</p>
+                      </div>
+                    </li>`;
           });
+          $body.append(html);
         }
       );
     },
     initBottomLeft() {
       // 初始化下左
-      let $body = $(".sjfx-left-bottom").empty();
-      $body.append(
-        "<div><div>诉求时间</div><div>姓名</div><div>诉求内容</div><div>分局</div></div>"
-      );
+      let html =
+        "<div><div>诉求时间</div><div>姓名</div><div>诉求内容</div><div>分局</div></div>";
       sugon.requestJson(
         {
           type: "post",
@@ -186,24 +188,22 @@ requirejs(["common", "ec"], function(sugon, ec) {
         },
         result => {
           result.data.map(val => {
-            $body.append(
-              "<div><div>" +
-                val.sqsj +
-                "</div><div>" +
-                val.xm +
-                "</div><div>" +
-                val.sqnr +
-                "</div><div>" +
-                val.fj +
-                "</div></div>"
-            );
+            html += `<div>
+                      <div title="${val.sqsj}">${val.sqsj}</div>
+                      <div>${val.xm}</div>
+                      <div title="${val.sqnr}">${val.sqnr}</div>
+                      <div title="${val.fj}">${val.fj}</div>
+                    </div>`;
           });
         }
       );
+      $(".sjfx-left-bottom")
+        .empty()
+        .append(html);
     },
     initBottomRight() {
       // 初始化下右
-      let $body = $(".sjfx-right-bottom").empty();
+      let html = "";
       let condition = { ...params, isMy: $(".select2").val() };
       sugon.requestJson(
         {
@@ -213,24 +213,31 @@ requirejs(["common", "ec"], function(sugon, ec) {
         },
         result => {
           result.data.map((val, index) => {
-            $body.append(
-              "<div><div><span>" +
-                (index + 1) +
-                "、" +
-                val.title +
-                "</span><div><span>" +
-                val.date +
-                "</span><span>" +
-                val.dept +
-                "</span></div></div><div><div><div>诉求内容</div><div>" +
-                val.sqnr +
-                "</div></div><div><div>答复脚本</div><div>" +
-                val.dfjb +
-                "</div></div></div></div>"
-            );
+            html += `<div>
+                      <div>
+                        <span>${index + 1}、${val.title}</span>
+                        <div>
+                          <span>${val.date}</span>
+                          <span>${val.dept}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <div>诉求内容</div>
+                          <div>${val.sqnr}</div>
+                        </div>
+                        <div>
+                          <div>答复脚本</div>
+                          <div title="${val.dfjb}">${val.dfjb}</div>
+                        </div>
+                      </div>
+                    </div>`;
           });
         }
       );
+      $(".sjfx-right-bottom")
+        .empty()
+        .append(html);
     }
   };
 

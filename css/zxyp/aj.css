@@ -717,3 +717,13 @@ div.jqcloud span {
   text-align: justify;
   padding: 10px;
 }
+
+.search-input {
+  padding-left: 35px;
+}
+
+.view-right-bottom-row > span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
