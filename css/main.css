@@ -184,8 +184,29 @@ html {
   background: url("../img/slhy/pjda_hover.png") no-repeat;
 }
 
+.alert-menu {
+  background: url("../img/slhy/zhzs_normal.png") no-repeat;
+}
+.infoUpload-menu {
+  background: url("../img/slhy/pjda_normal.png") no-repeat;
+}
+.alert-menu-hover {
+  background: url("../img/slhy/zhzs_hover.png") no-repeat;
+}
+.infoUpload-menu-hover {
+  background: url("../img/slhy/pjda_hover.png") no-repeat;
+}
+
+.management-menu {
+  background: url("../img/slhy/zhzs_normal.png") no-repeat;
+}
+.management-menu-hover {
+  background: url("../img/slhy/zhzs_hover.png") no-repeat;
+}
+
+
 .tab {
-  width: 480px;
+  width: 600px;
   height: 100%;
   margin-left: 12%;
   color: #bfccdf;
@@ -196,7 +217,7 @@ html {
 .tab > div {
   float: left;
   height: 100%;
-  width: calc(25%);
+  width: 20%;
   text-align: center;
   text-shadow: 1px 3px 6px #000;
   cursor: pointer;

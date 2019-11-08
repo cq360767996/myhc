@@ -195,6 +195,21 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/slhy/pjda.html",
       controller: "js/slhy/pjda.js"
     },
+    management: {
+      parent: "user",
+      templateUrl: "views/user/management.html",
+      controller: "js/user/management.js"
+    },
+    alert: {
+      parent: "user",
+      templateUrl: "views/user/alert.html",
+      controller: "js/user/alert.js"
+    },
+    infoUpload: {
+      parent: "user",
+      templateUrl: "views/user/infoUpload.html",
+      controller: "js/user/infoUpload.js"
+    },
     defaults: "404"
   };
   switch (sugon.identityInfo.role) {
@@ -317,7 +332,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
 
   // 把tab的名称转换为菜单名称以便在路由中找到
   function transformTab2Menu(type) {
-    if (["myhc", "zxyp", "slhy", "znbg"].indexOf(type) > -1) {
+    if (["myhc", "zxyp", "slhy", "znbg", "user"].indexOf(type) > -1) {
       Object.keys(router).forEach(key => {
         if (router[key].parent === type) {
           type = key;
@@ -350,6 +365,9 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
             break;
           case "znbg":
             arr = ["ywfxbg", "zhfxbg"];
+            break;
+          case "user":
+            arr = ["management", "alert", "infoUpload"];
             break;
         }
         let filterArr = filterMenu(arr);
