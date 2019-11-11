@@ -2,6 +2,12 @@
   font-family: "CenturyGothic";
   src: url("../../fonts/CenturyGothic.TTF");
 }
+
+@font-face {
+  font-family: "W05";
+  src: url("../../fonts/W05.ttf");
+}
+
 // 基础颜色
 @basic-color: #000;
 // header的高度
@@ -17,7 +23,7 @@
 
 // banner样式
 .banner-mixin {
-  @banner-height: calc(~"50% - 64px");
+  @banner-height: 31%;
   height: @banner-height;
   width: calc(~"100% - 40px");
   margin-left: 20px;
@@ -52,15 +58,17 @@
   }
 
   input,
-  button {
+  button,
+  select {
     height: @input-height;
     line-height: @input-height;
   }
 
-  input {
+  input,
+  select {
     border: 0;
     vertical-align: top;
-    width: 410px;
+    width: 300px;
     margin-left: 20px;
     padding: 0 10px;
 
@@ -69,15 +77,25 @@
     }
   }
 
-  #dept-name {
+  #type {
+    width: 100px;
     margin-left: 0;
-    width: calc(~"100% - 939px");
+    border: none;
+    outline: none;
+  }
+
+  #dept-name {
+    width: calc(~"100% - 950px");
   }
 
   button {
     width: 43px;
     margin-left: 20px;
     background: url(../../img//myhc/rdwt/btn_search.png) no-repeat;
+  }
+
+  .setting-btn {
+    background: url(../../img/myhc/rdwt/setting.png) no-repeat center center;
   }
 
   #dept-tree {
@@ -90,172 +108,90 @@
   }
 }
 
-.mid-panel {
-  .banner-mixin();
-  .border-style();
-  color: @basic-color;
-  padding: 10px 0;
+.mid-header {
+  width: calc(~"100% - 40px");
+  margin: 0 auto;
+  height: 19%;
+  display: flex;
+  justify-content: space-between;
 
-  & > header {
-    width: calc(~"100% - 40px");
-    margin-left: 20px;
-    height: @header-height;
-    line-height: @header-height;
-
-    & > div {
-      height: 100%;
-
-      &:first-child {
-        float: left;
-        font-size: 18px;
-      }
-
-      &:last-child,
-      &:nth-child(2) {
-        float: right;
-        cursor: pointer;
-        position: relative;
-        top: 1px;
-      }
-
-      &:last-child {
-        margin-right: 10px;
-      }
-    }
-  }
-
-  & > section {
-    float: left;
-    width: calc(~"(100% - 140px) / 3");
-    margin-left: 35px;
-    margin-top: 20px;
-    height: calc(~"100% - 240px");
+  & > div {
+    width: calc(~"(100% - 20px) / 3");
+    height: 100%;
+    color: #fff;
+    position: relative;
     cursor: pointer;
 
-    &:nth-child(2) {
-      & > div {
-        &:first-child {
-          border-bottom: 8px solid #f08988;
-        }
-        &:last-child {
-          background-color: #de686a;
-        }
-      }
-    }
-
-    &:nth-child(3) {
-      & > div {
-        &:first-child {
-          border-bottom: 8px solid #f0a16f;
-        }
-        &:last-child {
-          background-color: #df8042;
-        }
-      }
-    }
-
-    &:nth-child(4) {
-      & > div {
-        &:first-child {
-          border-bottom: 8px solid #f9c469;
-        }
-        &:last-child {
-          background-color: #ecb048;
-        }
-      }
+    & > i {
+      position: absolute;
+      top: 7%;
+      left: 6.5%;
+      font-size: 24px;
+      color: #fff;
+      font-weight: bold;
+      font-family: "W05";
     }
 
     & > div {
-      &:first-child {
-        height: 0;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-      }
+      position: absolute;
+      font-size: 20px;
+      width: 100%;
 
-      &:last-child {
-        height: calc(~"100% - 8px");
-        border-radius: 0px 0px 6px 6px;
+      &:nth-child(2) {
+        top: 9%;
+        left: 16%;
 
-        & > div {
-          text-align: center;
-          color: #fff;
-          font-family: "CenturyGothic";
-          padding: 0 5px;
-          .single-text-ellipse();
-
-          &:first-child > * {
-            font-weight: 900;
-          }
-
-          .up-img {
-            display: inline-block;
-            position: relative;
-            top: -2px;
-            left: 1px;
-          }
-
-          .down-img {
-            position: relative;
-            top: -1px;
-            left: 1px;
-          }
+        & > img {
+          position: relative;
+          bottom: 3px;
         }
+      }
+      &:nth-child(3) {
+        padding: 0 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        .single-text-ellipse();
+      }
+      &:nth-child(4) {
+        font-size: 14px;
+        bottom: 10%;
+        padding: 0 20px;
       }
     }
   }
+}
 
-  & > fieldset {
-    width: 50%;
-    height: 170px;
-    float: left;
-    margin-top: 20px;
-    padding: 0 35px;
+.mid-body {
+  width: calc(~"100% - 40px");
+  height: calc(~"40% - 68px");
+  margin: 20px auto;
+  line-height: 50px;
+  .border-style();
+  display: grid;
+  grid-template-rows: repeat(6, 16.7%);
+  align-items: center;
+  color: #666;
 
-    & > row {
-      display: block;
-      height: 50px;
-      line-height: 50px;
-      margin-top: 10px;
+  & > div {
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 200px 200px 100px auto 300px;
+    grid-column-gap: 20px;
+    cursor: pointer;
 
-      &:first-child {
-        margin-top: 0;
+    & > div {
+      span {
+        margin-left: 10px;
+        font-size: 16px;
       }
-
-      & > div {
-        height: 100%;
-        float: left;
-
-        &:first-child {
-          width: calc(~"100% - 180px");
-          background: url(../../img/myhc/rdwt/list_normal.png) no-repeat;
-          background-size: 100% 100%;
-          padding: 0 10px;
-          font-size: 16px;
-          font-weight: 600;
-          color: #000;
-          cursor: pointer;
-
-          &:hover {
-            background: url(../../img/myhc/rdwt/list_hover.png) no-repeat;
-            background-size: 100% 100%;
-          }
-        }
-        &:last-child {
-          width: 180px;
-          padding-left: 30px;
-          font-size: 20px;
-
-          strong {
-            color: #1d84c6;
-          }
-
-          img {
-            position: relative;
-            top: -2px;
-            left: 1px;
-          }
-        }
+      &:nth-child(1) {
+        font-size: 20px;
+        font-weight: bold;
       }
+    }
+
+    &:nth-child(2n + 1) {
+      background-color: rgb(241, 246, 255);
     }
   }
 }

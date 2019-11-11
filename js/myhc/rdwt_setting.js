@@ -15,7 +15,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
   const $mainBody = $("body");
 
   // 初始化左侧面板
-  const initLeftPanel = (index = 0) => {
+  const initLeftPanel = async (index = 0) => {
     let { date1, date2, deptId, model, sortCol, sortType } = searchParams;
     let tags = ["", "", "", ""];
     popMenuData.map((val = [], index) => {
@@ -23,39 +23,36 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
         v.selected && (tags[index] += v.name + ",");
       });
     });
-    return new Promise((resolve, reject) => {
-      sugon
-        .request(sugon.interFaces.myhc.rdwt.getLeft, {
-          date1,
-          date2,
-          deptId,
-          model,
-          sortCol,
-          sortType,
-          deptName: tags[0]
-            ? tags[0].substring(0, tags[0].lastIndexOf(","))
-            : "",
-          tag1: tags[1] ? tags[1].substring(0, tags[1].lastIndexOf(",")) : "",
-          tag2: tags[2] ? tags[2].substring(0, tags[2].lastIndexOf(",")) : "",
-          tag3: tags[3] ? tags[3].substring(0, tags[3].lastIndexOf(",")) : ""
-        })
-        .then(result => {
-          let html = "";
-          rightData &&
-            rightData.map(v1 => {
-              result.data.map(v2 => {
-                v1.id === v2.id && (v2.selected = true);
-              });
+    await sugon
+      .request(sugon.interFaces.myhc.rdwt.getLeft, {
+        date1,
+        date2,
+        deptId,
+        model,
+        sortCol,
+        sortType,
+        deptName: tags[0] ? tags[0].substring(0, tags[0].lastIndexOf(",")) : "",
+        tag1: tags[1] ? tags[1].substring(0, tags[1].lastIndexOf(",")) : "",
+        tag2: tags[2] ? tags[2].substring(0, tags[2].lastIndexOf(",")) : "",
+        tag3: tags[3] ? tags[3].substring(0, tags[3].lastIndexOf(",")) : ""
+      })
+      .then(result => {
+        let html = "";
+        rightData &&
+          rightData.map(v1 => {
+            result.data.map(v2 => {
+              v1.id === v2.id && (v2.selected = true);
             });
-          result.data.map(val => {
-            let className = "",
-              hover = "";
-            val.selected &&
-              ({ className, hover } = {
-                className: `class="row-selected"`,
-                hover: "_hover"
-              });
-            html += `<row rowid="${val.id}"
+          });
+        result.data.map(val => {
+          let className = "",
+            hover = "";
+          val.selected &&
+            ({ className, hover } = {
+              className: `class="row-selected"`,
+              hover: "_hover"
+            });
+          html += `<row rowid="${val.id}"
                       tag="${val.tag4}"
                       ${className}>
                       <cell>
@@ -74,18 +71,16 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
                       <cell>${val.value4}</cell>
                       <cell>${val.value5}</cell>
                     </row>`;
-          });
-          $(".row-body")
-            .empty()
-            .append(html);
-          let cellWidth = index == 1 ? "10%" : "calc(100% / 9)";
-          $(".left-panel > tab > div.row-body > row > cell").css(
-            "width",
-            cellWidth
-          );
-          resolve();
         });
-    });
+        $(".row-body")
+          .empty()
+          .append(html);
+        let cellWidth = index == 1 ? "10%" : "calc(100% / 9)";
+        $(".left-panel > tab > div.row-body > row > cell").css(
+          "width",
+          cellWidth
+        );
+      });
   };
 
   // 渲染右侧面板
@@ -110,17 +105,19 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
   };
 
   // 初始化右侧面板
-  const initRightPanel = () => {
-    let { date1, date2, deptId } = searchParams;
-    return new Promise(async (resolve, reject) => {
-      await sugon
-        .request(sugon.interFaces.myhc.rdwt.getRight, { date1, date2, deptId })
-        .then(result => {
-          rightData = result.data;
-          renderRightPanel();
-        });
-      resolve();
-    });
+  const initRightPanel = async () => {
+    let { date1, date2, deptId, type } = searchParams;
+    await sugon
+      .request(sugon.interFaces.myhc.rdwt.getRight, {
+        date1,
+        date2,
+        deptId,
+        type
+      })
+      .then(result => {
+        rightData = result.data;
+        renderRightPanel();
+      });
   };
 
   // 渲染下拉框
@@ -217,13 +214,14 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
 
   // 初始化预览页面
   const initPreview = () => {
-    let { date1, date2, deptId } = searchParams,
+    let { date1, date2, deptId, type } = searchParams,
       data = rightData.slice(0, 9);
     sugon
       .request(sugon.interFaces.myhc.rdwt.getPreview, {
         date1,
         date2,
         deptId,
+        type,
         data: JSON.stringify(data)
       })
       .then(result => {
@@ -283,32 +281,8 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     $target.parent().html(`${index + 1}、${input}`);
   };
 
-  // 查询按钮功能
-  const searchFunc = function() {
-    searchParams.deptId = $("#dept-id").val();
-    searchParams.date1 = $("#date1").val();
-    searchParams.date2 = $("#date2").val();
-    Promise.resolve()
-      .then(() => initRightPanel())
-      .then(() => initLeftPanel())
-      .catch(err => {
-        throw err;
-      });
-  };
-
-  // 初始化页面
-  function initPage() {
-    Promise.resolve()
-      .then(() => sugon.initSearchBar({ cb: searchFunc }))
-      .then(() => searchFunc());
-  }
-
-  // 页面入口
-  initPage();
-
-  // nav切换事件
-  $(".left-panel > header > section").on("click", function() {
-    let $this = $(this),
+  const navChange = e => {
+    let $this = $(e.target),
       className = "nav-hover",
       index = $this.index(".left-panel > header > section"),
       $header1 = $(".row-header1"),
@@ -331,9 +305,57 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
       }
       // 置空下拉框缓存数据
       popMenuData = [];
-      Promise.resolve().then(() => initLeftPanel(index));
+      initLeftPanel(index);
     }
-  });
+  };
+
+  // 查询按钮功能
+  const searchFunc = async function() {
+    searchParams.deptId = $("#dept-id").val();
+    searchParams.date1 = $("#date1").val();
+    searchParams.date2 = $("#date2").val();
+    await initRightPanel();
+    initLeftPanel();
+  };
+
+  // 控制nav显示
+  const handleNavDisplay = () => {
+    let html;
+    switch (searchParams.type) {
+      case "0":
+        html = `<section class="nav-hover">业务归口模型</section>
+                <section>具体问题模型</section>
+                <section>队伍管理模型</section>`;
+        $(".left-panel > header").on("click", "section", navChange);
+        break;
+      case "1":
+        html = `<section class="nav-hover">业务归口模型</section>`;
+        break;
+      case "2":
+        html = `<section class="nav-hover">问题归口模型</section>`;
+        break;
+      case "3":
+        html = `<section class="nav-hover">队伍归口模型</section>`;
+        break;
+    }
+    $(".left-panel > header")
+      .empty()
+      .append(html);
+  };
+
+  // 初始化页面
+  function initPage() {
+    let search = sugon.getParam(location.hash);
+    searchParams.type = search.type;
+    // 判断nav是否需要显示
+    handleNavDisplay();
+    Promise.resolve()
+      .then(() => sugon.initSearchBar({ cb: searchFunc }))
+      .then(() => searchFunc());
+  }
+
+  // 页面入口
+  initPage();
 
   // 下拉框事件
   $(".head-img1").on("click", e => {
@@ -418,7 +440,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     $target
       .attr("selected", "selected")
       .attr("src", `../../img/myhc/rdwt/sort_${sort}.png`);
-    Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
+    initLeftPanel(searchParams.model - 1);
   });
 
   // 下拉框行点击事件
@@ -448,7 +470,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
       popMenuData[i] = [];
     }
     $popMenu.remove();
-    Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
+    initLeftPanel(searchParams.model - 1);
   });
 
   // 下拉框确定事件
@@ -466,7 +488,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     for (let i = 1 + index; i < 4; i++) {
       popMenuData[i] = [];
     }
-    Promise.resolve().then(() => initLeftPanel(searchParams.model - 1));
+    initLeftPanel(searchParams.model - 1);
     $popMenu.remove();
   });
 
@@ -550,7 +572,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     .on("click", ".simple_content > footer > button", e => {
       let $target = $(e.target),
         btnName = $target.html(),
-        { date1, date2, deptId } = searchParams,
+        { date1, date2, deptId, type } = searchParams,
         data = [];
       previewData.map(val => {
         let { id, deptName, tag, tag1, model, content } = val;
@@ -562,6 +584,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
             date1,
             date2,
             deptId,
+            type,
             data: JSON.stringify(data)
           })
           .then(result => {

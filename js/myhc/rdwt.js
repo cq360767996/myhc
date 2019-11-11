@@ -3,64 +3,57 @@ requirejs(["common", "ec"], (sugon, ec) => {
   let searchParams = {};
 
   // 初始化中间的面板
-  const initMidPanel = () => {
-    return new Promise(async (resolve, reject) => {
-      const $upThree = $(".mid-panel > section > div:last-child"),
-        height = `${$upThree.height() / 2}px`;
-      await sugon
-        .request(sugon.interFaces.myhc.rdwt.getMidData, searchParams)
-        .then(result => {
-          if (result.data.length > 0) {
-            let { deptId, model, code } = result.data[0];
-            Object.assign(searchParams, { detailDeptId: deptId, model, code });
-          }
-          let $body = $(".mid-panel > fieldset"),
-            leftHtml = "",
-            rightHtml = "";
-          result.data.map((val, index) => {
-            let html = `<row>
-                          <div deptId="${val.deptId}" model="${val.model}"
-                              code="${val.code}" class="content-row">
-                              ${index + 1}、${val.content}
-                          </div>
-                          <div>
-                            <span>热度：</span>
-                            <strong>${val.freq}</strong>
-                            <img src="../../img/zxyp/aj/redian.png">
-                          </div>
-                        </row>`;
-            if (index < 3) {
-              $upThree
-                .eq(index)
-                .parent()
-                .attr("deptId", val.deptId)
-                .attr("model", val.model)
-                .attr("code", val.code);
-              $upThree
-                .eq(index)
-                .css("line-height", height)
-                .html(
-                  `<div style="font-size: 18px;height: ${height};">
-                    <strong>NO.${index + 1}</strong>
-                    <span>${val.content}</span>
-                  </div>
-                  <div style="font-size: 20px;height: ${height};">
-                    <span>热度：</span>
-                    <strong>${val.freq}</strong>
-                    <img class="down-img" src="../../img/zxyp/aj/redian.png"/>
-                  </div>`
-                );
-            } else if (index < 6) {
-              leftHtml += html;
-            } else if (index < 9) {
-              rightHtml += html;
-            }
+  const initMidPanel = async () => {
+    await sugon
+      .request(sugon.interFaces.myhc.rdwt.getMidData, searchParams)
+      .then(result => {
+        if (result.data.length > 0) {
+          let { deptId, model, code } = result.data[0];
+          Object.assign(searchParams, {
+            detailDeptId: deptId,
+            model,
+            code
           });
-          $body.eq(0).html(leftHtml);
-          $body.eq(1).html(rightHtml);
+        }
+        let html = "";
+        result.data.map((val, index) => {
+          if (index < 3) {
+            let $body = $(".mid-header > div")
+              .eq(index)
+              .attr("deptId", val.deptId)
+              .attr("model", val.model)
+              .attr("code", val.code)
+              .css(
+                "background",
+                `url(../../img/myhc/rdwt/${val.model}.png) no-repeat center center / 100% 100%`
+              );
+            $body.find("strong").html(val.freq);
+            $body.find(".area-div").html(`高发单位：${val.area}`);
+            $body.find(".content-div").html(val.content);
+          } else {
+            let type =
+              val.model == 1 ? "业务" : val.model == 2 ? "问题" : "队伍";
+            html += `<div deptId="${val.deptId}"
+                            model="${val.model}"
+                            code="${val.code}">
+                        <div>
+                          <img src="../../img/myhc/rdwt/star.png" />
+                          <span>TOP${index + 1}</span>
+                        </div>
+                        <div>
+                          <img src="../../img/myhc/rdwt/redian.png" />
+                          <span>${val.freq}</span>
+                        </div>
+                        <div>${type}</div>
+                        <div>${val.content}</div>
+                        <div>${val.area}</div>
+                       </div>`;
+          }
         });
-      resolve();
-    });
+        $(".mid-body")
+          .empty()
+          .append(html);
+      });
   };
 
   // 初始化下面的面板
@@ -588,14 +581,14 @@ requirejs(["common", "ec"], (sugon, ec) => {
   };
 
   // 查询按钮事件方法
-  function searchFunc() {
+  async function searchFunc() {
     searchParams.deptId = $("#dept-id").val();
     searchParams.deptName = $("#dept-name").val();
     searchParams.date1 = $("#date1").val();
     searchParams.date2 = $("#date2").val();
-    Promise.resolve()
-      .then(() => initMidPanel())
-      .then(() => initBottomPanel());
+    searchParams.type = $("#type").val();
+    await initMidPanel();
+    initBottomPanel();
   }
 
   // 页面入口
@@ -609,31 +602,25 @@ requirejs(["common", "ec"], (sugon, ec) => {
   initPage();
 
   // 前三个盒子点击事件
-  $(".mid-panel > section").on("click", function() {
+  $(".mid-header > div").on("click", function() {
     let $this = $(this),
       deptId = $this.attr("deptId"),
       model = $this.attr("model"),
       code = $this.attr("code");
     Object.assign(searchParams, { detailDeptId: deptId, model, code });
     initBottomPanel();
-    $(".content-row").css(
-      "background-image",
-      "url(../../img/myhc/rdwt/list_normal.png)"
-    );
   });
 
   // 列表点击事件
-  $(".mid-panel").on("click", ".content-row", e => {
-    let $target = $(e.target),
-      deptId = $target.attr("deptId"),
-      model = $target.attr("model"),
-      code = $target.attr("code");
+  $(".mid-body").on("click", $(".mid-body > div"), e => {
+    let $target = $(e.target);
+    let $row = $target.parent().hasClass("mid-body")
+      ? $target
+      : $target.parent();
+    let deptId = $row.attr("deptId"),
+      model = $row.attr("model"),
+      code = $row.attr("code");
     Object.assign(searchParams, { detailDeptId: deptId, model, code });
-    $(".content-row").css(
-      "background-image",
-      "url(../../img/myhc/rdwt/list_normal.png)"
-    );
-    $target.css("background-image", "url(../../img/myhc/rdwt/list_hover.png)");
     initBottomPanel();
   });
 
@@ -656,6 +643,13 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 设置按钮入口
   $(".setting-btn").on("click", () => {
-    location.hash = vipspa.stringify("rdwt/setting");
+    location.hash = vipspa.stringify("rdwt/setting", {
+      type: searchParams.type
+    });
+  });
+
+  // 下拉框修改事件
+  $("#type").on("change", e => {
+    searchParams.type = $(e.target).val();
   });
 });
