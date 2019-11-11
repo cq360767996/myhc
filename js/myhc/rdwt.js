@@ -594,7 +594,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   // 页面入口
   function initPage() {
     Promise.resolve()
-      .then(() => sugon.initSearchBar({ date1: -8, date2: -2, cb: searchFunc }))
+      .then(() => sugon.initSearchBar({ date1: -7, date2: -2, cb: searchFunc }))
       .then(() => searchFunc());
   }
 

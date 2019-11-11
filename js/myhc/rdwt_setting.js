@@ -350,7 +350,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
     // 判断nav是否需要显示
     handleNavDisplay();
     Promise.resolve()
-      .then(() => sugon.initSearchBar({ cb: searchFunc }))
+      .then(() => sugon.initSearchBar({ date1: -7, date2: -2, cb: searchFunc }))
       .then(() => searchFunc());
   }
 
