@@ -140,6 +140,7 @@ requirejs(["common"], sugon => {
       $main = $("main"),
       isGood;
     if (!$target.hasClass(className)) {
+      searchParams.type = index;
       $(".switch-btn > div").removeClass(className);
       $target.addClass(className);
       if (index === 1) {
