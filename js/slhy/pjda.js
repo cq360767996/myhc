@@ -1,551 +1,178 @@
-requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
-  // 最下层细节缓存数据
-  let cacheData = [];
-  // 所有echarts图的渲染
-  const chart = {
-    // 渲染echarts图
-    render(id, option, callback) {
-      const chart = ec.init(document.getElementById(id));
-      chart.setOption(option);
-      callback && chart.on("click", callback);
-    },
-    // 流体球
-    fluid(id, value) {
-      let data = [value, 0.5, 0.4, 0.3];
-      let option = {
-        title: {
-          text: `${value}%`,
-          textStyle: {
-            color: "#fff",
-            fontSize: "24",
-            fontWeight: "450"
-          },
-          left: "center",
-          top: "middle"
-        },
-        series: [
-          {
-            type: "liquidFill",
-            data,
-            radius: "80%",
-            color: [
-              new ec.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: "rgba(227, 184, 74, 1.0)" },
-                { offset: 1, color: "#ffa800" }
-              ])
-            ],
-            center: ["50%", "50%"],
-            outline: {
-              borderDistance: 0,
-              itemStyle: {
-                borderWidth: 1,
-                borderColor: "#2A9BD5"
-              }
-            },
-            label: {
-              normal: {
-                show: false,
-                color: "#000000",
-                insideColor: "white",
-                fontSize: 24
-              }
-            },
-            backgroundStyle: {
-              color: "rgba(232,241,248,0.8)"
-            }
-          }
-        ]
-      };
-      this.render(id, option);
-    },
-    // 单颜色环图
-    pie1(id, data, isRed) {
-      let [color, title, className] = isRed
-          ? ["#f17c8c", "满意度最低业务", "right"]
-          : ["#3ec1a1", "满意度最高业务", "left"],
-        handledData = [
-          data,
-          { name: "", value: (100 - data.value).toFixed(2) }
-        ];
-      $(`.${className}-div`).remove();
-      $(`#${id}`)
-        .parent()
-        .append(`<div class="${className}-div">${title}</div>`);
-      let option = {
-        title: {
-          text: data.name,
-          subtext: `${data.value}%`,
-          left: "center",
-          top: "35%",
-          textStyle: {
-            fontSize: 16,
-            color
-          },
-          subtextStyle: {
-            fontSize: 16,
-            color
-          }
-        },
-        color: [color, "#e6e6e6"],
-        series: [
-          {
-            type: "pie",
-            radius: ["60%", "70%"],
-            label: {
-              show: false
-            },
-            hoverAnimation: false,
-            labelLine: {
-              show: false
-            },
-            data: handledData
-          }
-        ]
-      };
-      this.render(id, option);
-    },
-    // 多颜色环图
-    pie2(id, data) {
-      let sum = data.reduce((sum, val) => sum + Number(val.value), 0),
-        xData = [],
-        max = data.reduce((max, val) => Math.max(Number(val.value), max), 0),
-        color = ["#71b6f9", "#14c6ca", "#a29ff3", "#f08988", "#f3b657"],
-        $parent = $(`#${id}`).parent(),
-        selectedIndex;
-      data.map((val, index) => {
-        xData.push(val.name);
-        val.percent = ((val.value / sum) * 100).toFixed(0);
-        if (max == val.value) {
-          val.selected = true;
-          selectedIndex = index;
-        }
-      });
-      $(`#${id} > div`).remove();
-      $parent.append(`<div class="pop-div" style="color: ${color[selectedIndex]}">
-                        <div>${data[selectedIndex].name}：${data[selectedIndex].value}件</div>
-                        <div>${data[selectedIndex].percent}%</div>
-                      </div>`);
-      let option = {
-        color,
-        tooltip: {
-          formatter: "{b}: {c} ({d}%)"
-        },
-        legend: {
-          bottom: 0,
-          data: xData
-        },
-        series: [
-          {
-            type: "pie",
-            radius: ["50%", "70%"],
-            center: ["50%", "37%"],
-            selectedMode: "single",
-            hoverAnimation: false,
-            avoidLabelOverlap: false,
-            label: {
-              show: true,
-              position: "inside",
-              formatter: function(param) {
-                return param.data.percent + "%";
-              }
-            },
-            data
-          }
-        ]
-      };
-
-      this.render(id, option, param => {
-        $(".pop-div").css("color", param.color)
-          .html(`<div>${param.data.name}：${param.data.value}件</div>
-                 <div>${param.data.percent}%</div>`);
-      });
-    },
-    // 线柱状混合图(两列柱子)
-    lineAndBar1(id, data) {
-      let yData1 = [],
-        yData2 = [],
-        yData3 = [],
-        xData = [];
-      data.map(val => {
-        xData.push(val.name);
-        yData1.push(val.value1);
-        yData2.push(val.value2);
-        yData3.push(val.value3);
-      });
-      let option = {
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999"
-            }
-          }
-        },
-        legend: {
-          data: ["接警量", "办案量", "满意度"]
-        },
-        grid: {
-          top: "15%",
-          left: "7%",
-          width: "87%",
-          height: "75%"
-        },
-        xAxis: [
-          {
-            type: "category",
-            data: xData,
-            axisPointer: {
-              type: "shadow"
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: "value",
-            name: "接警量/办案量"
-          },
-          {
-            type: "value",
-            name: "满意度",
-            // min: data2Min,
-            // max: data2Max,
-            axisLabel: {
-              formatter: "{value}%"
-            }
-          }
-        ],
-        series: [
-          {
-            name: "接警量",
-            type: "bar",
-            data: yData1,
-            barWidth: "15",
-            itemStyle: {
-              normal: {
-                barBorderRadius: [2, 2, 0, 0],
-                borderWidth: 1,
-                borderColor: "rgba(18, 86, 108, 0.5)",
-                color: "#14c6ca",
-                label: {
-                  show: false
-                }
-              }
-            }
-          },
-          {
-            name: "办案量",
-            type: "bar",
-            data: yData2,
-            barWidth: "15",
-            itemStyle: {
-              normal: {
-                barBorderRadius: [2, 2, 0, 0],
-                borderWidth: 1,
-                borderColor: "rgba(18, 86, 108, 0.5)",
-                color: "#6b8ab6",
-                label: {
-                  show: false
-                }
-              }
-            }
-          },
-          {
-            name: "满意度",
-            type: "line",
-            yAxisIndex: 1,
-            color: "#1890ff",
-            data: yData3
-          }
-        ]
-      };
-      this.render(id, option);
-    },
-    // 线柱状混合图(一列柱子)
-    lineAndBar2(id, data) {
-      let yData1 = [],
-        yData2 = [],
-        xData = [];
-      data.map(val => {
-        xData.push(val.name);
-        yData1.push(val.value1);
-        yData2.push(val.value2);
-      });
-      let option = {
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999"
-            }
-          }
-        },
-        legend: {
-          data: ["投诉次数", "满意度"]
-        },
-        grid: {
-          top: 20,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: "category",
-            data: xData,
-            axisPointer: {
-              type: "shadow"
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: "value"
-          },
-          {
-            type: "value",
-            // min: data2Min,
-            // max: data2Max,
-            axisLabel: {
-              formatter: "{value}%"
-            }
-          }
-        ],
-        series: [
-          {
-            name: "投诉次数",
-            type: "bar",
-            data: yData1,
-            barWidth: "15",
-            itemStyle: {
-              normal: {
-                barBorderRadius: [2, 2, 0, 0],
-                borderWidth: 1,
-                borderColor: "rgba(18, 86, 108, 0.5)",
-                color: "#f17c8c",
-                label: {
-                  show: false
-                }
-              }
-            }
-          },
-          {
-            name: "满意度",
-            type: "line",
-            yAxisIndex: 1,
-            color: "#1890ff",
-            data: yData2
-          }
-        ]
-      };
-      this.render(id, option);
-    }
-  };
-
-  // 初始化最上层面板
-  function initTop() {
-    sugon.request(sugon.interFaces.slhy.pjda.initTop).then(result => {
-      chart.fluid("chart1", result.data2[0]);
-      $(`.good-rank`).html(result.data2[1]);
-      $(`.bad-rank`).html(result.data2[2]);
-    });
-  }
-
-  // 初始化中间的面板
-  function initMid() {
-    sugon.request(sugon.interFaces.slhy.pjda.initMid).then(result => {
-      chart.pie1("chart2", result.data1);
-      chart.pie1("chart3", result.data2, true);
-      chart.lineAndBar1("chart4", result.data3);
-    });
-  }
-
-  // 初始化最下层面板
-  function initBottom() {
-    Promise.resolve()
-      .then(() => initTimeLine())
-      .then(date => {
-        $(".main-container > section .right-aside").empty();
-        getBottomDetail(date, 1);
-        getBottomDetail(date, 0);
-      });
-  }
-
-  // 渲染时间线
-  function initTimeLine() {
-    return new Promise((resolve, reject) => {
-      sugon.request(sugon.interFaces.slhy.pjda.initTimeLine).then(result => {
-        let html = "";
-        for (let i = 1, len = result.data.length; i < len; i++) {
-          html += `<li class="${i === 1 ? "li-selected" : ""}">
-                    <span></span>
-                    <span></span>
-                    <span>${result.data[i]}-${result.data[i - 1]}</span>
-                    <span></span>
-                  </li>`;
-        }
-        $(".time-line-container")
-          .empty()
-          .append(html);
-        $(".time-line-container > li:first-child::before").css(
-          "background-color",
-          "#509ce9"
-        );
-        resolve({ date1: result.data[0], date2: result.data[1] });
-      });
-    });
-  }
-
-  // 获取最下层的细节数据
-  function getBottomDetail(date, type) {
-    sugon
-      .request(sugon.interFaces.slhy.pjda.getBottomDetail, { type })
-      .then(result => {
-        let html = "",
-          data1 = result.data1;
-        let uuid = sugon.uuid();
-        html += `<section id="${uuid}">
-                <header>
-                  <img src="../../img/slhy/pjda/img10.png" />
-                  <span>${date.date2}—${date.date1}</span>
-                  <span>${data1[0]}</span>
-                  <span>岗位：${data1[1]}</span>
-                  <span>业务量：
-                    <strong class="strong1">${data1[2]}</strong>件</span>
-                  <span>被投诉：
-                    <strong class="strong2">${data1[3]}</strong>次</span>
-                  <span>满意度：
-                    <strong class="strong3">${data1[4]}%</strong></span>
-                </header>
-                <section>
-                  <aside>
-                    <section>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img11.png" />
-                          <span>业务分析</span>
-                        </header>
-                        <section id="${uuid}-left"></section>
-                      </aside>
-                      <aside id="${uuid}-right"></aside>
-                    </section>
-                    <section>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img11.png" />
-                          <span>民意点赞</span>
-                        </header>
-                        <section>
-                        </section>
-                      </aside>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img11.png" />
-                          <span>民意诉求</span>
-                        </header>
-                        <section></section>
-                      </aside>
-                    </section>
-                  </aside>
-                  <aside>
-                    <header>
-                      <img src="../../img/slhy/pjda/img11.png" />
-                      <span>群众诉求及评价</span>
-                    </header>
-                    <section>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img12.png" />
-                          <span>群众评价热词</span>
-                        </header>
-                      </aside>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img12.png" />
-                          <span>群众诉求热词</span>
-                        </header>
-                      </aside>
-                    </section>
-                  </aside>
-                </section>
-              </section>`;
-        // <div class="fold-btn"></div>
-        $(".main-container > section .right-aside").append(html);
-        chart.pie2(`${uuid}-left`, result.data2);
-        chart.lineAndBar2(`${uuid}-right`, result.data3);
-        let $listDom = $(
-            `#${uuid} > section > aside:first-child > section:last-child > aside > section`
-          ),
-          $RankDom = $(
-            `#${uuid} > section > aside:last-child > section > aside`
-          );
-        renderList($listDom.eq(0), result.data4);
-        renderList($listDom.eq(1), result.data5);
-        renderRank($RankDom.eq(0), result.data6);
-        renderRank($RankDom.eq(1), result.data7);
-      });
-  }
-
-  // 渲染最下层detail的列表
-  function renderList($dom, data) {
-    let html = "";
-    data.map(val => {
-      html += `<row>
-                <p>${val.id}</p>
-                <p>${val.content}</p>
-              </row>`;
-    });
-    $dom.append(html);
-  }
-
-  // 渲染最下层detail的排名
-  function renderRank($dom, data) {
-    let html = "";
-    data.map((val, i) => {
-      html += `<row>
-                <cell class="${i < 3 ? `span-top${i + 1}` : ""}"></cell>
-                <cell>${val}</cell>
-              </row>`;
-    });
-    $dom.append(html);
-  }
-
-  // 页面入口
-  function initPage() {
-    initTop();
-    initMid();
-    initBottom();
-  }
-
+requirejs(["common"], sugon => {
+  // 页面查询参数
+  let searchParams = {};
   // 页面入口
   initPage();
 
-  $(".close-btn").on("click", () => {
-    location.hash = "rdwt?click=1";
+  // 页面入口
+  function initPage() {
+    initSearchBar();
+    initBottom();
+  }
+
+  // 初始化所有的fieldset
+  function initBottom(isGood) {
+    initBottom1(isGood);
+    initBottom2(isGood);
+    initBottom3(isGood);
+    initBottom4(isGood);
+  }
+
+  // 初始化第1个fieldset
+  function initBottom1(isGood) {
+    let params = Object.assign({ position: 0, ckfwType: 0 }, searchParams);
+    sugon.request(sugon.interFaces.myhc.rdwt.getJcj, params).then(result => {
+      renderBottom({ id: "jcj", data: result.data, isGood });
+    });
+  }
+
+  // 初始化第2个fieldset
+  function initBottom2(isGood, ckfwType = 0) {
+    let params = Object.assign({ position: 1, ckfwType }, searchParams);
+    sugon.request(sugon.interFaces.myhc.rdwt.getCkfw, params).then(result => {
+      renderBottom({ id: "ckfw", data: result.data, isGood });
+    });
+  }
+
+  // 初始化第3个fieldset
+  function initBottom3(isGood) {
+    let params = Object.assign({ position: 2, ckfwType: 0 }, searchParams);
+    sugon.request(sugon.interFaces.myhc.rdwt.getAj, params).then(result => {
+      renderBottom({ id: "aj", data: result.data, isGood });
+    });
+  }
+
+  // 初始化第4个fieldset
+  function initBottom4(isGood) {
+    let params = Object.assign({ position: 3, ckfwType: 0 }, searchParams);
+    sugon.request(sugon.interFaces.myhc.rdwt.getMjsxl, params).then(result => {
+      renderBottom({ id: "sxl", data: result.data, isGood, isLast: true });
+    });
+  }
+
+  // 渲染fieldset的dom
+  function renderBottom({ id, data = [], isGood = false, isLast = false }) {
+    let selectedIndex,
+      html = "";
+    let filterData = data.filter((val, index) => {
+      if (val.isFirst) {
+        selectedIndex = index;
+      }
+      return val.isFirst;
+    });
+    if (filterData.length > 0) {
+      html += generateRow(filterData[0], selectedIndex, isGood, isLast);
+    }
+    data.map((val, index) => {
+      html += generateRow(val, index, isGood, isLast);
+    });
+    $(`#${id} > section`)
+      .empty()
+      .append(html);
+    // 绑定点击弹出页事件
+    $(".main-section > fieldset > section > section")
+      .off()
+      .on("click", function() {
+        let $this = $(this);
+        if ($this.attr("row-id")) {
+          requirejs(["text!../views/slhy/pjda_popup.html"], function(ele) {
+            $("#ui-view").append(ele);
+          });
+        }
+      });
+  }
+
+  // 追加行
+  function generateRow(val, index, isGood, isLast) {
+    let img,
+      color = "",
+      goodOrBad = isGood ? "good" : "bad";
+    if (index < 3) {
+      img = `<img 
+              src="../../img/slhy/pjda/mybd/${goodOrBad + (index + 1)}.png" />`;
+      color = ` class= "color${index + 1}"`;
+    } else {
+      img = `<span>${index + 1}</span>`;
+    }
+    let notLastDom = `<section row-id="${val.id}">
+                        <div><div>${img}</div><div>${val.name}</div></div>
+                        <div>
+                          <div${color}>
+                            <span>满意度<strong>${val.value}</strong></span>
+                            <span>业务量<strong>${val.ywl}</strong>次</span>
+                          </div>
+                          <div>${val.dw}</div>
+                        </div>
+                      </section>`;
+    let lastDom = `<section>
+                    <div><div>${img}</div><div${color}>${val.value}</div></div>
+                    <div>
+                      <div>${val.name}</div>
+                      <div>${val.dw}</div>
+                    </div>
+                   </section>`;
+    return isLast ? lastDom : notLastDom;
+  }
+
+  // s初始化查询栏
+  function initSearchBar() {
+    sugon.initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
+    sugon.initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
+    searchParams.type = 0;
+    searchParams.keyword = "";
+  }
+
+  // 查询
+  function searchFunc() {
+    let index = $(".selected").index(".switch-btn > div");
+    let isGood = index === 1;
+    searchParams.keyword = $("#keyword").val();
+    initBottom(isGood);
+  }
+
+  $(".switch-btn > div").on("click", e => {
+    let $target = $(e.target),
+      index = $target.index(".switch-btn > div"),
+      className = "selected";
+    let good = "good-section",
+      bad = "bad-section",
+      $mainSection = $(".main-section"),
+      $main = $("main"),
+      isGood;
+    if (!$target.hasClass(className)) {
+      $(".switch-btn > div").removeClass(className);
+      $target.addClass(className);
+      if (index === 1) {
+        isGood = true;
+        $mainSection.removeClass(bad).addClass(good);
+        $main.css(
+          "background",
+          `url(../../img/slhy/pjda/mybd/good_bg.png) no-repeat center center / 100% 100%`
+        );
+      } else {
+        isGood = false;
+        $mainSection.removeClass(good).addClass(bad);
+        $main.css(
+          "background",
+          `url(../../img/slhy/pjda/mybd/bad_bg.png) no-repeat center center / 100% 100%`
+        );
+      }
+      initBottom(isGood);
+    }
   });
 
-  // // 伸缩按钮事件
-  // $(".right-aside").on("click", ".fold-btn", e => {
-  //   let $target = $(e.target),
-  //     $parent = $target.parent(),
-  //     height = $parent.css("height"),
-  //     targetHeight,
-  //     hideSection = $parent.find(
-  //       "section > aside:first-child > section:last-child"
-  //     ),
-  //     className = "";
-  //   $target.removeClass("fold-btn-up");
-  //   if (height == "340px") {
-  //     targetHeight = "530px";
-  //     hideSection.show();
-  //   } else {
-  //     targetHeight = "340px";
-  //     hideSection.hide();
-  //     className = "fold-btn-up";
-  //   }
-  //   $parent.animate({ height: targetHeight });
-  //   $target.addClass(className);
-  // });
+  // 窗口服务下拉框事件
+  $("#ckfw select").on("change", e => {
+    let index = $(".selected").index(".switch-btn > div");
+    let isGood = index === 1;
+    initBottom2(isGood, $(e.target).val());
+  });
+
+  // 查询按钮事件
+  $("#search-btn").on("click", searchFunc);
+
+  // keyword回车键事件
+  $("#keyword").on("keyup", e => {
+    e.keyCode === 13 && searchFunc();
+  });
 });

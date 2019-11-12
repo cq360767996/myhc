@@ -1,110 +1,81 @@
 <link rel="stylesheet" href="../../css/slhy/pjda.css" />
 
-<div class="main-container">
+<main>
   <header>
-    <header>执法服务评价档案</header>
-    <div class="output-btn">
-      <img src="../../img/slhy/pjda/img7.png" />
-      <span>档案输出</span>
-    </div>
-    <i class="glyphicon glyphicon-remove close-btn"></i>
-    <aside class="left-aside">
-      <div>
-        <img src="../../img/slhy/pjda/1.jpg" />
-        <article>
-          <div>
-            <div>姓名：郑岩基</div>
-            <div>岗位：办案民警</div>
-          </div>
-          <div>
-            <div>警号：018117</div>
-            <div>单位：横溪派出所</div>
-          </div>
-          <div>
-            <div>职位：一级警员</div>
-            <div>学历：本科</div>
-          </div>
-        </article>
-      </div>
-      <div>
-        <p>
-          <img src="../../img/slhy/pjda/img1.png" />
-          <span class="span-line"></span>
-          <span> <strong>11</strong>年就职于<strong>2</strong>个单位 </span>
-        </p>
-        <p>
-          <img src="../../img/slhy/pjda/img2.png" />
-          <span class="span-line"></span>
-          <span>获得三等功以上表彰<strong>1</strong>项目 </span>
-        </p>
-        <p>
-          <img src="../../img/slhy/pjda/img3.png" />
-          <span class="span-line"></span>
-          <span> 连续<strong>2</strong>年年度考核优秀 </span>
-        </p>
-      </div>
-    </aside>
-    <aside class="right-aside">
-      <div>
-        <div>
-          <img src="../../img/slhy/pjda/img4.png" />
-          <span>综合满意度</span>
-          <img src="../../img/slhy/pjda/img4.png" />
-        </div>
-        <div id="chart1"></div>
-      </div>
-      <div>
-        <div>
-          <header>
-            <img src="../../img/slhy/pjda/img4.png" />
-            <span>本单位同岗位单位排名</span>
-            <img src="../../img/slhy/pjda/img4.png" />
-          </header>
-          <section>
-            <div>第 <strong class="good-rank"></strong> 名</div>
-            <div>
-              <img src="../../img/slhy/pjda/img5.png" />
-            </div>
-          </section>
-        </div>
-        <div>
-          <header>
-            <img src="../../img/slhy/pjda/img4.png" />
-            <span>分局同岗位排名</span>
-            <img src="../../img/slhy/pjda/img4.png" />
-          </header>
-          <section>
-            <div>第 <strong class="bad-rank"></strong> 名</div>
-            <div>
-              <img src="../../img/slhy/pjda/img6.png" />
-            </div>
-          </section>
-        </div>
-      </div>
-    </aside>
-  </header>
-  <banner>
     <div>
+      <input class="form-control" id="date1" placeholder="时间" readonly />
+      <span>至</span>
+      <input class="form-control" id="date2" placeholder="时间" readonly />
+      <input class="form-control" id="keyword" placeholder="民警姓名/警号" />
+      <button id="search-btn">查询</button>
+    </div>
+    <div class="switch-btn">
+      <div class="selected">曝光台</div>
+      <div>好评榜</div>
+    </div>
+  </header>
+  <section class="main-section bad-section">
+    <fieldset id="jcj">
       <header>
-        <img src="../../img/slhy/pjda/img8.png" />
-        <span>满意度分析</span>
+        <img src="../../img/slhy/pjda/mybd/t1.png" >
+        <span>110接处警</span>
       </header>
       <section>
-        <aside id="chart2"></aside>
-        <aside id="chart3"></aside>
+        <section>
+          <div>
+            <div><img src="../../img/slhy/pjda/mybd/bad1.png" /></div>
+            <div>凌学浩</div>
+          </div>
+          <div>
+            <div>
+              <span>满意度77.51%</span>
+              <span>业务量2次</span>
+            </div>
+            <div>
+              鼓楼分局华侨路派出所
+            </div>
+          </div>
+        </section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
       </section>
-    </div>
-    <div id="chart4"></div>
-  </banner>
-  <section>
-    <header>
-      <img src="../../img/slhy/pjda/img9.png" />
-      <span>效能分析</span>
-    </header>
-    <aside class="left-aside">
-      <ul class="time-line-container"></ul>
-    </aside>
-    <aside class="right-aside"></aside>
-    <div class="clear-div"></div>
+    </fieldset>
+    <fieldset id="ckfw">
+      <header>
+        <img src="../../img/slhy/pjda/mybd/t2.png" >
+        <select>
+          <option value="0">窗口服务</option>
+          <option value="3">户政服务</option>
+          <option value="6">身份证业务</option>
+          <option value="4">出入境业务</option>
+          <option value="2">车管车辆</option>
+          <option value="1">车管驾证</option>
+          <option value="5">监管业务</option>
+        </select>
+      </header>
+      <section></section>
+    </fieldset>
+    <fieldset id="aj">
+      <header>
+        <img src="../../img/slhy/pjda/mybd/t3.png" >
+        <span>案件办理</span>
+      </header>
+      <section></section>
+    </fieldset>
+    <fieldset id="sxl">
+      <header>
+        <img src="../../img/slhy/pjda/mybd/t4.png" >
+        <span>社区民警熟悉率</span>
+      </header>
+      <section></section>
+    </fieldset>
   </section>
-</div>
+</section>

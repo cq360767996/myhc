@@ -1,11 +1,16 @@
 @font-face {
-  font-family: "ZHSCNMT--GBK1-0";
-  src: url("../../fonts/zhscnm.ttf");
+  font-family: "FZHTJW";
+  src: url(../../fonts/FZHTJW.TTF);
 }
 
 @font-face {
-  font-family: "FZHTJW--GBK1-0";
-  src: url("../../fonts/FZHTJW.TTF");
+  font-family: "SourceHanSansCN";
+  src: url(../../fonts/SourceHanSansCN-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Balth";
+  src: url(../../fonts/Balth.ttf);
 }
 
 // 单行省略
@@ -16,609 +21,274 @@
   white-space: nowrap;
 }
 
-//多行省略
-.text-ellipse(@line) {
-  // 多行省略
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: @line;
-  overflow: hidden;
-  text-align: justify;
-}
-
-// 渐变色字体
-.color-gradient {
-  background-image: -webkit-linear-gradient(#ffb347, #ffcc33);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.clear-div {
-  clear: both;
-}
-
-#ui-view {
-  overflow: auto;
-}
-
-.main-container {
-  width: 1440px;
+main {
+  width: calc(~"100% - 32px");
+  height: calc(~"100% - 20px");
   margin: 10px auto;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  padding-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 38px 0px rgba(0, 0, 0, 0.47);
+  border-radius: 4px;
+  padding: 15px;
+  position: relative;
+  background: url(../../img/slhy/pjda/mybd/bad_bg.png) no-repeat center center /
+    100% 100%;
 
   & > header {
-    height: 459px;
-    background: url(../../img/slhy/pjda/header_bg.png) no-repeat center center /
-      100% 100%;
-    position: relative;
-    font-family: "FZHTJW--GBK1-0";
+    width: calc(~"100% - 30px");
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    top: calc(~"20% - 50px");
+    display: flex;
+    justify-content: space-between;
 
-    & > header {
-      height: 70px;
-      line-height: 70px;
-      text-align: center;
-      font-size: 40px;
-      font-weight: bold;
-      color: #ffffff;
-      font-family: "ZHSCNMT--GBK1-0";
-      .color-gradient();
-    }
+    & > div {
+      display: inline-flex;
+      justify-content: space-between;
 
-    .output-btn {
-      position: absolute;
-      top: 28px;
-      right: 69px;
-      font-size: 16px;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      font-size: 16px;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    & > aside {
-      float: left;
-      width: calc(~"50% - 150px");
-      height: 344px;
-      color: #fff;
-    }
-
-    .left-aside {
-      background: url(../../img/slhy/pjda/left_bg.png) no-repeat center center /
-        100% 100%;
-      margin-left: 140px;
-      padding: 20px 30px;
-
-      & > div {
-        &:first-child {
-          height: 180px;
-
-          & > * {
-            float: left;
-          }
-
-          & > img {
-            display: block;
-            width: 120px;
-            height: 120px;
-            border-radius: 58px;
-            margin: 30px 20px;
-          }
-
-          & > article {
-            width: calc(~"100% - 160px");
-            height: 100%;
-
-            & > div {
-              height: 60px;
-              line-height: 60px;
-              font-size: 20px;
-              letter-spacing: -1px;
-
-              & > div {
-                float: left;
-                width: 40%;
-                height: 100%;
-                .single-text-ellipse();
-
-                &:last-child {
-                  width: 60%;
-                }
-              }
-            }
-          }
-        }
-        &:last-child {
-          height: 120px;
-
-          & > p {
-            margin-bottom: 3px;
-            margin-left: 50px;
-            font-size: 20px;
-
-            .span-line {
-              display: inline-block;
-              width: 90px;
-              height: 2px;
-              border-top: 1px solid #00c0ff;
-              margin: 0 5px;
-            }
-
-            strong {
-              color: #fbc137;
-              font-size: 22px;
-            }
-          }
-        }
-      }
-    }
-    .right-aside {
-      background: url(../../img/slhy/pjda/right_bg.png) no-repeat center center /
-        100% 100%;
-      margin-left: 20px;
-
-      & > div {
-        &:first-child {
-          height: 145px;
-          padding: 7px 9px 0 9px;
-          line-height: 145px;
-          font-family: "FZHTJW--GBK1-0";
-          font-size: 28px;
-          .color-gradient();
-
-          & > div {
-            height: 100%;
-            float: left;
-
-            &:first-child {
-              width: calc(~"100% - 260px");
-
-              & > span {
-                margin: 0 20px;
-              }
-
-              & > img:first-child {
-                margin-left: 50px;
-              }
-            }
-          }
-
-          #chart1 {
-            width: 260px;
-            height: 100%;
-          }
-        }
-
-        &:last-child {
-          height: 191px;
-
-          & > div {
-            float: left;
-            width: 277px;
-            height: 100%;
-            padding: 9px 0 0 9px;
-
-            & > header {
-              height: 50px;
-              line-height: 50px;
-              text-align: center;
-
-              & > img {
-                position: relative;
-                top: -2px;
-              }
-
-              & > span {
-                margin: 0 20px;
-                .color-gradient();
-                font-size: 18px;
-                font-weight: 600;
-              }
-            }
-
-            & > section {
-              height: calc(~"100% - 50px");
-
-              & > div {
-                text-align: center;
-                &:first-child {
-                  height: 50px;
-                  line-height: 50px;
-                  font-size: 26px;
-                }
-
-                &:last-child {
-                  height: 70px;
-                  height: 70px;
-                }
-
-                .good-rank {
-                  .color-gradient();
-                  font-size: 36px;
-                }
-
-                .bad-rank {
-                  color: #fb556c;
-                  font-size: 36px;
-                }
-              }
-            }
-
-            &:last-child {
-              margin-left: 3px;
-            }
-          }
-        }
+      &:first-child > * {
+        color: #000;
+        margin-left: 10px;
       }
     }
   }
 
-  & > banner {
-    width: calc(~"100% - 280px");
-    display: block;
-    height: 230px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    margin: 0 auto 20px auto;
-    padding: 10px 20px;
-    color: #333;
+  #date1,
+  #date2,
+  #keyword {
+    width: 150px;
+    height: 100%;
+    padding: 0 5px;
+    vertical-align: top;
+  }
 
-    & > div {
-      height: 100%;
-      float: left;
-      position: relative;
-
-      &:first-child {
-        width: 35%;
-
-        & > header {
-          height: 40px;
-          line-height: 40px;
-          color: #000;
-
-          & > span {
-            margin-left: 5px;
-          }
-        }
-
-        & > section {
-          height: calc(~"100% - 40px");
-
-          & > aside {
-            float: left;
-            width: 50%;
-            height: 100%;
-          }
-
-          & > div {
-            position: absolute;
-            font-size: 16px;
-            color: #333;
-            width: 50%;
-            text-align: center;
-          }
-
-          .left-div {
-            left: 0;
-          }
-
-          .right-div {
-            left: 50%;
-          }
-        }
-      }
-
-      &:last-child {
-        width: 65%;
-      }
-    }
+  #search-btn {
+    background-color: #2a5896;
+    border-radius: 3px;
+    height: 100%;
+    border: 0;
+    outline: none;
+    color: #fff;
   }
 
   & > section {
-    margin: 0 auto;
-    width: calc(~"100% - 280px");
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 10px;
-    color: #333;
+    width: calc(~"100% - 30px");
+    height: calc(~"80% - 10px");
+    position: absolute;
+    top: 20%;
 
-    & > header {
-      height: 40px;
-      line-height: 40px;
-      color: #000;
+    & > fieldset {
+      height: 100%;
+      color: #333;
+      border-radius: 3px;
+      background-color: #e6eaf1;
 
-      & > span {
-        margin-left: 5px;
+      & > header {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        font-size: 24px;
+        font-family: "FZHTJW";
+        letter-spacing: 2px;
       }
-    }
-
-    & > aside {
-      float: left;
-    }
-
-    .left-aside {
-      width: 150px;
-      min-height: 100px;
-
-      & > ul {
-        margin: 0;
-        padding-left: 28px;
-        list-style: none;
-
-        & > li {
-          margin-bottom: 52px;
-          line-height: 20px;
-          position: relative;
-          cursor: pointer;
-
-          &:last-child > span:last-child {
-            display: none;
-          }
-
-          & > span {
-            &:first-child {
-              position: absolute;
-              width: 12px;
-              height: 12px;
-              border-radius: 6px;
-              top: 5px;
-              left: -20px;
-              background-color: #e4e7ed;
-            }
-
-            &:last-child {
-              position: absolute;
-              width: 2px;
-              height: 60px;
-              top: 17px;
-              left: -15px;
-              background-color: #e4e7ed;
-            }
-          }
-        }
-
-        .li-selected > span:first-child {
-          background-color: #509ce9;
-        }
-      }
-    }
-
-    .right-aside {
-      width: calc(~"100% - 150px");
 
       & > section {
-        background-color: #ffffff;
-        border-radius: 10px;
-        border: solid 1px #f2f2f2;
-        height: 510px;
-        margin-bottom: 20px;
-        position: relative;
-
-        .fold-btn {
-          width: 26px;
-          height: 26px;
-          background: #ffffff url(../../img/slhy/pjda/arrow_up.png) no-repeat
-            center center;
-          box-shadow: 0 0 2px 2px rgba(141, 141, 141, 0.25);
-          position: absolute;
-          bottom: -13px;
-          border-radius: 13px;
-          left: 50%;
-          cursor: pointer;
-          transform: rotate(180deg);
-        }
-
-        & > header {
-          height: 50px;
-          line-height: 50px;
-          border-bottom: 1px solid #f2f2f2;
-          background-color: #f6faff;
-          padding: 0 10px;
-
-          & > span {
-            margin-left: 40px;
-
-            &:nth-child(2) {
-              margin-left: 5px;
-            }
-          }
-
-          strong {
-            font-size: 18px;
-          }
-
-          .strong1 {
-            color: #1890ff;
-          }
-          .strong2 {
-            color: #fa6075;
-          }
-          .strong3 {
-            color: #3ec1a1;
-          }
-        }
+        height: calc(~"100% - 70px");
+        overflow: auto;
+        padding: 0 10px;
 
         & > section {
-          height: calc(~"100% - 50px");
-          padding: 10px;
+          height: 80px;
+          margin-top: 20px;
+          background-color: #fbfdff;
+          box-shadow: 1px 2px 2px 0px rgba(165, 186, 201, 0.32);
+          border-radius: 3px;
+          display: flex;
+          cursor: pointer;
 
-          & > aside {
-            float: left;
-            width: 292px;
-            height: 100%;
-
+          & > div {
+            font-family: "SourceHanSansCN";
             &:first-child {
-              width: calc(~"100% - 292px");
-              border-right: 2px dashed #e0e0e0;
-              padding: 0 10px;
+              width: 80px;
+              height: 100%;
+              text-align: center;
 
-              & > section {
-                height: 40%;
-
-                & > header {
-                  height: 30px;
-                  line-height: 30px;
-
-                  & > span {
-                    margin-left: 5px;
-                  }
-                }
-
-                & > section {
-                  height: calc(~"100% - 30px");
-                }
+              & > div {
+                height: 24px;
 
                 &:first-child {
-                  height: 60%;
-                  border-bottom: 2px dashed #e0e0e0;
+                  height: calc(~"100% - 24px");
+                  position: relative;
 
-                  & > aside {
-                    height: 100%;
-                    float: left;
-                    position: relative;
-
-                    .pop-div {
-                      position: absolute;
-                      width: 116px;
-                      height: 40px;
-                      left: 50%;
-                      top: 59%;
-                      margin-top: -58px;
-                      margin-left: -57px;
-                      text-align: center;
-                      border-radius: 58px;
-                      line-height: 20px;
-                    }
-
-                    &:first-child {
-                      width: 40%;
-
-                      & > header {
-                        height: 30px;
-                        line-height: 30px;
-                      }
-
-                      & > section {
-                        height: calc(~"100% - 30px");
-                      }
-                    }
-
-                    &:last-child {
-                      width: 60%;
-                    }
+                  & > * {
+                    font-size: 24px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                   }
                 }
 
                 &:last-child {
-                  & > aside {
-                    width: calc(~"50% - 10px");
-                    height: 100%;
-                    float: left;
-
-                    &:first-child {
-                      margin-right: 20px;
-                    }
-
-                    & > header {
-                      height: 30px;
-                      line-height: 30px;
-                    }
-
-                    & > section {
-                      height: calc(~"100% - 30px");
-                      border: solid 1px #e5e5e5;
-                      overflow: auto;
-
-                      & > row {
-                        padding: 0 15px;
-                        display: block;
-                        line-height: 25px;
-                        border-bottom: 1px dashed #e5e5e5;
-
-                        &:hover {
-                          background-color: #f5f5f5;
-                        }
-
-                        & > p {
-                          margin: 0;
-                          padding: 0;
-                        }
-                      }
-                    }
-                  }
+                  line-height: 24px;
+                  font-size: 16px;
                 }
               }
             }
 
             &:last-child {
-              padding: 0 10px;
-              & > header {
-                height: 30px;
-                line-height: 30px;
+              width: calc(~"100% - 80px");
+              height: 100%;
 
-                & > span {
-                  margin-left: 5px;
-                }
-              }
+              & > div {
+                height: 50%;
+                line-height: 40px;
+                font-size: 16px;
+                .single-text-ellipse();
 
-              & > section {
-                height: calc(~"100% - 30px");
+                &:first-child {
+                  & > span {
+                    margin-left: 10px;
 
-                & > aside {
-                  float: left;
-                  width: 50%;
-                  line-height: 30px;
-                  height: 100%;
-
-                  & > header {
-                    height: 30px;
-                  }
-
-                  & > row {
-                    display: block;
-                    height: 30px;
-
-                    & > cell {
-                      display: block;
-                      width: 24px;
-                      height: 100%;
-                      float: left;
-
-                      &:last-child {
-                        margin-left: 6px;
-                        width: calc(~"100% - 30px");
-                        height: 100%;
-                      }
-                    }
-
-                    .span-top1 {
-                      background: url(../../img/slhy/pjda/img14.png) no-repeat
-                        center center;
-                    }
-                    .span-top2 {
-                      background: url(../../img/slhy/pjda/img15.png) no-repeat
-                        center center;
-                    }
-                    .span-top3 {
-                      background: url(../../img/slhy/pjda/img16.png) no-repeat
-                        center center;
+                    &:first-child {
+                      margin-left: 0;
                     }
                   }
                 }
               }
             }
           }
+
+          &:first-child {
+            margin-top: 0;
+          }
         }
+      }
+
+      strong {
+        font-size: 20px;
+        color: #4c8acb;
       }
     }
   }
+}
+
+.main-section {
+  display: flex;
+  justify-content: space-between;
+
+  & > fieldset {
+    width: calc(~"25% - 15px");
+    height: 100%;
+  }
+}
+
+.switch-btn {
+  width: 230px;
+  height: 32px;
+  line-height: 32px;
+  background-color: #ffffff;
+  box-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, 0.39);
+  border-radius: 16px;
+  border: solid 1px #dcdfe6;
+  display: flex;
+
+  & > div {
+    width: 50%;
+    height: 100%;
+    border-radius: 16px;
+    text-align: center;
+    color: #787a80;
+    cursor: pointer;
+
+    &:first-child.selected {
+      background-color: #2a5896;
+    }
+
+    &:last-child.selected {
+      background-color: rgb(203, 54, 32);
+    }
+  }
+
+  .selected {
+    color: #fff;
+  }
+}
+
+.bad-section {
+  & > fieldset {
+    & > header {
+      color: #2a5896;
+
+      & > img {
+        display: inline;
+      }
+    }
+
+    .color1 {
+      font-size: 18px !important;
+      color: #0c009b;
+
+      strong {
+        color: #0c009b;
+      }
+    }
+    .color2 {
+      font-size: 18px !important;
+      color: #554adc;
+      strong {
+        color: #554adc;
+      }
+    }
+    .color3 {
+      font-size: 18px !important;
+      color: #8d00f0;
+      strong {
+        color: #8d00f0;
+      }
+    }
+  }
+}
+
+.good-section {
+  & > fieldset {
+    & > header {
+      color: #fff;
+      background: url(../../img/slhy/pjda/mybd/title_bg.png) no-repeat center
+        center / 100% 100%;
+
+      & > img {
+        display: none;
+      }
+    }
+  }
+  .color1,
+  .color2,
+  .color3 {
+    font-size: 18px !important;
+    color: rgb(234, 101, 64);
+
+    strong {
+      color: rgb(234, 101, 64);
+    }
+  }
+}
+
+#ckfw select {
+  border: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.pop-mask {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background-color: #7f7f7f;
+  opacity: 0.8;
+  z-index: 2;
+  top: 0;
+  left: 0;
 }
