@@ -312,7 +312,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           },
           grid: {
             left: 10,
-            right: 10,
+            right: 0,
             bottom: 20,
             top: 10,
             containLabel: true
@@ -329,8 +329,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
               type: "slider",
               start: startValue,
               end: endValue,
-              height: 15,
-              bottom: 15,
+              height: 10,
+              bottom: 0,
               handelSize: 0,
               zoomLock: true,
               textStyle: false

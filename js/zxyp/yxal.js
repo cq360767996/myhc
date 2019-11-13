@@ -21,7 +21,9 @@ requirejs(["common"], function(sugon) {
         var data1 = result.data1,
           data2 = result.data2;
         for (var key in data1) {
-          $("#" + key).html(data1[key]);
+          $("#" + key)
+            .attr("title", data1[key])
+            .html(data1[key]);
         }
         var $containerWidth =
           "calc((100% - 20px) / 3 * " +
@@ -36,6 +38,12 @@ requirejs(["common"], function(sugon) {
           data2.length +
           ")";
         $container.css("width", $containerWidth);
+        let $icon = $(".yxal-head-icon > i");
+        if (data2.length > 0) {
+          $icon.show();
+        } else {
+          $icon.hide();
+        }
         data2.map(function(val, index) {
           var $div = $("<div/>")
             .css("width", $divWidth)

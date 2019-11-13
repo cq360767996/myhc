@@ -216,13 +216,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -500px;
-  margin-top: -280px;
+  transform: translate(-50%, -50%);
   background-color: #224771;
   display: none;
   width: 1000px;
   height: 700px;
-  /*background-color: #224771;*/
   border-radius: 8px;
   box-shadow: 10px 10px 30px #939cab;
   z-index: 999;
@@ -276,6 +274,9 @@
   border: 1px solid #365b85;
   padding: 1em;
   vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .tab-td > p {

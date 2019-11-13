@@ -185,25 +185,24 @@ html {
 }
 
 .alert-menu {
-  background: url("../img/slhy/zhzs_normal.png") no-repeat;
+  background: url("../img/user/notice_normal.png") no-repeat;
 }
 .infoUpload-menu {
-  background: url("../img/slhy/pjda_normal.png") no-repeat;
+  background: url("../img/user/msg_normal.png") no-repeat;
 }
 .alert-menu-hover {
-  background: url("../img/slhy/zhzs_hover.png") no-repeat;
+  background: url("../img/user/notice_on.png") no-repeat;
 }
 .infoUpload-menu-hover {
-  background: url("../img/slhy/pjda_hover.png") no-repeat;
+  background: url("../img/user/msg_on.png") no-repeat;
 }
 
 .management-menu {
-  background: url("../img/slhy/zhzs_normal.png") no-repeat;
+  background: url("../img/user/user_normal.png") no-repeat;
 }
 .management-menu-hover {
-  background: url("../img/slhy/zhzs_hover.png") no-repeat;
+  background: url("../img/user/user_on.png") no-repeat;
 }
-
 
 .tab {
   width: 600px;

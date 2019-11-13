@@ -856,10 +856,10 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
       series: [
         {
           type: "pie",
-          radius: ["40%", "110%"],
+          radius: ["40%", "100%"],
           avoidLabelOverlap: false,
           startAngle: 0,
-          center: ["65%", "50%"],
+          center: ["50%", "50%"],
           roseType: "area",
           label: {
             show: false,

@@ -45,8 +45,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
                           <span>${val.freq}</span>
                         </div>
                         <div>${type}</div>
-                        <div>${val.content}</div>
-                        <div>${val.area}</div>
+                        <div title="${val.content}">${val.content}</div>
+                        <div title="${val.area}">${val.area}</div>
                        </div>`;
           }
         });
@@ -480,8 +480,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
               type: "shadow"
             },
             formatter: function(params) {
-              let tempStr =
-                params[0].name + "<br />数值：" + params[0].value + "%";
+              let tempStr = params[0].name + "<br />数值：" + params[0].value;
               return tempStr;
             }
           },

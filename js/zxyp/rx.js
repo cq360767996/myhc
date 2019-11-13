@@ -851,22 +851,20 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       var $child = $("<div/>").css("width", containerWidth);
       yxalData.map(function(val, index) {
         $child.append(
-          '<div style="' +
-            (index == 0 ? "margin-left: 0;" : "") +
-            "width: " +
-            childWidth +
-            ';"><div class="col-row1" rowId="' +
-            val.id +
-            '" style="background: url(' +
-            val.url +
-            ') no-repeat;background-size: 100% 100%;">' +
-            '</div><div class="col-row23">' +
-            val.content1 +
-            '</div><div class="col-row23">单位:' +
-            val.dept +
-            '</div><div class="col-row4">诉求内容：' +
-            val.content2 +
-            "</div></div>"
+          `<div style="${index == 0 ? "margin-left: 0;" : ""}
+                width: ${childWidth};">
+              <div class="col-row1" rowId="${val.id}"
+                   style="background: 
+                     url(${val.url}) no-repeat 50% 50% / 100% 100%;">
+              </div>
+              <div class="col-row23" title="${val.content1}">
+                ${val.content1}
+              </div>
+              <div class="col-row23" title="${val.dept}">单位:${val.dept}</div>
+              <div class="col-row4" title="${val.content2}">
+                诉求内容：${val.content2}
+              </div>
+          </div>`
         );
       });
       $container.append($child);
@@ -1178,11 +1176,15 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
 
   // 弹出页事件
   $("#yxal").on("click", ".col-row1", function(e) {
+    let title = $(e.target)
+      .next()
+      .next()
+      .attr("title");
     requirejs(["text!../views/zxyp/yxal.html"], function(ele) {
       sugon.renderDialog({
         width: 800,
         height: 500,
-        title: "玄武分局红山派出所 “优秀工作案例”",
+        title: `${title} “优秀工作案例”`,
         ele: ele,
         params: {
           id: $(e.target).attr("rowId")

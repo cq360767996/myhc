@@ -836,17 +836,29 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($img3)
-              .append($("<span/>").html(data.value1))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value1)
+                  .html(data.value1)
+              )
           )
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($('<img src="../../img/zxyp/aj/top_transparent.png">'))
-              .append($("<span/>").html(data.value2))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value2)
+                  .html(data.value2)
+              )
           )
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($('<img src="../../img/zxyp/aj/top_transparent.png">'))
-              .append($("<span/>").html(data.value3))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value3)
+                  .html(data.value3)
+              )
           );
         break;
       case "1":
@@ -854,12 +866,20 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($img2)
-              .append($("<span/>").html(data.value1))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value1)
+                  .html(data.value1)
+              )
           )
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($img3)
-              .append($("<span/>").html(data.value2))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value2)
+                  .html(data.value2)
+              )
           );
         break;
       default:
@@ -867,12 +887,20 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($img1)
-              .append($("<span/>").html(data.value1))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value1)
+                  .html(data.value1)
+              )
           )
           .append(
             $('<div class="view-right-bottom-row"/>')
               .append($img2)
-              .append($("<span/>").html(data.value2))
+              .append(
+                $("<span/>")
+                  .attr("title", data.value2)
+                  .html(data.value2)
+              )
           );
         break;
     }

@@ -341,11 +341,6 @@ define(["ec"], function(ec) {
             localUrl: localPath + "HotWords.json",
             remoteUrl: remotePath + "myhc/myys/getReSouList"
           },
-          //热搜-换一换
-          SearchList: {
-            localUrl: localPath + "SearchList.json",
-            remoteUrl: remotePath + "myhc/myys/getReSouList"
-          },
           //查询列表
           DataList: {
             localUrl: localPath + "DataList.json",
@@ -358,7 +353,7 @@ define(["ec"], function(ec) {
           },
           // 弹出详细信息
           PopDetail: {
-            localUrl: localPath + "Detail.json",
+            localUrl: localPath + "getPopDetail.json",
             remoteUrl: remotePath + "myhc/myys/getPopDetail"
           },
           //详情表格
@@ -1074,6 +1069,34 @@ define(["ec"], function(ec) {
           postImg: {
             localUrl: localPath + "ywfxbg/postImg.json",
             remoteUrl: remotePath + "znbg/zhfxbg/postImg"
+          }
+        }
+      },
+      user: {
+        management: {
+          query: {
+            localUrl: localPath + "user/getUserList.json",
+            remoteUrl: remotePath + "/user/getUserList"
+          },
+          detele: {
+            localUrl: remotePath + "/user/deleteUser",
+            remoteUrl: remotePath + "/user/deleteUser"
+          },
+          addUser: {
+            localUrl: remotePath + "/user/addUser",
+            remoteUrl: remotePath + "/user/addUser"
+          },
+          resetPassword: {
+            localUrl: remotePath + "/user/resetPassword",
+            remoteUrl: remotePath + "/user/resetPassword"
+          },
+          getRole: {
+            localUrl: localPath + "user/getRole.json",
+            remoteUrl: remotePath + "/user/getRole"
+          },
+          submitRole: {
+            localUrl: remotePath + "/user/submitRole",
+            remoteUrl: remotePath + "/user/submitRole"
           }
         }
       }

@@ -1,0 +1,137 @@
+.heagerstyle{
+    width: 100%;
+    height: 80px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 15px 20px;
+}
+.bannerstyle{
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
+    margin: 15px 20px;
+}
+.borde{
+    width: 100%;
+    padding: 15px 20px;
+    clear:both;
+}
+.bordenext{
+    width: 100%;
+    padding: 20px 0px;
+}
+.bordenexts{
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+.inputs{
+    width: calc(100% / 3);
+    float: left;
+}
+.inputstitle{
+    float: left;
+}
+.fonts{
+    font-weight: 700;
+    width: 60px;
+    text-align: right;
+    height: 30px;
+    line-height: 30px;
+}
+.fontsp{
+    width: calc(70% - 60px);
+}
+#username,#deptname,#loadname,#idname,#dept-name {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #cccccc99;
+    text-indent: 24px;
+    color: #4c4c4c;
+    margin: 0 10px;
+  }
+  #oldsecrct,#newsecrct,#checksecrct,#oldsecrcts{
+    width: 40%;
+    height: 30px;
+    border: 1px solid #cccccc99;
+    text-indent: 24px;
+    color: #4c4c4c;
+    margin: 10px 10px;
+  }
+  #moldwork {
+    color: #4c4c4c;
+    background-color: white;
+    width: 100%;
+    float: left;
+    margin: 0 10px;
+    border-radius: 3px;
+    border: 1px solid #cccccc99;
+    height: 30px;
+    line-height: 30px;
+  }
+  .query {
+    width: 65px;
+    height: 100%;
+    color: #ffffff;
+    background-color: #1887cf;
+    border-radius: 4px 4px 4px 4px;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+    margin: 0 5px;
+    line-height: 30px;
+  }
+  .check {
+    width: 65px;
+    height: 100%;
+    color: #4c4c4c;
+    background-color: #ffffff;
+    border-radius: 4px 4px 4px 4px;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+    margin: 0 5px;
+    border: 1px solid #cccccc99;
+    line-height: 30px;
+  }
+  .tab-container {
+    width: 93%;
+    height: 80%;
+    margin: 0 auto;
+    color: #c5daed;
+    border: 1px solid #365b85;
+    table-layout: fixed;
+  }
+  .bodyrooter #dept-tree {
+    width: 36% !important;
+    visibility: hidden;
+    margin-top: -5px;
+    height: 230px;
+    overflow: auto;
+    position: absolute;
+    z-index: 9999;
+    left: 19%;
+    top: 87%;
+  }
+  .nav-container {
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+.bodyrooter{
+    width: 100%;
+    margin: 15px 0 ;
+    clear: both;
+}
+.rooter{
+    width:12px;
+    height: 12px;
+    text-align:right;
+    display: inline-block;
+    background-color: #1887cf;
+    border-radius: 6px;
+}
+.rediose{
+    width:25%;
+    float: left;
+    margin: 10px 0;
+}

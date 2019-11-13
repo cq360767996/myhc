@@ -31,7 +31,7 @@ requirejs(["common"], sugon => {
 
   // 初始化查询列表
   function initSearchList() {
-    sugon.request(sugon.interFaces.myhc.myys.SearchList).then(result => {
+    sugon.request(sugon.interFaces.myhc.myys.HotWords).then(result => {
       let html = "";
       result.data.map(val => {
         html += `<div id="${val.value}">${val.name}</div>`;
@@ -45,11 +45,6 @@ requirejs(["common"], sugon => {
   // 绑定点击事件
   $(".hot_list").on("click", "div", e => {
     $("#keywords").val($(e.target).html());
-  });
-
-  // 刷新查询列表数据
-  $(".refresh").on("click", function() {
-    initSearchList();
   });
 
   // 入口

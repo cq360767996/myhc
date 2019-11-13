@@ -53,6 +53,7 @@ button {
   height: 230px;
   position: absolute;
   z-index: 9999;
+  overflow: auto;
 }
 .left-panel {
   float: left;
@@ -264,6 +265,7 @@ button {
 .right-panel > section {
   height: calc(100% - 55px);
   padding: 10px 0;
+  overflow: auto;
 }
 .right-panel > section > row {
   line-height: 60px;
@@ -336,6 +338,7 @@ button {
 .pop-menu > section {
   max-height: 205px;
   margin-bottom: 10px;
+  overflow: auto;
 }
 .pop-menu > section > div {
   cursor: pointer;

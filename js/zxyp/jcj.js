@@ -658,7 +658,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
               axisLabel: {
                 interval: 0,
                 textStyle: {
-                  color: "#b3cce2"
+                  color: "#000"
                 }
               },
               splitLine: {
@@ -688,7 +688,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
               axisLabel: {
                 formatter: "{value}%",
                 textStyle: {
-                  color: "#b3cce2"
+                  color: "#000"
                 }
               },
               splitLine: {
@@ -810,7 +810,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
               axisLabel: {
                 interval: 0,
                 textStyle: {
-                  color: "#b3cce2"
+                  color: "#000"
                 },
                 formatter: function(param) {
                   return sugon.handleStrLineFeed(param);
@@ -839,7 +839,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
               axisLabel: {
                 formatter: "{value}%",
                 textStyle: {
-                  color: "#b3cce2"
+                  color: "#000"
                 }
               },
               axisLine: {
@@ -1402,15 +1402,19 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       function(result) {
         $(".val3")
           .eq(0)
+          .attr("title", result.data[0].name)
           .html(result.data[0].name);
         $(".val3")
           .eq(1)
+          .attr("title", result.data[0].value)
           .html(result.data[0].value);
         $(".val3")
           .eq(2)
+          .attr("title", result.data[1].name)
           .html(result.data[1].name);
         $(".val3")
           .eq(3)
+          .attr("title", result.data[1].navalueme)
           .html(result.data[1].value);
       }
     );

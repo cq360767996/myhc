@@ -20,7 +20,7 @@ requirejs(["common"], function(sugon) {
     sugon.requestJson(
       {
         type: "POST",
-        url: sugon.interFaces.myhc.myys.SearchList,
+        url: sugon.interFaces.myhc.myys.HotWords,
         async: false
       },
       function(result) {
@@ -46,10 +46,6 @@ requirejs(["common"], function(sugon) {
     );
   };
 
-  $(".refresh").bind("click", function() {
-    initSearchList();
-  });
-
   var initView = function() {
     //搜索
     $(".check").bind("click", function() {
@@ -61,8 +57,7 @@ requirejs(["common"], function(sugon) {
     });
     //加载热词
     initWord();
-    //热搜-换一换
-    $(".refresh").click();
+    initSearchList();
   };
 
   initView();

@@ -722,8 +722,17 @@ div.jqcloud span {
   padding-left: 35px;
 }
 
+.view-right-bottom-row > img {
+  height: 100%;
+  display: inline-block;
+  width: 82px;
+}
+
 .view-right-bottom-row > span {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  display: inline-block;
+  width: calc(100% - 92px);
+  height: 100%;
 }

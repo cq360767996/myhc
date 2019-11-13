@@ -183,14 +183,20 @@ requirejs(["common"], function(sugon) {
                           result.data.data[i][key] +
                           "</span>";
                       }
+                      let title =
+                        eleStr.indexOf("span") > -1 ? "" : ` title="${eleStr}"`;
                       $("#" + result.data.data[i].value1).append(
-                        "<div class='cols ellipsis'>" + eleStr + "</div>"
+                        `<div class='cols ellipsis'${title}>${eleStr}</div>`
                       );
                     } else {
+                      let title =
+                        result.data.data[i][key].indexOf("span") > -1
+                          ? ""
+                          : ` title="${result.data.data[i][key]}"`;
                       $("#" + result.data.data[i].value1).append(
-                        "<div class='cols ellipsis'>" +
-                          result.data.data[i][key] +
-                          "</div>"
+                        `<div class='cols ellipsis'${title}>
+                            ${result.data.data[i][key]}
+                         </div>`
                       );
                     }
                   }
@@ -549,8 +555,10 @@ requirejs(["common"], function(sugon) {
                                 break;
                             }
                             $("#" + key).html(str);
-                            result[key];
                           } else {
+                            if (key === "ywbh") {
+                              $("#" + key).attr("title", result[key]);
+                            }
                             $("#" + key).html(result[key]);
                           }
                         }

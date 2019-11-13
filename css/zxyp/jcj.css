@@ -364,6 +364,19 @@
   justify-content: space-between;
 }
 
+.rect > div > div {
+  width: 65%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rect > div > div:last-child {
+  width: 35%;
+  text-align: right;
+}
+
 .dort {
   display: inline-block;
   width: 10px;
@@ -417,6 +430,9 @@
   color: #75797c;
   box-sizing: border-box;
   border-bottom: 1px solid #ced7e0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 #videoList img {
   width: 22px;
