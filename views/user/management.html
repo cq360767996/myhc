@@ -1,239 +1,358 @@
-<link rel="stylesheet" href="../../css/user/management.css">
+<link rel="stylesheet" href="../../css/user/management.css" />
 
 <div class="main-container">
-    <header class="heagerstyle">
-        <div style="color:#b2b2b8">首页&nbsp;/&nbsp;用户管理</div>
-        <h5 style="font-size: 16px;font-weight: 900;">用户管理列表</h5>
-    </header>
-    <div class="bannerstyle">
-        <div class="borde">
-            <div class="bordenext">
-                <div class="inputs">
-                    <div class="inputstitle fonts">用户名:</div>
-                    <div class="inputstitle fontsp">
-                        <input type="text" id="username" placeholder="请输入" />
-                    </div>
-                </div>
-                <div class="inputs">
-                    <div class="inputstitle fonts">姓名:</div>
-                    <div class="inputstitle fontsp">
-                        <input type="text" id="loadname" placeholder="请输入" />
-                    </div>
-                </div>
-                <div class="inputs">
-                    <div class="inputstitle fonts">工作单位:</div>
-                    <div class="inputstitle fontsp">
-                        <input type="text" id="deptname" placeholder="市局/分局" />
-                    </div>
-                </div>
-            </div>
-            <div class="bordenext">
-                <div class="inputs">
-                    <div class="inputstitle fonts">身份证号:</div>
-                    <div class="inputstitle fontsp">
-                        <input type="text" id="idname" placeholder="请输入" />
-                    </div>
-                </div>
-                <div class="inputs"></div>
-                <div class="inputs" style="float: right;height:30px;">
-                    <div class="query">查询</div>
-                    <div class="check">重置</div>
-                </div>
-            </div>
+  <header class="heagerstyle">
+    <div style="color:#b2b2b8">首页&nbsp;/&nbsp;用户管理</div>
+    <h5 style="font-size: 16px;font-weight: 900;">用户管理列表</h5>
+  </header>
+  <div class="bannerstyle">
+    <div class="borde">
+      <div class="bordenext">
+        <div class="inputs">
+          <div class="inputstitle fonts">用户名:</div>
+          <div class="inputstitle fontsp">
+            <input type="text" id="username" placeholder="请输入" />
+          </div>
         </div>
-        <div class="borde">
-            <div class="bordenexts" style="min-height: 35px;">
-                <div class="query queryse" data-toggle="modal" data-target="#myModal" style="width: 100px;">
-                    <img style="margin-right: 5px;" src="../../img/user/adduser.png">新增用户</div>
-                <div class="check checksef" data-toggle="modal" data-target="#myModalc" style="width: 100px;">
-                    <img style="margin-right: 5px;" src="../../img/user/roleassi.png">分配用户</div>
-                <div class="check checkdc" style="width: 100px;">
-                    <img style="margin-right: 5px;" src="../../img/user/export.png">导出用户</div>
-            </div>
-            <div class="bordenexts" style="min-height: 450px;">
-                <table class="table table-hover">
-                    <thead>
-                        <tr style="background: #cccccc38;">
-                            <th style="text-align: -webkit-center;">
-                                <input class="checkboxss" type='checkbox' name='vehicles' value="全选">
-                            </th>
-                            <th style="text-align: -webkit-center;">用户名</th>
-                            <th style="text-align: -webkit-center;">姓名</th>
-                            <th style="text-align: -webkit-center;">工作单位</th>
-                            <th style="text-align: -webkit-center;">警号</th>
-                            <th style="text-align: -webkit-center;">身份证号</th>
-                            <th style="text-align: -webkit-center;">手机号</th>
-                            <th style="text-align: -webkit-center;">权限</th>
-                            <th style="text-align: -webkit-center;">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tab-contain"></tbody>
-                </table>
-                <div class="nav-container"></div>
-            </div>
+        <div class="inputs">
+          <div class="inputstitle fonts">姓名:</div>
+          <div class="inputstitle fontsp">
+            <input type="text" id="loadname" placeholder="请输入" />
+          </div>
         </div>
+        <div class="inputs">
+          <div class="inputstitle fonts">工作单位:</div>
+          <div class="inputstitle fontsp">
+            <input type="text" id="deptname" placeholder="市局/分局" />
+          </div>
+        </div>
+      </div>
+      <div class="bordenext">
+        <div class="inputs">
+          <div class="inputstitle fonts">身份证号:</div>
+          <div class="inputstitle fontsp">
+            <input type="text" id="idname" placeholder="请输入" />
+          </div>
+        </div>
+        <div class="inputs"></div>
+        <div class="inputs" style="float: right;height:30px;">
+          <div class="query">查询</div>
+          <div class="check">重置</div>
+        </div>
+      </div>
     </div>
-    <!-- 新增用户模态框（Modal）-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel" style="color:black;">
-                        <img style="margin-right: 5px;" src="../../img/user/location.png"> 新增用户
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: -webkit-center;color:black;">
-                    <div style="width:50%;float: left;margin:10px 0 ;">
-                        <span style='color:red;'>*</span>
-                        <span style="width:60px;text-align:right;display: inline-block;">用户名:</span>
-                        <input type="text" id='usernamex'>
-                    </div>
-                    <div style="width:50%;float: left;margin:10px 0 ;">
-                        <span style='color:red;'>*</span>
-                        <span style="width:60px;text-align:right;display: inline-block;">姓名:</span>
-                        <input type="text" id='namex'>
-                    </div>
-                    <div style="width:50%;float: left;margin:10px 0 ;">
-                        <span style="width:60px;text-align:right;display: inline-block;">警号:</span>
-                        <input type="text" id='jhx'>
-                    </div>
-                    <div style="width:50%;float: left;margin:10px 0 ;">
-                        <span style="width:60px;text-align:right;display: inline-block;">身份证号:</span>
-                        <input type="text" id='sfzhx'>
-                    </div>
-                    <div style="width:50%;float: left;margin:10px 0 ;">
-                        <span style="width:60px;text-align:right;display: inline-block;">工作单位:</span>
-                        <input type="text" id='deptNamex'>
-                    </div>
-                    <div style="width:50%;float: left;margin:10px 0 ;">
-                        <span style="width:60px;text-align:right;display: inline-block;">手机:</span>
-                        <input type="text" id='phonex'>
-                    </div>
-                </div>
-                <div class="modal-footer" style="border:none;">
-                    <button type="button" class="btn btn-primary primaryadd">
-                        确认
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                    </button>
-                </div>
-            </div>
+    <div class="borde">
+      <div class="bordenexts" style="min-height: 35px;">
+        <div
+          class="query queryse"
+          data-toggle="modal"
+          data-target="#myModal"
+          style="width: 100px;"
+        >
+          <img
+            style="margin-right: 5px;"
+            src="../../img/user/adduser.png"
+          />新增用户
         </div>
-    </div>
-    <!--分配用户模态框（Modal） -->
-    <div class="modal fade" id="myModalc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel" style="color:black;">
-                        <img style="margin-right: 5px;" src="../../img/user/location.png"> 分配用户
-                    </h4>
-                </div>
-                <div class="modal-body" style="color:black;padding: 15px 30px;">
-                    <div class="bodyrooter">
-                        <span class="rooter"></span>&nbsp;&nbsp;市局</div>
-                    <div class="bodyrooter bodysj" style="padding-left: 55px;">
-
-                    </div>
-                    <div class="bodyrooter">
-                        <span class="rooter"></span>&nbsp;&nbsp;条线</div>
-                    <div class="bodyrooter bodytx" style="padding-left: 55px;">
-
-                    </div>
-                    <div class="bodyrooter">
-                        <span class="rooter"></span>&nbsp;&nbsp;分局及下级单位</div>
-                    <div class="bodyrooter">
-                        <input class="form-control" id="dept-name" placeholder="市局/分局" readonly style="width:40%;margin: 0 15%;cursor: pointer;"
-                        />
-                        <div id="dept-tree"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary primaryfp">
-                        确认
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                    </button>
-                </div>
-            </div>
+        <div
+          class="check checksef"
+          data-toggle="modal"
+          data-target="#myModalc"
+          style="width: 100px;"
+        >
+          <img
+            style="margin-right: 5px;"
+            src="../../img/user/roleassi.png"
+          />分配角色
         </div>
-    </div>
-    <!-- 删除模态框（Modal） -->
-    <div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="border-bottom:none;">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel" style="color:black;">
-                        <img style="margin-right: 5px;" src="../../img/user/location.png">删除提示
-                    </h4>
-                </div>
-                <input type="hidden" id='usern' value="">
-                <input type="hidden" id='sfzhn' value="">
-                <div class="modal-body" style="text-align: -webkit-center;color:black;">
-                    您确认删除当前用户？
-                </div>
-                <div class="modal-footer" style="border:none;">
-                    <button type="button" class="btn btn-primary primarydelete">
-                        确认
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                    </button>
-                </div>
-            </div>
+        <div class="check checkdc" style="width: 100px;">
+          <img
+            style="margin-right: 5px;"
+            src="../../img/user/export.png"
+          />导出用户
         </div>
+      </div>
+      <div class="bordenexts" style="min-height: 450px;">
+        <table class="table table-hover">
+          <thead>
+            <tr style="background: #cccccc38;">
+              <th style="text-align: -webkit-center;">
+                <input
+                  class="checkboxss"
+                  type="checkbox"
+                  name="vehicles"
+                  value="全选"
+                />
+              </th>
+              <th style="text-align: -webkit-center;">用户名</th>
+              <th style="text-align: -webkit-center;">姓名</th>
+              <th style="text-align: -webkit-center;">工作单位</th>
+              <th style="text-align: -webkit-center;">警号</th>
+              <th style="text-align: -webkit-center;">身份证号</th>
+              <th style="text-align: -webkit-center;">手机号</th>
+              <th style="text-align: -webkit-center;">权限</th>
+              <th style="text-align: -webkit-center;">操作</th>
+            </tr>
+          </thead>
+          <tbody class="tab-contain"></tbody>
+        </table>
+        <div class="nav-container"></div>
+      </div>
     </div>
-    <!-- 重置密码模态框（Modal） -->
-    <div class="modal fade" id="myModalcm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel" style="color:black;">
-                        <img style="margin-right: 5px;" src="../../img/user/location.png">重置密码
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: -webkit-center;color:black;">
-                    <input type="hidden" id='userns' value="">
-                    <input type="hidden" id='sfzhns' value="">
-                    <div>
-                        <span style="width:72px;text-align:right;display: inline-block;">初始密码:</span>
-                        <input type="text" id='oldsecrcts' readonly/>
-                    </div>
-                    <div>
-                        <span style='color:red;'>*</span>
-                        <span style="width:60px;text-align:right;display: inline-block;">旧密码:</span>
-                        <input type="text" id='oldsecrct'>
-                    </div>
-                    <div>
-                        <span style='color:red;'>*</span>
-                        <span style="width:60px;text-align:right;display: inline-block;">新密码:</span>
-                        <input type="text" id='newsecrct'>
-                    </div>
-                    <div>
-                        <span style='color:red;'>*</span>
-                        <span style="width:60px;text-align:right;display: inline-block;">确认密码:</span>
-                        <input type="text" id='checksecrct'>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary primaryscrect">
-                        确认
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                    </button>
-                </div>
-            </div>
+  </div>
+  <!-- 新增用户模态框（Modal）-->
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">
+            <img style="margin-right: 5px;" src="../../img/user/location.png" />
+            新增用户
+          </h4>
         </div>
+        <div class="modal-body" style="text-align: -webkit-center;color:black;">
+          <div style="width:50%;float: left;margin:10px 0 ;">
+            <span style="color:red;">*</span>
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >用户名:</span
+            >
+            <input type="text" id="usernamex" />
+          </div>
+          <div style="width:50%;float: left;margin:10px 0 ;">
+            <span style="color:red;">*</span>
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >姓名:</span
+            >
+            <input type="text" id="namex" />
+          </div>
+          <div style="width:50%;float: left;margin:10px 0 ;">
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >警号:</span
+            >
+            <input type="text" id="jhx" />
+          </div>
+          <div style="width:50%;float: left;margin:10px 0 ;">
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >身份证号:</span
+            >
+            <input type="text" id="sfzhx" />
+          </div>
+          <div style="width:50%;float: left;margin:10px 0 ;">
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >工作单位:</span
+            >
+            <input type="text" id="deptNamex" />
+          </div>
+          <div style="width:50%;float: left;margin:10px 0 ;">
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >手机:</span
+            >
+            <input type="text" id="phonex" />
+          </div>
+        </div>
+        <div class="modal-footer" style="border:none;">
+          <button type="button" class="btn btn-primary primaryadd">
+            确认
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            取消
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+  <!--分配用户模态框（Modal） -->
+  <div
+    class="modal fade"
+    id="myModalc"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">
+            <img style="margin-right: 5px;" src="../../img/user/location.png" />
+            分配用户
+          </h4>
+        </div>
+        <div class="modal-body" style="color:black;padding: 15px 30px;">
+          <div class="bodyrooter">
+            <span class="rooter"></span>&nbsp;&nbsp;市局
+          </div>
+          <div class="bodyrooter bodysj" style="padding-left: 55px;"></div>
+          <div class="bodyrooter">
+            <span class="rooter"></span>&nbsp;&nbsp;条线
+          </div>
+          <div class="bodyrooter bodytx" style="padding-left: 55px;"></div>
+          <div class="bodyrooter">
+            <span class="rooter"></span>&nbsp;&nbsp;分局及下级单位
+          </div>
+          <div class="bodyrooter">
+            <input
+              class="form-control"
+              id="dept-name"
+              placeholder="市局/分局"
+              readonly
+              style="width:40%;margin: 0 15%;cursor: pointer;"
+            />
+            <input
+              type="hidden"
+              class="form-control"
+              id="dept-id"
+              placeholder="市局/分局"
+              readonly
+              style="width:40%;margin: 0 15%;cursor: pointer;"
+            />
+            <div id="dept-tree"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary primaryfp">
+            确认
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 删除模态框（Modal） -->
+  <div
+    class="modal fade"
+    id="myModals"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="border-bottom:none;">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">
+            <img
+              style="margin-right: 5px;"
+              src="../../img/user/location.png"
+            />删除提示
+          </h4>
+        </div>
+        <input type="hidden" id="usern" value="" />
+        <input type="hidden" id="sfzhn" value="" />
+        <div class="modal-body" style="text-align: -webkit-center;color:black;">
+          您确认删除当前用户？
+        </div>
+        <div class="modal-footer" style="border:none;">
+          <button type="button" class="btn btn-primary primarydelete">
+            确认
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 重置密码模态框（Modal） -->
+  <div
+    class="modal fade"
+    id="myModalcm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">
+            <img
+              style="margin-right: 5px;"
+              src="../../img/user/location.png"
+            />重置密码
+          </h4>
+        </div>
+        <div class="modal-body" style="text-align: -webkit-center;color:black;">
+          <input type="hidden" id="userns" value="" />
+          <input type="hidden" id="sfzhns" value="" />
+          <div>
+            <span style="width:72px;text-align:right;display: inline-block;"
+              >初始密码:</span
+            >
+            <input type="text" id="oldsecrcts" readonly />
+          </div>
+          <div>
+            <span style="color:red;">*</span>
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >旧密码:</span
+            >
+            <input type="text" id="oldsecrct" />
+          </div>
+          <div>
+            <span style="color:red;">*</span>
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >新密码:</span
+            >
+            <input type="text" id="newsecrct" />
+          </div>
+          <div>
+            <span style="color:red;">*</span>
+            <span style="width:60px;text-align:right;display: inline-block;"
+              >确认密码:</span
+            >
+            <input type="text" id="checksecrct" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary primaryscrect">
+            确认
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
