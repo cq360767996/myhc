@@ -293,35 +293,22 @@ html {
 .pop-message {
   min-width: 380px;
   height: 50px;
-  box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
   position: fixed;
   left: 50%;
-  top: 20px;
-  transform: translateX(-50%);
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  top: 10%;
+  transform: translate(-50%, -10%);
   border-radius: 4px;
-  overflow: hidden;
   font-size: 18px;
   line-height: 50px;
   z-index: 10000;
 }
 
 .pop-message > i {
-  float: left;
-  color: inherit;
   margin-left: 18px;
   margin-top: -4px;
 }
 
 .pop-message > span {
-  float: left;
-  color: inherit;
   margin-left: 10px;
 }
 

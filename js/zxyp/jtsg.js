@@ -69,8 +69,9 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
           grid: {
             top: 25,
             bottom: 25,
-            left: 60,
-            right: 0
+            left: 10,
+            right: 0,
+            containLabel: true
           },
           xAxis: [
             {
@@ -85,7 +86,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
                 }
               },
               axisLabel: {
-                // interval: 0,
                 textStyle: {
                   color: "#000"
                 }
@@ -102,7 +102,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
           yAxis: [
             {
               type: "value",
-              splitNumber: 5,
               min: minAndMax.min,
               max: minAndMax.max,
               axisTick: {
@@ -115,9 +114,6 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
                 }
               },
               axisLabel: {
-                formatter: function(param) {
-                  return Number(param).toFixed(3) + "%";
-                },
                 textStyle: {
                   color: "#000"
                 }

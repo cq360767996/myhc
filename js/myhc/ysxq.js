@@ -34,92 +34,71 @@ requirejs(["common"], function(sugon) {
             tempStr1 = "热点问题：";
             tempStr2 = "民意诉求及热点问题分析";
           }
-          secondEle =
-            "<div class='secondRow'>" +
-            "<div class='" +
-            moudleInfo +
-            "'><span class='lab'>" +
-            tempStr1 +
-            "</span><span class='val'>" +
-            tempStr2 +
-            "</span></div>" +
-            "</div>";
+          secondEle = `<div class='secondRow'>
+                        <div class='${moudleInfo}'>
+                          <span class='lab'>${tempStr1}</span>
+                          <span class='val'>${tempStr2}</span>
+                        </div>
+                       </div>`;
         } else {
           thumbnail = "../../img/myhc/myys/dwjx_thumbnail.png";
           thumbnailShow = "myThumbnail show";
           moudleInfo = "low";
-          secondEle =
-            "<div class='secondRow'>" +
-            "<div class='" +
-            moudleInfo +
-            "' id='sqxz'><span class='lab'>模块：</span><span class='val'>诉求性质分析模式</span></div>" +
-            "<div class='" +
-            moudleInfo +
-            "' id='ywgk'><span class='lab'>模块：</span><span class='val'>业务归口分析模式</span></div>" +
-            "<div class='" +
-            moudleInfo +
-            "' id='jtwt'><span class='lab'>模块：</span><span class='val'>具体问题分析模式</span></div>" +
-            "<div class='" +
-            moudleInfo +
-            "' id='dwjs'><span class='lab'>模块：</span><span class='val'>队伍管理分析模式</span></div>" +
-            "</div>";
+          secondEle = `<div class='secondRow'>
+                        <div class='${moudleInfo}' id='sqxz'>
+                          <span class='lab'>模块：</span>
+                          <span class='val'>诉求性质分析模式</span>
+                        </div>
+                        <div class='${moudleInfo}' id='ywgk'>
+                          <span class='lab'>模块：</span>
+                          <span class='val'>业务归口分析模式</span>
+                        </div>
+                        <div class='${moudleInfo}' id='jtwt'>
+                          <span class='lab'>模块：</span>
+                          <span class='val'>具体问题分析模式</span>
+                          </div>
+                          <div class='${moudleInfo}' id='dwjs'>
+                          <span class='lab'>模块：</span>
+                          <span class='val'>队伍管理分析模式</span>
+                        </div>
+                       </div>`;
         }
       } else {
-        secondEle =
-          "<div class='secondRow'>" +
-          "<div class='" +
-          moudleInfo +
-          "'><span class='lab'>" +
-          result.data[i].name2 +
-          "</span><span class='val'>" +
-          result.data[i].value2 +
-          "</span></div>" +
-          "<div class='" +
-          moudleInfo +
-          "'><span class='lab'>" +
-          result.data[i].name3 +
-          "</span><span class='val'>" +
-          result.data[i].value3 +
-          "</span></div>" +
-          "<div class='" +
-          moudleInfo +
-          "'><span class='lab'>" +
-          result.data[i].name4 +
-          "</span><span class='val'>" +
-          result.data[i].value4 +
-          "</span></div>" +
-          "</div>";
+        secondEle = `<div class='secondRow'>
+                      <div class='${moudleInfo}'>
+                        <span class='lab'>${result.data[i].name2}</span>
+                        <span class='val'>${result.data[i].value2}</span>
+                      </div>
+                      <div class='${moudleInfo}'>
+                        <span class='lab'>${result.data[i].name3}</span>
+                        <span class='val'>${result.data[i].value3}</span>
+                      </div>
+                      <div class='${moudleInfo}'>
+                        <span class='lab'>${result.data[i].name4}</span>
+                        <span class='val'>${result.data[i].value4}</span>
+                      </div>
+                     </div>`;
       }
-      var eleStr =
-        "<div class='row' id=" +
-        result.data[i].id +
-        " type=" +
-        result.data[i].type +
-        " url=" +
-        result.data[i].url +
-        " name=" +
-        result.data[i].codeName +
-        " mold=" +
-        result.data[i].mold +
-        " >" +
-        "<div class='firstRow'>" +
-        "<div><span class='lab'>" +
-        result.data[i].name1 +
-        "</span><span class='val'>" +
-        result.data[i].value1 +
-        "</span></div>" +
-        "<div class='" +
-        thumbnailShow +
-        "'><img src=" +
-        thumbnail +
-        " /></div>" +
-        "</div>";
+      var eleStr = `<div class="row" id="${result.data[i].id}"
+                        type="${result.data[i].type}"
+                        url="${result.data[i].url}"
+                        name="${result.data[i].codeName}"
+                        mold="${result.data[i].mold}">
+                      <div class='firstRow'>
+                        <div>
+                          <span class='lab'>${result.data[i].name1}</span>
+                          <span class='val'>${result.data[i].value1}</span>
+                        </div>
+                        <div class='${thumbnailShow}'>
+                          <img src="${thumbnail}" />
+                        </div>
+                      </div>`;
       eleStr += secondEle + "</div>";
       $(".grid").append(eleStr);
     }
   }
 
-  var getEvent = function() {
+  function getEvent() {
     $(".grid>div")
       .unbind()
       .bind("click", function(event) {
@@ -164,7 +143,7 @@ requirejs(["common"], function(sugon) {
         var tempUrl = "dwjx/" + this.id;
         location.hash = vipspa.stringify(tempUrl, { type: tempUrl });
       });
-  };
+  }
 
   $(".check").bind("click", function() {
     sugon.requestJson(

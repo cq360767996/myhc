@@ -91,7 +91,7 @@ requirejs(["common", "Sortable"], (sugon, Sortable) => {
       html += `<row 
                 rowid="${val.id}"
                 tag1="${val.tag1}">
-                  <cell>${index + 1}、${val.tag}</cell>
+                  <cell title="${val.tag}">${index + 1}、${val.tag}</cell>
                   <cell>${val.deptName}</cell>
                   <cell>
                     <span class="span-model${val.model}">${yw}</span>

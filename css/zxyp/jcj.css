@@ -346,8 +346,8 @@
   height: 100%;
 }
 .rect {
-  width: calc(100% - 20px);
-  margin-left: 10px;
+  width: calc(100% - 10px);
+  margin-left: 5px;
   height: calc(50% - 15px);
   margin-top: 10px;
   box-sizing: border-box;

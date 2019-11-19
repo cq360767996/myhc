@@ -1,3 +1,129 @@
-<link rel="stylesheet" href="../../css/user/management.css">
+<link rel="stylesheet" href="../../css/user/alert.css" />
 
-alert
+<main>
+  <header>
+    <div>首页/通知管理</div>
+    <div>通知管理列表</div>
+  </header>
+  <section class="main-section">
+    <header>
+      <span>标题：</span>
+      <input id="title" />
+      <span>发送日期：</span>
+      <input id="date1" readonly class="form-control" />
+      <span>——</span>
+      <input id="date2" readonly class="form-control" />
+      <button id="search-btn" class="btn-selected">查询</button>
+      <button id="search-reset">重置</button>
+    </header>
+    <banner>
+      <button id="add-btn" class="btn-selected">
+        <i class="glyphicon glyphicon-plus"></i>新增
+      </button>
+      <button id="edit-btn">
+        <i class="glyphicon glyphicon-pencil"></i>修改
+      </button>
+      <button id="delete-btn">
+        <i class="glyphicon glyphicon-trash"></i>删除
+      </button>
+      <button id="send-btn">
+        <i class="glyphicon glyphicon-send"></i>发送
+      </button>
+      <button id="detail-btn">
+        <i class="glyphicon glyphicon-list-alt"></i>详情
+      </button>
+    </banner>
+    <tab id="tab-container"></tab>
+    <footer>
+      <div class="nav-container"></div>
+    </footer>
+  </section>
+</main>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="pop-panel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <img src="../../img/user/location.png" /> 通知公告修改
+        </h4>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">
+              <span style="color:red;">*</span>
+              标题：
+            </label>
+            <div class="col-sm-9">
+              <input class="form-control" id="pop-title" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">
+              <span style="color:red;">*</span>
+              内容：
+            </label>
+            <div class="col-sm-9">
+              <textarea id="pop-content" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">附件选择：</label>
+            <div class="col-sm-7">
+              <input readonly id="pop-file-name" class="form-control" />
+            </div>
+            <div class="col-sm-2">
+              <button class="btn-preview btn btn-primary">浏览</button>
+            </div>
+            <input
+              type="file"
+              multiple
+              id="pop-file-input"
+              accept="
+                application/vnd.ms-excel,
+                application/msword,
+                application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            />
+          </div>
+          <div id="send-obj" class="form-group">
+            <label class="col-sm-3 control-label">
+              <span style="color:red;">*</span>
+              发送对象：
+            </label>
+            <div class="col-sm-5">
+              <input id="dept-name" readonly class="form-control" />
+              <div id="dept-tree"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">创建人：</label>
+            <div class="col-sm-4">
+              <p id="pop-creater" class="form-control-static"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">创建日期：</label>
+            <div class="col-sm-6">
+              <p id="pop-create-time" class="form-control-static"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="pop-confirm" class="btn btn-primary">确定</button>
+          <button class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

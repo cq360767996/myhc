@@ -1,0 +1,151 @@
+@font-face {
+  font-family: "SourceHanSansCN";
+  src: url(../../fonts/SourceHanSansCN-Regular.ttf);
+}
+banner,
+tab,
+cell {
+  display: block;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+main {
+  height: 100%;
+  font-family: "SourceHanSansCN";
+  color: #666;
+}
+main > header {
+  height: 70px;
+  line-height: 35px;
+  background-color: #fff;
+}
+main > header > div {
+  height: 50%;
+  padding-left: 25px;
+}
+main > header > div:first-child {
+  color: #afafaf;
+}
+main > header > div:last-child {
+  color: #272727;
+  font-size: 16px;
+  font-weight: bold;
+}
+main > section {
+  width: calc(100% - 48px);
+  height: calc(100% - 110px);
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 20px 30px;
+}
+.main-section > header {
+  height: 32px;
+  line-height: 32px;
+}
+.main-section > header > * {
+  margin-left: 10px;
+  display: inline-block;
+}
+.main-section > header > *:first-child {
+  margin-left: 0;
+}
+.main-section > header input {
+  width: 240px;
+  border-radius: 3px;
+  outline: none;
+  border: solid 1px #d9d9d9;
+  padding: 0 5px;
+}
+.main-section > header input:focus {
+  border: 1px solid #40a9ff;
+}
+.main-section > header button {
+  width: 64px;
+  border: 1px solid #d9d9d9;
+}
+.main-section > header button.btn-selected {
+  background-color: #3b8cc1;
+  color: #fff;
+}
+.main-section > header #title {
+  margin-right: 40px;
+  width: calc(100% - 1000px);
+}
+.main-section > banner {
+  height: 32px;
+  line-height: 32px;
+  margin-top: 26px;
+}
+.main-section > banner > button {
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  margin-left: 10px;
+  padding: 0 15px;
+}
+.main-section > banner > button.btn-selected {
+  background-color: #3b8cc1;
+  color: #fff;
+}
+.main-section > banner > button > i {
+  margin-right: 10px;
+}
+.main-section > banner > button:first-child {
+  margin-left: 0;
+}
+.main-section > tab {
+  margin-top: 10px;
+  height: calc(100% - 140px);
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+.main-section > tab > row {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #e8e8e8;
+  display: grid;
+  grid-template-columns: 50px auto 200px 200px;
+  align-items: center;
+  justify-items: center;
+}
+.main-section > tab > row:first-child,
+.main-section > tab > row:hover {
+  background-color: #fafafa;
+}
+.main-section > footer {
+  height: 40px;
+  padding-top: 10px;
+}
+.main-section > footer > div {
+  float: right;
+}
+#pop-panel {
+  color: #333;
+}
+.modal textarea {
+  resize: none;
+  outline: none;
+  height: 100px;
+}
+#pop-file-input {
+  display: none;
+}
+.modal input {
+  padding: 0 5px;
+}
+.modal textarea {
+  padding: 5px;
+}
+#dept-tree {
+  visibility: hidden;
+  height: 230px;
+  overflow: auto;
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+}

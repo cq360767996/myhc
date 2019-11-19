@@ -58,8 +58,10 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       deptName: sessionStorage.getItem("deptName"),
       deptCode: sessionStorage.getItem("deptCode"),
       role: sessionStorage.getItem("role"),
-      username: sessionStorage.getItem("username")
+      username: sessionStorage.getItem("username"),
+      name: sessionStorage.getItem("name")
     };
+    $("#userName").html(`你好，${sugon.identityInfo.name}`);
   } else {
     location.href = sugon.isPublished ? "/login" : "login.html";
   }
@@ -114,6 +116,11 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       parent: "myhc",
       templateUrl: "views/myhc/ysxq.html",
       controller: "js/myhc/ysxq.js"
+    },
+    "myys/mysq": {
+      parent: "myhc",
+      templateUrl: "views/myhc/mysq.html",
+      controller: "js/myhc/mysq.js"
     },
     "myys/ysxq/detail": {
       parent: "myhc",

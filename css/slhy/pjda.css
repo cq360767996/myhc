@@ -226,13 +226,6 @@ main > section > fieldset strong {
   outline: none;
   background-color: transparent;
 }
-.pop-mask {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background-color: #7f7f7f;
-  opacity: 0.8;
-  z-index: 2;
-  top: 0;
-  left: 0;
+#ckfw select > option {
+  color: #000;
 }

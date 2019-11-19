@@ -534,10 +534,10 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       },
       grid: {
-        top: "0",
-        left: "0",
-        width: isShow ? "88%" : "100%",
-        height: "100%",
+        top: 0,
+        left: 0,
+        right: 20,
+        bottom: 10,
         containLabel: true
       },
       dataZoom: [
@@ -877,7 +877,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     drawGddwfb(gddwfbData[index]);
   });
 
-  $(".switch-panel").on("click", "#dept4", function() {
+  $(".switch-panel").on("change", "#dept4", function() {
     $(".tab2>div")
       .eq(0)
       .click();
@@ -1370,7 +1370,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           },
           xAxis: {
             type: "value",
-            boundaryGap: ["20%", "20%"],
+            boundaryGap: ["100%", "100%"],
             min: 0
           },
           yAxis: {

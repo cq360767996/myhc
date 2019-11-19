@@ -249,6 +249,10 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     // 点击回调
     function cb(param) {
       searchRuler.id2 = param.data.id;
+      $(".tab4 > div")
+        .removeClass("selected")
+        .eq(0)
+        .addClass("selected");
       getGddwfb();
     }
   };
@@ -313,10 +317,10 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       },
       grid: {
-        top: "0",
-        left: "0",
-        width: isShow ? "88%" : "100%",
-        height: "100%",
+        top: 0,
+        left: 0,
+        right: 20,
+        bottom: 10,
         containLabel: true
       },
       dataZoom: [
@@ -388,9 +392,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         }
       ]
     };
-    if (!(data instanceof Array) || data.length === 0) {
-      option = null;
-    }
     sugon.renderChart({ id: "chart33", option, data });
   };
 
@@ -894,15 +895,16 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           },
           color: ["#1e9bdd"],
           grid: {
-            left: "0px",
-            right: "15px",
-            bottom: "5px",
-            top: "40px",
+            left: 0,
+            right: 15,
+            bottom: 5,
+            top: 40,
             containLabel: true
           },
           xAxis: {
             type: "value",
-            boundaryGap: ["20%", "20%"]
+            boundaryGap: ["20%", "20%"],
+            min: 0
           },
           yAxis: {
             type: "category",

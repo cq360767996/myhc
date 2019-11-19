@@ -346,6 +346,10 @@ define(["ec"], function(ec) {
             localUrl: localPath + "DataList.json",
             remoteUrl: remotePath + "myhc/myys/search"
           },
+          esSearch: {
+            localUrl: localPath + "esSearch.json",
+            remoteUrl: remotePath + "myhc/myys/esSearch"
+          },
           //详情
           Detail: {
             localUrl: localPath + "Detail.json",
@@ -1076,27 +1080,45 @@ define(["ec"], function(ec) {
         management: {
           query: {
             localUrl: localPath + "user/getUserList.json",
-            remoteUrl: remotePath + "/user/getUserList"
+            remoteUrl: remotePath + "user/getUserList"
           },
           detele: {
-            localUrl: remotePath + "/user/deleteUser",
-            remoteUrl: remotePath + "/user/deleteUser"
+            localUrl: remotePath + "user/deleteUser",
+            remoteUrl: remotePath + "user/deleteUser"
           },
           addUser: {
-            localUrl: remotePath + "/user/addUser",
-            remoteUrl: remotePath + "/user/addUser"
+            localUrl: remotePath + "user/addUser",
+            remoteUrl: remotePath + "user/addUser"
           },
           resetPassword: {
-            localUrl: remotePath + "/user/resetPassword",
-            remoteUrl: remotePath + "/user/resetPassword"
+            localUrl: remotePath + "user/resetPassword",
+            remoteUrl: remotePath + "user/resetPassword"
           },
           getRole: {
             localUrl: localPath + "user/getRole.json",
-            remoteUrl: remotePath + "/user/getRole"
+            remoteUrl: remotePath + "user/getRole"
           },
           submitRole: {
-            localUrl: remotePath + "/user/submitRole",
-            remoteUrl: remotePath + "/user/submitRole"
+            localUrl: remotePath + "user/submitRole",
+            remoteUrl: remotePath + "user/submitRole"
+          },
+          getDeptTree: {
+            localUrl: localPath + "Tree.json",
+            remoteUrl: remotePath + "user/getDeptTree"
+          }
+        },
+        alert: {
+          getTree: {
+            localUrl: localPath + "Tree.json",
+            remoteUrl: remotePath + "user/alert/getTree"
+          },
+          getAll: {
+            localUrl: localPath + "user/alert/getAll.json",
+            remoteUrl: remotePath + "user/alert/getAll"
+          },
+          submitAdd: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "user/alert/submitAdd"
           }
         }
       }
@@ -1413,7 +1435,7 @@ define(["ec"], function(ec) {
       return result;
     },
     // 获取当前时间并加减固定月份
-    getDate: function(difference) {
+    getDate: function(difference = 0) {
       var now = new Date();
       var year = now.getFullYear();
       var month = now.getMonth() + 1;
@@ -1426,6 +1448,21 @@ define(["ec"], function(ec) {
         resultMonth = resultMonth < 10 ? "0" + resultMonth : resultMonth;
         return resultYear + "-" + resultMonth;
       }
+    },
+    // 获取今天的日期
+    getToday: function() {
+      // 是否比9大
+      function handleZero(val) {
+        return val < 10 ? "0" + val : val;
+      }
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = handleZero(date.getMonth() + 1);
+      let day = handleZero(date.getDate());
+      let hour = handleZero(date.getHours());
+      let minute = handleZero(date.getMinutes());
+      let second = handleZero(date.getSeconds());
+      return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
     },
     // 防抖函数
     debounce: (fn, wait) => {
@@ -1514,7 +1551,7 @@ define(["ec"], function(ec) {
           });
         });
         // 为单位名称绑定点击事件
-        $("#dept-name").on("click", () => {
+        $deptName.off().on("click", () => {
           $deptTree.css(
             "visibility",
             $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"

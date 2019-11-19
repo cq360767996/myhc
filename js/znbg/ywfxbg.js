@@ -941,7 +941,7 @@ requirejs(
         .datetimepicker({
           format: "yyyy-mm",
           autoclose: true,
-          todayBtn: true,
+          todayBtn: false,
           startView: "year",
           minView: "year",
           maxView: "decade",
@@ -956,7 +956,7 @@ requirejs(
         .datetimepicker({
           format: "yyyy-mm",
           autoclose: true,
-          todayBtn: true,
+          todayBtn: false,
           startView: "year",
           minView: "year",
           maxView: "decade",
@@ -990,17 +990,12 @@ requirejs(
     }
 
     // 初始化右侧文件列表
-    function initRightPanel() {
-      sugon.requestJson(
-        {
-          type: "post",
-          url: sugon.interFaces.znbg.ywfxbg.getFileList,
-          data: {
-            deptId: searchRuler.deptId,
-            username: sugon.identityInfo.username
-          }
-        },
-        result => {
+    async function initRightPanel() {
+      let { deptId } = searchRuler;
+      let { username } = sugon.identityInfo;
+      await sugon
+        .request(sugon.interFaces.znbg.ywfxbg.getFileList, { deptId, username })
+        .then(result => {
           rightPanelData = result.data;
           let html = "";
           result.data.map(val => {
@@ -1020,8 +1015,7 @@ requirejs(
           $(".tab-body")
             .empty()
             .append(html);
-        }
-      );
+        });
     }
 
     // 上传图片
@@ -1033,9 +1027,11 @@ requirejs(
             id: id,
             img: imgUrl
           })
-          .then(result => {
+          .then(async result => {
             if (result.code) {
-              initRightPanel();
+              await initRightPanel();
+              $(".loading").remove();
+              sugon.showMessage("报告已生成！", "success");
             }
           });
       } else {
@@ -1154,10 +1150,6 @@ requirejs(
           });
         }
       });
-      if (idArr.length !== 1) {
-        $(".loading").remove();
-        sugon.showMessage("报告已生成！", "success");
-      }
     }
 
     // 刷新左侧面板
@@ -1242,7 +1234,9 @@ requirejs(
                     .attr("src")
                     .indexOf("hover") > -1 && codeArr.push($ele.attr("code"));
                 });
-                if (codeArr.length !== 0) {
+                if (codeArr.length === 0) {
+                  sugon.showMessage("尚未进行勾选！", "warning");
+                } else {
                   sugon.renderLoading();
                   generateReport(sugon.uuid(), codeArr);
                 }

@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="../../css/myhc/mysq.css" />
+
+<div class="view">
+  <div>
+    <div class="back">
+      <div id="back">
+        <img src="../../img/myhc/back.png" />
+        <span>返回</span>
+      </div>
+    </div>
+    <div class="search_bar">
+      <div class="title">
+        <img src="../../img/myhc/cloud_search.png" />
+      </div>
+
+      <div class="text">
+        <input type="text" id="keywords" placeholder="请输入要搜索内容" />
+      </div>
+
+      <div class="check">搜 索</div>
+    </div>
+
+    <div class="banner">
+      <span>业务类型：</span>
+      <select id="type">
+        <option value="0">全部</option>
+        <option value="1">110接处警信息</option>
+        <option value="2">窗口服务信息</option>
+        <option value="3">案件信息</option>
+        <option value="4">交通事故信息</option>
+        <option value="5">其他渠道信息</option>
+      </select>
+    </div>
+    <div class="grid">
+      <div class="tab-header">
+        搜索到 <strong class="total"></strong> 条数据，用时
+        <strong class="period"></strong> ms
+      </div>
+      <div class="tab-container"></div>
+      <ul id="pageLimit"></ul>
+    </div>
+  </div>
+</div>
+
+<div class="window2">
+  <div class="window2-header">
+    <div class="header-title">业务详情</div>
+    <div class="close-btn">x</div>
+  </div>
+  <div class="window2-body">
+    <table class="pop-tab-container"></table>
+  </div>
+</div>

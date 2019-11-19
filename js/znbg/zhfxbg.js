@@ -345,11 +345,6 @@ requirejs(
                 resolve();
               });
             }
-          })
-          .then(async result => {
-            await initRightPanel();
-            $(".loading").remove();
-            sugon.showMessage("报告已生成！", "success");
           });
       },
       initPopPage(condition) {
@@ -461,7 +456,7 @@ requirejs(
         .datetimepicker({
           format: "yyyy-mm",
           autoclose: true,
-          todayBtn: true,
+          todayBtn: false,
           startView: "year",
           minView: "year",
           maxView: "decade",
@@ -476,7 +471,7 @@ requirejs(
         .datetimepicker({
           format: "yyyy-mm",
           autoclose: true,
-          todayBtn: true,
+          todayBtn: false,
           startView: "year",
           minView: "year",
           maxView: "decade",
@@ -510,17 +505,12 @@ requirejs(
     }
 
     // 初始化右侧文件列表
-    function initRightPanel() {
-      sugon.requestJson(
-        {
-          type: "post",
-          url: sugon.interFaces.znbg.zhfxbg.getFileList,
-          data: {
-            deptId: searchRuler.deptId,
-            username: sugon.identityInfo.username
-          }
-        },
-        result => {
+    async function initRightPanel() {
+      let { deptId } = searchRuler;
+      let { username } = sugon.identityInfo;
+      await sugon
+        .request(sugon.interFaces.znbg.zhfxbg.getFileList, { deptId, username })
+        .then(result => {
           rightPanelData = result.data;
           let html = "";
           result.data.map(val => {
@@ -540,27 +530,25 @@ requirejs(
           $(".tab-body")
             .empty()
             .append(html);
-        }
-      );
+        });
     }
 
     // 生成报告
-    function generateReport(uuid, codeArr) {
+    async function generateReport(uuid, codeArr) {
       searchRuler.code = codeArr.join(",");
       searchRuler.content = $(".textarea-div").val();
       searchRuler.uuid = uuid;
       let params = { username: sugon.identityInfo.username };
       Object.assign(params, searchRuler);
       popFunc.initPopPage(searchRuler);
-      sugon
+      await sugon
         .request(sugon.interFaces.znbg.zhfxbg.generateReport, params)
-        .then(result => {
+        .then(async result => {
           let $body = $(".hidden-chart").empty();
           if (result.data.length > 0) {
             result.data.map(val => {
               let id = sugon.uuid();
               $body.append($("<div/>").attr("id", id));
-              let $id = $("#" + id);
               switch (val.type) {
                 case "0.1":
                   popFunc.initTab(val.data, id, true);
@@ -578,7 +566,7 @@ requirejs(
               }
             });
           }
-          setTimeout(drawImage, 2000, result, uuid);
+          await setTimeout(drawImage, 2000, result, uuid);
         });
     }
 
@@ -591,9 +579,11 @@ requirejs(
             id: id,
             img: imgUrl
           })
-          .then(result => {
+          .then(async result => {
             if (result.code) {
-              initRightPanel();
+              await initRightPanel();
+              $(".loading").remove();
+              sugon.showMessage("报告已生成！", "success");
             }
           });
       } else {
@@ -604,17 +594,17 @@ requirejs(
     }
 
     // 遍历图片
-    function drawImage(result, uuid) {
-      $(".hidden-chart > div").each((index, dom) => {
+    async function drawImage(result, uuid) {
+      await $(".hidden-chart > div").each(async (index, dom) => {
         if ($(dom).attr("_echarts_instance_")) {
-          uploadImg(
+          await uploadImg(
             result.data[index].id,
             ec.getInstanceByDom(dom).getDataURL(),
             uuid
           );
         } else {
-          domtoimage.toPng(dom).then(imgUrl => {
-            uploadImg(result.data[index].id, imgUrl, uuid);
+          await domtoimage.toPng(dom).then(async imgUrl => {
+            await uploadImg(result.data[index].id, imgUrl, uuid);
           });
         }
       });
@@ -850,8 +840,8 @@ requirejs(
           pdfUrl,
           uuid
         })
-        .then(result => {
-          initRightPanel();
+        .then(async result => {
+          await initRightPanel();
           result.code
             ? sugon.showMessage("删除成功！", "success")
             : sugon.showMessage("删除失败！", "error");
@@ -868,7 +858,9 @@ requirejs(
           .attr("src")
           .indexOf("hover") > -1 && codeArr.push($ele.attr("code"));
       });
-      if (codeArr.length !== 0) {
+      if (codeArr.length === 0) {
+        sugon.showMessage("尚未进行勾选！", "warning");
+      } else {
         sugon.renderLoading();
         generateReport(sugon.uuid(), codeArr);
       }

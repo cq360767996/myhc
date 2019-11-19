@@ -72,6 +72,7 @@ function passwordLogin(e) {
           sessionStorage.setItem("deptCode", result.deptCode);
           sessionStorage.setItem("role", result.role);
           sessionStorage.setItem("username", username);
+          sessionStorage.setItem("name", result.name);
           location.href = sugon.isPublished
             ? "/index?#myzs"
             : "index.html?#myzs";

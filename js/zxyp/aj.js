@@ -790,6 +790,13 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
     let data2 = [data.qclaj / 100, 0.5, 0.4, 0.3];
     option.series[0].data = data1;
     option.title.text = data.shlaj + "%";
+
+    let bubble1 = document.getElementById("air-bubble1");
+    let bubble2 = document.getElementById("air-bubble2");
+    bubble1.getAttribute("_echarts_instance_") &&
+      ec.getInstanceByDom(bubble1).dispose();
+    bubble2.getAttribute("_echarts_instance_") &&
+      ec.getInstanceByDom(bubble2).dispose();
     sugon.renderChart({ id: "air-bubble1", data: data1, option });
     option.series[0].data = data2;
     option.title.text = data.qclaj + "%";

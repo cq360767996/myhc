@@ -101,14 +101,14 @@ requirejs(["common"], sugon => {
                             <span>满意度<strong>${val.value}</strong></span>
                             <span>业务量<strong>${val.ywl}</strong>次</span>
                           </div>
-                          <div>${val.dw}</div>
+                          <div title="${val.dw}">${val.dw}</div>
                         </div>
                       </section>`;
     let lastDom = `<section>
                     <div><div>${img}</div><div${color}>${val.value}</div></div>
                     <div>
                       <div>${val.name}</div>
-                      <div>${val.dw}</div>
+                      <div title="${val.dw}">${val.dw}</div>
                     </div>
                    </section>`;
     return isLast ? lastDom : notLastDom;

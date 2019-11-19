@@ -29,7 +29,10 @@ requirejs(["common", "ec"], (sugon, ec) => {
               );
             $body.find("strong").html(val.freq);
             $body.find(".area-div").html(`高发单位：${val.area}`);
-            $body.find(".content-div").html(val.content);
+            $body
+              .find(".content-div")
+              .attr("title", val.content)
+              .html(val.content);
           } else {
             let type =
               val.model == 1 ? "业务" : val.model == 2 ? "问题" : "队伍";
