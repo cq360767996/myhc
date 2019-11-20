@@ -13,24 +13,18 @@
       <input id="date1" readonly class="form-control" />
       <span>——</span>
       <input id="date2" readonly class="form-control" />
-      <button id="search-btn" class="btn-selected">查询</button>
-      <button id="search-reset">重置</button>
+      <button id="search-btn" class="btn btn-primary">查询</button>
+      <button id="search-reset" class="btn btn-default">重置</button>
     </header>
     <banner>
-      <button id="add-btn" class="btn-selected">
+      <button id="add-btn" class="btn btn-primary">
         <i class="glyphicon glyphicon-plus"></i>新增
       </button>
-      <button id="edit-btn">
-        <i class="glyphicon glyphicon-pencil"></i>修改
-      </button>
-      <button id="delete-btn">
+      <button id="delete-btn" class="btn btn-danger">
         <i class="glyphicon glyphicon-trash"></i>删除
       </button>
-      <button id="send-btn">
+      <button id="send-btn" class="btn btn-default">
         <i class="glyphicon glyphicon-send"></i>发送
-      </button>
-      <button id="detail-btn">
-        <i class="glyphicon glyphicon-list-alt"></i>详情
       </button>
     </banner>
     <tab id="tab-container"></tab>
@@ -39,7 +33,7 @@
     </footer>
   </section>
 </main>
-
+<!-- 新增修改 -->
 <div class="modal fade" tabindex="-1" role="dialog" id="pop-panel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -87,7 +81,6 @@
             </div>
             <input
               type="file"
-              multiple
               id="pop-file-input"
               accept="
                 application/vnd.ms-excel,
@@ -109,7 +102,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">创建人：</label>
             <div class="col-sm-4">
-              <p id="pop-creater" class="form-control-static"></p>
+              <p id="pop-creator" class="form-control-static"></p>
             </div>
           </div>
           <div class="form-group">
@@ -125,6 +118,97 @@
           <button class="btn btn-default" data-dismiss="modal">取消</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- 发送删除确认 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="confirm-panel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <img src="../../img/system/user/location.png" />
+          <span id="confirm-name"></span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="tip-panel">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          <span id="tip-span">您确定要删除所选数据吗？</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-delete-send" class="btn btn-primary">确定</button>
+        <button class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 详情 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="detail-panel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <img src="../../img/system/user/location.png" />
+          <span>通知公告详情</span>
+        </h4>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">标题：</label>
+            <div class="col-sm-9">
+              <p id="detail-title" class="form-control-static"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">内容：</label>
+            <div class="col-sm-9">
+              <p id="detail-content" class="form-control-static"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">附件：</label>
+            <div class="col-sm-9">
+              <p id="detail-file-name" class="form-control-static"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">创建人：</label>
+            <div class="col-sm-9">
+              <p id="detail-creator" class="form-control-static"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">创建时间：</label>
+            <div class="col-sm-9">
+              <p id="detail-create-time" class="form-control-static"></p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
     </div>
   </div>
 </div>

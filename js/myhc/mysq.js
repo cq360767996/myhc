@@ -86,7 +86,7 @@ requirejs(["common", "myhc/detail_popup"], (sugon, popup) => {
   function getEvent() {
     sugon.request(sugon.interFaces.myhc.myys.saveKeyWord, {
       keyWord: searchParams.txt,
-      type: searchParams.type
+      type: 1
     });
   }
 

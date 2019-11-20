@@ -1116,9 +1116,21 @@ define(["ec"], function(ec) {
             localUrl: localPath + "user/alert/getAll.json",
             remoteUrl: remotePath + "system/notification/getAll"
           },
-          submitAdd: {
+          submit: {
             localUrl: localPath + "200.json",
-            remoteUrl: remotePath + "system/notification/submitAdd"
+            remoteUrl: remotePath + "system/notification/submit"
+          },
+          getDetail: {
+            localUrl: localPath + "user/alert/getDetail.json",
+            remoteUrl: remotePath + "system/notification/getDetail"
+          },
+          delete: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/notification/delete"
+          },
+          send: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/notification/send"
           }
         }
       }

@@ -63,14 +63,6 @@ main > section {
 .main-section > header input:focus {
   border: 1px solid #40a9ff;
 }
-.main-section > header button {
-  width: 64px;
-  border: 1px solid #d9d9d9;
-}
-.main-section > header button.btn-selected {
-  background-color: #3b8cc1;
-  color: #fff;
-}
 .main-section > header #title {
   margin-right: 40px;
   width: calc(100% - 1000px);
@@ -81,20 +73,10 @@ main > section {
   margin-top: 26px;
 }
 .main-section > banner > button {
-  border: 1px solid #d9d9d9;
-  border-radius: 3px;
   margin-left: 10px;
-  padding: 0 15px;
-}
-.main-section > banner > button.btn-selected {
-  background-color: #3b8cc1;
-  color: #fff;
 }
 .main-section > banner > button > i {
   margin-right: 10px;
-}
-.main-section > banner > button:first-child {
-  margin-left: 0;
 }
 .main-section > tab {
   margin-top: 10px;
@@ -109,9 +91,21 @@ main > section {
   height: 100%;
   border-bottom: 1px solid #e8e8e8;
   display: grid;
-  grid-template-columns: 50px auto 200px 200px;
+  grid-template-columns: 50px auto 200px 200px 200px;
   align-items: center;
-  justify-items: center;
+  grid-column-gap: 20px;
+  padding: 0 10px;
+}
+.main-section > tab > row > cell {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.main-section > tab > row > cell button {
+  margin-right: 5px;
+}
+.main-section > tab > row > cell button > i {
+  margin-right: 5px;
 }
 .main-section > tab > row:first-child,
 .main-section > tab > row:hover {
@@ -124,7 +118,9 @@ main > section {
 .main-section > footer > div {
   float: right;
 }
-#pop-panel {
+#pop-panel,
+#confirm-panel,
+#detail-panel {
   color: #333;
 }
 .modal textarea {
@@ -148,4 +144,9 @@ main > section {
   position: absolute;
   z-index: 9999;
   background-color: #fff;
+}
+#confirm-panel .tip-panel {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 16px;
 }

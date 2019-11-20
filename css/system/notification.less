@@ -2,7 +2,14 @@
   font-family: "SourceHanSansCN";
   src: url(../../fonts/SourceHanSansCN-Regular.ttf);
 }
- 
+
+// 单行省略
+.single-text-ellipse() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 banner,
 tab,
 cell {
@@ -76,16 +83,6 @@ main {
       }
     }
 
-    button {
-      width: 64px;
-      border: 1px solid #d9d9d9;
-
-      &.btn-selected {
-        background-color: #3b8cc1;
-        color: #fff;
-      }
-    }
-
     #title {
       margin-right: 40px;
       width: calc(~"100% - 1000px");
@@ -98,22 +95,9 @@ main {
     margin-top: 26px;
 
     & > button {
-      border: 1px solid #d9d9d9;
-      border-radius: 3px;
       margin-left: 10px;
-      padding: 0 15px;
-
-      &.btn-selected {
-        background-color: #3b8cc1;
-        color: #fff;
-      }
-
       & > i {
         margin-right: 10px;
-      }
-
-      &:first-child {
-        margin-left: 0;
       }
     }
   }
@@ -131,9 +115,21 @@ main {
       height: 100%;
       border-bottom: 1px solid #e8e8e8;
       display: grid;
-      grid-template-columns: 50px auto 200px 200px;
+      grid-template-columns: 50px auto 200px 200px 200px;
       align-items: center;
-      justify-items: center;
+      grid-column-gap: 20px;
+      padding: 0 10px;
+
+      & > cell {
+        .single-text-ellipse();
+
+        button {
+          margin-right: 5px;
+          & > i {
+            margin-right: 5px;
+          }
+        }
+      }
 
       &:first-child,
       &:hover {
@@ -152,7 +148,9 @@ main {
   }
 }
 
-#pop-panel {
+#pop-panel,
+#confirm-panel,
+#detail-panel {
   color: #333;
 }
 
@@ -181,4 +179,10 @@ main {
   position: absolute;
   z-index: 9999;
   background-color: #fff;
+}
+
+#confirm-panel .tip-panel {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 16px;
 }
