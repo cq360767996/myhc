@@ -55,7 +55,8 @@ requirejs(["common"], sugon => {
 
   // 加载表格数据和分页组件
   function loadTabAndNav(pageNum = 1) {
-    let params = Object.assign({ pageNum }, searchParams);
+    let { title, date1, date2 } = searchParams;
+    let params = { pageNum, title, date1, date2 };
     sugon
       .request(sugon.interFaces.system.notification.getAll, params)
       .then(result => {
@@ -75,22 +76,22 @@ requirejs(["common"], sugon => {
                       <cell>操作</cell>
                     </row>`;
         result.data.map(val => {
-          html += `<row>
-                    <cell>
-                      <input class="single-check" row-id="${val.id}" type="checkbox" />
-                    </cell>
-                    <cell title="${val.title}">${val.title}</cell>
-                    <cell>${val.name}</cell>
-                    <cell>${val.date}</cell>
-                    <cell>
-                      <button class="edit-btn btn btn-primary">
-                        <i class="glyphicon glyphicon-pencil"></i>修改
-                      </button>
-                      <button class="detail-btn btn btn-info">
-                        <i class="glyphicon glyphicon-list-alt"></i>详情
-                      </button>
-                    </cell>
-                   </row>`;
+          html += ` <row>
+                      <cell>
+                        <input class="single-check" row-id="${val.id}" type="checkbox" />
+                      </cell>
+                      <cell title="${val.title}">${val.title}</cell>
+                      <cell>${val.name}</cell>
+                      <cell>${val.date}</cell>
+                      <cell>
+                        <button class="edit-btn btn btn-primary">
+                          <i class="glyphicon glyphicon-pencil"></i>修改
+                        </button>
+                        <button class="detail-btn btn btn-info">
+                          <i class="glyphicon glyphicon-list-alt"></i>详情
+                        </button>
+                      </cell>
+                    </row>`;
         });
         $("#tab-container")
           .empty()
@@ -163,6 +164,7 @@ requirejs(["common"], sugon => {
       })
       .then(result => {
         if (result.code == 200) {
+          loadTabAndNav();
           sugon.showMessage(tip, "success");
           $("#pop-panel").modal("hide");
         } else {
@@ -231,6 +233,7 @@ requirejs(["common"], sugon => {
           $("#detail-panel").modal("show");
           $("#detail-title").html(result.title);
           $("#detail-content").html(result.content);
+          $("#detail-sendObj").html(result.objName);
           let fileName = `<a 
                             href="${result.fileUrl}"
                             download="${result.fileName}">
@@ -244,8 +247,10 @@ requirejs(["common"], sugon => {
           $("#pop-panel").modal("show");
           $("#pop-title").val(result.title);
           $("#pop-content").val(result.content);
+          $("#dept-name")
+            .val(result.objName)
+            .attr("node-id", result.objId);
           $("#pop-file-name").val(result.fileName);
-          $("#send-obj").hide();
           $("#pop-creator").html(result.creator);
           $("#pop-create-time").html(result.createTime);
         }
@@ -269,7 +274,6 @@ requirejs(["common"], sugon => {
     $("#pop-content").val("");
     $("#pop-file-name").val("");
     $("#pop-file-input").val("");
-    $("#send-obj").show();
     $("#dept-name")
       .val("")
       .removeAttr("node-id");
@@ -337,11 +341,15 @@ requirejs(["common"], sugon => {
     formData.append("createTime", createTime);
     let file = document.getElementById("pop-file-input").files[0] || "";
     formData.append("file", file);
-    if ($("#send-obj").css("display") === "block") {
+    // 判断是否新增
+    if (
+      $("#pop-name")
+        .html()
+        .indexOf("新增") > -1
+    ) {
       if (isPass(title) && isPass(content) && isPass(sendObj)) {
         formData.append("id", "");
         submit(formData, "新增成功！");
-        loadTabAndNav();
       } else {
         sugon.showMessage("请填写必填项！");
       }
@@ -349,7 +357,6 @@ requirejs(["common"], sugon => {
       if (isPass(title) && isPass(content)) {
         formData.append("id", searchParams.editId);
         submit(formData, "修改成功！");
-        loadTabAndNav();
       } else {
         sugon.showMessage("请填写必填项！");
       }
