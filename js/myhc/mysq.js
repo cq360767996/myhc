@@ -7,43 +7,47 @@ requirejs(["common", "myhc/detail_popup"], (sugon, popup) => {
 
   // 获取查询列表
   function getSearchList(pageNum = 1) {
-    sugon
-      .request(sugon.interFaces.myhc.myys.esSearch, {
-        txt: searchParams.txt,
-        pageSize: 5,
-        pageNum
-      })
-      .then(result => {
-        $(".total").html(result.total);
-        $(".period").html(result.period);
-        $("#pageLimit").bootstrapPaginator({
-          currentPage: pageNum,
-          totalPages: result.totalPages,
-          size: "normal",
-          bootstrapMajorVersion: 3,
-          alignment: "right",
-          numberOfPages: 6,
-          itemTexts: function(type, page, current) {
-            switch (type) {
-              case "first":
-                return "首页";
-              case "prev":
-                return "<";
-              case "next":
-                return ">";
-              case "last":
-                return "末页";
-              case "page":
-                return page;
-            }
-          },
-          onPageClicked: function(event, originalEvent, type, pageNum) {
-            getSearchList(pageNum);
+    let { txt, type } = searchParams;
+    let { role, deptId } = sugon.identityInfo;
+    let params = {
+      txt,
+      pageSize: 5,
+      type,
+      role,
+      deptId,
+      pageNum
+    };
+    sugon.request(sugon.interFaces.myhc.myys.esSearch, params).then(result => {
+      $(".total").html(result.total);
+      $(".period").html(result.period);
+      $("#pageLimit").bootstrapPaginator({
+        currentPage: pageNum,
+        totalPages: result.totalPages,
+        size: "normal",
+        bootstrapMajorVersion: 3,
+        alignment: "right",
+        numberOfPages: 6,
+        itemTexts: function(type, page) {
+          switch (type) {
+            case "first":
+              return "首页";
+            case "prev":
+              return "<";
+            case "next":
+              return ">";
+            case "last":
+              return "末页";
+            case "page":
+              return page;
           }
-        });
-        let html = "";
-        result.data.map(val => {
-          html += `<div class="table-row" row-id="${val.id}">
+        },
+        onPageClicked: function(event, originalEvent, type, pageNum) {
+          getSearchList(pageNum);
+        }
+      });
+      let html = "";
+      result.data.map(val => {
+        html += `<div class="table-row" row-id="${val.id}">
                   <div>
                     <div class="first-row">
                       <span>工单编号：${val.ywbm}</span>
@@ -58,24 +62,24 @@ requirejs(["common", "myhc/detail_popup"], (sugon, popup) => {
                     <img src="../../img/myhc/myys/${val.type}.png" />
                   </div>
                 </div>`;
-        });
-        $(".tab-container")
-          .empty()
-          .append(html);
-
-        // 点击弹出页事件
-        $(".table-row")
-          .off()
-          .on("click", function() {
-            let $this = $(this);
-            let id = $this.attr("row-id");
-            let type = $this
-              .find("img")
-              .attr("src")
-              .match(/\d+/)[0];
-            popup.renderPopup(id, 0, type, $(".pop-tab-container"));
-          });
       });
+      $(".tab-container")
+        .empty()
+        .append(html);
+
+      // 点击弹出页事件
+      $(".table-row")
+        .off()
+        .on("click", function() {
+          let $this = $(this);
+          let id = $this.attr("row-id");
+          let type = $this
+            .find("img")
+            .attr("src")
+            .match(/\d+/)[0];
+          popup.renderPopup(id, 0, type, $(".pop-tab-container"));
+        });
+    });
   }
 
   // 记录一次点击

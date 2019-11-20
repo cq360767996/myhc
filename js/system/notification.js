@@ -27,7 +27,7 @@ requirejs(["common"], sugon => {
       endDate: sugon.getDate(),
       language: "zh-CN"
     });
-    sugon.request(sugon.interFaces.user.alert.getTree).then(result => {
+    sugon.request(sugon.interFaces.system.notification.getTree).then(result => {
       let data = result.data;
       let $deptTree = $("#dept-tree");
       let $sendObj = $("#dept-name");
@@ -55,7 +55,7 @@ requirejs(["common"], sugon => {
   // 加载表格数据和分页组件
   function loadTabAndNav(pageNum = 1) {
     let params = Object.assign({ pageNum }, searchParams);
-    sugon.request(sugon.interFaces.user.alert.getAll, params).then(result => {
+    sugon.request(sugon.interFaces.system.notification.getAll, params).then(result => {
       sugon.renderNav(
         $(".nav-container"),
         pageNum,
@@ -120,6 +120,51 @@ requirejs(["common"], sugon => {
     return /\S+/.test(val);
   }
 
+  // 获取选中的数量
+  function getSelected() {
+    let result = { total: 0, idArr: [] };
+    $(".single-check").each((index, dom) => {
+      let $dom = $(dom);
+      if ($dom.is(":checked")) {
+        result.total++;
+        result.idArr.push($dom.attr("row-id"));
+      }
+    });
+    return result;
+  }
+
+  // 提交添加
+  function submitAdd(formData) {
+    sugon
+      .request(sugon.interFaces.system.notification.submitAdd, formData, {
+        processData: false,
+        contentType: false,
+        dataType: "json"
+      })
+      .then(result => {
+        if (result.code == 200) {
+          sugon.showMessage("新增成功！", "success");
+          $("#pop-panel").modal("hide");
+        }
+      });
+  }
+
+  // 提交修改
+  function submitEdit() {
+    sugon
+      .request(sugon.interFaces.system.notification.submitAdd, formData, {
+        processData: false,
+        contentType: false,
+        dataType: "json"
+      })
+      .then(result => {
+        if (result.code == 200) {
+          sugon.showMessage("修改成功！", "success");
+          $("#pop-panel").modal("hide");
+        }
+      });
+  }
+
   // 页面入口
   function initPage() {
     initSearchBar();
@@ -130,7 +175,8 @@ requirejs(["common"], sugon => {
   initPage();
 
   // 添加按钮事件
-  $("#add-btn").on("click", e => {
+  $("#add-btn").on("click", () => {
+    $("#pop-name").html("通知公告新增");
     $("#pop-panel").modal("show");
     $("#pop-title").val("");
     $("#pop-content").val("");
@@ -142,6 +188,35 @@ requirejs(["common"], sugon => {
       .removeAttr("node-id");
     $("#pop-creater").html(sugon.identityInfo.name);
     $("#pop-create-time").html(sugon.getToday());
+  });
+
+  // 修改按钮事件
+  $("#edit-btn").on("click", () => {
+    let selected = getSelected();
+    if (selected.total === 1) {
+      $("#pop-name").html("通知公告修改");
+      $("#pop-panel").modal("show");
+      $("#pop-title").val("");
+      $("#pop-content").val("");
+      $("#pop-file-name").val("");
+      $("#pop-file-input").val("");
+      $("#send-obj").hide();
+      $("#pop-creater").html(sugon.identityInfo.name);
+      $("#pop-create-time").html(sugon.getToday());
+    } else if (selected.total === 0) {
+      sugon.showMessage("请勾选进行修改！", "warning");
+    } else {
+      sugon.showMessage("一次只能修改一条记录！", "warning");
+    }
+  });
+
+  // 删除按钮事件
+  $("#delete-btn").on("click", () => {
+    let selected = getSelected();
+    if (selected.total === 0) {
+      sugon.showMessage("请勾选进行删除！", "warning");
+    } else {
+    }
   });
 
   // 查询按钮事件
@@ -187,15 +262,20 @@ requirejs(["common"], sugon => {
     formData.append("sendObj", sendObj);
     formData.append("creater", creater);
     formData.append("createTime", createTime);
+    let fileList = Array.from(document.getElementById("pop-file-input").files);
+    fileList.forEach((val, index) => {
+      formData.append("file" + index, val);
+    });
+    if ($("#send-obj").css("display") === "block") {
+      if (isPass(title) && isPass(content) && isPass(sendObj)) {
+        submitAdd();
+      }
+    } else {
+      submitEdit();
+    }
     if (isPass(title) && isPass(content) && isPass(sendObj)) {
-      let fileList = Array.from(
-        document.getElementById("pop-file-input").files
-      );
-      fileList.forEach((val, index) => {
-        formData.append("file" + index, val);
-      });
       sugon
-        .request(sugon.interFaces.user.alert.submitAdd, formData, {
+        .request(sugon.interFaces.system.notification.submitAdd, formData, {
           processData: false,
           contentType: false,
           dataType: "json"

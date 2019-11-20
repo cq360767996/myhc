@@ -1076,54 +1076,54 @@ define(["ec"], function(ec) {
           }
         }
       },
-      user: {
-        management: {
+      system: {
+        user: {
           query: {
             localUrl: localPath + "user/getUserList.json",
-            remoteUrl: remotePath + "user/getUserList"
+            remoteUrl: remotePath + "system/user/getUserList"
           },
           detele: {
             localUrl: remotePath + "user/deleteUser",
-            remoteUrl: remotePath + "user/deleteUser"
+            remoteUrl: remotePath + "system/user/deleteUser"
           },
           addUser: {
             localUrl: remotePath + "user/addUser",
-            remoteUrl: remotePath + "user/addUser"
+            remoteUrl: remotePath + "system/user/addUser"
           },
           resetPassword: {
             localUrl: remotePath + "user/resetPassword",
-            remoteUrl: remotePath + "user/resetPassword"
+            remoteUrl: remotePath + "system/user/resetPassword"
           },
           getRole: {
             localUrl: localPath + "user/getRole.json",
-            remoteUrl: remotePath + "user/getRole"
+            remoteUrl: remotePath + "system/user/getRole"
           },
           submitRole: {
             localUrl: remotePath + "user/submitRole",
-            remoteUrl: remotePath + "user/submitRole"
+            remoteUrl: remotePath + "system/user/submitRole"
           },
           getDeptTree: {
             localUrl: localPath + "Tree.json",
-            remoteUrl: remotePath + "user/getDeptTree"
+            remoteUrl: remotePath + "system/user/getDeptTree"
           }
         },
-        alert: {
+        notification: {
           getTree: {
             localUrl: localPath + "Tree.json",
-            remoteUrl: remotePath + "user/alert/getTree"
+            remoteUrl: remotePath + "system/notification/getTree"
           },
           getAll: {
             localUrl: localPath + "user/alert/getAll.json",
-            remoteUrl: remotePath + "user/alert/getAll"
+            remoteUrl: remotePath + "system/notification/getAll"
           },
           submitAdd: {
             localUrl: localPath + "200.json",
-            remoteUrl: remotePath + "user/alert/submitAdd"
+            remoteUrl: remotePath + "system/notification/submitAdd"
           }
         }
       }
     },
-    getUrlParam(name, defaultValue) {
+    getUrlParam(name) {
       var str = window.location.hash.substring(
         window.location.hash.indexOf(name) + name.length + 1,
         window.location.hash.length

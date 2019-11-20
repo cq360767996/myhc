@@ -14,7 +14,7 @@ requirejs(["common"], sugon => {
       {
         type: "POST",
         async: true,
-        url: sugon.interFaces.user.management.query,
+        url: sugon.interFaces.system.user.query,
         data: {
           username: username,
           name: name,
@@ -51,7 +51,7 @@ requirejs(["common"], sugon => {
       {
         type: "POST",
         async: true,
-        url: sugon.interFaces.user.management.query,
+        url: sugon.interFaces.system.user.query,
         data: {
           username: username,
           name: name,
@@ -165,7 +165,7 @@ requirejs(["common"], sugon => {
       {
         type: "POST",
         async: true,
-        url: sugon.interFaces.user.management.detele,
+        url: sugon.interFaces.system.user.detele,
         data: {
           username: $("#usern").val(),
           sfzh: $("#sfzhn").val()
@@ -200,7 +200,7 @@ requirejs(["common"], sugon => {
           {
             type: "POST",
             async: true,
-            url: sugon.interFaces.user.management.resetPassword,
+            url: sugon.interFaces.system.user.resetPassword,
             data: {
               username: $("#userns").val(),
               sfzh: $("#sfzhns").val(),
@@ -241,7 +241,7 @@ requirejs(["common"], sugon => {
         {
           type: "POST",
           async: true,
-          url: sugon.interFaces.user.management.getRole,
+          url: sugon.interFaces.system.user.getRole,
           data: {}
         },
         function(result) {
@@ -314,7 +314,7 @@ requirejs(["common"], sugon => {
         {
           type: "POST",
           async: true,
-          url: sugon.interFaces.user.management.submitRole,
+          url: sugon.interFaces.system.user.submitRole,
           data: {
             usernames: usernamess,
             code: codes,
@@ -377,7 +377,7 @@ requirejs(["common"], sugon => {
         {
           type: "POST",
           async: true,
-          url: sugon.interFaces.user.management.addUser,
+          url: sugon.interFaces.system.user.addUser,
           data: {
             username: $("#usernamex").val(),
             name: $("#namex").val(),

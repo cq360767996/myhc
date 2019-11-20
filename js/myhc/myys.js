@@ -1,35 +1,23 @@
 requirejs(["common"], function(sugon) {
-  function initWord(type = 0) {
+  function initSearchList(type = 0) {
     sugon
       .request(sugon.interFaces.myhc.myys.HotWords, { type })
       .then(result => {
         let html = "";
         result.data.map(val => {
-          html += `<div id="${val.value}">${val.name}</div>`;
+          html += `<div class='ellipsis' id="${val.value}">${val.name}</div>`;
         });
-        $(".hotWord")
+        $(".hotSearch .list")
           .empty()
           .append(html);
-      });
-  }
 
-  function initSearchList() {
-    sugon.request(sugon.interFaces.myhc.myys.HotWords).then(result => {
-      let html = "";
-      result.data.map(val => {
-        html += `<div class='ellipsis' id="${val.value}">${val.name}</div>`;
+        $(".hotSearch .list>div")
+          .unbind()
+          .bind("click", function() {
+            $("#keywords").val($(this).html());
+            searchFunc();
+          });
       });
-      $(".hotSearch .list")
-        .empty()
-        .append(html);
-
-      $(".hotSearch .list>div")
-        .unbind()
-        .bind("click", function() {
-          $("#keywords").val($(this).html());
-          searchFunc();
-        });
-    });
   }
 
   // 查询按钮事件
@@ -55,7 +43,6 @@ requirejs(["common"], function(sugon) {
       }
     });
     //加载热词
-    initWord();
     initSearchList();
   };
 
@@ -71,7 +58,7 @@ requirejs(["common"], function(sugon) {
       $target.addClass(className);
       let left = $section.css("left") === "54px" ? "144px" : "54px";
       $section.css({ left });
-      initWord($target.index(".switch-btn > div"));
+      initSearchList($target.index(".switch-btn > div"));
     }
   });
 });

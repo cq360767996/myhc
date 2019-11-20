@@ -202,20 +202,20 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/slhy/pjda.html",
       controller: "js/slhy/pjda.js"
     },
-    management: {
-      parent: "user",
-      templateUrl: "views/user/management.html",
-      controller: "js/user/management.js"
+    user: {
+      parent: "system",
+      templateUrl: "views/system/user.html",
+      controller: "js/system/user.js"
     },
-    alert: {
-      parent: "user",
-      templateUrl: "views/user/alert.html",
-      controller: "js/user/alert.js"
+    notification: {
+      parent: "system",
+      templateUrl: "views/system/notification.html",
+      controller: "js/system/notification.js"
     },
     infoUpload: {
-      parent: "user",
-      templateUrl: "views/user/infoUpload.html",
-      controller: "js/user/infoUpload.js"
+      parent: "system",
+      templateUrl: "views/system/infoUpload.html",
+      controller: "js/system/infoUpload.js"
     },
     defaults: "404"
   };
@@ -339,7 +339,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
 
   // 把tab的名称转换为菜单名称以便在路由中找到
   function transformTab2Menu(type) {
-    if (["myhc", "zxyp", "slhy", "znbg", "user"].indexOf(type) > -1) {
+    if (["myhc", "zxyp", "slhy", "znbg", "system"].indexOf(type) > -1) {
       Object.keys(router).forEach(key => {
         if (router[key].parent === type) {
           type = key;
@@ -373,8 +373,8 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
           case "znbg":
             arr = ["ywfxbg", "zhfxbg"];
             break;
-          case "user":
-            arr = ["management", "alert", "infoUpload"];
+          case "system":
+            arr = ["user", "notification", "infoUpload"];
             break;
         }
         let filterArr = filterMenu(arr);
