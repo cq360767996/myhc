@@ -632,17 +632,6 @@ requirejs(["common", "ec"], (sugon, ec) => {
     initChart4();
   });
 
-  // 民意榜单按钮事件
-  $(".mybd-btn").on("click", () => {
-    requirejs(["text!../views/myhc/ryqk.html"], function(ele) {
-      $(".pop-panel")
-        .html(ele)
-        .show()
-        .css("width", "100%")
-        .css("height", "100%");
-    });
-  });
-
   // 设置按钮入口
   $(".setting-btn").on("click", () => {
     location.hash = vipspa.stringify("rdwt/setting", {
