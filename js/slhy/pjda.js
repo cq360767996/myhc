@@ -114,7 +114,7 @@ requirejs(["common"], sugon => {
     return isLast ? lastDom : notLastDom;
   }
 
-  // s初始化查询栏
+  // 初始化查询栏
   function initSearchBar() {
     sugon.initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
     sugon.initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));

@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "SourceHanSansCN";
+  src: url(../../fonts/SourceHanSansCN-Regular.ttf);
+}
+.home-main {
+  height: 100%;
+  background: url(../../img/slhy/zhzs/main/bg.png) no-repeat center center / 100% 100%;
+}
+.home-main > header {
+  padding-top: 20px;
+  height: 70px;
+  line-height: 37px;
+  background: url(../../img/slhy/zhzs/main/header_bg.png) no-repeat center bottom;
+  text-align: center;
+  font-family: "SourceHanSansCN";
+  color: #2a5fb7;
+  font-size: 38px;
+}
+.home-main > main {
+  width: calc(100% - 118px);
+  margin-left: 46px;
+  height: calc(100% - 146px);
+  margin-top: 10px;
+  background: url(../../img/slhy/zhzs/main/main_bg.png) no-repeat center center / 100% 100%;
+  position: relative;
+}
+.home-main > main > aside {
+  width: 108px;
+  height: 77px;
+  line-height: 60px;
+  position: absolute;
+  right: 26%;
+  bottom: 20%;
+  background: url(../../img/slhy/zhzs/main/btn.png) no-repeat;
+  border-radius: 30px;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+.home-main > main > aside:hover {
+  bottom: calc(20% + 10px);
+  color: #2a5fb7;
+}
+.home-main > main > input {
+  position: absolute;
+  bottom: 22%;
+  right: 8%;
+  display: block;
+  width: 222px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #093cab;
+  border-radius: 5px;
+  border: solid 2px #08abff;
+  padding: 0 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  color: #fff;
+}
+.home-main > main > span {
+  position: absolute;
+  bottom: 24%;
+  right: 9%;
+  width: 20px;
+  height: 10px;
+  display: block;
+  background: url(../../img/slhy/zhzs/main/arrow.png) no-repeat;
+}
+#left-tree {
+  visibility: hidden;
+  margin-top: -5px;
+  height: 230px;
+  position: absolute;
+  z-index: 9999;
+  overflow: auto;
+  right: 8%;
+  bottom: -11.7%;
+  color: #000;
+}

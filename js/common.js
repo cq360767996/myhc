@@ -968,6 +968,48 @@ define(["ec"], function(ec) {
         }
       },
       slhy: {
+        zhzs: {
+          getDeptTree: {
+            localUrl: localPath + "Tree.json",
+            remoteUrl: remotePath + "slhy/pjda/getDeptTree"
+          },
+          getTopLeft: {
+            localUrl: localPath + "zhzs/getTopLeft.json",
+            remoteUrl: remotePath + "slhy/pjda/getTopLeft"
+          },
+          getTopRight: {
+            localUrl: localPath + "zhzs/getTopRight.json",
+            remoteUrl: remotePath + "slhy/pjda/getTopRight"
+          },
+          getMidTop: {
+            localUrl: localPath + "zhzs/getMidTop.json",
+            remoteUrl: remotePath + "slhy/pjda/getMidTop"
+          },
+          getMidBottomLeft: {
+            localUrl: localPath + "zhzs/getMidBottomLeft.json",
+            remoteUrl: remotePath + "slhy/pjda/getMidBottomLeft"
+          },
+          getMidBottomRight: {
+            localUrl: localPath + "zhzs/getMidBottomRight.json",
+            remoteUrl: remotePath + "slhy/pjda/getMidBottomRight"
+          },
+          getBottomLeft: {
+            localUrl: localPath + "zhzs/getBottomLeft.json",
+            remoteUrl: remotePath + "slhy/pjda/getBottomLeft"
+          },
+          getBottomMid: {
+            localUrl: localPath + "zhzs/getBottomMid.json",
+            remoteUrl: remotePath + "slhy/pjda/getBottomMid"
+          },
+          getBottomRight: {
+            localUrl: localPath + "zhzs/getBottomRight.json",
+            remoteUrl: remotePath + "slhy/pjda/getBottomRight"
+          },
+          getBottomRightSelect: {
+            localUrl: localPath + "zhzs/getBottomRightSelect.json",
+            remoteUrl: remotePath + "slhy/pjda/getBottomRightSelect"
+          }
+        },
         pjda: {
           initTop: {
             localUrl: localPath + "pjda/initTop.json",
@@ -1417,17 +1459,22 @@ define(["ec"], function(ec) {
     handleMinAndMax: function(arr = [], isNotPercent) {
       let result = { min: null, max: null };
       if (arr.length > 0) {
-        result.min = Number(arr[0]);
-        result.max = Number(arr[0]);
-        arr.map(val => {
-          if (typeof val === "object") {
+        if (typeof arr[0] === "object") {
+          result.min = Number(arr[0].value);
+          result.max = Number(arr[0].value);
+          arr.map(val => {
             result.min = Math.min(result.min, Number(val.value));
             result.max = Math.max(result.max, Number(val.value));
-          } else {
+          });
+        } else {
+          result.min = Number(arr[0]);
+          result.max = Number(arr[0]);
+          arr.map(val => {
             result.min = Math.min(result.min, Number(val));
             result.max = Math.max(result.max, Number(val));
-          }
-        });
+          });
+        }
+
         let diff = (result.max - result.min) / 2;
         result.min =
           result.min - diff < 0 ? 0 : Number(result.min - diff).toFixed(2);
