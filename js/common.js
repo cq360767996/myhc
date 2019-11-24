@@ -3,7 +3,7 @@ define(["ec"], function(ec) {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: false,
+    isPublished: true,
     // 菜单权限配置文件
     menuConfig: {
       // 交警
@@ -971,43 +971,43 @@ define(["ec"], function(ec) {
         zhzs: {
           getDeptTree: {
             localUrl: localPath + "Tree.json",
-            remoteUrl: remotePath + "slhy/pjda/getDeptTree"
+            remoteUrl: remotePath + "slhy/zhzs/getDeptTree"
           },
           getTopLeft: {
             localUrl: localPath + "zhzs/getTopLeft.json",
-            remoteUrl: remotePath + "slhy/pjda/getTopLeft"
+            remoteUrl: remotePath + "slhy/zhzs/getTopLeft"
           },
           getTopRight: {
             localUrl: localPath + "zhzs/getTopRight.json",
-            remoteUrl: remotePath + "slhy/pjda/getTopRight"
+            remoteUrl: remotePath + "slhy/zhzs/getTopRight"
           },
           getMidTop: {
             localUrl: localPath + "zhzs/getMidTop.json",
-            remoteUrl: remotePath + "slhy/pjda/getMidTop"
+            remoteUrl: remotePath + "slhy/zhzs/getMidTop"
           },
           getMidBottomLeft: {
             localUrl: localPath + "zhzs/getMidBottomLeft.json",
-            remoteUrl: remotePath + "slhy/pjda/getMidBottomLeft"
+            remoteUrl: remotePath + "slhy/zhzs/getMidBottomLeft"
           },
           getMidBottomRight: {
             localUrl: localPath + "zhzs/getMidBottomRight.json",
-            remoteUrl: remotePath + "slhy/pjda/getMidBottomRight"
+            remoteUrl: remotePath + "slhy/zhzs/getMidBottomRight"
           },
           getBottomLeft: {
             localUrl: localPath + "zhzs/getBottomLeft.json",
-            remoteUrl: remotePath + "slhy/pjda/getBottomLeft"
+            remoteUrl: remotePath + "slhy/zhzs/getBottomLeft"
           },
           getBottomMid: {
             localUrl: localPath + "zhzs/getBottomMid.json",
-            remoteUrl: remotePath + "slhy/pjda/getBottomMid"
+            remoteUrl: remotePath + "slhy/zhzs/getBottomMid"
           },
           getBottomRight: {
             localUrl: localPath + "zhzs/getBottomRight.json",
-            remoteUrl: remotePath + "slhy/pjda/getBottomRight"
+            remoteUrl: remotePath + "slhy/zhzs/getBottomRight"
           },
           getBottomRightSelect: {
             localUrl: localPath + "zhzs/getBottomRightSelect.json",
-            remoteUrl: remotePath + "slhy/pjda/getBottomRightSelect"
+            remoteUrl: remotePath + "slhy/zhzs/getBottomRightSelect"
           }
         },
         pjda: {
@@ -1173,6 +1173,32 @@ define(["ec"], function(ec) {
           send: {
             localUrl: localPath + "200.json",
             remoteUrl: remotePath + "system/notification/send"
+          },
+          getTotal: {
+            localUrl: localPath + "user/alert/getTotal.json",
+            remoteUrl: remotePath + "system/notification/getTotal"
+          },
+          getAllByUser: {
+            localUrl: localPath + "user/alert/getAllByUser.json",
+            remoteUrl: remotePath + "system/notification/getAllByUser"
+          },
+          getDetailByUser: {
+            localUrl: localPath + "user/alert/getDetail.json",
+            remoteUrl: remotePath + "system/notification/getDetailByUser"
+          }
+        },
+        msgBoard: {
+          getAll: {
+            localUrl: localPath + "user/msgBoard/getAll.json",
+            remoteUrl: remotePath + "system/msgBoard/getAll"
+          },
+          delete: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/msgBoard/delete"
+          },
+          add: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/msgBoard/add"
           }
         }
       }
@@ -1435,11 +1461,7 @@ define(["ec"], function(ec) {
     },
     // 加载中页面组件
     renderLoading() {
-      $("#ui-view").append(
-        $("<aside/>")
-          .addClass("loading")
-          .append("<div></div>")
-      );
+      $("#ui-view").append(`"<aside class="loading"><div></div></aside>"`);
     },
     // 生成uuid
     uuid() {

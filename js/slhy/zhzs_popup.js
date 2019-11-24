@@ -3,7 +3,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
   let searchParams = { code: null, bottomId: null };
   // 初始化查询栏
   async function initSearchBar() {
-    let { deptId } = searchParams;
+    let { deptId, deptName } = searchParams;
+    $(".main-title").html(`${deptName}效能档案`);
     let result = await sugon.request(sugon.interFaces.slhy.zhzs.getDeptTree, {
       deptId,
       type: 1
@@ -25,7 +26,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
     sugon.initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
     sugon.initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
     $deptId.val((searchParams.deptId = result.data[0].id));
-    $deptName.val(result.data[0].text);
+    $deptName.val((searchParams.deptName = result.data[0].text));
     // 为单位名称绑定点击事件
     $deptName.off().on("click", () => {
       $deptTree.css(
@@ -33,7 +34,6 @@ requirejs(["common", "ec"], (sugon, ec) => {
         $deptTree.css("visibility") === "hidden" ? "visible" : "hidden"
       );
     });
-    await initBottomRightSelect();
   }
 
   // 初始化最上面板
@@ -118,7 +118,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
     result.data.map((val, index) => {
       let upOrDown = Number(val.value) < 0 ? "down" : "up";
       html += `<div row-id="${val.id}"
-                  class="icon269x48-${val.id}${index === 0 ? " selected" : ""}">
+                  class="mid-top-right-row 
+                  icon269x48-${val.id}${index === 0 ? " selected" : ""}">
                     <div>${val.name}</div>
                     <div class="${upOrDown}-color">
                       ${Math.abs(val.value)}%
@@ -250,7 +251,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 初始化最下左侧面板
   async function initBottomLeft() {
-    let { deptId, date1, date2 } = searchParams;
+    let { deptId, date1, date2, deptName } = searchParams;
+    $(".bottom-left-span").html(`${deptName}<br />效能评估总结`);
     let result = await sugon.request(sugon.interFaces.slhy.zhzs.getBottomLeft, {
       deptId,
       date1,
@@ -383,7 +385,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
   }
 
   // 查询按钮事件
-  function searchFunc() {
+  async function searchFunc() {
+    await initBottomRightSelect();
     initTop();
     initMid();
     initBottom();
@@ -393,6 +396,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   async function initPage() {
     // 获取主页传过来的deptId
     searchParams.deptId = window.passDeptId;
+    searchParams.deptName = window.passDeptName;
     await initSearchBar();
     searchFunc();
   }
@@ -421,24 +425,14 @@ requirejs(["common", "ec"], (sugon, ec) => {
   });
 
   // 中上右侧点击事件
-  document.querySelector(".mid-top-right").addEventListener("click", e => {
-    let className = "";
+  $(".mid-top-right").on("click", ".mid-top-right-row", e => {
+    let $target = $(e.target);
     let selected = "selected";
-    e.path.map(el => {
-      el.classList &&
-        Array.from(el.classList).map(val => {
-          if (val.indexOf("icon269x48-") > -1) {
-            className = val;
-          }
-        });
-    });
-
-    let $selectedItem = $(`.${className}`);
-    if (!$selectedItem.hasClass(selected)) {
-      $(".mid-top-right > div").removeClass(selected);
-      $selectedItem.addClass(selected);
+    if (!$target.hasClass(selected)) {
+      $(".mid-top-right-row").removeClass(selected);
+      $target.addClass(selected);
       searchParams.code = null;
-      searchParams.id = $selectedItem.attr("row-id");
+      searchParams.id = $target.attr("row-id");
       initMidBottomLeft();
       initMidBottomRight();
     }

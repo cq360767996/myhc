@@ -60,6 +60,9 @@
   -webkit-appearance: none;
   color: #fff;
 }
+.home-main > main > input::placeholder {
+  color: #fff;
+}
 .home-main > main > span {
   position: absolute;
   bottom: 24%;

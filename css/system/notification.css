@@ -12,29 +12,29 @@ input[type="checkbox"] {
   width: 20px;
   height: 20px;
 }
-main {
+.main-panel {
   height: 100%;
   font-family: "SourceHanSansCN";
   color: #666;
 }
-main > header {
+.main-panel > header {
   height: 70px;
   line-height: 35px;
   background-color: #fff;
 }
-main > header > div {
+.main-panel > header > div {
   height: 50%;
   padding-left: 25px;
 }
-main > header > div:first-child {
+.main-panel > header > div:first-child {
   color: #afafaf;
 }
-main > header > div:last-child {
+.main-panel > header > div:last-child {
   color: #272727;
   font-size: 16px;
   font-weight: bold;
 }
-main > section {
+.main-panel > section {
   width: calc(100% - 48px);
   height: calc(100% - 110px);
   margin: 20px auto;
@@ -95,6 +95,9 @@ main > section {
   align-items: center;
   grid-column-gap: 20px;
   padding: 0 10px;
+}
+.main-section > tab > row:first-child {
+  font-weight: bold;
 }
 .main-section > tab > row > cell {
   text-overflow: ellipsis;

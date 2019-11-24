@@ -190,17 +190,17 @@ cell {
 }
 .left-aside1 > aside:first-child > div:last-child > div:first-child {
   color: #ff9d33;
-  font-size: 30px;
+  font-size: 24px;
 }
 .left-aside1 > aside:last-child {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  font-size: 18px;
+  font-size: 16px;
 }
 .left-aside1 > aside:last-child .top-left-val {
   color: #ff9d33;
-  font-size: 20px;
+  font-size: 18px;
 }
 .left-aside1 > aside:last-child > div:first-child {
   display: flex;
@@ -208,7 +208,7 @@ cell {
   align-items: center;
 }
 .left-aside1 > aside:last-child > div:first-child > div:last-child {
-  margin-left: 20px;
+  margin-left: 18px;
 }
 .left-aside2 {
   top: 65.4%;
@@ -876,6 +876,9 @@ cell {
 }
 .mid-bottom-right > div > div:nth-child(2) {
   font-size: 17px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .mid-bottom-right > div > div:nth-child(3) {
   font-size: 20px;
@@ -1011,10 +1014,10 @@ cell {
   top: 2px;
 }
 .bottom-right > main > row > cell:nth-child(2) {
-  width: 100px;
+  width: 120px;
 }
 .bottom-right > main > row > cell:nth-child(3) {
-  width: calc(100% - 420px);
+  width: calc(100% - 440px);
 }
 .bottom-right > main > row > cell:nth-child(4) {
   width: 150px;

@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="../../css/system/msgBoard.css" />
+
+<main class="main-container">
+  <header>
+    <div>首页/留言管理</div>
+    <div>留言列表</div>
+  </header>
+  <section>
+    <tab id="tab-container"></tab>
+    <footer>
+      <div class="nav-container"></div>
+    </footer>
+  </section>
+</main>
+
+<!-- 删除提示 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="confirm-panel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">
+            <img src="../../img/system/user/location.png" />
+            <span id="confirm-name"></span>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="tip-panel">
+            <i class="glyphicon glyphicon-info-sign"></i>
+            <span id="tip-span">您确定要删除所选数据吗？</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-delete" class="btn btn-primary">确定</button>
+          <button class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>

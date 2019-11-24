@@ -1,8 +1,10 @@
 requirejs(["common"], sugon => {
   $(".home-main > main > aside").on("click", () => {
     let deptId = $("#placeCode").val();
+    let deptName = $("#place").val();
     if (deptId) {
       window.passDeptId = deptId;
+      window.passDeptName = deptName;
       requirejs(["text!../views/slhy/zhzs_popup.html"], function(ele) {
         $("#ui-view").append(ele);
       });

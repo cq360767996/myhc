@@ -212,13 +212,14 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/system/notification.html",
       controller: "js/system/notification.js"
     },
-    infoUpload: {
+    msgBoard: {
       parent: "system",
-      templateUrl: "views/system/infoUpload.html",
-      controller: "js/system/infoUpload.js"
+      templateUrl: "views/system/msgBoard.html",
+      controller: "js/system/msgBoard.js"
     },
     defaults: "404"
   };
+  // 判断地图模块文件
   switch (sugon.identityInfo.role) {
     case "fj":
       router.myzs.controller = "js/myhc/myzs_fj.js";
@@ -247,7 +248,8 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
   handleTabDisplay();
   // 加载左侧菜单
   loadMenu(location.hash);
-
+  // 初始化消息通知
+  initNotification();
   // 浏览器历史记录改变时触发
   window.addEventListener(
     "popstate",
@@ -306,6 +308,145 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       }
     }
   });
+
+  // 留言板点击事件
+  $("#msg-board").on("click", () => {
+    let html = `<div class="msg-board-popup">
+                  <header>
+                    <img src="../../img/system/user/location.png" />
+                    <span>消息留言板</span>
+                    <i class="msg-board-popup-close glyphicon glyphicon-remove"></i>
+                  </header>
+                  <main>
+                    <textarea id="msg-board-textarea"></textarea>
+                  </main>
+                  <footer>
+                    <div>
+                      <button class="msg-board-popup-confirm btn btn-primary">确定</button>
+                      <button class="msg-board-popup-close btn btn-default">取消</button>
+                    </div>
+                  </footer>
+                </div>`;
+    $("#ui-view")
+      .append(html)
+      .append(`<div class="main-page-mask"></div>`);
+  });
+
+  // 关闭按钮事件
+  $("#ui-view").on("click", ".msg-board-popup-close", popupClose);
+
+  // 确定按钮事件
+  $("#ui-view").on("click", ".msg-board-popup-confirm", popupConfirm);
+
+  // 通知按钮事件
+  $(".popup-right").on("click", () => {
+    let html = `<div class="msg-board-popup" style="width: 600px;height: 480px;">
+                  <header>
+                    <img src="../../img/system/user/location.png" />
+                    <span>通知列表</span>
+                    <i class="msg-board-popup-close glyphicon glyphicon-remove"></i>
+                  </header>
+                  <main>
+                    <div id="msg-board-tab"></div>
+                  </main>
+                  <footer>
+                    <section></section>
+                  </footer>
+                </div>`;
+    $("#ui-view")
+      .append(html)
+      .append(`<div class="main-page-mask"></div>`);
+    loadNotifyTabAndNav();
+  });
+
+  // 行点击事件
+  $("#ui-view").on("click", "#msg-board-tab > div", async e => {
+    let $target = $(e.currentTarget);
+    let id = $target.attr("row-id");
+    if (id) {
+      $("#main-detail-panel").modal("show");
+      let result = await sugon.request(
+        sugon.interFaces.system.notification.getDetailByUser
+      );
+      $("#main-detail-title").html(result.title);
+      $("#main-detail-content").html(result.content);
+      let fileName = `<a 
+                        href="${result.fileUrl}"
+                        download="${result.fileName}">
+                          ${result.fileName}
+                      </a>`;
+      $("#main-detail-file-name").html(fileName);
+      $("#main-detail-creator").html(result.creator);
+      $("#main-detail-create-time").html(result.createTime);
+    }
+  });
+
+  // 加载通知的表单和分页
+  async function loadNotifyTabAndNav(pageNum = 1) {
+    let { username, role, deptId } = sugon.identityInfo;
+    let result = await sugon.request(
+      sugon.interFaces.system.notification.getAllByUser,
+      { username, role, deptId, pageNum, pageSize: 5 }
+    );
+    let $body = $("#msg-board-tab");
+    if (result.totalPage == 0) {
+      $body.html("暂无数据");
+    } else {
+      let html = `<div>
+      <div>时间</div>
+      <div>标题</div>
+      <div>是否已读</div>
+    </div>`;
+      result.data.map(val => {
+        html += `<div row-id="${val.id}">
+    <div title="${val.date}">${val.date}</div>
+    <div title="${val.title}">${val.title}</div>
+    <div>${val.isRead ? "已读" : "未读"}</div>
+   </div>`;
+      });
+      $body.empty().append(html);
+      sugon.renderNav(
+        $(".msg-board-popup > footer > section"),
+        pageNum,
+        result.totalPage,
+        loadNotifyTabAndNav
+      );
+    }
+  }
+
+  // 弹出页确定事件
+  function popupConfirm() {
+    let content = $("#msg-board-textarea").val();
+    let { deptId, role, username } = sugon.identityInfo;
+    if (/\S+/.test(content)) {
+      sugon
+        .request(sugon.interFaces.system.msgBoard.add, {
+          content,
+          deptId,
+          role,
+          username
+        })
+        .then(result => {
+          if (result.code == 200) {
+            sugon.showMessage("留言成功！", "success");
+            popupClose();
+          } else {
+            sugon.showMessage("留言失败！", "error");
+          }
+        })
+        .catch(() => {
+          sugon.showMessage("服务器内部错误，请联系管理员！", "error");
+        });
+    } else {
+      sugon.showMessage("您的输入有误！", "error");
+    }
+  }
+
+  // 弹出页关闭事件
+  function popupClose() {
+    $(".msg-board-popup").remove();
+    $(".main-page-mask").remove();
+  }
 
   // 根据权限过滤菜单
   function filterMenu(arr) {
@@ -374,7 +515,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
             arr = ["ywfxbg", "zhfxbg"];
             break;
           case "system":
-            arr = ["user", "notification", "infoUpload"];
+            arr = ["user", "notification", "msgBoard"];
             break;
         }
         let filterArr = filterMenu(arr);
@@ -390,5 +531,18 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     ["za", "rk", "crj", "xtj", "xzj", "zhzx", "fz", "dcjj"].indexOf(
       sugon.identityInfo.role
     ) > -1 && $("div[type=slhy]").remove();
+  }
+
+  // 初始化消息弹出框
+  async function initNotification() {
+    let result = await sugon.request(
+      sugon.interFaces.system.notification.getTotal
+    );
+    let $total = $(".popup-right > span");
+    if (result.total && result.total != 0) {
+      $total.show().html(result.total);
+    } else {
+      $total.hide();
+    }
   }
 });
