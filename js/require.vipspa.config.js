@@ -535,8 +535,10 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
 
   // 初始化消息弹出框
   async function initNotification() {
+    let { username, role, deptId } = sugon.identityInfo;
     let result = await sugon.request(
-      sugon.interFaces.system.notification.getTotal
+      sugon.interFaces.system.notification.getTotal,
+      { username, role, deptId }
     );
     let $total = $(".popup-right > span");
     if (result.total && result.total != 0) {

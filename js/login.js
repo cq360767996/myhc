@@ -1,5 +1,5 @@
 const sugon = {
-  isPublished: true,
+  isPublished: false,
   api: {
     login: {
       localUrl: "/static/json/login/login.json",

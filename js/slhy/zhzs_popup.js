@@ -114,6 +114,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
     if (result.data.length > 0) {
       searchParams.id = result.data[0].id;
       searchParams.sort = result.data[0].value > 0 ? "asc" : "desc";
+      searchParams.title = result.data[0].name;
     }
     result.data.map((val, index) => {
       let upOrDown = Number(val.value) < 0 ? "down" : "up";
@@ -134,7 +135,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 初始化中下左侧面板
   async function initMidBottomLeft() {
-    let { deptId, date1, date2, id } = searchParams;
+    let { deptId, date1, date2, id, title } = searchParams;
+    $(".mid-bottom-left-title").html(title + "——");
     let result = await sugon.request(
       sugon.interFaces.slhy.zhzs.getMidBottomLeft,
       { deptId, date1, date2, id }
@@ -204,10 +206,10 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 初始化中下右侧面板
   async function initMidBottomRight() {
-    let { deptId, date1, date2, id, code } = searchParams;
+    let { deptId, date1, date2, id, code, sort } = searchParams;
     let result = await sugon.request(
       sugon.interFaces.slhy.zhzs.getMidBottomRight,
-      { deptId, date1, date2, id, code }
+      { deptId, date1, date2, id, code, sort }
     );
     $(".mid-bottom-right-title").html(result.content);
     let html = "";
@@ -414,7 +416,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
     let deptId = $("#dept-id").val();
     let date1 = $("#date1").val();
     let date2 = $("#date2").val();
-    searchParams = { date1, date2, deptId, code: null };
+    let deptName = $("#dept-name").val();
+    searchParams = { date1, date2, deptId, deptName, code: null };
     searchFunc();
   });
 
@@ -426,13 +429,25 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 中上右侧点击事件
   $(".mid-top-right").on("click", ".mid-top-right-row", e => {
-    let $target = $(e.target);
+    let $target = $(e.currentTarget);
     let selected = "selected";
     if (!$target.hasClass(selected)) {
       $(".mid-top-right-row").removeClass(selected);
       $target.addClass(selected);
       searchParams.code = null;
       searchParams.id = $target.attr("row-id");
+      searchParams.sort =
+        $target
+          .find("div")
+          .eq(1)
+          .attr("class")
+          .indexOf("up") > -1
+          ? "asc"
+          : "desc";
+      searchParams.title = $target
+        .find("div")
+        .eq(0)
+        .html();
       initMidBottomLeft();
       initMidBottomRight();
     }
