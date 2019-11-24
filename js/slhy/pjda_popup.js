@@ -351,6 +351,11 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
       chart.fluid("chart1", result.data2[0]);
       $(`.good-rank`).html(result.data2[1]);
       $(`.bad-rank`).html(result.data2[2]);
+      result.data1.map((val, index) => {
+        $(".top-val")
+          .eq(index)
+          .html(val);
+      });
     });
   }
 
