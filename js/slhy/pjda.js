@@ -74,8 +74,10 @@ requirejs(["common"], sugon => {
       .off()
       .on("click", function() {
         let $this = $(this);
-        if ($this.attr("row-id")) {
+        let id = $this.attr("row-id");
+        if (id) {
           requirejs(["text!../views/slhy/pjda_popup.html"], function(ele) {
+            window.selectedPersonId = id;
             $("#ui-view").append(ele);
           });
         }

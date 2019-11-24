@@ -1,6 +1,6 @@
 requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
-  // 最下层细节缓存数据
-  let cacheData = [];
+  // 全局查询参数
+  let searchParams = {};
   // 所有echarts图的渲染
   const chart = {
     // 渲染echarts图
@@ -346,7 +346,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
 
   // 初始化最上层面板
   function initTop() {
-    sugon.request(sugon.interFaces.slhy.pjda.initTop).then(result => {
+    let { id } = searchParams;
+    sugon.request(sugon.interFaces.slhy.pjda.initTop, { id }).then(result => {
       chart.fluid("chart1", result.data2[0]);
       $(`.good-rank`).html(result.data2[1]);
       $(`.bad-rank`).html(result.data2[2]);
@@ -355,7 +356,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
 
   // 初始化中间的面板
   function initMid() {
-    sugon.request(sugon.interFaces.slhy.pjda.initMid).then(result => {
+    let { id } = searchParams;
+    sugon.request(sugon.interFaces.slhy.pjda.initMid, { id }).then(result => {
       chart.pie1("chart2", result.data1);
       chart.pie1("chart3", result.data2, true);
       chart.lineAndBar1("chart4", result.data3);
@@ -366,126 +368,137 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   function initBottom() {
     Promise.resolve()
       .then(() => initTimeLine())
-      .then(date => {
+      .then(params => {
         $(".main-container > section .right-aside").empty();
-        getBottomDetail(date, 1);
-        getBottomDetail(date, 0);
+        getBottomDetail({ ...params, type: 1 });
+        getBottomDetail({ ...params, type: 0 });
       });
   }
 
   // 渲染时间线
   function initTimeLine() {
     return new Promise((resolve, reject) => {
-      sugon.request(sugon.interFaces.slhy.pjda.initTimeLine).then(result => {
-        let html = "";
-        for (let i = 1, len = result.data.length; i < len; i++) {
-          html += `<li class="${i === 1 ? "li-selected" : ""}">
+      let { id } = searchParams;
+      sugon
+        .request(sugon.interFaces.slhy.pjda.initTimeLine, { id })
+        .then(result => {
+          let html = "";
+          result.data.map((val, i) => {
+            let selected = i === 0 ? " li-selected" : "";
+            html += `<li dept-id="${val.deptId}" class="time-line-row${selected}">
                     <span></span>
-                    <span></span>
-                    <span>${result.data[i]}-${result.data[i - 1]}</span>
+                    <span>${val.date1}-${val.date2}</span>
+                    <br/>
+                    <span>${val.deptName}</span>
                     <span></span>
                   </li>`;
-        }
-        $(".time-line-container")
-          .empty()
-          .append(html);
-        $(".time-line-container > li:first-child::before").css(
-          "background-color",
-          "#509ce9"
-        );
-        resolve({ date1: result.data[0], date2: result.data[1] });
-      });
+          });
+          $(".time-line-container")
+            .empty()
+            .append(html);
+          $(".time-line-container > li:first-child::before").css(
+            "background-color",
+            "#509ce9"
+          );
+          let { date1, date2, deptId } = result.data[0];
+          resolve({ date1, date2, deptId });
+        });
     });
   }
 
   // 获取最下层的细节数据
-  function getBottomDetail(date, type) {
-    sugon
-      .request(sugon.interFaces.slhy.pjda.getBottomDetail, { type })
-      .then(result => {
-        let html = "",
-          data1 = result.data1;
-        let uuid = sugon.uuid();
-        html += `<section id="${uuid}">
-                <header>
-                  <img src="../../img/slhy/pjda/img10.png" />
-                  <span>${date.date2}—${date.date1}</span>
-                  <span>${data1[0]}</span>
-                  <span>岗位：${data1[1]}</span>
-                  <span>业务量：
-                    <strong class="strong1">${data1[2]}</strong>件</span>
-                  <span>被投诉：
-                    <strong class="strong2">${data1[3]}</strong>次</span>
-                  <span>满意度：
-                    <strong class="strong3">${data1[4]}%</strong></span>
-                </header>
-                <section>
-                  <aside>
-                    <section>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img11.png" />
-                          <span>业务分析</span>
-                        </header>
-                        <section id="${uuid}-left"></section>
-                      </aside>
-                      <aside id="${uuid}-right"></aside>
-                    </section>
-                    <section>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img11.png" />
-                          <span>民意点赞</span>
-                        </header>
-                        <section>
-                        </section>
-                      </aside>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img11.png" />
-                          <span>民意诉求</span>
-                        </header>
-                        <section></section>
-                      </aside>
-                    </section>
-                  </aside>
-                  <aside>
-                    <header>
-                      <img src="../../img/slhy/pjda/img11.png" />
-                      <span>群众诉求及评价</span>
-                    </header>
-                    <section>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img12.png" />
-                          <span>群众评价热词</span>
-                        </header>
-                      </aside>
-                      <aside>
-                        <header>
-                          <img src="../../img/slhy/pjda/img12.png" />
-                          <span>群众诉求热词</span>
-                        </header>
-                      </aside>
-                    </section>
-                  </aside>
-                </section>
-              </section>`;
-        // <div class="fold-btn"></div>
-        $(".main-container > section .right-aside").append(html);
-        chart.pie2(`${uuid}-left`, result.data2);
-        chart.lineAndBar2(`${uuid}-right`, result.data3);
-        let $listDom = $(
-            `#${uuid} > section > aside:first-child > section:last-child > aside > section`
-          ),
-          $RankDom = $(
-            `#${uuid} > section > aside:last-child > section > aside`
-          );
-        renderList($listDom.eq(0), result.data4);
-        renderList($listDom.eq(1), result.data5);
-        renderRank($RankDom.eq(0), result.data6);
-        renderRank($RankDom.eq(1), result.data7);
-      });
+  async function getBottomDetail({ date1, date2, deptId, type }) {
+    let id = searchParams.id;
+    let result = await sugon.request(
+      sugon.interFaces.slhy.pjda.getBottomDetail,
+      {
+        id,
+        date1,
+        date2,
+        deptId,
+        type
+      }
+    );
+
+    let html = "",
+      data1 = result.data1;
+    let uuid = sugon.uuid();
+    html += `<section id="${uuid}">
+              <header>
+                <img src="../../img/slhy/pjda/img10.png" />
+                <span>${date1}—${date2}</span>
+                <span>${data1[0]}</span>
+                <span>岗位：${data1[1]}</span>
+                <span>业务量：
+                  <strong class="strong1">${data1[2]}</strong>件</span>
+                <span>被投诉：
+                  <strong class="strong2">${data1[3]}</strong>次</span>
+                <span>满意度：
+                  <strong class="strong3">${data1[4]}%</strong></span>
+              </header>
+              <section>
+                <aside>
+                  <section>
+                    <aside>
+                      <header>
+                        <img src="../../img/slhy/pjda/img11.png" />
+                        <span>业务分析</span>
+                      </header>
+                      <section id="${uuid}-left"></section>
+                    </aside>
+                    <aside id="${uuid}-right"></aside>
+                  </section>
+                  <section>
+                    <aside>
+                      <header>
+                        <img src="../../img/slhy/pjda/img11.png" />
+                        <span>民意点赞</span>
+                      </header>
+                      <section>
+                      </section>
+                    </aside>
+                    <aside>
+                      <header>
+                        <img src="../../img/slhy/pjda/img11.png" />
+                        <span>民意诉求</span>
+                      </header>
+                      <section></section>
+                    </aside>
+                  </section>
+                </aside>
+                <aside>
+                  <header>
+                    <img src="../../img/slhy/pjda/img11.png" />
+                    <span>群众诉求及评价</span>
+                  </header>
+                  <section>
+                    <aside>
+                      <header>
+                        <img src="../../img/slhy/pjda/img12.png" />
+                        <span>群众评价热词</span>
+                      </header>
+                    </aside>
+                    <aside>
+                      <header>
+                        <img src="../../img/slhy/pjda/img12.png" />
+                        <span>群众诉求热词</span>
+                      </header>
+                    </aside>
+                  </section>
+                </aside>
+              </section>
+            </section>`;
+    $(".main-container > section .right-aside").append(html);
+    chart.pie2(`${uuid}-left`, result.data2);
+    chart.lineAndBar2(`${uuid}-right`, result.data3);
+    let $listDom = $(
+        `#${uuid} > section > aside:first-child > section:last-child > aside > section`
+      ),
+      $RankDom = $(`#${uuid} > section > aside:last-child > section > aside`);
+    renderList($listDom.eq(0), result.data4);
+    renderList($listDom.eq(1), result.data5);
+    renderRank($RankDom.eq(0), result.data6);
+    renderRank($RankDom.eq(1), result.data7);
   }
 
   // 渲染最下层detail的列表
@@ -514,6 +527,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
 
   // 页面入口
   function initPage() {
+    searchParams.id = window.selectedPersonId;
     initTop();
     initMid();
     initBottom();
@@ -522,30 +536,27 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   // 页面入口
   initPage();
 
+  // 关闭按钮事件
   $(".close-btn").on("click", () => {
     $(".main-container").remove();
   });
 
-  // // 伸缩按钮事件
-  // $(".right-aside").on("click", ".fold-btn", e => {
-  //   let $target = $(e.target),
-  //     $parent = $target.parent(),
-  //     height = $parent.css("height"),
-  //     targetHeight,
-  //     hideSection = $parent.find(
-  //       "section > aside:first-child > section:last-child"
-  //     ),
-  //     className = "";
-  //   $target.removeClass("fold-btn-up");
-  //   if (height == "340px") {
-  //     targetHeight = "530px";
-  //     hideSection.show();
-  //   } else {
-  //     targetHeight = "340px";
-  //     hideSection.hide();
-  //     className = "fold-btn-up";
-  //   }
-  //   $parent.animate({ height: targetHeight });
-  //   $target.addClass(className);
-  // });
+  // 时间轴点击事件
+  $(".time-line-container").on("click", ".time-line-row", e => {
+    let $target = $(e.currentTarget);
+    let selected = "li-selected";
+    if (!$target.hasClass(selected)) {
+      $(".time-line-row").removeClass(selected);
+      $target.addClass(selected);
+      let dateArr = $target
+        .find("span")
+        .eq(1)
+        .html()
+        .split("-");
+      let [date1, date2] = dateArr;
+      let deptId = $target.attr("dept-id");
+      getBottomDetail({ date1, date2, deptId, type: 1 });
+      getBottomDetail({ date1, date2, deptId, type: 0 });
+    }
+  });
 });

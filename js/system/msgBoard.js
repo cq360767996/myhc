@@ -16,25 +16,21 @@ requirejs(["common"], sugon => {
                   <cell>操作</cell>
                 </row>`;
     result.data.map(val => {
-      html += `<row row-id="${val.id}">
+      html += `<row>
                 <cell>${val.time}</cell>
                 <cell>${val.name}</cell>
                 <cell>${val.content}</cell>
-                <cell><button class="delete-btn btn btn-danger">删除</button></cell>
+                <cell>
+                  <button row-id="${val.id}" class="delete-btn btn btn-danger">
+                    删除
+                  </button>
+                </cell>
               </row>`;
     });
     $("#tab-container")
       .empty()
       .append(html);
     sugon.renderNav($(".nav-container"), pageNum, result.totalPage, initPage);
-
-    // 绑定行点击时间
-    $("#tab-container .delete-btn")
-      .off()
-      .on("click", function() {
-        deleteRowId = $(this).attr("row-id");
-        $("#confirm-panel").modal("show");
-      });
   }
 
   // 确认删除按钮事件
@@ -53,6 +49,13 @@ requirejs(["common"], sugon => {
       .catch(() => {
         sugon.showMessage("服务器内部错误，请联系管理员！", "error");
       });
+  });
+
+  // 绑定删除按钮事件
+  $("#tab-container").on("click", ".delete-btn", e => {
+    let $target = $(e.currentTarget);
+    deleteRowId = $target.attr("row-id");
+    $("#confirm-panel").modal("show");
   });
 
   // 页面入口

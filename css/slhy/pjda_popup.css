@@ -310,7 +310,7 @@
 .main-container > section .left-aside > ul > li > span:last-child {
   position: absolute;
   width: 2px;
-  height: 60px;
+  height: 80px;
   top: 17px;
   left: -15px;
   background-color: #e4e7ed;

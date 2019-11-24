@@ -365,8 +365,10 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     let id = $target.attr("row-id");
     if (id) {
       $("#main-detail-panel").modal("show");
+      let { username } = sugon.identityInfo;
       let result = await sugon.request(
-        sugon.interFaces.system.notification.getDetailByUser
+        sugon.interFaces.system.notification.getDetailByUser,
+        { username, id }
       );
       $("#main-detail-title").html(result.title);
       $("#main-detail-content").html(result.content);
@@ -379,6 +381,11 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       $("#main-detail-creator").html(result.creator);
       $("#main-detail-create-time").html(result.createTime);
     }
+  });
+
+  // 消息通知详情关闭了之后刷新弹出页
+  $("#main-detail-panel").on("hide.bs.modal", () => {
+    loadNotifyTabAndNav();
   });
 
   // 加载通知的表单和分页
@@ -417,14 +424,15 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
   // 弹出页确定事件
   function popupConfirm() {
     let content = $("#msg-board-textarea").val();
-    let { deptId, role, username } = sugon.identityInfo;
+    let { deptId, role, username, name } = sugon.identityInfo;
     if (/\S+/.test(content)) {
       sugon
         .request(sugon.interFaces.system.msgBoard.add, {
           content,
           deptId,
           role,
-          username
+          username,
+          name
         })
         .then(result => {
           if (result.code == 200) {
@@ -531,6 +539,13 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     ["za", "rk", "crj", "xtj", "xzj", "zhzx", "fz", "dcjj"].indexOf(
       sugon.identityInfo.role
     ) > -1 && $("div[type=slhy]").remove();
+    // 负责人权限
+    if (sugon.identityInfo.role.indexOf("fzr") > -1) {
+      let $tab = $(".tab");
+      $tab
+        .remove("div[type=system]")
+        .append(`<div type="system"><div>系统管理</div></div>`);
+    }
   }
 
   // 初始化消息弹出框
