@@ -105,13 +105,14 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
       this.render(id, option);
     },
     // 多颜色环图
-    pie2(id, data) {
-      let sum = data.reduce((sum, val) => sum + Number(val.value), 0),
-        xData = [],
-        max = data.reduce((max, val) => Math.max(Number(val.value), max), 0),
-        color = ["#71b6f9", "#14c6ca", "#a29ff3", "#f08988", "#f3b657"],
-        $parent = $(`#${id}`).parent(),
-        selectedIndex;
+    pie2(rawId, data, params) {
+      let id = rawId + "-left";
+      let sum = data.reduce((sum, val) => sum + Number(val.value), 0);
+      let xData = [];
+      let max = data.reduce((max, val) => Math.max(Number(val.value), max), 0);
+      let color = ["#71b6f9", "#14c6ca", "#a29ff3", "#f08988", "#f3b657"];
+      let $parent = $(`#${id}`).parent();
+      let selectedIndex;
       data.map((val, index) => {
         xData.push(val.name);
         val.percent = ((val.value / sum) * 100).toFixed(0);
@@ -121,7 +122,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
         }
       });
       $(`#${id} > div`).remove();
-      $parent.append(`<div class="pop-div" style="color: ${color[selectedIndex]}">
+      let popId = id + "-pop";
+      $parent.append(`<div id="${popId}" class="pop-div" style="color: ${color[selectedIndex]}">
                         <div>${data[selectedIndex].name}：${data[selectedIndex].value}件</div>
                         <div>${data[selectedIndex].percent}%</div>
                       </div>`);
@@ -154,18 +156,26 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
         ]
       };
 
-      this.render(id, option, param => {
-        $(".pop-div").css("color", param.color)
+      this.render(id, option, async param => {
+        let code = param.data.code;
+        $(`#${popId}`).css("color", param.color)
           .html(`<div>${param.data.name}：${param.data.value}件</div>
                  <div>${param.data.percent}%</div>`);
+        let { date1, date2, deptId, type } = params;
+        let personId = searchParams.id;
+        let result = await sugon.request(
+          sugon.interFaces.slhy.pjda.getBarByAnnual,
+          { date1, date2, deptId, type, code, id: personId }
+        );
+        this.lineAndBar2(rawId, result.data);
       });
     },
     // 线柱状混合图(两列柱子)
     lineAndBar1(id, data) {
-      let yData1 = [],
-        yData2 = [],
-        yData3 = [],
-        xData = [];
+      let yData1 = [];
+      let yData2 = [];
+      let yData3 = [];
+      let xData = [];
       data.map(val => {
         xData.push(val.name);
         yData1.push(val.value1);
@@ -263,9 +273,10 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
     },
     // 线柱状混合图(一列柱子)
     lineAndBar2(id, data) {
-      let yData1 = [],
-        yData2 = [],
-        xData = [];
+      let yData1 = [];
+      let yData2 = [];
+      let xData = [];
+      id += "-right";
       data.map(val => {
         xData.push(val.name);
         yData1.push(val.value1);
@@ -345,70 +356,63 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   };
 
   // 初始化最上层面板
-  function initTop() {
+  async function initTop() {
     let { id } = searchParams;
-    sugon.request(sugon.interFaces.slhy.pjda.initTop, { id }).then(result => {
-      chart.fluid("chart1", result.data2[0]);
-      $(`.good-rank`).html(result.data2[1]);
-      $(`.bad-rank`).html(result.data2[2]);
-      result.data1.map((val, index) => {
-        $(".top-val")
-          .eq(index)
-          .html(val);
-      });
+    let result = await sugon.request(sugon.interFaces.slhy.pjda.initTop, {
+      id
+    });
+    chart.fluid("chart1", result.data2[0]);
+    $(`.good-rank`).html(result.data2[1]);
+    $(`.bad-rank`).html(result.data2[2]);
+    result.data1.map((val, index) => {
+      $(".top-val")
+        .eq(index)
+        .html(val);
     });
   }
 
   // 初始化中间的面板
-  function initMid() {
+  async function initMid() {
     let { id } = searchParams;
-    sugon.request(sugon.interFaces.slhy.pjda.initMid, { id }).then(result => {
-      chart.pie1("chart2", result.data1);
-      chart.pie1("chart3", result.data2, true);
-      chart.lineAndBar1("chart4", result.data3);
+    let result = await sugon.request(sugon.interFaces.slhy.pjda.initMid, {
+      id
     });
+    chart.pie1("chart2", result.data1);
+    chart.pie1("chart3", result.data2, true);
+    chart.lineAndBar1("chart4", result.data3);
   }
 
   // 初始化最下层面板
-  function initBottom() {
-    Promise.resolve()
-      .then(() => initTimeLine())
-      .then(params => {
-        $(".main-container > section .right-aside").empty();
-        getBottomDetail({ ...params, type: 1 });
-        getBottomDetail({ ...params, type: 0 });
-      });
+  async function initBottom() {
+    let params = await initTimeLine();
+    $(".main-container > section .right-aside").empty();
+    await getBottomDetail({ ...params, type: 0 });
+    await getBottomDetail({ ...params, type: 1 });
   }
 
   // 渲染时间线
-  function initTimeLine() {
-    return new Promise((resolve, reject) => {
-      let { id } = searchParams;
-      sugon
-        .request(sugon.interFaces.slhy.pjda.initTimeLine, { id })
-        .then(result => {
-          let html = "";
-          result.data.map((val, i) => {
-            let selected = i === 0 ? " li-selected" : "";
-            html += `<li dept-id="${val.deptId}" class="time-line-row${selected}">
-                    <span></span>
-                    <span>${val.date1}-${val.date2}</span>
-                    <br/>
-                    <span>${val.deptName}</span>
-                    <span></span>
-                  </li>`;
-          });
-          $(".time-line-container")
-            .empty()
-            .append(html);
-          $(".time-line-container > li:first-child::before").css(
-            "background-color",
-            "#509ce9"
-          );
-          let { date1, date2, deptId } = result.data[0];
-          resolve({ date1, date2, deptId });
-        });
+  async function initTimeLine() {
+    let { id } = searchParams;
+    let result = await sugon.request(sugon.interFaces.slhy.pjda.initTimeLine, {
+      id
     });
+    let html = "";
+    let $body = $(".time-line-container");
+    let $firstLi = $(".time-line-container > li:first-child::before");
+    result.data.map((val, i) => {
+      let selected = i === 0 ? " li-selected" : "";
+      html += `<li dept-id="${val.deptId}" class="time-line-row${selected}">
+                  <span></span>
+                  <span>${val.date1}-${val.date2}</span>
+                  <br/>
+                  <span>${val.deptName}</span>
+                  <span></span>
+              </li>`;
+    });
+    $body.empty().append(html);
+    $firstLi.css("background-color", "#509ce9");
+    let { date1, date2, deptId } = result.data[0];
+    return { date1, date2, deptId };
   }
 
   // 获取最下层的细节数据
@@ -439,7 +443,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
                 <span>被投诉：
                   <strong class="strong2">${data1[3]}</strong>次</span>
                 <span>满意度：
-                  <strong class="strong3">${data1[4]}%</strong></span>
+                  <strong class="strong3">${data1[4]}</strong></span>
               </header>
               <section>
                 <aside>
@@ -494,8 +498,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
               </section>
             </section>`;
     $(".main-container > section .right-aside").append(html);
-    chart.pie2(`${uuid}-left`, result.data2);
-    chart.lineAndBar2(`${uuid}-right`, result.data3);
+    chart.pie2(uuid, result.data2, { date1, date2, deptId, type });
+    chart.lineAndBar2(uuid, result.data3);
     let $listDom = $(
         `#${uuid} > section > aside:first-child > section:last-child > aside > section`
       ),
@@ -524,7 +528,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
     data.map((val, i) => {
       html += `<row>
                 <cell class="${i < 3 ? `span-top${i + 1}` : ""}"></cell>
-                <cell>${val}</cell>
+                <cell title="${val}">${val}</cell>
               </row>`;
     });
     $dom.append(html);
@@ -547,7 +551,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
   });
 
   // 时间轴点击事件
-  $(".time-line-container").on("click", ".time-line-row", e => {
+  $(".time-line-container").on("click", ".time-line-row", async e => {
     let $target = $(e.currentTarget);
     let selected = "li-selected";
     if (!$target.hasClass(selected)) {
@@ -560,8 +564,9 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
         .split("-");
       let [date1, date2] = dateArr;
       let deptId = $target.attr("dept-id");
-      getBottomDetail({ date1, date2, deptId, type: 1 });
-      getBottomDetail({ date1, date2, deptId, type: 0 });
+      $(".main-container > section .right-aside").empty();
+      await getBottomDetail({ date1, date2, deptId, type: 0 });
+      await getBottomDetail({ date1, date2, deptId, type: 1 });
     }
   });
 });

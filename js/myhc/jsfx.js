@@ -2,6 +2,7 @@ requirejs(["common", "ec", "jqcloud"], (sugon, ec) => {
   // 全局查询条件
   let searchParams = {};
 
+  // 所有渲染页面方法
   let viewRenderer = {
     render(id, option, callback) {
       const chart = ec.init(document.getElementById(id));
@@ -359,7 +360,8 @@ requirejs(["common", "ec", "jqcloud"], (sugon, ec) => {
   // 页面入口
   function initPage() {
     let param = sugon.getParam(location.hash);
-    Object.assign(searchParams, param);
+    $(".top-panel > span").html(param.title + "意见建议分析");
+    searchParams.type = param.type;
     Promise.resolve()
       .then(() => sugon.initSearchBar({ cb: searchFunc }))
       .then(() => searchFunc());

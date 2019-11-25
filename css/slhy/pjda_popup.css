@@ -493,6 +493,9 @@
   margin-left: 6px;
   width: calc(100% - 30px);
   height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .main-container > section .right-aside > section > section > aside:last-child > section > aside > row .span-top1 {
   background: url(../../img/slhy/pjda/img14.png) no-repeat center center;

@@ -385,6 +385,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
 
   // 消息通知详情关闭了之后刷新弹出页
   $("#main-detail-panel").on("hide.bs.modal", () => {
+    initNotification();
     loadNotifyTabAndNav();
   });
 

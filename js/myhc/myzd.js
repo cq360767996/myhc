@@ -16,11 +16,15 @@ requirejs(["common"], sugon => {
 
   // 路由事件
   $(".main-container > section > div").on("click", function() {
-    let $this = $(this),
-      className = $this
-        .find("div")
-        .eq(1)
-        .attr("class");
-    location.hash = vipspa.stringify("myzd/jsfx", { type: className });
+    let $this = $(this);
+    let className = $this
+      .find("div")
+      .eq(1)
+      .attr("class");
+    let title = $this
+      .find("div")
+      .eq(0)
+      .html();
+    location.hash = vipspa.stringify("myzd/jsfx", { type: className, title });
   });
 });

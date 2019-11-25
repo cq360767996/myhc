@@ -3,7 +3,7 @@ define(["ec"], function(ec) {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: false,
+    isPublished: true,
     // 菜单权限配置文件
     menuConfig: {
       // 交警
@@ -1026,6 +1026,10 @@ define(["ec"], function(ec) {
           getBottomDetail: {
             localUrl: localPath + "pjda/getBottomDetail.json",
             remoteUrl: remotePath + "slhy/pjda/getBottomDetail"
+          },
+          getBarByAnnual: {
+            localUrl: localPath + "pjda/getBarByAnnual.json",
+            remoteUrl: remotePath + "slhy/pjda/getBarByAnnual"
           }
         }
       },
@@ -1216,7 +1220,7 @@ define(["ec"], function(ec) {
       name.replace(/\?(.*)/g, function($1, $2) {
         $2.split("&").map(val => {
           let arr = val.split("=");
-          result[arr[0]] = arr[1];
+          result[arr[0]] = decodeURI(arr[1]);
         });
       });
       return result;
