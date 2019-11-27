@@ -47,14 +47,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.main-container > header .output-btn {
-  position: absolute;
-  top: 28px;
-  right: 69px;
-  font-size: 16px;
-  color: #ffffff;
-  cursor: pointer;
-}
 .main-container > header .close-btn {
   position: absolute;
   top: 18px;

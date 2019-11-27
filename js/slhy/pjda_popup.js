@@ -276,6 +276,8 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
       let yData1 = [];
       let yData2 = [];
       let xData = [];
+      let startValue = 0;
+      let endValue = Math.floor((9 / data.length) * 100);
       id += "-right";
       data.map(val => {
         xData.push(val.name);
@@ -295,10 +297,28 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
         legend: {
           data: ["投诉次数", "满意度"]
         },
+        dataZoom: [
+          {
+            type: "inside",
+            start: startValue,
+            end: endValue,
+            zoomOnMouseWheel: false
+          },
+          {
+            type: "slider",
+            start: startValue,
+            end: endValue,
+            height: 10,
+            bottom: 5,
+            handelSize: 0,
+            zoomLock: true,
+            textStyle: false
+          }
+        ],
         grid: {
           top: 20,
           left: 0,
-          bottom: 0,
+          bottom: 20,
           right: 0,
           containLabel: true
         },
@@ -400,18 +420,19 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
     let $body = $(".time-line-container");
     let $firstLi = $(".time-line-container > li:first-child::before");
     result.data.map((val, i) => {
+      let height = val.deptName.length / 8;
       let selected = i === 0 ? " li-selected" : "";
       html += `<li dept-id="${val.deptId}" class="time-line-row${selected}">
                   <span></span>
                   <span>${val.date1}-${val.date2}</span>
                   <br/>
                   <span>${val.deptName}</span>
-                  <span></span>
+                  <span style="height:${80 + 20 * height}px;"></span>
               </li>`;
     });
     $body.empty().append(html);
     $firstLi.css("background-color", "#509ce9");
-    let { date1, date2, deptId } = result.data[0];
+    let { date1, date2, deptId } = result.data[0] || {};
     return { date1, date2, deptId };
   }
 

@@ -306,21 +306,21 @@ requirejs(["common"], function(sugon) {
     if (mold == 1) {
       $list1.show();
       $list2.hide();
-      getList(deptId, date1, date2);
+      getList(deptId, date1, date2, mold);
     } else {
       $list1.hide();
       $list2.show();
-      getList2(deptId, date1, date2);
+      getList2(deptId, date1, date2, mold);
     }
   }
 
   async function initPage() {
-    let deptId = $("#placeCode").val();
-    let date1 = $("#date1").val();
-    let date2 = $("#date2").val();
     handleMoldDis();
     mold = myjzType == 0 ? 1 : myjzType;
     await onLoad();
+    let deptId = $("#placeCode").val();
+    let date1 = $("#date1").val();
+    let date2 = $("#date2").val();
     initList(deptId, minDate, maxDate);
     setCenterHeight();
     sugon.initRightMenu({

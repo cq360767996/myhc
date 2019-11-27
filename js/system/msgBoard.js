@@ -19,7 +19,7 @@ requirejs(["common"], sugon => {
       html += `<row>
                 <cell>${val.time}</cell>
                 <cell>${val.name}</cell>
-                <cell>${val.content}</cell>
+                <cell title="${val.content}">${val.content}</cell>
                 <cell>
                   <button row-id="${val.id}" class="delete-btn btn btn-danger">
                     删除

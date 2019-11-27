@@ -45,14 +45,6 @@ cell {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.main-container > header .output-btn {
-  position: absolute;
-  top: 28px;
-  right: 69px;
-  font-size: 16px;
-  color: #ffffff;
-  cursor: pointer;
-}
 .main-container > header .close-btn {
   position: absolute;
   top: 18px;
@@ -219,8 +211,8 @@ cell {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   padding: 10px 30px 45px 30px;
-  column-gap: 20px;
-  row-gap: 20px;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   position: relative;
 }
 .left-aside2 > section {
@@ -292,8 +284,8 @@ cell {
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
-  row-gap: 10px;
-  column-gap: 15px;
+  grid-row-gap: 10px;
+  grid-column-gap: 15px;
 }
 .right-aside1 > main > div {
   background-image: linear-gradient(90deg, rgba(87, 137, 239, 0.9) 0%, rgba(53, 203, 233, 0.9) 100%, rgba(79, 167, 122, 0.9) 100%, rgba(241, 141, 86, 0.9) 100%), linear-gradient(#ffffff, #ffffff);
@@ -335,8 +327,8 @@ cell {
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, auto);
-  row-gap: 10px;
-  column-gap: 15px;
+  grid-row-gap: 10px;
+  grid-column-gap: 15px;
 }
 .right-aside2 > main > div {
   background-image: linear-gradient(90deg, #f18956 0%, #e657ef 100%), linear-gradient(#ffffff, #ffffff);
@@ -740,8 +732,8 @@ cell {
   grid-template-rows: repeat(4, 48px);
   justify-content: center;
   align-items: center;
-  row-gap: 8px;
-  column-gap: 20px;
+  grid-row-gap: 8px;
+  grid-column-gap: 20px;
 }
 .main-banner > banner > aside:last-child > div {
   padding-left: 55px;
@@ -929,6 +921,11 @@ cell {
   padding: 15px 10px;
   color: #000;
   text-indent: 28px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 10;
+  overflow: hidden;
   text-align: justify;
 }
 .bottom-mid {

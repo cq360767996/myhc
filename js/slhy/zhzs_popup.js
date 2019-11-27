@@ -228,7 +228,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
       });
       html += `<div class="icon147x241-${index + 1}">
                 <div>TOP${index + 1}</div>
-                <div>${val.name}</div>
+                <div title="${val.name}">${val.name}</div>
                 <div class="list-color">${val.value1}</div>
                 <div>
                   <span>环比<br />${upOrDownStr}</span>
@@ -260,7 +260,9 @@ requirejs(["common", "ec"], (sugon, ec) => {
       date1,
       date2
     });
-    $(".bottom-left > main > div:last-child").html(result.content);
+    $(".bottom-left > main > div:last-child")
+      .attr("title", result.content)
+      .html(result.content);
   }
 
   // 初始化最下中间面板
@@ -431,11 +433,12 @@ requirejs(["common", "ec"], (sugon, ec) => {
   $(".mid-top-right").on("click", ".mid-top-right-row", e => {
     let $target = $(e.currentTarget);
     let selected = "selected";
-    if (!$target.hasClass(selected)) {
+    let id = $target.attr("row-id");
+    if (!$target.hasClass(selected) && id != 8) {
       $(".mid-top-right-row").removeClass(selected);
       $target.addClass(selected);
       searchParams.code = null;
-      searchParams.id = $target.attr("row-id");
+      searchParams.id = id;
       searchParams.sort =
         $target
           .find("div")

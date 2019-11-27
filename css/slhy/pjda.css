@@ -181,21 +181,18 @@ main > section > fieldset strong {
   display: inline;
 }
 .bad-section > fieldset .color1 {
-  font-size: 18px !important;
   color: #0c009b;
 }
 .bad-section > fieldset .color1 strong {
   color: #0c009b;
 }
 .bad-section > fieldset .color2 {
-  font-size: 18px !important;
   color: #554adc;
 }
 .bad-section > fieldset .color2 strong {
   color: #554adc;
 }
 .bad-section > fieldset .color3 {
-  font-size: 18px !important;
   color: #8d00f0;
 }
 .bad-section > fieldset .color3 strong {

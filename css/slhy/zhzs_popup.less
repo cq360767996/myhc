@@ -75,15 +75,6 @@ cell {
       .color-gradient(#0ed2f7, #b2fefa);
     }
 
-    .output-btn {
-      position: absolute;
-      top: 28px;
-      right: 69px;
-      font-size: 16px;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
     .close-btn {
       position: absolute;
       top: 18px;
@@ -304,8 +295,8 @@ cell {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   padding: 10px 30px 45px 30px;
-  column-gap: 20px;
-  row-gap: 20px;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   position: relative;
 
   & > section {
@@ -388,8 +379,8 @@ cell {
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(2, auto);
-    row-gap: 10px;
-    column-gap: 15px;
+    grid-row-gap: 10px;
+    grid-column-gap: 15px;
 
     & > div {
       background-image: linear-gradient(
@@ -442,8 +433,8 @@ cell {
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
-    row-gap: 10px;
-    column-gap: 15px;
+    grid-row-gap: 10px;
+    grid-column-gap: 15px;
 
     & > div {
       background-image: linear-gradient(
@@ -583,8 +574,8 @@ cell {
         grid-template-rows: repeat(4, 48px);
         justify-content: center;
         align-items: center;
-        row-gap: 8px;
-        column-gap: 20px;
+        grid-row-gap: 8px;
+        grid-column-gap: 20px;
 
         & > div {
           padding-left: 55px;
@@ -818,6 +809,7 @@ cell {
         color: #000;
         text-indent: 28px;
         text-align: justify;
+        .text-ellipse(10);
       }
     }
   }

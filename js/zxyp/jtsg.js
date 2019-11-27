@@ -167,6 +167,9 @@ requirejs(["common", "ec", "ecPlugin"], function(sugon, ec) {
         var data = result.data;
         var xData = [],
           yData = [];
+        if (data.length == 0) {
+          return;
+        }
         for (var i = 0; i < data.length; i++) {
           var name = "";
           if (data[i].name.length) {

@@ -548,6 +548,7 @@ body::-webkit-scrollbar-track {
   cursor: pointer;
 }
 
+#msg-board-tab > div:hover,
 #msg-board-tab > div:first-child {
   background-color: #fafafa;
   font-weight: bold;

@@ -415,3 +415,7 @@ input {
 .group_two {
   width: calc(100% - 495px);
 }
+
+.navigor > span:nth-last-child(2) {
+  color: gray;
+}

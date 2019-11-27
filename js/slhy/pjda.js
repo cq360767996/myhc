@@ -96,7 +96,7 @@ requirejs(["common"], sugon => {
     } else {
       img = `<span>${index + 1}</span>`;
     }
-    let notLastDom = `<section row-id="${val.id}">
+    let notLastDom = `<section row-id="${val.id || ""}">
                         <div><div>${img}</div><div>${val.name}</div></div>
                         <div>
                           <div${color}>
@@ -132,6 +132,7 @@ requirejs(["common"], sugon => {
     initBottom(isGood);
   }
 
+  // 切换好评榜/曝光台
   $(".switch-btn > div").on("click", e => {
     let $target = $(e.target),
       index = $target.index(".switch-btn > div"),
@@ -178,4 +179,14 @@ requirejs(["common"], sugon => {
   $("#keyword").on("keyup", e => {
     e.keyCode === 13 && searchFunc();
   });
+
+  // 滚动条事件
+  $(".main-section > fieldset > section").on("scroll", e => {
+    scrollEvent(e);
+  });
+
+  // 滚动条事件
+  function scrollEvent(e) {
+    debugger;
+  }
 });

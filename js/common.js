@@ -1502,6 +1502,10 @@ define(["ec"], function(ec) {
           }
         };
       }
+      if (cb instanceof Function) {
+        chart.off();
+        chart.on("click", cb);
+      }
       chart.setOption(option, true);
     },
     // 节流函数

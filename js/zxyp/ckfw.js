@@ -686,6 +686,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       function(result) {
         let indicatorData = [],
           seriesData = [];
+        if (result.data.length == 0) {
+          return;
+        }
         for (let i = 0; i < result.data.length; i++) {
           indicatorData.push({
             text: result.data[i].name,
@@ -802,9 +805,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       },
       function(result) {
         let scaleData = result.data;
-        if (result.data.length == 0) {
-          return;
-        }
 
         // 点击回调事件
         function cb(params) {
@@ -832,7 +832,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           tooltip: {
             show: true
           },
-          //color: ['rgba(44, 193, 213, 1)', 'rgba(220, 214, 147, 1)', 'rgba(238, 172, 49, 1)', 'rgba(223, 102, 66, 1)', 'rgba(0, 246, 151, 1)', 'rgba(81, 86, 186, 1)'],
           series: [
             {
               name: "",
@@ -869,7 +868,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        sugon.renderChart({ id: "chart5", data: result.data, cb, option });
+        sugon.renderChart({ id: "chart5", data: scaleData, cb, option });
       }
     );
   };
@@ -931,7 +930,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ]
         };
 
-        sugon.renderChart({ id: "chart6", data: result.data, option });
+        sugon.renderChart({ id: "chart6", data, option });
       }
     );
   };
