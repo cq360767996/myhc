@@ -28,23 +28,24 @@ requirejs(["common"], sugon => {
         let $body = $(".left2")
           .empty()
           .append(
-            "<row><cell>诉求时间</cell><cell>诉求人</cell><cell>诉求电话</cell>" +
-              "<cell>诉求类型</cell><cell>诉求内容</cell></row>"
+            `<row>
+              <cell>诉求时间</cell>
+              <cell>诉求人</cell>
+              <cell>诉求电话</cell>
+              <cell>诉求类型</cell>
+              <cell>诉求内容</cell>
+            </row>`
           );
         data.data.map(val => {
           let sqnr = val.sqnr.replace(/<.*>/, "");
           $body.append(
-            "<row><cell>" +
-              val.sqsj +
-              "</cell><cell>" +
-              val.sqr +
-              "</cell><cell>" +
-              val.sqdh +
-              "</cell><cell>" +
-              val.sqlx +
-              "</cell><cell>" +
-              sqnr +
-              "</cell></row>"
+            `<row>
+              <cell>${val.sqsj}</cell>
+              <cell>${val.sqr}</cell>
+              <cell>${val.sqdh}</cell>
+              <cell>${val.sqlx}</cell>
+              <cell title="${sqnr}">${sqnr}</cell>
+            </row>`
           );
         });
         sugon.renderNav($(".nav1 > div"), pageNum, data.totalPage, initLeft2);

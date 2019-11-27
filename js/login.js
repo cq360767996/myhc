@@ -81,14 +81,7 @@ function passwordLogin(e) {
     if (verify(username, password)) {
       sugon.request(sugon.api.login, { username, password }).then(result => {
         if (result.code === 1000) {
-          sessionStorage.setItem("token", result.token);
-          sessionStorage.setItem("deptId", result.deptId);
-          sessionStorage.setItem("deptName", result.deptName);
-          sessionStorage.setItem("deptCode", result.deptCode);
-          sessionStorage.setItem("role", result.role);
-          sessionStorage.setItem("username", username);
-          sessionStorage.setItem("name", result.name);
-          sessionStorage.setItem("myjzType", result.myjzType);
+          sessionStorage.setItem("identityInfo", JSON.stringify(result));
           location.href = sugon.isPublished
             ? "/index?#myzs"
             : "index.html?#myzs";

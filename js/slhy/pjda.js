@@ -1,6 +1,8 @@
 requirejs(["common"], sugon => {
   // 页面查询参数
   let searchParams = {};
+  // 页面页码
+  let bottomPages = [1, 1, 1, 1];
   // 页面入口
   initPage();
 
@@ -11,90 +13,68 @@ requirejs(["common"], sugon => {
   }
 
   // 初始化所有的fieldset
-  function initBottom(isGood) {
-    initBottom1(isGood);
-    initBottom2(isGood);
-    initBottom3(isGood);
-    initBottom4(isGood);
+  function initBottom() {
+    for (let i = 0; i < 4; i++) {
+      initSingleBottom(i);
+    }
   }
 
-  // 初始化第1个fieldset
-  function initBottom1(isGood) {
-    let params = Object.assign({ position: 0, ckfwType: 0 }, searchParams);
-    sugon.request(sugon.interFaces.myhc.rdwt.getJcj, params).then(result => {
-      renderBottom({ id: "jcj", data: result.data, isGood });
-    });
-  }
-
-  // 初始化第2个fieldset
-  function initBottom2(isGood, ckfwType = 0) {
-    let params = Object.assign({ position: 1, ckfwType }, searchParams);
-    sugon.request(sugon.interFaces.myhc.rdwt.getCkfw, params).then(result => {
-      renderBottom({ id: "ckfw", data: result.data, isGood });
-    });
-  }
-
-  // 初始化第3个fieldset
-  function initBottom3(isGood) {
-    let params = Object.assign({ position: 2, ckfwType: 0 }, searchParams);
-    sugon.request(sugon.interFaces.myhc.rdwt.getAj, params).then(result => {
-      renderBottom({ id: "aj", data: result.data, isGood });
-    });
-  }
-
-  // 初始化第4个fieldset
-  function initBottom4(isGood) {
-    let params = Object.assign({ position: 3, ckfwType: 0 }, searchParams);
-    sugon.request(sugon.interFaces.myhc.rdwt.getMjsxl, params).then(result => {
-      renderBottom({ id: "sxl", data: result.data, isGood, isLast: true });
-    });
+  // 获取列表接口
+  async function initSingleBottom(position, ckfwType = 0) {
+    let typeArr = ["jcj", "ckfw", "aj", "sxl"];
+    let type = typeArr[position];
+    let upperCaseType = `get${type.charAt(0).toUpperCase() + type.slice(1)}`;
+    let isLast = position === 3;
+    let params = {
+      ...searchParams,
+      position,
+      pageNum: bottomPages[position],
+      pageSize: 6
+    };
+    if (position === 1) {
+      params.ckfwType = ckfwType;
+    }
+    let result = await sugon.request(
+      sugon.interFaces.myhc.rdwt[upperCaseType],
+      params
+    );
+    let data = result.data;
+    if (data.length > 0) {
+      bottomPages[position]++;
+    }
+    renderBottom({ id: type, isLast, data });
   }
 
   // 渲染fieldset的dom
-  function renderBottom({ id, data = [], isGood = false, isLast = false }) {
-    let selectedIndex,
-      html = "";
-    let filterData = data.filter((val, index) => {
-      if (val.isFirst) {
-        selectedIndex = index;
-      }
-      return val.isFirst;
-    });
+  function renderBottom({ id, data = [], isLast = false }) {
+    let html = "";
+    let $body = $(`#${id} > section`);
+    let filterData = data.filter(val => val.isFirst);
+
     if (filterData.length > 0) {
-      html += generateRow(filterData[0], selectedIndex, isGood, isLast);
-    }
-    data.map((val, index) => {
-      html += generateRow(val, index, isGood, isLast);
-    });
-    $(`#${id} > section`)
-      .empty()
-      .append(html);
-    // 绑定点击弹出页事件
-    $(".main-section > fieldset > section > section")
-      .off()
-      .on("click", function() {
-        let $this = $(this);
-        let id = $this.attr("row-id");
-        if (id) {
-          requirejs(["text!../views/slhy/pjda_popup.html"], function(ele) {
-            window.selectedPersonId = id;
-            $("#ui-view").append(ele);
-          });
-        }
+      filterData.map(val => {
+        html += generateRow(val, isLast);
       });
+      $body.children(":first").before(html);
+    } else {
+      data.map(val => {
+        html += generateRow(val, isLast);
+      });
+      $body.append(html);
+    }
   }
 
   // 追加行
-  function generateRow(val, index, isGood, isLast) {
-    let img,
-      color = "",
-      goodOrBad = isGood ? "good" : "bad";
-    if (index < 3) {
+  function generateRow(val, isLast) {
+    let img;
+    let color = "";
+    let goodOrBad = searchParams.type ? "good" : "bad";
+    if (Number(val.index) < 4) {
       img = `<img 
-              src="../../img/slhy/pjda/mybd/${goodOrBad + (index + 1)}.png" />`;
-      color = ` class= "color${index + 1}"`;
+              src="../../img/slhy/pjda/mybd/${goodOrBad + val.index}.png" />`;
+      color = ` class= "color${val.index}"`;
     } else {
-      img = `<span>${index + 1}</span>`;
+      img = `<span>${val.index}</span>`;
     }
     let notLastDom = `<section row-id="${val.id || ""}">
                         <div><div>${img}</div><div>${val.name}</div></div>
@@ -126,10 +106,11 @@ requirejs(["common"], sugon => {
 
   // 查询
   function searchFunc() {
-    let index = $(".selected").index(".switch-btn > div");
-    let isGood = index === 1;
     searchParams.keyword = $("#keyword").val();
-    initBottom(isGood);
+    searchParams.date1 = $("#date1").val();
+    searchParams.date2 = $("#date2").val();
+    $(".main-section > fieldset > section").empty();
+    initBottom();
   }
 
   // 切换好评榜/曝光台
@@ -140,36 +121,33 @@ requirejs(["common"], sugon => {
     let good = "good-section",
       bad = "bad-section",
       $mainSection = $(".main-section"),
-      $main = $("main"),
-      isGood;
+      $main = $("main");
     if (!$target.hasClass(className)) {
+      $(".main-section > fieldset > section").empty();
       searchParams.type = index;
       $(".switch-btn > div").removeClass(className);
       $target.addClass(className);
       if (index === 1) {
-        isGood = true;
         $mainSection.removeClass(bad).addClass(good);
         $main.css(
           "background",
           `url(../../img/slhy/pjda/mybd/good_bg.png) no-repeat center center / 100% 100%`
         );
       } else {
-        isGood = false;
         $mainSection.removeClass(good).addClass(bad);
         $main.css(
           "background",
           `url(../../img/slhy/pjda/mybd/bad_bg.png) no-repeat center center / 100% 100%`
         );
       }
-      initBottom(isGood);
+      initBottom();
     }
   });
 
   // 窗口服务下拉框事件
   $("#ckfw select").on("change", e => {
-    let index = $(".selected").index(".switch-btn > div");
-    let isGood = index === 1;
-    initBottom2(isGood, $(e.target).val());
+    $("#ckfw > section").empty();
+    initSingleBottom(1, $(e.target).val());
   });
 
   // 查询按钮事件
@@ -180,13 +158,31 @@ requirejs(["common"], sugon => {
     e.keyCode === 13 && searchFunc();
   });
 
-  // 滚动条事件
-  $(".main-section > fieldset > section").on("scroll", e => {
-    scrollEvent(e);
+  // 绑定点击弹出页事件
+  $(".main-section > fieldset > section").on("click", "section", e => {
+    let $this = $(e.currentTarget);
+    let id = $this.attr("row-id");
+    if (id) {
+      requirejs(["text!../views/slhy/pjda_popup.html"], function(ele) {
+        window.selectedPersonId = id;
+        $("#ui-view").append(ele);
+      });
+    }
   });
 
   // 滚动条事件
-  function scrollEvent(e) {
-    debugger;
-  }
+  $(".main-section > fieldset > section").on("scroll", e => {
+    let $target = $(e.target);
+    // 容器高
+    let containerHeight = $target.height();
+    // 第几列
+    let index = $target.index(".main-section > fieldset > section");
+    // 滚动的top值
+    let top = $(e.target).prop("scrollTop");
+    // 滚动的总高度
+    let height = $(e.target).prop("scrollHeight");
+    if (height - top <= containerHeight) {
+      initSingleBottom(index, $("#ckfw select").val());
+    }
+  });
 });

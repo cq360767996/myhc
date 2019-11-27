@@ -351,7 +351,7 @@ define(["ec"], function(ec) {
             remoteUrl: remotePath + "myhc/rdwt/ranking"
           },
           // 获取社区民警熟悉率数据
-          getMjsxl: {
+          getSxl: {
             localUrl: localPath + "rdwt/sxl.json",
             remoteUrl: remotePath + "myhc/rdwt/ranking"
           }
