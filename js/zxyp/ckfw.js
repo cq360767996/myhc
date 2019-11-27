@@ -7,6 +7,18 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     gddwfbData = [],
     mydData = [];
 
+  // 初始化单位下拉框
+  let initDeptSelect = async function() {
+    let result = await sugon.request(sugon.interFaces.zxyp.ckfw.Menu, {
+      search: JSON.stringify(search)
+    });
+    let html = "";
+    result.data.map(val => {
+      html += `<option value="${val.value}">${val.name}</option>`;
+    });
+    $(".second-selector").html(html);
+  };
+
   let initTxt = function() {
     sugon.requestJson(
       {
@@ -580,7 +592,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
           ],
           grid: {
             left: 0,
-            top: 25,
+            top: 40,
             bottom: 0,
             right: 0,
             containLabel: true
@@ -1118,17 +1130,13 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
               ? "../../img/zxyp/ckfw/red.png"
               : "../../img/zxyp/ckfw/blue.png";
           $(".wtList").append(
-            "<div id=" +
-              result.data[i].id +
-              ">" +
-              "<span class='lh l tt'>" +
-              tempStr +
-              "</span>" +
-              "<span class='lh y advise'>建议</span>" +
-              "<span class='lh y img'><img src=" +
-              tempImg +
-              " /></span>" +
-              "</div>"
+            `<div id="${result.data[i].id}">
+              <span title="${tempStr}" class='lh l tt'>${tempStr}</span>
+              <span class='lh y advise'>建议</span>
+              <span class='lh y img'>
+                <img src="${tempImg}" />
+              </span>
+            </div>`
           );
         }
       }
@@ -1201,7 +1209,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     }
   });
 
-  let initView = function() {
+  let initView = async function() {
     searchRuler.deptId = $("#dept-id").val();
     searchRuler.deptName = $("#dept-name").val();
     searchRuler.date1 = $("#date1").val();
@@ -1210,6 +1218,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     search.deptName = $("#dept-name").val();
     search.date1 = $("#date1").val();
     search.date2 = $("#date2").val();
+    await initDeptSelect();
     //左上文本
     initTxt();
     if ($(".switch-btn").hasClass("switch-three")) {

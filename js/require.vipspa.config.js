@@ -59,7 +59,8 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       deptCode: sessionStorage.getItem("deptCode"),
       role: sessionStorage.getItem("role"),
       username: sessionStorage.getItem("username"),
-      name: sessionStorage.getItem("name")
+      name: sessionStorage.getItem("name"),
+      myjzType: sessionStorage.getItem("myjzType")
     };
     $("#userName").html(`你好，${sugon.identityInfo.name}`);
   } else {
@@ -229,7 +230,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       break;
   }
   // 菜单过滤器
-  let menuDispatch = sugon.menuConfig[sugon.identityInfo.role] || [];
+  let menuDispatch = sugon.identityInfo.menuDispatch || [];
   // 过滤路由
   Object.keys(router).forEach(key => {
     menuDispatch.map(val => {
@@ -401,16 +402,16 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       $body.html("暂无数据");
     } else {
       let html = `<div>
-      <div>时间</div>
-      <div>标题</div>
-      <div>是否已读</div>
-    </div>`;
+                    <div>时间</div>
+                    <div>标题</div>
+                    <div>是否已读</div>
+                  </div>`;
       result.data.map(val => {
         html += `<div row-id="${val.id}">
-    <div title="${val.date}">${val.date}</div>
-    <div title="${val.title}">${val.title}</div>
-    <div>${val.isRead ? "已读" : "未读"}</div>
-   </div>`;
+                  <div title="${val.date}">${val.date}</div>
+                  <div title="${val.title}">${val.title}</div>
+                  <div>${val.isRead ? "已读" : "未读"}</div>
+                </div>`;
       });
       $body.empty().append(html);
       sugon.renderNav(

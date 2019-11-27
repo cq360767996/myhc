@@ -46,6 +46,27 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
   $("#date1").val(minDate);
   $("#date2").val(maxDate);
 
+  // 加载热点问题数据
+  function initRdwtList() {
+    let params = {
+      deptId: $("#placeCode").val(),
+      date1: $("#date1").val(),
+      date2: $("#date2").val()
+    };
+    sugon
+      .request(sugon.interFaces.myhc.rdwt.getMidData, params)
+      .then(result => {
+        let html = "";
+        let $body = $(".rcGrid");
+        result.data.map((val, index) => {
+          html += `<div title="${val.content}">
+                    ${index + 1}、${val.content}
+                  </div>`;
+        });
+        $body.empty().append(html);
+      });
+  }
+
   async function onLoad() {
     await getTree();
     //渲染树
@@ -74,10 +95,6 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
 
   $("#back").bind("click", function() {
     location.hash = vipspa.stringify("dwjx", { type: "dwjx" });
-  });
-
-  $("#gotoMap").bind("click", function() {
-    location.hash = vipspa.stringify("myzs", { type: "myzs" });
   });
 
   //----------------------------------------------------------------------------------------------------------------------
@@ -855,7 +872,9 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
       .eq(1)
       .html("诉求性质数量分析");
     initChart({ name: "诉求性质", id: "sqxz" });
+    initRdwtList();
   });
+
   async function initPage() {
     await onLoad();
     $("#check").click();

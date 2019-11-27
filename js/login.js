@@ -88,6 +88,7 @@ function passwordLogin(e) {
           sessionStorage.setItem("role", result.role);
           sessionStorage.setItem("username", username);
           sessionStorage.setItem("name", result.name);
+          sessionStorage.setItem("myjzType", result.myjzType);
           location.href = sugon.isPublished
             ? "/index?#myzs"
             : "index.html?#myzs";

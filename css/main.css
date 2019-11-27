@@ -240,12 +240,6 @@ html {
   color: #67c3ff;
 }
 
-#gotoMap {
-  cursor: pointer;
-  background: url("../img/right_pannel_back.png") no-repeat;
-  background-position-y: 62%;
-}
-
 /*
     弹窗公共样式区域
 */

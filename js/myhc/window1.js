@@ -384,7 +384,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         trigger: "axis"
       },
       grid: {
-        top: 55,
+        top: 70,
         bottom: 35,
         left: 45,
         right: 20

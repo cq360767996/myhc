@@ -5,6 +5,18 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     gddwfbData = [];
   var param1, param2;
 
+  // 初始化单位下拉框
+  let initDeptSelect = async function() {
+    let result = await sugon.request(sugon.interFaces.zxyp.ckfw.Menu, {
+      search: JSON.stringify(search)
+    });
+    let html = "";
+    result.data.map(val => {
+      html += `<option value="${val.value}">${val.name}</option>`;
+    });
+    $("#dept").html(html);
+  };
+
   var initVideo = function() {
     sugon.requestJson(
       {
@@ -276,7 +288,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
       xData.push(data[i].name);
       yData.push(data[i].value);
     }
-    let minAndMax = sugon.handleMinAndMax(yData);
     var option = {
       color: "#3cb2fc",
       tooltip: {
@@ -318,8 +329,6 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         {
           type: "value",
           splitNumber: 5,
-          min: minAndMax.min,
-          max: minAndMax.max,
           axisTick: {
             show: false
           },
@@ -1427,7 +1436,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     initWtdw(param1, param2, index, 1);
   });
 
-  var initView = function() {
+  var initView = async function() {
     searchRuler.deptId = $("#dept-id").val();
     searchRuler.deptName = $("#dept-name").val();
     searchRuler.date1 = $("#date1").val();
@@ -1436,6 +1445,7 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
     search.deptName = $("#dept-name").val();
     search.date1 = $("#date1").val();
     search.date2 = $("#date2").val();
+    await initDeptSelect();
     // 视频加载
     initVideo();
     // 左上文本

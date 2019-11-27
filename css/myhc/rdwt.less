@@ -123,6 +123,48 @@
     position: relative;
     cursor: pointer;
 
+    &:first-child {
+      background: url(../../img/myhc/rdwt/1.png) no-repeat center center / 100%
+        100%;
+      & > aside {
+        color: #ff623d;
+      }
+    }
+
+    &:nth-child(2) {
+      background: url(../../img/myhc/rdwt/2.png) no-repeat center center / 100%
+        100%;
+      & > aside {
+        color: #793feb;
+      }
+    }
+
+    &:last-child {
+      background: url(../../img/myhc/rdwt/3.png) no-repeat center center / 100%
+        100%;
+      & > aside {
+        color: #4998fa;
+      }
+    }
+
+    & > aside {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      width: 71px;
+      height: 71px;
+      background: url(../../img/myhc/rdwt/tag.png) no-repeat;
+      font-size: 20px;
+      font-weight: bold;
+
+      & > span {
+        position: absolute;
+        transform: rotate(45deg);
+        top: 10px;
+        left: 25px;
+      }
+    }
+
     & > i {
       position: absolute;
       top: 7%;

@@ -4,5 +4,7 @@
   "deptId": "mock deptId",
   "deptCode": "mock deptCode",
   "name": "张三",
-  "role": "fzr"
+  "role": "fzr",
+  "myjzType": 0,
+  "menuDispatch": []
 }

@@ -8,9 +8,10 @@
   height: 100%;
 }
 .rightPannel {
+  margin-top: 10px;
   float: left;
   width: 390px;
-  height: calc(100% - 75px);
+  height: calc(100% - 27px);
   overflow: hidden;
 }
 .content {
@@ -35,6 +36,7 @@
   border: 0px;
   height: 30px;
   line-height: 30px;
+  color: #555;
 }
 
 #date1,
@@ -66,6 +68,7 @@ input {
   overflow: auto;
   position: absolute;
   z-index: 9999;
+  color: #555;
 }
 .list {
   width: 100%;
@@ -268,6 +271,11 @@ input {
 }
 .progress_title > span {
   margin-right: 15px;
+  display: inline-block;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .progress_bk {
   width: 100%;
@@ -400,19 +408,6 @@ input {
   color: #0075bb;
   line-height: 26px;
   margin-right: 10px;
-}
-#gotoMap {
-  width: 390px;
-  height: 75px;
-  line-height: 75px;
-  float: right;
-}
-#gotoMap span {
-  float: right;
-  margin-right: 35px;
-  color: red;
-  font-size: 20px;
-  cursor: pointer;
 }
 .group_one {
   width: 480px;

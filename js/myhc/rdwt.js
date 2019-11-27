@@ -17,16 +17,18 @@ requirejs(["common", "ec"], (sugon, ec) => {
         }
         let html = "";
         result.data.map((val, index) => {
+          let type = val.model == 1 ? "业务" : val.model == 2 ? "问题" : "队伍";
           if (index < 3) {
             let $body = $(".mid-header > div")
               .eq(index)
               .attr("deptId", val.deptId)
               .attr("model", val.model)
-              .attr("code", val.code)
-              .css(
-                "background",
-                `url(../../img/myhc/rdwt/${val.model}.png) no-repeat center center / 100% 100%`
-              );
+              .attr("code", val.code);
+
+            $body
+              .find("aside")
+              .find("span")
+              .html(type);
             $body.find("strong").html(val.freq);
             $body.find(".area-div").html(`高发单位：${val.area}`);
             $body
@@ -34,8 +36,6 @@ requirejs(["common", "ec"], (sugon, ec) => {
               .attr("title", val.content)
               .html(val.content);
           } else {
-            let type =
-              val.model == 1 ? "业务" : val.model == 2 ? "问题" : "队伍";
             html += `<div deptId="${val.deptId}"
                             model="${val.model}"
                             code="${val.code}">
@@ -174,7 +174,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
             }
           ]
         };
-        renderChart(option, "chart1", "", true);
+        sugon.renderChart({ id: "chart1", data: result.data, option });
       });
   };
 
@@ -365,7 +365,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
           },
           series: seriesArr
         };
-        renderChart(option, "chart2");
+        sugon.renderChart({ id: "chart2", data, option });
       });
   };
 
@@ -437,10 +437,13 @@ requirejs(["common", "ec"], (sugon, ec) => {
             }
           ]
         };
-        renderChart(option, "chart3", params => {
+
+        // 点击回调
+        function cb(params) {
           searchParams.id = params.data.id;
           initChart4();
-        });
+        }
+        sugon.renderChart({ id: "chart3", data, option, cb });
       });
   };
   //第四个echarts图
@@ -578,7 +581,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
             }
           ]
         };
-        renderChart(option, "chart4");
+        sugon.renderChart({ id: "chart4", data, option });
       });
   };
 

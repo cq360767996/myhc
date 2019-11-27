@@ -13,10 +13,11 @@ var myChart1,
   Chart9,
   Chart10;
 requirejs(["common"], function(sugon) {
-  let treeData = [];
+  // myjzType
+  const myjzType = sugon.identityInfo.myjzType;
+  let mold = null;
   var maxDate = sugon.getDate(-2);
   var minDate = sugon.getDate(-7);
-  $("#left-tree").css("width", $("#place").css("width"));
 
   $("#place").bind("click", function() {
     $("#left-tree").css("visibility", "visible");
@@ -55,89 +56,75 @@ requirejs(["common"], function(sugon) {
   $("#date1").val(minDate);
   $("#date2").val(maxDate);
 
-  $("#mold").change(function() {
-    $("#left-tree").css("visibility", "hidden");
-    onLoad($(this).val());
-    if ($(this).val() == "1") {
-      $("#check")
-        .unbind()
-        .bind("click", function() {
-          getList(
-            $("#placeCode").val(),
-            $("#date1").val(),
-            $("#date2").val(),
-            $("#mold").val()
-          );
-        });
-      $(".list").css("display", "block");
-      $(".list2").css("display", "none");
-      getList(
-        $("#placeCode").val(),
-        $("#date1").val(),
-        $("#date2").val(),
-        $("#mold").val()
-      );
+  // 控制select隐藏显示
+  function handleMoldDis() {
+    let $deptName = $("#place");
+    let $date1 = $("#date1");
+    let $date2 = $("#date2");
+    let $mold = $("#mold");
+    let $leftTree = $("#left-tree");
+    if (myjzType == 0) {
+      $mold.show();
+      $deptName.css("width", "calc(35% - 30px)");
+      $date1.css("width", "calc(25% - 30px)");
+      $date2.css("width", "calc(25% - 30px)");
+      $leftTree.css({ "margin-left": "156px", width: $deptName.outerWidth() });
     } else {
-      $("#check")
-        .unbind()
-        .bind("click", function() {
-          getList2(
-            $("#placeCode").val(),
-            $("#date1").val(),
-            $("#date2").val(),
-            $("#mold").val()
-          );
-        });
-      $(".list").css("display", "none");
-      $(".list2").css("display", "block");
-      getList2(
-        $("#placeCode").val(),
-        $("#date1").val(),
-        $("#date2").val(),
-        $("#mold").val()
-      );
+      $mold.hide();
+      $deptName.css("width", "calc(50% - 60px)");
+      $date1.css("width", "calc(25% - 30px)");
+      $date2.css("width", "calc(25% - 30px)");
+      $leftTree.css({ "margin-left": "15px", width: $deptName.outerWidth() });
     }
-  });
+  }
 
-  async function onLoad(type) {
-    await getTree(type, false);
+  // 加载热点问题数据
+  function initRdwtList() {
+    let params = {
+      deptId: mold == 2 ? null : $("#placeCode").val(),
+      date1: $("#date1").val(),
+      date2: $("#date2").val()
+    };
+    sugon
+      .request(sugon.interFaces.myhc.rdwt.getMidData, params)
+      .then(result => {
+        let html = "";
+        let $body = $(".rcGrid");
+        result.data.map((val, index) => {
+          html += `<div title="${val.content}">
+                    ${index + 1}、${val.content}
+                  </div>`;
+        });
+        $body.empty().append(html);
+      });
+  }
+
+  // 加载单位树
+  async function onLoad() {
+    let $deptName = $("#place");
+    let $deptId = $("#placeCode");
+    let { deptId, role } = sugon.identityInfo;
+    let result = await sugon.request(sugon.interFaces.common.getDeptTree, {
+      deptId,
+      role,
+      type: mold
+    });
     //渲染树
     $("#left-tree").treeview({
-      data: treeData,
+      data: result.data,
       levels: 1,
       onNodeSelected: function(event, node) {
-        $("#place").val(node.text);
-        $("#placeCode").val(node.id);
+        $deptName.val(node.text);
+        $deptId.val(node.id);
         $("#left-tree").css("visibility", "hidden");
-        if (type == 2) {
-          getList2(
-            $("#placeCode").val(),
-            $("#date1").val(),
-            $("#date2").val(),
-            $("#mold").val()
-          );
-        }
       },
       showCheckbox: false //是否显示多选
     });
-    $("#place").val(treeData[0].text);
-    $("#placeCode").val(treeData[0].id);
+    $deptName.val(result.data[0].text);
+    $deptId.val(result.data[0].id);
   }
 
-  //获取树数据
-  async function getTree() {
-    let { deptId, role } = sugon.identityInfo;
-    await sugon
-      .request(sugon.interFaces.common.getDeptTree, { deptId, role })
-      .then(result => {
-        treeData = result.data;
-      });
-  }
-  $("#gotoMap").bind("click", function() {
-    location.hash = vipspa.stringify("myzs", { type: "myzs" });
-  });
-
-  var getList2 = function(code, time1, time2, type) {
+  function getList2(code, time1, time2, type) {
     sugon.requestJson(
       {
         type: "POST",
@@ -170,9 +157,9 @@ requirejs(["common"], function(sugon) {
         );
       }
     );
-  };
+  }
 
-  var getList = function(code, time1, time2, type) {
+  function getList(code, time1, time2, type) {
     sugon.requestJson(
       {
         type: "POST",
@@ -310,16 +297,37 @@ requirejs(["common"], function(sugon) {
         }
       }
     );
-  };
+  }
+
+  // 初始化列表
+  function initList(deptId, date1, date2) {
+    let $list1 = $(".list");
+    let $list2 = $(".list2");
+    if (mold == 1) {
+      $list1.show();
+      $list2.hide();
+      getList(deptId, date1, date2);
+    } else {
+      $list1.hide();
+      $list2.show();
+      getList2(deptId, date1, date2);
+    }
+  }
+
   async function initPage() {
-    await onLoad(1);
-    $("#mold").val(1);
-    getList(treeData[0].id, minDate, maxDate, 1);
+    let deptId = $("#placeCode").val();
+    let date1 = $("#date1").val();
+    let date2 = $("#date2").val();
+    handleMoldDis();
+    mold = myjzType == 0 ? 1 : myjzType;
+    await onLoad();
+    initList(deptId, minDate, maxDate);
     setCenterHeight();
     sugon.initRightMenu({
-      deptId: $("#placeCode").val(),
-      date1: $("#date1").val(),
-      date2: $("#date2").val()
+      deptId,
+      date1,
+      date2,
+      mold
     });
   }
   //页面入口
@@ -332,13 +340,21 @@ requirejs(["common"], function(sugon) {
       .css("overflow", "auto");
   }
 
+  // 如果type为0的话，绑定改变事件
+  if (myjzType == 0) {
+    $("#mold").on("change", e => {
+      mold = $(e.target).val();
+      onLoad();
+    });
+  }
+
   $("#check").bind("click", function() {
-    getList(
-      $("#placeCode").val(),
-      $("#date1").val(),
-      $("#date2").val(),
-      $("#mold").val()
-    );
+    let deptId = $("#placeCode").val();
+    let date1 = $("#date1").val();
+    let date2 = $("#date2").val();
+    mold = myjzType == 0 ? mold : myjzType;
+    initList(deptId, date1, date2);
+    initRdwtList();
   });
 
   $(document).on("click", ".list>div", function() {
