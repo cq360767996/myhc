@@ -52,8 +52,9 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
   let identityInfo = sessionStorage.getItem("identityInfo");
   // 判断是否登录过
   if (identityInfo) {
+    let username = sessionStorage.getItem("username");
     // 确认登录过，将token等信息写入缓存
-    sugon.identityInfo = JSON.parse(identityInfo);
+    sugon.identityInfo = { ...JSON.parse(identityInfo), username };
     $("#userName").html(`你好，${sugon.identityInfo.name}`);
   } else {
     location.href = sugon.isPublished ? "/login" : "login.html";

@@ -10,7 +10,7 @@
   font-family: "Balth";
   src: url(../../fonts/Balth.ttf);
 }
-main {
+.outer-container {
   width: calc(100% - 32px);
   height: calc(100% - 20px);
   margin: 10px auto;
@@ -21,7 +21,7 @@ main {
   position: relative;
   background: url(../../img/slhy/pjda/mybd/bad_bg.png) no-repeat center center / 100% 100%;
 }
-main > header {
+.outer-container > header {
   width: calc(100% - 30px);
   height: 30px;
   line-height: 30px;
@@ -30,23 +30,23 @@ main > header {
   display: flex;
   justify-content: space-between;
 }
-main > header > div {
+.outer-container > header > div {
   display: inline-flex;
   justify-content: space-between;
 }
-main > header > div:first-child > * {
+.outer-container > header > div:first-child > * {
   color: #000;
   margin-left: 10px;
 }
-main #date1,
-main #date2,
-main #keyword {
+.outer-container #date1,
+.outer-container #date2,
+.outer-container #keyword {
   width: 150px;
   height: 100%;
   padding: 0 5px;
   vertical-align: top;
 }
-main #search-btn {
+.outer-container #search-btn {
   background-color: #2a5896;
   border-radius: 3px;
   height: 100%;
@@ -54,19 +54,27 @@ main #search-btn {
   outline: none;
   color: #fff;
 }
-main > section {
+.outer-container #reset-btn {
+  background-color: #2a5896;
+  border-radius: 3px;
+  height: 100%;
+  border: 0;
+  outline: none;
+  color: #fff;
+}
+.outer-container > section {
   width: calc(100% - 30px);
   height: calc(80% - 10px);
   position: absolute;
   top: 20%;
 }
-main > section > fieldset {
+.outer-container > section > fieldset {
   height: 100%;
   color: #333;
   border-radius: 3px;
   background-color: #e6eaf1;
 }
-main > section > fieldset > header {
+.outer-container > section > fieldset > header {
   height: 70px;
   line-height: 70px;
   text-align: center;
@@ -74,12 +82,12 @@ main > section > fieldset > header {
   font-family: "FZHTJW";
   letter-spacing: 2px;
 }
-main > section > fieldset > section {
+.outer-container > section > fieldset > section {
   height: calc(100% - 70px);
   overflow: auto;
   padding: 0 10px;
 }
-main > section > fieldset > section > section {
+.outer-container > section > fieldset > section > section {
   height: 80px;
   margin-top: 20px;
   background-color: #fbfdff;
@@ -88,37 +96,37 @@ main > section > fieldset > section > section {
   display: flex;
   cursor: pointer;
 }
-main > section > fieldset > section > section > div {
+.outer-container > section > fieldset > section > section > div {
   font-family: "SourceHanSansCN";
 }
-main > section > fieldset > section > section > div:first-child {
+.outer-container > section > fieldset > section > section > div:first-child {
   width: 80px;
   height: 100%;
   text-align: center;
 }
-main > section > fieldset > section > section > div:first-child > div {
+.outer-container > section > fieldset > section > section > div:first-child > div {
   height: 24px;
 }
-main > section > fieldset > section > section > div:first-child > div:first-child {
+.outer-container > section > fieldset > section > section > div:first-child > div:first-child {
   height: calc(100% - 24px);
   position: relative;
 }
-main > section > fieldset > section > section > div:first-child > div:first-child > * {
+.outer-container > section > fieldset > section > section > div:first-child > div:first-child > * {
   font-size: 24px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-main > section > fieldset > section > section > div:first-child > div:last-child {
+.outer-container > section > fieldset > section > section > div:first-child > div:last-child {
   line-height: 24px;
   font-size: 16px;
 }
-main > section > fieldset > section > section > div:last-child {
+.outer-container > section > fieldset > section > section > div:last-child {
   width: calc(100% - 80px);
   height: 100%;
 }
-main > section > fieldset > section > section > div:last-child > div {
+.outer-container > section > fieldset > section > section > div:last-child > div {
   height: 50%;
   line-height: 40px;
   font-size: 16px;
@@ -126,16 +134,16 @@ main > section > fieldset > section > section > div:last-child > div {
   overflow: hidden;
   white-space: nowrap;
 }
-main > section > fieldset > section > section > div:last-child > div:first-child > span {
+.outer-container > section > fieldset > section > section > div:last-child > div:first-child > span {
   margin-left: 10px;
 }
-main > section > fieldset > section > section > div:last-child > div:first-child > span:first-child {
+.outer-container > section > fieldset > section > section > div:last-child > div:first-child > span:first-child {
   margin-left: 0;
 }
-main > section > fieldset > section > section:first-child {
+.outer-container > section > fieldset > section > section:first-child {
   margin-top: 0;
 }
-main > section > fieldset strong {
+.outer-container > section > fieldset strong {
   font-size: 20px;
   color: #4c8acb;
 }

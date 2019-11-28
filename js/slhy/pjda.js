@@ -110,6 +110,7 @@ requirejs(["common"], sugon => {
     searchParams.date1 = $("#date1").val();
     searchParams.date2 = $("#date2").val();
     $(".main-section > fieldset > section").empty();
+    bottomPages = [1, 1, 1, 1];
     initBottom();
   }
 
@@ -124,6 +125,7 @@ requirejs(["common"], sugon => {
       $main = $("main");
     if (!$target.hasClass(className)) {
       $(".main-section > fieldset > section").empty();
+      bottomPages = [1, 1, 1, 1];
       searchParams.type = index;
       $(".switch-btn > div").removeClass(className);
       $target.addClass(className);
@@ -184,5 +186,10 @@ requirejs(["common"], sugon => {
     if (height - top <= containerHeight) {
       initSingleBottom(index, $("#ckfw select").val());
     }
+  });
+
+  // 重置按钮事件
+  $("#reset-btn").on("click", () => {
+    $("#keyword").val("");
   });
 });
