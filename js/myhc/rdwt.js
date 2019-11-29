@@ -174,6 +174,9 @@ requirejs(["common", "ec"], (sugon, ec) => {
             }
           ]
         };
+        let chartDom = document.getElementById("chart1");
+        chartDom.getAttribute("_echarts_instance_") &&
+          ec.getInstanceByDom(chartDom).dispose();
         sugon.renderChart({ id: "chart1", data: result.data, option });
       });
   };
