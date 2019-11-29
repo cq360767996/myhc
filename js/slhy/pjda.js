@@ -48,20 +48,12 @@ requirejs(["common"], sugon => {
   // 渲染fieldset的dom
   function renderBottom({ id, data = [], isLast = false }) {
     let html = "";
-    let $body = $(`#${id} > section`);
     let filterData = data.filter(val => val.isFirst);
-
-    if (filterData.length > 0) {
-      filterData.map(val => {
-        html += generateRow(val, isLast);
-      });
-      $body.children(":first").before(html);
-    } else {
-      data.map(val => {
-        html += generateRow(val, isLast);
-      });
-      $body.append(html);
-    }
+    let resultData = filterData.length > 0 ? filterData : data;
+    resultData.map(val => {
+      html += generateRow(val, isLast);
+    });
+    $(`#${id} > section`).append(html);
   }
 
   // 追加行
