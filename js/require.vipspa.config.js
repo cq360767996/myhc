@@ -57,7 +57,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
     sugon.identityInfo = { ...JSON.parse(identityInfo), username };
     $("#userName").html(`你好，${sugon.identityInfo.name}`);
   } else {
-    location.href = sugon.isPublished ? "/login" : "login.html";
+    location.href = sugon.isPublished ? "/" : "login.html";
   }
   // 路由配置
   let router = {

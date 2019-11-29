@@ -92,8 +92,6 @@ function passwordLogin(e) {
         }
       });
     }
-  } else {
-    location.href = sugon.isPublished ? "/index?#myzs" : "index.html?#myzs";
   }
 }
 
