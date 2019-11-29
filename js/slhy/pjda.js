@@ -175,7 +175,7 @@ requirejs(["common"], sugon => {
     let top = $(e.target).prop("scrollTop");
     // 滚动的总高度
     let height = $(e.target).prop("scrollHeight");
-    if (height - top <= containerHeight) {
+    if (height != containerHeight && height - top <= containerHeight) {
       initSingleBottom(index, $("#ckfw select").val());
     }
   });
