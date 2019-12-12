@@ -1,6 +1,6 @@
 .leftPannel {
   float: left;
-  width: calc(100% - 390px);
+  width: 100%;
   height: 100%;
 }
 

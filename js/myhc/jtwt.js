@@ -880,8 +880,8 @@ requirejs(["common", "ec", "high3D"], function(sugon, ec, hc) {
   async function initPage() {
     await onLoad();
     $("#check").click();
-    let { code, date1, date2 } = searchRule;
-    sugon.initRightMenu({ deptId: code, date1, date2 });
+    // let { code, date1, date2 } = searchRule;
+    // sugon.initRightMenu({ deptId: code, date1, date2 });
   }
   // 入口
   initPage();

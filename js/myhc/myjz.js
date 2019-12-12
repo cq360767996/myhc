@@ -323,12 +323,12 @@ requirejs(["common"], function(sugon) {
     let date2 = $("#date2").val();
     initList(deptId, minDate, maxDate);
     setCenterHeight();
-    sugon.initRightMenu({
-      deptId,
-      date1,
-      date2,
-      mold
-    });
+    // sugon.initRightMenu({
+    //   deptId,
+    //   date1,
+    //   date2,
+    //   mold
+    // });
   }
   //页面入口
   initPage();

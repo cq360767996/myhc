@@ -3,7 +3,7 @@ define(["ec"], function(ec) {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: false,
+    isPublished: true,
     // 所有接口
     interFaces: {
       common: {
@@ -1581,12 +1581,12 @@ define(["ec"], function(ec) {
         resolve();
       });
     },
-    initRightMenu(params) {
-      window.rightParams = params;
-      requirejs(["text!../views/myhc/rightMenu.html"], ele => {
-        $(".rightPannel").html(ele);
-      });
-    },
+    // initRightMenu(params) {
+    //   window.rightParams = params;
+    //   requirejs(["text!../views/myhc/rightMenu.html"], ele => {
+    //     $(".rightPannel").html(ele);
+    //   });
+    // },
     getLabelVal(val) {
       if (val.length == 1) {
         val = "   " + val;
