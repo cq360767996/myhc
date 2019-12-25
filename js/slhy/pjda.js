@@ -90,8 +90,8 @@ requirejs(["common"], sugon => {
 
   // 初始化查询栏
   function initSearchBar() {
-    sugon.initDateInput("date1", (searchParams.date1 = sugon.getDate(-7)));
-    sugon.initDateInput("date2", (searchParams.date2 = sugon.getDate(-1)));
+    sugon.initDateInput("date1", (searchParams.date1 = sugon.getDate(-8)));
+    sugon.initDateInput("date2", (searchParams.date2 = sugon.getDate(-2)));
     searchParams.type = 0;
     searchParams.keyword = "";
   }
@@ -154,8 +154,8 @@ requirejs(["common"], sugon => {
 
   // 查询
   function searchFunc() {
+    searchParams.keyword = $("#keyword").val();
     if (/\S+/.test(searchParams.keyword)) {
-      searchParams.keyword = $("#keyword").val();
       renderKeywordSearch();
     } else {
       searchParams.date1 = $("#date1").val();
