@@ -354,6 +354,10 @@ define(["ec"], function(ec) {
           getSxl: {
             localUrl: localPath + "rdwt/sxl.json",
             remoteUrl: remotePath + "myhc/rdwt/ranking"
+          },
+          keywordSearch: {
+            localUrl: localPath + "rdwt/keywordSearch.json",
+            remoteUrl: remotePath + "myhc/rdwt/keywordSearch"
           }
         },
         myzd: {
@@ -1221,14 +1225,16 @@ define(["ec"], function(ec) {
         tempL = "-" + (option.width / 2 + "px"),
         tempT = "-" + (option.height / 2 + "px");
       var tempID = "showDialog" + Math.floor(Math.random() * 10000 + 1);
+      const zIndex = option.zIndex ? ` style="z-index: ${option.zIndex};"` : "";
+      const maskZIndex = option.zIndex
+        ? ` style="z-index: ${option.zIndex - 1};"`
+        : "";
       $("#ui-view").append(
-        "<div class='simple_shade'></div>" +
-          "<div class='simple_showDialog' id=" +
-          tempID +
-          ">" +
-          "<i class='simple_close glyphicon glyphicon-remove'></i>" +
-          "<div class='simple_content'></div>" +
-          "</div>"
+        ` <div class='simple_shade'${maskZIndex}></div>
+          <div class='simple_showDialog'${zIndex} id="${tempID}">
+            <i class='simple_close glyphicon glyphicon-remove'></i>
+            <div class='simple_content'></div>
+          </div>`
       );
       $("#" + tempID).css("width", tempW);
       $("#" + tempID).css("height", tempH);

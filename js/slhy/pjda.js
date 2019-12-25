@@ -84,7 +84,7 @@ requirejs(["common"], sugon => {
                       <div>${val.name}</div>
                       <div title="${val.dw}">${val.dw}</div>
                     </div>
-                   </section>`;
+                  </section>`;
     return isLast ? lastDom : notLastDom;
   }
 
@@ -96,14 +96,74 @@ requirejs(["common"], sugon => {
     searchParams.keyword = "";
   }
 
+  // 渲染关键字查询结果
+  async function renderKeywordSearch() {
+    const dialogParams = {
+      ele: `<div class="search-popup">
+              <main></main>
+              <footer><button>关闭</button></footer>
+            </div>`,
+      width: 620,
+      height: 490,
+      zIndex: 999
+    };
+    sugon.showDialog(dialogParams);
+    const { keyword, date1, date2 } = searchParams;
+    const result = await sugon.request(
+      sugon.interFaces.myhc.rdwt.keywordSearch,
+      {
+        keyword,
+        date1,
+        date2
+      }
+    );
+    let html = "";
+    result.data.map(v1 => {
+      html += `<div>
+                <div class="row-left">
+                  <div style="background-image: url(${v1.img});"></div>
+                </div>
+                <div class="row-right">
+                  <header>
+                    <div>姓名：${v1.name}</div>
+                    <div>警号：${v1.policeNum}</div>
+                    <div>单位：${v1.dept}</div>
+                  </header>
+                  <main>
+                    ${v1.data.reduce(
+                      (acc, v2) =>
+                        acc +
+                        `<div class="detail-list">
+                          <div>${v2.type}</div>
+                          <div>满意度：${v2.myd}%</div>
+                          <div>业务量：${v2.ywl}次</div>
+                        </div>`,
+                      ""
+                    )}
+                    <div>
+                      <button row-id="${v1.id}" class="detail-btn">档案</button>
+                    </div>
+                  </main>
+                </div>
+              </div>`;
+    });
+    $(".search-popup > main")
+      .empty()
+      .append(html);
+  }
+
   // 查询
   function searchFunc() {
     searchParams.keyword = $("#keyword").val();
     searchParams.date1 = $("#date1").val();
     searchParams.date2 = $("#date2").val();
-    $(".main-section > fieldset > section").empty();
-    bottomPages = [1, 1, 1, 1];
-    initBottom();
+    if (/\S+/.test(searchParams.keyword)) {
+      renderKeywordSearch();
+    } else {
+      $(".main-section > fieldset > section").empty();
+      bottomPages = [1, 1, 1, 1];
+      initBottom();
+    }
   }
 
   // 切换好评榜/曝光台
@@ -183,5 +243,21 @@ requirejs(["common"], sugon => {
   // 重置按钮事件
   $("#reset-btn").on("click", () => {
     $("#keyword").val("");
+  });
+
+  // 关闭按钮事件
+  $("#ui-view").on("click", ".search-popup > footer > button", () => {
+    $(".simple_showDialog > i").click();
+  });
+
+  // 档案按钮事件
+  $("#ui-view").on("click", ".detail-btn", e => {
+    const id = $(e.target).attr("row-id");
+    if (id) {
+      requirejs(["text!../views/slhy/pjda_popup.html"], function(ele) {
+        window.selectedPersonId = id;
+        $("#ui-view").append(ele);
+      });
+    }
   });
 });

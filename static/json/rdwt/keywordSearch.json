@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "data": [
+        {
+          "type": "110接处警",
+          "myd": "89.4",
+          "ywl": "332"
+        }
+      ],
+      "name": "陆丰",
+      "policeNum": "216673",
+      "dept": "雨花台分局岱善派出所",
+      "id": "1",
+      "img": "../../img/slhy/zhzs/photo.png"
+    },
+    {
+      "data": [
+        {
+          "type": "窗口服务",
+          "myd": "89.4",
+          "ywl": "332"
+        }
+      ],
+      "name": "陆毅",
+      "policeNum": "216673",
+      "dept": "雨花台分局岱善派出所",
+      "id": "2",
+      "img": "../../img/slhy/zhzs/photo.png"
+    },
+    {
+      "data": [
+        {
+          "type": "窗口服务",
+          "myd": "89.4",
+          "ywl": "332"
+        }
+      ],
+      "name": "陆项",
+      "policeNum": "216673",
+      "dept": "雨花台分局岱善派出所",
+      "id": "3",
+      "img": "../../img/slhy/zhzs/photo.png"
+    }
+  ]
+}
