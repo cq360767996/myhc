@@ -154,12 +154,12 @@ requirejs(["common"], sugon => {
 
   // 查询
   function searchFunc() {
-    searchParams.keyword = $("#keyword").val();
-    searchParams.date1 = $("#date1").val();
-    searchParams.date2 = $("#date2").val();
     if (/\S+/.test(searchParams.keyword)) {
+      searchParams.keyword = $("#keyword").val();
       renderKeywordSearch();
     } else {
+      searchParams.date1 = $("#date1").val();
+      searchParams.date2 = $("#date2").val();
       $(".main-section > fieldset > section").empty();
       bottomPages = [1, 1, 1, 1];
       initBottom();
