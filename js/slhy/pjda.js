@@ -130,16 +130,18 @@ requirejs(["common"], sugon => {
                     <div>单位：${v1.dept}</div>
                   </header>
                   <main>
-                    ${v1.data.reduce(
-                      (acc, v2) =>
-                        acc +
-                        `<div class="detail-list">
-                          <div>${v2.type}</div>
-                          <div>满意度：${v2.myd}%</div>
-                          <div>业务量：${v2.ywl}次</div>
-                        </div>`,
-                      ""
-                    )}
+                    <div class="detail-list">
+                      ${v1.data.reduce(
+                        (acc, v2) =>
+                          acc +
+                          `<div>
+                            <div>${v2.type}</div>
+                            <div>满意度：${v2.myd}%</div>
+                            <div>业务量：${v2.ywl}次</div>
+                          </div>`,
+                        ""
+                      )}
+                    </div>
                     <div>
                       <button row-id="${v1.id}" class="detail-btn">档案</button>
                     </div>

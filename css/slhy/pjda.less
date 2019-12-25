@@ -389,14 +389,19 @@
   }
 
   .detail-list {
-    display: flex;
     & > div {
-      width: calc(~"100% / 3");
       height: 30px;
       line-height: 30px;
+      display: flex;
 
-      &:first-child {
-        color: #3b8cc1;
+      & > div {
+        width: calc(~"100% / 3");
+        height: 30px;
+        line-height: 30px;
+
+        &:first-child {
+          color: #3b8cc1;
+        }
       }
     }
   }

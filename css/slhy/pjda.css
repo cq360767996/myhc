@@ -315,14 +315,16 @@
   outline: none;
   color: #3b8cc1;
 }
-.search-popup .detail-list {
+.search-popup .detail-list > div {
+  height: 30px;
+  line-height: 30px;
   display: flex;
 }
-.search-popup .detail-list > div {
+.search-popup .detail-list > div > div {
   width: calc(100% / 3);
   height: 30px;
   line-height: 30px;
 }
-.search-popup .detail-list > div:first-child {
+.search-popup .detail-list > div > div:first-child {
   color: #3b8cc1;
 }

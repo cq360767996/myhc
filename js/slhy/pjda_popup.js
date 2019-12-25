@@ -295,7 +295,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
           }
         },
         legend: {
-          data: ["投诉次数", "满意度"]
+          data: ["业务量", "满意度"]
         },
         dataZoom: [
           {
@@ -346,7 +346,7 @@ requirejs(["common", "ec", "ecPlugin"], (sugon, ec) => {
         ],
         series: [
           {
-            name: "投诉次数",
+            name: "业务量",
             type: "bar",
             data: yData1,
             barWidth: "15",
