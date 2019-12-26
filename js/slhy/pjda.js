@@ -127,7 +127,7 @@ requirejs(["common"], sugon => {
                   <header>
                     <div>姓名：${v1.name}</div>
                     <div>警号：${v1.policeNum}</div>
-                    <div>单位：${v1.dept}</div>
+                    <div title="${v1.dept}">单位：${v1.dept}</div>
                   </header>
                   <main>
                     <div class="detail-list">
