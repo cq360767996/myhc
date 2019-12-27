@@ -118,37 +118,44 @@ requirejs(["common"], sugon => {
       }
     );
     let html = "";
-    result.data.map(v1 => {
-      html += `<div>
-                <div class="row-left">
-                  <div style="background-image: url(${v1.img});"></div>
-                </div>
-                <div class="row-right">
-                  <header>
-                    <div>姓名：${v1.name}</div>
-                    <div>警号：${v1.policeNum}</div>
-                    <div title="${v1.dept}">单位：${v1.dept}</div>
-                  </header>
-                  <main>
-                    <div class="detail-list">
-                      ${v1.data.reduce(
-                        (acc, v2) =>
-                          acc +
-                          `<div>
-                            <div>${v2.type}</div>
-                            <div>满意度：${v2.myd}%</div>
-                            <div>业务量：${v2.ywl}次</div>
-                          </div>`,
-                        ""
-                      )}
-                    </div>
-                    <div>
-                      <button row-id="${v1.id}" class="detail-btn">档案</button>
-                    </div>
-                  </main>
-                </div>
-              </div>`;
-    });
+    if (result.data.length === 0) {
+      html += `<section class="no-data"><img src="../../img/nodata.png"/></section>`;
+    } else {
+      result.data.map(v1 => {
+        html += `<div>
+                  <div class="row-left">
+                    <div style="background-image: url(${v1.img});"></div>
+                  </div>
+                  <div class="row-right">
+                    <header>
+                      <div>姓名：${v1.name}</div>
+                      <div>警号：${v1.policeNum}</div>
+                      <div title="${v1.dept}">单位：${v1.dept}</div>
+                    </header>
+                    <main>
+                      <div class="detail-list">
+                        ${v1.data.reduce(
+                          (acc, v2) =>
+                            acc +
+                            `<div>
+                              <div>${v2.type}</div>
+                              <div>满意度：${v2.myd}%</div>
+                              <div>业务量：${v2.ywl}次</div>
+                            </div>`,
+                          ""
+                        )}
+                      </div>
+                      <div>
+                        <button row-id="${
+                          v1.id
+                        }" class="detail-btn">档案</button>
+                      </div>
+                    </main>
+                  </div>
+                </div>`;
+      });
+    }
+
     $(".search-popup > main")
       .empty()
       .append(html);
@@ -156,15 +163,19 @@ requirejs(["common"], sugon => {
 
   // 查询
   function searchFunc() {
+    const date1 = $("#date1").val();
+    const date2 = $("#date2").val();
     searchParams.keyword = $("#keyword").val();
-    if (/\S+/.test(searchParams.keyword)) {
-      renderKeywordSearch();
-    } else {
-      searchParams.date1 = $("#date1").val();
-      searchParams.date2 = $("#date2").val();
+    if (date1 !== searchParams.date1 || date2 !== searchParams.date2) {
+      searchParams.date1 = date1;
+      searchParams.date2 = date2;
       $(".main-section > fieldset > section").empty();
       bottomPages = [1, 1, 1, 1];
       initBottom();
+    }
+
+    if (/\S+/.test(searchParams.keyword)) {
+      renderKeywordSearch();
     }
   }
 

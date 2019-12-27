@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'FZHTJW';
+  font-family: "FZHTJW";
   src: url(../../fonts/FZHTJW.TTF);
 }
 @font-face {
-  font-family: 'SourceHanSansCN';
+  font-family: "SourceHanSansCN";
   src: url(../../fonts/SourceHanSansCN-Regular.ttf);
 }
 @font-face {
-  font-family: 'Balth';
+  font-family: "Balth";
   src: url(../../fonts/Balth.ttf);
 }
 .outer-container {
@@ -79,7 +79,7 @@
   line-height: 70px;
   text-align: center;
   font-size: 24px;
-  font-family: 'FZHTJW';
+  font-family: "FZHTJW";
   letter-spacing: 2px;
 }
 .outer-container > section > fieldset > section {
@@ -97,7 +97,7 @@
   cursor: pointer;
 }
 .outer-container > section > fieldset > section > section > div {
-  font-family: 'SourceHanSansCN';
+  font-family: "SourceHanSansCN";
 }
 .outer-container > section > fieldset > section > section > div:first-child {
   width: 80px;
@@ -250,6 +250,12 @@
 }
 .search-popup > main > div > div {
   height: 100%;
+}
+.search-popup > main .no-data {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .search-popup > footer {
   height: 50px;
