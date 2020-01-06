@@ -1131,6 +1131,36 @@ define(["ec"], function(ec) {
             localUrl: localPath + "200.json",
             remoteUrl: remotePath + "system/msgBoard/add"
           }
+        },
+        dataEntry: {
+          getTable1: {
+            localUrl: localPath + "user/dataEntry/getTable1.json",
+            remoteUrl: remotePath + "system/dataEntry/getTable1"
+          },
+          getTable23: {
+            localUrl: localPath + "user/dataEntry/getTable23.json",
+            remoteUrl: remotePath + "system/dataEntry/getTable23"
+          },
+          uploadVideo: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/dataEntry/uploadVideo"
+          },
+          editTable2: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/dataEntry/editTable2"
+          },
+          editTable3: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/dataEntry/editTable3"
+          },
+          deleteTable1: {
+            localUrl: localPath + "200.json",
+            remoteUrl: remotePath + "system/dataEntry/deleteTable1"
+          },
+          getDetail: {
+            localUrl: localPath + "user/dataEntry/getDetail.json",
+            remoteUrl: remotePath + "system/dataEntry/getDetail"
+          }
         }
       }
     },

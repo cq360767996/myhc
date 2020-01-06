@@ -209,6 +209,13 @@ html {
   background: url("../img/system/user_on.png") no-repeat;
 }
 
+.dataEntry-menu {
+  background: url("../img/system/data_entry.png") no-repeat;
+}
+.dataEntry-menu-hover {
+  background: url("../img/system/data_entry_hover.png") no-repeat;
+}
+
 .tab {
   width: 600px;
   height: 100%;

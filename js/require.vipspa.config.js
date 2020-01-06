@@ -211,6 +211,11 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/system/msgBoard.html",
       controller: "js/system/msgBoard.js"
     },
+    dataEntry: {
+      parent: "system",
+      templateUrl: "views/system/dataEntry.html",
+      controller: "js/system/dataEntry.js"
+    },
     defaults: "404"
   };
   // 判断地图模块文件
@@ -518,7 +523,7 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
             arr = ["ywfxbg", "zhfxbg"];
             break;
           case "system":
-            arr = ["user", "notification", "msgBoard"];
+            arr = ["user", "notification", "msgBoard", "dataEntry"];
             break;
         }
         let filterArr = filterMenu(arr);

@@ -1,0 +1,195 @@
+<link rel="stylesheet" href="../../css/system/dataEntry.css" />
+
+<main class="main-container">
+  <header>
+    <div>首页/数据录入</div>
+    <div class="main-title">110接处警视频库</div>
+  </header>
+  <section class="bottom-box">
+    <header class="bottom-box__head">
+      <label class="label-text">视频名称：</label>
+      <input placeholder="请输入" class="keyword" />
+      <button class="btn btn-primary reset-btn">重置</button>
+      <button class="btn btn-primary search-btn">查询</button>
+    </header>
+    <section class="bottom-box__middle">
+      <input type="file" id="file-input" style="display: none;" />
+      <button class="btn-text btn btn-primary">上传视频</button>
+    </section>
+    <main class="bottom-box__main">
+      <div class="main-left">
+        <main class="table-wrap table1">
+          <header class="table-wrap__head">
+            <div><input type="checkbox" class="head-checkbox" /></div>
+            <div>视频名称</div>
+            <div>提交时间</div>
+            <div>提交人</div>
+            <div>操作</div>
+          </header>
+          <main class="table-wrap__body"></main>
+        </main>
+        <main class="table-wrap table2">
+          <header class="table-wrap__head">
+            <div><input type="checkbox" class="head-checkbox" /></div>
+            <div>标签名称</div>
+            <div>问题处理建议</div>
+            <div>操作</div>
+          </header>
+          <main class="table-wrap__body"></main>
+        </main>
+        <main class="table-wrap table3">
+          <header class="table-wrap__head">
+            <div><input type="checkbox" class="head-checkbox" /></div>
+            <div>视频名称</div>
+            <div>执行规范</div>
+            <div>详情</div>
+            <div>操作</div>
+          </header>
+          <main class="table-wrap__body"></main>
+        </main>
+      </div>
+      <div class="main-right">
+        <ul class="time-line">
+          <li class="time-line__level1 active" type="0">1 专项研判</li>
+          <li class="time-line__level2 active" type="1">1.1 110接处警</li>
+          <li class="time-line__level3 active" type="1">1.1.1 110接处警视频库</li>
+          <li class="time-line__level2" type="2">1.2 窗口服务</li>
+          <li class="time-line__level3" type="2">1.2.1 窗口服务问题预测</li>
+          <li class="time-line__level2" type="3">1.3 案件</li>
+          <li class="time-line__level3" type="3">
+            1.3.1 群众热点诉求TOP10/伤害类、侵财类案件专项分析
+          </li>
+          <li class="time-line__level1">2 三流合一</li>
+          <li class="time-line__level2">2.1 效能战法</li>
+          <li class="time-line__level2">2.2 季度之星</li>
+        </ul>
+      </div>
+    </mains>
+  </section>
+</main>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-panel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <img src="../../img/system/user/location.png" />
+          <span>批量修改</span>
+        </h4>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group edit3">
+            <label class="col-sm-3 control-label">问题处理建议：</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="edit3-input" />
+            </div>
+            <div class="col-sm-9 col-sm-offset-3" style="color:#aaa;margin-top: 5px;">
+              说明：本次修改将更新到所有已勾选的标签。
+            </div>
+          </div>
+          <div class="form-group edit2">
+            <label class="col-sm-3 control-label">执行规范标题：</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="edit2-title" />
+            </div>
+          </div>
+          <div class="form-group edit2">
+            <label class="col-sm-3 control-label">执行规范内容：</label>
+            <div class="col-sm-9">
+              <textarea style="resize:none;height: 240px;" class="form-control" id="edit2-content"></textarea>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3" style="color:#aaa;margin-top: 5px;">
+              说明：本次修改将更新到所有已勾选的标签。
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button id="confirm-edit" class="btn btn-primary">确定</button>
+          <button class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 详情 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="detail-panel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <img src="../../img/system/user/location.png" />
+          <span>执行规范详情</span>
+        </h4>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">执行规范标题：</label>
+            <div class="col-sm-9">
+              <p id="detail-title" class="form-control-static"></p>
+            </div>
+          </div>
+          <div class="form-group edit2">
+            <label class="col-sm-3 control-label">执行规范内容：</label>
+            <div class="col-sm-9">
+              <p id="detail-content" class="form-control-static"></p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 删除提示 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="confirm-panel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <img src="../../img/system/user/location.png" />
+          <span id="confirm-name">删除提示</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="tip-panel">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          <span id="tip-span">您确定要删除所选数据吗？</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-delete" class="btn btn-primary">确定</button>
+        <button class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

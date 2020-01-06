@@ -1,0 +1,115 @@
+{
+  "data": [
+    {
+      "id": "11000000",
+      "label": "诉求性质",
+      "excuteStandard": "执行规范1",
+      "level": 1,
+      "children": [
+        {
+          "id": "11110000",
+          "label": "治安管理类",
+          "excuteStandard": "执行规范1",
+          "level": 2,
+          "children": [
+            {
+              "id": "11111100",
+              "label": "广场舞扰民",
+              "excuteStandard": "执行规范1",
+              "level": 3,
+              "children": []
+            },
+            {
+              "id": "11111200",
+              "label": "广场舞扰民",
+              "excuteStandard": "",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "11120000",
+          "label": "违法犯罪类",
+          "excuteStandard": "执行规范1",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "12000000",
+      "label": "业务归口",
+      "excuteStandard": "执行规范1",
+      "level": 1,
+      "children": [
+        {
+          "id": "12110000",
+          "label": "治安管理类",
+          "excuteStandard": "执行规范1",
+          "level": 2,
+          "children": [
+            {
+              "id": "12111100",
+              "label": "广场舞扰民",
+              "excuteStandard": "执行规范1",
+              "level": 3,
+              "children": []
+            },
+            {
+              "id": "12111200",
+              "label": "广场舞扰民",
+              "excuteStandard": "",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "12120000",
+          "label": "违法犯罪类",
+          "excuteStandard": "执行规范1",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "13000000",
+      "label": "警情类别",
+      "excuteStandard": "执行规范1",
+      "level": 1,
+      "children": [
+        {
+          "id": "13110000",
+          "label": "治安管理类",
+          "excuteStandard": "执行规范1",
+          "level": 2,
+          "children": [
+            {
+              "id": "13111100",
+              "label": "广场舞扰民",
+              "excuteStandard": "执行规范1",
+              "level": 3,
+              "children": []
+            },
+            {
+              "id": "13111200",
+              "label": "广场舞扰民",
+              "excuteStandard": "",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "13120000",
+          "label": "违法犯罪类",
+          "excuteStandard": "执行规范1",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
