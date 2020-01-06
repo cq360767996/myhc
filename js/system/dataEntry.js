@@ -390,15 +390,15 @@ requirejs(["common"], sugon => {
   $("#confirm-edit").on("click", async () => {
     const params = {};
     const { type } = searchParams;
-    if (type == 2) {
-      params.title = $("#edit2-title").val();
-      params.content = $("#edit2-content").val();
+    if (type == 3) {
+      params.title = $("#edit3-title").val();
+      params.content = $("#edit3-content").val();
       if (!params.title || !params.content) {
         sugon.showMessage("请输入对应的内容", "error");
         return;
       }
     } else {
-      params.content = $("#edit3-input").val();
+      params.content = $("#edit2-input").val();
       if (!params.content) {
         sugon.showMessage("请输入对应的内容", "error");
         return;
@@ -413,9 +413,9 @@ requirejs(["common"], sugon => {
       $("#edit-panel").modal("hide");
       sugon.showMessage("修改成功！", "success");
       $(".head-checkbox").prop("checked", false);
-      $("#edit2-title").val("");
-      $("#edit2-content").val("");
-      $("#edit3-input").val("");
+      $("#edit3-title").val("");
+      $("#edit3-content").val("");
+      $("#edit2-input").val("");
       initPage();
     } else {
       sugon.showMessage("修改失败，请稍后重试！", "error");
@@ -429,7 +429,7 @@ requirejs(["common"], sugon => {
   });
 
   // 重置按钮事件
-  $("#reset-btn").on("click", () => {
+  $(".reset-btn").on("click", () => {
     $(".keyword").val("");
   });
 
