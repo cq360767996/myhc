@@ -23,7 +23,7 @@ requirejs(["common"], sugon => {
       cb: loadTable1
     },
     2: {
-      btnName: "批量修改",
+      btnName: "修改",
       labelName: "标签名称",
       title: "窗口服务问题预测",
       icon: "edit",
@@ -31,7 +31,7 @@ requirejs(["common"], sugon => {
       cb: loadTable2
     },
     3: {
-      btnName: "批量修改",
+      btnName: "修改",
       labelName: "标签名称",
       title: "群众热点诉求TOP10/伤害类、侵财类案件专项分析",
       icon: "edit",
@@ -65,6 +65,7 @@ requirejs(["common"], sugon => {
       selectedIdArr.map(val => {
         trueSelectedId = [...trueSelectedId, ...getIdBySelectedId(val)];
       });
+      debugger;
       $(`.edit${type}`).show();
       $(`.edit${type == 2 ? 3 : 2}`).hide();
       $("#edit-panel").modal("show");
@@ -146,7 +147,7 @@ requirejs(["common"], sugon => {
       if (canModify) {
         edit = `<span class="edit-btn">修改</span>`;
         btn = "";
-        excuteStandard = val.excuteStandard;
+        excuteStandard = val.excuteStandard || `<span>暂无建议</span>`;
         padding += 29;
         if (searchParams.type === 3) {
           column4 = `<div><div class="detail-btn"></div></div>`;

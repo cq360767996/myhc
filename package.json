@@ -1,6 +1,9 @@
 {
   "name": "myhc",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node server"
+  },
   "dependencies": {},
   "devDependencies": {
     "eslint": "^6.0.1",

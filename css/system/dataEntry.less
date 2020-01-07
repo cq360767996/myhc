@@ -324,18 +324,21 @@
 }
 
 // 表2
-.table2-width {
+.table2-width(@text-align) {
   & > div {
     &:nth-child(1) {
       width: 50px;
     }
     &:nth-child(2) {
-      width: calc(~"100% - 300px");
-      text-align: left;
+      width: 300px;
+      text-align: @text-align;
       .single-text-ellipse();
     }
     &:nth-child(3) {
-      width: 200px;
+      width: calc(~"100% - 400px");
+      span {
+        color: #ccc;
+      }
     }
     &:nth-child(4) {
       width: 50px;
@@ -344,12 +347,12 @@
 }
 .table2 {
   .table-wrap__head {
-    .table2-width();
+    .table2-width(center);
   }
 
   .table-wrap__body {
     & > div {
-      .table2-width();
+      .table2-width(left);
 
       & > div:last-child {
         color: #3b8cc1;
@@ -360,18 +363,22 @@
 }
 
 // 表3
-.table3-width {
+.table3-width(@text-align) {
   & > div {
     &:nth-child(1) {
       width: 50px;
     }
     &:nth-child(2) {
-      width: calc(~"100% - 350px");
-      text-align: left;
+      width: 300px;
+      text-align: @text-align;
       .single-text-ellipse();
     }
     &:nth-child(3) {
-      width: 200px;
+      width: calc(~"100% - 450px");
+
+      span {
+        color: #ccc;
+      }
     }
     &:nth-child(4) {
       width: 50px;
@@ -389,12 +396,12 @@
 .table3 {
   display: none;
   .table-wrap__head {
-    .table3-width();
+    .table3-width(center);
   }
 
   .table-wrap__body {
     & > div {
-      .table3-width();
+      .table3-width(left);
 
       & > div:last-child {
         color: #3b8cc1;
@@ -405,7 +412,6 @@
 }
 
 #edit-panel,
-#upload-panel,
 #detail-panel,
 #confirm-panel {
   color: #000;
