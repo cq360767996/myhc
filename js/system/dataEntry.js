@@ -63,9 +63,13 @@ requirejs(["common"], sugon => {
     } else {
       trueSelectedId = [];
       selectedIdArr.map(val => {
-        trueSelectedId = [...trueSelectedId, ...getIdBySelectedId(val)];
+        const recurseData = getIdBySelectedId(val);
+        if (recurseData.length === 0) {
+          trueSelectedId = [...trueSelectedId, val];
+        } else {
+          trueSelectedId = [...trueSelectedId, ...recurseData];
+        }
       });
-      debugger;
       $(`.edit${type}`).show();
       $(`.edit${type == 2 ? 3 : 2}`).hide();
       $("#edit-panel").modal("show");
