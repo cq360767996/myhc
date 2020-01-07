@@ -400,16 +400,8 @@ requirejs(["common"], sugon => {
     if (type == 3) {
       params.title = $("#edit3-title").val();
       params.content = $("#edit3-content").val();
-      if (!params.title || !params.content) {
-        sugon.showMessage("请输入对应的内容", "error");
-        return;
-      }
     } else {
       params.content = $("#edit2-input").val();
-      if (!params.content) {
-        sugon.showMessage("请输入对应的内容", "error");
-        return;
-      }
     }
     params.ids = trueSelectedId.join(",");
     const result = await sugon.request(
