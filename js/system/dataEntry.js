@@ -153,7 +153,7 @@ requirejs(["common"], sugon => {
         btn = "";
         excuteStandard = val.excuteStandard || `<span>暂无建议</span>`;
         padding += 29;
-        if (searchParams.type === 3) {
+        if (searchParams.type === 3 && val.excuteStandard) {
           column4 = `<div><div class="detail-btn"></div></div>`;
         }
       } else {
@@ -275,7 +275,9 @@ requirejs(["common"], sugon => {
       sugon.interFaces.system.dataEntry.getDetail,
       { id }
     );
-    let content = result.content.replace(/\n/, "<br/>").replace(" ", "&nbsp;");
+    let content = result.content
+      .replace(/\n/g, "<br/>")
+      .replace(/ /g, "&nbsp;");
     $("#detail-title").html(result.title);
     $("#detail-content").html(content);
     $("#detail-panel").modal("show");
