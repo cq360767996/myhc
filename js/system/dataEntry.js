@@ -89,8 +89,11 @@ requirejs(["common"], sugon => {
         sugon.interFaces.system.dataEntry.getDetail,
         { id }
       );
+      const content = result.content
+        .replace(/\<br \/\>/g, "\n")
+        .replace(/&nbsp;/g, " ");
       $("#edit3-title").val(result.title);
-      $("#edit3-content").val(result.content);
+      $("#edit3-content").val(content);
       $(".edit3").show();
       $(".edit2").hide();
       $("#edit-panel").modal("show");
@@ -167,7 +170,11 @@ requirejs(["common"], sugon => {
         btn = "";
         excuteStandard = val.excuteStandard || `<span>${suggestion}</span>`;
         padding += 29;
-        if (searchParams.type === 3 && val.excuteStandard) {
+        if (
+          searchParams.type === 3 &&
+          val.excuteStandard &&
+          val.excuteStandard.indexOf("span") === -1
+        ) {
           column4 = `<div><div class="detail-btn"></div></div>`;
         }
       } else {
@@ -289,11 +296,8 @@ requirejs(["common"], sugon => {
       sugon.interFaces.system.dataEntry.getDetail,
       { id }
     );
-    let content = result.content
-      .replace(/\n/g, "<br/>")
-      .replace(/ /g, "&nbsp;");
     $("#detail-title").html(result.title);
-    $("#detail-content").html(content);
+    $("#detail-content").html(result.content);
     $("#detail-panel").modal("show");
   }
 
@@ -417,7 +421,10 @@ requirejs(["common"], sugon => {
     const { type } = searchParams;
     if (type == 3) {
       params.title = $("#edit3-title").val();
-      params.content = $("#edit3-content").val();
+      params.content = $("#edit3-content")
+        .val()
+        .replace(/\n/g, "<br />")
+        .replace(/ /g, "&nbsp;");
     } else {
       params.content = $("#edit2-input").val();
     }
