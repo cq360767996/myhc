@@ -77,11 +77,24 @@ requirejs(["common"], sugon => {
   }
 
   // 单选修改
-  function singleEdit(id, type) {
+  async function singleEdit(id, type, suggestion) {
     trueSelectedId = [id];
-    $(`.edit${type}`).show();
-    $(`.edit${type == 2 ? 3 : 2}`).hide();
-    $("#edit-panel").modal("show");
+    if (type == 2) {
+      $(".edit2").show();
+      $(".edit3").hide();
+      suggestion.indexOf("span") === -1 && $("#edit2-input").val(suggestion);
+      $("#edit-panel").modal("show");
+    } else {
+      const result = await sugon.request(
+        sugon.interFaces.system.dataEntry.getDetail,
+        { id }
+      );
+      $("#edit3-title").val(result.title);
+      $("#edit3-content").val(result.content);
+      $(".edit3").show();
+      $(".edit2").hide();
+      $("#edit-panel").modal("show");
+    }
   }
 
   // 获取选中的id数组
@@ -142,6 +155,7 @@ requirejs(["common"], sugon => {
   function generateDom(data, selected = false) {
     let html = "";
     let column4 = "";
+    const suggestion = searchParams.type == 2 ? "暂无建议" : "暂无执行规范";
 
     data.map(val => {
       const canModify = val.children.length === 0;
@@ -151,7 +165,7 @@ requirejs(["common"], sugon => {
       if (canModify) {
         edit = `<span class="edit-btn">修改</span>`;
         btn = "";
-        excuteStandard = val.excuteStandard || `<span>暂无建议</span>`;
+        excuteStandard = val.excuteStandard || `<span>${suggestion}</span>`;
         padding += 29;
         if (searchParams.type === 3 && val.excuteStandard) {
           column4 = `<div><div class="detail-btn"></div></div>`;
@@ -331,8 +345,12 @@ requirejs(["common"], sugon => {
         // 删除按钮
         deleteConfirm(id);
       } else if ($target.hasClass("edit-btn")) {
+        const suggestion = $target
+          .parent()
+          .prev()
+          .html();
         // 修改按钮
-        singleEdit(id, searchParams.type);
+        singleEdit(id, searchParams.type, suggestion);
       } else if ($target.hasClass("detail-btn")) {
         // 详情按钮
         getDetail(id);
