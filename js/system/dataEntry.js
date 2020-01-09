@@ -170,12 +170,10 @@ requirejs(["common"], sugon => {
         btn = "";
         excuteStandard = val.excuteStandard || `<span>${suggestion}</span>`;
         padding += 29;
-        if (
-          searchParams.type === 3 &&
-          val.excuteStandard &&
-          val.excuteStandard.indexOf("span") === -1
-        ) {
+        if (searchParams.type === 3 && val.excuteStandard) {
           column4 = `<div><div class="detail-btn"></div></div>`;
+        } else {
+          column4 = `<div></div>`;
         }
       } else {
         edit = "";

@@ -1,113 +1,1251 @@
 {
   "data": [
     {
-      "id": "11000000",
-      "label": "诉求性质",
-      "excuteStandard": "执行规范1",
-      "level": 1,
+      "id": "61010000",
+      "label": "现场处置",
+      "excuteStandard": "",
+      "level": 2,
       "children": [
         {
-          "id": "11110000",
-          "label": "治安管理类",
-          "excuteStandard": "执行规范1",
-          "level": 2,
+          "id": "61010200",
+          "label": "现场措施不规范",
+          "excuteStandard": "",
+          "level": 3,
           "children": [
             {
-              "id": "11111100",
-              "label": "广场舞扰民",
-              "excuteStandard": "执行规范1",
-              "level": 3,
+              "id": "61010201",
+              "label": "未采取紧急措施",
+              "excuteStandard": "交付甲方根据发染发剂",
+              "level": 4,
               "children": []
             },
             {
-              "id": "11111200",
-              "label": "广场舞扰民",
+              "id": "61010202",
+              "label": "未控制嫌疑人",
               "excuteStandard": "",
-              "level": 3,
+              "level": 4,
               "children": []
             }
           ]
         },
         {
-          "id": "11120000",
-          "label": "违法犯罪类",
-          "excuteStandard": "执行规范1",
-          "level": 2,
-          "children": []
+          "id": "61010300",
+          "label": "借故推托",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61010301",
+              "label": "拒不带回调查",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61010302",
+              "label": "以证据、管辖为由推脱",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61010100",
+          "label": "现场勘查不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61010102",
+              "label": "未勘查现场",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61010104",
+              "label": "遗漏现场物证",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61010101",
+              "label": "未及时勘查",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61010103",
+              "label": "未查找证人",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "id": "12000000",
-      "label": "业务归口",
-      "excuteStandard": "执行规范1",
-      "level": 1,
+      "id": "61070000",
+      "label": "行政处罚（行政案件）",
+      "excuteStandard": "",
+      "level": 2,
       "children": [
         {
-          "id": "12110000",
-          "label": "治安管理类",
-          "excuteStandard": "执行规范1",
-          "level": 2,
+          "id": "61070100",
+          "label": "处罚决定不规范",
+          "excuteStandard": "",
+          "level": 3,
           "children": [
             {
-              "id": "12111100",
-              "label": "广场舞扰民",
-              "excuteStandard": "执行规范1",
-              "level": 3,
+              "id": "61070104",
+              "label": "错误当场处罚",
+              "excuteStandard": "",
+              "level": 4,
               "children": []
             },
             {
-              "id": "12111200",
-              "label": "广场舞扰民",
+              "id": "61070103",
+              "label": "未听取申辩",
               "excuteStandard": "",
-              "level": 3,
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070106",
+              "label": "法律依据错误",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070101",
+              "label": "未及时作出决定",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070105",
+              "label": "错误治安调解",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070107",
+              "label": "决定结果错误",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070102",
+              "label": "处罚前未告知",
+              "excuteStandard": "",
+              "level": 4,
               "children": []
             }
           ]
         },
         {
-          "id": "12120000",
-          "label": "违法犯罪类",
-          "excuteStandard": "执行规范1",
-          "level": 2,
-          "children": []
+          "id": "61070200",
+          "label": "处罚执行不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61070204",
+              "label": "罚款缴付不当",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070202",
+              "label": "未及时结案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070205",
+              "label": "暂缓拘留不当",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070203",
+              "label": "未处置物品",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61070201",
+              "label": "未执行",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "id": "13000000",
-      "label": "警情类别",
-      "excuteStandard": "执行规范1",
-      "level": 1,
+      "id": "61020000",
+      "label": "受理登记",
+      "excuteStandard": "",
+      "level": 2,
       "children": [
         {
-          "id": "13110000",
-          "label": "治安管理类",
-          "excuteStandard": "执行规范1",
-          "level": 2,
+          "id": "61020300",
+          "label": "受案告知不规范",
+          "excuteStandard": "",
+          "level": 3,
           "children": [
             {
-              "id": "13111100",
-              "label": "广场舞扰民",
-              "excuteStandard": "执行规范1",
-              "level": 3,
+              "id": "61020301",
+              "label": "未告知查询方式",
+              "excuteStandard": "《公安部关于公安机关执法公开规定》（2018年8月23日修订）",
+              "level": 4,
               "children": []
             },
             {
-              "id": "13111200",
-              "label": "广场舞扰民",
+              "id": "61020302",
+              "label": "未签收受案回执",
+              "excuteStandard": "《公安机关办理刑事案件程序规定》（2013年1月1日实施）",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020304",
+              "label": "未出具权利义务告知书",
               "excuteStandard": "",
-              "level": 3,
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020303",
+              "label": "未告知鉴定权利",
+              "excuteStandard": "",
+              "level": 4,
               "children": []
             }
           ]
         },
         {
-          "id": "13120000",
-          "label": "违法犯罪类",
-          "excuteStandard": "执行规范1",
-          "level": 2,
-          "children": []
+          "id": "61020500",
+          "label": "管辖推诿",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61020502",
+              "label": "外市管辖为由",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020501",
+              "label": "外区管辖为由",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020503",
+              "label": "互相推诿",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61020100",
+          "label": "笔录制作不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61020101",
+              "label": "未制作笔录",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020103",
+              "label": "单人制作",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020104",
+              "label": "未经核对签字",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020102",
+              "label": "未出具询问通知书",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020107",
+              "label": "未如实记录",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020105",
+              "label": "未个别制作",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020106",
+              "label": "笔录内容缺失",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61020600",
+          "label": "移交不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61020602",
+              "label": "移案不移物",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020601",
+              "label": "不移交",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61020200",
+          "label": "受案不及时",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61020204",
+              "label": "未及时受理",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020201",
+              "label": "催促后受案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020203",
+              "label": "请托后受案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020202",
+              "label": "信访后受案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61020400",
+          "label": "证据接受不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61020402",
+              "label": "未出具接受证据清单",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020403",
+              "label": "清单内容不全",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61020401",
+              "label": "拒不接受",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61050000",
+      "label": "涉案物品管理",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61050200",
+          "label": "扣押不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61050203",
+              "label": "不及时解除扣押",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050201",
+              "label": "应扣押未扣押",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050204",
+              "label": "未出具文书",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050202",
+              "label": "扣押无关物品",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050205",
+              "label": "文书内容不实",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61050100",
+          "label": "查封不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61050105",
+              "label": "文书内容不实",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050104",
+              "label": "未出具文书",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050103",
+              "label": "不及时解除查封",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050102",
+              "label": "查封无关物品",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050101",
+              "label": "应查封未查封",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61050300",
+          "label": "冻结不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61050302",
+              "label": "超限度冻结",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050301",
+              "label": "应冻结未冻结",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61050303",
+              "label": "不及时解冻",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61100000",
+      "label": "治安调解",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61100100",
+          "label": "调解不公正",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61100101",
+              "label": "言行偏袒",
+              "excuteStandard": "《伤害类案件办理程序规定》",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61100102",
+              "label": "事实调查不清",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61100400",
+          "label": "调解协议不履行",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61100401",
+              "label": "调解协议不履行",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61100300",
+          "label": "调解协议制作不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61100301",
+              "label": "无调解协议书",
+              "excuteStandard": "《江苏省行政调解办法》",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61100302",
+              "label": "调解协议书未签字",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61100303",
+              "label": "调解协议书内容不实",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61100200",
+          "label": "不宜调解而调解",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61100202",
+              "label": "调解双方非自愿",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61100201",
+              "label": "案件该立不立",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61030000",
+      "label": "立案程序（刑事案件）",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61030200",
+          "label": "立案不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61030204",
+              "label": "立案未告知",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61030205",
+              "label": "定性不准",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61030203",
+              "label": "升降格立案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61030201",
+              "label": "逾期立案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61030202",
+              "label": "违规立案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61030100",
+          "label": "未立案",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61030103",
+              "label": "以管辖问题为由",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61030101",
+              "label": "以价值不够为由",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61030102",
+              "label": "材料不合要求为由",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61060000",
+      "label": "涉案人员处置",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61060200",
+          "label": "强制措施不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61060204",
+              "label": "未及时退还保证金",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61060202",
+              "label": "超期羁押",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61060201",
+              "label": "未采取强制措施",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61060203",
+              "label": "未及时解保",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61060100",
+          "label": "人员措施不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61060101",
+              "label": "未传唤被指控控告人",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61060103",
+              "label": "不及时对人采取措施",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61060102",
+              "label": "不及时抓捕嫌疑人",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61080000",
+      "label": "违纪违规",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61081000",
+          "label": "贪污贿赂",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081001",
+              "label": "贪污贿赂",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081700",
+          "label": "违规使用警用装备",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081701",
+              "label": "违规使用警用装备",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081500",
+          "label": "粗暴执法",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081501",
+              "label": "粗暴执法",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080400",
+          "label": "刑讯逼供",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080401",
+              "label": "刑讯逼供",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081800",
+          "label": "不协作执法",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081801",
+              "label": "不协作执法",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080100",
+          "label": "办人情（金钱）案",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080101",
+              "label": "办人情（金钱）案",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080600",
+          "label": "滥用职权",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080601",
+              "label": "滥用职权",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081400",
+          "label": "故意刁难",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081401",
+              "label": "故意刁难",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081100",
+          "label": "执法不公",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081101",
+              "label": "执法不公",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080700",
+          "label": "玩忽职守",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080701",
+              "label": "玩忽职守",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081900",
+          "label": "违规处置涉案财物",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081901",
+              "label": "违规处置涉案财物",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081600",
+          "label": "违规羁押",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081601",
+              "label": "违规羁押",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080800",
+          "label": "执法不文明",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080801",
+              "label": "执法不文明",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080900",
+          "label": "平台信息录入不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080901",
+              "label": "平台信息录入不规范",
+              "excuteStandard": "《江苏省公安机关大平台数据质量管理办法》（苏公厅﹝2011﹞250号）",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081300",
+          "label": "外泄平台信息",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081301",
+              "label": "外泄平台信息",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080500",
+          "label": "徇私舞弊",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080501",
+              "label": "徇私舞弊",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080300",
+          "label": "泄露案情",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080301",
+              "label": "泄露案情",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61080200",
+          "label": "违规收礼、吃请",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61080201",
+              "label": "违规收礼、吃请",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61081200",
+          "label": "违反勤务纪律",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61081201",
+              "label": "违反勤务纪律",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61090000",
+      "label": "其他诉求",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61090600",
+          "label": "对调解结果不满意",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61090601",
+              "label": "对调解结果不满意",
+              "excuteStandard": "《中华人民共和国治安管理处罚法》（2013年1月1日修正施行）",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61090300",
+          "label": "对案件未破不满意",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61090301",
+              "label": "对案件未破不满意",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61090200",
+          "label": "对行政处罚结果不满意",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61090201",
+              "label": "对行政处罚结果不满意",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61090400",
+          "label": "对追赃挽损不满意",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61090401",
+              "label": "对追赃挽损不满意",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61090500",
+          "label": "群众不满意但无明文规范（如勘查不及时等）",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61090501",
+              "label": "群众不满意但无明文规范（如勘查不及时等）",
+              "excuteStandard": "《公安机关办理刑事案件程序规定》（2013年1月1日实施）",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61090100",
+          "label": "对执法办案程序不理解",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61090101",
+              "label": "对执法办案程序不理解",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61040000",
+      "label": "调查取证",
+      "excuteStandard": "",
+      "level": 2,
+      "children": [
+        {
+          "id": "61040100",
+          "label": "证据收集不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61040104",
+              "label": "未调监控",
+              "excuteStandard": "《中华人民共和国刑事诉讼法》（2018年10月26日修正）",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61040101",
+              "label": "未收集证据",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61040105",
+              "label": "未辨认",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61040102",
+              "label": "证据收集不及时",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61040103",
+              "label": "手续不全",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "61040200",
+          "label": "鉴定不规范",
+          "excuteStandard": "",
+          "level": 3,
+          "children": [
+            {
+              "id": "61040202",
+              "label": "未告知鉴定意见",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            },
+            {
+              "id": "61040201",
+              "label": "未鉴定",
+              "excuteStandard": "",
+              "level": 4,
+              "children": []
+            }
+          ]
         }
       ]
     }
