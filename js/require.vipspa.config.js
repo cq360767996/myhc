@@ -216,6 +216,10 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/system/dataEntry.html",
       controller: "js/system/dataEntry.js"
     },
+    demo: {
+      templateUrl: "views/myhc/demo.html",
+      controller: "js/myhc/myzs_animate.js"
+    },
     defaults: "404"
   };
   // 判断地图模块文件
