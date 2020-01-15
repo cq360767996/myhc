@@ -50,7 +50,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
                         <div>${type}</div>
                         <div title="${val.content}">${val.content}</div>
                         <div title="${val.area}">${val.area}</div>
-                       </div>`;
+                      </div>`;
           }
         });
         $(".mid-body")
@@ -621,10 +621,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
 
   // 列表点击事件
   $(".mid-body").on("click", $(".mid-body > div"), e => {
-    let $target = $(e.target);
-    let $row = $target.parent().hasClass("mid-body")
-      ? $target
-      : $target.parent();
+    let $row = $(e.currentTarget);
     let deptId = $row.attr("deptId"),
       model = $row.attr("model"),
       code = $row.attr("code");

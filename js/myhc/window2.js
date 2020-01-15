@@ -39,7 +39,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
         "<option value='1'>" + allData.data1[0].name + "</option>"
       );
       $(".select_pannel").append(
-        "<option value='2'>" + allData.data2[0].name + "</option>"
+        "<option value='2'>" + allData.data1[1].name + "</option>"
       );
       // for(var i = 0; i < allData.data1.length; i++) {
       //     $(".select_pannel").append("<option value='" + (i + 1) + "'>"+ allData.data1[i].name +"</option>");
@@ -66,8 +66,8 @@ requirejs(["common", "ec"], function(sugon, ec) {
       }
       $("#tb1").html(allData.data1[0].value2);
       $("#hb1").html(allData.data1[0].value3);
-      $("#tb2").html(allData.data2[0].value2);
-      $("#hb2").html(allData.data2[0].value3);
+      $("#tb2").html(allData.data1[1].value2);
+      $("#hb2").html(allData.data1[1].value3);
     }
   );
 
@@ -96,6 +96,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           type: "pie",
           radius: ["60%", "80%"],
           avoidLabelOverlap: false,
+          silent: true,
           label: {
             normal: {
               show: true,
@@ -138,6 +139,7 @@ requirejs(["common", "ec"], function(sugon, ec) {
           type: "pie",
           radius: ["60%", "80%"],
           avoidLabelOverlap: false,
+          silent: true,
           label: {
             normal: {
               show: true,

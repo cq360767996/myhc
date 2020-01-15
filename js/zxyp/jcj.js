@@ -961,6 +961,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
         var indicatorData = [],
           seriesData = [];
         let minAndMax = sugon.handleMinAndMax(result.data);
+        if (result.data.length === 0) {
+          return;
+        }
         for (var i = 0; i < result.data.length; i++) {
           indicatorData.push({
             text: result.data[i].name + "\n" + result.data[i].value + "%",

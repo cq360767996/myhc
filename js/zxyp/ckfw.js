@@ -859,7 +859,9 @@ requirejs(["common", "ec", "jqcloud"], function(sugon, ec) {
                     }
                   },
                   labelLine: {
-                    show: true
+                    show: true,
+                    length: 5,
+                    length2: 3
                   }
                 }
               },

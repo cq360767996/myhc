@@ -1297,22 +1297,13 @@ requirejs(["common", "ec", "ecPlugin", "jqcloud"], function(sugon, ec) {
         trigger: "item",
         formatter: "{b}:{c}"
       },
-      legend: {
-        icon: "circle",
-        x: "center",
-        y: "0",
-        data: xData,
-        textStyle: {
-          color: "#000"
-        }
-      },
       series: [
         {
           type: "pie",
-          radius: [37, 100],
+          radius: [63, 130],
           avoidLabelOverlap: false,
           startAngle: 0,
-          center: ["50%", "40%"],
+          center: ["50%", "0%"],
           roseType: "area",
           label: {
             show: true,
