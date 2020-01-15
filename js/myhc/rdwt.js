@@ -36,7 +36,8 @@ requirejs(["common", "ec"], (sugon, ec) => {
               .attr("title", val.content)
               .html(val.content);
           } else {
-            html += `<div deptId="${val.deptId}"
+            html += `<div class="mid-row"
+                            deptId="${val.deptId}"
                             model="${val.model}"
                             code="${val.code}">
                         <div>
@@ -620,7 +621,7 @@ requirejs(["common", "ec"], (sugon, ec) => {
   });
 
   // 列表点击事件
-  $(".mid-body").on("click", $(".mid-body > div"), e => {
+  $(".mid-body").on("click", ".mid-row", e => {
     let $row = $(e.currentTarget);
     let deptId = $row.attr("deptId"),
       model = $row.attr("model"),
