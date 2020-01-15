@@ -1,5 +1,6 @@
 requirejs(["common"], sugon => {
-  const $uiView = $("#ui-view");
+  // 清空绑定在ui-view的所有事件
+  const $uiView = $("#ui-view").off();
   // 全局查询条件
   const searchParams = {
     type: 1,
