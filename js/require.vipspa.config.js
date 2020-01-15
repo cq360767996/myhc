@@ -18,7 +18,8 @@ requirejs.config({
     jqcloud: "../lib/jqcloud",
     vipspa: "../lib/vipspa.min",
     rx_setting: "zxyp/rx_setting",
-    Sortable: "../lib/Sortable.min"
+    Sortable: "../lib/Sortable.min",
+    myzs_animate: "myhc/myzs_animate"
   },
   shim: {
     high3D: {

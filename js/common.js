@@ -192,6 +192,14 @@ define(["ec"], function(ec) {
           getYlldRdsjByBound: {
             localUrl: localPath + "myzs/getBmfwq.json",
             remoteUrl: remotePath + "myhc/myzs/getYlldRdsjByBound"
+          },
+          getZrqMap: {
+            localUrl: localPath + "myzs/getBmfwq.json",
+            remoteUrl: remotePath + "myhc/myzs/getZrqMap"
+          },
+          getZrqAnimation: {
+            localUrl: localPath + "myzs/getBmfwq.json",
+            remoteUrl: remotePath + "myhc/myzs/getZrqAnimation"
           }
         },
         myjz: {
@@ -1363,13 +1371,22 @@ define(["ec"], function(ec) {
         arr = [{ value: 1, selected: true }];
       } else if (totalPage == 2) {
         if (pageNum == 1) {
-          arr = [{ value: 1, selected: true }, { value: 2, selected: false }];
+          arr = [
+            { value: 1, selected: true },
+            { value: 2, selected: false }
+          ];
         } else {
-          arr = [{ value: 1, selected: false }, { value: 2, selected: true }];
+          arr = [
+            { value: 1, selected: false },
+            { value: 2, selected: true }
+          ];
         }
       } else {
         if (pageNum == 1) {
-          arr = [{ value: 1, selected: true }, { value: 2, selected: false }];
+          arr = [
+            { value: 1, selected: true },
+            { value: 2, selected: false }
+          ];
         } else if (pageNum == totalPage) {
           arr = [
             { value: pageNum - 1, selected: false },
@@ -1499,6 +1516,7 @@ define(["ec"], function(ec) {
       function handleZero(val) {
         return val < 10 ? "0" + val : val;
       }
+
       let date = new Date();
       let year = date.getFullYear();
       let month = handleZero(date.getMonth() + 1);
