@@ -182,13 +182,18 @@ requirejs(
           $chart.css("font-size", "12px");
         }
         $chart.addClass(className);
-        data.map(val1 => {
-          let $row = $("<row/>");
-          val1.map(val2 => {
-            $row.append(`<cell>${val2}</cell>`);
-          });
-          $chart.append($row);
+        let html = "";
+        data.map(val => {
+          html += ` <row>
+                      <cell>${val.name}</cell>
+                      <cell>${val.value1}</cell>
+                      <cell>${val.value2}</cell>
+                      <cell>${val.value3}</cell>
+                      <cell>${val.value4}</cell>
+                      <cell>${val.value5}</cell>
+                    </row>`;
         });
+        $chart.append(html);
         $body.empty().append($chart);
       },
       initBarWithLine(rawData, id, isDisplay) {
