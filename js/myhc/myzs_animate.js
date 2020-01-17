@@ -25,13 +25,14 @@ define(["common"], sugon => {
 
   // 初始化组件
   const initComponent = async params => {
-    $(".zrq-popup-marker-origin").each((index, dom) => {
-      const $dom = $(dom);
-      const src = $dom.attr("src");
-      const newSrc = src.substring(0, src.indexOf(".png")) + "_animate.png";
-      $dom.attr("src", newSrc);
-      $dom.addClass("zrq-popup-marker-animate");
-    });
+    $(".zrq-popup-marker-origin").hide();
+    // $(".zrq-popup-marker-origin").each((index, dom) => {
+    //   const $dom = $(dom);
+    //   const src = $dom.attr("src");
+    //   const newSrc = src.substring(0, src.indexOf(".png")) + "_animate.png";
+    //   $dom.attr("src", newSrc);
+    //   $dom.addClass("zrq-popup-marker-animate");
+    // });
     const result = await sugon.request(
       sugon.interFaces.myhc.myzs.getZrqAnimation,
       params
@@ -151,14 +152,15 @@ define(["common"], sugon => {
 
   // 处理关闭组件带来的effect
   function useEffect() {
-    $(".zrq-popup-marker-origin").each((index, dom) => {
-      const $dom = $(dom);
-      const src = $dom.attr("src");
-      const newSrc = src.substring(0, src.indexOf("_animate.png")) + ".png";
-      console.log(newSrc);
-      $dom.attr("src", newSrc);
-      $dom.addClass("zrq-popup-marker-animate");
-    });
+    $(".zrq-popup-marker-origin").show();
+    // $(".zrq-popup-marker-origin").each((index, dom) => {
+    //   const $dom = $(dom);
+    //   const src = $dom.attr("src");
+    //   const newSrc = src.substring(0, src.indexOf("_animate.png")) + ".png";
+    //   console.log(newSrc);
+    //   $dom.attr("src", newSrc);
+    //   $dom.addClass("zrq-popup-marker-animate");
+    // });
   }
 
   // 监听标签动画结束事件
