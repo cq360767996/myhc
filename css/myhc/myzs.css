@@ -567,7 +567,7 @@ input {
     width: 360px;
     height: 810px;
     position: absolute;
-    right: 15px;
+    right: -330px;
     top: 10px;
     z-index: 1000;
 }
@@ -594,7 +594,7 @@ input {
     background: url('../../img/myhc/myzs/fold.png') no-repeat 50% 50%;
     height: 30px;
     width: 100%;
-    transform: rotateY(0deg);
+    transform: rotateY(180deg);
 }
 
 .fold-btn > div:nth-child(2) {
@@ -1800,6 +1800,7 @@ input {
     float: right;
     cursor: pointer;
     color: #008fed;
+    text-decoration: underline;
 }
 
 .pop-marker-bg {
@@ -2369,6 +2370,7 @@ input {
     position: absolute;
     width: 100%;
     bottom: 15px;
+    font-size: 12px;
     text-align: left !important;
 }
 
@@ -2609,4 +2611,21 @@ input {
 
 .simple_content {
     position: relative;
+}
+
+.zrq-popup-marker-animate {
+    animation-duration: 1s;
+    animation-name: zrq-marker-show;
+}
+
+@keyframes zrq-marker-show {
+    0% {
+        transform: translate3d(0, 100%, 0);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateZ(0);
+    }
 }

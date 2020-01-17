@@ -217,10 +217,10 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
       templateUrl: "views/system/dataEntry.html",
       controller: "js/system/dataEntry.js"
     },
-    demo: {
-      templateUrl: "views/myhc/demo.html",
-      controller: "js/myhc/myzs_animate.js"
-    },
+    // demo: {
+    //   templateUrl: "views/myhc/demo.html",
+    //   controller: "js/myhc/myzs_animate.js"
+    // },
     defaults: "404"
   };
   // 判断地图模块文件
@@ -315,6 +315,8 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
 
   // 留言板点击事件
   $("#msg-board").on("click", () => {
+    $(".main-page-mask").remove();
+    $(".msg-board-popup").remove();
     let html = `<div class="msg-board-popup">
                   <header>
                     <img src="../../img/system/user/location.png" />
@@ -344,6 +346,8 @@ requirejs(["vipspa", "common"], function(vipspa, sugon) {
 
   // 通知按钮事件
   $(".popup-right").on("click", () => {
+    $(".main-page-mask").remove();
+    $(".msg-board-popup").remove();
     let html = `<div class="msg-board-popup" style="width: 600px;height: 480px;">
                   <header>
                     <img src="../../img/system/user/location.png" />

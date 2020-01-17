@@ -68,7 +68,7 @@ requirejs(["common"], function(sugon) {
       $deptName.css("width", "calc(35% - 30px)");
       $date1.css("width", "calc(25% - 30px)");
       $date2.css("width", "calc(25% - 30px)");
-      $leftTree.css({ "margin-left": "156px", width: $deptName.outerWidth() });
+      $leftTree.css({ "margin-left": "262px", width: $deptName.outerWidth() });
     } else {
       $mold.hide();
       $deptName.css("width", "calc(50% - 60px)");

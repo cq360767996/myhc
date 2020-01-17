@@ -815,7 +815,7 @@ requirejs(
                     let which = e.originalEvent.which;
                     if (which == 3) {
                         $(".data-panel4").hide();
-                        $(".zrq-popup-marker-animate").remove();
+                        $(".zrq-popup-marker-origin").remove();
                         // 移除责任区图层
                         map.removeLayer(singleZrqLayerGroup);
                         map.removeLayer(singleZrqMarkerGroup);
@@ -2752,7 +2752,7 @@ requirejs(
             selectedDeptCode = $target.attr("code");
             const showZrqMap = $target.attr("showZrqMap");
             let attr = "";
-            $(".zrq-popup-marker-animate").remove();
+            $(".zrq-popup-marker-origin").remove();
             if (showZrqMap == 1) {
                 $(".zrq-popup-marker-normal").show();
                 attr = 0;
@@ -2767,11 +2767,10 @@ requirejs(
 
                 result.data.map(val => {
                     const icon = L.icon({
-                        className: "zrq-popup-marker-animate",
+                        className: "zrq-popup-marker-origin",
                         iconUrl: `../../img/myhc/myzs/animate/zrq/${val.type}.png`,
-                        popupAnchor: [10, 5]
+                        popupAnchor: [25, 25]
                     });
-                    // console.log(`../../img/myhc/myzs/animate/zrq/${val.type}.png`);
                     const marker = L.marker([val.lat, val.lng], {icon});
                     map.addLayer(marker);
                 });
@@ -2781,7 +2780,7 @@ requirejs(
         });
 
         // 责任区动效入口
-        $("#ui-view").on("click", ".zrq-popup-marker-animate", e => {
+        $("#ui-view").on("click", ".zrq-popup-marker-origin", e => {
             const params = {deptCode: selectedDeptCode, date1: $("#date1").val(), date2: $("#date2").val()};
             animate(params);
         });

@@ -29,7 +29,6 @@ define(["common"], sugon => {
       const $dom = $(dom);
       const src = $dom.attr("src");
       const newSrc = src.substring(0, src.indexOf(".png")) + "_animate.png";
-      console.log(newSrc);
       $dom.attr("src", newSrc);
       $dom.addClass("zrq-popup-marker-animate");
     });
@@ -192,7 +191,7 @@ define(["common"], sugon => {
   $uiView.on("mouseup", ".box-popup", e => {
     if (e.which === 3) {
       const $target = $(e.currentTarget);
-      if ($(".box-popup").length > 0 && !$target.hasClass("box-popup")) {
+      if ($(".box-popup").length > 0 && $target.hasClass("box-popup")) {
         closeComponent();
         useEffect();
       }

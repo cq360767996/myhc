@@ -3,7 +3,7 @@ define(["ec"], function(ec) {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: false,
+    isPublished: true,
     // 所有接口
     interFaces: {
       common: {
@@ -198,7 +198,7 @@ define(["ec"], function(ec) {
             remoteUrl: remotePath + "myhc/myzs/getZrqMap"
           },
           getZrqAnimation: {
-            localUrl: localPath + "myzs/getBmfwq.json",
+            localUrl: localPath + "myzs/getZrqAnimation.json",
             remoteUrl: remotePath + "myhc/myzs/getZrqAnimation"
           }
         },
