@@ -3,7 +3,7 @@ define(["ec"], function(ec) {
     localPath = "./static/json/";
   return {
     // 调试版还是发布版
-    isPublished: true,
+    isPublished: false,
     // 所有接口
     interFaces: {
       common: {
