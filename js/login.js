@@ -1,9 +1,17 @@
 const sugon = {
-  isPublished: false,
+  isPublished: true,
   api: {
     login: {
       localUrl: "/static/json/login/login.json",
       remoteUrl: "/login"
+    },
+    downloadChrome: {
+      localUrl: "/static/json/login/download.json",
+      remoteUrl: "/login/downloadChrome"
+    },
+    downloadDoc: {
+      localUrl: "/static/json/login/download.json",
+      remoteUrl: "/login/downloadDoc"
     }
   },
   request: function(url, data, config) {
@@ -50,6 +58,15 @@ const sugon = {
   // 加载中页面组件
   renderLoading() {
     $("body").append(`<aside class="loading"><div></div></aside>`);
+  },
+  // 下载文件
+  downloadFile(url) {
+    let link = document.createElement("a");
+    link.style.display = "none";
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 };
 
@@ -131,6 +148,18 @@ $("#password").on("keyup", e => {
   if (e.keyCode === 13) {
     passwordLogin(e);
   }
+});
+
+// 下载谷歌浏览器事件
+$(".chrome-btn").on("click", async () => {
+  const result = await sugon.request(sugon.api.downloadChrome);
+  sugon.downloadFile(result.url);
+});
+
+// 下载帮助文档事件
+$(".help-btn").on("click", async () => {
+  const result = await sugon.request(sugon.api.downloadDoc);
+  sugon.downloadFile(result.url);
 });
 
 // 页面入口
